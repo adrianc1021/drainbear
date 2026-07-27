@@ -35,7 +35,7 @@ export default function BlogPost() {
     datePublished: post.date,
     keywords: post.keywords.join(","),
     author: { "@type": "Organization", name: "通渠熊 DrainBear" },
-    publisher: { "@type": "Plumber", name: "通渠熊 DrainBear", telephone: "+85265318580" },
+    publisher: { "@type": "Plumber", name: "通渠熊 DrainBear", telephone: "+85295588260" },
     mainEntityOfPage: `https://drainbear.manus.space/blog/${post.slug}`,
   };
 
@@ -141,4 +141,3 @@ export default function BlogPost() {
     </div>
   );
 }
-

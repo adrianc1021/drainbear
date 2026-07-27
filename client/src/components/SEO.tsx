@@ -70,7 +70,7 @@ export default function SEO({ title, description, path, jsonLd }: SEOProps) {
       description:
         "香港 24 小時現代化通渠公司，德國高壓水槍、CCTV 照喉檢測，不成功不收費，覆蓋港島、九龍、新界及離島。",
       url: SITE_URL,
-      telephone: "+85265318580",
+      telephone: "+85295588260",
       priceRange: "$$",
       areaServed: ["香港島", "九龍", "新界", "離島"],
       openingHoursSpecification: {

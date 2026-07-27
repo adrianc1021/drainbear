@@ -87,7 +87,7 @@ const SERVICES_JSONLD = SERVICES.map((s) => ({
   "@type": "Service",
   serviceType: s.title,
   description: s.desc,
-  provider: { "@type": "Plumber", name: "通渠熊 DrainBear", telephone: "+85265318580" },
+  provider: { "@type": "Plumber", name: "通渠熊 DrainBear", telephone: "+85295588260" },
   areaServed: ["香港島", "九龍", "新界", "離島"],
 }));
 
