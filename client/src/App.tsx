@@ -9,6 +9,8 @@ import Home from "./pages/Home";
 import Services from "./pages/Services";
 import Areas from "./pages/Areas";
 import FAQ from "./pages/FAQ";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 
 
 function Router() {
@@ -18,6 +20,8 @@ function Router() {
         <Route path={"/"} component={Home} />
         <Route path={"/services"} component={Services} />
         <Route path={"/areas"} component={Areas} />
+        <Route path={"/blog"} component={Blog} />
+        <Route path={"/blog/:slug"} component={BlogPost} />
         <Route path={"/faq"} component={FAQ} />
         <Route path={"/404"} component={NotFound} />
         {/* Final fallback route */}

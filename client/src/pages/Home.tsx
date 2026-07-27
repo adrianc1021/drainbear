@@ -28,6 +28,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { WhatsAppButton } from "@/components/Layout";
+import { BLOG_POSTS } from "@/lib/blogData";
 import SEO from "@/components/SEO";
 import { PHONE_DISPLAY, PHONE_TEL, waLink } from "@/lib/contact";
 
@@ -369,6 +370,49 @@ export default function Home() {
                   </a>
                 </div>
               </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 區塊 6：通渠小知識精選 ===== */}
+      <section className="bg-white py-20 md:py-24">
+        <div className="container">
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <div className="mb-2 text-xs font-bold tracking-[0.2em] text-safety">DRAIN CARE TIPS</div>
+              <h2 className="text-balance font-display text-3xl font-black text-navy md:text-4xl">
+                通渠小知識
+              </h2>
+              <p className="mt-3 max-w-lg text-muted-foreground">
+                預防勝於治療。白熊師傅嘅實戰貼士，教你日常保養喉管，慳返通渠費。
+              </p>
+            </div>
+            <Link
+              href="/blog"
+              className="btn-smooth inline-flex items-center gap-1.5 rounded-lg border border-navy/15 px-5 py-2.5 text-sm font-bold text-navy hover:border-navy/35 hover:bg-navy hover:text-white"
+            >
+              查看全部文章 <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {BLOG_POSTS.slice(0, 3).map((p) => (
+              <Link
+                key={p.slug}
+                href={`/blog/${p.slug}`}
+                className="card-float group flex flex-col rounded-lg border border-border bg-white p-7"
+              >
+                <div className="inline-flex w-fit items-center rounded-full bg-mist px-3 py-1 text-[11px] font-bold tracking-wide text-navy/60">
+                  {p.category}
+                </div>
+                <h3 className="mt-4 text-balance font-display text-lg font-black leading-snug text-navy transition-colors duration-200 group-hover:text-wagreen-dark">
+                  {p.title}
+                </h3>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{p.excerpt}</p>
+                <span className="btn-smooth mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-wagreen-dark group-hover:gap-2.5">
+                  閱讀全文 <ArrowRight className="h-4 w-4" />
+                </span>
+              </Link>
             ))}
           </div>
         </div>

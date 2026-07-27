@@ -7,6 +7,7 @@ import { ReactNode, useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Menu, X, MessageCircle, Phone, Clock, Star, Award, ShieldCheck } from "lucide-react";
 import { PHONE_DISPLAY, PHONE_TEL, WA_DEFAULT } from "@/lib/contact";
+import WhatsAppWidget from "@/components/WhatsAppWidget";
 
 const LOGO = "/manus-storage/drainbear-logo_3d941447.png";
 
@@ -14,6 +15,7 @@ const NAV_ITEMS = [
   { label: "首頁", href: "/" },
   { label: "通渠服務", href: "/services" },
   { label: "服務地區", href: "/areas" },
+  { label: "通渠小知識", href: "/blog" },
   { label: "常見問題", href: "/faq" },
 ];
 
@@ -224,6 +226,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <main className="flex-1 pb-14 pt-16 md:pb-0 md:pt-[72px]">{children}</main>
       <Footer />
       <MobileCTABar />
+      <WhatsAppWidget />
     </div>
   );
 }
