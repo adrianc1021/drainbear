@@ -28,7 +28,7 @@ export default function WhatsAppWidget() {
 
   return (
     <div
-      className="fixed bottom-[86px] right-3 z-[60] flex flex-col items-end md:bottom-6 md:right-6"
+      className="pointer-events-none fixed bottom-[86px] right-3 z-[60] flex flex-col items-end md:bottom-6 md:right-6"
       style={{ marginBottom: "env(safe-area-inset-bottom)" }}
     >
       {/* 對話卡 */}
@@ -109,7 +109,7 @@ export default function WhatsAppWidget() {
       {/* 懸浮按鈕 */}
       <button
         onClick={() => setOpen(!open)}
-        className="btn-smooth relative flex h-12 w-12 items-center justify-center rounded-full bg-navy text-white shadow-[0_8px_24px_rgba(11,19,43,0.4)] hover:bg-navy-light active:scale-95 md:h-14 md:w-14 md:bg-wagreen md:shadow-[0_8px_24px_rgba(37,211,102,0.45)] md:hover:bg-wagreen-dark md:hover:shadow-[0_10px_32px_rgba(37,211,102,0.55)]"
+        className="btn-smooth pointer-events-auto relative flex h-12 w-12 items-center justify-center rounded-full bg-navy text-white shadow-[0_8px_24px_rgba(11,19,43,0.4)] hover:bg-navy-light active:scale-95 md:h-14 md:w-14 md:bg-wagreen md:shadow-[0_8px_24px_rgba(37,211,102,0.45)] md:hover:bg-wagreen-dark md:hover:shadow-[0_10px_32px_rgba(37,211,102,0.55)]"
         aria-label={open ? "關閉 WhatsApp 對話框" : "開啟 WhatsApp 對話框"}
         aria-expanded={open}
       >

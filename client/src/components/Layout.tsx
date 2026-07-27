@@ -87,7 +87,7 @@ function MobileCTABar() {
   return (
     <div
       className={`fixed inset-x-0 bottom-0 z-50 border-t border-border bg-white/95 backdrop-blur-md transition-transform duration-300 md:hidden ${
-        hidden ? "translate-y-full" : "translate-y-0"
+        hidden ? "pointer-events-none translate-y-full" : "translate-y-0"
       }`}
       style={{
         transitionTimingFunction: "cubic-bezier(0.23, 1, 0.32, 1)",
@@ -367,7 +367,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <main className="flex-1 pt-16 md:pt-[72px]">{children}</main>
       <Footer />
       {/* 佔位：避免內容及 Footer 被固定 CTA 列遮蓋（含 safe-area） */}
-      <div className="h-[68px] md:hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }} aria-hidden="true" />
+      <div className="pointer-events-none h-[68px] md:hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }} aria-hidden="true" />
       <MobileCTABar />
       <WhatsAppWidget />
       <BackToTop />

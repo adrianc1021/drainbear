@@ -93,3 +93,8 @@
 - [x] Services.tsx / Home.tsx 裝飾 blur 層補上 pointer-events-none，確保不遮擋互動元素
 - [x] Layout.tsx 實作 BackToTop 元件：捲動 >600px 淡入、平滑捲頂、手機 bottom-150px 避開 CTA 列、桌面 bottom-104px
 - [x] 截圖驗證（桌面 /guide 全頁 + 手機 375px /、/areas），無遮擋
+
+## 用戶回報：手機版按鈕點擊無反應
+- [x] 排查手機版按鈕無法點擊的根因（遮擋層 z-index / pointer-events / 事件綁定）——根因：WhatsAppWidget 外層 fixed 容器在對話卡關閉時攔截右下角大面積點擊
+- [x] 修正所有受影響按鈕並全站手機視窗驗證（外層容器 pointer-events-none、按鈕 pointer-events-auto、MobileCTABar 收起補 pointer-events-none；elementFromPoint 全頁掃描通過、12 項 vitest 通過、手機截圖正常）
+- [ ] 儲存檢查點並交付
