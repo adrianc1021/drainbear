@@ -97,4 +97,12 @@
 ## 用戶回報：手機版按鈕點擊無反應
 - [x] 排查手機版按鈕無法點擊的根因（遮擋層 z-index / pointer-events / 事件綁定）——根因：WhatsAppWidget 外層 fixed 容器在對話卡關閉時攔截右下角大面積點擊
 - [x] 修正所有受影響按鈕並全站手機視窗驗證（外層容器 pointer-events-none、按鈕 pointer-events-auto、MobileCTABar 收起補 pointer-events-none；elementFromPoint 全頁掃描通過、12 項 vitest 通過、手機截圖正常）
-- [ ] 儲存檢查點並交付
+- [x] 儲存檢查點並交付（7f0d46c2）
+
+---
+
+# 用戶視覺編輯要求：首頁服務卡圖片失效（「找可用圖片」）
+- [x] 排查四張服務卡圖片（service-residential / commercial / hydrojet / cctv）載入失敗原因——storage 物件失效（presign 404）
+- [x] 找回或重新生成可用圖片，重新上傳並更新 Home.tsx（及其他引用處）——以本地原圖重新上傳，Home.tsx 四張服務卡 + hero 圖 + SEO.tsx OG 圖已更新
+- [x] 全站檢查其他 /manus-storage 圖片是否同樣失效並一併修復——全站掃描所有引用均返回 200
+- [ ] 截圖驗證後儲存檢查點並交付

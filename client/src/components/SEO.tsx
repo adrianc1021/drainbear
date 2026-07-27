@@ -51,7 +51,7 @@ export interface SEOProps {
   noindex?: boolean;
 }
 
-const DEFAULT_OG_IMAGE = `${SITE_URL}/manus-storage/hero-plumber_ade9e162.png`;
+const DEFAULT_OG_IMAGE = `${SITE_URL}/manus-storage/hero-plumber_f9109f53.png`;
 
 export default function SEO({
   title,
