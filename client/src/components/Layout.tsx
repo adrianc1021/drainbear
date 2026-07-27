@@ -13,7 +13,7 @@ import { useEstimate } from "@/contexts/EstimateContext";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
 import { useReveal } from "@/hooks/useReveal";
 
-const LOGO = "/manus-storage/drainbear-logo_3d941447.png";
+const LOGO = "https://res.cloudinary.com/pgjztf2p/image/upload/v1785147037/LOGO_dmyalo.png";
 
 const NAV_ITEMS = [
   { label: "首頁", href: "/" },
