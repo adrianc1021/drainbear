@@ -35,7 +35,7 @@ const SERVICES = [
     tag: "RESIDENTIAL",
     title: "住宅通渠急救",
     desc: "針對一般家庭的廚房星盆、浴室去水位及座廁淤塞，專業手搖泵極速打通，過程注重家居保護，完工包清理，還原企理現場。",
-    img: "/https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A1_vyqcil.png",
+    img: "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A1_vyqcil.png",
     wa: "你好，我想查詢住宅通渠服務報價。",
   },
   {
@@ -43,7 +43,7 @@ const SERVICES = [
     tag: "COMMERCIAL",
     title: "商業重型通渠",
     desc: "專治食肆隔油池爆滿、大廈主渠倒灌等重型工程。配備工業級設備及大型吸車，將營業損失減至最低，深夜施工亦可安排。",
-    img: "/https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A2_onju5z.png",
+    img: "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A2_onju5z.png",
     wa: "你好，我想查詢商業重型通渠服務報價。",
   },
   {
@@ -51,7 +51,7 @@ const SERVICES = [
     tag: "HYDRO JETTING",
     title: "高壓水槍洗渠",
     desc: "引進頂級高壓水槍車，以極限水壓將硬化油垢、水泥及陳年污垢徹底粉碎沖走，令喉管回復暢通如新，效果遠勝傳統通渠方法。",
-    img: "/https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A3_fyozug.png",
+    img: "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A3_fyozug.png",
     wa: "你好，我想查詢高壓水槍洗渠服務報價。",
   },
   {
@@ -59,7 +59,7 @@ const SERVICES = [
     tag: "CCTV INSPECTION",
     title: "CCTV 照喉檢測",
     desc: "高清防水鏡頭深入喉管探測，精準定位淤塞物及破損位置，科學斷症、有片有真相，杜絕盲猜式維修及不必要的換喉工程。",
-    img: "/https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A4_hiufrh.png",
+    img: "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A4_hiufrh.png",
     wa: "你好，我想查詢 CCTV 照喉檢測服務報價。",
   },
 ];
