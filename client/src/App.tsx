@@ -19,8 +19,8 @@ import BlogPost from "./pages/BlogPost";
 import Guide from "./pages/Guide";
 import Thanks from "./pages/Thanks";
 
-
 function Router() {
+  // make sure to consider if you need authentication for certain routes
   return (
     <Layout>
       <Switch>

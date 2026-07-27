@@ -98,3 +98,28 @@
 - 觸控優化已完成：WhatsAppButton min-h-44、MobileCTABar 按鈕 min-h-52、手機選單項 min-h-48、footer 連結 min-h-44、Areas pill min-h-44、Guide 地區關鍵字 pill min-h-40、PriceCalculator 選項 min-h-48、文字型箭嘴連結（Home/Guide/District/Thanks/BlogPost/Breadcrumbs 共 13 處）min-h-44
 - Wix 回答要點：React 程式碼無法直接匯入 Wix；建議 Manus Publish（支援自訂網域，Wix 網域可指向）；或 GitHub 匯出自行部署
 - 待辦：tsc 檢查、手機截圖驗證（/、/thanks、/guide、/areas）、checkpoint、交付
+
+## 第七輪已交付（checkpoint 66a47202）
+
+## 第八輪（進行中）：回到頂部按鈕 + z-index 修正 + 資料庫升級
+### 用戶需求
+1. 懸浮「回到頂部」按鈕（長頁面捲動後出現，返回頂部選單）
+2. 按鈕層級修正：用戶反映按鈕被物件遮擋按不到，所有按鍵需在最頂層（z-index / pointer-events）
+3. 資料庫持久保存數據（已升級 web-db-user）
+
+### z-index 審查結果（audit shell）
+- Header z-50 fixed、MobileCTABar z-50 fixed、WhatsAppWidget fixed（需確認 z 值）
+- 需修正的裝飾層（無 pointer-events-none，可能遮擋點擊）：
+  - Home.tsx:229 `absolute -inset-6 ... blur-2xl`（hero 圖背光層）
+  - Home.tsx:344 `absolute -inset-4 ... blur-xl`（why 圖背光層）
+  - Services.tsx:166 `absolute -inset-4 ... blur-xl`
+  - Home.tsx:175 已有 pointer-events-none（OK）
+- 計劃：所有裝飾性 absolute blur/漸變層加 pointer-events-none；BackToTop 按鈕 fixed z-40（低於 header/CTA 列），手機版位置在 WhatsAppWidget 之上方（bottom 約 150px）或左下角避開
+
+### web-db-user 升級要點（template README 摘要）
+- 已升級成功；Home.tsx 有衝突：模板以範例 Home 覆蓋——需還原原有 Home 內容並移除 useAuth 樣板（原內容在衝突 diff 中，git 歷史 66a47202 亦有）
+- 升級後必做：檢查 client/src/main.tsx（已自動接 trpc provider）、App.tsx（自動小改）、`pnpm db:push` 同步 schema、重啟 dev server
+- 開發流程：drizzle/schema.ts 加表 → `pnpm db:push`（generate+migrate）→ server/db.ts helpers → server/routers.ts tRPC procedures → 前端 trpc.*.useQuery/useMutation
+- 資料表計劃：estimate_leads（id, location, building, timeSlot, low, high, pagePath, createdAt）記錄估價計算機使用；whatsapp/phone CTA 點擊記錄 cta_clicks（channel, location, pagePath, createdAt）可選
+- 注意：main.tsx 原有 initAnalytics()+EstimateProvider 可能被模板覆蓋——需檢查並保留
+- vitest：server/*.test.ts，`pnpm test`

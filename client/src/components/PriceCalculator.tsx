@@ -24,6 +24,7 @@ import {
 import { waLink } from "@/lib/contact";
 import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
 import { useEstimate } from "@/contexts/EstimateContext";
+import { trpc } from "@/lib/trpc";
 
 interface Option {
   id: string;
@@ -65,6 +66,7 @@ export default function PriceCalculator() {
   const [bld, setBld] = useState<string | null>(null);
   const [time, setTime] = useState<string>("day");
   const { setEstimate } = useEstimate();
+  const recordEstimate = trpc.estimate.record.useMutation();
 
   const result = useMemo(() => {
     const l = LOCATIONS.find((o) => o.id === loc);
@@ -82,6 +84,8 @@ export default function PriceCalculator() {
 
   // 估價結果同步至全域 Context：底部 CTA 列即時改用預填估價詳情
   const toastShown = useRef(false);
+  // 防止同一組合重覆寫入資料庫
+  const lastRecorded = useRef<string | null>(null);
   useEffect(() => {
     if (result && waMsg) {
       setEstimate({
@@ -92,6 +96,19 @@ export default function PriceCalculator() {
         high: result.high,
         waMessage: waMsg,
       });
+      // 估價完成時匿名記錄到資料庫（同一組合只記錄一次）
+      const key = `${result.l.id}_${result.b.id}_${result.t.id}`;
+      if (lastRecorded.current !== key) {
+        lastRecorded.current = key;
+        recordEstimate.mutate({
+          location: result.l.label,
+          building: result.b.label,
+          timeSlot: result.t.id,
+          priceLow: result.low,
+          priceHigh: result.high,
+          sourcePage: window.location.pathname,
+        });
+      }
       // 首次完成估價時提示：估價已同步至 WhatsApp 按鈕
       if (!toastShown.current) {
         toastShown.current = true;

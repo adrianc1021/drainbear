@@ -67,3 +67,24 @@
 - [ ] 全站審查手機版按鈕觸控目標：Header 電話/CTA、Footer 連結、地區 pill、計算機選項、卡片連結等，統一 ≥44px
 - [ ] 截圖驗證（手機 375px：/、/thanks、/guide、/areas）
 - [ ] 儲存 checkpoint 並交付，說明 Wix 發佈可行性（不可直接匯入，建議 Manus 發佈 + 自訂網域）
+
+---
+
+# 第八輪任務：回到頂部按鈕 + 按鈕層級（z-index）修正（上輪已交付 66a47202）
+
+- [ ] 審查全站 z-index 層級：固定元素（Header z-50、MobileCTABar z-50、WhatsAppWidget）、裝飾層（dot-grid、漸變遮罩、絕對定位圖形）、reveal 動畫層是否遮擋可點元素
+- [ ] 修正遮擋問題：裝飾層加 pointer-events-none；互動按鈕確保 position/z-index 在其上（relative z-10+）
+- [ ] 新增懸浮「回到頂部」按鈕：捲動超過一定距離後淡入，點擊平滑捲回頂部；手機版位置避開底部 CTA 列與 WhatsApp 懸浮鈕
+- [ ] 截圖驗證（手機 375px + 桌面）
+- [ ] 儲存 checkpoint 並交付
+
+## 追加：資料庫持久化（用戶新要求）
+- [x] webdev_add_feature 升級 web-db-user（後端 + 資料庫 + 用戶系統）
+- [x] 設計資料表：客戶查詢/估價記錄（estimate_leads：位置/樓宇/時段/估價範圍/來源頁/時間）
+- [x] 設計資料表：inquiries 客戶查詢表（稱呼/電話/服務類型/地區/訊息/狀態）
+- [x] tRPC 路由：inquiry.submit（公開提交）、inquiry.list / updateStatus（管理員）、estimate.record（公開）、estimate.list（管理員）
+- [x] PriceCalculator 完成估價時寫入資料庫（匿名記錄，同一組合去重）
+- [x] 驗證資料寫入與讀取正常（SQL 插入/查詢/刪除測試通過）
+- [x] vitest 單元測試 12 項全部通過（提交驗證、權限控制、估價記錄）
+- [x] 瀏覽器端到端驗證：估價計算機操作後 estimate_leads 成功寫入（坐廁/私樓/$600-1200，測試資料已清除）
+- [x] 儲存 checkpoint 並交付
