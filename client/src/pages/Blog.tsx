@@ -83,7 +83,7 @@ export default function Blog() {
             </div>
             <div className="hidden items-center justify-center bg-gradient-to-br from-navy via-navy to-[#16224d] p-10 md:col-span-2 md:flex">
               <img
-                src="/manus-storage/drainbear-logo_3d941447.png"
+                src="https://res.cloudinary.com/pgjztf2p/image/upload/v1785147037/LOGO_dmyalo.png"
                 alt="通渠熊 DrainBear"
                 className="h-40 w-40 opacity-90 drop-shadow-[0_12px_36px_rgba(37,211,102,0.25)] transition-transform duration-300 group-hover:scale-105"
               />

@@ -62,12 +62,12 @@ const CASE_STUDIES = [
   },
 ];
 
-const HERO_IMG = "https://res.cloudinary.com/pgjztf2p/image/upload/v1785147037/LOGO_dmyalo.png";
-const WHY_IMG = "/manus-storage/why-choose-us_3e335303.png";
-const IMG_RESIDENTIAL = "/manus-storage/service-residential_69154457.png";
-const IMG_COMMERCIAL = "/manus-storage/service-commercial_99bef6a7.png";
-const IMG_HYDROJET = "/manus-storage/service-hydrojet_55800a40.png";
-const IMG_CCTV = "/manus-storage/service-cctv_5ac58f72.png";
+const HERO_IMG = "https://res.cloudinary.com/pgjztf2p/image/upload/v1785149281/copy_of_a_portrait_of_a_young_handsome_asian_male_plumbin-1785149206310_mmq04g.png";
+const WHY_IMG = "https://res.cloudinary.com/pgjztf2p/image/upload/v1785149473/why_sv7tw9.png";
+const IMG_RESIDENTIAL = "https://res.cloudinary.com/pgjztf2p/image/upload/v1785149431/home_sdyxhb.png";
+const IMG_COMMERCIAL = "https://res.cloudinary.com/pgjztf2p/image/upload/v1785149532/bar_nccfy4.png";
+const IMG_HYDROJET = "https://res.cloudinary.com/pgjztf2p/image/upload/v1785149597/2_edlrhp.png";
+const IMG_CCTV = "https://res.cloudinary.com/pgjztf2p/image/upload/v1785149606/3_olpvyt.png";
 
 const ADVANTAGES = [
   { icon: BadgeCheck, title: "不成功不收費", desc: "明碼實價，絕不隱藏" },
