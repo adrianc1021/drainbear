@@ -226,7 +226,7 @@ export default function Home() {
 
           {/* 右側懸浮主圖 */}
           <div className="relative fade-up" style={{ animationDelay: "120ms" }}>
-            <div className="absolute -inset-6 rounded-[24px] bg-gradient-to-tr from-wagreen/15 via-transparent to-navy/10 blur-2xl" />
+            <div className="pointer-events-none absolute -inset-6 rounded-[24px] bg-gradient-to-tr from-wagreen/15 via-transparent to-navy/10 blur-2xl" />
             <div className="float-anim relative">
               <img
                 src={HERO_IMG}
@@ -341,7 +341,7 @@ export default function Home() {
 
           {/* 右：大圖 */}
           <div className="reveal relative" data-reveal-delay={120}>
-            <div className="absolute -inset-4 rounded-[20px] bg-gradient-to-br from-navy/8 to-wagreen/10 blur-xl" />
+            <div className="pointer-events-none absolute -inset-4 rounded-[20px] bg-gradient-to-br from-navy/8 to-wagreen/10 blur-xl" />
             <img
               src={WHY_IMG}
               alt="通渠熊團隊使用 CCTV 檢測設備"

@@ -5,7 +5,7 @@
  */
 import { ReactNode, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, MessageCircle, Phone, Clock, Star, Award, ShieldCheck } from "lucide-react";
+import { Menu, X, MessageCircle, Phone, Clock, Star, Award, ShieldCheck, ArrowUp } from "lucide-react";
 import { PHONE_DISPLAY, PHONE_TEL, WA_DEFAULT } from "@/lib/contact";
 import { waLink } from "@/lib/contact";
 import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
@@ -132,6 +132,38 @@ function MobileCTABar() {
         </a>
       </div>
     </div>
+  );
+}
+
+/**
+ * 回到頂部懸浮按鈕：
+ * - 捲動超過 600px 後淡入，點擊平滑捲回頂部
+ * - 手機版位置避開底部 CTA 列與 WhatsApp 懸浮鈕
+ * - 桌面版置於 WhatsApp 懸浮鈕上方
+ */
+function BackToTop() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 600);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <button
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      aria-label="回到頂部"
+      className={`btn-smooth fixed right-4 z-40 flex h-11 w-11 items-center justify-center rounded-lg border border-border bg-white/95 text-navy shadow-[0_6px_20px_rgba(11,19,43,0.16)] backdrop-blur transition-all duration-300 hover:bg-mist active:scale-[0.94] md:right-6 ${
+        visible
+          ? "translate-y-0 opacity-100"
+          : "pointer-events-none translate-y-3 opacity-0"
+      } bottom-[150px] md:bottom-[104px]`}
+      style={{ transitionTimingFunction: "cubic-bezier(0.23, 1, 0.32, 1)" }}
+    >
+      <ArrowUp className="h-5 w-5" strokeWidth={2.4} />
+    </button>
   );
 }
 
@@ -338,6 +370,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <div className="h-[68px] md:hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }} aria-hidden="true" />
       <MobileCTABar />
       <WhatsAppWidget />
+      <BackToTop />
     </div>
   );
 }

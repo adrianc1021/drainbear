@@ -163,7 +163,7 @@ export default function Services() {
               {/* 圖 */}
               <div className="relative">
                 <div
-                  className={`absolute -inset-4 rounded-[20px] blur-xl ${
+                  className={`pointer-events-none absolute -inset-4 rounded-[20px] blur-xl ${
                     i % 2 === 0
                       ? "bg-gradient-to-br from-navy/8 to-wagreen/10"
                       : "bg-gradient-to-bl from-wagreen/10 to-navy/8"
