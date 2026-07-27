@@ -1,7 +1,8 @@
 /**
  * 通渠熊 DrainBear — 服務地區（SEO 導向，第六輪全面優化版）
  * 風格：Premium SaaS Minimalism，大量留白、8px 圓角、懸浮陰影卡片、無 Emoji
- * 結構：Hero + 覆蓋統計帶 → 專屬著陸頁精選卡 → 地區速查（搜尋過濾）→ 三大分區卡 → 統一收費承諾 CTA
+ * 結構：Hero + 地區速查 + 統計帶 → 互動香港地圖 → 專屬著陸頁精選卡 → 三大分區（分頁籤式）→ 統一收費承諾 CTA
+ * 第十輪：新增互動式十八區地圖（HongKongMap）；三大分區改為分頁籤 + 分組排版，減少 pill 牆壓迫感
  */
 import { useMemo, useState } from "react";
 import {
@@ -17,6 +18,7 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 import { WhatsAppButton } from "@/components/Layout";
+import HongKongMap from "@/components/HongKongMap";
 import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact";
@@ -40,10 +42,11 @@ const REGIONS = [
     desc: "熟悉商廈及半山豪宅喉管結構，高效低噪音。",
     seoText:
       "港島區商廈林立，亦有不少樓齡較高的半山豪宅及唐樓，容易出現主渠老化及隔油池滿瀉問題。我們熟悉港島區喉管結構，提供高效、低噪音的專業通渠，絕不影響鄰居及商戶運作。",
-    districts: [
-      "中環", "上環", "西環", "半山", "山頂", "金鐘", "灣仔", "銅鑼灣", "天后", "大坑",
-      "跑馬地", "北角", "鰂魚涌", "太古城", "西灣河", "筲箕灣", "柴灣", "小西灣",
-      "香港仔", "鴨脷洲", "黃竹坑", "薄扶林", "赤柱", "淺水灣",
+    groups: [
+      { label: "中西區", items: ["中環", "上環", "西環", "半山", "山頂", "金鐘"] },
+      { label: "灣仔區", items: ["灣仔", "銅鑼灣", "天后", "大坑", "跑馬地"] },
+      { label: "東區", items: ["北角", "鰂魚涌", "太古城", "西灣河", "筲箕灣", "柴灣", "小西灣"] },
+      { label: "南區", items: ["香港仔", "鴨脷洲", "黃竹坑", "薄扶林", "赤柱", "淺水灣"] },
     ],
   },
   {
@@ -54,10 +57,12 @@ const REGIONS = [
     desc: "專治舊式大廈喉管倒灌及食肆塞廁所，24/7 極速救亡。",
     seoText:
       "九龍區人口極度密集、食肆林立，旺角及深水埗等地的舊式大廈經常發生喉管倒灌及塞廁所的緊急情況。我們的九龍區車隊 24/7 候命，配備高壓水槍，瞬間擊退陳年頑固油垢。",
-    districts: [
-      "尖沙咀", "佐敦", "油麻地", "旺角", "太子", "大角咀", "深水埗", "長沙灣", "荔枝角",
-      "美孚", "石硤尾", "九龍塘", "何文田", "紅磡", "土瓜灣", "九龍城", "啟德", "新蒲崗",
-      "黃大仙", "鑽石山", "彩虹", "牛頭角", "九龍灣", "觀塘", "藍田", "油塘",
+    groups: [
+      { label: "油尖旺區", items: ["尖沙咀", "佐敦", "油麻地", "旺角", "太子", "大角咀"] },
+      { label: "深水埗區", items: ["深水埗", "長沙灣", "荔枝角", "美孚", "石硤尾"] },
+      { label: "九龍城區", items: ["九龍塘", "何文田", "紅磡", "土瓜灣", "九龍城", "啟德"] },
+      { label: "黃大仙區", items: ["新蒲崗", "黃大仙", "鑽石山", "彩虹"] },
+      { label: "觀塘區", items: ["牛頭角", "九龍灣", "觀塘", "藍田", "油塘"] },
     ],
   },
   {
@@ -68,15 +73,20 @@ const REGIONS = [
     desc: "配備大型吸車，專治村屋沙井滿瀉及戶外樹根纏繞。",
     seoText:
       "新界區涵蓋大型私人屋苑及偏遠村屋。針對村屋常見的化糞池滿瀉、沙井淤塞或戶外樹根纏繞喉管等高難度問題，我們引進大型吸車及重型設備，提供徹底的解決方案。",
-    districts: [
-      "沙田", "大圍", "火炭", "馬鞍山", "大埔", "太和", "粉嶺", "上水", "荃灣", "葵涌",
-      "葵芳", "青衣", "深井", "馬灣", "屯門", "掃管笏", "元朗", "天水圍", "錦田", "洪水橋",
-      "將軍澳", "日出康城", "調景嶺", "西貢", "清水灣", "東涌", "愉景灣", "馬灣島",
+    groups: [
+      { label: "沙田區", items: ["沙田", "大圍", "火炭", "馬鞍山"] },
+      { label: "大埔／北區", items: ["大埔", "太和", "粉嶺", "上水"] },
+      { label: "荃灣／葵青區", items: ["荃灣", "葵涌", "葵芳", "青衣", "深井", "馬灣"] },
+      { label: "屯門／元朗區", items: ["屯門", "掃管笏", "元朗", "天水圍", "錦田", "洪水橋"] },
+      { label: "西貢區", items: ["將軍澳", "日出康城", "調景嶺", "西貢", "清水灣"] },
+      { label: "離島區", items: ["東涌", "愉景灣", "馬灣島"] },
     ],
   },
 ];
 
-const ALL_DISTRICTS = REGIONS.flatMap((r) => r.districts.map((d) => ({ district: d, region: r.name })));
+const ALL_DISTRICTS = REGIONS.flatMap((r) =>
+  r.groups.flatMap((g) => g.items.map((d) => ({ district: d, region: r.name }))),
+);
 
 const AREAS_JSONLD = {
   "@context": "https://schema.org",
@@ -113,11 +123,13 @@ function DistrictPill({ name }: { name: string }) {
 
 export default function Areas() {
   const [query, setQuery] = useState("");
+  const [activeRegion, setActiveRegion] = useState(0);
   const matches = useMemo(() => {
     const q = query.trim();
     if (!q) return null;
     return ALL_DISTRICTS.filter((d) => d.district.includes(q));
   }, [query]);
+  const region = REGIONS[activeRegion];
 
   return (
     <div>
@@ -218,6 +230,22 @@ export default function Areas() {
       {/* 專屬地區著陸頁精選卡 */}
       <section className="bg-white py-4 md:py-6">
         <div className="container">
+          {/* 互動式香港地圖 */}
+          <div className="reveal mb-12 md:mb-16">
+            <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
+              <div>
+                <div className="mb-2 text-xs font-bold tracking-[0.2em] text-safety">INTERACTIVE MAP</div>
+                <h2 className="font-display text-2xl font-black text-navy md:text-3xl">
+                  點擊地圖，找到你的地區
+                </h2>
+              </div>
+              <p className="max-w-md text-sm text-muted-foreground">
+                十八區全覆蓋。點擊你所在的分區，即可查看當區到達時間及專屬服務頁入口。
+              </p>
+            </div>
+            <HongKongMap />
+          </div>
+
           <div className="reveal mb-6 flex flex-wrap items-end justify-between gap-3">
             <div>
               <div className="mb-2 text-xs font-bold tracking-[0.2em] text-safety">FEATURED DISTRICTS</div>
@@ -269,39 +297,77 @@ export default function Areas() {
         </div>
       </section>
 
-      {/* 三大分區卡 */}
+      {/* 三大分區完整覆蓋（分頁籤式） */}
       <section className="bg-white py-12 md:py-16">
         <div className="container">
-          <div className="reveal mb-8">
-            <div className="mb-2 text-xs font-bold tracking-[0.2em] text-safety">FULL COVERAGE</div>
-            <h2 className="font-display text-2xl font-black text-navy md:text-3xl">三大分區完整覆蓋</h2>
+          <div className="reveal mb-8 flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <div className="mb-2 text-xs font-bold tracking-[0.2em] text-safety">FULL COVERAGE</div>
+              <h2 className="font-display text-2xl font-black text-navy md:text-3xl">三大分區完整覆蓋</h2>
+            </div>
+            <p className="max-w-md text-sm text-muted-foreground">
+              按行政區分組排列，一眼找到你的地區。綠色地區設有專屬服務頁，點擊直達。
+            </p>
           </div>
-          <div className="grid gap-8 md:grid-cols-3">
+
+          {/* 分區切換籤 */}
+          <div
+            className="reveal grid grid-cols-3 gap-2 rounded-lg border border-border bg-mist p-1.5 md:gap-2.5"
+            role="tablist"
+            aria-label="選擇分區"
+          >
             {REGIONS.map((r, i) => (
-              <article
+              <button
                 key={r.name}
-                className="card-float card-accent reveal flex flex-col rounded-lg border border-border bg-white p-8"
-                data-reveal-delay={i * 70}
+                type="button"
+                role="tab"
+                aria-selected={activeRegion === i}
+                onClick={() => setActiveRegion(i)}
+                className={`btn-smooth flex min-h-[52px] flex-col items-center justify-center gap-0.5 rounded-md px-2 py-2.5 text-sm font-bold transition-colors md:flex-row md:gap-2.5 md:text-base ${
+                  activeRegion === i
+                    ? "bg-navy text-white shadow-[0_4px_16px_rgba(11,19,43,0.25)]"
+                    : "text-navy/60 hover:bg-white hover:text-navy"
+                }`}
               >
-                <div className="flex items-start justify-between">
-                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-navy text-wagreen">
-                    <r.icon className="h-6 w-6" strokeWidth={2} />
-                  </div>
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-wagreen/10 px-3 py-1 text-xs font-bold text-wagreen-dark">
-                    <Clock className="h-3 w-3" strokeWidth={2.5} />
-                    {r.eta}到達
-                  </span>
-                </div>
-                <div className="text-[11px] font-bold tracking-[0.2em] text-muted-foreground">{r.en}</div>
-                <h3 className="mt-1 font-display text-2xl font-black text-navy">{r.name}通渠服務</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{r.seoText}</p>
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {r.districts.map((d) => (
-                    <DistrictPill key={d} name={d} />
-                  ))}
-                </div>
-              </article>
+                <r.icon
+                  className={`h-4 w-4 md:h-5 md:w-5 ${activeRegion === i ? "text-wagreen" : ""}`}
+                  strokeWidth={2.2}
+                />
+                {r.name}
+              </button>
             ))}
+          </div>
+
+          {/* 當前分區內容 */}
+          <div key={region.name} className="fade-up mt-6 rounded-lg border border-border bg-white p-6 md:p-8">
+            <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+              <div className="max-w-2xl">
+                <div className="text-[11px] font-bold tracking-[0.2em] text-muted-foreground">{region.en}</div>
+                <h3 className="mt-1 font-display text-2xl font-black text-navy">{region.name}通渠服務</h3>
+                <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{region.seoText}</p>
+              </div>
+              <span className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full bg-wagreen/10 px-4 py-2 text-sm font-bold text-wagreen-dark">
+                <Clock className="h-4 w-4" strokeWidth={2.5} />
+                {region.eta}到達
+              </span>
+            </div>
+
+            <div className="mt-7 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
+              {region.groups.map((g) => (
+                <div key={g.label}>
+                  <div className="flex items-center gap-2 border-b border-border pb-2">
+                    <MapPin className="h-3.5 w-3.5 text-wagreen" strokeWidth={2.5} />
+                    <span className="text-sm font-black text-navy">{g.label}</span>
+                    <span className="text-[11px] font-semibold text-muted-foreground">{g.items.length} 區</span>
+                  </div>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {g.items.map((d) => (
+                      <DistrictPill key={d} name={d} />
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

@@ -120,4 +120,17 @@
 - [x] 更新 sitemap.xml（+8 URL 共 23）、路由沿用動態 /areas/:slug、地區搜尋自動涵蓋新地區
 - [x] 頁面視覺優化：層次、互動、SEO（title/description/keywords 更新、JSON-LD areaServed 自動擴充、麵包屑沿用）
 - [x] 截圖驗證（桌面 + 手機 375px：/areas、/areas/mong-kok、/areas/tsuen-wan、/areas/causeway-bay）+ vitest 12 項通過
+- [x] 儲存檢查點並交付（580b2fb3）
+
+---
+
+# 第十輪任務：服務地區頁互動式香港地圖 + 分區清單排版重設計
+
+- [x] 取得香港十八區 SVG 地圖資源（GeoJSON/SVG path），評估授權與可用性（Paulkit/HKMap GeoJSON → 簡化 SVG path，已生成 client/src/lib/hkDistrictPaths.ts）
+- [x] 實作 HongKongMap 互動元件：hover 高亮 + 區名 tooltip、點擊十八區導航（有專頁地區直接跳轉，無專頁顯示該區覆蓋地區並提供 CTA）
+- [x] 地圖與 10 個地區專頁的對照（十八區 → 專頁 slug / 覆蓋地區清單，PAGE_HINT/COVERAGE_HINT）
+- [x] 手機版地圖體驗：觸控友善、尺寸自適應、點擊後資訊卡呈現（grid 單欄堆疊）
+- [x] 重新設計三大分區覆蓋清單排版：分頁籤（港島/九龍/新界及離島）+ 行政區分組 + 分欄呈現，減少 pill 牆壓迫感
+- [x] 截圖驗證（桌面 + 手機 375px）+ TypeScript 0 錯誤 + vitest 12 項通過
+- [x] 調整 HongKongMap 點擊行為：有專頁 slug 的地區在桌面（hover+fine pointer）點擊/Enter 直接跳轉 /areas/{slug}；觸控裝置保留兩段式資訊卡避免誤觸
 - [ ] 儲存檢查點並交付

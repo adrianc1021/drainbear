@@ -43,7 +43,7 @@ export function initAnalytics() {
   }
 }
 
-export type CtaChannel = "whatsapp" | "phone";
+export type CtaChannel = "whatsapp" | "phone" | "map";
 
 /**
  * 追蹤 CTA 點擊。
@@ -54,7 +54,8 @@ export type CtaChannel = "whatsapp" | "phone";
 export function trackCTA(channel: CtaChannel, location: string, topic?: string) {
   if (typeof window === "undefined") return;
   window.dataLayer = window.dataLayer || [];
-  const eventName = channel === "whatsapp" ? "whatsapp_click" : "phone_click";
+  const eventName =
+    channel === "whatsapp" ? "whatsapp_click" : channel === "map" ? "map_district_click" : "phone_click";
   const params = {
     cta_location: location,
     page_path: window.location.pathname,
