@@ -1,6 +1,7 @@
 /**
  * 通渠熊 DrainBear — 地區著陸頁資料
  * 每區獨立長內容：當區特色、常見問題場景、鄰近地點、FAQ（SEO 長尾關鍵字覆蓋）
+ * 第一批：觀塘、沙田；第二批（districtData2.ts）：旺角、深水埗、銅鑼灣、北角、荃灣、元朗、屯門、將軍澳
  */
 export interface DistrictInfo {
   slug: string;
@@ -18,7 +19,7 @@ export interface DistrictInfo {
   metaDescription: string;
 }
 
-export const DISTRICTS: DistrictInfo[] = [
+const DISTRICTS_BATCH1: DistrictInfo[] = [
   {
     slug: "kwun-tong",
     name: "觀塘",
@@ -122,6 +123,16 @@ export const DISTRICTS: DistrictInfo[] = [
       "沙田通渠專家｜24 小時特快上門，1 小時內到達沙田、大圍、火炭、馬鞍山。專治屋苑去水慢、村屋沙井滿瀉、樹根纏繞喉管。明碼實價，不成功不收費。",
   },
 ];
+
+import { DISTRICTS_BATCH2 } from "./districtData2";
+
+/** 全部已有專屬著陸頁的地區（10 區） */
+export const DISTRICTS: DistrictInfo[] = [...DISTRICTS_BATCH1, ...DISTRICTS_BATCH2];
+
+/** 地區名 → slug 對照（供 pill 連結使用） */
+export const DISTRICT_SLUGS: Record<string, string> = Object.fromEntries(
+  DISTRICTS.map((d) => [d.name, d.slug]),
+);
 
 export function getDistrict(slug: string) {
   return DISTRICTS.find((d) => d.slug === slug);

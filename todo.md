@@ -105,4 +105,19 @@
 - [x] 排查四張服務卡圖片（service-residential / commercial / hydrojet / cctv）載入失敗原因——storage 物件失效（presign 404）
 - [x] 找回或重新生成可用圖片，重新上傳並更新 Home.tsx（及其他引用處）——以本地原圖重新上傳，Home.tsx 四張服務卡 + hero 圖 + SEO.tsx OG 圖已更新
 - [x] 全站檢查其他 /manus-storage 圖片是否同樣失效並一併修復——全站掃描所有引用均返回 200
-- [ ] 截圖驗證後儲存檢查點並交付
+- [x] 截圖驗證後儲存檢查點並交付（a4857065；首頁/services/guide/areas 截圖正常，稽核輸出存於 .manus-notes/storage-audit.txt）
+
+---
+
+# 第九輪任務：服務地區頁全面優化（更多熱門地區 + 分區擴充）
+
+- [x] 審視 Areas.tsx、現有著陸頁（觀塘/沙田）與路由/資料結構，規劃可擴充的地區資料架構
+- [x] 建立集中式地區資料檔（districtData）：每區含名稱/分區/地標/常見渠務問題/到達時間，支援動態著陸頁（districtData2.ts 批次合併 + DISTRICT_SLUGS 對照）
+- [x] 新增 8 個熱門地區著陸頁：旺角、深水埗、銅鑼灣、北角、荃灣、元朗、屯門、將軍澳（動態路由 /areas/:slug，總數達 10 區）
+- [x] 擴充三大分區覆蓋清單：港島 24 區、九龍 26 區、新界及離島 28 區，共 78 區（統計帶更新為 78+）
+- [x] 熱門地區區塊改為三欄卡片網格（sm:2 / lg:3），每卡含地標 pill 與 CTA
+- [x] 分區清單中每個地區 pill 連結至對應著陸頁（DISTRICT_SLUGS 自動對照），統一 ≥44px 觸控目標
+- [x] 更新 sitemap.xml（+8 URL 共 23）、路由沿用動態 /areas/:slug、地區搜尋自動涵蓋新地區
+- [x] 頁面視覺優化：層次、互動、SEO（title/description/keywords 更新、JSON-LD areaServed 自動擴充、麵包屑沿用）
+- [x] 截圖驗證（桌面 + 手機 375px：/areas、/areas/mong-kok、/areas/tsuen-wan、/areas/causeway-bay）+ vitest 12 項通過
+- [ ] 儲存檢查點並交付
