@@ -8,6 +8,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
 import Areas from "./pages/Areas";
+import District from "./pages/District";
 import FAQ from "./pages/FAQ";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
@@ -21,7 +22,8 @@ function Router() {
         <Route path={"/"} component={Home} />
         <Route path={"/services"} component={Services} />
         <Route path={"/guide"} component={Guide} />
-        <Route path={"/areas"} component={Areas} />
+      <Route path={"/areas"} component={Areas} />
+      <Route path={"/areas/:slug"} component={District} />
         <Route path={"/blog"} component={Blog} />
         <Route path={"/blog/:slug"} component={BlogPost} />
         <Route path={"/faq"} component={FAQ} />

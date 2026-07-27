@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import PriceCalculator from "@/components/PriceCalculator";
 import { WhatsAppButton } from "@/components/Layout";
 import { waLink, PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact";
 
@@ -202,6 +203,22 @@ export default function Guide() {
               以上價錢僅供參考，實際收費視乎現場淤塞程度、樓層及施工難度而定。深夜時段（23:00–07:00）設合理附加費，
               出發前必定與你確認最終總收費，絕不坐地起價。純異物淤塞打不通，分毫不收。
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 互動式估價計算機 */}
+      <section className="pb-14 md:pb-20">
+        <div className="container">
+          <div className="reveal mb-8 max-w-xl">
+            <div className="mb-2 text-xs font-bold tracking-[0.2em] text-safety">PRICE ESTIMATOR</div>
+            <h2 className="font-display text-2xl font-black text-navy md:text-3xl">即時估價計算機</h2>
+            <p className="mt-3 text-sm text-muted-foreground md:text-base">
+              揀好堵塞位置、樓宇類型同上門時段，即刻睇到初步估價範圍，一撳即可用 WhatsApp 確認實際報價。
+            </p>
+          </div>
+          <div className="reveal">
+            <PriceCalculator />
           </div>
         </div>
       </section>

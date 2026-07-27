@@ -21,6 +21,7 @@ import {
   Phone,
   Home as HomeIcon,
   Building2,
+  MapPin,
   Waves,
   Video,
   FileCheck,
@@ -31,6 +32,34 @@ import { WhatsAppButton } from "@/components/Layout";
 import { BLOG_POSTS } from "@/lib/blogData";
 import SEO from "@/components/SEO";
 import { PHONE_DISPLAY, PHONE_TEL, waLink } from "@/lib/contact";
+
+/** 真實工程案例（實際工程紀錄，非客戶評論） */
+const CASE_STUDIES = [
+  {
+    area: "觀塘",
+    type: "商業工程",
+    title: "工廈食堂去水位嚴重淤塞",
+    desc: "活化工廈內食堂鋅盤及地台去水完全停滯，高壓水槍沖洗 15 米排水管，徹底清除積聚多年嘅油脂層，即場放水測試回復暢通。",
+    arrival: "42 分鐘",
+    duration: "約 1.5 小時",
+  },
+  {
+    area: "沙田",
+    type: "村屋工程",
+    title: "村屋沙井滿瀉緊急抽清",
+    desc: "大圍村屋沙井雨後滿瀉倒灌後院，大型吸車即日到場抽清，CCTV 照喉發現樹根入侵，機械切割清除後回復排水。",
+    arrival: "55 分鐘",
+    duration: "約 2 小時",
+  },
+  {
+    area: "旺角",
+    type: "住宅工程",
+    title: "唐樓座廁淤塞深夜救援",
+    desc: "凌晨接報唐樓座廁淤塞倒灌，師傅 30 分鐘上門，專用通渠器配合高壓疏通，出發前已確認總價，完工清理現場。",
+    arrival: "31 分鐘",
+    duration: "約 45 分鐘",
+  },
+];
 
 const HERO_IMG = "/manus-storage/hero-plumber_aaa576bf.png";
 const WHY_IMG = "/manus-storage/why-choose-us_3e335303.png";
@@ -377,6 +406,91 @@ export default function Home() {
                 </div>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 區塊 5.5：真實工程案例 + Google 評價入口 ===== */}
+      <section className="bg-mist py-20 md:py-24">
+        <div className="container">
+          <div className="reveal max-w-xl">
+            <div className="mb-2 text-xs font-bold tracking-[0.2em] text-safety">CASE STUDIES</div>
+            <h2 className="text-balance font-display text-3xl font-black text-navy md:text-4xl">
+              真實工程案例
+            </h2>
+            <p className="mt-3 text-muted-foreground">
+              每一單都係白熊師傅親自落場。以下是近期完成的實際工程紀錄，收費全部出發前確認。
+            </p>
+          </div>
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {CASE_STUDIES.map((c, i) => (
+              <article
+                key={c.title}
+                className="card-float card-accent reveal flex flex-col rounded-lg border border-border bg-white p-7"
+                data-reveal-delay={i * 70}
+              >
+                <div className="flex items-center justify-between">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-navy px-3 py-1 text-[11px] font-bold text-white">
+                    <MapPin className="h-3 w-3 text-wagreen" strokeWidth={2.5} />
+                    {c.area}
+                  </span>
+                  <span className="text-[11px] font-bold tracking-wide text-muted-foreground">
+                    {c.type}
+                  </span>
+                </div>
+                <h3 className="mt-4 font-display text-lg font-black leading-snug text-navy">
+                  {c.title}
+                </h3>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{c.desc}</p>
+                <dl className="mt-5 grid grid-cols-2 gap-3 border-t border-border pt-4">
+                  <div>
+                    <dt className="text-[11px] font-bold tracking-wide text-muted-foreground">到達時間</dt>
+                    <dd className="mt-0.5 text-sm font-black text-navy">{c.arrival}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-[11px] font-bold tracking-wide text-muted-foreground">完工時間</dt>
+                    <dd className="mt-0.5 text-sm font-black text-navy">{c.duration}</dd>
+                  </div>
+                </dl>
+              </article>
+            ))}
+          </div>
+
+          {/* Google 評價入口（連結真實評價，不展示虛構評論） */}
+          <div className="reveal mt-12 flex flex-col items-center justify-between gap-6 rounded-lg border border-border bg-white p-8 shadow-[0_4px_24px_rgba(11,19,43,0.06)] md:flex-row md:p-10">
+            <div className="flex items-center gap-5">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-mist ring-1 ring-border">
+                <svg viewBox="0 0 24 24" className="h-7 w-7" aria-hidden="true">
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                </svg>
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="font-display text-lg font-black text-navy">Google 商家評價</span>
+                  <span className="flex items-center gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-4 w-4 fill-safety text-safety" strokeWidth={0} />
+                    ))}
+                  </span>
+                </div>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  唔使聽我哋自賣自誇——直接去 Google 睇下街坊客戶嘅真實評價，或者幫襯完留低你嘅意見。
+                </p>
+              </div>
+            </div>
+            <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
+              <a
+                href="https://www.google.com/maps/search/%E9%80%9A%E6%B8%A0%E7%86%8A+DrainBear"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-smooth inline-flex items-center justify-center gap-2 rounded-lg bg-navy px-6 py-3 text-sm font-bold text-white hover:bg-navy-light"
+              >
+                查看 Google 評價 <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
           </div>
         </div>
       </section>

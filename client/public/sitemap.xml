@@ -21,6 +21,16 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://drainbear.manus.space/areas/kwun-tong</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://drainbear.manus.space/areas/sha-tin</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://drainbear.manus.space/faq</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

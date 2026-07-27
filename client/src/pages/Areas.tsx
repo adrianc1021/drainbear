@@ -3,6 +3,7 @@
  * 3 欄式網格 + 分區 SEO 描述文案 + 統一透明收費承諾
  */
 import { MapPin, Building, Landmark, Trees, ShieldCheck, Phone } from "lucide-react";
+import { Link } from "wouter";
 import { WhatsAppButton } from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -12,6 +13,12 @@ const AREAS_CRUMBS = [
   { name: "首頁", path: "/" },
   { name: "服務地區", path: "/areas" },
 ];
+
+/** 已有專屬著陸頁的地區 → slug 對照 */
+const DISTRICT_PAGES: Record<string, string> = {
+  觀塘: "kwun-tong",
+  沙田: "sha-tin",
+};
 
 const REGIONS = [
   {
@@ -91,15 +98,26 @@ export default function Areas() {
               <h2 className="mt-1 font-display text-2xl font-black text-navy">{r.name}通渠服務</h2>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{r.seoText}</p>
               <div className="mt-6 flex flex-wrap gap-2">
-                {r.districts.map((d) => (
-                  <span
-                    key={d}
-                    className="btn-smooth inline-flex items-center gap-1 rounded-full border border-border bg-mist px-3.5 py-1.5 text-sm font-medium text-navy hover:border-wagreen/50 hover:bg-wagreen/10 hover:text-wagreen-dark"
-                  >
-                    <MapPin className="h-3 w-3 text-wagreen" strokeWidth={2.5} />
-                    {d}通渠
-                  </span>
-                ))}
+                {r.districts.map((d) =>
+                  DISTRICT_PAGES[d] ? (
+                    <Link
+                      key={d}
+                      href={`/areas/${DISTRICT_PAGES[d]}`}
+                      className="btn-smooth inline-flex items-center gap-1 rounded-full border border-wagreen/40 bg-wagreen/10 px-3.5 py-1.5 text-sm font-bold text-wagreen-dark hover:bg-wagreen hover:text-white"
+                    >
+                      <MapPin className="h-3 w-3" strokeWidth={2.5} />
+                      {d}通渠
+                    </Link>
+                  ) : (
+                    <span
+                      key={d}
+                      className="btn-smooth inline-flex items-center gap-1 rounded-full border border-border bg-mist px-3.5 py-1.5 text-sm font-medium text-navy hover:border-wagreen/50 hover:bg-wagreen/10 hover:text-wagreen-dark"
+                    >
+                      <MapPin className="h-3 w-3 text-wagreen" strokeWidth={2.5} />
+                      {d}通渠
+                    </span>
+                  ),
+                )}
               </div>
             </article>
           ))}

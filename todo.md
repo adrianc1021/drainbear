@@ -1,21 +1,17 @@
-# 通渠熊 DrainBear — 本輪工作（SEO 頁面 + 美化 + 排名優化模版）
+# 本輪任務：地區著陸頁 + 工程案例 + 估價計算機
 
-## 1. SEO 著陸頁
-- [ ] 建立「通渠服務指南 / 收費參考」長內容頁 /guide（服務×地區關鍵字、常見問題、收費表、HowTo 內容）
-- [ ] 加入導航、路由、sitemap
+## 1. 地區著陸頁
+- [ ] 建立 /areas/kwun-tong 觀塘通渠著陸頁（當區內容、SEO、JSON-LD、麵包屑）
+- [ ] 建立 /areas/sha-tin 沙田通渠著陸頁（當區內容、SEO、JSON-LD、麵包屑）
+- [ ] Areas 頁地區 Pill 連結至新著陸頁；App.tsx 路由；sitemap.xml 更新
 
-## 2. 全站美化 + 手機版優化
-- [ ] 手機版 Hero、卡片間距、字級層次優化
-- [ ] 全站細節美化（section 過渡、卡片 hover、視覺層次）
-- [ ] 手機截圖驗證各頁
+## 2. 首頁工程案例 + Google 評價
+- [ ] 首頁新增「真實工程案例」區塊（案例卡：問題/方案/結果/地區/工時）
+- [ ] Google 評價連結與評分展示（注意：不可捏造用戶評價文字，僅展示連結入口，不偽造評論）
 
-## 3. Google 排名優化模版
-- [ ] Breadcrumb 麵包屑元件 + BreadcrumbList JSON-LD
-- [ ] SEO 元件擴充（og:image、article meta、keywords per page）
-- [ ] 內部連結強化（頁尾相關連結區、地區/服務互連）
-- [ ] index.html 效能與 meta 完善（preconnect、lang zh-HK）
-- [ ] sitemap.xml / robots.txt 更新
+## 3. 估價計算機
+- [ ] /guide 頁加入互動式估價計算機（堵塞位置 × 樓宇類型 × 緊急程度 → 估價範圍 + WhatsApp 預填 CTA）
 
 ## 收尾
-- [ ] TypeScript 檢查 + 桌面/手機截圖驗證
+- [ ] TypeScript 檢查 + 截圖驗證（桌面/手機）
 - [ ] 儲存檢查點並交付
