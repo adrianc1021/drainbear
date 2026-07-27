@@ -18,6 +18,7 @@ import { WhatsAppButton } from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { PHONE_DISPLAY, PHONE_TEL, waLink } from "@/lib/contact";
+import { trackCTA } from "@/lib/analytics";
 import { getDistrict } from "@/lib/districtData";
 import NotFound from "@/pages/NotFound";
 
@@ -82,6 +83,7 @@ export default function District() {
                 href={waDistrict}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackCTA("whatsapp", "district_hero", d.name)}
                 className="btn-smooth inline-flex items-center justify-center gap-2 rounded-lg bg-wagreen px-7 py-3.5 text-base font-bold text-white shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark"
               >
                 <MessageCircle className="h-5 w-5" strokeWidth={2.4} />
@@ -89,6 +91,7 @@ export default function District() {
               </a>
               <a
                 href={PHONE_TEL}
+                onClick={() => trackCTA("phone", "district_hero", d.name)}
                 className="btn-smooth inline-flex items-center justify-center gap-2 rounded-lg bg-navy px-7 py-3.5 text-base font-bold text-white hover:bg-navy-light"
               >
                 <Phone className="h-5 w-5" strokeWidth={2.2} />
@@ -147,7 +150,7 @@ export default function District() {
                 ))}
               </ul>
               <div className="mt-6">
-                <WhatsAppButton className="w-full justify-center" label="立即免費報價" />
+                <WhatsAppButton className="w-full justify-center" label="立即免費報價" trackLocation="district_sidebar" />
               </div>
             </div>
           </aside>
@@ -213,6 +216,12 @@ export default function District() {
             >
               查看通渠收費指南 <ArrowRight className="h-4 w-4" />
             </Link>
+            <Link
+              href="/guide#calculator"
+              className="btn-smooth inline-flex items-center gap-1.5 font-bold text-navy/70 hover:gap-2.5 hover:text-navy"
+            >
+              試用估價計算機 <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
         </div>
       </section>
@@ -232,6 +241,7 @@ export default function District() {
                 href={waDistrict}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackCTA("whatsapp", "district_footer_cta", d.name)}
                 className="btn-smooth inline-flex items-center gap-2 rounded-lg bg-wagreen px-8 py-4 text-base font-bold text-white shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark"
               >
                 <MessageCircle className="h-5 w-5" strokeWidth={2.4} />
@@ -239,6 +249,7 @@ export default function District() {
               </a>
               <a
                 href={PHONE_TEL}
+                onClick={() => trackCTA("phone", "district_footer_cta", d.name)}
                 className="btn-smooth inline-flex items-center gap-2 rounded-lg border border-white/25 bg-white/5 px-7 py-4 text-base font-bold text-white hover:bg-white hover:text-navy"
               >
                 <Phone className="h-[18px] w-[18px]" strokeWidth={2.2} />
@@ -251,4 +262,3 @@ export default function District() {
     </div>
   );
 }
-

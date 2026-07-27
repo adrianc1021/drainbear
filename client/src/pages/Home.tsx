@@ -32,6 +32,7 @@ import { WhatsAppButton } from "@/components/Layout";
 import { BLOG_POSTS } from "@/lib/blogData";
 import SEO from "@/components/SEO";
 import { PHONE_DISPLAY, PHONE_TEL, waLink } from "@/lib/contact";
+import { trackCTA } from "@/lib/analytics";
 
 /** 真實工程案例（實際工程紀錄，非客戶評論） */
 const CASE_STUDIES = [
@@ -200,6 +201,7 @@ export default function Home() {
                 href={waLink("你好，我想立即獲取通渠報價。")}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackCTA("whatsapp", "home_hero")}
                 className="btn-smooth inline-flex items-center justify-center gap-2 rounded-lg bg-wagreen px-7 py-3.5 text-base font-bold text-white shadow-[0_8px_24px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark hover:shadow-[0_12px_32px_rgba(37,211,102,0.45)]"
               >
                 <MessageCircle className="h-5 w-5" strokeWidth={2.2} />
@@ -207,6 +209,7 @@ export default function Home() {
               </a>
               <a
                 href={PHONE_TEL}
+                onClick={() => trackCTA("phone", "home_hero")}
                 className="btn-smooth inline-flex items-center justify-center gap-2 rounded-lg bg-navy px-6 py-3.5 text-base font-bold text-white shadow-[0_8px_24px_rgba(11,19,43,0.25)] hover:bg-navy-light hover:shadow-[0_12px_32px_rgba(11,19,43,0.3)]"
               >
                 <Phone className="h-4.5 w-4.5 h-[18px] w-[18px]" strokeWidth={2.2} />
@@ -278,6 +281,13 @@ export default function Home() {
               className="btn-smooth mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-wagreen-dark hover:gap-2.5"
             >
               查看 2026 通渠收費指南 <ArrowRight className="h-4 w-4" />
+            </Link>
+            <span className="mx-2 hidden text-border sm:inline">|</span>
+            <Link
+              href="/guide#calculator"
+              className="btn-smooth mt-2 inline-flex items-center gap-1.5 text-sm font-bold text-navy/70 hover:gap-2.5 hover:text-navy sm:mt-5"
+            >
+              試用即時估價計算機 <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
           <div className="mt-12 grid gap-6 md:grid-cols-3">
@@ -398,6 +408,7 @@ export default function Home() {
                     href={waLink(s.wa)}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => trackCTA("whatsapp", "home_service_card", s.title)}
                     className="btn-smooth mt-5 inline-flex items-center justify-center gap-1.5 rounded-lg bg-wagreen/10 px-4 py-2.5 text-sm font-bold text-wagreen-dark hover:bg-wagreen hover:text-white"
                   >
                     <MessageCircle className="h-4 w-4" strokeWidth={2.4} />
@@ -549,9 +560,10 @@ export default function Home() {
             即時 WhatsApp 獲取初步報價，24 小時全天候特快上門，1 小時內到達現場解除危機。
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
-            <WhatsAppButton className="px-8 py-4 text-base" label="WhatsApp 即時報價" />
+            <WhatsAppButton className="px-8 py-4 text-base" label="WhatsApp 即時報價" trackLocation="home_footer_cta" />
             <a
               href={PHONE_TEL}
+              onClick={() => trackCTA("phone", "home_footer_cta")}
               className="btn-smooth inline-flex items-center justify-center gap-2 rounded-lg border border-white/20 bg-white/5 px-7 py-4 text-base font-bold text-white hover:border-white/45 hover:bg-white hover:text-navy"
             >
               <Phone className="h-4.5 w-4.5 h-[18px] w-[18px]" strokeWidth={2.2} />

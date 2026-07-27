@@ -20,6 +20,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import PriceCalculator from "@/components/PriceCalculator";
 import { WhatsAppButton } from "@/components/Layout";
 import { waLink, PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact";
+import { trackCTA } from "@/lib/analytics";
 
 const CRUMBS = [
   { name: "首頁", path: "/" },
@@ -149,9 +150,10 @@ export default function Guide() {
               以及了解由報價到完工的完整流程——一切透明，決定權在你手。
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-3">
-              <WhatsAppButton label="WhatsApp 免費報價" className="px-6 py-3" />
+              <WhatsAppButton label="WhatsApp 免費報價" className="px-6 py-3" trackLocation="guide_hero" />
               <a
                 href={PHONE_TEL}
+                onClick={() => trackCTA("phone", "guide_hero")}
                 className="btn-smooth inline-flex items-center gap-2 rounded-lg border-2 border-navy/15 bg-white px-6 py-3 text-sm font-bold text-navy hover:border-navy/30"
               >
                 {PHONE_DISPLAY}
@@ -208,7 +210,7 @@ export default function Guide() {
       </section>
 
       {/* 互動式估價計算機 */}
-      <section className="pb-14 md:pb-20">
+      <section id="calculator" className="scroll-mt-24 pb-14 md:pb-20">
         <div className="container">
           <div className="reveal mb-8 max-w-xl">
             <div className="mb-2 text-xs font-bold tracking-[0.2em] text-safety">PRICE ESTIMATOR</div>
@@ -281,6 +283,7 @@ export default function Guide() {
               href={waLink("你好，我想影相俾師傅估價，麻煩晒。")}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackCTA("whatsapp", "guide_howto", "影相估價")}
               className="btn-smooth inline-flex items-center gap-2 rounded-lg bg-wagreen px-7 py-3.5 text-sm font-bold text-white shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark"
             >
               <MessageCircle className="h-4 w-4" strokeWidth={2.5} />
@@ -380,9 +383,10 @@ export default function Guide() {
               影低塞渠位置，WhatsApp 傳過嚟，三分鐘內回覆初步報價。先報價、後動工、不成功不收費。
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-              <WhatsAppButton label="WhatsApp 免費報價" className="px-7 py-3.5" />
+              <WhatsAppButton label="WhatsApp 免費報價" className="px-7 py-3.5" trackLocation="guide_footer_cta" />
               <a
                 href={PHONE_TEL}
+                onClick={() => trackCTA("phone", "guide_footer_cta")}
                 className="btn-smooth inline-flex items-center gap-2 rounded-lg border border-white/25 px-7 py-3.5 text-sm font-bold text-white hover:bg-white/10"
               >
                 致電 {PHONE_DISPLAY}

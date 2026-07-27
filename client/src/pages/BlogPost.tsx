@@ -118,7 +118,7 @@ export default function BlogPost() {
               WhatsApp 白熊師傅，影相或拍片描述情況，即時免費初步報價，24 小時候命。
             </p>
             <div className="mt-6 flex justify-center">
-              <WhatsAppButton label="WhatsApp 免費報價" />
+              <WhatsAppButton label="WhatsApp 免費報價" trackLocation="blogpost_cta" />
             </div>
           </div>
 

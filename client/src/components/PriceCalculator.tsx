@@ -3,7 +3,9 @@
  * 三步選擇：堵塞位置 × 樓宇類型 × 時段 → 即時估價範圍 + WhatsApp 預填報價
  * 風格：Premium SaaS Minimalism（navy/wagreen/mist，8px 圓角，無 Emoji）
  */
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useRef } from "react";
+import { toast } from "sonner";
 import {
   Bath,
   Building2,
@@ -20,6 +22,8 @@ import {
   Waves,
 } from "lucide-react";
 import { waLink } from "@/lib/contact";
+import { trackCTA } from "@/lib/analytics";
+import { useEstimate } from "@/contexts/EstimateContext";
 
 interface Option {
   id: string;
@@ -60,6 +64,7 @@ export default function PriceCalculator() {
   const [loc, setLoc] = useState<string | null>(null);
   const [bld, setBld] = useState<string | null>(null);
   const [time, setTime] = useState<string>("day");
+  const { setEstimate } = useEstimate();
 
   const result = useMemo(() => {
     const l = LOCATIONS.find((o) => o.id === loc);
@@ -74,6 +79,31 @@ export default function PriceCalculator() {
   const waMsg = result
     ? `你好，我想查詢通渠報價：${result.l.label}淤塞，樓宇類型係${result.b.label}，${result.t.label}上門。網上估價約 HK$${result.low}–${result.high}，請確認實際報價。`
     : undefined;
+
+  // 估價結果同步至全域 Context：底部 CTA 列即時改用預填估價詳情
+  const toastShown = useRef(false);
+  useEffect(() => {
+    if (result && waMsg) {
+      setEstimate({
+        location: result.l.label,
+        building: result.b.label,
+        time: result.t.label,
+        low: result.low,
+        high: result.high,
+        waMessage: waMsg,
+      });
+      // 首次完成估價時提示：估價已同步至 WhatsApp 按鈕
+      if (!toastShown.current) {
+        toastShown.current = true;
+        toast.success("估價已同步至 WhatsApp 按鈕", {
+          description: "一按即可發送估價詳情，師傅會盡快確認實際報價。",
+          duration: 3500,
+        });
+      }
+    } else {
+      setEstimate(null);
+    }
+  }, [result, waMsg, setEstimate]);
 
   const StepTitle = ({ n, text }: { n: number; text: string }) => (
     <div className="mb-3 flex items-center gap-2.5">
@@ -158,11 +188,18 @@ export default function PriceCalculator() {
                 href={waLink(waMsg!)}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() =>
+                  trackCTA("whatsapp", "price_calculator", `${result.l.label}_${result.b.label}_${result.t.id}`)
+                }
                 className="btn-smooth mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-wagreen px-6 py-3.5 text-sm font-bold text-white shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark"
               >
                 <MessageCircle className="h-[18px] w-[18px]" strokeWidth={2.4} />
                 WhatsApp 確認實際報價
               </a>
+              <p className="mt-3 flex items-center gap-1.5 text-[11px] font-medium text-wagreen">
+                <span className="inline-flex h-1.5 w-1.5 rounded-full bg-wagreen" />
+                估價已同步至頁底 WhatsApp 按鈕，一按即可發送
+              </p>
               <p className="mt-4 text-[11px] leading-relaxed text-white/40">
                 以上為初步估算，僅供參考。實際收費以師傅上門評估後、動工前確認為準。純異物淤塞打不通，分毫不收。
               </p>

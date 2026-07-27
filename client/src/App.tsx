@@ -5,6 +5,10 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Layout from "./components/Layout";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { EstimateProvider } from "./contexts/EstimateContext";
+import { initAnalytics } from "./lib/analytics";
+
+initAnalytics();
 import Home from "./pages/Home";
 import Services from "./pages/Services";
 import Areas from "./pages/Areas";
@@ -43,14 +47,13 @@ function Router() {
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider
-        defaultTheme="light"
-        // switchable
-      >
-        <TooltipProvider>
-          <Toaster />
-          <Router />
-        </TooltipProvider>
+      <ThemeProvider defaultTheme="light">
+        <EstimateProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Router />
+          </TooltipProvider>
+        </EstimateProvider>
       </ThemeProvider>
     </ErrorBoundary>
   );

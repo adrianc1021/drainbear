@@ -107,7 +107,7 @@ export default function FAQ() {
               直接 WhatsApp 白熊師傅，即時解答並獲取免費初步報價。
             </p>
             <div className="mt-6 flex justify-center">
-              <WhatsAppButton label="WhatsApp 即時查詢" />
+              <WhatsAppButton label="WhatsApp 即時查詢" trackLocation="faq_cta" />
             </div>
           </div>
         </div>

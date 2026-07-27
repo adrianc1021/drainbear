@@ -127,7 +127,7 @@ export default function Blog() {
               DIY 有極限，反覆淤塞多數係喉管深處出事。WhatsApp 影相俾我哋，免費初步判症。
             </p>
             <div className="mt-6 flex justify-center">
-              <WhatsAppButton label="WhatsApp 免費判症" />
+              <WhatsAppButton label="WhatsApp 免費判症" trackLocation="blog_cta" />
             </div>
           </div>
         </div>

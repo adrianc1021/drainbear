@@ -46,3 +46,29 @@
 3. 排名模版完成：全頁 SEO+keywords+canonical+OG；Services/Areas/FAQ/Blog/BlogPost 有 Breadcrumbs 視覺 + BreadcrumbList JSON-LD；首頁透明報價區加 /guide 內部連結。
 - 舊 devserver.log 的 WhatsAppWidget 錯誤為過期日誌，檔案存在且 HMR 正常。
 - 待辦：手機版截圖驗證 → 儲存檢查點 → 交付。
+
+## 第五輪（GA4 + 在線綠點 + 估價同步 + 額外優化）— 進行中
+- 前情 checkpoint：64d53513（地區頁/案例/計算機）→ 53e180d3（手機版 UX：CTA 列重構、safe-area、捲動收起、懸浮鈕手機版 48px 深藍底綠圖標）
+- 已建立：
+  - client/src/lib/analytics.ts：initAnalytics()（GA4 via VITE_GA4_ID 或 window.__GA4_ID__；未配置時事件推 dataLayer 佇列）+ trackCTA(channel, location, topic)，事件名 whatsapp_click / phone_click，參數 cta_location / page_path / topic
+  - client/src/contexts/EstimateContext.tsx：EstimateProvider / useEstimate()，EstimateResult{location,building,time,low,high,waMessage}
+- 待辦：
+  1. main.tsx（或 App.tsx）：initAnalytics()、以 EstimateProvider 包住 App
+  2. PriceCalculator.tsx：結果變化時 useEffect setEstimate()；其 WhatsApp 按鈕 trackCTA("whatsapp","price_calculator",摘要)
+  3. Layout.tsx MobileCTABar：useEstimate() → 有估價時 WhatsApp href=waLink(estimate.waMessage)、文案「發送估價詳情 HK$low–high」；加「現在有師傅在線」呼吸綠點；兩按鈕 trackCTA("whatsapp"/"phone","mobile_bar")
+  4. WhatsAppButton（Layout 匯出）加可選 trackLocation prop 統一上報；Header 綠鈕=header；WhatsAppWidget=floating_widget（topic=所選快速主題）；hero/頁內電話連結 trackCTA("phone",...)
+  5. 額外 UX 優化候選：估價完成 toast 提示底部列已同步；District/Guide 頁內 CTA 追蹤
+  6. 截圖驗證（桌面+手機 375px）→ checkpoint → 交付
+- MobileCTABar 現狀（Layout.tsx）：v2 版本，WhatsApp 主 CTA flex-[1.6]（副標「即時免費・1 分鐘內回覆」）+ 電話次 CTA flex-1，捲動收起邏輯 hidden state，safe-area padding
+
+## 第五輪已完成（Phase 29-30 done）
+- App.tsx：initAnalytics() + EstimateProvider 已接入
+- 追蹤已接入全部 CTA：Layout（header、mobile_menu、mobile_bar wa+phone、footer phone）、WhatsAppButton trackLocation prop（預設 shared_button）、WhatsAppWidget（floating_widget）、PriceCalculator（price_calculator）、Home（home_hero wa+phone、home_service_card、home_footer_cta）、Guide（guide_hero、guide_howto、guide_footer_cta）、District、Areas、Services、FAQ（faq_cta）、Blog（blog_cta）、BlogPost（blogpost_cta）
+- MobileCTABar：estimate 有值時 href=waLink(estimate.waMessage)、標題「發送估價詳情」、副標「已附上估價 HK$X–Y」；無估價時副標「現在有師傅在線・即時回覆」+ animate-ping 白色呼吸點
+- PriceCalculator：useEffect setEstimate 同步 + 右側「估價已同步至頁底 WhatsApp 按鈕」綠色提示
+- tsc 0 errors；devserver log 中 WhatsAppWidget import 錯誤為 04:24 舊日誌，可忽略
+
+## 剩餘待辦（Phase 31-33）
+- Phase 31 額外優化候選：Guide 頁計算機錨點連結（首頁/District 指向 /guide#calculator）、計算機結果變化時 sonner toast、District 頁補充內部連結、檢查手機版 Header 選單 UX
+- Phase 32：截圖驗證 desktop + 375px（/、/guide、/areas/kwun-tong）→ webdev_save_checkpoint
+- Phase 33：交付，告知 GA4 ID 配置方式（client/index.html window.__GA4_ID__ 或 VITE_GA4_ID env），事件規格 whatsapp_click/phone_click + cta_location/page_path/topic

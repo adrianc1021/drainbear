@@ -8,6 +8,7 @@ import { WhatsAppButton } from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact";
+import { trackCTA } from "@/lib/analytics";
 
 const AREAS_CRUMBS = [
   { name: "首頁", path: "/" },
@@ -136,9 +137,10 @@ export default function Areas() {
               不管您在哪個分區，通渠熊均堅守「明碼實價、先報價後動工」原則，絕不因地區偏遠而坐地起價。不成功，不收費。
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-              <WhatsAppButton className="px-8 py-4 text-base" label="查詢我的地區" />
+              <WhatsAppButton className="px-8 py-4 text-base" label="查詢我的地區" trackLocation="areas_footer_cta" />
               <a
                 href={PHONE_TEL}
+                onClick={() => trackCTA("phone", "areas_footer_cta")}
                 className="btn-smooth inline-flex items-center gap-2 rounded-lg border border-white/25 bg-white/5 px-7 py-4 text-base font-bold text-white hover:bg-white hover:text-navy"
               >
                 <Phone className="h-[18px] w-[18px]" strokeWidth={2.2} />

@@ -7,6 +7,9 @@ import { ReactNode, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Menu, X, MessageCircle, Phone, Clock, Star, Award, ShieldCheck } from "lucide-react";
 import { PHONE_DISPLAY, PHONE_TEL, WA_DEFAULT } from "@/lib/contact";
+import { waLink } from "@/lib/contact";
+import { trackCTA } from "@/lib/analytics";
+import { useEstimate } from "@/contexts/EstimateContext";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
 import { useReveal } from "@/hooks/useReveal";
 
@@ -21,12 +24,21 @@ const NAV_ITEMS = [
   { label: "常見問題", href: "/faq" },
 ];
 
-export function WhatsAppButton({ className = "", label = "24hr 緊急報價" }: { className?: string; label?: string }) {
+export function WhatsAppButton({
+  className = "",
+  label = "24hr 緊急報價",
+  trackLocation = "shared_button",
+}: {
+  className?: string;
+  label?: string;
+  trackLocation?: string;
+}) {
   return (
     <a
       href={WA_DEFAULT}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => trackCTA("whatsapp", trackLocation)}
       className={`btn-smooth inline-flex items-center gap-2 rounded-lg bg-wagreen px-5 py-2.5 text-sm font-bold text-white shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark hover:shadow-[0_6px_24px_rgba(37,211,102,0.45)] ${className}`}
     >
       <MessageCircle className="h-4 w-4" strokeWidth={2.5} />
@@ -45,6 +57,7 @@ export function WhatsAppButton({ className = "", label = "24hr 緊急報價" }: 
 function MobileCTABar() {
   const [hidden, setHidden] = useState(false);
   const lastY = useRef(0);
+  const { estimate } = useEstimate();
 
   useEffect(() => {
     const onScroll = () => {
@@ -62,6 +75,12 @@ function MobileCTABar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const waHref = estimate ? waLink(estimate.waMessage) : WA_DEFAULT;
+  const waTitle = estimate ? "發送估價詳情" : "WhatsApp 報價";
+  const waSub = estimate
+    ? `已附上估價 HK$${estimate.low.toLocaleString()}–${estimate.high.toLocaleString()}`
+    : "現在有師傅在線・即時回覆";
+
   return (
     <div
       className={`fixed inset-x-0 bottom-0 z-50 border-t border-border bg-white/95 backdrop-blur-md transition-transform duration-300 md:hidden ${
@@ -75,19 +94,33 @@ function MobileCTABar() {
     >
       <div className="flex items-stretch gap-2.5 px-3 py-2.5">
         <a
-          href={WA_DEFAULT}
+          href={waHref}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() =>
+            trackCTA(
+              "whatsapp",
+              "mobile_bar",
+              estimate ? `estimate_${estimate.low}-${estimate.high}` : undefined
+            )
+          }
           className="btn-smooth flex flex-[1.6] items-center justify-center gap-2.5 rounded-lg bg-wagreen px-3 py-2.5 text-white shadow-[0_4px_14px_rgba(37,211,102,0.4)] active:scale-[0.97]"
         >
           <MessageCircle className="h-5 w-5 shrink-0" strokeWidth={2.4} />
           <span className="flex flex-col items-start leading-tight">
-            <span className="text-[15px] font-bold">WhatsApp 報價</span>
-            <span className="text-[10.5px] font-medium text-white/85">即時免費・1 分鐘內回覆</span>
+            <span className="text-[15px] font-bold">{waTitle}</span>
+            <span className="flex items-center gap-1.5 text-[10.5px] font-medium text-white/85">
+              <span className="relative flex h-2 w-2 shrink-0">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white/70 [animation-duration:1.8s]" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-white shadow-[0_0_6px_rgba(255,255,255,0.9)]" />
+              </span>
+              {waSub}
+            </span>
           </span>
         </a>
         <a
           href={PHONE_TEL}
+          onClick={() => trackCTA("phone", "mobile_bar")}
           className="btn-smooth flex flex-1 items-center justify-center gap-2 rounded-lg bg-navy px-3 py-2.5 text-white active:scale-[0.97]"
         >
           <Phone className="h-[18px] w-[18px] shrink-0" strokeWidth={2.4} />
@@ -143,7 +176,7 @@ function Header() {
         </nav>
 
         <div className="hidden md:block">
-          <WhatsAppButton />
+          <WhatsAppButton trackLocation="header" />
         </div>
 
         <button
@@ -169,7 +202,7 @@ function Header() {
             </Link>
           ))}
           <div className="mt-3 px-4">
-            <WhatsAppButton className="w-full justify-center" />
+            <WhatsAppButton className="w-full justify-center" trackLocation="mobile_menu" />
           </div>
         </div>
       )}
@@ -252,7 +285,7 @@ function Footer() {
         </div>
       </div>
       <div className="border-t border-white/10 py-5 text-center text-xs text-white/40">
-        <a href={PHONE_TEL} className="btn-smooth hover:text-white">
+        <a href={PHONE_TEL} onClick={() => trackCTA("phone", "footer")} className="btn-smooth hover:text-white">
           24 小時熱線：{PHONE_DISPLAY}
         </a>
         <span className="mx-2">|</span>© {new Date().getFullYear()} 通渠熊 DrainBear Limited.
@@ -267,7 +300,21 @@ export default function Layout({ children }: { children: ReactNode }) {
   useReveal();
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+    // 支援 hash 錨點（如 /guide#calculator）：有錨點時捲至該區塊，否則回頁頂
+    const hash = window.location.hash;
+    if (hash) {
+      // 等待目標頁面渲染完成後再捲動
+      requestAnimationFrame(() => {
+        const el = document.querySelector(hash);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+          return;
+        }
+        window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+      });
+    } else {
+      window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+    }
   }, [location]);
 
   return (
