@@ -62,7 +62,7 @@ const CASE_STUDIES = [
   },
 ];
 
-const HERO_IMG = "/manus-storage/hero-plumber_f9109f53.png";
+const HERO_IMG = "https://res.cloudinary.com/pgjztf2p/image/upload/v1785147037/LOGO_dmyalo.png";
 const WHY_IMG = "/manus-storage/why-choose-us_3e335303.png";
 const IMG_RESIDENTIAL = "/manus-storage/service-residential_69154457.png";
 const IMG_COMMERCIAL = "/manus-storage/service-commercial_99bef6a7.png";
