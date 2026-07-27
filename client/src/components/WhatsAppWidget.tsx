@@ -26,10 +26,13 @@ export default function WhatsAppWidget() {
   }, [open]);
 
   return (
-    <div className="fixed bottom-[72px] right-4 z-[60] flex flex-col items-end md:bottom-6 md:right-6">
+    <div
+      className="fixed bottom-[86px] right-3 z-[60] flex flex-col items-end md:bottom-6 md:right-6"
+      style={{ marginBottom: "env(safe-area-inset-bottom)" }}
+    >
       {/* 對話卡 */}
       <div
-        className={`mb-3 w-[320px] max-w-[calc(100vw-2rem)] origin-bottom-right overflow-hidden rounded-lg bg-white shadow-[0_20px_60px_rgba(11,19,43,0.25)] ring-1 ring-border transition-all duration-200 ${
+        className={`mb-3 w-[320px] max-w-[calc(100vw-1.5rem)] origin-bottom-right overflow-hidden rounded-lg bg-white shadow-[0_20px_60px_rgba(11,19,43,0.25)] ring-1 ring-border transition-all duration-200 ${
           open
             ? "pointer-events-auto translate-y-0 scale-100 opacity-100"
             : "pointer-events-none translate-y-2 scale-95 opacity-0"
@@ -97,21 +100,21 @@ export default function WhatsAppWidget() {
       {/* 懸浮按鈕 */}
       <button
         onClick={() => setOpen(!open)}
-        className="btn-smooth relative flex h-14 w-14 items-center justify-center rounded-full bg-wagreen text-white shadow-[0_8px_24px_rgba(37,211,102,0.45)] hover:bg-wagreen-dark hover:shadow-[0_10px_32px_rgba(37,211,102,0.55)]"
+        className="btn-smooth relative flex h-12 w-12 items-center justify-center rounded-full bg-navy text-white shadow-[0_8px_24px_rgba(11,19,43,0.4)] hover:bg-navy-light active:scale-95 md:h-14 md:w-14 md:bg-wagreen md:shadow-[0_8px_24px_rgba(37,211,102,0.45)] md:hover:bg-wagreen-dark md:hover:shadow-[0_10px_32px_rgba(37,211,102,0.55)]"
         aria-label={open ? "關閉 WhatsApp 對話框" : "開啟 WhatsApp 對話框"}
         aria-expanded={open}
       >
         {pulse && !open && (
-          <span className="absolute inset-0 animate-ping rounded-full bg-wagreen/50 [animation-duration:2s]" />
+          <span className="absolute inset-0 hidden animate-ping rounded-full bg-wagreen/50 [animation-duration:2s] md:block" />
         )}
         <span
           className="relative flex items-center justify-center transition-transform duration-200"
           style={{ transform: open ? "rotate(90deg)" : "rotate(0deg)", transitionTimingFunction: "cubic-bezier(0.23, 1, 0.32, 1)" }}
         >
           {open ? (
-            <X className="h-6 w-6" strokeWidth={2.5} />
+            <X className="h-5 w-5 md:h-6 md:w-6" strokeWidth={2.5} />
           ) : (
-            <MessageCircle className="h-6 w-6" strokeWidth={2.4} />
+            <MessageCircle className="h-5 w-5 text-wagreen md:h-6 md:w-6 md:text-white" strokeWidth={2.4} />
           )}
         </span>
       </button>

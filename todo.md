@@ -15,3 +15,15 @@
 ## 收尾
 - [ ] TypeScript 檢查 + 截圖驗證（桌面/手機）
 - [ ] 儲存檢查點並交付
+
+---
+
+# 新一輪任務：手機版 UX 優化（上輪三項功能已完成並交付 64d53513）
+
+- [x] 檢視 Layout.tsx 的 MobileCTABar 與 WhatsAppWidget 現有實作及重疊情況
+- [x] 底部 CTA 列：WhatsApp 主 CTA（62% 闊、副標）、電話次 CTA、safe-area-inset-bottom、圓角卡片化、active 縮放回饋
+- [x] 向下捲動自動收起 CTA 列、向上捲/近頁底重現（減少閱讀遮擋）
+- [x] WhatsApp 懸浮按鈕手機版縮細至 48px、改深藍底綠圖標（與綠色 CTA 列區分）、上移至 bottom-86px、停用手機版 ping 動畫
+- [x] Footer 後加 68px 佔位 div，內容不被固定 CTA 列遮蓋
+- [x] 手機版截圖驗證（/、/guide、/areas/kwun-tong、375px 及 390px）
+- [ ] 儲存 checkpoint 並交付

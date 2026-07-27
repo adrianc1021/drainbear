@@ -3,7 +3,7 @@
  * Header：Logo + 首頁/通渠服務/服務地區/常見問題 + 綠色「24hr 緊急報價」懸浮按鈕
  * Footer：橫向 4 組數據 + 公司資訊
  */
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Menu, X, MessageCircle, Phone, Clock, Star, Award, ShieldCheck } from "lucide-react";
 import { PHONE_DISPLAY, PHONE_TEL, WA_DEFAULT } from "@/lib/contact";
@@ -35,26 +35,65 @@ export function WhatsAppButton({ className = "", label = "24hr 緊急報價" }: 
   );
 }
 
-/** 行動裝置底部固定 CTA 列：WhatsApp + 電話直撥 */
+/**
+ * 行動裝置底部固定 CTA 列（v2）：
+ * - WhatsApp 為主 CTA（佔約 62% 闊度、副標「即時免費報價」提升點擊誘因）
+ * - 電話為次 CTA（深色，僅圖標+短文字）
+ * - 支援 iPhone 底部安全區（safe-area-inset-bottom）
+ * - 向下捲動時自動收起、向上捲動或近頁底時重現，減少閱讀遮擋
+ */
 function MobileCTABar() {
+  const [hidden, setHidden] = useState(false);
+  const lastY = useRef(0);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY;
+      const nearBottom = window.innerHeight + y >= document.body.scrollHeight - 160;
+      // 向下捲超過 12px 才收起，向上捲、頁頂或近頁底即重現
+      if (nearBottom || y < 80 || y < lastY.current - 4) {
+        setHidden(false);
+      } else if (y > lastY.current + 12) {
+        setHidden(true);
+      }
+      lastY.current = y;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-2 gap-px border-t border-border bg-white shadow-[0_-4px_20px_rgba(11,19,43,0.12)] md:hidden">
-      <a
-        href={WA_DEFAULT}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="btn-smooth flex items-center justify-center gap-2 bg-wagreen py-3.5 text-sm font-bold text-white"
-      >
-        <MessageCircle className="h-4.5 w-4.5 h-[18px] w-[18px]" strokeWidth={2.4} />
-        WhatsApp 報價
-      </a>
-      <a
-        href={PHONE_TEL}
-        className="btn-smooth flex items-center justify-center gap-2 bg-navy py-3.5 text-sm font-bold text-white"
-      >
-        <Phone className="h-[18px] w-[18px]" strokeWidth={2.4} />
-        致電師傅
-      </a>
+    <div
+      className={`fixed inset-x-0 bottom-0 z-50 border-t border-border bg-white/95 backdrop-blur-md transition-transform duration-300 md:hidden ${
+        hidden ? "translate-y-full" : "translate-y-0"
+      }`}
+      style={{
+        transitionTimingFunction: "cubic-bezier(0.23, 1, 0.32, 1)",
+        paddingBottom: "env(safe-area-inset-bottom)",
+        boxShadow: "0 -6px 24px rgba(11,19,43,0.12)",
+      }}
+    >
+      <div className="flex items-stretch gap-2.5 px-3 py-2.5">
+        <a
+          href={WA_DEFAULT}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-smooth flex flex-[1.6] items-center justify-center gap-2.5 rounded-lg bg-wagreen px-3 py-2.5 text-white shadow-[0_4px_14px_rgba(37,211,102,0.4)] active:scale-[0.97]"
+        >
+          <MessageCircle className="h-5 w-5 shrink-0" strokeWidth={2.4} />
+          <span className="flex flex-col items-start leading-tight">
+            <span className="text-[15px] font-bold">WhatsApp 報價</span>
+            <span className="text-[10.5px] font-medium text-white/85">即時免費・1 分鐘內回覆</span>
+          </span>
+        </a>
+        <a
+          href={PHONE_TEL}
+          className="btn-smooth flex flex-1 items-center justify-center gap-2 rounded-lg bg-navy px-3 py-2.5 text-white active:scale-[0.97]"
+        >
+          <Phone className="h-[18px] w-[18px] shrink-0" strokeWidth={2.4} />
+          <span className="text-[15px] font-bold">致電</span>
+        </a>
+      </div>
     </div>
   );
 }
@@ -234,8 +273,10 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-screen flex-col bg-white">
       <Header />
-      <main className="flex-1 pb-14 pt-16 md:pb-0 md:pt-[72px]">{children}</main>
+      <main className="flex-1 pt-16 md:pt-[72px]">{children}</main>
       <Footer />
+      {/* 佔位：避免內容及 Footer 被固定 CTA 列遮蓋（含 safe-area） */}
+      <div className="h-[68px] md:hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }} aria-hidden="true" />
       <MobileCTABar />
       <WhatsAppWidget />
     </div>
