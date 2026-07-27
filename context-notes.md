@@ -90,3 +90,11 @@
 - [x] Layout.tsx WhatsAppButton + MobileCTABar 已接 goThanksAfterWhatsApp
 - [ ] 剩餘 inline WhatsApp 錨點接跳轉：District.tsx(hero/footer_cta)、Guide.tsx(283)、Home.tsx(201/408)、Services.tsx(187)、WhatsAppWidget.tsx(77/88)、PriceCalculator.tsx(188)
 - [ ] 截圖驗證（/areas 桌面+手機、/thanks）→ checkpoint → 交付
+
+## 第六輪已全部完成並交付（checkpoint 7f854f8e）
+
+## 第七輪（進行中）：感謝頁 FAQ + 手機觸控優化 + Wix 說明
+- Thanks.tsx 已加入 FAQ 手風琴區塊（服務流程與收費標準）
+- 觸控優化已完成：WhatsAppButton min-h-44、MobileCTABar 按鈕 min-h-52、手機選單項 min-h-48、footer 連結 min-h-44、Areas pill min-h-44、Guide 地區關鍵字 pill min-h-40、PriceCalculator 選項 min-h-48、文字型箭嘴連結（Home/Guide/District/Thanks/BlogPost/Breadcrumbs 共 13 處）min-h-44
+- Wix 回答要點：React 程式碼無法直接匯入 Wix；建議 Manus Publish（支援自訂網域，Wix 網域可指向）；或 GitHub 匯出自行部署
+- 待辦：tsc 檢查、手機截圖驗證（/、/thanks、/guide、/areas）、checkpoint、交付

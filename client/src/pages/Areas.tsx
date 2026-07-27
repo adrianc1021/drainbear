@@ -88,14 +88,14 @@ function DistrictPill({ name }: { name: string }) {
   return slug ? (
     <Link
       href={`/areas/${slug}`}
-      className="btn-smooth inline-flex items-center gap-1 rounded-full border border-wagreen/40 bg-wagreen/10 px-3.5 py-1.5 text-sm font-bold text-wagreen-dark hover:bg-wagreen hover:text-white"
+      className="btn-smooth inline-flex min-h-[44px] items-center gap-1 rounded-full border border-wagreen/40 bg-wagreen/10 px-4 py-2 text-sm font-bold text-wagreen-dark hover:bg-wagreen hover:text-white"
     >
       <MapPin className="h-3 w-3" strokeWidth={2.5} />
       {name}通渠
       <ArrowRight className="h-3 w-3" strokeWidth={2.5} />
     </Link>
   ) : (
-    <span className="inline-flex items-center gap-1 rounded-full border border-border bg-mist px-3.5 py-1.5 text-sm font-medium text-navy">
+    <span className="inline-flex min-h-[44px] items-center gap-1 rounded-full border border-border bg-mist px-4 py-2 text-sm font-medium text-navy">
       <MapPin className="h-3 w-3 text-wagreen" strokeWidth={2.5} />
       {name}通渠
     </span>

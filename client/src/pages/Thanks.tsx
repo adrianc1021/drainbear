@@ -16,6 +16,12 @@ import {
   Wrench,
 } from "lucide-react";
 import SEO from "@/components/SEO";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { PHONE_DISPLAY, PHONE_TEL, WA_DEFAULT } from "@/lib/contact";
 import { trackCTA, trackWhatsAppOpen } from "@/lib/analytics";
 
@@ -34,6 +40,34 @@ const NEXT_STEPS = [
     icon: Wrench,
     title: "3. 確認後極速上門",
     desc: "同意報價後即刻出發，全港 1 小時內特快到達，先報價、後動工。",
+  },
+];
+
+/* 等候期間 FAQ：服務流程 + 收費標準 */
+const THANKS_FAQS = [
+  {
+    q: "通渠收費大概幾多錢？",
+    a: "常見服務參考價：坐廁/馬桶淤塞 HK$600 起、廚房鋅盤 HK$500 起、企缸/地台去水位 HK$500 起、大廈主渠/沙井 HK$1,800 起、高壓水槍洗渠 HK$2,800 起。師傅會在動工前一次過確認總價，絕不坐地起價；純異物淤塞打不通，分毫不收。",
+  },
+  {
+    q: "報價之後仲會唔會加價？",
+    a: "不會。通渠熊堅持「先報價、後動工」：師傅上門評估後、動工前確認最終總收費（已包上門費及完工清潔），深夜時段（23:00–07:00）附加費亦會一併講明。你確認價錢後才開工，絕無隱藏收費。",
+  },
+  {
+    q: "師傅幾耐會到？服務範圍包唔包我嗰區？",
+    a: "全港 1 小時特快到達，24 小時全天候候命，覆蓋港島、九龍、新界及離島 32+ 分區，統一收費、絕不因地區加價。深夜緊急塞渠亦可即時安排師傅出動。",
+  },
+  {
+    q: "上門會用咩方法通渠？",
+    a: "師傅會按淤塞性質選用最合適工具：手搖泵、電動通渠機或高壓水槍；懷疑喉管破損時會用 CCTV 照喉檢測，有片有真相，是堵塞便疏通、確認破損才建議維修，絕不無故推銷換喉工程。",
+  },
+  {
+    q: "「不成功不收費」點樣計？",
+    a: "凡屬異物淤塞（豬油膏、頭髮、紙巾、濕紙巾等）而未能成功疏通，我們分毫不收，上門檢查費亦全免。如檢測後確認屬喉管破損需維修，則屬另一種工程，師傅會先解釋清楚並另行報價，由你決定是否進行。",
+  },
+  {
+    q: "等緊回覆，我可以做啲咩令報價更快？",
+    a: "可以在 WhatsApp 對話中補充：堵塞位置的相片或短片、所在地區及樓宇類型（住宅/村屋/商舖）、大概發生時間。資料愈齊，師傅斷症愈快，通常 1 分鐘內就能給你初步報價。",
   },
 ];
 
@@ -123,21 +157,63 @@ export default function Thanks() {
             <span className="text-muted-foreground">等候回覆時，不妨了解一下：</span>
             <Link
               href="/guide"
-              className="btn-smooth inline-flex items-center gap-1.5 font-bold text-wagreen-dark hover:gap-2.5"
+              className="btn-smooth inline-flex min-h-[44px] items-center gap-1.5 font-bold text-wagreen-dark hover:gap-2.5"
             >
               通渠收費指南 <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               href="/blog"
-              className="btn-smooth inline-flex items-center gap-1.5 font-bold text-wagreen-dark hover:gap-2.5"
+              className="btn-smooth inline-flex min-h-[44px] items-center gap-1.5 font-bold text-wagreen-dark hover:gap-2.5"
             >
               通渠小知識 <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               href="/"
-              className="btn-smooth inline-flex items-center gap-1.5 font-bold text-navy/70 hover:gap-2.5 hover:text-navy"
+              className="btn-smooth inline-flex min-h-[44px] items-center gap-1.5 font-bold text-navy/70 hover:gap-2.5 hover:text-navy"
             >
               返回首頁 <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 等候期間 FAQ */}
+      <section className="bg-mist py-14 md:py-20">
+        <div className="container max-w-3xl">
+          <div className="reveal text-center">
+            <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">WHILE YOU WAIT</div>
+            <h2 className="font-display text-2xl font-black text-navy md:text-3xl">
+              等候回覆時，先了解服務流程同收費
+            </h2>
+            <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground md:text-base">
+              以下是客戶查詢時最關心的幾條問題，睇完之後同師傅溝通會更快更順。
+            </p>
+          </div>
+          <div className="reveal mt-8">
+            <Accordion
+              type="single"
+              collapsible
+              className="card-float overflow-hidden rounded-lg border border-border bg-white"
+            >
+              {THANKS_FAQS.map((f, i) => (
+                <AccordionItem key={f.q} value={`faq-${i}`} className="border-border px-5 md:px-7">
+                  <AccordionTrigger className="min-h-[56px] py-4 text-left font-bold text-navy hover:no-underline md:text-base">
+                    {f.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-5 text-sm leading-relaxed text-muted-foreground">
+                    {f.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+          <div className="reveal mt-6 text-center text-sm text-muted-foreground">
+            想睇完整價目表同揀公司貼士？
+            <Link
+              href="/guide"
+              className="btn-smooth ml-2 inline-flex items-center gap-1.5 font-bold text-wagreen-dark hover:gap-2.5"
+            >
+              前往收費指南 <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>

@@ -127,7 +127,7 @@ export default function PriceCalculator() {
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`btn-smooth flex items-center gap-2.5 rounded-lg border px-4 py-3 text-left text-sm font-semibold ${
+      className={`btn-smooth flex min-h-[48px] items-center gap-2.5 rounded-lg border px-4 py-3 text-left text-sm font-semibold ${
         active
           ? "border-wagreen bg-wagreen/10 text-wagreen-dark shadow-[0_2px_12px_rgba(37,211,102,0.18)]"
           : "border-border bg-white text-navy/75 hover:border-navy/30 hover:text-navy"

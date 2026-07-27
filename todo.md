@@ -58,3 +58,12 @@
 - [ ] 全站 WhatsApp CTA 接上跳轉邏輯（集中於 trackCTA 或新 openWhatsApp() helper）
 - [ ] 截圖驗證（桌面+手機：/areas、/thanks）
 - [ ] 儲存 checkpoint 並交付
+
+---
+
+# 第七輪任務：感謝頁 FAQ + 全站手機按鈕觸控優化 + Wix 說明（上輪已交付 7f854f8e）
+
+- [ ] 感謝頁 /thanks 下方加入 FAQ 區塊（服務流程 + 收費標準，可重用 Guide FAQ 資料，手風琴式）
+- [ ] 全站審查手機版按鈕觸控目標：Header 電話/CTA、Footer 連結、地區 pill、計算機選項、卡片連結等，統一 ≥44px
+- [ ] 截圖驗證（手機 375px：/、/thanks、/guide、/areas）
+- [ ] 儲存 checkpoint 並交付，說明 Wix 發佈可行性（不可直接匯入，建議 Manus 發佈 + 自訂網域）

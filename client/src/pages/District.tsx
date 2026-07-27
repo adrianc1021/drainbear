@@ -215,13 +215,13 @@ export default function District() {
             <span className="text-muted-foreground">想了解更多收費詳情？</span>
             <Link
               href="/guide"
-              className="btn-smooth inline-flex items-center gap-1.5 font-bold text-wagreen-dark hover:gap-2.5"
+              className="btn-smooth inline-flex min-h-[44px] items-center gap-1.5 font-bold text-wagreen-dark hover:gap-2.5"
             >
               查看通渠收費指南 <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               href="/guide#calculator"
-              className="btn-smooth inline-flex items-center gap-1.5 font-bold text-navy/70 hover:gap-2.5 hover:text-navy"
+              className="btn-smooth inline-flex min-h-[44px] items-center gap-1.5 font-bold text-navy/70 hover:gap-2.5 hover:text-navy"
             >
               試用估價計算機 <ArrowRight className="h-4 w-4" />
             </Link>

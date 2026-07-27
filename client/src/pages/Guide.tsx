@@ -320,7 +320,7 @@ export default function Guide() {
                     <Link
                       key={k}
                       href="/areas"
-                      className="btn-smooth rounded-full bg-white/10 px-3 py-1 text-xs text-white/80 hover:bg-wagreen hover:text-white"
+                      className="btn-smooth inline-flex min-h-[40px] items-center rounded-full bg-white/10 px-3.5 py-1.5 text-xs text-white/80 hover:bg-wagreen hover:text-white"
                     >
                       {k}
                     </Link>
@@ -332,7 +332,7 @@ export default function Guide() {
           <div className="mt-8 text-center">
             <Link
               href="/areas"
-              className="btn-smooth inline-flex items-center gap-1.5 text-sm font-bold text-wagreen hover:gap-2.5"
+              className="btn-smooth inline-flex min-h-[44px] items-center gap-1.5 text-sm font-bold text-wagreen hover:gap-2.5"
             >
               查看完整服務地區
               <ArrowRight className="h-4 w-4" />
@@ -366,7 +366,7 @@ export default function Guide() {
           <div className="mt-8 text-center">
             <Link
               href="/faq"
-              className="btn-smooth inline-flex items-center gap-1.5 text-sm font-bold text-wagreen-dark hover:gap-2.5"
+              className="btn-smooth inline-flex min-h-[44px] items-center gap-1.5 text-sm font-bold text-wagreen-dark hover:gap-2.5"
             >
               查看全部常見問題
               <ArrowRight className="h-4 w-4" />

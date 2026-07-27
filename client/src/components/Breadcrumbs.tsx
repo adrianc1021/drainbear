@@ -26,7 +26,7 @@ export default function Breadcrumbs({ items }: { items: Crumb[] }) {
               ) : (
                 <Link
                   href={c.path}
-                  className="btn-smooth inline-flex items-center gap-1 hover:text-wagreen-dark"
+                  className="btn-smooth inline-flex min-h-[44px] items-center gap-1 hover:text-wagreen-dark"
                 >
                   {i === 0 && <Home className="h-3.5 w-3.5" strokeWidth={2} />}
                   {c.name}

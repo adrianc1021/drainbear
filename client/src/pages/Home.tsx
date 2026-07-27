@@ -377,7 +377,7 @@ export default function Home() {
             </div>
             <Link
               href="/services"
-              className="btn-smooth inline-flex items-center gap-1.5 rounded-lg border border-border bg-white px-5 py-2.5 text-sm font-semibold text-navy hover:border-navy/30 hover:bg-mist"
+              className="btn-smooth inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border border-border bg-white px-5 py-2.5 text-sm font-semibold text-navy hover:border-navy/30 hover:bg-mist"
             >
               查看全部服務
               <ArrowRight className="h-4 w-4" />
@@ -527,7 +527,7 @@ export default function Home() {
             </div>
             <Link
               href="/blog"
-              className="btn-smooth inline-flex items-center gap-1.5 rounded-lg border border-navy/15 px-5 py-2.5 text-sm font-bold text-navy hover:border-navy/35 hover:bg-navy hover:text-white"
+              className="btn-smooth inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border border-navy/15 px-5 py-2.5 text-sm font-bold text-navy hover:border-navy/35 hover:bg-navy hover:text-white"
             >
               查看全部文章 <ArrowRight className="h-4 w-4" />
             </Link>
