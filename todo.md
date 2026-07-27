@@ -1,17 +1,21 @@
-# 第三輪功能新增 Todo
+# 通渠熊 DrainBear — 本輪工作（SEO 頁面 + 美化 + 排名優化模版）
 
-## WhatsApp 懸浮對話框
-- [x] 建立 WhatsAppWidget 元件（右下角常駐、點擊展開對話卡、快速訊息選項、平滑動畫）
-- [x] 掛載至 Layout 全站顯示，手機版避開底部固定 CTA 列
+## 1. SEO 著陸頁
+- [ ] 建立「通渠服務指南 / 收費參考」長內容頁 /guide（服務×地區關鍵字、常見問題、收費表、HowTo 內容）
+- [ ] 加入導航、路由、sitemap
 
-## 通渠小知識網誌
-- [x] 建立 blog 資料檔（6 篇防塞喉管實用文章，含 slug/摘要/正文/分類/日期）
-- [x] Blog 列表頁 /blog（卡片網格 + SEO + Blog JSON-LD）
-- [x] 文章內頁 /blog/:slug（正文排版 + Article JSON-LD + 相關文章 + CTA）
-- [x] Header/Footer 導航加入「通渠小知識」
-- [x] 首頁加入網誌精選區塊
-- [x] sitemap.xml 加入 blog 頁面
+## 2. 全站美化 + 手機版優化
+- [ ] 手機版 Hero、卡片間距、字級層次優化
+- [ ] 全站細節美化（section 過渡、卡片 hover、視覺層次）
+- [ ] 手機截圖驗證各頁
+
+## 3. Google 排名優化模版
+- [ ] Breadcrumb 麵包屑元件 + BreadcrumbList JSON-LD
+- [ ] SEO 元件擴充（og:image、article meta、keywords per page）
+- [ ] 內部連結強化（頁尾相關連結區、地區/服務互連）
+- [ ] index.html 效能與 meta 完善（preconnect、lang zh-HK）
+- [ ] sitemap.xml / robots.txt 更新
 
 ## 收尾
-- [x] TypeScript 檢查 + 截圖驗證（桌面/手機）
+- [ ] TypeScript 檢查 + 桌面/手機截圖驗證
 - [ ] 儲存檢查點並交付

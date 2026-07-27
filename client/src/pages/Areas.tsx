@@ -5,7 +5,13 @@
 import { MapPin, Building, Landmark, Trees, ShieldCheck, Phone } from "lucide-react";
 import { WhatsAppButton } from "@/components/Layout";
 import SEO from "@/components/SEO";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact";
+
+const AREAS_CRUMBS = [
+  { name: "首頁", path: "/" },
+  { name: "服務地區", path: "/areas" },
+];
 
 const REGIONS = [
   {
@@ -39,11 +45,10 @@ const REGIONS = [
 
 const AREAS_JSONLD = {
   "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    { "@type": "ListItem", position: 1, name: "首頁", item: "https://drainbear.manus.space/" },
-    { "@type": "ListItem", position: 2, name: "服務地區", item: "https://drainbear.manus.space/areas" },
-  ],
+  "@type": "Service",
+  serviceType: "24 小時通渠服務",
+  provider: { "@type": "Plumber", name: "通渠熊 DrainBear", telephone: "+85295588260" },
+  areaServed: REGIONS.flatMap((r) => r.districts).map((d) => ({ "@type": "Place", name: d })),
 };
 
 export default function Areas() {
@@ -53,8 +58,11 @@ export default function Areas() {
         title="服務地區｜港島・九龍・新界離島 24 小時通渠・1 小時特快到達｜通渠熊 DrainBear"
         description="通渠熊服務覆蓋全港：中環、灣仔、銅鑼灣、尖沙咀、旺角、深水埗、觀塘、沙田、荃灣、屯門、元朗、將軍澳等。各區師傅 24 小時候命，1 小時特快到達，統一透明收費，不成功不收費。"
         path="/areas"
+        keywords="通渠服務地區, 港島通渠, 九龍通渠, 新界通渠, 中環通渠, 旺角通渠, 沙田通渠, 元朗通渠, 24小時通渠"
         jsonLd={AREAS_JSONLD}
+        breadcrumbs={AREAS_CRUMBS}
       />
+      <Breadcrumbs items={AREAS_CRUMBS} />
       <section className="bg-gradient-to-b from-mist to-white py-16 md:py-20">
         <div className="container text-center">
           <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">SERVICE AREAS</div>
@@ -70,8 +78,12 @@ export default function Areas() {
 
       <section className="bg-white pb-20 md:pb-24">
         <div className="container grid gap-8 md:grid-cols-3">
-          {REGIONS.map((r) => (
-            <article key={r.name} className="card-float flex flex-col rounded-lg border border-border bg-white p-8">
+          {REGIONS.map((r, i) => (
+            <article
+              key={r.name}
+              className="card-float card-accent reveal flex flex-col rounded-lg border border-border bg-white p-8"
+              data-reveal-delay={i * 70}
+            >
               <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-navy text-wagreen">
                 <r.icon className="h-6 w-6" strokeWidth={2} />
               </div>

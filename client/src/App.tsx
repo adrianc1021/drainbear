@@ -11,6 +11,7 @@ import Areas from "./pages/Areas";
 import FAQ from "./pages/FAQ";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import Guide from "./pages/Guide";
 
 
 function Router() {
@@ -19,6 +20,7 @@ function Router() {
       <Switch>
         <Route path={"/"} component={Home} />
         <Route path={"/services"} component={Services} />
+        <Route path={"/guide"} component={Guide} />
         <Route path={"/areas"} component={Areas} />
         <Route path={"/blog"} component={Blog} />
         <Route path={"/blog/:slug"} component={BlogPost} />

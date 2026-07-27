@@ -11,6 +11,12 @@ import {
 import { HelpCircle } from "lucide-react";
 import { WhatsAppButton } from "@/components/Layout";
 import SEO from "@/components/SEO";
+import Breadcrumbs from "@/components/Breadcrumbs";
+
+const FAQ_CRUMBS = [
+  { name: "首頁", path: "/" },
+  { name: "常見問題", path: "/faq" },
+];
 
 const FAQS = [
   {
@@ -56,8 +62,11 @@ export default function FAQ() {
         title="常見問題｜通渠收費・不成功不收費・通渠水處理｜通渠熊 DrainBear"
         description="通渠常見問題解答：上門檢查是否收費？倒了通渠水仍堵塞點算？不成功不收費是否屬實？深夜通渠附加費如何計算？通渠熊白熊師傅為您一一解答，明碼實價絕不坐地起價。"
         path="/faq"
+        keywords="通渠常見問題, 通渠收費, 不成功不收費, 通渠水危害, 深夜通渠附加費, 上門檢查費"
         jsonLd={FAQ_JSONLD}
+        breadcrumbs={FAQ_CRUMBS}
       />
+      <Breadcrumbs items={FAQ_CRUMBS} />
       <section className="bg-gradient-to-b from-mist to-white py-16 md:py-20">
         <div className="container text-center">
           <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">FAQ</div>

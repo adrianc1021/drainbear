@@ -7,6 +7,12 @@ import { CalendarDays, Clock, ArrowRight, BookOpen } from "lucide-react";
 import { BLOG_POSTS } from "@/lib/blogData";
 import { WhatsAppButton } from "@/components/Layout";
 import SEO from "@/components/SEO";
+import Breadcrumbs from "@/components/Breadcrumbs";
+
+const BLOG_CRUMBS = [
+  { name: "首頁", path: "/" },
+  { name: "通渠小知識", path: "/blog" },
+];
 
 const BLOG_JSONLD = {
   "@context": "https://schema.org",
@@ -30,8 +36,11 @@ export default function Blog() {
         title="通渠小知識｜防塞喉管實用建議・通渠迷思拆解｜通渠熊 DrainBear"
         description="白熊師傅教你日常防塞喉管：廚房防豬油膏、企缸防頭髮淤塞、點解唔好倒通渠水、坐廁塞咗點自救、食肆隔油池保養及村屋沙井雨季檢查。實用渠務知識，慳返通渠費。"
         path="/blog"
+        keywords="通渠小知識, 防塞喉管, 通渠水迷思, 坐廁塞自救, 隔油池保養, 沙井檢查, 渠務保養"
         jsonLd={BLOG_JSONLD}
+        breadcrumbs={BLOG_CRUMBS}
       />
+      <Breadcrumbs items={BLOG_CRUMBS} />
       <section className="bg-gradient-to-b from-mist to-white py-16 md:py-20">
         <div className="container text-center">
           <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">DRAIN CARE TIPS</div>
@@ -83,11 +92,12 @@ export default function Blog() {
 
           {/* 文章網格 */}
           <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {rest.map((p) => (
+            {rest.map((p, i) => (
               <Link
                 key={p.slug}
                 href={`/blog/${p.slug}`}
-                className="card-float group flex flex-col rounded-lg border border-border bg-white p-7"
+                className="card-float card-accent reveal group flex flex-col rounded-lg border border-border bg-white p-7"
+                data-reveal-delay={i * 60}
               >
                 <div className="mb-4 inline-flex w-fit items-center rounded-full bg-mist px-3 py-1 text-[11px] font-bold tracking-wide text-navy/60">
                   {p.category}

@@ -8,12 +8,14 @@ import { Link, useLocation } from "wouter";
 import { Menu, X, MessageCircle, Phone, Clock, Star, Award, ShieldCheck } from "lucide-react";
 import { PHONE_DISPLAY, PHONE_TEL, WA_DEFAULT } from "@/lib/contact";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
+import { useReveal } from "@/hooks/useReveal";
 
 const LOGO = "/manus-storage/drainbear-logo_3d941447.png";
 
 const NAV_ITEMS = [
   { label: "首頁", href: "/" },
   { label: "通渠服務", href: "/services" },
+  { label: "收費指南", href: "/guide" },
   { label: "服務地區", href: "/areas" },
   { label: "通渠小知識", href: "/blog" },
   { label: "常見問題", href: "/faq" },
@@ -162,11 +164,13 @@ function Footer() {
   return (
     <footer className="bg-navy text-white">
       {/* 數據列 */}
-      <div className="border-b border-white/10">
-        <div className="container grid grid-cols-2 gap-8 py-12 md:grid-cols-4 md:py-14">
+      <div className="dot-grid border-b border-white/10">
+        <div className="container grid grid-cols-2 gap-x-4 gap-y-10 py-12 md:grid-cols-4 md:gap-8 md:py-14">
           {FOOTER_STATS.map((s) => (
             <div key={s.label} className="flex flex-col items-center text-center">
-              <s.icon className="mb-3 h-6 w-6 text-wagreen" strokeWidth={2} />
+              <span className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-white/5 ring-1 ring-white/10">
+                <s.icon className="h-5 w-5 text-wagreen" strokeWidth={2} />
+              </span>
               <div className="font-display text-3xl font-extrabold tracking-tight md:text-4xl">{s.value}</div>
               <div className="mt-1 text-sm text-white/60">{s.label}</div>
             </div>
@@ -220,6 +224,13 @@ function Footer() {
 }
 
 export default function Layout({ children }: { children: ReactNode }) {
+  const [location] = useLocation();
+  useReveal();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+  }, [location]);
+
   return (
     <div className="flex min-h-screen flex-col bg-white">
       <Header />

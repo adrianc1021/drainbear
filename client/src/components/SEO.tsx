@@ -43,23 +43,42 @@ export interface SEOProps {
   description: string;
   path: string;
   jsonLd?: object | object[];
+  keywords?: string;
+  image?: string;
+  type?: "website" | "article";
+  breadcrumbs?: { name: string; path: string }[];
 }
 
-export default function SEO({ title, description, path, jsonLd }: SEOProps) {
+const DEFAULT_OG_IMAGE = `${SITE_URL}/manus-storage/hero-plumber_ade9e162.png`;
+
+export default function SEO({
+  title,
+  description,
+  path,
+  jsonLd,
+  keywords,
+  image,
+  type = "website",
+  breadcrumbs,
+}: SEOProps) {
   useEffect(() => {
     const url = `${SITE_URL}${path}`;
     document.title = title;
     setMeta("name", "description", description);
+    if (keywords) setMeta("name", "keywords", keywords);
+    setMeta("name", "robots", "index, follow, max-image-preview:large");
     setCanonical(url);
     setMeta("property", "og:title", title);
     setMeta("property", "og:description", description);
     setMeta("property", "og:url", url);
-    setMeta("property", "og:type", "website");
+    setMeta("property", "og:type", type);
     setMeta("property", "og:site_name", SITE_NAME);
     setMeta("property", "og:locale", "zh_HK");
+    setMeta("property", "og:image", image || DEFAULT_OG_IMAGE);
     setMeta("name", "twitter:card", "summary_large_image");
     setMeta("name", "twitter:title", title);
     setMeta("name", "twitter:description", description);
+    setMeta("name", "twitter:image", image || DEFAULT_OG_IMAGE);
 
     // 全站 LocalBusiness 結構化資料
     setJsonLd("jsonld-business", {
@@ -92,8 +111,24 @@ export default function SEO({ title, description, path, jsonLd }: SEOProps) {
       document.getElementById("jsonld-page")?.remove();
     }
 
+    // BreadcrumbList 結構化資料
+    if (breadcrumbs && breadcrumbs.length > 0) {
+      setJsonLd("jsonld-breadcrumb", {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: breadcrumbs.map((b, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          name: b.name,
+          item: `${SITE_URL}${b.path}`,
+        })),
+      });
+    } else {
+      document.getElementById("jsonld-breadcrumb")?.remove();
+    }
+
     window.scrollTo(0, 0);
-  }, [title, description, path, jsonLd]);
+  }, [title, description, path, jsonLd, keywords, image, type, breadcrumbs]);
 
   return null;
 }

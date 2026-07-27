@@ -45,7 +45,14 @@ export default function BlogPost() {
         title={`${post.title}｜通渠小知識｜通渠熊 DrainBear`}
         description={post.excerpt}
         path={`/blog/${post.slug}`}
+        type="article"
+        keywords={post.keywords.join(", ")}
         jsonLd={jsonLd}
+        breadcrumbs={[
+          { name: "首頁", path: "/" },
+          { name: "通渠小知識", path: "/blog" },
+          { name: post.title, path: `/blog/${post.slug}` },
+        ]}
       />
       {/* 文章頭部 */}
       <section className="bg-gradient-to-b from-mist to-white py-14 md:py-16">

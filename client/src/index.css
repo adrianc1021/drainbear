@@ -228,6 +228,35 @@
     transform: translateY(-4px);
     box-shadow: 0 4px 12px rgba(11, 19, 43, 0.08), 0 16px 40px rgba(11, 19, 43, 0.12);
   }
+  /* 綠色頂邊光條卡片（hover 顯示） */
+  .card-accent {
+    position: relative;
+    overflow: hidden;
+  }
+  .card-accent::before {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--wagreen), var(--wagreen-dark));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 260ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .card-accent:hover::before {
+    transform: scaleX(1);
+  }
+  /* 細緻網點紋理（深色區塊用） */
+  .dot-grid {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  /* 淺色區塊網點 */
+  .dot-grid-light {
+    background-image: radial-gradient(rgba(11, 19, 43, 0.05) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
   /* 懸浮主圖動畫 */
   @media (prefers-reduced-motion: no-preference) {
     .float-anim {
@@ -243,6 +272,18 @@
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+    /* 捲動進場動畫（配合 useReveal） */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition:
+        opacity 640ms cubic-bezier(0.23, 1, 0.32, 1),
+        transform 640ms cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .reveal.reveal-in {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
   .text-balance {

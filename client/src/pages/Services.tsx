@@ -20,7 +20,13 @@ import {
 } from "lucide-react";
 import { WhatsAppButton } from "@/components/Layout";
 import SEO from "@/components/SEO";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { waLink } from "@/lib/contact";
+
+const SERVICES_CRUMBS = [
+  { name: "首頁", path: "/" },
+  { name: "通渠服務", path: "/services" },
+];
 
 const SERVICES = [
   {
@@ -125,8 +131,11 @@ export default function Services() {
         title="通渠服務｜住宅通渠・食肆隔油池・高壓水槍洗渠・CCTV 照喉｜通渠熊 DrainBear"
         description="通渠熊提供全方位通渠服務：塞廁所、企缸、廚房鋅盤去水慢、食肆隔油池清理、大廈沙井主渠疏通、德國高壓水槍洗渠及 CCTV 照喉檢測。24 小時特快上門，先報價後動工，不成功不收費。"
         path="/services"
+        keywords="通渠服務, 塞廁所, 企缸塞, 廚房去水慢, 隔油池清理, 高壓水槍洗渠, CCTV照喉, 沙井疏通, 24小時通渠"
         jsonLd={SERVICES_JSONLD}
+        breadcrumbs={SERVICES_CRUMBS}
       />
+      <Breadcrumbs items={SERVICES_CRUMBS} />
       {/* 頁首 */}
       <section className="bg-gradient-to-b from-mist to-white py-16 md:py-20">
         <div className="container text-center">

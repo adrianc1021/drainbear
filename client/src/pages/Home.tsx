@@ -166,19 +166,19 @@ export default function Home() {
               香港頂尖水管急救團隊，24 小時全天候候命。引進外國頂級高壓設備與 CCTV
               探測，明碼實價、極速到達、不成功不收費，服務覆蓋全港九新界。
             </p>
-            <div className="mt-8 flex flex-wrap items-center gap-4">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
               <a
                 href={waLink("你好，我想立即獲取通渠報價。")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-smooth inline-flex items-center gap-2 rounded-lg bg-wagreen px-7 py-3.5 text-base font-bold text-white shadow-[0_8px_24px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark hover:shadow-[0_12px_32px_rgba(37,211,102,0.45)]"
+                className="btn-smooth inline-flex items-center justify-center gap-2 rounded-lg bg-wagreen px-7 py-3.5 text-base font-bold text-white shadow-[0_8px_24px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark hover:shadow-[0_12px_32px_rgba(37,211,102,0.45)]"
               >
                 <MessageCircle className="h-5 w-5" strokeWidth={2.2} />
                 WhatsApp 免費報價
               </a>
               <a
                 href={PHONE_TEL}
-                className="btn-smooth inline-flex items-center gap-2 rounded-lg bg-navy px-6 py-3.5 text-base font-bold text-white shadow-[0_8px_24px_rgba(11,19,43,0.25)] hover:bg-navy-light hover:shadow-[0_12px_32px_rgba(11,19,43,0.3)]"
+                className="btn-smooth inline-flex items-center justify-center gap-2 rounded-lg bg-navy px-6 py-3.5 text-base font-bold text-white shadow-[0_8px_24px_rgba(11,19,43,0.25)] hover:bg-navy-light hover:shadow-[0_12px_32px_rgba(11,19,43,0.3)]"
               >
                 <Phone className="h-4.5 w-4.5 h-[18px] w-[18px]" strokeWidth={2.2} />
                 {PHONE_DISPLAY}
@@ -234,9 +234,9 @@ export default function Home() {
       </section>
 
       {/* ===== 區塊 3：透明報價信任區塊 ===== */}
-      <section className="bg-white py-20 md:py-24">
+      <section className="dot-grid-light bg-white py-20 md:py-24">
         <div className="container">
-          <div className="mx-auto max-w-2xl text-center">
+          <div className="reveal mx-auto max-w-2xl text-center">
             <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">OUR PROMISE</div>
             <h2 className="text-balance font-display text-3xl font-black text-navy md:text-4xl">
               透明報價，安心動工
@@ -244,13 +244,19 @@ export default function Home() {
             <p className="mt-4 text-muted-foreground">
               我們堅持「上門檢查費全免」及「報價後才動工」的承諾，讓每一次通渠服務都建立在絕對的信任與透明之上。
             </p>
+            <Link
+              href="/guide"
+              className="btn-smooth mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-wagreen-dark hover:gap-2.5"
+            >
+              查看 2026 通渠收費指南 <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {TRUST_POINTS.map((t, i) => (
               <div
                 key={t.title}
-                className="card-float fade-up rounded-lg border border-border bg-white p-7 text-center"
-                style={{ animationDelay: `${i * 60}ms` }}
+                className="card-float card-accent reveal rounded-lg border border-border bg-white p-7 text-center"
+                data-reveal-delay={i * 70}
               >
                 <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-wagreen/10 text-wagreen-dark">
                   <t.icon className="h-6 w-6" strokeWidth={2} />
@@ -267,7 +273,7 @@ export default function Home() {
       <section className="bg-mist py-20 md:py-28">
         <div className="container grid items-center gap-12 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
           {/* 左：標題 + 2x2 網格 */}
-          <div>
+          <div className="reveal">
             <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">WHY DRAINBEAR</div>
             <h2 className="text-balance font-display text-3xl font-black text-navy md:text-4xl lg:text-[2.75rem] lg:leading-[1.15]">
               為什麼選擇通渠熊？
@@ -279,7 +285,7 @@ export default function Home() {
               {WHY_GRID.map((g) => (
                 <div
                   key={g.title}
-                  className="card-float rounded-lg bg-white p-6"
+                  className="card-float card-accent rounded-lg bg-white p-6"
                 >
                   <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-navy text-wagreen">
                     <g.icon className="h-5.5 w-5.5 h-[22px] w-[22px]" strokeWidth={2} />
@@ -292,7 +298,7 @@ export default function Home() {
           </div>
 
           {/* 右：大圖 */}
-          <div className="relative">
+          <div className="reveal relative" data-reveal-delay={120}>
             <div className="absolute -inset-4 rounded-[20px] bg-gradient-to-br from-navy/8 to-wagreen/10 blur-xl" />
             <img
               src={WHY_IMG}
@@ -317,7 +323,7 @@ export default function Home() {
       {/* ===== 區塊 5：四大服務卡（每卡獨立 WhatsApp CTA）===== */}
       <section className="bg-white py-20 md:py-28">
         <div className="container">
-          <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
+          <div className="reveal flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
             <div>
               <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">OUR SERVICES</div>
               <h2 className="text-balance font-display text-3xl font-black text-navy md:text-4xl">
@@ -339,8 +345,8 @@ export default function Home() {
             {HOME_SERVICES.map((s, i) => (
               <article
                 key={s.title}
-                className="card-float fade-up flex flex-col overflow-hidden rounded-lg border border-border bg-white"
-                style={{ animationDelay: `${i * 60}ms` }}
+                className="card-float card-accent reveal flex flex-col overflow-hidden rounded-lg border border-border bg-white"
+                data-reveal-delay={i * 70}
               >
                 <div className="relative h-40 overflow-hidden">
                   <img
@@ -378,7 +384,7 @@ export default function Home() {
       {/* ===== 區塊 6：通渠小知識精選 ===== */}
       <section className="bg-white py-20 md:py-24">
         <div className="container">
-          <div className="flex flex-wrap items-end justify-between gap-4">
+          <div className="reveal flex flex-wrap items-end justify-between gap-4">
             <div>
               <div className="mb-2 text-xs font-bold tracking-[0.2em] text-safety">DRAIN CARE TIPS</div>
               <h2 className="text-balance font-display text-3xl font-black text-navy md:text-4xl">
@@ -396,11 +402,12 @@ export default function Home() {
             </Link>
           </div>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {BLOG_POSTS.slice(0, 3).map((p) => (
+            {BLOG_POSTS.slice(0, 3).map((p, i) => (
               <Link
                 key={p.slug}
                 href={`/blog/${p.slug}`}
-                className="card-float group flex flex-col rounded-lg border border-border bg-white p-7"
+                className="card-float card-accent reveal group flex flex-col rounded-lg border border-border bg-white p-7"
+                data-reveal-delay={i * 70}
               >
                 <div className="inline-flex w-fit items-center rounded-full bg-mist px-3 py-1 text-[11px] font-bold tracking-wide text-navy/60">
                   {p.category}
@@ -419,25 +426,25 @@ export default function Home() {
       </section>
 
       {/* ===== CTA 收尾 ===== */}
-      <section className="bg-mist py-20 md:py-24">
-        <div className="container text-center">
-          <h2 className="text-balance font-display text-3xl font-black text-navy md:text-4xl">
+      <section className="dot-grid bg-navy py-20 md:py-24">
+        <div className="container reveal text-center">
+          <h2 className="text-balance font-display text-3xl font-black text-white md:text-4xl">
             渠道告急？白熊師傅隨時候命。
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
+          <p className="mx-auto mt-4 max-w-xl text-white/60">
             即時 WhatsApp 獲取初步報價，24 小時全天候特快上門，1 小時內到達現場解除危機。
           </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
             <WhatsAppButton className="px-8 py-4 text-base" label="WhatsApp 即時報價" />
             <a
               href={PHONE_TEL}
-              className="btn-smooth inline-flex items-center gap-2 rounded-lg border border-navy/20 bg-white px-7 py-4 text-base font-bold text-navy hover:border-navy/40 hover:bg-navy hover:text-white"
+              className="btn-smooth inline-flex items-center justify-center gap-2 rounded-lg border border-white/20 bg-white/5 px-7 py-4 text-base font-bold text-white hover:border-white/45 hover:bg-white hover:text-navy"
             >
               <Phone className="h-4.5 w-4.5 h-[18px] w-[18px]" strokeWidth={2.2} />
               {PHONE_DISPLAY}
             </a>
           </div>
-          <p className="mt-5 text-xs text-muted-foreground">
+          <p className="mt-5 text-xs text-white/45">
             24 小時全港到達・不成功不收費・德國專業設備
           </p>
         </div>
