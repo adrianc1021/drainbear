@@ -22,7 +22,7 @@ import { WhatsAppButton } from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { waLink } from "@/lib/contact";
-import { trackCTA } from "@/lib/analytics";
+import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
 
 const SERVICES_CRUMBS = [
   { name: "首頁", path: "/" },
@@ -187,7 +187,10 @@ export default function Services() {
                   href={waLink(s.wa)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => trackCTA("whatsapp", "services_section", s.title)}
+                  onClick={() => {
+                    trackCTA("whatsapp", "services_section", s.title);
+                    goThanksAfterWhatsApp("services_section");
+                  }}
                   className="btn-smooth mt-6 inline-flex items-center gap-1.5 text-sm font-bold text-wagreen-dark hover:gap-2.5"
                 >
                   WhatsApp 查詢報價

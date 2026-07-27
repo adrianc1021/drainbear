@@ -17,6 +17,7 @@ import FAQ from "./pages/FAQ";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Guide from "./pages/Guide";
+import Thanks from "./pages/Thanks";
 
 
 function Router() {
@@ -31,6 +32,7 @@ function Router() {
         <Route path={"/blog"} component={Blog} />
         <Route path={"/blog/:slug"} component={BlogPost} />
         <Route path={"/faq"} component={FAQ} />
+        <Route path={"/thanks"} component={Thanks} />
         <Route path={"/404"} component={NotFound} />
         {/* Final fallback route */}
         <Route component={NotFound} />

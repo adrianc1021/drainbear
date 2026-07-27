@@ -18,7 +18,7 @@ import { WhatsAppButton } from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { PHONE_DISPLAY, PHONE_TEL, waLink } from "@/lib/contact";
-import { trackCTA } from "@/lib/analytics";
+import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
 import { getDistrict } from "@/lib/districtData";
 import NotFound from "@/pages/NotFound";
 
@@ -83,7 +83,10 @@ export default function District() {
                 href={waDistrict}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => trackCTA("whatsapp", "district_hero", d.name)}
+                onClick={() => {
+                  trackCTA("whatsapp", "district_hero", d.name);
+                  goThanksAfterWhatsApp("district_hero");
+                }}
                 className="btn-smooth inline-flex items-center justify-center gap-2 rounded-lg bg-wagreen px-7 py-3.5 text-base font-bold text-white shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark"
               >
                 <MessageCircle className="h-5 w-5" strokeWidth={2.4} />
@@ -241,7 +244,10 @@ export default function District() {
                 href={waDistrict}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => trackCTA("whatsapp", "district_footer_cta", d.name)}
+                onClick={() => {
+                  trackCTA("whatsapp", "district_footer_cta", d.name);
+                  goThanksAfterWhatsApp("district_footer_cta");
+                }}
                 className="btn-smooth inline-flex items-center gap-2 rounded-lg bg-wagreen px-8 py-4 text-base font-bold text-white shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark"
               >
                 <MessageCircle className="h-5 w-5" strokeWidth={2.4} />

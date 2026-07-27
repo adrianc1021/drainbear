@@ -47,3 +47,14 @@
 ## 收尾
 - [ ] 截圖驗證（桌面+手機）
 - [ ] 儲存 checkpoint 並交付
+
+---
+
+# 第六輪任務：服務地區頁優化 + 感謝頁 + 選單按鈕（上輪已交付 f0016cd0）
+
+- [ ] 手機選單按鈕（Layout.tsx ~182 行 hamburger button）點擊範圍加大（用戶視覺編輯要求，未自動套用）
+- [ ] 審視 Areas.tsx 現狀並全面優化：內容、視覺層次、地區卡片互動、通往觀塘/沙田著陸頁的明顯入口、CTA
+- [ ] 感謝頁 /thanks：WhatsApp 點擊後跳轉（延遲跳轉不阻擋 WhatsApp 開啟），頁面含 GA4 whatsapp_open 轉化事件 + 後續引導內容
+- [ ] 全站 WhatsApp CTA 接上跳轉邏輯（集中於 trackCTA 或新 openWhatsApp() helper）
+- [ ] 截圖驗證（桌面+手機：/areas、/thanks）
+- [ ] 儲存 checkpoint 並交付

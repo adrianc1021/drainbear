@@ -32,7 +32,7 @@ import { WhatsAppButton } from "@/components/Layout";
 import { BLOG_POSTS } from "@/lib/blogData";
 import SEO from "@/components/SEO";
 import { PHONE_DISPLAY, PHONE_TEL, waLink } from "@/lib/contact";
-import { trackCTA } from "@/lib/analytics";
+import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
 
 /** 真實工程案例（實際工程紀錄，非客戶評論） */
 const CASE_STUDIES = [
@@ -201,7 +201,10 @@ export default function Home() {
                 href={waLink("你好，我想立即獲取通渠報價。")}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => trackCTA("whatsapp", "home_hero")}
+                onClick={() => {
+                  trackCTA("whatsapp", "home_hero");
+                  goThanksAfterWhatsApp("home_hero");
+                }}
                 className="btn-smooth inline-flex items-center justify-center gap-2 rounded-lg bg-wagreen px-7 py-3.5 text-base font-bold text-white shadow-[0_8px_24px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark hover:shadow-[0_12px_32px_rgba(37,211,102,0.45)]"
               >
                 <MessageCircle className="h-5 w-5" strokeWidth={2.2} />
@@ -408,7 +411,10 @@ export default function Home() {
                     href={waLink(s.wa)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={() => trackCTA("whatsapp", "home_service_card", s.title)}
+                    onClick={() => {
+                      trackCTA("whatsapp", "home_service_card", s.title);
+                      goThanksAfterWhatsApp("home_service_card");
+                    }}
                     className="btn-smooth mt-5 inline-flex items-center justify-center gap-1.5 rounded-lg bg-wagreen/10 px-4 py-2.5 text-sm font-bold text-wagreen-dark hover:bg-wagreen hover:text-white"
                   >
                     <MessageCircle className="h-4 w-4" strokeWidth={2.4} />

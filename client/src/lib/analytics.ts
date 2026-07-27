@@ -66,3 +66,30 @@ export function trackCTA(channel: CtaChannel, location: string, topic?: string) 
     window.dataLayer.push({ event: eventName, ...params });
   }
 }
+
+/**
+ * WhatsApp 點擊後跳轉感謝頁（/thanks）：
+ * - WhatsApp 於新分頁/App 開啟（原 <a target="_blank"> 行為不變）
+ * - 原分頁延遲 600ms 導向 /thanks?from=<cta_location>，不阻擋 WhatsApp 開啟
+ * - /thanks 頁面觸發 whatsapp_open 事件，作為「真實對話開啟率」的代理轉化指標
+ */
+export function goThanksAfterWhatsApp(location: string) {
+  if (typeof window === "undefined") return;
+  window.setTimeout(() => {
+    // 使用 wouter 以外的原生導向，確保任何組件情境都可用
+    window.history.pushState(null, "", `/thanks?from=${encodeURIComponent(location)}`);
+    window.dispatchEvent(new PopStateEvent("popstate"));
+  }, 600);
+}
+
+/** /thanks 頁面觸發：whatsapp_open 轉化事件（真實對話開啟率代理指標） */
+export function trackWhatsAppOpen(from: string) {
+  if (typeof window === "undefined") return;
+  window.dataLayer = window.dataLayer || [];
+  const params = { cta_location: from, page_path: "/thanks" };
+  if (window.gtag) {
+    window.gtag("event", "whatsapp_open", params);
+  } else {
+    window.dataLayer.push({ event: "whatsapp_open", ...params });
+  }
+}

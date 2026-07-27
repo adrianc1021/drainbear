@@ -22,7 +22,7 @@ import {
   Waves,
 } from "lucide-react";
 import { waLink } from "@/lib/contact";
-import { trackCTA } from "@/lib/analytics";
+import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
 import { useEstimate } from "@/contexts/EstimateContext";
 
 interface Option {
@@ -188,9 +188,10 @@ export default function PriceCalculator() {
                 href={waLink(waMsg!)}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() =>
-                  trackCTA("whatsapp", "price_calculator", `${result.l.label}_${result.b.label}_${result.t.id}`)
-                }
+                onClick={() => {
+                  trackCTA("whatsapp", "price_calculator", `${result.l.label}_${result.b.label}_${result.t.id}`);
+                  goThanksAfterWhatsApp("price_calculator");
+                }}
                 className="btn-smooth mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-wagreen px-6 py-3.5 text-sm font-bold text-white shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark"
               >
                 <MessageCircle className="h-[18px] w-[18px]" strokeWidth={2.4} />

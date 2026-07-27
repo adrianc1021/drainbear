@@ -72,3 +72,21 @@
 - Phase 31 額外優化候選：Guide 頁計算機錨點連結（首頁/District 指向 /guide#calculator）、計算機結果變化時 sonner toast、District 頁補充內部連結、檢查手機版 Header 選單 UX
 - Phase 32：截圖驗證 desktop + 375px（/、/guide、/areas/kwun-tong）→ webdev_save_checkpoint
 - Phase 33：交付，告知 GA4 ID 配置方式（client/index.html window.__GA4_ID__ 或 VITE_GA4_ID env），事件規格 whatsapp_click/phone_click + cta_location/page_path/topic
+
+## 第五輪已全部完成並交付（checkpoint f0016cd0）
+- 完成：GA4 追蹤全站、在線綠點、估價同步+toast、/guide#calculator 錨點、Home/District 內部連結、Layout hash 錨點捲動
+
+## 第六輪（進行中）：服務地區頁優化 + 感謝頁 + 選單按鈕
+1. 手機 hamburger 按鈕（Layout.tsx Header 內 aria-label="開啟選單"）點擊範圍加大：p-2 → 加大 padding/min-size 44px
+2. Areas.tsx 全面優化（需先讀檔審視）：加強觀塘/沙田著陸頁入口卡、地區覆蓋視覺化、CTA
+3. /thanks 感謝頁：openWhatsApp() helper（window.open WhatsApp + navigate /thanks?from=location）；/thanks 發 GA4 事件 whatsapp_open（真實對話開啟率代理指標）；頁面內容：確認訊息+等候提示+電話後備+返回首頁/瀏覽 blog
+4. 注意：MobileCTABar/WhatsAppButton/WhatsAppWidget/PriceCalculator/各頁 inline <a> 都要改用 helper 或在 onClick 加跳轉
+
+## 第六輪進度（截至 05:56）
+- [x] hamburger 按鈕加大至 48px（h-12 w-12）
+- [x] Areas.tsx 全面重寫：Hero+地區速查搜尋（過濾 ALL_DISTRICTS，有專頁的顯示「專屬地區頁」連結）、覆蓋統計帶（32+ 分區/1小時/統一價）、DISTRICTS 精選著陸頁卡（用 districtData 的 region/en/heroDesc/landmarks）、三大分區卡加 eta 徽章、dot-grid CTA
+- [x] analytics.ts 加 goThanksAfterWhatsApp(location)（600ms 後 pushState /thanks?from=x + popstate）及 trackWhatsAppOpen(from)（whatsapp_open 事件）
+- [x] Thanks.tsx 建立（noindex、whatsapp_open 事件、3 步指引、再按一次/電話後備、導流 guide/blog）；SEO.tsx 加 noindex prop；App.tsx 註冊 /thanks 路由
+- [x] Layout.tsx WhatsAppButton + MobileCTABar 已接 goThanksAfterWhatsApp
+- [ ] 剩餘 inline WhatsApp 錨點接跳轉：District.tsx(hero/footer_cta)、Guide.tsx(283)、Home.tsx(201/408)、Services.tsx(187)、WhatsAppWidget.tsx(77/88)、PriceCalculator.tsx(188)
+- [ ] 截圖驗證（/areas 桌面+手機、/thanks）→ checkpoint → 交付

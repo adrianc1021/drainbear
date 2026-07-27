@@ -20,7 +20,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import PriceCalculator from "@/components/PriceCalculator";
 import { WhatsAppButton } from "@/components/Layout";
 import { waLink, PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact";
-import { trackCTA } from "@/lib/analytics";
+import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
 
 const CRUMBS = [
   { name: "首頁", path: "/" },
@@ -283,7 +283,10 @@ export default function Guide() {
               href={waLink("你好，我想影相俾師傅估價，麻煩晒。")}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => trackCTA("whatsapp", "guide_howto", "影相估價")}
+              onClick={() => {
+                trackCTA("whatsapp", "guide_howto", "影相估價");
+                goThanksAfterWhatsApp("guide_howto");
+              }}
               className="btn-smooth inline-flex items-center gap-2 rounded-lg bg-wagreen px-7 py-3.5 text-sm font-bold text-white shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark"
             >
               <MessageCircle className="h-4 w-4" strokeWidth={2.5} />

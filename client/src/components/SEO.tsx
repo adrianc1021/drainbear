@@ -47,6 +47,8 @@ export interface SEOProps {
   image?: string;
   type?: "website" | "article";
   breadcrumbs?: { name: string; path: string }[];
+  /** 工具頁/感謝頁等不需被搜尋引擎收錄的頁面 */
+  noindex?: boolean;
 }
 
 const DEFAULT_OG_IMAGE = `${SITE_URL}/manus-storage/hero-plumber_ade9e162.png`;
@@ -60,13 +62,14 @@ export default function SEO({
   image,
   type = "website",
   breadcrumbs,
+  noindex = false,
 }: SEOProps) {
   useEffect(() => {
     const url = `${SITE_URL}${path}`;
     document.title = title;
     setMeta("name", "description", description);
     if (keywords) setMeta("name", "keywords", keywords);
-    setMeta("name", "robots", "index, follow, max-image-preview:large");
+    setMeta("name", "robots", noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large");
     setCanonical(url);
     setMeta("property", "og:title", title);
     setMeta("property", "og:description", description);
@@ -128,7 +131,7 @@ export default function SEO({
     }
 
     window.scrollTo(0, 0);
-  }, [title, description, path, jsonLd, keywords, image, type, breadcrumbs]);
+  }, [title, description, path, jsonLd, keywords, image, type, breadcrumbs, noindex]);
 
   return null;
 }

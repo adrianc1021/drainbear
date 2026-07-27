@@ -6,7 +6,7 @@
 import { useEffect, useState } from "react";
 import { MessageCircle, X, ArrowRight } from "lucide-react";
 import { waLink } from "@/lib/contact";
-import { trackCTA } from "@/lib/analytics";
+import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
 
 const LOGO = "/manus-storage/drainbear-logo_3d941447.png";
 
@@ -77,7 +77,10 @@ export default function WhatsAppWidget() {
               href={waLink(t.msg)}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => trackCTA("whatsapp", "floating_widget", t.label)}
+              onClick={() => {
+                trackCTA("whatsapp", "floating_widget", t.label);
+                goThanksAfterWhatsApp("floating_widget");
+              }}
               className="btn-smooth group flex items-center justify-between rounded-lg border border-border bg-white px-4 py-2.5 text-sm font-medium text-navy hover:border-wagreen/50 hover:bg-wagreen/5"
             >
               {t.label}
@@ -88,7 +91,10 @@ export default function WhatsAppWidget() {
             href={waLink("你好，我想查詢通渠服務報價。")}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => trackCTA("whatsapp", "floating_widget", "開始對話")}
+            onClick={() => {
+              trackCTA("whatsapp", "floating_widget", "開始對話");
+              goThanksAfterWhatsApp("floating_widget");
+            }}
             className="btn-smooth mt-1 flex items-center justify-center gap-2 rounded-lg bg-wagreen px-4 py-3 text-sm font-bold text-white shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark"
           >
             <MessageCircle className="h-4 w-4" strokeWidth={2.5} />

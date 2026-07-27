@@ -8,7 +8,7 @@ import { Link, useLocation } from "wouter";
 import { Menu, X, MessageCircle, Phone, Clock, Star, Award, ShieldCheck } from "lucide-react";
 import { PHONE_DISPLAY, PHONE_TEL, WA_DEFAULT } from "@/lib/contact";
 import { waLink } from "@/lib/contact";
-import { trackCTA } from "@/lib/analytics";
+import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
 import { useEstimate } from "@/contexts/EstimateContext";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
 import { useReveal } from "@/hooks/useReveal";
@@ -38,7 +38,10 @@ export function WhatsAppButton({
       href={WA_DEFAULT}
       target="_blank"
       rel="noopener noreferrer"
-      onClick={() => trackCTA("whatsapp", trackLocation)}
+      onClick={() => {
+        trackCTA("whatsapp", trackLocation);
+        goThanksAfterWhatsApp(trackLocation);
+      }}
       className={`btn-smooth inline-flex items-center gap-2 rounded-lg bg-wagreen px-5 py-2.5 text-sm font-bold text-white shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark hover:shadow-[0_6px_24px_rgba(37,211,102,0.45)] ${className}`}
     >
       <MessageCircle className="h-4 w-4" strokeWidth={2.5} />
@@ -97,13 +100,14 @@ function MobileCTABar() {
           href={waHref}
           target="_blank"
           rel="noopener noreferrer"
-          onClick={() =>
+          onClick={() => {
             trackCTA(
               "whatsapp",
               "mobile_bar",
               estimate ? `estimate_${estimate.low}-${estimate.high}` : undefined
-            )
-          }
+            );
+            goThanksAfterWhatsApp("mobile_bar");
+          }}
           className="btn-smooth flex flex-[1.6] items-center justify-center gap-2.5 rounded-lg bg-wagreen px-3 py-2.5 text-white shadow-[0_4px_14px_rgba(37,211,102,0.4)] active:scale-[0.97]"
         >
           <MessageCircle className="h-5 w-5 shrink-0" strokeWidth={2.4} />
@@ -180,7 +184,7 @@ function Header() {
         </div>
 
         <button
-          className="btn-smooth rounded-lg p-2 text-navy md:hidden"
+          className="btn-smooth -mr-2 flex h-12 w-12 items-center justify-center rounded-lg text-navy hover:bg-mist md:hidden"
           onClick={() => setOpen(!open)}
           aria-label="開啟選單"
         >
