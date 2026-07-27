@@ -51,9 +51,9 @@ const PAGE_HINT: Record<string, string> = {
 };
 
 const REGION_FILL: Record<MapDistrict["region"], string> = {
-  hki: "fill-navy/85",
-  kln: "fill-wagreen/75",
-  nt: "fill-[#7d9bc1]/70",
+  hki: "fill-[#16264f]",
+  kln: "fill-[#149e4c]",
+  nt: "fill-[#4a76ad]",
 };
 
 export default function HongKongMap() {
@@ -119,8 +119,8 @@ export default function HongKongMap() {
                 aria-label={`${d.name}${d.slug ? "（設有專屬服務頁）" : ""}`}
                 className={`cursor-pointer stroke-white transition-[fill-opacity,stroke-width] duration-150 focus:outline-none ${REGION_FILL[d.region]}`}
                 style={{
-                  fillOpacity: active ? 1 : 0.62,
-                  strokeWidth: active ? 2.2 : 1,
+                  fillOpacity: active ? 1 : 0.78,
+                  strokeWidth: active ? 2.6 : 1.4,
                 }}
                 onMouseEnter={() => setHovered(d.id)}
                 onClick={() => handleSelect(d)}
@@ -145,24 +145,28 @@ export default function HongKongMap() {
         {/* Hover tooltip（桌面） */}
         {hoveredDistrict && tip && (
           <div
-            className="pointer-events-none absolute z-10 hidden -translate-x-1/2 -translate-y-full rounded-md bg-navy px-3 py-1.5 text-xs font-bold text-white shadow-lg md:block"
+            className="pointer-events-none absolute z-10 hidden -translate-x-1/2 -translate-y-full rounded-md bg-navy px-3 py-2 text-xs text-white shadow-lg md:block"
             style={{ left: tip.x, top: tip.y - 10 }}
           >
-            {hoveredDistrict.name}
-            {hoveredDistrict.slug && <span className="ml-1.5 text-wagreen">設有專頁</span>}
+            <span className="font-bold">{hoveredDistrict.name}</span>
+            {hoveredDistrict.slug && <span className="ml-1.5 font-bold text-wagreen">設有專頁</span>}
+            <span className="mt-0.5 flex items-center gap-1 text-[11px] font-semibold text-white/85">
+              <Clock className="h-3 w-3 text-wagreen" strokeWidth={2.5} />
+              預計 {REGION_ETA[hoveredDistrict.region]}到達
+            </span>
           </div>
         )}
 
         {/* 圖例 */}
         <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1.5 px-1 text-[11px] font-semibold text-navy/70 md:text-xs">
           <span className="inline-flex items-center gap-1.5">
-            <span className="h-2.5 w-2.5 rounded-sm bg-navy/85" /> 港島
+            <span className="h-2.5 w-2.5 rounded-sm bg-[#16264f]" /> 港島
           </span>
           <span className="inline-flex items-center gap-1.5">
-            <span className="h-2.5 w-2.5 rounded-sm bg-wagreen/80" /> 九龍
+            <span className="h-2.5 w-2.5 rounded-sm bg-[#149e4c]" /> 九龍
           </span>
           <span className="inline-flex items-center gap-1.5">
-            <span className="h-2.5 w-2.5 rounded-sm bg-[#7d9bc1]" /> 新界及離島
+            <span className="h-2.5 w-2.5 rounded-sm bg-[#4a76ad]" /> 新界及離島
           </span>
           <span className="inline-flex items-center gap-1.5">
             <span className="relative flex h-2.5 w-2.5 items-center justify-center rounded-full bg-white ring-1 ring-border">

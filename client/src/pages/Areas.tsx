@@ -3,8 +3,9 @@
  * 風格：Premium SaaS Minimalism，大量留白、8px 圓角、懸浮陰影卡片、無 Emoji
  * 結構：Hero + 地區速查 + 統計帶 → 互動香港地圖 → 專屬著陸頁精選卡 → 三大分區（分頁籤式）→ 統一收費承諾 CTA
  * 第十輪：新增互動式十八區地圖（HongKongMap）；三大分區改為分頁籤 + 分組排版，減少 pill 牆壓迫感
+ * 第十一輪：搜尋列即時篩選 + 鍵盤導航 + 直接跳轉（有專頁 → 專頁；無專頁 → 捲至分區籤並高亮該地區）
  */
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowRight,
   Building,
@@ -17,6 +18,7 @@ import {
   Trees,
 } from "lucide-react";
 import { Link } from "wouter";
+import { useLocation } from "wouter";
 import { WhatsAppButton } from "@/components/Layout";
 import HongKongMap from "@/components/HongKongMap";
 import SEO from "@/components/SEO";
@@ -85,7 +87,9 @@ const REGIONS = [
 ];
 
 const ALL_DISTRICTS = REGIONS.flatMap((r) =>
-  r.groups.flatMap((g) => g.items.map((d) => ({ district: d, region: r.name }))),
+  r.groups.flatMap((g) =>
+    g.items.map((d) => ({ district: d, region: r.name, regionIdx: REGIONS.indexOf(r) })),
+  ),
 );
 
 const AREAS_JSONLD = {
@@ -102,19 +106,26 @@ const STATS = [
   { icon: ShieldCheck, value: "統一價", label: "絕不因地區加價" },
 ];
 
-function DistrictPill({ name }: { name: string }) {
+function DistrictPill({ name, highlighted }: { name: string; highlighted?: boolean }) {
   const slug = DISTRICT_PAGES[name];
+  const hl = highlighted
+    ? " ring-2 ring-safety ring-offset-2 animate-[pulse_1.2s_ease-in-out_2]"
+    : "";
   return slug ? (
     <Link
       href={`/areas/${slug}`}
-      className="btn-smooth inline-flex min-h-[44px] items-center gap-1 rounded-full border border-wagreen/40 bg-wagreen/10 px-4 py-2 text-sm font-bold text-wagreen-dark hover:bg-wagreen hover:text-white"
+      data-district={name}
+      className={`btn-smooth inline-flex min-h-[44px] items-center gap-1 rounded-full border border-wagreen/40 bg-wagreen/10 px-4 py-2 text-sm font-bold text-wagreen-dark hover:bg-wagreen hover:text-white${hl}`}
     >
       <MapPin className="h-3 w-3" strokeWidth={2.5} />
       {name}通渠
       <ArrowRight className="h-3 w-3" strokeWidth={2.5} />
     </Link>
   ) : (
-    <span className="inline-flex min-h-[44px] items-center gap-1 rounded-full border border-border bg-mist px-4 py-2 text-sm font-medium text-navy">
+    <span
+      data-district={name}
+      className={`inline-flex min-h-[44px] items-center gap-1 rounded-full border border-border bg-mist px-4 py-2 text-sm font-medium text-navy${hl}`}
+    >
       <MapPin className="h-3 w-3 text-wagreen" strokeWidth={2.5} />
       {name}通渠
     </span>
@@ -124,12 +135,70 @@ function DistrictPill({ name }: { name: string }) {
 export default function Areas() {
   const [query, setQuery] = useState("");
   const [activeRegion, setActiveRegion] = useState(0);
+  const [activeIdx, setActiveIdx] = useState(-1);
+  const [open, setOpen] = useState(false);
+  const [highlightedDistrict, setHighlightedDistrict] = useState<string | null>(null);
+  const searchRef = useRef<HTMLDivElement>(null);
+  const coverageRef = useRef<HTMLElement>(null);
+  const [, navigate] = useLocation();
   const matches = useMemo(() => {
     const q = query.trim();
     if (!q) return null;
     return ALL_DISTRICTS.filter((d) => d.district.includes(q));
   }, [query]);
+  const visible = useMemo(() => (matches ? matches.slice(0, 6) : []), [matches]);
   const region = REGIONS[activeRegion];
+
+  // 點擊搜尋框以外區域時關閉建議
+  useEffect(() => {
+    const onDown = (e: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onDown);
+    return () => document.removeEventListener("mousedown", onDown);
+  }, []);
+
+  /** 選定一個建議：有專頁 → 跳轉專頁；無專頁 → 切換分區籤、捲動至覆蓋清單並高亮該地區 pill */
+  const goToDistrict = (m: (typeof ALL_DISTRICTS)[number]) => {
+    trackCTA("map", "areas_search", m.district);
+    setOpen(false);
+    const slug = DISTRICT_PAGES[m.district];
+    if (slug) {
+      navigate(`/areas/${slug}`);
+      return;
+    }
+    setActiveRegion(m.regionIdx);
+    setQuery("");
+    setHighlightedDistrict(m.district);
+    // 待分區籤內容切換後再捲動至該地區 pill
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        const el = coverageRef.current?.querySelector(`[data-district="${m.district}"]`);
+        (el ?? coverageRef.current)?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 60);
+    });
+    window.setTimeout(() => setHighlightedDistrict(null), 3200);
+  };
+
+  const onSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!open || visible.length === 0) {
+      if (e.key === "Escape") setOpen(false);
+      return;
+    }
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setActiveIdx((i) => (i + 1) % visible.length);
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setActiveIdx((i) => (i <= 0 ? visible.length - 1 : i - 1));
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      goToDistrict(visible[activeIdx >= 0 ? activeIdx : 0]);
+    } else if (e.key === "Escape") {
+      setOpen(false);
+      setActiveIdx(-1);
+    }
+  };
 
   return (
     <div>
@@ -156,20 +225,34 @@ export default function Areas() {
               小時內極速到達，為您解決水管危機。
             </p>
             {/* 地區速查 */}
-            <div className="relative mx-auto mt-8 max-w-md">
+            <div ref={searchRef} className="relative mx-auto mt-8 max-w-md">
               <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
               <input
                 type="search"
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                  setOpen(true);
+                  setActiveIdx(-1);
+                }}
+                onFocus={() => setOpen(true)}
+                onKeyDown={onSearchKeyDown}
                 placeholder="輸入你的地區，如：旺角、沙田…"
                 className="h-13 w-full rounded-lg border border-border bg-white py-3.5 pl-12 pr-4 text-base text-navy shadow-sm outline-none transition-shadow placeholder:text-muted-foreground/70 focus:border-wagreen focus:ring-2 focus:ring-wagreen/25"
                 aria-label="搜尋服務地區"
+                role="combobox"
+                aria-expanded={open && !!matches}
+                aria-autocomplete="list"
+                aria-controls="areas-search-listbox"
               />
-              {matches && (
-                <div className="absolute left-0 right-0 top-full z-20 mt-2 overflow-hidden rounded-lg border border-border bg-white text-left shadow-xl">
+              {open && matches && (
+                <div
+                  id="areas-search-listbox"
+                  role="listbox"
+                  className="absolute left-0 right-0 top-full z-20 mt-2 overflow-hidden rounded-lg border border-border bg-white text-left shadow-xl"
+                >
                   {matches.length > 0 ? (
-                    matches.slice(0, 6).map((m) => {
+                    visible.map((m, idx) => {
                       const slug = DISTRICT_PAGES[m.district];
                       const inner = (
                         <>
@@ -179,26 +262,25 @@ export default function Areas() {
                             <span className="text-xs text-muted-foreground">{m.region}</span>
                           </span>
                           <span className="inline-flex items-center gap-1 text-xs font-bold text-wagreen-dark">
-                            {slug ? "專屬地區頁" : "1 小時到達"}
+                            {slug ? "專屬地區頁" : "查看覆蓋詳情"}
                             <ArrowRight className="h-3.5 w-3.5" />
                           </span>
                         </>
                       );
-                      const cls =
-                        "flex w-full items-center justify-between px-4 py-3 transition-colors hover:bg-mist";
-                      return slug ? (
-                        <Link key={m.district} href={`/areas/${slug}`} className={cls}>
-                          {inner}
-                        </Link>
-                      ) : (
-                        <a
+                      return (
+                        <button
                           key={m.district}
-                          href={PHONE_TEL}
-                          onClick={() => trackCTA("phone", "areas_search", m.district)}
-                          className={cls}
+                          type="button"
+                          role="option"
+                          aria-selected={activeIdx === idx}
+                          onClick={() => goToDistrict(m)}
+                          onMouseEnter={() => setActiveIdx(idx)}
+                          className={`flex w-full items-center justify-between px-4 py-3 text-left transition-colors ${
+                            activeIdx === idx ? "bg-mist" : "hover:bg-mist"
+                          }`}
                         >
                           {inner}
-                        </a>
+                        </button>
                       );
                     })
                   ) : (
@@ -298,7 +380,7 @@ export default function Areas() {
       </section>
 
       {/* 三大分區完整覆蓋（分頁籤式） */}
-      <section className="bg-white py-12 md:py-16">
+      <section ref={coverageRef} className="bg-white py-12 md:py-16">
         <div className="container">
           <div className="reveal mb-8 flex flex-wrap items-end justify-between gap-3">
             <div>
@@ -362,7 +444,7 @@ export default function Areas() {
                   </div>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {g.items.map((d) => (
-                      <DistrictPill key={d} name={d} />
+                      <DistrictPill key={d} name={d} highlighted={highlightedDistrict === d} />
                     ))}
                   </div>
                 </div>

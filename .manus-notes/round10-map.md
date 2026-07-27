@@ -35,3 +35,15 @@
 - districtData.ts: DISTRICTS + DISTRICT_SLUGS + getDistrict()；districtData2.ts 額外 8 區
 - 路由 /areas/:slug；顏色 token：navy #0b132b、wagreen #25d366、safety、mist
 - dev server 用 vite（pnpm dev），dotenv ERR_MODULE_NOT_FOUND 為歷史非阻斷錯誤
+
+---
+
+# 第十一輪（搜尋列 + 地圖對比 + tooltip ETA）進度
+
+- Areas.tsx 搜尋列已強化：combobox（open/activeIdx 狀態）、上下鍵/Enter/Esc 鍵盤導航、外點關閉
+- goToDistrict()：有專頁 → navigate(/areas/{slug})；無專頁 → setActiveRegion(regionIdx) + scrollIntoView 至 data-district pill + ring-safety 高亮 3.2s
+- DistrictPill 增加 highlighted prop（ring-2 ring-safety + pulse）與 data-district 屬性
+- HongKongMap 顏色更新：hki=#16264f、kln=#149e4c、nt=#4a76ad；fillOpacity 0.78/1、strokeWidth 1.4/2.6；圖例同步
+- tooltip 加入 Clock 圖標 + 「預計 45/60 分鐘內到達」（REGION_ETA）
+- 待驗證：HongKongMap 是否已 import Clock 與 REGION_ETA 是否存在；截圖、vitest、checkpoint
+- 生產網域：drainbear-k2cdot4g.manus.space；上輪 checkpoint 06756dd6
