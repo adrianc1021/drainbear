@@ -1,0 +1,167 @@
+/**
+ * 通渠熊 DrainBear — Premium SaaS Minimalism
+ * Header：Logo + 首頁/通渠服務/服務地區/常見問題 + 綠色「24hr 緊急報價」懸浮按鈕
+ * Footer：橫向 4 組數據 + 公司資訊
+ */
+import { ReactNode, useEffect, useState } from "react";
+import { Link, useLocation } from "wouter";
+import { Menu, X, MessageCircle, Phone, Clock, Star, Award, ShieldCheck } from "lucide-react";
+
+const LOGO = "/manus-storage/drainbear-logo_3d941447.png";
+
+const NAV_ITEMS = [
+  { label: "首頁", href: "/" },
+  { label: "通渠服務", href: "/services" },
+  { label: "服務地區", href: "/areas" },
+  { label: "常見問題", href: "/faq" },
+];
+
+export function WhatsAppButton({ className = "", label = "24hr 緊急報價" }: { className?: string; label?: string }) {
+  return (
+    <a
+      href="https://wa.me/85261234567"
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`btn-smooth inline-flex items-center gap-2 rounded-lg bg-wagreen px-5 py-2.5 text-sm font-bold text-white shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark hover:shadow-[0_6px_24px_rgba(37,211,102,0.45)] ${className}`}
+    >
+      <MessageCircle className="h-4 w-4" strokeWidth={2.5} />
+      {label}
+    </a>
+  );
+}
+
+function Header() {
+  const [location] = useLocation();
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => setOpen(false), [location]);
+
+  return (
+    <header
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        scrolled ? "bg-white/90 shadow-[0_2px_16px_rgba(11,19,43,0.08)] backdrop-blur-xl" : "bg-white/60 backdrop-blur-md"
+      }`}
+    >
+      <div className="container flex h-16 items-center justify-between md:h-[72px]">
+        <Link href="/" className="flex items-center gap-2.5">
+          <img src={LOGO} alt="通渠熊 DrainBear Logo" className="h-10 w-10 md:h-11 md:w-11" />
+          <span className="font-display text-lg font-extrabold tracking-tight text-navy md:text-xl">
+            通渠熊 <span className="text-wagreen">DrainBear</span>
+          </span>
+        </Link>
+
+        <nav className="hidden items-center gap-1 md:flex">
+          {NAV_ITEMS.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`btn-smooth rounded-lg px-4 py-2 text-sm font-medium ${
+                location === item.href
+                  ? "bg-mist text-navy font-bold"
+                  : "text-navy/70 hover:bg-mist hover:text-navy"
+              }`}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="hidden md:block">
+          <WhatsAppButton />
+        </div>
+
+        <button
+          className="btn-smooth rounded-lg p-2 text-navy md:hidden"
+          onClick={() => setOpen(!open)}
+          aria-label="開啟選單"
+        >
+          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
+      </div>
+
+      {open && (
+        <div className="border-t border-border bg-white px-4 pb-5 pt-2 shadow-lg md:hidden">
+          {NAV_ITEMS.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`block rounded-lg px-4 py-3 text-base font-medium ${
+                location === item.href ? "bg-mist font-bold text-navy" : "text-navy/70"
+              }`}
+            >
+              {item.label}
+            </Link>
+          ))}
+          <div className="mt-3 px-4">
+            <WhatsAppButton className="w-full justify-center" />
+          </div>
+        </div>
+      )}
+    </header>
+  );
+}
+
+const FOOTER_STATS = [
+  { icon: Award, value: "1000+", label: "成功案例" },
+  { icon: Clock, value: "1 小時", label: "特快到達承諾" },
+  { icon: Star, value: "98%", label: "客戶五星好評" },
+  { icon: Phone, value: "24/7", label: "全天候緊急熱線" },
+];
+
+function Footer() {
+  return (
+    <footer className="bg-navy text-white">
+      {/* 數據列 */}
+      <div className="border-b border-white/10">
+        <div className="container grid grid-cols-2 gap-8 py-12 md:grid-cols-4 md:py-14">
+          {FOOTER_STATS.map((s) => (
+            <div key={s.label} className="flex flex-col items-center text-center">
+              <s.icon className="mb-3 h-6 w-6 text-wagreen" strokeWidth={2} />
+              <div className="font-display text-3xl font-extrabold tracking-tight md:text-4xl">{s.value}</div>
+              <div className="mt-1 text-sm text-white/60">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="container flex flex-col items-center justify-between gap-6 py-10 md:flex-row">
+        <div className="flex items-center gap-2.5">
+          <img src={LOGO} alt="通渠熊 DrainBear" className="h-9 w-9 brightness-0 invert opacity-90" />
+          <span className="font-display text-lg font-extrabold">通渠熊 DrainBear</span>
+        </div>
+        <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-white/60">
+          {NAV_ITEMS.map((item) => (
+            <Link key={item.href} href={item.href} className="btn-smooth hover:text-white">
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+        <div className="flex items-center gap-2 text-sm text-white/60">
+          <ShieldCheck className="h-4 w-4 text-wagreen" />
+          不成功不收費・明碼實價
+        </div>
+      </div>
+      <div className="border-t border-white/10 py-5 text-center text-xs text-white/40">
+        © {new Date().getFullYear()} 通渠熊 DrainBear Limited. 版權所有.
+      </div>
+    </footer>
+  );
+}
+
+export default function Layout({ children }: { children: ReactNode }) {
+  return (
+    <div className="flex min-h-screen flex-col bg-white">
+      <Header />
+      <main className="flex-1 pt-16 md:pt-[72px]">{children}</main>
+      <Footer />
+    </div>
+  );
+}

@@ -3,11 +3,25 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/*
+ * 通渠熊 DrainBear — Premium SaaS Minimalism
+ * 主色海軍藍 #0B132B｜CTA WhatsApp 綠 #25D366｜點綴安全橙 #FF7A00
+ * 背景純白 + 淺灰藍 #F4F7FB｜圓角統一 8px｜嚴禁 Emoji，僅用 SVG 圖標
+ */
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --color-navy: var(--navy);
+  --color-navy-light: var(--navy-light);
+  --color-wagreen: var(--wagreen);
+  --color-wagreen-dark: var(--wagreen-dark);
+  --color-safety: var(--safety);
+  --color-mist: var(--mist);
+  --font-display: "Manrope", "Noto Sans TC", sans-serif;
+  --font-sans: "Noto Sans TC", "Manrope", sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -43,8 +57,16 @@
 }
 
 :root {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
+  /* 品牌色 */
+  --navy: #0b132b;
+  --navy-light: #1c2541;
+  --wagreen: #25d366;
+  --wagreen-dark: #1eb556;
+  --safety: #ff7a00;
+  --mist: #f4f7fb;
+
+  --primary: #0b132b;
+  --primary-foreground: #ffffff;
   --sidebar-primary: var(--color-blue-600);
   --sidebar-primary-foreground: var(--color-blue-50);
   --chart-1: var(--color-blue-300);
@@ -52,24 +74,24 @@
   --chart-3: var(--color-blue-600);
   --chart-4: var(--color-blue-700);
   --chart-5: var(--color-blue-800);
-  --radius: 0.65rem;
+  --radius: 0.5rem;
   --background: oklch(1 0 0);
-  --foreground: oklch(0.235 0.015 65);
+  --foreground: #0b132b;
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.235 0.015 65);
+  --card-foreground: #0b132b;
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.235 0.015 65);
-  --secondary: oklch(0.98 0.001 286.375);
-  --secondary-foreground: oklch(0.4 0.015 65);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.141 0.005 285.823);
+  --popover-foreground: #0b132b;
+  --secondary: #f4f7fb;
+  --secondary-foreground: #1c2541;
+  --muted: #f4f7fb;
+  --muted-foreground: #5a6785;
+  --accent: #eaf9f0;
+  --accent-foreground: #0b132b;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.623 0.214 259.815);
+  --border: #e3e9f2;
+  --input: #e3e9f2;
+  --ring: #25d366;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.235 0.015 65);
   --sidebar-accent: oklch(0.967 0.001 286.375);
@@ -119,6 +141,12 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
@@ -173,5 +201,51 @@
       padding-right: 2rem;
       max-width: 1280px; /* Standard content width */
     }
+  }
+}
+
+@layer utilities {
+  /* 平滑過渡：所有按鈕與連結 */
+  .btn-smooth {
+    transition:
+      transform 180ms cubic-bezier(0.23, 1, 0.32, 1),
+      background-color 180ms cubic-bezier(0.23, 1, 0.32, 1),
+      box-shadow 180ms cubic-bezier(0.23, 1, 0.32, 1),
+      color 180ms cubic-bezier(0.23, 1, 0.32, 1),
+      border-color 180ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .btn-smooth:active {
+    transform: scale(0.97);
+  }
+  /* 卡片懸浮陰影 */
+  .card-float {
+    box-shadow: 0 1px 3px rgba(11, 19, 43, 0.06), 0 8px 24px rgba(11, 19, 43, 0.07);
+    transition:
+      transform 220ms cubic-bezier(0.23, 1, 0.32, 1),
+      box-shadow 220ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .card-float:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(11, 19, 43, 0.08), 0 16px 40px rgba(11, 19, 43, 0.12);
+  }
+  /* 懸浮主圖動畫 */
+  @media (prefers-reduced-motion: no-preference) {
+    .float-anim {
+      animation: floatY 6s ease-in-out infinite;
+    }
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+    }
+    .fade-up {
+      animation: fadeUp 700ms cubic-bezier(0.23, 1, 0.32, 1) both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  }
+  .text-balance {
+    text-wrap: balance;
   }
 }
