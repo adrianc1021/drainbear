@@ -24,3 +24,22 @@
   - Footer：橫向 4 組數據（1000+ 案例 / 1 小時到達 / 98% 好評 / 24/7 熱線）。
 - **互動**：所有按鈕 hover 平滑過渡（transform/color 180ms ease-out）、卡片 hover 抬升陰影、區塊入場 fade-up。
 - **品牌**：Logo 為白熊頭 + 水滴/扳手極簡圖形符號，主色海軍藍配綠色點綴。
+
+## 第二輪優化（參考 Wix 通渠熊網站）
+參考網站重點：口語化廣東話標題（「塞渠爆喉？搵通渠熊，24小時一Call即到！」）、每張服務卡都有獨立 WhatsApp CTA、聯絡電話 +852 6531 8580、Footer 列出全部地區（SEO）、有「透明報價安心動工」信任區塊、服務細分（坐廁/企缸/廚房/隔氣/隔油池/沙井/CCTV）、地區頁有 SEO 導向的地區描述文案、有 Blog 最新消息。
+
+### UX / 獲客優化
+- Hero 標題改用更有力的口語化文案，強調「一Call即到」。
+- 全站行動裝置底部固定 WhatsApp + 電話雙按鈕列（sticky mobile CTA bar）。
+- 每張服務卡片附獨立「WhatsApp 查詢」CTA 並帶預填訊息（?text=）。
+- 首頁新增「透明報價，安心動工」信任區塊 + 服務細分標籤（坐廁/企缸/廚房去水等）。
+- 電話號碼統一 +852 6531 8580，支援 tel: 直撥。
+- FAQ 頁 CTA、地區頁尾「統一透明收費」承諾區塊。
+
+### SEO 完善
+- 每頁獨立 title/meta description/canonical/OG 標籤（react-helmet 或自製 SEO component）。
+- JSON-LD 結構化資料：LocalBusiness（Plumber）、FAQPage、Service、BreadcrumbList。
+- Footer 全地區文字連結（內部連結 + 關鍵字覆蓋）。
+- 語意化 HTML（h1 唯一、section/article、img alt 完整）。
+- sitemap.xml + robots.txt。
+- 地區頁加入 SEO 導向的分區描述文案。

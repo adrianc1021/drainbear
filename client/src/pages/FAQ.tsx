@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/accordion";
 import { HelpCircle } from "lucide-react";
 import { WhatsAppButton } from "@/components/Layout";
+import SEO from "@/components/SEO";
 
 const FAQS = [
   {
@@ -38,9 +39,25 @@ const FAQS = [
   },
 ];
 
+const FAQ_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQS.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
 export default function FAQ() {
   return (
     <div>
+      <SEO
+        title="常見問題｜通渠收費・不成功不收費・通渠水處理｜通渠熊 DrainBear"
+        description="通渠常見問題解答：上門檢查是否收費？倒了通渠水仍堵塞點算？不成功不收費是否屬實？深夜通渠附加費如何計算？通渠熊白熊師傅為您一一解答，明碼實價絕不坐地起價。"
+        path="/faq"
+        jsonLd={FAQ_JSONLD}
+      />
       <section className="bg-gradient-to-b from-mist to-white py-16 md:py-20">
         <div className="container text-center">
           <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">FAQ</div>

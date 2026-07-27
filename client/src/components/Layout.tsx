@@ -6,6 +6,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Menu, X, MessageCircle, Phone, Clock, Star, Award, ShieldCheck } from "lucide-react";
+import { PHONE_DISPLAY, PHONE_TEL, WA_DEFAULT } from "@/lib/contact";
 
 const LOGO = "/manus-storage/drainbear-logo_3d941447.png";
 
@@ -19,7 +20,7 @@ const NAV_ITEMS = [
 export function WhatsAppButton({ className = "", label = "24hr 緊急報價" }: { className?: string; label?: string }) {
   return (
     <a
-      href="https://wa.me/85261234567"
+      href={WA_DEFAULT}
       target="_blank"
       rel="noopener noreferrer"
       className={`btn-smooth inline-flex items-center gap-2 rounded-lg bg-wagreen px-5 py-2.5 text-sm font-bold text-white shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark hover:shadow-[0_6px_24px_rgba(37,211,102,0.45)] ${className}`}
@@ -27,6 +28,30 @@ export function WhatsAppButton({ className = "", label = "24hr 緊急報價" }: 
       <MessageCircle className="h-4 w-4" strokeWidth={2.5} />
       {label}
     </a>
+  );
+}
+
+/** 行動裝置底部固定 CTA 列：WhatsApp + 電話直撥 */
+function MobileCTABar() {
+  return (
+    <div className="fixed inset-x-0 bottom-0 z-50 grid grid-cols-2 gap-px border-t border-border bg-white shadow-[0_-4px_20px_rgba(11,19,43,0.12)] md:hidden">
+      <a
+        href={WA_DEFAULT}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="btn-smooth flex items-center justify-center gap-2 bg-wagreen py-3.5 text-sm font-bold text-white"
+      >
+        <MessageCircle className="h-4.5 w-4.5 h-[18px] w-[18px]" strokeWidth={2.4} />
+        WhatsApp 報價
+      </a>
+      <a
+        href={PHONE_TEL}
+        className="btn-smooth flex items-center justify-center gap-2 bg-navy py-3.5 text-sm font-bold text-white"
+      >
+        <Phone className="h-[18px] w-[18px]" strokeWidth={2.4} />
+        致電師傅
+      </a>
+    </div>
   );
 }
 
@@ -116,6 +141,21 @@ const FOOTER_STATS = [
   { icon: Phone, value: "24/7", label: "全天候緊急熱線" },
 ];
 
+const FOOTER_AREAS = [
+  {
+    name: "港島區通渠",
+    districts: "中環・半山・灣仔・銅鑼灣・北角・鰂魚涌・太古城・柴灣・香港仔・跑馬地",
+  },
+  {
+    name: "九龍區通渠",
+    districts: "尖沙咀・旺角・油麻地・深水埗・長沙灣・九龍城・土瓜灣・黃大仙・觀塘・九龍灣",
+  },
+  {
+    name: "新界及離島通渠",
+    districts: "沙田・大圍・大埔・粉嶺・上水・荃灣・葵涌・屯門・元朗・將軍澳・西貢・東涌",
+  },
+];
+
 function Footer() {
   return (
     <footer className="bg-navy text-white">
@@ -127,6 +167,23 @@ function Footer() {
               <s.icon className="mb-3 h-6 w-6 text-wagreen" strokeWidth={2} />
               <div className="font-display text-3xl font-extrabold tracking-tight md:text-4xl">{s.value}</div>
               <div className="mt-1 text-sm text-white/60">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* SEO 地區連結區 */}
+      <div className="border-b border-white/10">
+        <div className="container grid gap-8 py-10 md:grid-cols-3">
+          {FOOTER_AREAS.map((a) => (
+            <div key={a.name}>
+              <Link
+                href="/areas"
+                className="btn-smooth font-display text-sm font-bold text-white hover:text-wagreen"
+              >
+                {a.name}
+              </Link>
+              <p className="mt-2 text-xs leading-relaxed text-white/45">{a.districts}</p>
             </div>
           ))}
         </div>
@@ -150,7 +207,11 @@ function Footer() {
         </div>
       </div>
       <div className="border-t border-white/10 py-5 text-center text-xs text-white/40">
-        © {new Date().getFullYear()} 通渠熊 DrainBear Limited. 版權所有.
+        <a href={PHONE_TEL} className="btn-smooth hover:text-white">
+          24 小時熱線：{PHONE_DISPLAY}
+        </a>
+        <span className="mx-2">|</span>© {new Date().getFullYear()} 通渠熊 DrainBear Limited.
+        版權所有。專業排水工程團隊，香港島、九龍、新界全天候服務。
       </div>
     </footer>
   );
@@ -160,8 +221,9 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-screen flex-col bg-white">
       <Header />
-      <main className="flex-1 pt-16 md:pt-[72px]">{children}</main>
+      <main className="flex-1 pb-14 pt-16 md:pb-0 md:pt-[72px]">{children}</main>
       <Footer />
+      <MobileCTABar />
     </div>
   );
 }

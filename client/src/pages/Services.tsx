@@ -1,7 +1,7 @@
 /**
  * 通渠熊 DrainBear — 專業服務
  * 區塊 1：Z-Pattern 交替圖文（四大服務）
- * 區塊 2：4 步解除危機（橫向流程圖）
+ * 區塊 2：細分服務範疇（SEO 關鍵字覆蓋）｜區塊 3：4 步解除危機（橫向流程圖）
  */
 import {
   Home as HomeIcon,
@@ -13,8 +13,14 @@ import {
   Wrench,
   Sparkles,
   ArrowRight,
+  Droplets,
+  Bath,
+  UtensilsCrossed,
+  CircleAlert,
 } from "lucide-react";
 import { WhatsAppButton } from "@/components/Layout";
+import SEO from "@/components/SEO";
+import { waLink } from "@/lib/contact";
 
 const SERVICES = [
   {
@@ -23,6 +29,7 @@ const SERVICES = [
     title: "住宅通渠急救",
     desc: "針對一般家庭的廚房星盆、浴室去水位及座廁淤塞，專業手搖泵極速打通，過程注重家居保護，完工包清理，還原企理現場。",
     img: "/manus-storage/service-residential_f3e50e1c.png",
+    wa: "你好，我想查詢住宅通渠服務報價。",
   },
   {
     icon: Building2,
@@ -30,6 +37,7 @@ const SERVICES = [
     title: "商業重型通渠",
     desc: "專治食肆隔油池爆滿、大廈主渠倒灌等重型工程。配備工業級設備及大型吸車，將營業損失減至最低，深夜施工亦可安排。",
     img: "/manus-storage/service-commercial_4fc05340.png",
+    wa: "你好，我想查詢商業重型通渠服務報價。",
   },
   {
     icon: Waves,
@@ -37,6 +45,7 @@ const SERVICES = [
     title: "高壓水槍洗渠",
     desc: "引進頂級高壓水槍車，以極限水壓將硬化油垢、水泥及陳年污垢徹底粉碎沖走，令喉管回復暢通如新，效果遠勝傳統通渠方法。",
     img: "/manus-storage/service-hydrojet_20c6c68d.png",
+    wa: "你好，我想查詢高壓水槍洗渠服務報價。",
   },
   {
     icon: Video,
@@ -44,48 +53,89 @@ const SERVICES = [
     title: "CCTV 照喉檢測",
     desc: "高清防水鏡頭深入喉管探測，精準定位淤塞物及破損位置，科學斷症、有片有真相，杜絕盲猜式維修及不必要的換喉工程。",
     img: "/manus-storage/service-cctv_595f666d.png",
+    wa: "你好，我想查詢 CCTV 照喉檢測服務報價。",
   },
 ];
+
+const DETAIL_GROUPS = [
+  {
+    heading: "住宅特急通渠",
+    intro:
+      "廁所水倒灌？企缸去水慢？我們深知家居塞渠的煩惱，專注各類住宅通渠及屋苑水管維修，承諾絕不弄髒您的家居。",
+    items: [
+      { icon: CircleAlert, title: "坐廁及馬桶淤塞", desc: "專治硬物掉入或紙巾淤塞，高壓氣泵極速疏通，免拆馬桶。" },
+      { icon: UtensilsCrossed, title: "廚房鋅盤去水慢", desc: "針對 U 型喉管內的陳年豬油膏及廚餘殘渣，徹底清除油脂。" },
+      { icon: Bath, title: "企缸及浴缸通渠", desc: "解決頭髮及番梘垢導致的水浸問題，回復爽快去水速度。" },
+      { icon: Droplets, title: "隔氣及喉管漏水", desc: "精準檢查隔氣老化或接駁位滴水，提供即時防漏維修。" },
+    ],
+  },
+  {
+    heading: "商業重型通渠",
+    intro:
+      "營業場所塞渠等同停業！專為食肆、商場及物業提供高強度商業通渠，配備工業級設備，將對營業的影響減至最低。",
+    items: [
+      { icon: UtensilsCrossed, title: "食肆隔油池清理", desc: "應付大量高濃度油污，提供定期抽油及清洗服務。" },
+      { icon: Waves, title: "德國高壓洗渠車", desc: "極限水壓粉碎管壁硬化水泥及油塊，深度清洗管道。" },
+      { icon: Building2, title: "大廈沙井及主渠", desc: "重型設備應對沙井滿瀉、樹根纏繞及主渠倒灌。" },
+      { icon: Video, title: "CCTV 管道探測報告", desc: "微型鏡頭深入探測暗漏及破損，提供影像分析作工程依據。" },
+    ],
+  },
+];
+
+const SERVICES_JSONLD = SERVICES.map((s) => ({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  serviceType: s.title,
+  description: s.desc,
+  provider: { "@type": "Plumber", name: "通渠熊 DrainBear", telephone: "+85265318580" },
+  areaServed: ["香港島", "九龍", "新界", "離島"],
+}));
 
 const STEPS = [
   {
     icon: MessageCircle,
     step: "01",
     title: "WhatsApp 報價",
-    desc: "即時獲取初步報價",
+    desc: "影相或拍片描述情況，即時獲取初步報價",
   },
   {
     icon: Search,
     step: "02",
     title: "特快上門檢查",
-    desc: "精準評估確認最終收費",
+    desc: "師傅到達現場，精準評估並確認最終收費",
   },
   {
     icon: Wrench,
     step: "03",
     title: "專業施工",
-    desc: "確認報價後立即動工",
+    desc: "確認報價後立即動工，不成功不收費",
   },
   {
     icon: Sparkles,
     step: "04",
     title: "清理現場",
-    desc: "完工測試去水，徹底清潔",
+    desc: "完工後測試去水，徹底清潔施工位置",
   },
 ];
 
 export default function Services() {
   return (
     <div>
+      <SEO
+        title="通渠服務｜住宅通渠・食肆隔油池・高壓水槍洗渠・CCTV 照喉｜通渠熊 DrainBear"
+        description="通渠熊提供全方位通渠服務：塞廁所、企缸、廚房鋅盤去水慢、食肆隔油池清理、大廈沙井主渠疏通、德國高壓水槍洗渠及 CCTV 照喉檢測。24 小時特快上門，先報價後動工，不成功不收費。"
+        path="/services"
+        jsonLd={SERVICES_JSONLD}
+      />
       {/* 頁首 */}
       <section className="bg-gradient-to-b from-mist to-white py-16 md:py-20">
         <div className="container text-center">
           <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">OUR SERVICES</div>
           <h1 className="text-balance font-display text-4xl font-black text-navy md:text-5xl">
-            專業通渠服務
+            全方位通渠服務，無論塞得幾嚴重，我們都有計
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-            由家居急救到商業重型工程，通渠熊以現代化設備與科學方法，精準解決每一種渠務危機。
+            針對住宅及商業客戶的不同需求，以現代化設備與科學方法，提供精準、徹底、無手尾的水管急救方案。
           </p>
         </div>
       </section>
@@ -124,12 +174,12 @@ export default function Services() {
                 <h2 className="font-display text-2xl font-black text-navy md:text-3xl">{s.title}</h2>
                 <p className="mt-4 leading-relaxed text-muted-foreground">{s.desc}</p>
                 <a
-                  href="https://wa.me/85261234567"
+                  href={waLink(s.wa)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-smooth mt-6 inline-flex items-center gap-1.5 text-sm font-bold text-wagreen-dark hover:gap-2.5"
                 >
-                  立即查詢報價
+                  WhatsApp 查詢報價
                   <ArrowRight className="h-4 w-4" />
                 </a>
               </div>
@@ -138,7 +188,43 @@ export default function Services() {
         </div>
       </section>
 
-      {/* 區塊 2：4 步解除危機 */}
+      {/* 區塊 2：細分服務範疇 */}
+      <section className="bg-mist py-20 md:py-24">
+        <div className="container">
+          <div className="text-center">
+            <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">SERVICE SCOPE</div>
+            <h2 className="text-balance font-display text-3xl font-black text-navy md:text-4xl">
+              服務範疇一覽
+            </h2>
+            <p className="mx-auto mt-4 max-w-lg text-muted-foreground">
+              專業排水工程與物業維護，由家居小問題到大廈主渠工程，一一涵蓋。
+            </p>
+          </div>
+          <div className="mt-12 grid gap-8 lg:grid-cols-2">
+            {DETAIL_GROUPS.map((g) => (
+              <div key={g.heading} className="card-float rounded-lg bg-white p-8">
+                <h3 className="font-display text-xl font-black text-navy">{g.heading}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{g.intro}</p>
+                <div className="mt-6 grid gap-5 sm:grid-cols-2">
+                  {g.items.map((it) => (
+                    <div key={it.title} className="flex items-start gap-3">
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-wagreen/10 text-wagreen-dark">
+                        <it.icon className="h-4.5 w-4.5 h-[18px] w-[18px]" strokeWidth={2.2} />
+                      </div>
+                      <div>
+                        <h4 className="text-sm font-bold text-navy">{it.title}</h4>
+                        <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{it.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 區塊 3：4 步解除危機 */}
       <section className="bg-navy py-20 md:py-24">
         <div className="container">
           <div className="text-center">
