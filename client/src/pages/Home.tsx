@@ -154,10 +154,35 @@ const HOME_SERVICES = [
 
 const HOME_JSONLD = {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: "通渠熊 DrainBear",
-  url: "https://drainbearhk.com",
-  inLanguage: "zh-HK",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://drainbearhk.com/#website",
+      "url": "https://drainbearhk.com/",
+      "name": "通渠熊 DrainBear", 
+      "alternateName": "通渠熊",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://drainbearhk.com/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://drainbearhk.com/#localbusiness",
+      "name": "通渠熊 DrainBear",
+      "image": "https://res.cloudinary.com/pgjztf2p/image/upload/v1785314740/A_pure_black_and_white_vector_mascot_logo_of_a_con-1785146902762_k8ruvx.jpg", // 換成你張靚圖 Link
+      "telephone": "+852-9558-8260",
+      "url": "https://drainbearhk.com",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Hong Kong",
+        "addressRegion": "HK",
+        "addressCountry": "HK"
+      }
+    }
+  ]
 };
 
 export default function Home() {
