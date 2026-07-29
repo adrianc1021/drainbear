@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://drainbear.manus.space/sitemap.xml
+Sitemap: https://drainbearhk.com/sitemap.xml

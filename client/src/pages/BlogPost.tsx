@@ -36,7 +36,7 @@ export default function BlogPost() {
     keywords: post.keywords.join(","),
     author: { "@type": "Organization", name: "通渠熊 DrainBear" },
     publisher: { "@type": "Plumber", name: "通渠熊 DrainBear", telephone: "+85295588260" },
-    mainEntityOfPage: `https://drainbear.manus.space/blog/${post.slug}`,
+    mainEntityOfPage: `https://drainbearhk.com/blog/${post.slug}`,
   };
 
   return (

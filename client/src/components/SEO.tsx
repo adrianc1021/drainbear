@@ -5,7 +5,7 @@
 import { useEffect } from "react";
 
 const SITE_NAME = "通渠熊 DrainBear";
-const SITE_URL = "https://drainbear.manus.space";
+const SITE_URL = "https://drainbearhk.com";
 
 function setMeta(attr: "name" | "property", key: string, content: string) {
   let el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);

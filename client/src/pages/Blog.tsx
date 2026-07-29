@@ -19,7 +19,7 @@ const BLOG_JSONLD = {
   "@type": "Blog",
   name: "通渠小知識",
   description: "通渠熊 DrainBear 專業渠務知識庫：日常防塞喉管實用建議、通渠迷思拆解及緊急應對指南。",
-  url: "https://drainbear.manus.space/blog",
+  url: "https://drainbearhk.com/blog",
   publisher: { "@type": "Plumber", name: "通渠熊 DrainBear" },
 };
 

@@ -16,7 +16,7 @@
 - WhatsAppButton 從 @/components/Layout 匯出
 
 ## SEO 現狀
-- SEO.tsx：title/description/canonical/OG/LocalBusiness(Plumber) JSON-LD，SITE_URL=https://drainbear.manus.space
+- SEO.tsx：title/description/canonical/OG/LocalBusiness(Plumber) JSON-LD，SITE_URL=https://drainbearhk.com
 - FAQ 頁有 FAQPage JSON-LD；Services 有 Service JSON-LD；BlogPost 有 Article JSON-LD
 - sitemap.xml 含全部頁面+6篇 blog；robots.txt 已有
 - Blog 資料：client/src/lib/blogData.ts（BLOG_POSTS，6篇，slug: prevent-kitchen-sink-clog, why-not-drain-cleaner, toilet-clog-emergency-guide, bathroom-hair-clog-prevention, restaurant-grease-trap-guide, village-house-manhole-rainy-season, old-building-backflow-signs）

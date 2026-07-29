@@ -156,7 +156,7 @@ const HOME_JSONLD = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "通渠熊 DrainBear",
-  url: "https://drainbear.manus.space",
+  url: "https://drainbearhk.com",
   inLanguage: "zh-HK",
 };
 
@@ -189,7 +189,7 @@ export default function Home() {
               塞渠爆喉？
               <br />
               <span className="bg-gradient-to-r from-wagreen to-emerald-500 bg-clip-text text-transparent">
-                一 Call 即到。
+               通渠熊一Call即到。
               </span>
             </h1>
             <p className="mt-6 text-base leading-relaxed text-muted-foreground md:text-lg">

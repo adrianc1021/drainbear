@@ -8,7 +8,7 @@
 5. 服務頁：H1 改「全方位通渠服務…」、Z-pattern 各服務獨立 wa 訊息、新增「服務範疇一覽」細分（坐廁/鋅盤/企缸/隔氣/隔油池/高壓洗渠車/沙井主渠/CCTV 報告）、4 步流程描述加詳。
 6. 地區頁：每區加 SEO 長文案、Pill 標籤改「XX通渠」、新增「超越地區界限統一透明收費」navy 承諾區塊。
 7. FAQ 頁：FAQPage JSON-LD。
-8. index.html：完善 meta（keywords/robots/theme-color/geo/og:image）；新增 `client/public/robots.txt` 及 `sitemap.xml`（域名暫用 https://drainbear.manus.space）。
+8. index.html：完善 meta（keywords/robots/theme-color/geo/og:image）；新增 `client/public/robots.txt` 及 `sitemap.xml`（域名暫用 https://drainbearhk.com）。
 
 截圖驗證：四頁均正常渲染，TypeScript 無錯誤。
 
