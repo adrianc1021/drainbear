@@ -8,7 +8,7 @@ import { MessageCircle, X, ArrowRight } from "lucide-react";
 import { waLink } from "@/lib/contact";
 import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
 
-const LOGO = "/manus-storage/drainbear-logo_3d941447.png";
+const LOGO = "https://res.cloudinary.com/pgjztf2p/image/upload/v1785314740/A_pure_black_and_white_vector_mascot_logo_of_a_con-1785146902762_k8ruvx.jpg";
 
 const QUICK_TOPICS = [
   { label: "坐廁 / 馬桶淤塞", msg: "你好，我屋企坐廁塞咗，想查詢通渠報價。" },
