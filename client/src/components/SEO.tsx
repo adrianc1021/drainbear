@@ -51,7 +51,7 @@ export interface SEOProps {
   noindex?: boolean;
 }
 
-const DEFAULT_OG_IMAGE = `${SITE_URL}/manus-storage/hero-plumber_f9109f53.png`;
+const DEFAULT_OG_IMAGE = "https://res.cloudinary.com/pgjztf2p/image/upload/v1785314740/A_pure_black_and_white_vector_mascot_logo_of_a_con-1785146902762_k8ruvx.jpg";
 
 export default function SEO({
   title,
