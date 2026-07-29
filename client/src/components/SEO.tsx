@@ -4,7 +4,7 @@
  */
 import { useEffect } from "react";
 
-const SITE_NAME = "通渠熊 DrainBear";
+const SITE_NAME = "通渠熊 DrainBear | 24小時香港通渠、高壓水槍洗渠、CCTV 照喉 (明碼實價)";
 const SITE_URL = "https://drainbearhk.com";
 
 function setMeta(attr: "name" | "property", key: string, content: string) {
@@ -90,7 +90,7 @@ export default function SEO({
       name: SITE_NAME,
       alternateName: "DrainBear",
       description:
-        "香港 24 小時現代化通渠公司，德國高壓水槍、CCTV 照喉檢測，不成功不收費，覆蓋港島、九龍、新界及離島。",
+        "香港專業通渠公司，提供24小時特快住宅及商業通渠服務。引入德國高壓水槍及CCTV照喉技術，明碼實價，不成功不收費，全港九新界即時上門。",
       url: SITE_URL,
       telephone: "+85295588260",
       priceRange: "$$",
