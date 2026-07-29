@@ -128,10 +128,10 @@ export default function Guide() {
   return (
     <div className="bg-white">
       <SEO
-        title="通渠收費指南 2026｜通渠價錢參考・揀選通渠公司貼士｜通渠熊 DrainBear"
-        description="香港通渠收費幾多錢？坐廁淤塞 HK$600 起、鋅盤 HK$500 起、沙井主渠 HK$1,800 起。通渠熊公開透明價目表，教你揀選通渠公司 4 大貼士、認識服務流程，先報價後動工，不成功不收費。"
+        title="2026 最新通渠收費指南｜明碼實價・絕無隱藏收費｜通渠熊 DrainBear"
+        description="想知通渠幾錢？通渠熊提供全透明的通渠收費表。由住宅手搖泵通渠、高壓氣泵，到商業高壓水槍洗渠及 CCTV 照喉，各項收費一目了然。承諾報價後才動工，絕不坐地起價，上門檢查費更可豁免。"
         path="/guide"
-        keywords="通渠收費, 通渠價錢, 通渠公司推薦, 通渠幾錢, 塞渠收費, 通渠服務流程, 香港通渠, 24小時通渠"
+        keywords="通渠收費, 通渠幾錢, 通渠價錢, 塞廁所收費, 高壓通渠收費, CCTV照喉價錢, 通渠報價, 明碼實價"
         jsonLd={[FAQ_JSONLD, HOWTO_JSONLD]}
         breadcrumbs={CRUMBS}
       />
