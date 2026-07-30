@@ -1,41 +1,63 @@
 /**
  * 通渠熊 DrainBear — SEO 元件
- * 每頁獨立 title / description / canonical / Open Graph / JSON-LD 結構化資料
+ * 每頁獨立 title / description / canonical / Open Graph / JSON-LD
  */
 import { useEffect } from "react";
-
-const SITE_NAME = "通渠熊 DrainBear | 24小時香港通渠、高壓水槍洗渠、CCTV 照喉 (明碼實價)";
-const SITE_URL = "https://drainbearhk.com";
+import {
+  BUSINESS_ID,
+  BUSINESS_NAME,
+  DEFAULT_OG_IMAGE,
+  PHONE_E164,
+  SITE_NAME,
+  SITE_URL,
+  absoluteUrl,
+} from "@/config/site";
 
 function setMeta(attr: "name" | "property", key: string, content: string) {
-  let el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
-  if (!el) {
-    el = document.createElement("meta");
-    el.setAttribute(attr, key);
-    document.head.appendChild(el);
+  let element = document.head.querySelector<HTMLMetaElement>(
+    `meta[${attr}="${key}"]`
+  );
+
+  if (!element) {
+    element = document.createElement("meta");
+    element.setAttribute(attr, key);
+    document.head.appendChild(element);
   }
-  el.setAttribute("content", content);
+
+  element.setAttribute("content", content);
+}
+
+function removeMeta(attr: "name" | "property", key: string) {
+  document.head
+    .querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`)
+    ?.remove();
 }
 
 function setCanonical(url: string) {
-  let el = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
-  if (!el) {
-    el = document.createElement("link");
-    el.setAttribute("rel", "canonical");
-    document.head.appendChild(el);
+  let element = document.head.querySelector<HTMLLinkElement>(
+    'link[rel="canonical"]'
+  );
+
+  if (!element) {
+    element = document.createElement("link");
+    element.setAttribute("rel", "canonical");
+    document.head.appendChild(element);
   }
-  el.setAttribute("href", url);
+
+  element.setAttribute("href", url);
 }
 
 function setJsonLd(id: string, data: object | object[]) {
-  let el = document.getElementById(id) as HTMLScriptElement | null;
-  if (!el) {
-    el = document.createElement("script");
-    el.type = "application/ld+json";
-    el.id = id;
-    document.head.appendChild(el);
+  let element = document.getElementById(id) as HTMLScriptElement | null;
+
+  if (!element) {
+    element = document.createElement("script");
+    element.type = "application/ld+json";
+    element.id = id;
+    document.head.appendChild(element);
   }
-  el.textContent = JSON.stringify(data);
+
+  element.textContent = JSON.stringify(data);
 }
 
 export interface SEOProps {
@@ -46,12 +68,12 @@ export interface SEOProps {
   keywords?: string;
   image?: string;
   type?: "website" | "article";
-  breadcrumbs?: { name: string; path: string }[];
-  /** 工具頁/感謝頁等不需被搜尋引擎收錄的頁面 */
+  breadcrumbs?: {
+    name: string;
+    path: string;
+  }[];
   noindex?: boolean;
 }
-
-const DEFAULT_OG_IMAGE = "https://res.cloudinary.com/pgjztf2p/image/upload/v1785314740/A_pure_black_and_white_vector_mascot_logo_of_a_con-1785146902762_k8ruvx.jpg";
 
 export default function SEO({
   title,
@@ -65,51 +87,78 @@ export default function SEO({
   noindex = false,
 }: SEOProps) {
   useEffect(() => {
-    const url = `${SITE_URL}${path}`;
+    const cleanPath = path.split(/[?#]/)[0] || "/";
+    const pageUrl = absoluteUrl(cleanPath);
+    const socialImage = absoluteUrl(image || DEFAULT_OG_IMAGE);
+
+    document.documentElement.lang = "zh-Hant-HK";
     document.title = title;
+
     setMeta("name", "description", description);
-    if (keywords) setMeta("name", "keywords", keywords);
+
+    if (keywords) {
+      setMeta("name", "keywords", keywords);
+    } else {
+      removeMeta("name", "keywords");
+    }
+
     setMeta(
       "name",
       "robots",
-      noindex
-        ? "noindex, follow"
-        : "index, follow, max-image-preview:large"
-    ); setCanonical(url);
+      noindex ? "noindex, follow" : "index, follow, max-image-preview:large"
+    );
+
+    setMeta(
+      "name",
+      "googlebot",
+      noindex ? "noindex, follow" : "index, follow, max-image-preview:large"
+    );
+
+    setCanonical(pageUrl);
+
     setMeta("property", "og:title", title);
     setMeta("property", "og:description", description);
-    setMeta("property", "og:url", url);
+    setMeta("property", "og:url", pageUrl);
     setMeta("property", "og:type", type);
     setMeta("property", "og:site_name", SITE_NAME);
     setMeta("property", "og:locale", "zh_HK");
-    setMeta("property", "og:image", image || DEFAULT_OG_IMAGE);
+    setMeta("property", "og:image", socialImage);
+    setMeta("property", "og:image:alt", `${BUSINESS_NAME}｜香港專業通渠服務`);
+
     setMeta("name", "twitter:card", "summary_large_image");
     setMeta("name", "twitter:title", title);
     setMeta("name", "twitter:description", description);
-    setMeta("name", "twitter:image", image || DEFAULT_OG_IMAGE);
+    setMeta("name", "twitter:image", socialImage);
 
-    // 全站 LocalBusiness 結構化資料
+    // 全站統一商家實體。
+    // 暫時使用Organization，避免提供未核實或不完整地址。
     setJsonLd("jsonld-business", {
       "@context": "https://schema.org",
-      "@type": "Plumber",
-      name: SITE_NAME,
-      alternateName: "DrainBear",
-      description:
-        "香港專業通渠公司，提供24小時特快住宅及商業通渠服務。引入德國高壓水槍及CCTV照喉技術，明碼實價，不成功不收費，全港九新界即時上門。",
-      url: SITE_URL,
-      telephone: "+85295588260",
-      priceRange: "$$",
-      areaServed: ["香港島", "九龍", "新界", "離島"],
-      openingHoursSpecification: {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-        opens: "00:00",
-        closes: "23:59",
+      "@type": "Organization",
+      "@id": BUSINESS_ID,
+      name: BUSINESS_NAME,
+      alternateName: [SITE_NAME, "DrainBear"],
+      url: `${SITE_URL}/`,
+      logo: {
+        "@type": "ImageObject",
+        url: absoluteUrl("/favicon-512x512.png"),
+        width: 512,
+        height: 512,
       },
-      address: {
-        "@type": "PostalAddress",
-        addressRegion: "Hong Kong",
-        addressCountry: "HK",
+      image: socialImage,
+      description:
+        "香港24小時專業通渠服務，提供住宅及商業通渠、高壓水槍洗渠、CCTV照喉、隔油池及沙井處理。",
+      telephone: PHONE_E164,
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: PHONE_E164,
+        contactType: "customer service",
+        areaServed: "HK",
+        availableLanguage: ["zh-Hant", "zh-HK", "en"],
+      },
+      areaServed: {
+        "@type": "Country",
+        name: "Hong Kong",
       },
     });
 
@@ -119,16 +168,15 @@ export default function SEO({
       document.getElementById("jsonld-page")?.remove();
     }
 
-    // BreadcrumbList 結構化資料
     if (breadcrumbs && breadcrumbs.length > 0) {
       setJsonLd("jsonld-breadcrumb", {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
-        itemListElement: breadcrumbs.map((b, i) => ({
+        itemListElement: breadcrumbs.map((breadcrumb, index) => ({
           "@type": "ListItem",
-          position: i + 1,
-          name: b.name,
-          item: `${SITE_URL}${b.path}`,
+          position: index + 1,
+          name: breadcrumb.name,
+          item: absoluteUrl(breadcrumb.path),
         })),
       });
     } else {
@@ -136,7 +184,17 @@ export default function SEO({
     }
 
     window.scrollTo(0, 0);
-  }, [title, description, path, jsonLd, keywords, image, type, breadcrumbs, noindex]);
+  }, [
+    title,
+    description,
+    path,
+    jsonLd,
+    keywords,
+    image,
+    type,
+    breadcrumbs,
+    noindex,
+  ]);
 
   return null;
 }

@@ -31,6 +31,13 @@ import {
 import { WhatsAppButton } from "@/components/Layout";
 import { BLOG_POSTS } from "@/lib/blogData";
 import SEO from "@/components/SEO";
+import {
+  BUSINESS_ID,
+  BUSINESS_NAME,
+  SITE_NAME,
+  SITE_URL,
+  WEBSITE_ID,
+} from "@/config/site";
 import { PHONE_DISPLAY, PHONE_TEL, waLink } from "@/lib/contact";
 import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
 
@@ -62,12 +69,18 @@ const CASE_STUDIES = [
   },
 ];
 
-const HERO_IMG = "https://res.cloudinary.com/pgjztf2p/image/upload/v1785149281/copy_of_a_portrait_of_a_young_handsome_asian_male_plumbin-1785149206310_mmq04g.png";
-const WHY_IMG = "https://res.cloudinary.com/pgjztf2p/image/upload/v1785149473/why_sv7tw9.png";
-const IMG_RESIDENTIAL = "https://res.cloudinary.com/pgjztf2p/image/upload/v1785149431/home_sdyxhb.png";
-const IMG_COMMERCIAL = "https://res.cloudinary.com/pgjztf2p/image/upload/v1785149532/bar_nccfy4.png";
-const IMG_HYDROJET = "https://res.cloudinary.com/pgjztf2p/image/upload/v1785149597/2_edlrhp.png";
-const IMG_CCTV = "https://res.cloudinary.com/pgjztf2p/image/upload/v1785149606/3_olpvyt.png";
+const HERO_IMG =
+  "https://res.cloudinary.com/pgjztf2p/image/upload/v1785149281/copy_of_a_portrait_of_a_young_handsome_asian_male_plumbin-1785149206310_mmq04g.png";
+const WHY_IMG =
+  "https://res.cloudinary.com/pgjztf2p/image/upload/v1785149473/why_sv7tw9.png";
+const IMG_RESIDENTIAL =
+  "https://res.cloudinary.com/pgjztf2p/image/upload/v1785149431/home_sdyxhb.png";
+const IMG_COMMERCIAL =
+  "https://res.cloudinary.com/pgjztf2p/image/upload/v1785149532/bar_nccfy4.png";
+const IMG_HYDROJET =
+  "https://res.cloudinary.com/pgjztf2p/image/upload/v1785149597/2_edlrhp.png";
+const IMG_CCTV =
+  "https://res.cloudinary.com/pgjztf2p/image/upload/v1785149606/3_olpvyt.png";
 
 const ADVANTAGES = [
   { icon: BadgeCheck, title: "不成功不收費", desc: "明碼實價，絕不隱藏" },
@@ -154,35 +167,15 @@ const HOME_SERVICES = [
 
 const HOME_JSONLD = {
   "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebSite",
-      "@id": "https://drainbearhk.com/#website",
-      "url": "https://drainbearhk.com/",
-      "name": "通渠熊 DrainBear", 
-      "alternateName": "通渠熊",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://drainbearhk.com/?s={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    },
-    {
-      "@type": "LocalBusiness",
-      "@id": "https://drainbearhk.com/#localbusiness",
-      "name": "通渠熊 DrainBear",
-      "image": "https://res.cloudinary.com/pgjztf2p/image/upload/v1785314740/A_pure_black_and_white_vector_mascot_logo_of_a_con-1785146902762_k8ruvx.jpg", // 換成你張靚圖 Link
-      "telephone": "+852-9558-8260",
-      "url": "https://drainbearhk.com",
-      "priceRange": "$$",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Hong Kong",
-        "addressRegion": "HK",
-        "addressCountry": "HK"
-      }
-    }
-  ]
+  "@type": "WebSite",
+  "@id": WEBSITE_ID,
+  url: `${SITE_URL}/`,
+  name: SITE_NAME,
+  alternateName: [BUSINESS_NAME, "DrainBear", "drainbearhk.com"],
+  inLanguage: "zh-Hant-HK",
+  publisher: {
+    "@id": BUSINESS_ID,
+  },
 };
 
 export default function Home() {
@@ -215,12 +208,12 @@ export default function Home() {
               塞渠爆喉？
               <br />
               <span className="bg-gradient-to-r from-wagreen to-emerald-500 bg-clip-text text-transparent">
-               通渠熊一Call即到。
+                通渠熊一Call即到。
               </span>
             </h1>
             <p className="mt-6 text-base leading-relaxed text-muted-foreground md:text-lg">
-              香港頂尖水管急救團隊，24 小時全天候候命。引進外國頂級高壓設備與 CCTV
-              探測，明碼實價、極速到達、不成功不收費，服務覆蓋全港九新界。
+              香港頂尖水管急救團隊，24 小時全天候候命。引進外國頂級高壓設備與
+              CCTV 探測，明碼實價、極速到達、不成功不收費，服務覆蓋全港九新界。
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
               <a
@@ -241,7 +234,10 @@ export default function Home() {
                 onClick={() => trackCTA("phone", "home_hero")}
                 className="btn-smooth inline-flex items-center justify-center gap-2 rounded-lg bg-navy px-6 py-3.5 text-base font-bold text-white shadow-[0_8px_24px_rgba(11,19,43,0.25)] hover:bg-navy-light hover:shadow-[0_12px_32px_rgba(11,19,43,0.3)]"
               >
-                <Phone className="h-4.5 w-4.5 h-[18px] w-[18px]" strokeWidth={2.2} />
+                <Phone
+                  className="h-4.5 w-4.5 h-[18px] w-[18px]"
+                  strokeWidth={2.2}
+                />
                 {PHONE_DISPLAY}
               </a>
             </div>
@@ -264,8 +260,12 @@ export default function Home() {
                   <Clock className="h-5 w-5" strokeWidth={2.2} />
                 </div>
                 <div>
-                  <div className="font-display text-sm font-extrabold text-navy">1 小時特快到達</div>
-                  <div className="text-xs text-muted-foreground">全港 24 小時候命</div>
+                  <div className="font-display text-sm font-extrabold text-navy">
+                    1 小時特快到達
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    全港 24 小時候命
+                  </div>
                 </div>
               </div>
             </div>
@@ -286,8 +286,12 @@ export default function Home() {
                 <a.icon className="h-6 w-6 text-wagreen" strokeWidth={2} />
               </div>
               <div>
-                <h3 className="font-display text-base font-bold text-white">{a.title}</h3>
-                <p className="mt-1 text-sm leading-relaxed text-white/55">{a.desc}</p>
+                <h3 className="font-display text-base font-bold text-white">
+                  {a.title}
+                </h3>
+                <p className="mt-1 text-sm leading-relaxed text-white/55">
+                  {a.desc}
+                </p>
               </div>
             </div>
           ))}
@@ -298,7 +302,9 @@ export default function Home() {
       <section className="dot-grid-light bg-white py-20 md:py-24">
         <div className="container">
           <div className="reveal mx-auto max-w-2xl text-center">
-            <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">OUR PROMISE</div>
+            <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">
+              OUR PROMISE
+            </div>
             <h2 className="text-balance font-display text-3xl font-black text-navy md:text-4xl">
               透明報價，安心動工
             </h2>
@@ -329,8 +335,12 @@ export default function Home() {
                 <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-wagreen/10 text-wagreen-dark">
                   <t.icon className="h-6 w-6" strokeWidth={2} />
                 </div>
-                <h3 className="font-display text-lg font-bold text-navy">{t.title}</h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{t.desc}</p>
+                <h3 className="font-display text-lg font-bold text-navy">
+                  {t.title}
+                </h3>
+                <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
+                  {t.desc}
+                </p>
               </div>
             ))}
           </div>
@@ -342,7 +352,9 @@ export default function Home() {
         <div className="container grid items-center gap-12 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
           {/* 左：標題 + 2x2 網格 */}
           <div className="reveal">
-            <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">WHY DRAINBEAR</div>
+            <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">
+              WHY DRAINBEAR
+            </div>
             <h2 className="text-balance font-display text-3xl font-black text-navy md:text-4xl lg:text-[2.75rem] lg:leading-[1.15]">
               為什麼選擇通渠熊？
             </h2>
@@ -350,16 +362,23 @@ export default function Home() {
               我們以科技與誠信重新定義通渠行業，每一次上門都是專業、透明、乾淨的服務體驗。
             </p>
             <div className="mt-10 grid gap-5 sm:grid-cols-2">
-              {WHY_GRID.map((g) => (
+              {WHY_GRID.map(g => (
                 <div
                   key={g.title}
                   className="card-float card-accent rounded-lg bg-white p-6"
                 >
                   <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-navy text-wagreen">
-                    <g.icon className="h-5.5 w-5.5 h-[22px] w-[22px]" strokeWidth={2} />
+                    <g.icon
+                      className="h-5.5 w-5.5 h-[22px] w-[22px]"
+                      strokeWidth={2}
+                    />
                   </div>
-                  <h3 className="font-display text-base font-bold text-navy">{g.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{g.desc}</p>
+                  <h3 className="font-display text-base font-bold text-navy">
+                    {g.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {g.desc}
+                  </p>
                 </div>
               ))}
             </div>
@@ -375,12 +394,18 @@ export default function Home() {
             />
             <div className="absolute -bottom-6 left-6 right-6 flex items-center justify-between rounded-lg bg-white/95 px-6 py-4 shadow-[0_12px_32px_rgba(11,19,43,0.15)] backdrop-blur md:left-10 md:right-auto md:gap-10">
               <div>
-                <div className="font-display text-2xl font-black text-navy">98%</div>
-                <div className="text-xs text-muted-foreground">客戶五星好評</div>
+                <div className="font-display text-2xl font-black text-navy">
+                  98%
+                </div>
+                <div className="text-xs text-muted-foreground">
+                  客戶五星好評
+                </div>
               </div>
               <div className="h-10 w-px bg-border" />
               <div>
-                <div className="font-display text-2xl font-black text-navy">1000+</div>
+                <div className="font-display text-2xl font-black text-navy">
+                  1000+
+                </div>
                 <div className="text-xs text-muted-foreground">成功案例</div>
               </div>
             </div>
@@ -393,7 +418,9 @@ export default function Home() {
         <div className="container">
           <div className="reveal flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
             <div>
-              <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">OUR SERVICES</div>
+              <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">
+                OUR SERVICES
+              </div>
               <h2 className="text-balance font-display text-3xl font-black text-navy md:text-4xl">
                 專業通渠服務
               </h2>
@@ -428,8 +455,12 @@ export default function Home() {
                   <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-navy text-wagreen">
                     <s.icon className="h-5 w-5" strokeWidth={2} />
                   </div>
-                  <h3 className="font-display text-base font-bold text-navy">{s.title}</h3>
-                  <p className="mt-0.5 text-xs font-semibold text-safety">{s.sub}</p>
+                  <h3 className="font-display text-base font-bold text-navy">
+                    {s.title}
+                  </h3>
+                  <p className="mt-0.5 text-xs font-semibold text-safety">
+                    {s.sub}
+                  </p>
                   <p className="mt-2.5 flex-1 text-sm leading-relaxed text-muted-foreground">
                     {s.desc}
                   </p>
@@ -457,7 +488,9 @@ export default function Home() {
       <section className="bg-mist py-20 md:py-24">
         <div className="container">
           <div className="reveal max-w-xl">
-            <div className="mb-2 text-xs font-bold tracking-[0.2em] text-safety">CASE STUDIES</div>
+            <div className="mb-2 text-xs font-bold tracking-[0.2em] text-safety">
+              CASE STUDIES
+            </div>
             <h2 className="text-balance font-display text-3xl font-black text-navy md:text-4xl">
               真實工程案例
             </h2>
@@ -474,7 +507,10 @@ export default function Home() {
               >
                 <div className="flex items-center justify-between">
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-navy px-3 py-1 text-[11px] font-bold text-white">
-                    <MapPin className="h-3 w-3 text-wagreen" strokeWidth={2.5} />
+                    <MapPin
+                      className="h-3 w-3 text-wagreen"
+                      strokeWidth={2.5}
+                    />
                     {c.area}
                   </span>
                   <span className="text-[11px] font-bold tracking-wide text-muted-foreground">
@@ -484,15 +520,25 @@ export default function Home() {
                 <h3 className="mt-4 font-display text-lg font-black leading-snug text-navy">
                   {c.title}
                 </h3>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{c.desc}</p>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                  {c.desc}
+                </p>
                 <dl className="mt-5 grid grid-cols-2 gap-3 border-t border-border pt-4">
                   <div>
-                    <dt className="text-[11px] font-bold tracking-wide text-muted-foreground">到達時間</dt>
-                    <dd className="mt-0.5 text-sm font-black text-navy">{c.arrival}</dd>
+                    <dt className="text-[11px] font-bold tracking-wide text-muted-foreground">
+                      到達時間
+                    </dt>
+                    <dd className="mt-0.5 text-sm font-black text-navy">
+                      {c.arrival}
+                    </dd>
                   </div>
                   <div>
-                    <dt className="text-[11px] font-bold tracking-wide text-muted-foreground">完工時間</dt>
-                    <dd className="mt-0.5 text-sm font-black text-navy">{c.duration}</dd>
+                    <dt className="text-[11px] font-bold tracking-wide text-muted-foreground">
+                      完工時間
+                    </dt>
+                    <dd className="mt-0.5 text-sm font-black text-navy">
+                      {c.duration}
+                    </dd>
                   </div>
                 </dl>
               </article>
@@ -504,23 +550,42 @@ export default function Home() {
             <div className="flex items-center gap-5">
               <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-mist ring-1 ring-border">
                 <svg viewBox="0 0 24 24" className="h-7 w-7" aria-hidden="true">
-                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                  <path
+                    fill="#4285F4"
+                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                  />
+                  <path
+                    fill="#34A853"
+                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                  />
+                  <path
+                    fill="#FBBC05"
+                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                  />
+                  <path
+                    fill="#EA4335"
+                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                  />
                 </svg>
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="font-display text-lg font-black text-navy">Google 商家評價</span>
+                  <span className="font-display text-lg font-black text-navy">
+                    Google 商家評價
+                  </span>
                   <span className="flex items-center gap-0.5">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-safety text-safety" strokeWidth={0} />
+                      <Star
+                        key={i}
+                        className="h-4 w-4 fill-safety text-safety"
+                        strokeWidth={0}
+                      />
                     ))}
                   </span>
                 </div>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  唔使聽我哋自賣自誇——直接去 Google 睇下街坊客戶嘅真實評價，或者幫襯完留低你嘅意見。
+                  唔使聽我哋自賣自誇——直接去 Google
+                  睇下街坊客戶嘅真實評價，或者幫襯完留低你嘅意見。
                 </p>
               </div>
             </div>
@@ -543,7 +608,9 @@ export default function Home() {
         <div className="container">
           <div className="reveal flex flex-wrap items-end justify-between gap-4">
             <div>
-              <div className="mb-2 text-xs font-bold tracking-[0.2em] text-safety">DRAIN CARE TIPS</div>
+              <div className="mb-2 text-xs font-bold tracking-[0.2em] text-safety">
+                DRAIN CARE TIPS
+              </div>
               <h2 className="text-balance font-display text-3xl font-black text-navy md:text-4xl">
                 通渠小知識
               </h2>
@@ -572,7 +639,9 @@ export default function Home() {
                 <h3 className="mt-4 text-balance font-display text-lg font-black leading-snug text-navy transition-colors duration-200 group-hover:text-wagreen-dark">
                   {p.title}
                 </h3>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{p.excerpt}</p>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                  {p.excerpt}
+                </p>
                 <span className="btn-smooth mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-wagreen-dark group-hover:gap-2.5">
                   閱讀全文 <ArrowRight className="h-4 w-4" />
                 </span>
@@ -589,16 +658,24 @@ export default function Home() {
             渠道告急？白熊師傅隨時候命。
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-white/60">
-            即時 WhatsApp 獲取初步報價，24 小時全天候特快上門，1 小時內到達現場解除危機。
+            即時 WhatsApp 獲取初步報價，24 小時全天候特快上門，1
+            小時內到達現場解除危機。
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
-            <WhatsAppButton className="px-8 py-4 text-base" label="WhatsApp 即時報價" trackLocation="home_footer_cta" />
+            <WhatsAppButton
+              className="px-8 py-4 text-base"
+              label="WhatsApp 即時報價"
+              trackLocation="home_footer_cta"
+            />
             <a
               href={PHONE_TEL}
               onClick={() => trackCTA("phone", "home_footer_cta")}
               className="btn-smooth inline-flex items-center justify-center gap-2 rounded-lg border border-white/20 bg-white/5 px-7 py-4 text-base font-bold text-white hover:border-white/45 hover:bg-white hover:text-navy"
             >
-              <Phone className="h-4.5 w-4.5 h-[18px] w-[18px]" strokeWidth={2.2} />
+              <Phone
+                className="h-4.5 w-4.5 h-[18px] w-[18px]"
+                strokeWidth={2.2}
+              />
               {PHONE_DISPLAY}
             </a>
           </div>
