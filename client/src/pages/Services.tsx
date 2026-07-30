@@ -21,6 +21,7 @@ import {
 import { WhatsAppButton } from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { BUSINESS_ID, SITE_URL } from "@/config/site";
 import { waLink } from "@/lib/contact";
 import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
 
@@ -70,10 +71,26 @@ const DETAIL_GROUPS = [
     intro:
       "廁所水倒灌？企缸去水慢？我們深知家居塞渠的煩惱，專注各類住宅通渠及屋苑水管維修，承諾絕不弄髒您的家居。",
     items: [
-      { icon: CircleAlert, title: "坐廁及馬桶淤塞", desc: "專治硬物掉入或紙巾淤塞，高壓氣泵極速疏通，免拆馬桶。" },
-      { icon: UtensilsCrossed, title: "廚房鋅盤去水慢", desc: "針對 U 型喉管內的陳年豬油膏及廚餘殘渣，徹底清除油脂。" },
-      { icon: Bath, title: "企缸及浴缸通渠", desc: "解決頭髮及番梘垢導致的水浸問題，回復爽快去水速度。" },
-      { icon: Droplets, title: "隔氣及喉管漏水", desc: "精準檢查隔氣老化或接駁位滴水，提供即時防漏維修。" },
+      {
+        icon: CircleAlert,
+        title: "坐廁及馬桶淤塞",
+        desc: "專治硬物掉入或紙巾淤塞，高壓氣泵極速疏通，免拆馬桶。",
+      },
+      {
+        icon: UtensilsCrossed,
+        title: "廚房鋅盤去水慢",
+        desc: "針對 U 型喉管內的陳年豬油膏及廚餘殘渣，徹底清除油脂。",
+      },
+      {
+        icon: Bath,
+        title: "企缸及浴缸通渠",
+        desc: "解決頭髮及番梘垢導致的水浸問題，回復爽快去水速度。",
+      },
+      {
+        icon: Droplets,
+        title: "隔氣及喉管漏水",
+        desc: "精準檢查隔氣老化或接駁位滴水，提供即時防漏維修。",
+      },
     ],
   },
   {
@@ -81,20 +98,48 @@ const DETAIL_GROUPS = [
     intro:
       "營業場所塞渠等同停業！專為食肆、商場及物業提供高強度商業通渠，配備工業級設備，將對營業的影響減至最低。",
     items: [
-      { icon: UtensilsCrossed, title: "食肆隔油池清理", desc: "應付大量高濃度油污，提供定期抽油及清洗服務。" },
-      { icon: Waves, title: "德國高壓洗渠車", desc: "極限水壓粉碎管壁硬化水泥及油塊，深度清洗管道。" },
-      { icon: Building2, title: "大廈沙井及主渠", desc: "重型設備應對沙井滿瀉、樹根纏繞及主渠倒灌。" },
-      { icon: Video, title: "CCTV 管道探測報告", desc: "微型鏡頭深入探測暗漏及破損，提供影像分析作工程依據。" },
+      {
+        icon: UtensilsCrossed,
+        title: "食肆隔油池清理",
+        desc: "應付大量高濃度油污，提供定期抽油及清洗服務。",
+      },
+      {
+        icon: Waves,
+        title: "德國高壓洗渠車",
+        desc: "極限水壓粉碎管壁硬化水泥及油塊，深度清洗管道。",
+      },
+      {
+        icon: Building2,
+        title: "大廈沙井及主渠",
+        desc: "重型設備應對沙井滿瀉、樹根纏繞及主渠倒灌。",
+      },
+      {
+        icon: Video,
+        title: "CCTV 管道探測報告",
+        desc: "微型鏡頭深入探測暗漏及破損，提供影像分析作工程依據。",
+      },
     ],
   },
 ];
 
-const SERVICES_JSONLD = SERVICES.map((s) => ({
+const SERVICE_SCHEMA_IDS = [
+  "residential-drain-unblocking",
+  "commercial-drain-cleaning",
+  "high-pressure-water-jetting",
+  "cctv-drain-inspection",
+];
+
+const SERVICES_JSONLD = SERVICES.map((service, index) => ({
   "@context": "https://schema.org",
   "@type": "Service",
-  serviceType: s.title,
-  description: s.desc,
-  provider: { "@type": "Plumber", name: "通渠熊 DrainBear", telephone: "+85295588260" },
+  "@id": `${SITE_URL}/services#${SERVICE_SCHEMA_IDS[index]}`,
+  name: service.title,
+  serviceType: service.title,
+  description: service.desc,
+  url: `${SITE_URL}/services`,
+  provider: {
+    "@id": BUSINESS_ID,
+  },
   areaServed: ["香港島", "九龍", "新界", "離島"],
 }));
 
@@ -140,7 +185,9 @@ export default function Services() {
       {/* 頁首 */}
       <section className="bg-gradient-to-b from-mist to-white py-16 md:py-20">
         <div className="container text-center">
-          <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">OUR SERVICES</div>
+          <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">
+            OUR SERVICES
+          </div>
           <h1 className="text-balance font-display text-4xl font-black text-navy md:text-5xl">
             全方位通渠服務，無論塞得幾嚴重，我們都有計
           </h1>
@@ -178,11 +225,18 @@ export default function Services() {
               {/* 文 */}
               <div className={i % 2 === 1 ? "lg:pr-8" : "lg:pl-8"}>
                 <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-mist px-4 py-1.5 text-xs font-bold tracking-[0.15em] text-navy/60">
-                  <s.icon className="h-3.5 w-3.5 text-wagreen" strokeWidth={2.5} />
+                  <s.icon
+                    className="h-3.5 w-3.5 text-wagreen"
+                    strokeWidth={2.5}
+                  />
                   {s.tag}
                 </div>
-                <h2 className="font-display text-2xl font-black text-navy md:text-3xl">{s.title}</h2>
-                <p className="mt-4 leading-relaxed text-muted-foreground">{s.desc}</p>
+                <h2 className="font-display text-2xl font-black text-navy md:text-3xl">
+                  {s.title}
+                </h2>
+                <p className="mt-4 leading-relaxed text-muted-foreground">
+                  {s.desc}
+                </p>
                 <a
                   href={waLink(s.wa)}
                   target="_blank"
@@ -206,7 +260,9 @@ export default function Services() {
       <section className="bg-mist py-20 md:py-24">
         <div className="container">
           <div className="text-center">
-            <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">SERVICE SCOPE</div>
+            <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">
+              SERVICE SCOPE
+            </div>
             <h2 className="text-balance font-display text-3xl font-black text-navy md:text-4xl">
               服務範疇一覽
             </h2>
@@ -215,19 +271,33 @@ export default function Services() {
             </p>
           </div>
           <div className="mt-12 grid gap-8 lg:grid-cols-2">
-            {DETAIL_GROUPS.map((g) => (
-              <div key={g.heading} className="card-float rounded-lg bg-white p-8">
-                <h3 className="font-display text-xl font-black text-navy">{g.heading}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{g.intro}</p>
+            {DETAIL_GROUPS.map(g => (
+              <div
+                key={g.heading}
+                className="card-float rounded-lg bg-white p-8"
+              >
+                <h3 className="font-display text-xl font-black text-navy">
+                  {g.heading}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  {g.intro}
+                </p>
                 <div className="mt-6 grid gap-5 sm:grid-cols-2">
-                  {g.items.map((it) => (
+                  {g.items.map(it => (
                     <div key={it.title} className="flex items-start gap-3">
                       <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-wagreen/10 text-wagreen-dark">
-                        <it.icon className="h-4.5 w-4.5 h-[18px] w-[18px]" strokeWidth={2.2} />
+                        <it.icon
+                          className="h-4.5 w-4.5 h-[18px] w-[18px]"
+                          strokeWidth={2.2}
+                        />
                       </div>
                       <div>
-                        <h4 className="text-sm font-bold text-navy">{it.title}</h4>
-                        <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{it.desc}</p>
+                        <h4 className="text-sm font-bold text-navy">
+                          {it.title}
+                        </h4>
+                        <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                          {it.desc}
+                        </p>
                       </div>
                     </div>
                   ))}
@@ -242,7 +312,9 @@ export default function Services() {
       <section className="bg-navy py-20 md:py-24">
         <div className="container">
           <div className="text-center">
-            <div className="mb-3 text-xs font-bold tracking-[0.2em] text-wagreen">HOW IT WORKS</div>
+            <div className="mb-3 text-xs font-bold tracking-[0.2em] text-wagreen">
+              HOW IT WORKS
+            </div>
             <h2 className="text-balance font-display text-3xl font-black text-white md:text-4xl">
               4 步解除危機
             </h2>
@@ -253,21 +325,30 @@ export default function Services() {
           <div className="relative mt-14 grid gap-10 md:grid-cols-4 md:gap-6">
             {/* 連接線 */}
             <div className="absolute left-[12%] right-[12%] top-8 hidden h-px bg-gradient-to-r from-wagreen/60 via-white/25 to-wagreen/60 md:block" />
-            {STEPS.map((st) => (
-              <div key={st.step} className="relative flex flex-col items-center text-center">
+            {STEPS.map(st => (
+              <div
+                key={st.step}
+                className="relative flex flex-col items-center text-center"
+              >
                 <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-lg bg-white/8 ring-1 ring-white/20 backdrop-blur">
                   <st.icon className="h-7 w-7 text-wagreen" strokeWidth={2} />
                 </div>
                 <div className="mt-4 font-display text-xs font-extrabold tracking-[0.25em] text-safety">
                   STEP {st.step}
                 </div>
-                <h3 className="mt-2 font-display text-lg font-bold text-white">{st.title}</h3>
+                <h3 className="mt-2 font-display text-lg font-bold text-white">
+                  {st.title}
+                </h3>
                 <p className="mt-1.5 text-sm text-white/55">{st.desc}</p>
               </div>
             ))}
           </div>
           <div className="mt-14 flex justify-center">
-            <WhatsAppButton className="px-8 py-4 text-base" label="立即開始第一步" trackLocation="services_footer_cta" />
+            <WhatsAppButton
+              className="px-8 py-4 text-base"
+              label="立即開始第一步"
+              trackLocation="services_footer_cta"
+            />
           </div>
         </div>
       </section>
