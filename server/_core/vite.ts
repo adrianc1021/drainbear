@@ -90,6 +90,7 @@ export async function setupVite(app: Express, server: Server) {
   app.use(vite.middlewares);
   app.use("*", async (req, res, next) => {
     const url = req.originalUrl;
+    const pathname = normalizePath(url.split("?")[0] || "/");
 
     try {
       const clientTemplate = path.resolve(
@@ -106,10 +107,10 @@ export async function setupVite(app: Express, server: Server) {
         `src="/src/main.tsx?v=${nanoid()}"`
       );
       const page = await vite.transformIndexHtml(url, template);
-      const isKnownRoute = isKnownPublicRoute(req.path);
+      const isKnownRoute = isKnownPublicRoute(pathname);
       const statusCode = isKnownRoute ? 200 : 404;
 
-      if (normalizePath(req.path) === "/thanks") {
+      if (pathname === "/thanks") {
         res.set("X-Robots-Tag", "noindex, nofollow");
       } else if (!isKnownRoute) {
         res.set("X-Robots-Tag", "noindex, follow");
@@ -144,7 +145,8 @@ export function serveStatic(app: Express) {
   );
 
   app.use("*", (req, res) => {
-    const pathname = normalizePath(req.path);
+    const pathname = normalizePath(req.originalUrl.split("?")[0] || "/");
+
     const isKnownRoute = isKnownPublicRoute(pathname);
 
     if (pathname === "/thanks") {
