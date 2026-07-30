@@ -69,8 +69,13 @@ export default function SEO({
     document.title = title;
     setMeta("name", "description", description);
     if (keywords) setMeta("name", "keywords", keywords);
-    setMeta("name", "robots", noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large");
-    setCanonical(url);
+    setMeta(
+      "name",
+      "robots",
+      noindex
+        ? "noindex, follow"
+        : "index, follow, max-image-preview:large"
+    ); setCanonical(url);
     setMeta("property", "og:title", title);
     setMeta("property", "og:description", description);
     setMeta("property", "og:url", url);
