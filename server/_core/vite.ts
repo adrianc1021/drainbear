@@ -64,6 +64,15 @@ function isKnownPublicRoute(urlPath: string) {
   return false;
 }
 
+function getPrerenderFilePath(distPath: string, urlPath: string) {
+  const pathname = normalizePath(urlPath);
+
+  const relativePath =
+    pathname === "/" ? "index.html" : `${pathname.slice(1)}.html`;
+
+  return path.resolve(distPath, "..", "prerender", relativePath);
+}
+
 export async function setupVite(app: Express, server: Server) {
   const serverOptions = {
     middlewareMode: true,
@@ -106,10 +115,7 @@ export async function setupVite(app: Express, server: Server) {
         res.set("X-Robots-Tag", "noindex, follow");
       }
 
-      res
-        .status(statusCode)
-        .set({ "Content-Type": "text/html" })
-        .end(page);
+      res.status(statusCode).set({ "Content-Type": "text/html" }).end(page);
     } catch (e) {
       vite.ssrFixStacktrace(e as Error);
       next(e);
@@ -122,28 +128,43 @@ export function serveStatic(app: Express) {
     process.env.NODE_ENV === "development"
       ? path.resolve(import.meta.dirname, "../..", "dist", "public")
       : path.resolve(import.meta.dirname, "public");
+
   if (!fs.existsSync(distPath)) {
     console.error(
       `Could not find the build directory: ${distPath}, make sure to build the client first`
     );
   }
 
-  app.use(express.static(distPath));
+  // index:false 防止 Express 對首頁自動回傳原本的 SPA index.html。
+  // 首頁需要交由下面的 handler 回傳預渲染版本。
+  app.use(
+    express.static(distPath, {
+      index: false,
+    })
+  );
 
-  // fall through to index.html if the file doesn't exist
-// React SPA fallback：只讓真正存在的公開頁面回傳200
-app.use("*", (req, res) => {
-  const pathname = normalizePath(req.path);
-  const isKnownRoute = isKnownPublicRoute(pathname);
+  app.use("*", (req, res) => {
+    const pathname = normalizePath(req.path);
+    const isKnownRoute = isKnownPublicRoute(pathname);
 
-  if (pathname === "/thanks") {
-    res.set("X-Robots-Tag", "noindex, nofollow");
-  } else if (!isKnownRoute) {
-    res.set("X-Robots-Tag", "noindex, follow");
-  }
+    if (pathname === "/thanks") {
+      res.set("X-Robots-Tag", "noindex, nofollow");
+    } else if (!isKnownRoute) {
+      res.set("X-Robots-Tag", "noindex, follow");
+    }
 
-  res
-    .status(isKnownRoute ? 200 : 404)
-    .sendFile(path.resolve(distPath, "index.html"));
-});
+    if (isKnownRoute && pathname !== "/thanks") {
+      const prerenderFile = getPrerenderFilePath(distPath, pathname);
+
+      if (fs.existsSync(prerenderFile)) {
+        return res.status(200).sendFile(prerenderFile);
+      }
+
+      console.warn(`Prerendered HTML not found for ${pathname}`);
+    }
+
+    return res
+      .status(isKnownRoute ? 200 : 404)
+      .sendFile(path.resolve(distPath, "index.html"));
+  });
 }
