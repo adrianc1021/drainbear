@@ -8,12 +8,19 @@ import { MessageCircle, X, ArrowRight } from "lucide-react";
 import { waLink } from "@/lib/contact";
 import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
 
-const LOGO = "https://res.cloudinary.com/pgjztf2p/image/upload/v1785314740/A_pure_black_and_white_vector_mascot_logo_of_a_con-1785146902762_k8ruvx.jpg";
+const LOGO =
+  "https://res.cloudinary.com/pgjztf2p/image/upload/v1785314740/A_pure_black_and_white_vector_mascot_logo_of_a_con-1785146902762_k8ruvx.jpg";
 
 const QUICK_TOPICS = [
   { label: "坐廁 / 馬桶淤塞", msg: "你好，我屋企坐廁塞咗，想查詢通渠報價。" },
-  { label: "廚房 / 企缸去水慢", msg: "你好，我想查詢廚房鋅盤或企缸去水慢嘅通渠報價。" },
-  { label: "食肆 / 商業通渠", msg: "你好，我想查詢食肆或商業場所嘅通渠服務報價。" },
+  {
+    label: "廚房 / 企缸去水慢",
+    msg: "你好，我想查詢廚房鋅盤或企缸去水慢嘅通渠報價。",
+  },
+  {
+    label: "食肆 / 商業通渠",
+    msg: "你好，我想查詢食肆或商業場所嘅通渠服務報價。",
+  },
   { label: "其他渠務問題", msg: "你好，我想查詢通渠服務報價。" },
 ];
 
@@ -42,15 +49,22 @@ export default function WhatsAppWidget() {
         role="dialog"
         aria-label="WhatsApp 即時查詢"
         aria-hidden={!open}
+        inert={!open}
       >
         {/* 頂部 */}
         <div className="flex items-center gap-3 bg-navy px-5 py-4">
           <div className="relative">
-            <img src={LOGO} alt="通渠熊 DrainBear" className="h-10 w-10 rounded-full bg-white p-1" />
+            <img
+              src={LOGO}
+              alt="通渠熊 DrainBear"
+              className="h-10 w-10 rounded-full bg-white p-1"
+            />
             <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-navy bg-wagreen" />
           </div>
           <div className="flex-1">
-            <div className="font-display text-sm font-bold text-white">白熊師傅</div>
+            <div className="font-display text-sm font-bold text-white">
+              白熊師傅
+            </div>
             <div className="text-xs text-wagreen">在線・通常 1 分鐘內回覆</div>
           </div>
           <button
@@ -71,7 +85,7 @@ export default function WhatsAppWidget() {
 
         {/* 快速主題 */}
         <div className="space-y-2 px-5 py-4">
-          {QUICK_TOPICS.map((t) => (
+          {QUICK_TOPICS.map(t => (
             <a
               key={t.label}
               href={waLink(t.msg)}
@@ -84,7 +98,10 @@ export default function WhatsAppWidget() {
               className="btn-smooth group flex items-center justify-between rounded-lg border border-border bg-white px-4 py-2.5 text-sm font-medium text-navy hover:border-wagreen/50 hover:bg-wagreen/5"
             >
               {t.label}
-              <ArrowRight className="h-3.5 w-3.5 text-wagreen opacity-0 transition-opacity duration-150 group-hover:opacity-100" strokeWidth={2.5} />
+              <ArrowRight
+                className="h-3.5 w-3.5 text-wagreen opacity-0 transition-opacity duration-150 group-hover:opacity-100"
+                strokeWidth={2.5}
+              />
             </a>
           ))}
           <a
@@ -118,12 +135,18 @@ export default function WhatsAppWidget() {
         )}
         <span
           className="relative flex items-center justify-center transition-transform duration-200"
-          style={{ transform: open ? "rotate(90deg)" : "rotate(0deg)", transitionTimingFunction: "cubic-bezier(0.23, 1, 0.32, 1)" }}
+          style={{
+            transform: open ? "rotate(90deg)" : "rotate(0deg)",
+            transitionTimingFunction: "cubic-bezier(0.23, 1, 0.32, 1)",
+          }}
         >
           {open ? (
             <X className="h-5 w-5 md:h-6 md:w-6" strokeWidth={2.5} />
           ) : (
-            <MessageCircle className="h-5 w-5 text-wagreen md:h-6 md:w-6 md:text-white" strokeWidth={2.4} />
+            <MessageCircle
+              className="h-5 w-5 text-wagreen md:h-6 md:w-6 md:text-white"
+              strokeWidth={2.4}
+            />
           )}
         </span>
       </button>

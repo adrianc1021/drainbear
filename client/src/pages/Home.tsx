@@ -70,18 +70,17 @@ const CASE_STUDIES = [
 ];
 
 const HERO_IMG =
-  "https://res.cloudinary.com/pgjztf2p/image/upload/v1785149281/copy_of_a_portrait_of_a_young_handsome_asian_male_plumbin-1785149206310_mmq04g.png";
+  "https://res.cloudinary.com/pgjztf2p/image/upload/f_auto,q_auto:good,c_limit,w_768/v1785149281/copy_of_a_portrait_of_a_young_handsome_asian_male_plumbin-1785149206310_mmq04g.png";
 const WHY_IMG =
-  "https://res.cloudinary.com/pgjztf2p/image/upload/v1785149473/why_sv7tw9.png";
+  "https://res.cloudinary.com/pgjztf2p/image/upload/f_auto,q_auto:good,c_limit,w_1200/v1785149473/why_sv7tw9.png";
 const IMG_RESIDENTIAL =
-  "https://res.cloudinary.com/pgjztf2p/image/upload/v1785149431/home_sdyxhb.png";
+  "https://res.cloudinary.com/pgjztf2p/image/upload/f_auto,q_auto:good,c_limit,w_640/v1785149431/home_sdyxhb.png";
 const IMG_COMMERCIAL =
-  "https://res.cloudinary.com/pgjztf2p/image/upload/v1785149532/bar_nccfy4.png";
+  "https://res.cloudinary.com/pgjztf2p/image/upload/f_auto,q_auto:good,c_limit,w_640/v1785149532/bar_nccfy4.png";
 const IMG_HYDROJET =
-  "https://res.cloudinary.com/pgjztf2p/image/upload/v1785149597/2_edlrhp.png";
+  "https://res.cloudinary.com/pgjztf2p/image/upload/f_auto,q_auto:good,c_limit,w_640/v1785149597/2_edlrhp.png";
 const IMG_CCTV =
-  "https://res.cloudinary.com/pgjztf2p/image/upload/v1785149606/3_olpvyt.png";
-
+  "https://res.cloudinary.com/pgjztf2p/image/upload/f_auto,q_auto:good,c_limit,w_640/v1785149606/3_olpvyt.png";
 const ADVANTAGES = [
   { icon: BadgeCheck, title: "不成功不收費", desc: "明碼實價，絕不隱藏" },
   { icon: Clock, title: "24/7 特快到達", desc: "全天候港九極速救亡" },
@@ -253,6 +252,11 @@ export default function Home() {
               <img
                 src={HERO_IMG}
                 alt="通渠熊專業師傅配備高壓通渠設備"
+                width={768}
+                height={768}
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
                 className="w-full rounded-2xl object-cover shadow-[0_24px_64px_rgba(11,19,43,0.22)]"
               />
               <div className="absolute -bottom-5 -left-5 hidden items-center gap-3 rounded-lg bg-white px-5 py-4 shadow-[0_12px_32px_rgba(11,19,43,0.15)] md:flex">
@@ -390,6 +394,10 @@ export default function Home() {
             <img
               src={WHY_IMG}
               alt="通渠熊團隊使用 CCTV 檢測設備"
+              width={1200}
+              height={896}
+              loading="lazy"
+              decoding="async"
               className="relative w-full rounded-2xl object-cover shadow-[0_20px_56px_rgba(11,19,43,0.18)]"
             />
             <div className="absolute -bottom-6 left-6 right-6 flex items-center justify-between rounded-lg bg-white/95 px-6 py-4 shadow-[0_12px_32px_rgba(11,19,43,0.15)] backdrop-blur md:left-10 md:right-auto md:gap-10">
@@ -447,8 +455,11 @@ export default function Home() {
                   <img
                     src={s.img}
                     alt={`${s.title}｜${s.sub}`}
+                    width={1376}
+                    height={768}
                     className="h-full w-full object-cover transition-transform duration-500 ease-out hover:scale-105"
                     loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 <div className="flex flex-1 flex-col p-6">
