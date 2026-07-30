@@ -150,38 +150,63 @@ function vitePluginManusDebugCollector(): Plugin {
   };
 }
 
-const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector()];
+export default defineConfig(({ command }) => {
+  const isProductionBuild = command === "build";
 
-export default defineConfig({
-  plugins,
-  resolve: {
-    alias: {
-      "@": path.resolve(import.meta.dirname, "client", "src"),
-      "@shared": path.resolve(import.meta.dirname, "shared"),
-      "@assets": path.resolve(import.meta.dirname, "attached_assets"),
-    },
-  },
-  envDir: path.resolve(import.meta.dirname),
-  root: path.resolve(import.meta.dirname, "client"),
-  publicDir: path.resolve(import.meta.dirname, "client", "public"),
-  build: {
-    outDir: path.resolve(import.meta.dirname, "dist/public"),
-    emptyOutDir: true,
-  },
-  server: {
-    host: true,
-    allowedHosts: [
-      ".manuspre.computer",
-      ".manus.computer",
-      ".manus-asia.computer",
-      ".manuscomputer.ai",
-      ".manusvm.computer",
-      "localhost",
-      "127.0.0.1",
+  return {
+    plugins: [
+      react(),
+      tailwindcss(),
+
+      // 以下工具只供本機開發使用，不可進入正式網站
+      ...(!isProductionBuild
+        ? [
+            jsxLocPlugin(),
+            vitePluginManusRuntime(),
+            vitePluginManusDebugCollector(),
+          ]
+        : []),
     ],
-    fs: {
-      strict: true,
-      deny: ["**/.*"],
+
+    resolve: {
+      alias: {
+        "@": path.resolve(import.meta.dirname, "client", "src"),
+        "@shared": path.resolve(import.meta.dirname, "shared"),
+        "@assets": path.resolve(import.meta.dirname, "attached_assets"),
+      },
     },
-  },
+
+    envDir: path.resolve(import.meta.dirname),
+    root: path.resolve(import.meta.dirname, "client"),
+    publicDir: path.resolve(
+      import.meta.dirname,
+      "client",
+      "public"
+    ),
+
+    build: {
+      outDir: path.resolve(
+        import.meta.dirname,
+        "dist/public"
+      ),
+      emptyOutDir: true,
+    },
+
+    server: {
+      host: true,
+      allowedHosts: [
+        ".manuspre.computer",
+        ".manus.computer",
+        ".manus-asia.computer",
+        ".manuscomputer.ai",
+        ".manusvm.computer",
+        "localhost",
+        "127.0.0.1",
+      ],
+      fs: {
+        strict: true,
+        deny: ["**/.*"],
+      },
+    },
+  };
 });
