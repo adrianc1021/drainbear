@@ -17,13 +17,19 @@ import {
 import { WhatsAppButton } from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { PHONE_DISPLAY, PHONE_TEL, waLink } from "@/lib/contact";
+import {
+  useContactSettings,
+  useSiteSettings,
+} from "@/contexts/SiteSettingsContext";
 import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
 import { getDistrict } from "@/lib/districtData";
 import NotFound from "@/pages/NotFound";
 
 export default function District() {
-  const { slug } = useParams<{ slug: string }>();
+  const {slug} = useParams<{slug: string}>();
+  const {phoneDisplay, phoneHref, whatsappHref} =
+    useContactSettings();
+  const {settings} = useSiteSettings();
   const d = getDistrict(slug || "");
   if (!d) return <NotFound />;
 
@@ -38,7 +44,11 @@ export default function District() {
       "@context": "https://schema.org",
       "@type": "Service",
       serviceType: `${d.name}24 小時通渠服務`,
-      provider: { "@type": "Plumber", name: "通渠熊 DrainBear", telephone: "+85295588260" },
+      provider: {
+        "@type": "Plumber",
+        name: settings.businessName,
+        telephone: settings.phoneE164,
+      },
       areaServed: [d.name, ...d.nearby].map((n) => ({ "@type": "Place", name: n })),
     },
     {
@@ -52,7 +62,7 @@ export default function District() {
     },
   ];
 
-  const waDistrict = waLink(`你好，我喺${d.name}，想查詢通渠服務報價。`);
+  const waDistrict = whatsappHref(`你好，我喺${d.name}，想查詢通渠服務報價。`);
 
   return (
     <div>
@@ -93,12 +103,12 @@ export default function District() {
                 WhatsApp {d.name}師傅
               </a>
               <a
-                href={PHONE_TEL}
+                href={phoneHref}
                 onClick={() => trackCTA("phone", "district_hero", d.name)}
                 className="btn-smooth inline-flex items-center justify-center gap-2 rounded-lg bg-navy px-7 py-3.5 text-base font-bold text-white hover:bg-navy-light"
               >
                 <Phone className="h-5 w-5" strokeWidth={2.2} />
-                {PHONE_DISPLAY}
+                {phoneDisplay}
               </a>
             </div>
             <p className="mt-4 text-xs text-muted-foreground">
@@ -254,12 +264,12 @@ export default function District() {
                 WhatsApp 即時報價
               </a>
               <a
-                href={PHONE_TEL}
+                href={phoneHref}
                 onClick={() => trackCTA("phone", "district_footer_cta", d.name)}
                 className="btn-smooth inline-flex items-center gap-2 rounded-lg border border-white/25 bg-white/5 px-7 py-4 text-base font-bold text-white hover:bg-white hover:text-navy"
               >
                 <Phone className="h-[18px] w-[18px]" strokeWidth={2.2} />
-                {PHONE_DISPLAY}
+                {phoneDisplay}
               </a>
             </div>
           </div>

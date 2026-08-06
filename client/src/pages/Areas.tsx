@@ -23,7 +23,10 @@ import { WhatsAppButton } from "@/components/Layout";
 import HongKongMap from "@/components/HongKongMap";
 import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact";
+import {
+  useContactSettings,
+  useSiteSettings,
+} from "@/contexts/SiteSettingsContext";
 import { trackCTA } from "@/lib/analytics";
 import { DISTRICTS, DISTRICT_SLUGS } from "@/lib/districtData";
 
@@ -96,7 +99,6 @@ const AREAS_JSONLD = {
   "@context": "https://schema.org",
   "@type": "Service",
   serviceType: "24 小時通渠服務",
-  provider: { "@type": "Plumber", name: "通渠熊 DrainBear", telephone: "+85295588260" },
   areaServed: ALL_DISTRICTS.map((d) => ({ "@type": "Place", name: d.district })),
 };
 
@@ -133,6 +135,17 @@ function DistrictPill({ name, highlighted }: { name: string; highlighted?: boole
 }
 
 export default function Areas() {
+  const {phoneDisplay, phoneHref} = useContactSettings();
+  const {settings} = useSiteSettings();
+
+  const areasJsonLd = {
+    ...AREAS_JSONLD,
+    provider: {
+      "@type": "Plumber",
+      name: settings.businessName,
+      telephone: settings.phoneE164,
+    },
+  };
   const [query, setQuery] = useState("");
   const [activeRegion, setActiveRegion] = useState(0);
   const [activeIdx, setActiveIdx] = useState(-1);
@@ -207,7 +220,7 @@ export default function Areas() {
         description="通渠熊 DrainBear 服務網絡覆蓋全港。無論您身處香港島(中環/銅鑼灣)、九龍(旺角/觀塘)、還是新界(沙田/荃灣/元朗)，我們的通渠車隊都能在 1 小時內特快到達。各區設有駐場通渠師傅，24小時緊急救亡。"
         path="/areas"
         keywords="通渠服務地區, 港島通渠, 九龍通渠, 新界通渠, 中環通渠, 旺角通渠, 深水埗通渠, 銅鑼灣通渠, 北角通渠, 荃灣通渠, 元朗通渠, 屯門通渠, 將軍澳通渠, 沙田通渠, 觀塘通渠, 24小時通渠"
-        jsonLd={AREAS_JSONLD}
+        jsonLd={areasJsonLd}
         breadcrumbs={AREAS_CRUMBS}
       />
       <Breadcrumbs items={AREAS_CRUMBS} />
@@ -285,7 +298,7 @@ export default function Areas() {
                     })
                   ) : (
                     <div className="px-4 py-4 text-sm text-muted-foreground">
-                      未找到「{query}」？我們仍然覆蓋全港，請直接致電 {PHONE_DISPLAY} 確認。
+                      未找到「{query}」？我們仍然覆蓋全港，請直接致電 {phoneDisplay} 確認。
                     </div>
                   )}
                 </div>
@@ -468,12 +481,12 @@ export default function Areas() {
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <WhatsAppButton className="px-8 py-4 text-base" label="查詢我的地區" trackLocation="areas_footer_cta" />
               <a
-                href={PHONE_TEL}
+                href={phoneHref}
                 onClick={() => trackCTA("phone", "areas_footer_cta")}
                 className="btn-smooth inline-flex items-center gap-2 rounded-lg border border-white/25 bg-white/5 px-7 py-4 text-base font-bold text-white hover:bg-white hover:text-navy"
               >
                 <Phone className="h-[18px] w-[18px]" strokeWidth={2.2} />
-                {PHONE_DISPLAY}
+                {phoneDisplay}
               </a>
             </div>
           </div>
