@@ -22,7 +22,7 @@ import { WhatsAppButton } from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { BUSINESS_ID, SITE_URL } from "@/config/site";
-import { waLink } from "@/lib/contact";
+import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
 
 const SERVICES_CRUMBS = [
@@ -171,6 +171,7 @@ const STEPS = [
 ];
 
 export default function Services() {
+  const {whatsappHref} = useContactSettings();
   return (
     <div>
       <SEO
@@ -238,7 +239,7 @@ export default function Services() {
                   {s.desc}
                 </p>
                 <a
-                  href={waLink(s.wa)}
+                  href={whatsappHref(s.wa)}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => {
