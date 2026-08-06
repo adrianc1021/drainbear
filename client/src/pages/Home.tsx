@@ -30,7 +30,7 @@ import {
 } from "lucide-react";
 import { WhatsAppButton } from "@/components/Layout";
 import { BLOG_POSTS } from "@/lib/blogData";
-import SEO from "@/components/SEO";
+import CmsPageSEO from "@/components/CmsPageSEO";
 import {
   BUSINESS_ID,
   BUSINESS_NAME,
@@ -180,7 +180,7 @@ const HOME_JSONLD = {
 export default function Home() {
   return (
     <div>
-      <SEO
+      <CmsPageSEO
         title="通渠熊 DrainBear｜24小時通渠公司・全港特快上門・不成功不收費"
         description="香港通渠救星！通渠熊專營24小時緊急通渠服務。配備德國高壓水槍洗渠及CCTV照喉技術，專治塞廁所、廚房星盆去水慢、企缸淤塞、食肆隔油池及大廈沙井。全港九新界特快上門，報價後動工，不成功不收費。"
         path="/"

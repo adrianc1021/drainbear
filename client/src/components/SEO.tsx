@@ -64,6 +64,10 @@ export interface SEOProps {
   title: string;
   description: string;
   path: string;
+  canonicalUrl?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  imageAlt?: string;
   jsonLd?: object | object[];
   keywords?: string;
   image?: string;
@@ -79,6 +83,10 @@ export default function SEO({
   title,
   description,
   path,
+  canonicalUrl,
+  ogTitle,
+  ogDescription,
+  imageAlt,
   jsonLd,
   keywords,
   image,
@@ -89,7 +97,12 @@ export default function SEO({
   useEffect(() => {
     const cleanPath = path.split(/[?#]/)[0] || "/";
     const pageUrl = absoluteUrl(cleanPath);
+    const canonicalPageUrl = canonicalUrl
+      ? absoluteUrl(canonicalUrl)
+      : pageUrl;
     const socialImage = absoluteUrl(image || DEFAULT_OG_IMAGE);
+    const socialTitle = ogTitle || title;
+    const socialDescription = ogDescription || description;
 
     document.documentElement.lang = "zh-Hant-HK";
     document.title = title;
@@ -114,20 +127,24 @@ export default function SEO({
       noindex ? "noindex, follow" : "index, follow, max-image-preview:large"
     );
 
-    setCanonical(pageUrl);
+    setCanonical(canonicalPageUrl);
 
-    setMeta("property", "og:title", title);
-    setMeta("property", "og:description", description);
-    setMeta("property", "og:url", pageUrl);
+    setMeta("property", "og:title", socialTitle);
+    setMeta("property", "og:description", socialDescription);
+    setMeta("property", "og:url", canonicalPageUrl);
     setMeta("property", "og:type", type);
     setMeta("property", "og:site_name", SITE_NAME);
     setMeta("property", "og:locale", "zh_HK");
     setMeta("property", "og:image", socialImage);
-    setMeta("property", "og:image:alt", `${BUSINESS_NAME}｜香港專業通渠服務`);
+    setMeta(
+      "property",
+      "og:image:alt",
+      imageAlt || `${BUSINESS_NAME}｜香港專業通渠服務`
+    );
 
     setMeta("name", "twitter:card", "summary_large_image");
-    setMeta("name", "twitter:title", title);
-    setMeta("name", "twitter:description", description);
+    setMeta("name", "twitter:title", socialTitle);
+    setMeta("name", "twitter:description", socialDescription);
     setMeta("name", "twitter:image", socialImage);
 
     // 全站統一商家實體。
@@ -188,6 +205,10 @@ export default function SEO({
     title,
     description,
     path,
+    canonicalUrl,
+    ogTitle,
+    ogDescription,
+    imageAlt,
     jsonLd,
     keywords,
     image,
