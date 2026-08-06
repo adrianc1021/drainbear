@@ -7,6 +7,7 @@ import Layout from "./components/Layout";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { EstimateProvider } from "./contexts/EstimateContext";
 import { initAnalytics } from "./lib/analytics";
+import { SiteSettingsProvider } from "./contexts/SiteSettingsContext";
 
 initAnalytics();
 import Home from "./pages/Home";
@@ -49,14 +50,16 @@ function Router() {
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider defaultTheme="light">
-        <EstimateProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Router />
-          </TooltipProvider>
-        </EstimateProvider>
-      </ThemeProvider>
+      <SiteSettingsProvider>
+        <ThemeProvider defaultTheme="light">
+          <EstimateProvider>
+            <TooltipProvider>
+              <Toaster />
+              <Router />
+            </TooltipProvider>
+          </EstimateProvider>
+        </ThemeProvider>
+      </SiteSettingsProvider>
     </ErrorBoundary>
   );
 }
