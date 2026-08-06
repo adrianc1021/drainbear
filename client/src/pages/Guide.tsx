@@ -19,7 +19,7 @@ import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import PriceCalculator from "@/components/PriceCalculator";
 import { WhatsAppButton } from "@/components/Layout";
-import { waLink, PHONE_DISPLAY, PHONE_TEL } from "@/lib/contact";
+import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
 
 const CRUMBS = [
@@ -125,6 +125,8 @@ const HOWTO_JSONLD = {
 };
 
 export default function Guide() {
+  const {phoneDisplay, phoneHref, whatsappHref} =
+    useContactSettings();
   return (
     <div className="bg-white">
       <SEO
@@ -152,11 +154,11 @@ export default function Guide() {
             <div className="mt-6 flex flex-wrap items-center gap-3">
               <WhatsAppButton label="WhatsApp 免費報價" className="px-6 py-3" trackLocation="guide_hero" />
               <a
-                href={PHONE_TEL}
+                href={phoneHref}
                 onClick={() => trackCTA("phone", "guide_hero")}
                 className="btn-smooth inline-flex items-center gap-2 rounded-lg border-2 border-navy/15 bg-white px-6 py-3 text-sm font-bold text-navy hover:border-navy/30"
               >
-                {PHONE_DISPLAY}
+                {phoneDisplay}
               </a>
             </div>
           </div>
@@ -280,7 +282,7 @@ export default function Guide() {
           </div>
           <div className="mt-10 flex justify-center">
             <a
-              href={waLink("你好，我想影相俾師傅估價，麻煩晒。")}
+              href={whatsappHref("你好，我想影相俾師傅估價，麻煩晒。")}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => {
@@ -388,11 +390,11 @@ export default function Guide() {
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
               <WhatsAppButton label="WhatsApp 免費報價" className="px-7 py-3.5" trackLocation="guide_footer_cta" />
               <a
-                href={PHONE_TEL}
+                href={phoneHref}
                 onClick={() => trackCTA("phone", "guide_footer_cta")}
                 className="btn-smooth inline-flex items-center gap-2 rounded-lg border border-white/25 px-7 py-3.5 text-sm font-bold text-white hover:bg-white/10"
               >
-                致電 {PHONE_DISPLAY}
+                致電 {phoneDisplay}
               </a>
             </div>
           </div>
