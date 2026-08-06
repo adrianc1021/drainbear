@@ -5,7 +5,7 @@
  */
 import { useEffect, useState } from "react";
 import { MessageCircle, X, ArrowRight } from "lucide-react";
-import { waLink } from "@/lib/contact";
+import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
 
 const LOGO =
@@ -27,6 +27,7 @@ const QUICK_TOPICS = [
 export default function WhatsAppWidget() {
   const [open, setOpen] = useState(false);
   const [pulse, setPulse] = useState(true);
+  const {whatsappHref} = useContactSettings();
 
   // 開啟後停止呼吸提示動畫
   useEffect(() => {
@@ -88,7 +89,7 @@ export default function WhatsAppWidget() {
           {QUICK_TOPICS.map(t => (
             <a
               key={t.label}
-              href={waLink(t.msg)}
+              href={whatsappHref(t.msg)}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => {
@@ -105,7 +106,7 @@ export default function WhatsAppWidget() {
             </a>
           ))}
           <a
-            href={waLink("你好，我想查詢通渠服務報價。")}
+            href={whatsappHref("你好，我想查詢通渠服務報價。")}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => {

@@ -6,12 +6,11 @@
 import { ReactNode, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Menu, X, MessageCircle, Phone, Clock, Star, Award, ShieldCheck, ArrowUp } from "lucide-react";
-import { PHONE_DISPLAY, PHONE_TEL, WA_DEFAULT } from "@/lib/contact";
-import { waLink } from "@/lib/contact";
 import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
 import { useEstimate } from "@/contexts/EstimateContext";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
 import { useReveal } from "@/hooks/useReveal";
+import { useContactSettings } from "@/contexts/SiteSettingsContext";
 
 const LOGO = "https://res.cloudinary.com/pgjztf2p/image/upload/v1785147037/LOGO_dmyalo.png";
 
@@ -33,9 +32,11 @@ export function WhatsAppButton({
   label?: string;
   trackLocation?: string;
 }) {
+  const {whatsappDefaultHref} = useContactSettings();
+
   return (
     <a
-      href={WA_DEFAULT}
+      href={whatsappDefaultHref}
       target="_blank"
       rel="noopener noreferrer"
       onClick={() => {
@@ -61,6 +62,12 @@ function MobileCTABar() {
   const [hidden, setHidden] = useState(false);
   const lastY = useRef(0);
   const { estimate } = useEstimate();
+  const {
+    phoneDisplay,
+    phoneHref,
+    whatsappDefaultHref,
+    whatsappHref,
+  } = useContactSettings();
 
   useEffect(() => {
     const onScroll = () => {
@@ -78,7 +85,9 @@ function MobileCTABar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const waHref = estimate ? waLink(estimate.waMessage) : WA_DEFAULT;
+  const waHref = estimate
+    ? whatsappHref(estimate.waMessage)
+    : whatsappDefaultHref;
   const waTitle = estimate ? "發送估價詳情" : "WhatsApp 報價";
   const waSub = estimate
     ? `已附上估價 HK$${estimate.low.toLocaleString()}–${estimate.high.toLocaleString()}`
@@ -123,7 +132,7 @@ function MobileCTABar() {
           </span>
         </a>
         <a
-          href={PHONE_TEL}
+          href={phoneHref}
           onClick={() => trackCTA("phone", "mobile_bar")}
           className="btn-smooth flex min-h-[52px] flex-1 items-center justify-center gap-2 rounded-lg bg-navy px-3 py-2.5 text-white active:scale-[0.97]"
         >
@@ -269,6 +278,8 @@ const FOOTER_AREAS = [
 ];
 
 function Footer() {
+  const {phoneDisplay, phoneHref} = useContactSettings();
+
   return (
     <footer className="bg-navy text-white">
       {/* 數據列 */}
@@ -326,11 +337,11 @@ function Footer() {
       </div>
       <div className="border-t border-white/10 py-5 text-center text-xs text-white/40">
         <a
-          href={PHONE_TEL}
+          href={phoneHref}
           onClick={() => trackCTA("phone", "footer")}
           className="btn-smooth inline-flex min-h-[44px] items-center px-2 hover:text-white"
         >
-          24 小時熱線：{PHONE_DISPLAY}
+          24 小時熱線：{phoneDisplay}
         </a>
         <span className="mx-2">|</span>© {new Date().getFullYear()} 通渠熊 DrainBear Limited.
         版權所有。專業排水工程團隊，香港島、九龍、新界全天候服務。
