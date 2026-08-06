@@ -30,7 +30,7 @@ import {
 } from "lucide-react";
 import { WhatsAppButton } from "@/components/Layout";
 import { BLOG_POSTS } from "@/lib/blogData";
-import SEO from "@/components/SEO";
+import CmsPageSEO from "@/components/CmsPageSEO";
 import {
   BUSINESS_ID,
   BUSINESS_NAME,
@@ -38,7 +38,7 @@ import {
   SITE_URL,
   WEBSITE_ID,
 } from "@/config/site";
-import { PHONE_DISPLAY, PHONE_TEL, waLink } from "@/lib/contact";
+import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
 
 /** 真實工程案例（實際工程紀錄，非客戶評論） */
@@ -178,9 +178,11 @@ const HOME_JSONLD = {
 };
 
 export default function Home() {
+  const {phoneDisplay, phoneHref, whatsappHref} =
+    useContactSettings();
   return (
     <div>
-      <SEO
+      <CmsPageSEO
         title="通渠熊 DrainBear｜24小時通渠公司・全港特快上門・不成功不收費"
         description="香港通渠救星！通渠熊專營24小時緊急通渠服務。配備德國高壓水槍洗渠及CCTV照喉技術，專治塞廁所、廚房星盆去水慢、企缸淤塞、食肆隔油池及大廈沙井。全港九新界特快上門，報價後動工，不成功不收費。"
         path="/"
@@ -216,7 +218,7 @@ export default function Home() {
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
               <a
-                href={waLink("你好，我想立即獲取通渠報價。")}
+                href={whatsappHref("你好，我想立即獲取通渠報價。")}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => {
@@ -229,7 +231,7 @@ export default function Home() {
                 WhatsApp 免費報價
               </a>
               <a
-                href={PHONE_TEL}
+                href={phoneHref}
                 onClick={() => trackCTA("phone", "home_hero")}
                 className="btn-smooth inline-flex items-center justify-center gap-2 rounded-lg bg-navy px-6 py-3.5 text-base font-bold text-white shadow-[0_8px_24px_rgba(11,19,43,0.25)] hover:bg-navy-light hover:shadow-[0_12px_32px_rgba(11,19,43,0.3)]"
               >
@@ -237,7 +239,7 @@ export default function Home() {
                   className="h-4.5 w-4.5 h-[18px] w-[18px]"
                   strokeWidth={2.2}
                 />
-                {PHONE_DISPLAY}
+                {phoneDisplay}
               </a>
             </div>
             <p className="mt-5 text-xs text-muted-foreground">
@@ -476,7 +478,7 @@ export default function Home() {
                     {s.desc}
                   </p>
                   <a
-                    href={waLink(s.wa)}
+                    href={whatsappHref(s.wa)}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => {
@@ -679,7 +681,7 @@ export default function Home() {
               trackLocation="home_footer_cta"
             />
             <a
-              href={PHONE_TEL}
+              href={phoneHref}
               onClick={() => trackCTA("phone", "home_footer_cta")}
               className="btn-smooth inline-flex items-center justify-center gap-2 rounded-lg border border-white/20 bg-white/5 px-7 py-4 text-base font-bold text-white hover:border-white/45 hover:bg-white hover:text-navy"
             >
@@ -687,7 +689,7 @@ export default function Home() {
                 className="h-4.5 w-4.5 h-[18px] w-[18px]"
                 strokeWidth={2.2}
               />
-              {PHONE_DISPLAY}
+              {phoneDisplay}
             </a>
           </div>
           <p className="mt-5 text-xs text-white/45">

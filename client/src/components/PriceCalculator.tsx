@@ -21,7 +21,7 @@ import {
   UtensilsCrossed,
   Waves,
 } from "lucide-react";
-import { waLink } from "@/lib/contact";
+import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
 import { useEstimate } from "@/contexts/EstimateContext";
 import { trpc } from "@/lib/trpc";
@@ -62,6 +62,7 @@ function roundTo50(n: number) {
 }
 
 export default function PriceCalculator() {
+  const {whatsappHref} = useContactSettings();
   const [loc, setLoc] = useState<string | null>(null);
   const [bld, setBld] = useState<string | null>(null);
   const [time, setTime] = useState<string>("day");
@@ -202,7 +203,7 @@ export default function PriceCalculator() {
                 {result.t.note ? `（${result.t.note}）` : ""}
               </p>
               <a
-                href={waLink(waMsg!)}
+                href={whatsappHref(waMsg!)}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => {

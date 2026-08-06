@@ -9,7 +9,7 @@ import { useLocation } from "wouter";
 import { ArrowRight, Clock, MapPin, MessageCircle, X } from "lucide-react";
 import { MAP_DISTRICTS, MAP_VIEWBOX, type MapDistrict } from "@/lib/hkDistrictPaths";
 import { getDistrict } from "@/lib/districtData";
-import { waLink } from "@/lib/contact";
+import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
 
 const REGION_LABEL: Record<MapDistrict["region"], string> = {
@@ -57,6 +57,7 @@ const REGION_FILL: Record<MapDistrict["region"], string> = {
 };
 
 export default function HongKongMap() {
+  const {whatsappHref} = useContactSettings();
   const [, navigate] = useLocation();
   const [hovered, setHovered] = useState<string | null>(null);
   const [selected, setSelected] = useState<MapDistrict | null>(null);
@@ -230,7 +231,7 @@ export default function HongKongMap() {
               </button>
             ) : (
               <a
-                href={waLink(`你好，我喺${selected.name}，想查詢通渠服務報價。`)}
+                href={whatsappHref(`你好，我喺${selected.name}，想查詢通渠服務報價。`)}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => {

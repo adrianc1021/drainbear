@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+
+# Sanity build output
+dist/
+.sanity/
+
+# Local environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Logs and temporary files
+*.log
+.DS_Store

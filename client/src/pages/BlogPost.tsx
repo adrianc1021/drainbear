@@ -8,6 +8,7 @@ import { CalendarDays, Clock, ArrowLeft, ArrowRight, Lightbulb } from "lucide-re
 import { BLOG_POSTS, getPostBySlug } from "@/lib/blogData";
 import { WhatsAppButton } from "@/components/Layout";
 import SEO from "@/components/SEO";
+import {useSiteSettings} from "@/contexts/SiteSettingsContext";
 
 function formatDate(iso: string) {
   const d = new Date(iso);
@@ -15,7 +16,8 @@ function formatDate(iso: string) {
 }
 
 export default function BlogPost() {
-  const { slug } = useParams<{ slug: string }>();
+  const {slug} = useParams<{slug: string}>();
+  const {settings} = useSiteSettings();
   const [, navigate] = useLocation();
   const post = getPostBySlug(slug ?? "");
 
@@ -34,9 +36,16 @@ export default function BlogPost() {
     description: post.excerpt,
     datePublished: post.date,
     keywords: post.keywords.join(","),
-    author: { "@type": "Organization", name: "通渠熊 DrainBear" },
-    publisher: { "@type": "Plumber", name: "通渠熊 DrainBear", telephone: "+85295588260" },
-    mainEntityOfPage: `https://drainbearhk.com/blog/${post.slug}`,
+    author: {
+      "@type": "Organization",
+      name: settings.businessName,
+    },
+    publisher: {
+      "@type": "Plumber",
+      name: settings.businessName,
+      telephone: settings.phoneE164,
+    },
+    mainEntityOfPage: `${settings.siteUrl}/blog/${post.slug}`,
   };
 
   return (

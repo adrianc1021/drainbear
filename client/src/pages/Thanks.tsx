@@ -22,7 +22,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { PHONE_DISPLAY, PHONE_TEL, WA_DEFAULT } from "@/lib/contact";
+import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import { trackCTA, trackWhatsAppOpen } from "@/lib/analytics";
 
 const NEXT_STEPS = [
@@ -73,6 +73,11 @@ const THANKS_FAQS = [
 
 export default function Thanks() {
   const tracked = useRef(false);
+  const {
+    phoneDisplay,
+    phoneHref,
+    whatsappDefaultHref,
+  } = useContactSettings();
 
   useEffect(() => {
     if (tracked.current) return;
@@ -105,7 +110,7 @@ export default function Thanks() {
           {/* 後備入口 */}
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <a
-              href={WA_DEFAULT}
+              href={whatsappDefaultHref}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackCTA("whatsapp", "thanks_retry")}
@@ -115,12 +120,12 @@ export default function Thanks() {
               未開啟到？再按一次
             </a>
             <a
-              href={PHONE_TEL}
+              href={phoneHref}
               onClick={() => trackCTA("phone", "thanks_fallback")}
               className="btn-smooth inline-flex items-center gap-2 rounded-lg bg-navy px-6 py-3 text-sm font-bold text-white hover:bg-navy-light"
             >
               <Phone className="h-4 w-4" strokeWidth={2.2} />
-              直接致電 {PHONE_DISPLAY}
+              直接致電 {phoneDisplay}
             </a>
           </div>
           <p className="mt-4 text-xs text-muted-foreground">
