@@ -124,11 +124,13 @@ async function prerender() {
         return Boolean(
           document.title &&
             canonical?.href &&
-            document.querySelector("#root")?.textContent?.trim()
+            document.querySelector("#root")?.textContent?.trim() &&
+            document.documentElement.dataset.seoReady === "true"
         );
       });
 
-      await page.waitForTimeout(500);
+      // SEO effect 已明確標記完成；短暫等待瀏覽器完成 DOM serialization。
+      await page.waitForTimeout(50);
 
       const html = await page.content();
       const outputPath = getOutputPath(route);

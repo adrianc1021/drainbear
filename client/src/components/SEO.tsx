@@ -3,15 +3,7 @@
  * 每頁獨立 title / description / canonical / Open Graph / JSON-LD
  */
 import { useEffect } from "react";
-import {
-  BUSINESS_ID,
-  BUSINESS_NAME,
-  DEFAULT_OG_IMAGE,
-  PHONE_E164,
-  SITE_NAME,
-  SITE_URL,
-  absoluteUrl,
-} from "@/config/site";
+import {useSiteSettings} from "@/contexts/SiteSettingsContext";
 
 function setMeta(attr: "name" | "property", key: string, content: string) {
   let element = document.head.querySelector<HTMLMetaElement>(
@@ -68,6 +60,7 @@ export interface SEOProps {
   ogTitle?: string;
   ogDescription?: string;
   imageAlt?: string;
+  contentReady?: boolean;
   jsonLd?: object | object[];
   keywords?: string;
   image?: string;
@@ -87,6 +80,7 @@ export default function SEO({
   ogTitle,
   ogDescription,
   imageAlt,
+  contentReady = true,
   jsonLd,
   keywords,
   image,
@@ -94,13 +88,42 @@ export default function SEO({
   breadcrumbs,
   noindex = false,
 }: SEOProps) {
+  const {
+    settings,
+    isLoading: isSiteSettingsLoading,
+  } = useSiteSettings();
+
   useEffect(() => {
+    const isSeoReady =
+      contentReady && !isSiteSettingsLoading;
+
+    if (!isSeoReady) {
+      document.documentElement.dataset.seoReady = "false";
+      return;
+    }
+
     const cleanPath = path.split(/[?#]/)[0] || "/";
-    const pageUrl = absoluteUrl(cleanPath);
+    const siteUrl = settings.siteUrl.replace(/\/+$/, "");
+
+    const toAbsoluteUrl = (value = "/") => {
+      if (/^https?:\/\//i.test(value)) return value;
+
+      const normalizedValue = value.startsWith("/")
+        ? value
+        : `/${value}`;
+
+      return new URL(normalizedValue, `${siteUrl}/`).toString();
+    };
+
+    const pageUrl = toAbsoluteUrl(cleanPath);
     const canonicalPageUrl = canonicalUrl
-      ? absoluteUrl(canonicalUrl)
+      ? toAbsoluteUrl(canonicalUrl)
       : pageUrl;
-    const socialImage = absoluteUrl(image || DEFAULT_OG_IMAGE);
+    const socialImage = toAbsoluteUrl(
+      image ||
+        settings.defaultOgImage?.url ||
+        "/favicon-512x512.png"
+    );
     const socialTitle = ogTitle || title;
     const socialDescription = ogDescription || description;
 
@@ -133,13 +156,19 @@ export default function SEO({
     setMeta("property", "og:description", socialDescription);
     setMeta("property", "og:url", canonicalPageUrl);
     setMeta("property", "og:type", type);
-    setMeta("property", "og:site_name", SITE_NAME);
+    setMeta(
+      "property",
+      "og:site_name",
+      settings.businessName
+    );
     setMeta("property", "og:locale", "zh_HK");
     setMeta("property", "og:image", socialImage);
     setMeta(
       "property",
       "og:image:alt",
-      imageAlt || `${BUSINESS_NAME}｜香港專業通渠服務`
+      imageAlt ||
+        settings.defaultOgImage?.alt ||
+        `${settings.businessName}｜香港專業通渠服務`
     );
 
     setMeta("name", "twitter:card", "summary_large_image");
@@ -152,23 +181,25 @@ export default function SEO({
     setJsonLd("jsonld-business", {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "@id": BUSINESS_ID,
-      name: BUSINESS_NAME,
-      alternateName: [SITE_NAME, "DrainBear"],
-      url: `${SITE_URL}/`,
+      "@id": `${siteUrl}/#organization`,
+      name: settings.businessName,
+      alternateName: ["通渠熊", "DrainBear"],
+      url: `${siteUrl}/`,
       logo: {
         "@type": "ImageObject",
-        url: absoluteUrl("/favicon-512x512.png"),
+        url: toAbsoluteUrl("/favicon-512x512.png"),
         width: 512,
         height: 512,
       },
-      image: socialImage,
-      description:
-        "香港24小時專業通渠服務，提供住宅及商業通渠、高壓水槍洗渠、CCTV照喉、隔油池及沙井處理。",
-      telephone: PHONE_E164,
+      image: toAbsoluteUrl(
+        settings.defaultOgImage?.url ||
+          "/favicon-512x512.png"
+      ),
+      description: settings.businessDescription,
+      telephone: settings.phoneE164,
       contactPoint: {
         "@type": "ContactPoint",
-        telephone: PHONE_E164,
+        telephone: settings.phoneE164,
         contactType: "customer service",
         areaServed: "HK",
         availableLanguage: ["zh-Hant", "zh-HK", "en"],
@@ -193,13 +224,14 @@ export default function SEO({
           "@type": "ListItem",
           position: index + 1,
           name: breadcrumb.name,
-          item: absoluteUrl(breadcrumb.path),
+          item: toAbsoluteUrl(breadcrumb.path),
         })),
       });
     } else {
       document.getElementById("jsonld-breadcrumb")?.remove();
     }
 
+    document.documentElement.dataset.seoReady = "true";
     window.scrollTo(0, 0);
   }, [
     title,
@@ -209,12 +241,15 @@ export default function SEO({
     ogTitle,
     ogDescription,
     imageAlt,
+    contentReady,
+    isSiteSettingsLoading,
     jsonLd,
     keywords,
     image,
     type,
     breadcrumbs,
     noindex,
+    settings,
   ]);
 
   return null;

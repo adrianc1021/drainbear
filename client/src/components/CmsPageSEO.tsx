@@ -12,7 +12,7 @@ export default function CmsPageSEO({
 }: CmsPageSEOProps) {
   const queryPath = cmsPath ?? fallback.path;
 
-  const {data} = useQuery({
+  const {data, isLoading} = useQuery({
     queryKey: ["sanity", "pageSeo", queryPath],
     queryFn: () => getPageSeo(queryPath),
     staleTime: 5 * 60 * 1000,
@@ -25,6 +25,7 @@ export default function CmsPageSEO({
   return (
     <SEO
       {...fallback}
+      contentReady={!isLoading}
       title={seo?.metaTitle || fallback.title}
       description={seo?.metaDescription || fallback.description}
       keywords={
