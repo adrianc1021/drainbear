@@ -1,6 +1,11 @@
+import type { PortableTextBlock } from "@portabletext/types";
+
 export interface SanityImageData {
   url?: string;
   alt?: string;
+  caption?: string;
+  width?: number;
+  height?: number;
 }
 
 export interface SeoData {
@@ -33,5 +38,43 @@ export interface SiteSettings {
 export interface PageSeo {
   name: string;
   path: string;
+  seo: SeoData;
+}
+
+export interface SanityArticleImage {
+  _type: "articleImage";
+  _key: string;
+  url?: string;
+  alt?: string;
+  caption?: string;
+  width?: number;
+  height?: number;
+}
+
+export interface SanityExpertTip {
+  _type: "expertTip";
+  _key: string;
+  title: string;
+  text: string;
+}
+
+export type SanityBlogBodyBlock =
+  | PortableTextBlock
+  | SanityArticleImage
+  | SanityExpertTip;
+
+export interface SanityBlogPost {
+  _id: string;
+  title: string;
+  slug: string;
+  category: string;
+  excerpt: string;
+  coverImage?: SanityImageData;
+  body: SanityBlogBodyBlock[];
+  publishedAt: string;
+  updatedAt?: string;
+  readMins: number;
+  featured?: boolean;
+  instagramUrl?: string;
   seo: SeoData;
 }

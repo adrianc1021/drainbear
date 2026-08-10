@@ -37,6 +37,7 @@ const BLOG_SLUGS = new Set([
   "restaurant-grease-trap-guide",
   "village-house-manhole-rainy-season",
   "old-building-backflow-signs",
+  "hong-kong-drain-cleaning-price-guide",
 ]);
 
 function normalizePath(urlPath: string) {
