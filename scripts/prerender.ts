@@ -28,6 +28,7 @@ const BLOG_SLUGS = [
   "restaurant-grease-trap-guide",
   "village-house-manhole-rainy-season",
   "old-building-backflow-signs",
+  "hong-kong-drain-cleaning-price-guide",
 ];
 
 const ROUTES = [
