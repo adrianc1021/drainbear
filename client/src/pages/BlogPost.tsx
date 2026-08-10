@@ -6,6 +6,7 @@ import { Link, useParams, useLocation } from "wouter";
 import { useEffect } from "react";
 import { CalendarDays, Clock, ArrowLeft, ArrowRight, Lightbulb } from "lucide-react";
 import { BLOG_POSTS, getPostBySlug } from "@/lib/blogData";
+import { trackBlogRead, trackNavClick } from "@/lib/analytics";
 import { WhatsAppButton } from "@/components/Layout";
 import SEO from "@/components/SEO";
 import {useSiteSettings} from "@/contexts/SiteSettingsContext";
@@ -25,6 +26,34 @@ export default function BlogPost() {
     if (!post) navigate("/blog", { replace: true });
     window.scrollTo({ top: 0 });
   }, [post, navigate, slug]);
+
+  // blog_read：捲動達 60% 或停留 45 秒視為實際閱讀（每篇每次載入只記一次，去重由 analytics 模組處理）
+  useEffect(() => {
+    if (!post) return;
+    const currentSlug = post.slug;
+
+    const onScroll = () => {
+      const doc = document.documentElement;
+      const scrollable = doc.scrollHeight - window.innerHeight;
+      if (scrollable <= 0) return;
+      const percent = Math.round((window.scrollY / scrollable) * 100);
+      if (percent >= 60) {
+        trackBlogRead(currentSlug, percent);
+        window.removeEventListener("scroll", onScroll);
+      }
+    };
+
+    const timer = window.setTimeout(() => {
+      trackBlogRead(currentSlug);
+      window.removeEventListener("scroll", onScroll);
+    }, 45_000);
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, [post]);
 
   if (!post) return null;
 
@@ -139,6 +168,13 @@ export default function BlogPost() {
                 <Link
                   key={p.slug}
                   href={`/blog/${p.slug}`}
+                  onClick={() =>
+                    trackNavClick("blog_post", {
+                      article_slug: p.slug,
+                      cta_location: "blogpost_related",
+                      destination_url: `/blog/${p.slug}`,
+                    })
+                  }
                   className="card-float group flex flex-col rounded-lg border border-border bg-white p-5"
                 >
                   <div className="text-[11px] font-bold tracking-wide text-wagreen-dark">{p.category}</div>

@@ -5,6 +5,7 @@
 import { Link } from "wouter";
 import { CalendarDays, Clock, ArrowRight, BookOpen } from "lucide-react";
 import { BLOG_POSTS } from "@/lib/blogData";
+import { trackNavClick } from "@/lib/analytics";
 import { WhatsAppButton } from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -58,6 +59,13 @@ export default function Blog() {
           {/* 精選文章 */}
           <Link
             href={`/blog/${featured.slug}`}
+            onClick={() =>
+              trackNavClick("blog_post", {
+                article_slug: featured.slug,
+                cta_location: "blog_featured",
+                destination_url: `/blog/${featured.slug}`,
+              })
+            }
             className="card-float group grid overflow-hidden rounded-lg border border-border bg-navy md:grid-cols-5"
           >
             <div className="flex flex-col justify-center p-8 md:col-span-3 md:p-12">
@@ -96,6 +104,13 @@ export default function Blog() {
               <Link
                 key={p.slug}
                 href={`/blog/${p.slug}`}
+                onClick={() =>
+                  trackNavClick("blog_post", {
+                    article_slug: p.slug,
+                    cta_location: "blog_grid",
+                    destination_url: `/blog/${p.slug}`,
+                  })
+                }
                 className="card-float card-accent reveal group flex flex-col rounded-lg border border-border bg-white p-7"
                 data-reveal-delay={i * 60}
               >

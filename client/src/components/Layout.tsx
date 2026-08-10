@@ -6,7 +6,7 @@
 import { ReactNode, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Menu, X, MessageCircle, Phone, Clock, Star, Award, ShieldCheck, ArrowUp } from "lucide-react";
-import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
+import { trackCTA, goThanksAfterWhatsApp, trackNavClick } from "@/lib/analytics";
 import { useEstimate } from "@/contexts/EstimateContext";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
 import { useReveal } from "@/hooks/useReveal";
@@ -209,6 +209,13 @@ function Header() {
             <Link
               key={item.href}
               href={item.href}
+              onClick={() =>
+                trackNavClick("navigation", {
+                  cta_location: "header",
+                  cta_label: item.label,
+                  destination_url: item.href,
+                })
+              }
               className={`btn-smooth rounded-lg px-4 py-2 text-sm font-medium ${
                 location === item.href
                   ? "bg-mist text-navy font-bold"
@@ -239,6 +246,13 @@ function Header() {
             <Link
               key={item.href}
               href={item.href}
+              onClick={() =>
+                trackNavClick("navigation", {
+                  cta_location: "mobile_menu",
+                  cta_label: item.label,
+                  destination_url: item.href,
+                })
+              }
               className={`block min-h-[48px] rounded-lg px-4 py-3 text-base font-medium ${
                 location === item.href ? "bg-mist font-bold text-navy" : "text-navy/70"
               }`}

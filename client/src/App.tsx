@@ -1,12 +1,13 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Route, Switch, useLocation } from "wouter";
+import { useEffect, useRef } from "react";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Layout from "./components/Layout";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { EstimateProvider } from "./contexts/EstimateContext";
-import { initAnalytics } from "./lib/analytics";
+import { initAnalytics, trackPageView } from "./lib/analytics";
 import { SiteSettingsProvider } from "./contexts/SiteSettingsContext";
 
 initAnalytics();
@@ -19,6 +20,24 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Guide from "./pages/Guide";
 import Thanks from "./pages/Thanks";
+
+/** SPA 路由變更時上報 GA4 page_view（首次載入由 gtag config 自動處理，這裡跳過） */
+function PageViewTracker() {
+  const [location] = useLocation();
+  const isFirst = useRef(true);
+
+  useEffect(() => {
+    if (isFirst.current) {
+      isFirst.current = false;
+      return;
+    }
+    // 等 document.title 由 SEO 元件更新後再上報
+    const id = window.setTimeout(() => trackPageView(location), 100);
+    return () => window.clearTimeout(id);
+  }, [location]);
+
+  return null;
+}
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
@@ -55,6 +74,7 @@ function App() {
           <EstimateProvider>
             <TooltipProvider>
               <Toaster />
+              <PageViewTracker />
               <Router />
             </TooltipProvider>
           </EstimateProvider>

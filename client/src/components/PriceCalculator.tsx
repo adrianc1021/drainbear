@@ -22,7 +22,12 @@ import {
   Waves,
 } from "lucide-react";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
-import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
+import {
+  trackCTA,
+  goThanksAfterWhatsApp,
+  trackQuoteCalculatorStart,
+  trackQuoteCalculatorComplete,
+} from "@/lib/analytics";
 import { useEstimate } from "@/contexts/EstimateContext";
 import { trpc } from "@/lib/trpc";
 
@@ -99,6 +104,8 @@ export default function PriceCalculator() {
       });
       // 估價完成時匿名記錄到資料庫（同一組合只記錄一次）
       const key = `${result.l.id}_${result.b.id}_${result.t.id}`;
+      // GA4：估價完成事件（模組內部以組合 key 去重）
+      trackQuoteCalculatorComplete(key, `${result.l.label}_${result.b.label}_${result.t.id}`);
       if (lastRecorded.current !== key) {
         lastRecorded.current = key;
         recordEstimate.mutate({
@@ -164,7 +171,15 @@ export default function PriceCalculator() {
           <StepTitle n={1} text="邊度塞咗？" />
           <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
             {LOCATIONS.map((o) => (
-              <OptionBtn key={o.id} o={o} active={loc === o.id} onClick={() => setLoc(o.id)} />
+              <OptionBtn
+                key={o.id}
+                o={o}
+                active={loc === o.id}
+                onClick={() => {
+                  trackQuoteCalculatorStart();
+                  setLoc(o.id);
+                }}
+              />
             ))}
           </div>
 
@@ -172,7 +187,15 @@ export default function PriceCalculator() {
             <StepTitle n={2} text="乜嘢樓宇類型？" />
             <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
               {BUILDINGS.map((o) => (
-                <OptionBtn key={o.id} o={o} active={bld === o.id} onClick={() => setBld(o.id)} />
+                <OptionBtn
+                  key={o.id}
+                  o={o}
+                  active={bld === o.id}
+                  onClick={() => {
+                    trackQuoteCalculatorStart();
+                    setBld(o.id);
+                  }}
+                />
               ))}
             </div>
           </div>
@@ -181,7 +204,15 @@ export default function PriceCalculator() {
             <StepTitle n={3} text="幾時要上門？" />
             <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
               {TIMES.map((o) => (
-                <OptionBtn key={o.id} o={o} active={time === o.id} onClick={() => setTime(o.id)} />
+                <OptionBtn
+                  key={o.id}
+                  o={o}
+                  active={time === o.id}
+                  onClick={() => {
+                    trackQuoteCalculatorStart();
+                    setTime(o.id);
+                  }}
+                />
               ))}
             </div>
           </div>
