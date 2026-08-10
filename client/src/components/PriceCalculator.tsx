@@ -22,9 +22,15 @@ import {
   Waves,
 } from "lucide-react";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
-import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
+import {
+  trackCTA,
+  goThanksAfterWhatsApp,
+  trackQuoteCalculatorStart,
+  trackQuoteCalculatorComplete,
+} from "@/lib/analytics";
 import { useEstimate } from "@/contexts/EstimateContext";
 import { trpc } from "@/lib/trpc";
+import { createPerViewDedup, type PerViewDedup } from "@/lib/perViewDedup";
 
 interface Option {
   id: string;
@@ -87,6 +93,18 @@ export default function PriceCalculator() {
   const toastShown = useRef(false);
   // 防止同一組合重覆寫入資料庫
   const lastRecorded = useRef<string | null>(null);
+  // GA4 去重：隨 Component Mount 建立、Unmount 丟棄。
+  // 離開頁面再返回（新 Mount）可重新記錄；同一次瀏覽內
+  // start 只記一次、同一組合（含 A→B→A 的 A）只記一次。
+  const ga4DedupRef = useRef<PerViewDedup | null>(null);
+  if (!ga4DedupRef.current) ga4DedupRef.current = createPerViewDedup();
+  const ga4Dedup = ga4DedupRef.current;
+
+  const handleCalculatorStart = () => {
+    if (ga4Dedup.once("start")) {
+      trackQuoteCalculatorStart();
+    }
+  };
   useEffect(() => {
     if (result && waMsg) {
       setEstimate({
@@ -99,6 +117,10 @@ export default function PriceCalculator() {
       });
       // 估價完成時匿名記錄到資料庫（同一組合只記錄一次）
       const key = `${result.l.id}_${result.b.id}_${result.t.id}`;
+      // GA4：估價完成事件（同一次頁面瀏覽同一組合只記一次，含 A→B→A）
+      if (ga4Dedup.once(`complete:${key}`)) {
+        trackQuoteCalculatorComplete(`${result.l.label}_${result.b.label}_${result.t.id}`);
+      }
       if (lastRecorded.current !== key) {
         lastRecorded.current = key;
         recordEstimate.mutate({
@@ -164,7 +186,15 @@ export default function PriceCalculator() {
           <StepTitle n={1} text="邊度塞咗？" />
           <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
             {LOCATIONS.map((o) => (
-              <OptionBtn key={o.id} o={o} active={loc === o.id} onClick={() => setLoc(o.id)} />
+              <OptionBtn
+                key={o.id}
+                o={o}
+                active={loc === o.id}
+                onClick={() => {
+                  handleCalculatorStart();
+                  setLoc(o.id);
+                }}
+              />
             ))}
           </div>
 
@@ -172,7 +202,15 @@ export default function PriceCalculator() {
             <StepTitle n={2} text="乜嘢樓宇類型？" />
             <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
               {BUILDINGS.map((o) => (
-                <OptionBtn key={o.id} o={o} active={bld === o.id} onClick={() => setBld(o.id)} />
+                <OptionBtn
+                  key={o.id}
+                  o={o}
+                  active={bld === o.id}
+                  onClick={() => {
+                    handleCalculatorStart();
+                    setBld(o.id);
+                  }}
+                />
               ))}
             </div>
           </div>
@@ -181,7 +219,15 @@ export default function PriceCalculator() {
             <StepTitle n={3} text="幾時要上門？" />
             <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
               {TIMES.map((o) => (
-                <OptionBtn key={o.id} o={o} active={time === o.id} onClick={() => setTime(o.id)} />
+                <OptionBtn
+                  key={o.id}
+                  o={o}
+                  active={time === o.id}
+                  onClick={() => {
+                    handleCalculatorStart();
+                    setTime(o.id);
+                  }}
+                />
               ))}
             </div>
           </div>

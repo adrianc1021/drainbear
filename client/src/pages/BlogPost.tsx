@@ -6,6 +6,11 @@ import { Link, useParams, useLocation } from "wouter";
 import { useEffect } from "react";
 import { CalendarDays, Clock, ArrowLeft, ArrowRight, Lightbulb } from "lucide-react";
 import { BLOG_POSTS, getPostBySlug } from "@/lib/blogData";
+import { trackBlogRead, trackNavClick } from "@/lib/analytics";
+import {
+  browserBlogReadDeps,
+  createBlogReadTracker,
+} from "@/lib/blogReadTracker";
 import { WhatsAppButton } from "@/components/Layout";
 import SEO from "@/components/SEO";
 import {useSiteSettings} from "@/contexts/SiteSettingsContext";
@@ -25,6 +30,19 @@ export default function BlogPost() {
     if (!post) navigate("/blog", { replace: true });
     window.scrollTo({ top: 0 });
   }, [post, navigate, slug]);
+
+  // blog_read：捲動達 60% 或停留 45 秒（分頁可見時）視為實際閱讀。
+  // 每次文章瀏覽建立一個新 tracker（同一次瀏覽只記一次；離開再返回可重新記錄）；
+  // 捲動觸發成功後立即清 Timer；unmount／換文章時 dispose 清除 Timer 及 Listener。
+  const postSlug = post?.slug;
+  useEffect(() => {
+    if (!postSlug) return;
+    const tracker = createBlogReadTracker(
+      postSlug,
+      browserBlogReadDeps(trackBlogRead),
+    );
+    return () => tracker.dispose();
+  }, [postSlug]);
 
   if (!post) return null;
 
@@ -139,6 +157,13 @@ export default function BlogPost() {
                 <Link
                   key={p.slug}
                   href={`/blog/${p.slug}`}
+                  onClick={() =>
+                    trackNavClick("blog_post", {
+                      article_slug: p.slug,
+                      cta_location: "blogpost_related",
+                      destination_url: `/blog/${p.slug}`,
+                    })
+                  }
                   className="card-float group flex flex-col rounded-lg border border-border bg-white p-5"
                 >
                   <div className="text-[11px] font-bold tracking-wide text-wagreen-dark">{p.category}</div>
