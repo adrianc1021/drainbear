@@ -7,6 +7,10 @@ import { useEffect } from "react";
 import { CalendarDays, Clock, ArrowLeft, ArrowRight, Lightbulb } from "lucide-react";
 import { BLOG_POSTS, getPostBySlug } from "@/lib/blogData";
 import { trackBlogRead, trackNavClick } from "@/lib/analytics";
+import {
+  browserBlogReadDeps,
+  createBlogReadTracker,
+} from "@/lib/blogReadTracker";
 import { WhatsAppButton } from "@/components/Layout";
 import SEO from "@/components/SEO";
 import {useSiteSettings} from "@/contexts/SiteSettingsContext";
@@ -27,33 +31,18 @@ export default function BlogPost() {
     window.scrollTo({ top: 0 });
   }, [post, navigate, slug]);
 
-  // blog_read：捲動達 60% 或停留 45 秒視為實際閱讀（每篇每次載入只記一次，去重由 analytics 模組處理）
+  // blog_read：捲動達 60% 或停留 45 秒（分頁可見時）視為實際閱讀。
+  // 每次文章瀏覽建立一個新 tracker（同一次瀏覽只記一次；離開再返回可重新記錄）；
+  // 捲動觸發成功後立即清 Timer；unmount／換文章時 dispose 清除 Timer 及 Listener。
+  const postSlug = post?.slug;
   useEffect(() => {
-    if (!post) return;
-    const currentSlug = post.slug;
-
-    const onScroll = () => {
-      const doc = document.documentElement;
-      const scrollable = doc.scrollHeight - window.innerHeight;
-      if (scrollable <= 0) return;
-      const percent = Math.round((window.scrollY / scrollable) * 100);
-      if (percent >= 60) {
-        trackBlogRead(currentSlug, percent);
-        window.removeEventListener("scroll", onScroll);
-      }
-    };
-
-    const timer = window.setTimeout(() => {
-      trackBlogRead(currentSlug);
-      window.removeEventListener("scroll", onScroll);
-    }, 45_000);
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      window.clearTimeout(timer);
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, [post]);
+    if (!postSlug) return;
+    const tracker = createBlogReadTracker(
+      postSlug,
+      browserBlogReadDeps(trackBlogRead),
+    );
+    return () => tracker.dispose();
+  }, [postSlug]);
 
   if (!post) return null;
 

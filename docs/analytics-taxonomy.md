@@ -19,10 +19,32 @@
 | `VITE_GA4_DEBUG` | 前端 env | `"true"` 時開發環境亦上報(帶 `debug_mode`,事件入 GA4 DebugView) |
 
 行為:
-- **未設定 GA4 ID**:不載入任何額外腳本,事件推入 `dataLayer` 佇列,網站正常運作。
+- **未設定 GA4 ID**:不載入任何額外腳本,網站正常運作。事件仍推入當前頁面的
+  `dataLayer`,**僅作除錯/相容用途**——`dataLayer` 只存在於當前頁面的記憶體,
+  **不會永久儲存**,亦**不能補回 GA4 安裝前的歷史數據**;正式收數由設定
+  Measurement ID 當日開始。
+- **ID 格式驗證**:只接受合法 `G-` 格式(`isValidGa4Id()`)。值存在但格式錯誤時
+  不初始化 GA4、不呼叫 `gtag('config', …)`,開發環境顯示不含該值的警告,網站照常運作。
 - **開發環境(`import.meta.env.DEV`)**:預設不上報 GA4,避免污染正式數據。
+- **事件目的地隔離**:GA4 啟用時,`sendEvent()` 及 `trackPageView()` 均帶
+  `send_to: <GA4 Measurement ID>`,自訂事件只送 GA4,不會流向 Google Ads Destination。
 - **Google Ads Tag `AW-18128738982`**:由 `client/index.html` 載入,**不受本模組影響**;
   GA4 重用同一 gtag.js 及 dataLayer,不會重複載入腳本。
+
+## 去重責任劃分
+
+`analytics.ts` 為**純事件發送 Helper**,不保存「每次瀏覽一次」的去重狀態。
+每頁/每篇一次的去重由 Component 生命週期管理:
+
+- **估價計算機**(`PriceCalculator.tsx`):以 `useRef` 持有 `createPerViewDedup()`
+  (`client/src/lib/perViewDedup.ts`)實例——每次 Mount 一個新實例。
+  同一次頁面瀏覽中 `quote_calculator_start` 只記一次、同一組合的
+  `quote_calculator_complete` 只記一次(A→B→A 時 A 不再記錄);
+  離開頁面再返回(重新 Mount)可重新記錄。
+- **Blog 閱讀**(`BlogPost.tsx`):以 `createBlogReadTracker()`
+  (`client/src/lib/blogReadTracker.ts`)管理,每次文章瀏覽一個實例,
+  unmount 時 `dispose()`;成功記錄後立即清除 Timer 及 Scroll Listener,
+  45 秒 Timer 觸發前檢查分頁可見;同一次瀏覽只記一次,返回同一文章可重新記錄。
 
 ## 事件清單
 
@@ -36,8 +58,8 @@
 | `contact_form_start` | 表格開始填寫(每表格一次) | form_name, cta_location | 🟡 helper 已備,前台尚無表格 |
 | `contact_form_submit` | 伺服器確認提交成功後 | form_name, cta_location | 🟡 helper 已備 |
 | `contact_form_error` | 表格提交失敗 | form_name, error_type(不含錯誤內文) | 🟡 helper 已備 |
-| `quote_calculator_start` | 估價計算機首次互動(每頁一次) | cta_location | ✅ 已接 |
-| `quote_calculator_complete` | 估價完成(同組合去重) | cta_location, topic(選項摘要) | ✅ 已接 |
+| `quote_calculator_start` | 估價計算機首次互動(每次頁面瀏覽一次,Component 去重) | cta_location | ✅ 已接 |
+| `quote_calculator_complete` | 估價完成(每次頁面瀏覽同組合一次,Component 去重) | cta_location, topic(選項摘要) | ✅ 已接 |
 
 ### 導航及內容事件
 
@@ -45,7 +67,7 @@
 |---|---|---|---|
 | `navigation_click` | 主導航連結點擊 | cta_location, cta_label, destination_url | ✅ 已接(header / mobile_menu) |
 | `blog_post_click` | Blog 文章卡片點擊 | article_slug, cta_location, destination_url | ✅ 已接(blog_featured / blog_grid / blogpost_related) |
-| `blog_read` | 捲動 60% 或停留 45 秒(每篇一次) | article_slug, read_percent | ✅ 已接 |
+| `blog_read` | 捲動 60% 或停留 45 秒且分頁可見(每次文章瀏覽一次,Component 去重) | article_slug, read_percent | ✅ 已接 |
 | `area_click` | 地區互動(地圖/搜尋)(原 `map_district_click` 統一命名) | cta_location, area_name | ✅ 已接(areas_map / areas_search) |
 | `cta_click` | 一般 CTA 點擊 | cta_location, cta_label, destination_url | 🟡 `trackNavClick("cta", …)` 可用 |
 | `service_click` | 服務項目點擊 | service_name, cta_location, destination_url | 🟡 `trackNavClick("service", …)` 可用 |

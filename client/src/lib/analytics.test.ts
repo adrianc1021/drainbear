@@ -1,5 +1,5 @@
 /**
- * 統一 Analytics 模組測試(第二階段驗收)
+ * 統一 Analytics 模組測試(第二階段驗收 + PR#4 修正輪)
  * 環境:node + 手動 window/document stub(不依賴 jsdom,不新增套件)
  *
  * 註:vitest 下 import.meta.env.DEV = true 且未設 GA4 ID,
@@ -9,6 +9,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import {
   __resetAnalyticsStateForTests,
   initAnalytics,
+  isValidGa4Id,
   sendEvent,
   trackBlogRead,
   trackCTA,
@@ -45,6 +46,58 @@ beforeEach(() => {
   __resetAnalyticsStateForTests();
 });
 
+// ---------------------------------------------------------------------------
+// GA4 Measurement ID 驗證(修正項 3)
+// ---------------------------------------------------------------------------
+
+describe("isValidGa4Id", () => {
+  it("合法 G- 格式通過", () => {
+    expect(isValidGa4Id("G-XXXXXXXXXX")).toBe(true);
+    expect(isValidGa4Id("G-ABC123DEF4")).toBe(true);
+    expect(isValidGa4Id("G-1234567890")).toBe(true);
+    expect(isValidGa4Id("G-AB12")).toBe(true); // 最短 4 位
+    expect(isValidGa4Id(" G-ABC123DEF4 ")).toBe(true); // 前後空白可容忍
+  });
+
+  it("非 G- 格式拒絕", () => {
+    expect(isValidGa4Id("AW-18128738982")).toBe(false); // Google Ads tag
+    expect(isValidGa4Id("UA-12345678-1")).toBe(false); // Universal Analytics
+    expect(isValidGa4Id("GT-ABC123")).toBe(false);
+    expect(isValidGa4Id("G-")).toBe(false);
+    expect(isValidGa4Id("G-abc123def4")).toBe(false); // 小寫拒絕
+    expect(isValidGa4Id("G-XXXX XXXX")).toBe(false); // 內含空白
+    expect(isValidGa4Id("g-ABC123DEF4")).toBe(false);
+    expect(isValidGa4Id("")).toBe(false);
+    expect(isValidGa4Id(undefined)).toBe(false);
+    expect(isValidGa4Id(null)).toBe(false);
+    expect(isValidGa4Id(12345)).toBe(false);
+    expect(isValidGa4Id("javascript:alert(1)")).toBe(false);
+  });
+});
+
+describe("initAnalytics — 格式錯誤 ID 防護", () => {
+  it("window.__GA4_ID__ 為非法格式時不拋錯、不初始化 GA4,網站正常運作", () => {
+    const w = (globalThis as Record<string, unknown>).window as Record<
+      string,
+      unknown
+    >;
+    w.__GA4_ID__ = "not-a-valid-id";
+    expect(() => initAnalytics()).not.toThrow();
+    // gtag stub 已建立(dataLayer 佇列可用),但沒有任何 config 呼叫入佇列
+    const configCalls = getQueue().filter(
+      (e) => Array.isArray(e) && (e as unknown as unknown[])[0] === "config",
+    );
+    expect(configCalls).toHaveLength(0);
+    // 事件仍可正常發送(不報錯)
+    expect(() => trackCTA("phone", "header")).not.toThrow();
+    expect(eventsNamed("phone_click")).toHaveLength(1);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// GA4 未設定時網站正常運作
+// ---------------------------------------------------------------------------
+
 describe("initAnalytics(GA4 未設定)", () => {
   it("不會拋出錯誤,並建立 dataLayer 佇列", () => {
     expect(() => initAnalytics()).not.toThrow();
@@ -58,6 +111,10 @@ describe("initAnalytics(GA4 未設定)", () => {
     expect(getQueue().length).toBe(len);
   });
 });
+
+// ---------------------------------------------------------------------------
+// trackCTA
+// ---------------------------------------------------------------------------
 
 describe("trackCTA", () => {
   it("whatsapp 點擊記錄 whatsapp_click,一次呼叫只入一筆", () => {
@@ -85,6 +142,10 @@ describe("trackCTA", () => {
   });
 });
 
+// ---------------------------------------------------------------------------
+// PII 防護
+// ---------------------------------------------------------------------------
+
 describe("PII 防護", () => {
   it("疑似電話號碼的參數值會被丟棄", () => {
     trackCTA("whatsapp", "header", "請回電 95588260 我係陳生");
@@ -111,47 +172,45 @@ describe("PII 防護", () => {
   });
 });
 
-describe("估價計算機事件", () => {
-  it("quote_calculator_start 每次載入只記一次", () => {
+// ---------------------------------------------------------------------------
+// 純 Helper:每次呼叫發送一次(去重責任在 Component,見 perViewDedup 測試)
+// ---------------------------------------------------------------------------
+
+describe("純事件 Helper(不持有跨頁面去重狀態)", () => {
+  it("trackQuoteCalculatorStart 每次呼叫各發一筆(去重由 Component 負責)", () => {
     trackQuoteCalculatorStart();
     trackQuoteCalculatorStart();
-    trackQuoteCalculatorStart();
-    expect(eventsNamed("quote_calculator_start")).toHaveLength(1);
+    expect(eventsNamed("quote_calculator_start")).toHaveLength(2);
   });
 
-  it("quote_calculator_complete 同一組合只記一次,不同組合各記一次", () => {
-    trackQuoteCalculatorComplete("toilet_apartment_day");
-    trackQuoteCalculatorComplete("toilet_apartment_day");
-    trackQuoteCalculatorComplete("sink_village_night");
-    expect(eventsNamed("quote_calculator_complete")).toHaveLength(2);
-  });
-});
-
-describe("表格事件", () => {
-  it("contact_form_start 同一表格只記一次", () => {
-    trackContactFormStart("inquiry_form");
-    trackContactFormStart("inquiry_form");
-    expect(eventsNamed("contact_form_start")).toHaveLength(1);
-  });
-
-  it("contact_form_submit 記錄 form_name", () => {
-    trackContactFormSubmit("inquiry_form", "contact_page");
-    const events = eventsNamed("contact_form_submit");
+  it("trackQuoteCalculatorComplete 帶 topic 摘要", () => {
+    trackQuoteCalculatorComplete("坐廁_私樓_day");
+    const events = eventsNamed("quote_calculator_complete");
     expect(events).toHaveLength(1);
-    expect(events[0].form_name).toBe("inquiry_form");
+    expect(events[0].topic).toBe("坐廁_私樓_day");
+    expect(events[0].cta_location).toBe("price_calculator");
   });
-});
 
-describe("Blog 事件", () => {
-  it("blog_read 同一篇文章只記一次", () => {
+  it("trackBlogRead 每次呼叫各發一筆(去重由 blogReadTracker 負責)", () => {
     trackBlogRead("prevent-kitchen-sink-clog", 62);
     trackBlogRead("prevent-kitchen-sink-clog", 80);
-    const events = eventsNamed("blog_read");
-    expect(events).toHaveLength(1);
-    expect(events[0].article_slug).toBe("prevent-kitchen-sink-clog");
-    expect(events[0].read_percent).toBe(62);
+    expect(eventsNamed("blog_read")).toHaveLength(2);
+    expect(eventsNamed("blog_read")[0].read_percent).toBe(62);
+  });
+
+  it("trackContactFormStart / Submit 記錄 form_name", () => {
+    trackContactFormStart("inquiry_form", "contact_page");
+    trackContactFormSubmit("inquiry_form", "contact_page");
+    expect(eventsNamed("contact_form_start")).toHaveLength(1);
+    const submits = eventsNamed("contact_form_submit");
+    expect(submits).toHaveLength(1);
+    expect(submits[0].form_name).toBe("inquiry_form");
   });
 });
+
+// ---------------------------------------------------------------------------
+// whatsapp_open
+// ---------------------------------------------------------------------------
 
 describe("whatsapp_open(/thanks 代理轉換)", () => {
   it("記錄來源位置及 /thanks 路徑", () => {
@@ -162,6 +221,10 @@ describe("whatsapp_open(/thanks 代理轉換)", () => {
     expect(events[0].page_path).toBe("/thanks");
   });
 });
+
+// ---------------------------------------------------------------------------
+// 參數白名單
+// ---------------------------------------------------------------------------
 
 describe("參數白名單", () => {
   it("空值參數不會被傳送", () => {
