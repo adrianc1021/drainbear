@@ -400,6 +400,48 @@ function Footer() {
         DrainBear Limited.
         版權所有。專業排水工程團隊，香港島、九龍、新界全天候服務。
       </div>
+      <div className="border-t border-white/10">
+        <div className="container py-6">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center">
+            <p className="shrink-0 text-xs font-bold tracking-[0.14em] text-white/55">
+              熱門地區
+            </p>
+            <nav
+              aria-label="熱門通渠服務地區"
+              className="flex flex-wrap gap-x-4 gap-y-2"
+            >
+              {[
+                { label: "觀塘通渠", href: "/areas/kwun-tong" },
+                { label: "沙田通渠", href: "/areas/sha-tin" },
+                { label: "旺角通渠", href: "/areas/mong-kok" },
+                { label: "深水埗通渠", href: "/areas/sham-shui-po" },
+                { label: "銅鑼灣通渠", href: "/areas/causeway-bay" },
+                { label: "北角通渠", href: "/areas/north-point" },
+                { label: "荃灣通渠", href: "/areas/tsuen-wan" },
+                { label: "屯門通渠", href: "/areas/tuen-mun" },
+                { label: "元朗通渠", href: "/areas/yuen-long" },
+                { label: "大圍通渠", href: "/areas/tai-wai" },
+              ].map(item => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() =>
+                    trackNavClick("area", {
+                      cta_location: "footer_popular_areas",
+                      cta_label: item.label,
+                      area_name: item.label.replace("通渠", ""),
+                      destination_url: item.href,
+                    })
+                  }
+                  className="text-sm text-white/70 transition-colors hover:text-white"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
+        </div>
+      </div>
     </footer>
   );
 }

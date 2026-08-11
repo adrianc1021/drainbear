@@ -29,6 +29,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { WhatsAppButton } from "@/components/Layout";
+import ServiceQuickSelect from "@/components/ServiceQuickSelect";
 import { useBlogPosts } from "@/lib/useBlog";
 import CmsPageSEO from "@/components/CmsPageSEO";
 import {
@@ -114,8 +115,8 @@ const WHY_GRID = [
 const TRUST_POINTS = [
   {
     icon: FileCheck,
-    title: "上門檢查費全免",
-    desc: "接納報價並進行工程，檢查費即時豁免，先斷症後決定。",
+    title: "接納工程免檢查費",
+    desc: "師傅先到場檢查；接納報價並進行工程，可豁免檢查費。",
   },
   {
     icon: HandCoins,
@@ -125,7 +126,7 @@ const TRUST_POINTS = [
   {
     icon: ShieldCheck,
     title: "絕無隱藏費用",
-    desc: "深夜附加費出發前講明，絕不坐地起價，收幾多講幾多。",
+    desc: "深夜附加費及其他費用會於動工前講明，確認最終總價才施工。",
   },
 ];
 
@@ -243,7 +244,7 @@ export default function Home() {
               </a>
             </div>
             <p className="mt-5 text-xs text-muted-foreground">
-              先報價・後動工・不成功不收費・上門檢查費全免
+              先報價・後動工・不成功不收費・接納工程免檢查費
             </p>
           </div>
 
@@ -278,6 +279,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <ServiceQuickSelect />
 
       {/* ===== 區塊 2：暗色優勢列 ===== */}
       <section className="bg-navy">
@@ -315,7 +318,7 @@ export default function Home() {
               透明報價，安心動工
             </h2>
             <p className="mt-4 text-muted-foreground">
-              我們堅持「上門檢查費全免」及「報價後才動工」的承諾，讓每一次通渠服務都建立在絕對的信任與透明之上。
+              我們堅持「接納工程免檢查費」及「報價後才動工」的承諾，讓每一次通渠服務都建立在絕對的信任與透明之上。
             </p>
             <Link
               href="/guide"
