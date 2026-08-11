@@ -29,50 +29,68 @@ const DISTRICT_SLUGS = new Set([
   "tseung-kwan-o",
 ]);
 
-const BLOG_SLUGS = new Set([
-  "prevent-kitchen-sink-clog",
-  "why-not-drain-cleaner",
-  "toilet-clog-emergency-guide",
-  "bathroom-hair-clog-prevention",
-  "restaurant-grease-trap-guide",
-  "village-house-manhole-rainy-season",
-  "old-building-backflow-signs",
-  "hong-kong-drain-cleaning-price-guide",
-  "drain-cleaning-scam-prevention-hong-kong",
-]);
+interface RouteManifest {
+  routes?: string[];
+}
 
 function normalizePath(urlPath: string) {
   if (urlPath === "/") return "/";
   return urlPath.replace(/\/+$/, "");
 }
 
-function isKnownPublicRoute(urlPath: string) {
+function isStaticPublicRoute(urlPath: string) {
   const pathname = normalizePath(urlPath);
 
   if (STATIC_PUBLIC_ROUTES.has(pathname)) {
     return true;
   }
 
-  const districtMatch = pathname.match(/^\/areas\/([^/]+)$/);
-  if (districtMatch) {
-    return DISTRICT_SLUGS.has(districtMatch[1]);
-  }
+  const districtMatch = pathname.match(/^\/areas\/([a-z0-9-]+)$/);
 
-  const blogMatch = pathname.match(/^\/blog\/([^/]+)$/);
-  if (blogMatch) {
-    return BLOG_SLUGS.has(blogMatch[1]);
-  }
+  return districtMatch ? DISTRICT_SLUGS.has(districtMatch[1]) : false;
+}
 
-  return false;
+function isPotentialBlogRoute(urlPath: string) {
+  return /^\/blog\/[a-z0-9]+(?:-[a-z0-9]+)*$/.test(normalizePath(urlPath));
 }
 
 function getPrerenderFilePath(distPath: string, urlPath: string) {
   const pathname = normalizePath(urlPath);
-
   const relativePath =
     pathname === "/" ? "index.html" : `${pathname.slice(1)}.html`;
 
   return path.resolve(distPath, "..", "prerender", relativePath);
+}
+
+function loadPrerenderRoutes(distPath: string) {
+  const manifestPath = path.resolve(distPath, "..", "prerender", "routes.json");
+
+  try {
+    const manifest = JSON.parse(
+      fs.readFileSync(manifestPath, "utf8")
+    ) as RouteManifest;
+
+    return new Set((manifest.routes ?? []).map(route => normalizePath(route)));
+  } catch (error) {
+    console.warn(
+      `Unable to load prerender route manifest: ${manifestPath}`,
+      error
+    );
+
+    return new Set<string>();
+  }
+}
+
+function applyRobotsHeaders(
+  pathname: string,
+  isKnownRoute: boolean,
+  res: express.Response
+) {
+  if (pathname === "/thanks") {
+    res.set("X-Robots-Tag", "noindex, nofollow");
+  } else if (!isKnownRoute) {
+    res.set("X-Robots-Tag", "noindex, follow");
+  }
 }
 
 export async function setupVite(app: Express, server: Server) {
@@ -90,6 +108,7 @@ export async function setupVite(app: Express, server: Server) {
   });
 
   app.use(vite.middlewares);
+
   app.use("*", async (req, res, next) => {
     const url = req.originalUrl;
     const pathname = normalizePath(url.split("?")[0] || "/");
@@ -102,26 +121,28 @@ export async function setupVite(app: Express, server: Server) {
         "index.html"
       );
 
-      // always reload the index.html file from disk incase it changes
-      let template = await fs.promises.readFile(clientTemplate, "utf-8");
+      let template = await fs.promises.readFile(clientTemplate, "utf8");
+
       template = template.replace(
         `src="/src/main.tsx"`,
         `src="/src/main.tsx?v=${nanoid()}"`
       );
+
       const page = await vite.transformIndexHtml(url, template);
-      const isKnownRoute = isKnownPublicRoute(pathname);
-      const statusCode = isKnownRoute ? 200 : 404;
 
-      if (pathname === "/thanks") {
-        res.set("X-Robots-Tag", "noindex, nofollow");
-      } else if (!isKnownRoute) {
-        res.set("X-Robots-Tag", "noindex, follow");
-      }
+      // 開發環境允許合法格式 Blog Slug，實際文章由 Sanity 查詢。
+      const isKnownRoute =
+        isStaticPublicRoute(pathname) || isPotentialBlogRoute(pathname);
 
-      res.status(statusCode).set({ "Content-Type": "text/html" }).end(page);
-    } catch (e) {
-      vite.ssrFixStacktrace(e as Error);
-      next(e);
+      applyRobotsHeaders(pathname, isKnownRoute, res);
+
+      res
+        .status(isKnownRoute ? 200 : 404)
+        .set({ "Content-Type": "text/html" })
+        .end(page);
+    } catch (error) {
+      vite.ssrFixStacktrace(error as Error);
+      next(error);
     }
   });
 }
@@ -133,13 +154,11 @@ export function serveStatic(app: Express) {
       : path.resolve(import.meta.dirname, "public");
 
   if (!fs.existsSync(distPath)) {
-    console.error(
-      `Could not find the build directory: ${distPath}, make sure to build the client first`
-    );
+    console.error(`Could not find build directory: ${distPath}`);
   }
 
-  // index:false 防止 Express 對首頁自動回傳原本的 SPA index.html。
-  // 首頁需要交由下面的 handler 回傳預渲染版本。
+  const prerenderRoutes = loadPrerenderRoutes(distPath);
+
   app.use(
     express.static(distPath, {
       index: false,
@@ -149,13 +168,10 @@ export function serveStatic(app: Express) {
   app.use("*", (req, res) => {
     const pathname = normalizePath(req.originalUrl.split("?")[0] || "/");
 
-    const isKnownRoute = isKnownPublicRoute(pathname);
+    const isKnownRoute =
+      isStaticPublicRoute(pathname) || prerenderRoutes.has(pathname);
 
-    if (pathname === "/thanks") {
-      res.set("X-Robots-Tag", "noindex, nofollow");
-    } else if (!isKnownRoute) {
-      res.set("X-Robots-Tag", "noindex, follow");
-    }
+    applyRobotsHeaders(pathname, isKnownRoute, res);
 
     if (isKnownRoute && pathname !== "/thanks") {
       const prerenderFile = getPrerenderFilePath(distPath, pathname);
