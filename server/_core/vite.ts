@@ -38,6 +38,7 @@ const BLOG_SLUGS = new Set([
   "village-house-manhole-rainy-season",
   "old-building-backflow-signs",
   "hong-kong-drain-cleaning-price-guide",
+  "drain-cleaning-scam-prevention-hong-kong",
 ]);
 
 function normalizePath(urlPath: string) {

@@ -29,6 +29,7 @@ const BLOG_SLUGS = [
   "village-house-manhole-rainy-season",
   "old-building-backflow-signs",
   "hong-kong-drain-cleaning-price-guide",
+  "drain-cleaning-scam-prevention-hong-kong",
 ];
 
 const ROUTES = [
