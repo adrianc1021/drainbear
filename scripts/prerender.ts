@@ -5,7 +5,16 @@ import { chromium } from "playwright";
 
 const PORT = 4173;
 const BASE_URL = `http://127.0.0.1:${PORT}`;
+const SITE_URL = "https://drainbearhk.com";
 const OUTPUT_ROOT = path.resolve("dist/prerender");
+const ROUTE_MANIFEST = path.join(OUTPUT_ROOT, "routes.json");
+const SITEMAP_PATH = path.resolve("dist/public/sitemap.xml");
+
+const SANITY_PROJECT_ID = "oyph9zy1";
+const SANITY_DATASET = "production";
+const SANITY_API_VERSION = "2025-02-19";
+
+const STATIC_ROUTES = ["/", "/services", "/guide", "/areas", "/faq", "/blog"];
 
 const DISTRICT_SLUGS = [
   "kwun-tong",
@@ -20,7 +29,7 @@ const DISTRICT_SLUGS = [
   "tseung-kwan-o",
 ];
 
-const BLOG_SLUGS = [
+const STATIC_BLOG_SLUGS = [
   "prevent-kitchen-sink-clog",
   "why-not-drain-cleaner",
   "toilet-clog-emergency-guide",
@@ -28,20 +37,114 @@ const BLOG_SLUGS = [
   "restaurant-grease-trap-guide",
   "village-house-manhole-rainy-season",
   "old-building-backflow-signs",
-  "hong-kong-drain-cleaning-price-guide",
-  "drain-cleaning-scam-prevention-hong-kong",
 ];
 
-const ROUTES = [
-  "/",
-  "/services",
-  "/guide",
-  "/areas",
-  ...DISTRICT_SLUGS.map(slug => `/areas/${slug}`),
-  "/faq",
-  "/blog",
-  ...BLOG_SLUGS.map(slug => `/blog/${slug}`),
-];
+interface PublishedBlogEntry {
+  slug: string;
+  lastmod?: string;
+  source: "static" | "sanity";
+}
+
+interface SanityBlogEntry {
+  slug?: string;
+  publishedAt?: string;
+  updatedAt?: string;
+}
+
+function isValidSlug(slug: string) {
+  return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug);
+}
+
+function normalizeDate(value?: string) {
+  if (!value) return undefined;
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return undefined;
+  }
+
+  return date.toISOString().slice(0, 10);
+}
+
+async function loadPublishedSanityBlogs(): Promise<PublishedBlogEntry[]> {
+  const query = `
+    *[
+      _type == "blogPost" &&
+      defined(slug.current) &&
+      defined(publishedAt) &&
+      publishedAt <= now() &&
+      coalesce(seo.noIndex, false) == false
+    ] | order(publishedAt desc) {
+      "slug": slug.current,
+      publishedAt,
+      "updatedAt": coalesce(updatedAt, _updatedAt, publishedAt)
+    }
+  `;
+
+  const endpoint = new URL(
+    `https://${SANITY_PROJECT_ID}.api.sanity.io/v${SANITY_API_VERSION}/data/query/${SANITY_DATASET}`
+  );
+
+  endpoint.searchParams.set("query", query);
+
+  const response = await fetch(endpoint, {
+    headers: {
+      Accept: "application/json",
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(
+      `Sanity query failed: HTTP ${response.status} ${response.statusText}`
+    );
+  }
+
+  const payload = (await response.json()) as {
+    result?: SanityBlogEntry[];
+  };
+
+  const entries: PublishedBlogEntry[] = [];
+
+  for (const item of payload.result ?? []) {
+    const slug = item.slug?.trim().toLowerCase();
+
+    if (!slug) continue;
+
+    if (!isValidSlug(slug)) {
+      throw new Error(`Invalid Sanity blog slug: ${slug}`);
+    }
+
+    entries.push({
+      slug,
+      lastmod: normalizeDate(item.updatedAt ?? item.publishedAt),
+      source: "sanity",
+    });
+  }
+
+  return entries;
+}
+
+function mergeBlogEntries(
+  sanityEntries: PublishedBlogEntry[]
+): PublishedBlogEntry[] {
+  const entries = new Map<string, PublishedBlogEntry>();
+
+  for (const slug of STATIC_BLOG_SLUGS) {
+    entries.set(slug, {
+      slug,
+      source: "static",
+    });
+  }
+
+  for (const entry of sanityEntries) {
+    entries.set(entry.slug, entry);
+  }
+
+  return Array.from(entries.values()).sort((a, b) =>
+    a.slug.localeCompare(b.slug)
+  );
+}
 
 function getOutputPath(route: string) {
   if (route === "/") {
@@ -69,9 +172,98 @@ async function waitForServer() {
   throw new Error(`Server did not start at ${BASE_URL}`);
 }
 
+function escapeXml(value: string) {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&apos;");
+}
+
+async function updateSitemap(blogEntries: PublishedBlogEntry[]) {
+  let sitemap = await fs.readFile(SITEMAP_PATH, "utf8");
+
+  // Build 每次重新生成全部文章 URL，避免舊 CMS 文章或 noIndex 文章殘留。
+  sitemap = sitemap.replace(
+    /\s*<url>\s*<loc>https:\/\/drainbearhk\.com\/blog\/[^<]+<\/loc>[\s\S]*?<\/url>/g,
+    ""
+  );
+
+  const blogXml = blogEntries
+    .map(entry => {
+      const lastmod = entry.lastmod
+        ? `\n    <lastmod>${escapeXml(entry.lastmod)}</lastmod>`
+        : "";
+
+      return [
+        "  <url>",
+        `    <loc>${SITE_URL}/blog/${escapeXml(entry.slug)}</loc>${lastmod}`,
+        "    <changefreq>monthly</changefreq>",
+        "    <priority>0.7</priority>",
+        "  </url>",
+      ].join("\n");
+    })
+    .join("\n");
+
+  if (!sitemap.includes("</urlset>")) {
+    throw new Error("Invalid sitemap.xml: missing </urlset>");
+  }
+
+  sitemap = sitemap.replace(
+    "</urlset>",
+    `${blogXml ? `\n${blogXml}\n` : "\n"}</urlset>`
+  );
+
+  await fs.writeFile(SITEMAP_PATH, sitemap, "utf8");
+
+  console.log(
+    `Updated sitemap with ${blogEntries.length} published blog routes.`
+  );
+}
+
 async function prerender() {
-  await fs.rm(OUTPUT_ROOT, { recursive: true, force: true });
-  await fs.mkdir(OUTPUT_ROOT, { recursive: true });
+  await fs.rm(OUTPUT_ROOT, {
+    recursive: true,
+    force: true,
+  });
+
+  await fs.mkdir(OUTPUT_ROOT, {
+    recursive: true,
+  });
+
+  console.log("Loading published Sanity blog routes...");
+
+  const sanityEntries = await loadPublishedSanityBlogs();
+  const blogEntries = mergeBlogEntries(sanityEntries);
+
+  const routes = [
+    ...STATIC_ROUTES,
+    ...DISTRICT_SLUGS.map(slug => `/areas/${slug}`),
+    ...blogEntries.map(entry => `/blog/${entry.slug}`),
+  ];
+
+  if (new Set(routes).size !== routes.length) {
+    throw new Error("Duplicate prerender routes detected.");
+  }
+
+  // Server 透過 manifest 判斷 CMS URL 是否為有效路由。
+  await fs.writeFile(
+    ROUTE_MANIFEST,
+    JSON.stringify(
+      {
+        generatedAt: new Date().toISOString(),
+        routes,
+      },
+      null,
+      2
+    ),
+    "utf8"
+  );
+
+  console.log(
+    `Found ${sanityEntries.length} published Sanity blog article(s).`
+  );
 
   const server = spawn(process.execPath, ["dist/index.js"], {
     env: {
@@ -101,7 +293,7 @@ async function prerender() {
 
     const page = await browser.newPage();
 
-    for (const route of ROUTES) {
+    for (const route of routes) {
       const response = await page.goto(`${BASE_URL}${route}`, {
         waitUntil: "domcontentloaded",
         timeout: 30_000,
@@ -131,7 +323,6 @@ async function prerender() {
         );
       });
 
-      // SEO effect 已明確標記完成；短暫等待瀏覽器完成 DOM serialization。
       await page.waitForTimeout(50);
 
       const html = await page.content();
@@ -148,8 +339,9 @@ async function prerender() {
     }
 
     await page.close();
+    await updateSitemap(blogEntries);
 
-    console.log(`Successfully prerendered ${ROUTES.length} routes.`);
+    console.log(`Successfully prerendered ${routes.length} routes.`);
   } finally {
     await browser?.close();
     server.kill("SIGTERM");

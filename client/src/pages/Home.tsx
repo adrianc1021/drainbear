@@ -29,7 +29,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { WhatsAppButton } from "@/components/Layout";
-import { BLOG_POSTS } from "@/lib/blogData";
+import { useBlogPosts } from "@/lib/useBlog";
 import CmsPageSEO from "@/components/CmsPageSEO";
 import {
   BUSINESS_ID,
@@ -178,8 +178,8 @@ const HOME_JSONLD = {
 };
 
 export default function Home() {
-  const {phoneDisplay, phoneHref, whatsappHref} =
-    useContactSettings();
+  const { posts: blogPosts } = useBlogPosts();
+  const { phoneDisplay, phoneHref, whatsappHref } = useContactSettings();
   return (
     <div>
       <CmsPageSEO
@@ -639,7 +639,7 @@ export default function Home() {
             </Link>
           </div>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {BLOG_POSTS.slice(0, 3).map((p, i) => (
+            {blogPosts.slice(0, 3).map((p, i) => (
               <Link
                 key={p.slug}
                 href={`/blog/${p.slug}`}
