@@ -16,6 +16,14 @@ const SANITY_API_VERSION = "2025-02-19";
 
 const STATIC_ROUTES = ["/", "/services", "/guide", "/areas", "/faq", "/blog"];
 
+const SERVICE_SLUGS = [
+  "toilet-unblocking",
+  "kitchen-sink-unblocking",
+  "high-pressure-jetting",
+  "cctv-drain-inspection",
+  "main-drain-manhole",
+];
+
 const DISTRICT_SLUGS = [
   "kwun-tong",
   "sha-tin",
@@ -239,6 +247,7 @@ async function prerender() {
 
   const routes = [
     ...STATIC_ROUTES,
+    ...SERVICE_SLUGS.map(slug => `/services/${slug}`),
     ...DISTRICT_SLUGS.map(slug => `/areas/${slug}`),
     ...blogEntries.map(entry => `/blog/${entry.slug}`),
   ];

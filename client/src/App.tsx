@@ -11,6 +11,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { initAnalytics, trackPageView } from "./lib/analytics";
 
 const Services = lazy(() => import("./pages/Services"));
+const ServiceDetail = lazy(() => import("./pages/ServiceDetail"));
 const Areas = lazy(() => import("./pages/Areas"));
 const District = lazy(() => import("./pages/District"));
 const FAQ = lazy(() => import("./pages/FAQ"));
@@ -59,6 +60,7 @@ function Router() {
         <Switch>
           <Route path="/" component={Home} />
           <Route path="/services" component={Services} />
+          <Route path="/services/:slug" component={ServiceDetail} />
           <Route path="/guide" component={Guide} />
           <Route path="/areas" component={Areas} />
           <Route path="/areas/:slug" component={District} />

@@ -18,12 +18,18 @@ import {
   UtensilsCrossed,
   CircleAlert,
 } from "lucide-react";
+import { Link } from "wouter";
 import { WhatsAppButton } from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { BUSINESS_ID, SITE_URL } from "@/config/site";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
-import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
+import {
+  trackCTA,
+  goThanksAfterWhatsApp,
+  trackNavClick,
+} from "@/lib/analytics";
+import { SERVICE_PAGES } from "@/lib/serviceData";
 
 const SERVICES_CRUMBS = [
   { name: "首頁", path: "/" },
@@ -171,7 +177,7 @@ const STEPS = [
 ];
 
 export default function Services() {
-  const {whatsappHref} = useContactSettings();
+  const { whatsappHref } = useContactSettings();
   return (
     <div>
       <SEO
@@ -254,6 +260,50 @@ export default function Services() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="border-y border-border bg-white py-16 md:py-20">
+        <div className="container">
+          <div className="mx-auto max-w-2xl text-center">
+            <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">
+              SERVICE GUIDES
+            </div>
+            <h2 className="font-display text-3xl font-black text-navy md:text-4xl">
+              按問題查看處理方法
+            </h2>
+            <p className="mt-4 text-muted-foreground">
+              了解常見症狀、處理流程及影響收費的因素，再決定下一步。
+            </p>
+          </div>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {SERVICE_PAGES.map(service => (
+              <Link
+                key={service.slug}
+                href={`/services/${service.slug}`}
+                onClick={() =>
+                  trackNavClick("service", {
+                    cta_location: "services_guides",
+                    cta_label: service.shortName,
+                    service_name: service.slug,
+                    destination_url: `/services/${service.slug}`,
+                  })
+                }
+                className="group rounded-xl border border-border bg-mist/45 p-5 transition hover:-translate-y-1 hover:border-wagreen/50 hover:bg-white hover:shadow-lg"
+              >
+                <span className="text-[10px] font-bold tracking-[0.13em] text-safety">
+                  {service.eyebrow}
+                </span>
+                <h3 className="mt-2 font-display text-base font-black text-navy">
+                  {service.name}
+                </h3>
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-wagreen-dark">
+                  查看詳情
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
