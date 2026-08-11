@@ -16,6 +16,7 @@ import { useBlogPosts } from "@/lib/useBlog";
 import { WhatsAppButton } from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { createImageSrcSet, optimizedImageUrl } from "@/lib/imageOptimization";
 
 const BLOG_CRUMBS = [
   { name: "首頁", path: "/" },
@@ -167,7 +168,15 @@ export default function Blog() {
 
                 <div className="relative min-h-64 overflow-hidden bg-gradient-to-br from-navy via-navy to-[#16224d] md:col-span-2">
                   <img
-                    src={featured.coverImage?.url ?? FALLBACK_FEATURED_IMAGE}
+                    src={optimizedImageUrl(
+                      featured.coverImage?.url ?? FALLBACK_FEATURED_IMAGE,
+                      960
+                    )}
+                    srcSet={createImageSrcSet(
+                      featured.coverImage?.url ?? FALLBACK_FEATURED_IMAGE,
+                      [480, 768, 960]
+                    )}
+                    sizes="(min-width: 768px) 40vw, 100vw"
                     alt={featured.coverImage?.alt ?? "通渠熊 DrainBear"}
                     className={
                       featured.coverImage?.url
@@ -175,6 +184,8 @@ export default function Blog() {
                         : "absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 object-contain opacity-90 drop-shadow-[0_12px_36px_rgba(37,211,102,0.25)] transition-transform duration-300 group-hover:scale-105"
                     }
                     loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
                   />
 
                   {featured.coverImage?.url && (
@@ -201,10 +212,16 @@ export default function Blog() {
                     {post.coverImage?.url && (
                       <div className="aspect-[1.91/1] overflow-hidden bg-mist">
                         <img
-                          src={post.coverImage.url}
+                          src={optimizedImageUrl(post.coverImage.url, 768)}
+                          srcSet={createImageSrcSet(
+                            post.coverImage.url,
+                            [360, 480, 640, 768]
+                          )}
+                          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                           alt={post.coverImage.alt ?? post.title}
                           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                           loading="lazy"
+                          decoding="async"
                         />
                       </div>
                     )}

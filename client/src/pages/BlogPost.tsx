@@ -24,6 +24,7 @@ import type { SanityArticleImage, SanityExpertTip } from "@/lib/sanity/types";
 import { WhatsAppButton } from "@/components/Layout";
 import SEO from "@/components/SEO";
 import { useSiteSettings } from "@/contexts/SiteSettingsContext";
+import { createImageSrcSet, optimizedImageUrl } from "@/lib/imageOptimization";
 
 function formatDate(iso: string) {
   const date = new Date(iso);
@@ -114,12 +115,15 @@ const portableTextComponents: PortableTextComponents = {
       return (
         <figure className="mt-10">
           <img
-            src={image.url}
+            src={optimizedImageUrl(image.url, 1200)}
+            srcSet={createImageSrcSet(image.url, [480, 768, 960, 1200])}
+            sizes="(min-width: 768px) 768px, 100vw"
             alt={image.alt ?? ""}
             width={image.width}
             height={image.height}
             className="h-auto w-full rounded-lg border border-border object-cover"
             loading="lazy"
+            decoding="async"
           />
 
           {image.caption && (
@@ -357,12 +361,19 @@ export default function BlogPost() {
           {post.coverImage?.url && (
             <figure className="mt-8 overflow-hidden rounded-lg border border-border bg-white">
               <img
-                src={post.coverImage.url}
+                src={optimizedImageUrl(post.coverImage.url, 1200)}
+                srcSet={createImageSrcSet(
+                  post.coverImage.url,
+                  [480, 768, 960, 1200]
+                )}
+                sizes="(min-width: 768px) 768px, 100vw"
                 alt={post.coverImage.alt || post.title}
                 width={post.coverImage.width}
                 height={post.coverImage.height}
                 className="aspect-[1.91/1] h-auto w-full object-cover"
                 loading="eager"
+                fetchPriority="high"
+                decoding="async"
               />
 
               {post.coverImage.caption && (
