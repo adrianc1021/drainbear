@@ -18,14 +18,20 @@
  * - 開發環境:預設不上報 GA4(避免污染正式數據);設 VITE_GA4_DEBUG="true"
  *   可於開發環境以 debug_mode 上報,事件會出現在 GA4 DebugView
  *
- * Google Ads:client/index.html 已載入 gtag.js(AW-18128738982)。本模組
- * 重用同一 gtag.js 及 dataLayer,只以 gtag('config', 'G-…') 附加 GA4,
+ * Google Ads:client/index.html 先建立 dataLayer 並排入 AW config。本模組
+ * 延遲載入共用 gtag.js,並以 gtag('config', 'G-…') 附加 GA4,
  * 絕不重複載入腳本,也不改動 Ads 轉換設定。所有自訂事件均以 send_to
  * 明確指定 GA4 Measurement ID,避免誤送到 Google Ads Destination。
  *
  * 私隱紅線:不得傳送姓名、電話、電郵、地址或表格內容到 GA4。
  * sendEvent 內建 PII 樣式防護,疑似個人資料的參數值會被整個丟棄。
  */
+
+import {
+  __resetGoogleTagLoaderForTests,
+  loadGoogleTag,
+  scheduleGoogleTag,
+} from "./googleTagLoader";
 
 declare global {
   interface Window {
@@ -76,7 +82,7 @@ function resolveGa4Id(): string | undefined {
     if (IS_DEV && !invalidIdWarned) {
       invalidIdWarned = true;
       console.warn(
-        "[analytics] GA4 Measurement ID 格式不正確(應為 G-XXXXXXXXXX),GA4 已停用;網站其他功能不受影響。",
+        "[analytics] GA4 Measurement ID 格式不正確(應為 G-XXXXXXXXXX),GA4 已停用;網站其他功能不受影響。"
       );
     }
     return undefined;
@@ -117,23 +123,14 @@ export function initAnalytics() {
   if (!ga4Id || !isGa4Active()) {
     if (IS_DEV && ga4Id) {
       console.info(
-        '[analytics] 開發環境已停用 GA4 上報(設 VITE_GA4_DEBUG="true" 可啟用 DebugView 上報)',
+        '[analytics] 開發環境已停用 GA4 上報(設 VITE_GA4_DEBUG="true" 可啟用 DebugView 上報)'
       );
     }
     return;
   }
 
-  // 重用已存在的 gtag.js(index.html Google Ads 片段已載入),避免重複載入。
-  const alreadyLoaded = Boolean(
-    document.querySelector('script[src*="googletagmanager.com/gtag/js"]'),
-  );
-  if (!alreadyLoaded) {
-    const s = document.createElement("script");
-    s.async = true;
-    s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(ga4Id)}`;
-    document.head.appendChild(s);
-    window.gtag("js", new Date());
-  }
+  // config 先排入 dataLayer；外部 gtag.js 移離首屏關鍵路徑。
+  scheduleGoogleTag(ga4Id);
 
   window.gtag("config", ga4Id, {
     send_page_view: true,
@@ -183,7 +180,7 @@ const PII_PATTERNS = [
 ];
 
 function looksLikePII(value: string): boolean {
-  return PII_PATTERNS.some((re) => re.test(value));
+  return PII_PATTERNS.some(re => re.test(value));
 }
 
 /**
@@ -197,7 +194,7 @@ function looksLikePII(value: string): boolean {
  */
 export function sendEvent(
   eventName: string,
-  params: AnalyticsEventParams = {},
+  params: AnalyticsEventParams = {}
 ) {
   if (typeof window === "undefined") return;
   window.dataLayer = window.dataLayer || [];
@@ -208,7 +205,7 @@ export function sendEvent(
     if (value === undefined || value === null || value === "") continue;
     if (typeof value === "string" && looksLikePII(value)) {
       console.warn(
-        `[analytics] 參數 ${key} 疑似含個人資料,已丟棄(事件 ${eventName})`,
+        `[analytics] 參數 ${key} 疑似含個人資料,已丟棄(事件 ${eventName})`
       );
       continue;
     }
@@ -228,6 +225,7 @@ export function sendEvent(
 
   const ga4Id = resolveGa4Id();
   if (window.gtag && ga4Id && isGa4Active()) {
+    loadGoogleTag(ga4Id);
     window.gtag("event", eventName, { ...clean, send_to: ga4Id });
     return;
   }
@@ -257,6 +255,7 @@ export function trackPageView(path: string) {
 
   const ga4Id = resolveGa4Id();
   if (window.gtag && ga4Id && isGa4Active()) {
+    loadGoogleTag(ga4Id);
     window.gtag("event", "page_view", {
       page_path: path,
       page_title: typeof document !== "undefined" ? document.title : undefined,
@@ -287,7 +286,7 @@ export type CtaChannel = "whatsapp" | "phone" | "map";
 export function trackCTA(
   channel: CtaChannel,
   location: string,
-  topic?: string,
+  topic?: string
 ) {
   if (channel === "map") {
     sendEvent("area_click", {
@@ -315,7 +314,7 @@ export function goThanksAfterWhatsApp(location: string) {
     window.history.pushState(
       null,
       "",
-      `/thanks?from=${encodeURIComponent(location)}`,
+      `/thanks?from=${encodeURIComponent(location)}`
     );
     window.dispatchEvent(new PopStateEvent("popstate"));
   }, 600);
@@ -405,7 +404,7 @@ export function trackNavClick(
     | "service_name"
     | "area_name"
     | "article_slug"
-  >,
+  >
 ) {
   sendEvent(NAV_EVENT_NAMES[kind], params);
 }
@@ -431,4 +430,5 @@ export function __resetAnalyticsStateForTests() {
   initialized = false;
   lastTrackedPath = null;
   invalidIdWarned = false;
+  __resetGoogleTagLoaderForTests();
 }
