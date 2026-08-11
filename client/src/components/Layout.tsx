@@ -58,7 +58,7 @@ export function WhatsAppButton({
         trackCTA("whatsapp", trackLocation);
         goThanksAfterWhatsApp(trackLocation);
       }}
-      className={`btn-smooth inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-wagreen px-5 py-2.5 text-sm font-bold text-white shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark hover:shadow-[0_6px_24px_rgba(37,211,102,0.45)] ${className}`}
+      className={`btn-smooth inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-wagreen px-5 py-2.5 text-sm font-bold text-navy shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark hover:shadow-[0_6px_24px_rgba(37,211,102,0.45)] ${className}`}
     >
       <MessageCircle className="h-4 w-4" strokeWidth={2.5} />
       {label}
@@ -129,14 +129,14 @@ function MobileCTABar() {
             );
             goThanksAfterWhatsApp("mobile_bar");
           }}
-          className="btn-smooth flex min-h-[52px] flex-[1.6] items-center justify-center gap-2.5 rounded-lg bg-wagreen px-3 py-2.5 text-white shadow-[0_4px_14px_rgba(37,211,102,0.4)] active:scale-[0.97]"
+          className="btn-smooth flex min-h-[52px] flex-[1.6] items-center justify-center gap-2.5 rounded-lg bg-wagreen px-3 py-2.5 text-navy shadow-[0_4px_14px_rgba(37,211,102,0.4)] active:scale-[0.97]"
         >
           <MessageCircle className="h-5 w-5 shrink-0" strokeWidth={2.4} />
           <span className="flex flex-col items-start leading-tight">
             <span className="text-[15px] font-bold">{waTitle}</span>
-            <span className="flex items-center gap-1.5 text-[10.5px] font-medium text-white/85">
+            <span className="flex items-center gap-1.5 text-[10.5px] font-medium text-navy/80">
               <span className="relative flex h-2 w-2 shrink-0">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white/70 [animation-duration:1.8s]" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-navy/30 [animation-duration:1.8s]" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-white shadow-[0_0_6px_rgba(255,255,255,0.9)]" />
               </span>
               {waSub}
@@ -218,7 +218,7 @@ function Header() {
             className="h-10 w-10 md:h-11 md:w-11"
           />
           <span className="font-display text-lg font-extrabold tracking-tight text-navy md:text-xl">
-            通渠熊 <span className="text-wagreen">DrainBear</span>
+            通渠熊 <span className="text-[#087a35]">DrainBear</span>
           </span>
         </Link>
 
@@ -353,7 +353,7 @@ function Footer() {
               >
                 {a.name}
               </Link>
-              <p className="mt-2 text-xs leading-relaxed text-white/45">
+              <p className="mt-2 text-xs leading-relaxed text-white/70">
                 {a.districts}
               </p>
             </div>
@@ -388,7 +388,7 @@ function Footer() {
           不成功不收費・明碼實價
         </div>
       </div>
-      <div className="border-t border-white/10 py-5 text-center text-xs text-white/40">
+      <div className="border-t border-white/10 py-5 text-center text-xs text-white/70">
         <a
           href={phoneHref}
           onClick={() => trackCTA("phone", "footer")}
