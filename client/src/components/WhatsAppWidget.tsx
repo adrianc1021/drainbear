@@ -9,7 +9,7 @@ import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
 
 const LOGO =
-  "https://res.cloudinary.com/pgjztf2p/image/upload/v1785314740/A_pure_black_and_white_vector_mascot_logo_of_a_con-1785146902762_k8ruvx.jpg";
+  "https://res.cloudinary.com/pgjztf2p/image/upload/f_auto,q_auto:eco,c_fill,w_96,h_96/v1785314740/A_pure_black_and_white_vector_mascot_logo_of_a_con-1785146902762_k8ruvx.jpg";
 
 const QUICK_TOPICS = [
   { label: "坐廁 / 馬桶淤塞", msg: "你好，我屋企坐廁塞咗，想查詢通渠報價。" },
@@ -27,7 +27,7 @@ const QUICK_TOPICS = [
 export default function WhatsAppWidget() {
   const [open, setOpen] = useState(false);
   const [pulse, setPulse] = useState(true);
-  const {whatsappHref} = useContactSettings();
+  const { whatsappHref } = useContactSettings();
 
   // 開啟後停止呼吸提示動畫
   useEffect(() => {
