@@ -225,7 +225,7 @@ export default function Home() {
                   trackCTA("whatsapp", "home_hero");
                   goThanksAfterWhatsApp("home_hero");
                 }}
-                className="btn-smooth inline-flex items-center justify-center gap-2 rounded-lg bg-wagreen px-7 py-3.5 text-base font-bold text-white shadow-[0_8px_24px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark hover:shadow-[0_12px_32px_rgba(37,211,102,0.45)]"
+                className="btn-smooth inline-flex items-center justify-center gap-2 rounded-lg bg-wagreen px-7 py-3.5 text-base font-bold text-navy shadow-[0_8px_24px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark hover:shadow-[0_12px_32px_rgba(37,211,102,0.45)]"
               >
                 <MessageCircle className="h-5 w-5" strokeWidth={2.2} />
                 WhatsApp 免費報價
@@ -292,9 +292,9 @@ export default function Home() {
                 <a.icon className="h-6 w-6 text-wagreen" strokeWidth={2} />
               </div>
               <div>
-                <h3 className="font-display text-base font-bold text-white">
+                <p className="font-display text-base font-bold text-white">
                   {a.title}
-                </h3>
+                </p>
                 <p className="mt-1 text-sm leading-relaxed text-white/55">
                   {a.desc}
                 </p>
@@ -485,7 +485,7 @@ export default function Home() {
                       trackCTA("whatsapp", "home_service_card", s.title);
                       goThanksAfterWhatsApp("home_service_card");
                     }}
-                    className="btn-smooth mt-5 inline-flex items-center justify-center gap-1.5 rounded-lg bg-wagreen/10 px-4 py-2.5 text-sm font-bold text-wagreen-dark hover:bg-wagreen hover:text-white"
+                    className="btn-smooth mt-5 inline-flex items-center justify-center gap-1.5 rounded-lg bg-wagreen/10 px-4 py-2.5 text-sm font-bold text-wagreen-dark hover:bg-wagreen hover:text-navy"
                   >
                     <MessageCircle className="h-4 w-4" strokeWidth={2.4} />
                     WhatsApp 查詢
@@ -692,7 +692,7 @@ export default function Home() {
               {phoneDisplay}
             </a>
           </div>
-          <p className="mt-5 text-xs text-white/45">
+          <p className="mt-5 text-xs text-white/70">
             24 小時全港到達・不成功不收費・德國專業設備
           </p>
         </div>
