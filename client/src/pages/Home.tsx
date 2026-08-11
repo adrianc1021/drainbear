@@ -70,9 +70,9 @@ const CASE_STUDIES = [
 ];
 
 const HERO_IMG =
-  "https://res.cloudinary.com/pgjztf2p/image/upload/f_auto,q_auto:good,c_limit,w_768/v1785149281/copy_of_a_portrait_of_a_young_handsome_asian_male_plumbin-1785149206310_mmq04g.png";
+  "https://res.cloudinary.com/pgjztf2p/image/upload/f_auto,q_auto:good,c_limit,w_480/v1785149281/copy_of_a_portrait_of_a_young_handsome_asian_male_plumbin-1785149206310_mmq04g.png";
 const WHY_IMG =
-  "https://res.cloudinary.com/pgjztf2p/image/upload/f_auto,q_auto:good,c_limit,w_1200/v1785149473/why_sv7tw9.png";
+  "https://res.cloudinary.com/pgjztf2p/image/upload/f_auto,q_auto:good,c_limit,w_480/v1785149473/why_sv7tw9.png";
 const IMG_RESIDENTIAL =
   "https://res.cloudinary.com/pgjztf2p/image/upload/f_auto,q_auto:good,c_limit,w_640/v1785149431/home_sdyxhb.png";
 const IMG_COMMERCIAL =

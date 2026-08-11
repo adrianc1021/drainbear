@@ -4,12 +4,12 @@ import { lazy, Suspense, useEffect, useRef } from "react";
 import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Layout from "./components/Layout";
+import Home from "./pages/Home";
 import { EstimateProvider } from "./contexts/EstimateContext";
 import { SiteSettingsProvider } from "./contexts/SiteSettingsContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { initAnalytics, trackPageView } from "./lib/analytics";
 
-const Home = lazy(() => import("./pages/Home"));
 const Services = lazy(() => import("./pages/Services"));
 const Areas = lazy(() => import("./pages/Areas"));
 const District = lazy(() => import("./pages/District"));

@@ -5,14 +5,29 @@
  */
 import { ReactNode, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, MessageCircle, Phone, Clock, Star, Award, ShieldCheck, ArrowUp } from "lucide-react";
-import { trackCTA, goThanksAfterWhatsApp, trackNavClick } from "@/lib/analytics";
+import {
+  Menu,
+  X,
+  MessageCircle,
+  Phone,
+  Clock,
+  Star,
+  Award,
+  ShieldCheck,
+  ArrowUp,
+} from "lucide-react";
+import {
+  trackCTA,
+  goThanksAfterWhatsApp,
+  trackNavClick,
+} from "@/lib/analytics";
 import { useEstimate } from "@/contexts/EstimateContext";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
 import { useReveal } from "@/hooks/useReveal";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
 
-const LOGO = "https://res.cloudinary.com/pgjztf2p/image/upload/v1785147037/LOGO_dmyalo.png";
+const LOGO =
+  "https://res.cloudinary.com/pgjztf2p/image/upload/f_auto,q_auto:eco,c_fill,w_96,h_96/v1785147037/LOGO_dmyalo.png";
 
 const NAV_ITEMS = [
   { label: "首頁", href: "/" },
@@ -32,7 +47,7 @@ export function WhatsAppButton({
   label?: string;
   trackLocation?: string;
 }) {
-  const {whatsappDefaultHref} = useContactSettings();
+  const { whatsappDefaultHref } = useContactSettings();
 
   return (
     <a
@@ -62,17 +77,14 @@ function MobileCTABar() {
   const [hidden, setHidden] = useState(false);
   const lastY = useRef(0);
   const { estimate } = useEstimate();
-  const {
-    phoneDisplay,
-    phoneHref,
-    whatsappDefaultHref,
-    whatsappHref,
-  } = useContactSettings();
+  const { phoneDisplay, phoneHref, whatsappDefaultHref, whatsappHref } =
+    useContactSettings();
 
   useEffect(() => {
     const onScroll = () => {
       const y = window.scrollY;
-      const nearBottom = window.innerHeight + y >= document.body.scrollHeight - 160;
+      const nearBottom =
+        window.innerHeight + y >= document.body.scrollHeight - 160;
       // 向下捲超過 12px 才收起，向上捲、頁頂或近頁底即重現
       if (nearBottom || y < 80 || y < lastY.current - 4) {
         setHidden(false);
@@ -193,19 +205,25 @@ function Header() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-white/90 shadow-[0_2px_16px_rgba(11,19,43,0.08)] backdrop-blur-xl" : "bg-white/60 backdrop-blur-md"
+        scrolled
+          ? "bg-white/90 shadow-[0_2px_16px_rgba(11,19,43,0.08)] backdrop-blur-xl"
+          : "bg-white/60 backdrop-blur-md"
       }`}
     >
       <div className="container flex h-16 items-center justify-between md:h-[72px]">
         <Link href="/" className="flex items-center gap-2.5">
-          <img src={LOGO} alt="通渠熊 DrainBear Logo" className="h-10 w-10 md:h-11 md:w-11" />
+          <img
+            src={LOGO}
+            alt="通渠熊 DrainBear Logo"
+            className="h-10 w-10 md:h-11 md:w-11"
+          />
           <span className="font-display text-lg font-extrabold tracking-tight text-navy md:text-xl">
             通渠熊 <span className="text-wagreen">DrainBear</span>
           </span>
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex">
-          {NAV_ITEMS.map((item) => (
+          {NAV_ITEMS.map(item => (
             <Link
               key={item.href}
               href={item.href}
@@ -242,7 +260,7 @@ function Header() {
 
       {open && (
         <div className="border-t border-border bg-white px-4 pb-5 pt-2 shadow-lg md:hidden">
-          {NAV_ITEMS.map((item) => (
+          {NAV_ITEMS.map(item => (
             <Link
               key={item.href}
               href={item.href}
@@ -254,14 +272,19 @@ function Header() {
                 })
               }
               className={`block min-h-[48px] rounded-lg px-4 py-3 text-base font-medium ${
-                location === item.href ? "bg-mist font-bold text-navy" : "text-navy/70"
+                location === item.href
+                  ? "bg-mist font-bold text-navy"
+                  : "text-navy/70"
               }`}
             >
               {item.label}
             </Link>
           ))}
           <div className="mt-3 px-4">
-            <WhatsAppButton className="w-full justify-center" trackLocation="mobile_menu" />
+            <WhatsAppButton
+              className="w-full justify-center"
+              trackLocation="mobile_menu"
+            />
           </div>
         </div>
       )}
@@ -279,32 +302,40 @@ const FOOTER_STATS = [
 const FOOTER_AREAS = [
   {
     name: "港島區通渠",
-    districts: "中環・半山・灣仔・銅鑼灣・北角・鰂魚涌・太古城・柴灣・香港仔・跑馬地",
+    districts:
+      "中環・半山・灣仔・銅鑼灣・北角・鰂魚涌・太古城・柴灣・香港仔・跑馬地",
   },
   {
     name: "九龍區通渠",
-    districts: "尖沙咀・旺角・油麻地・深水埗・長沙灣・九龍城・土瓜灣・黃大仙・觀塘・九龍灣",
+    districts:
+      "尖沙咀・旺角・油麻地・深水埗・長沙灣・九龍城・土瓜灣・黃大仙・觀塘・九龍灣",
   },
   {
     name: "新界及離島通渠",
-    districts: "沙田・大圍・大埔・粉嶺・上水・荃灣・葵涌・屯門・元朗・將軍澳・西貢・東涌",
+    districts:
+      "沙田・大圍・大埔・粉嶺・上水・荃灣・葵涌・屯門・元朗・將軍澳・西貢・東涌",
   },
 ];
 
 function Footer() {
-  const {phoneDisplay, phoneHref} = useContactSettings();
+  const { phoneDisplay, phoneHref } = useContactSettings();
 
   return (
     <footer className="bg-navy text-white">
       {/* 數據列 */}
       <div className="dot-grid border-b border-white/10">
         <div className="container grid grid-cols-2 gap-x-4 gap-y-10 py-12 md:grid-cols-4 md:gap-8 md:py-14">
-          {FOOTER_STATS.map((s) => (
-            <div key={s.label} className="flex flex-col items-center text-center">
+          {FOOTER_STATS.map(s => (
+            <div
+              key={s.label}
+              className="flex flex-col items-center text-center"
+            >
               <span className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-white/5 ring-1 ring-white/10">
                 <s.icon className="h-5 w-5 text-wagreen" strokeWidth={2} />
               </span>
-              <div className="font-display text-3xl font-extrabold tracking-tight md:text-4xl">{s.value}</div>
+              <div className="font-display text-3xl font-extrabold tracking-tight md:text-4xl">
+                {s.value}
+              </div>
               <div className="mt-1 text-sm text-white/60">{s.label}</div>
             </div>
           ))}
@@ -314,7 +345,7 @@ function Footer() {
       {/* SEO 地區連結區 */}
       <div className="border-b border-white/10">
         <div className="container grid gap-8 py-10 md:grid-cols-3">
-          {FOOTER_AREAS.map((a) => (
+          {FOOTER_AREAS.map(a => (
             <div key={a.name}>
               <Link
                 href="/areas"
@@ -322,7 +353,9 @@ function Footer() {
               >
                 {a.name}
               </Link>
-              <p className="mt-2 text-xs leading-relaxed text-white/45">{a.districts}</p>
+              <p className="mt-2 text-xs leading-relaxed text-white/45">
+                {a.districts}
+              </p>
             </div>
           ))}
         </div>
@@ -330,11 +363,17 @@ function Footer() {
 
       <div className="container flex flex-col items-center justify-between gap-6 py-10 md:flex-row">
         <div className="flex items-center gap-2.5">
-          <img src={LOGO} alt="通渠熊 DrainBear" className="h-9 w-9 brightness-0 invert opacity-90" />
-          <span className="font-display text-lg font-extrabold">通渠熊 DrainBear</span>
+          <img
+            src={LOGO}
+            alt="通渠熊 DrainBear"
+            className="h-9 w-9 brightness-0 invert opacity-90"
+          />
+          <span className="font-display text-lg font-extrabold">
+            通渠熊 DrainBear
+          </span>
         </div>
         <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-white/60">
-          {NAV_ITEMS.map((item) => (
+          {NAV_ITEMS.map(item => (
             <Link
               key={item.href}
               href={item.href}
@@ -357,7 +396,8 @@ function Footer() {
         >
           24 小時熱線：{phoneDisplay}
         </a>
-        <span className="mx-2">|</span>© {new Date().getFullYear()} 通渠熊 DrainBear Limited.
+        <span className="mx-2">|</span>© {new Date().getFullYear()} 通渠熊
+        DrainBear Limited.
         版權所有。專業排水工程團隊，香港島、九龍、新界全天候服務。
       </div>
     </footer>
@@ -392,7 +432,11 @@ export default function Layout({ children }: { children: ReactNode }) {
       <main className="flex-1 pt-16 md:pt-[72px]">{children}</main>
       <Footer />
       {/* 佔位：避免內容及 Footer 被固定 CTA 列遮蓋（含 safe-area） */}
-      <div className="pointer-events-none h-[68px] md:hidden" style={{ paddingBottom: "env(safe-area-inset-bottom)" }} aria-hidden="true" />
+      <div
+        className="pointer-events-none h-[68px] md:hidden"
+        style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+        aria-hidden="true"
+      />
       <MobileCTABar />
       <WhatsAppWidget />
       <BackToTop />

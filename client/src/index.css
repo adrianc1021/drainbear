@@ -20,8 +20,12 @@
   --color-wagreen-dark: var(--wagreen-dark);
   --color-safety: var(--safety);
   --color-mist: var(--mist);
-  --font-display: "Manrope", "Noto Sans TC", sans-serif;
-  --font-sans: "Noto Sans TC", "Manrope", sans-serif;
+  --font-display:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang HK",
+    "Noto Sans HK", "Microsoft JhengHei", sans-serif;
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang HK",
+    "Noto Sans HK", "Microsoft JhengHei", sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -116,7 +120,7 @@
   --muted: oklch(0.274 0.006 286.033);
   --muted-foreground: oklch(0.705 0.015 286.067);
   --accent: oklch(0.274 0.006 286.033);
-  --accent-foreground:  oklch(0.92 0.005 65);
+  --accent-foreground: oklch(0.92 0.005 65);
   --destructive: oklch(0.704 0.191 22.216);
   --destructive-foreground: oklch(0.985 0 0);
   --border: oklch(1 0 0 / 10%);
@@ -130,7 +134,7 @@
   --sidebar: oklch(0.21 0.006 285.885);
   --sidebar-foreground: oklch(0.85 0.005 65);
   --sidebar-accent: oklch(0.274 0.006 286.033);
-  --sidebar-accent-foreground:  oklch(0.985 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.488 0.243 264.376);
 }
@@ -144,7 +148,10 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     font-family: var(--font-display);
     letter-spacing: -0.02em;
   }
@@ -219,14 +226,18 @@
   }
   /* 卡片懸浮陰影 */
   .card-float {
-    box-shadow: 0 1px 3px rgba(11, 19, 43, 0.06), 0 8px 24px rgba(11, 19, 43, 0.07);
+    box-shadow:
+      0 1px 3px rgba(11, 19, 43, 0.06),
+      0 8px 24px rgba(11, 19, 43, 0.07);
     transition:
       transform 220ms cubic-bezier(0.23, 1, 0.32, 1),
       box-shadow 220ms cubic-bezier(0.23, 1, 0.32, 1);
   }
   .card-float:hover {
     transform: translateY(-4px);
-    box-shadow: 0 4px 12px rgba(11, 19, 43, 0.08), 0 16px 40px rgba(11, 19, 43, 0.12);
+    box-shadow:
+      0 4px 12px rgba(11, 19, 43, 0.08),
+      0 16px 40px rgba(11, 19, 43, 0.12);
   }
   /* 綠色頂邊光條卡片（hover 顯示） */
   .card-accent {
@@ -249,12 +260,18 @@
   }
   /* 細緻網點紋理（深色區塊用） */
   .dot-grid {
-    background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+    background-image: radial-gradient(
+      rgba(255, 255, 255, 0.07) 1px,
+      transparent 1px
+    );
     background-size: 22px 22px;
   }
   /* 淺色區塊網點 */
   .dot-grid-light {
-    background-image: radial-gradient(rgba(11, 19, 43, 0.05) 1px, transparent 1px);
+    background-image: radial-gradient(
+      rgba(11, 19, 43, 0.05) 1px,
+      transparent 1px
+    );
     background-size: 22px 22px;
   }
   /* 懸浮主圖動畫 */
@@ -263,15 +280,26 @@
       animation: floatY 6s ease-in-out infinite;
     }
     @keyframes floatY {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-14px); }
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-14px);
+      }
     }
     .fade-up {
       animation: fadeUp 700ms cubic-bezier(0.23, 1, 0.32, 1) both;
     }
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     /* 捲動進場動畫（配合 useReveal） */
     .reveal {
