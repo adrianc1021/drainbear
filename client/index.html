@@ -4,6 +4,7 @@
     <!-- Google tag (gtag.js) -->
     <script
       async
+      fetchpriority="low"
       src="https://www.googletagmanager.com/gtag/js?id=AW-18128738982"
     ></script>
     <script>
@@ -55,10 +56,20 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.sanity.io" />
+    <link rel="preconnect" href="https://res.cloudinary.com" />
     <link
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap"
-      rel="stylesheet"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap"
+      />
+    </noscript>
   </head>
 
   <body>
