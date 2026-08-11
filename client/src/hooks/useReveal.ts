@@ -1,48 +1,103 @@
 /**
  * useReveal — 捲動進場動畫 hook
- * 設計風格：Modern Utility（極簡科技）
- * 配合 index.css 的 .reveal / .reveal-in，用 IntersectionObserver 觸發。
- * 尊重 prefers-reduced-motion（CSS 端已 gate，無動畫時元素直接可見）。
+ *
+ * 支援 React.lazy / Suspense：
+ * - IntersectionObserver 處理進入 viewport 的動畫。
+ * - MutationObserver 處理 route chunk 載入後才加入 DOM 的 .reveal 元素。
+ * - 只有 observer 成功初始化後，才在 <html> 加上 reveal-ready。
+ *   因此 JavaScript 或 observer 失效時，內容預設可見（fail-open）。
  */
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { useLocation } from "wouter";
 
 export function useReveal() {
   const [location] = useLocation();
-  useEffect(() => {
+
+  useLayoutEffect(() => {
+    const root = document.documentElement;
+
+    // Fail-open：缺少任何必要 observer 時，不啟用隱藏動畫。
+    if (
+      typeof IntersectionObserver === "undefined" ||
+      typeof MutationObserver === "undefined"
+    ) {
+      root.classList.remove("reveal-ready");
+      return;
+    }
+
     let disposed = false;
-    let io: IntersectionObserver | null = null;
+    const observed = new WeakSet<HTMLElement>();
 
-    // 等待路由切換後的 DOM 渲染完成
-    const raf = requestAnimationFrame(() => {
-      if (disposed) return;
-      const els = Array.from(document.querySelectorAll<HTMLElement>(".reveal:not(.reveal-in)"));
-      if (els.length === 0) return;
+    const io = new IntersectionObserver(
+      entries => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
 
-      io = new IntersectionObserver(
-        (entries) => {
-          for (const entry of entries) {
-            if (entry.isIntersecting) {
-              const el = entry.target as HTMLElement;
-              const delay = Number(el.dataset.revealDelay || 0);
-              if (delay > 0) {
-                el.style.transitionDelay = `${delay}ms`;
-              }
-              el.classList.add("reveal-in");
-              io?.unobserve(el);
-            }
+          const element = entry.target as HTMLElement;
+          const delay = Number(element.dataset.revealDelay || 0);
+
+          if (Number.isFinite(delay) && delay > 0) {
+            element.style.transitionDelay = `${delay}ms`;
           }
-        },
-        { threshold: 0.12, rootMargin: "0px 0px -6% 0px" },
-      );
 
-      els.forEach((el) => io?.observe(el));
+          element.classList.add("reveal-in");
+          io.unobserve(element);
+        }
+      },
+      {
+        threshold: 0.12,
+        rootMargin: "0px 0px -6% 0px",
+      }
+    );
+
+    const observeElement = (element: HTMLElement) => {
+      if (
+        disposed ||
+        observed.has(element) ||
+        element.classList.contains("reveal-in")
+      ) {
+        return;
+      }
+
+      observed.add(element);
+      io.observe(element);
+    };
+
+    const scanNode = (node: Node) => {
+      if (!(node instanceof HTMLElement)) return;
+
+      if (node.matches(".reveal:not(.reveal-in)")) {
+        observeElement(node);
+      }
+
+      node
+        .querySelectorAll<HTMLElement>(".reveal:not(.reveal-in)")
+        .forEach(observeElement);
+    };
+
+    // 先登記目前已存在的元素，再啟用隱藏動畫，避免無 observer 的透明內容。
+    document
+      .querySelectorAll<HTMLElement>(".reveal:not(.reveal-in)")
+      .forEach(observeElement);
+
+    const mutationObserver = new MutationObserver(records => {
+      for (const record of records) {
+        record.addedNodes.forEach(scanNode);
+      }
     });
+
+    mutationObserver.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+
+    root.classList.add("reveal-ready");
 
     return () => {
       disposed = true;
-      cancelAnimationFrame(raf);
-      io?.disconnect();
+      mutationObserver.disconnect();
+      io.disconnect();
+      root.classList.remove("reveal-ready");
     };
   }, [location]);
 }
