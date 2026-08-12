@@ -94,9 +94,9 @@ try {
 
     await verifyNoHorizontalOverflow(page, `首頁 ${viewport.name}px`);
 
-    const menuButton = page.getByRole("button", {
-      name: "開啟選單",
-    });
+    const menuButton = page.locator(
+      'button[aria-controls="mobile-navigation"]'
+    );
 
     await menuButton.click();
 
