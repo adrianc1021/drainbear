@@ -27,6 +27,12 @@
  * sendEvent 內建 PII 樣式防護,疑似個人資料的參數值會被整個丟棄。
  */
 
+import {
+  captureInitialAttribution,
+  createWhatsAppHandoff,
+  type SessionAttribution,
+} from "./trackingSession";
+
 declare global {
   interface Window {
     dataLayer: unknown[];
@@ -60,7 +66,7 @@ function rawGa4Id(): string | undefined {
   const fromEnv =
     (import.meta.env.VITE_GA4_MEASUREMENT_ID as string | undefined) ||
     (import.meta.env.VITE_GA4_ID as string | undefined);
-  const id = fromWindow || fromEnv;
+  const id = fromWindow || fromEnv || "G-7JEL7SLBGQ";
   return id && id.trim() ? id.trim() : undefined;
 }
 
@@ -76,7 +82,7 @@ function resolveGa4Id(): string | undefined {
     if (IS_DEV && !invalidIdWarned) {
       invalidIdWarned = true;
       console.warn(
-        "[analytics] GA4 Measurement ID 格式不正確(應為 G-XXXXXXXXXX),GA4 已停用;網站其他功能不受影響。",
+        "[analytics] GA4 Measurement ID 格式不正確(應為 G-XXXXXXXXXX),GA4 已停用;網站其他功能不受影響。"
       );
     }
     return undefined;
@@ -87,9 +93,23 @@ function resolveGa4Id(): string | undefined {
 const IS_DEV = Boolean(import.meta.env.DEV);
 const DEV_DEBUG_ENABLED = import.meta.env.VITE_GA4_DEBUG === "true";
 
-/** GA4 是否應該實際上報(有合法 ID,且非開發環境或已明確開啟 debug 上報) */
+const PRODUCTION_HOSTS = new Set(["drainbearhk.com", "www.drainbearhk.com"]);
+
+function isProductionTrackingHost() {
+  if (typeof window === "undefined") return false;
+  return PRODUCTION_HOSTS.has(window.location.hostname);
+}
+
+/**
+ * 只在正式網域上報 Production GA4。
+ * localhost、Playwright 及 Vercel Preview 預設不會污染正式數據；
+ * 開發時可使用 VITE_GA4_DEBUG=true 明確開啟 DebugView。
+ */
 function isGa4Active(): boolean {
-  return Boolean(resolveGa4Id()) && (!IS_DEV || DEV_DEBUG_ENABLED);
+  return (
+    Boolean(resolveGa4Id()) &&
+    (DEV_DEBUG_ENABLED || (!IS_DEV && isProductionTrackingHost()))
+  );
 }
 
 let initialized = false;
@@ -105,6 +125,10 @@ export function initAnalytics() {
   if (initialized || typeof window === "undefined") return;
   initialized = true;
 
+  // 歸因保存不等於外送 Analytics：所有 hostname 都應先保存，
+  // GA4／Google Ads 外送仍由下方 production-host gate 控制。
+  captureInitialAttribution();
+
   window.dataLayer = window.dataLayer || [];
   window.gtag =
     window.gtag ||
@@ -117,7 +141,7 @@ export function initAnalytics() {
   if (!ga4Id || !isGa4Active()) {
     if (IS_DEV && ga4Id) {
       console.info(
-        '[analytics] 開發環境已停用 GA4 上報(設 VITE_GA4_DEBUG="true" 可啟用 DebugView 上報)',
+        '[analytics] 開發環境已停用 GA4 上報(設 VITE_GA4_DEBUG="true" 可啟用 DebugView 上報)'
       );
     }
     return;
@@ -125,7 +149,7 @@ export function initAnalytics() {
 
   // 重用已存在的 gtag.js(index.html Google Ads 片段已載入),避免重複載入。
   const alreadyLoaded = Boolean(
-    document.querySelector('script[src*="googletagmanager.com/gtag/js"]'),
+    document.querySelector('script[src*="googletagmanager.com/gtag/js"]')
   );
   if (!alreadyLoaded) {
     const s = document.createElement("script");
@@ -136,8 +160,8 @@ export function initAnalytics() {
   }
 
   window.gtag("config", ga4Id, {
-    send_page_view: true,
-    ...(IS_DEV ? { debug_mode: true } : {}),
+    send_page_view: false,
+    ...(DEV_DEBUG_ENABLED ? { debug_mode: true } : {}),
   });
 }
 
@@ -159,6 +183,11 @@ export interface AnalyticsEventParams {
   form_name?: string;
   error_type?: string;
   read_percent?: number;
+  traffic_source?: string;
+  traffic_medium?: string;
+  campaign_name?: string;
+  landing_page?: string;
+  click_id_type?: string;
 }
 
 const ALLOWED_PARAM_KEYS: ReadonlyArray<keyof AnalyticsEventParams> = [
@@ -174,6 +203,11 @@ const ALLOWED_PARAM_KEYS: ReadonlyArray<keyof AnalyticsEventParams> = [
   "form_name",
   "error_type",
   "read_percent",
+  "traffic_source",
+  "traffic_medium",
+  "campaign_name",
+  "landing_page",
+  "click_id_type",
 ];
 
 // 疑似個人資料樣式:電郵、8 位以上連續數字(香港電話)、+852 開頭
@@ -183,7 +217,7 @@ const PII_PATTERNS = [
 ];
 
 function looksLikePII(value: string): boolean {
-  return PII_PATTERNS.some((re) => re.test(value));
+  return PII_PATTERNS.some(re => re.test(value));
 }
 
 /**
@@ -197,7 +231,7 @@ function looksLikePII(value: string): boolean {
  */
 export function sendEvent(
   eventName: string,
-  params: AnalyticsEventParams = {},
+  params: AnalyticsEventParams = {}
 ) {
   if (typeof window === "undefined") return;
   window.dataLayer = window.dataLayer || [];
@@ -208,7 +242,7 @@ export function sendEvent(
     if (value === undefined || value === null || value === "") continue;
     if (typeof value === "string" && looksLikePII(value)) {
       console.warn(
-        `[analytics] 參數 ${key} 疑似含個人資料,已丟棄(事件 ${eventName})`,
+        `[analytics] 參數 ${key} 疑似含個人資料,已丟棄(事件 ${eventName})`
       );
       continue;
     }
@@ -287,7 +321,7 @@ export type CtaChannel = "whatsapp" | "phone" | "map";
 export function trackCTA(
   channel: CtaChannel,
   location: string,
-  topic?: string,
+  topic?: string
 ) {
   if (channel === "map") {
     sendEvent("area_click", {
@@ -310,20 +344,65 @@ export function trackCTA(
  */
 export function goThanksAfterWhatsApp(location: string) {
   if (typeof window === "undefined") return;
+
+  captureInitialAttribution();
+  createWhatsAppHandoff(location);
+
   window.setTimeout(() => {
     // 使用 wouter 以外的原生導向,確保任何組件情境都可用
     window.history.pushState(
       null,
       "",
-      `/thanks?from=${encodeURIComponent(location)}`,
+      `/thanks?from=${encodeURIComponent(location)}`
     );
     window.dispatchEvent(new PopStateEvent("popstate"));
   }, 600);
 }
 
-/** /thanks 頁面觸發:whatsapp_open 轉化事件(真實對話開啟率代理指標) */
+/**
+ * 舊事件保留作歷史兼容；新前台不再以單純 /thanks page load
+ * 觸發 whatsapp_open。
+ */
 export function trackWhatsAppOpen(from: string) {
-  sendEvent("whatsapp_open", { cta_location: from, page_path: "/thanks" });
+  sendEvent("whatsapp_open", {
+    cta_location: from,
+    page_path: "/thanks",
+  });
+}
+
+/**
+ * 只有成功 consume 一次性 handoff token 才觸發。
+ * 它代表有效 WhatsApp 外跳流程，不代表對方已發送訊息。
+ */
+export function trackWhatsAppHandoff(
+  from: string,
+  attribution: SessionAttribution
+) {
+  sendEvent("whatsapp_handoff", {
+    cta_location: from,
+    page_path: "/thanks",
+    traffic_source: attribution.traffic_source,
+    traffic_medium: attribution.traffic_medium,
+    campaign_name: attribution.campaign_name,
+    landing_page: attribution.landing_page,
+    click_id_type: attribution.click_id_type,
+  });
+
+  const adsLabel = (
+    import.meta.env.VITE_GOOGLE_ADS_WHATSAPP_LABEL as string | undefined
+  )?.trim();
+
+  if (
+    window.gtag &&
+    adsLabel &&
+    /^[A-Za-z0-9_-]{4,64}$/.test(adsLabel) &&
+    isGa4Active()
+  ) {
+    window.gtag("event", "conversion", {
+      send_to: `AW-18128738982/${adsLabel}`,
+      transport_type: "beacon",
+    });
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -405,7 +484,7 @@ export function trackNavClick(
     | "service_name"
     | "area_name"
     | "article_slug"
-  >,
+  >
 ) {
   sendEvent(NAV_EVENT_NAMES[kind], params);
 }
