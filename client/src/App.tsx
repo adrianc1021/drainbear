@@ -1,6 +1,6 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { lazy, Suspense, useEffect, useRef } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Layout from "./components/Layout";
@@ -25,15 +25,11 @@ initAnalytics();
 
 function PageViewTracker() {
   const [location] = useLocation();
-  const isFirst = useRef(true);
 
   useEffect(() => {
-    if (isFirst.current) {
-      isFirst.current = false;
-      return;
-    }
-
-    const id = window.setTimeout(() => trackPageView(location), 100);
+    // 包括首次載入；gtag config 已設 send_page_view:false。
+    // 稍候 SEO effect 寫入 title 後才送出。
+    const id = window.setTimeout(() => trackPageView(location), 150);
 
     return () => window.clearTimeout(id);
   }, [location]);

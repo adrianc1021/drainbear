@@ -4,7 +4,7 @@
  *       量度真實對話開啟率；同時提供等候指引、電話後備及導流內容。
  * 風格：Premium SaaS Minimalism
  */
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { Link } from "wouter";
 import {
   ArrowRight,
@@ -23,7 +23,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
-import { trackCTA, trackWhatsAppOpen } from "@/lib/analytics";
+import { trackCTA, trackWhatsAppHandoff } from "@/lib/analytics";
+import { consumeWhatsAppHandoff } from "@/lib/trackingSession";
 
 const NEXT_STEPS = [
   {
@@ -72,18 +73,14 @@ const THANKS_FAQS = [
 ];
 
 export default function Thanks() {
-  const tracked = useRef(false);
-  const {
-    phoneDisplay,
-    phoneHref,
-    whatsappDefaultHref,
-  } = useContactSettings();
+  const { phoneDisplay, phoneHref, whatsappDefaultHref } = useContactSettings();
 
   useEffect(() => {
-    if (tracked.current) return;
-    tracked.current = true;
-    const from = new URLSearchParams(window.location.search).get("from") || "unknown";
-    trackWhatsAppOpen(from);
+    const handoff = consumeWhatsAppHandoff();
+
+    if (!handoff) return;
+
+    trackWhatsAppHandoff(handoff.cta_location, handoff.attribution);
   }, []);
 
   return (
@@ -103,8 +100,9 @@ export default function Thanks() {
             WhatsApp 對話已開啟
           </h1>
           <p className="mx-auto mt-4 max-w-lg text-muted-foreground">
-            感謝查詢！在線師傅會於 <strong className="text-navy">1 分鐘內</strong>回覆你。
-            請留意 WhatsApp 通知，或按以下步驟令報價更快更準。
+            感謝查詢！在線師傅會於{" "}
+            <strong className="text-navy">1 分鐘內</strong>回覆你。 請留意
+            WhatsApp 通知，或按以下步驟令報價更快更準。
           </p>
 
           {/* 後備入口 */}
@@ -151,15 +149,21 @@ export default function Thanks() {
                 <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-navy text-wagreen">
                   <s.icon className="h-5 w-5" strokeWidth={2.2} />
                 </div>
-                <h3 className="font-display text-base font-black text-navy">{s.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.desc}</p>
+                <h3 className="font-display text-base font-black text-navy">
+                  {s.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  {s.desc}
+                </p>
               </div>
             ))}
           </div>
 
           {/* 等候時導流 */}
           <div className="reveal mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm">
-            <span className="text-muted-foreground">等候回覆時，不妨了解一下：</span>
+            <span className="text-muted-foreground">
+              等候回覆時，不妨了解一下：
+            </span>
             <Link
               href="/guide"
               className="btn-smooth inline-flex min-h-[44px] items-center gap-1.5 font-bold text-wagreen-dark hover:gap-2.5"
@@ -186,7 +190,9 @@ export default function Thanks() {
       <section className="bg-mist py-14 md:py-20">
         <div className="container max-w-3xl">
           <div className="reveal text-center">
-            <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">WHILE YOU WAIT</div>
+            <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">
+              WHILE YOU WAIT
+            </div>
             <h2 className="font-display text-2xl font-black text-navy md:text-3xl">
               等候回覆時，先了解服務流程同收費
             </h2>
@@ -201,7 +207,11 @@ export default function Thanks() {
               className="card-float overflow-hidden rounded-lg border border-border bg-white"
             >
               {THANKS_FAQS.map((f, i) => (
-                <AccordionItem key={f.q} value={`faq-${i}`} className="border-border px-5 md:px-7">
+                <AccordionItem
+                  key={f.q}
+                  value={`faq-${i}`}
+                  className="border-border px-5 md:px-7"
+                >
                   <AccordionTrigger className="min-h-[56px] py-4 text-left font-bold text-navy hover:no-underline md:text-base">
                     {f.q}
                   </AccordionTrigger>
