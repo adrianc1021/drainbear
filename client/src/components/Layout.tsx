@@ -293,10 +293,10 @@ function Header() {
 }
 
 const FOOTER_STATS = [
-  { icon: Award, value: "1000+", label: "成功案例" },
-  { icon: Clock, value: "1 小時", label: "特快到達承諾" },
-  { icon: Star, value: "98%", label: "客戶五星好評" },
-  { icon: Phone, value: "24/7", label: "全天候緊急熱線" },
+  { icon: Award, value: "先報價", label: "動工前確認收費" },
+  { icon: Clock, value: "按安排", label: "確認上門時間" },
+  { icon: Star, value: "專業設備", label: "按實際情況選用" },
+  { icon: Phone, value: "24 小時", label: "接受渠務查詢" },
 ];
 
 const FOOTER_AREAS = [
@@ -385,7 +385,7 @@ function Footer() {
         </nav>
         <div className="flex items-center gap-2 text-sm text-white/60">
           <ShieldCheck className="h-4 w-4 text-wagreen" />
-          不成功不收費・明碼實價
+          先報價・動工前確認總價
         </div>
       </div>
       <div className="border-t border-white/10 py-5 text-center text-xs text-white/70">
@@ -394,11 +394,11 @@ function Footer() {
           onClick={() => trackCTA("phone", "footer")}
           className="btn-smooth inline-flex min-h-[44px] items-center px-2 hover:text-white"
         >
-          24 小時熱線：{phoneDisplay}
+          24 小時查詢：{phoneDisplay}
         </a>
         <span className="mx-2">|</span>© {new Date().getFullYear()} 通渠熊
         DrainBear Limited.
-        版權所有。專業排水工程團隊，香港島、九龍、新界全天候服務。
+        版權所有。提供港島、九龍、新界及離島渠務查詢；服務安排按所在地點、交通及工具運送情況確認。
       </div>
       <div className="border-t border-white/10">
         <div className="container py-6">

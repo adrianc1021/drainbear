@@ -1,7 +1,7 @@
 /**
  * 通渠熊 DrainBear — 服務地區（SEO 導向，第六輪全面優化版）
  * 風格：Premium SaaS Minimalism，大量留白、8px 圓角、懸浮陰影卡片、無 Emoji
- * 結構：Hero + 地區速查 + 統計帶 → 互動香港地圖 → 專屬著陸頁精選卡 → 三大分區（分頁籤式）→ 統一收費承諾 CTA
+ * 結構：Hero + 地區速查 + 動態統計帶 → 互動香港地圖 → 專屬著陸頁精選卡 → 三大分區（分頁籤式）→ 收費流程 CTA
  * 第十輪：新增互動式十八區地圖（HongKongMap）；三大分區改為分頁籤 + 分組排版，減少 pill 牆壓迫感
  * 第十一輪：搜尋列即時篩選 + 鍵盤導航 + 直接跳轉（有專頁 → 專頁；無專頁 → 捲至分區籤並高亮該地區）
  */
@@ -43,8 +43,8 @@ const REGIONS = [
     icon: Landmark,
     name: "港島區",
     en: "HONG KONG ISLAND",
-    eta: "45 分鐘內",
-    desc: "熟悉商廈及半山豪宅喉管結構，高效低噪音。",
+    eta: "上門時間按安排確認",
+    desc: "熟悉商廈、住宅及樓齡較高樓宇的常見渠務情況。",
     seoText:
       "港島區商廈林立，亦有不少樓齡較高的半山豪宅及唐樓，容易出現主渠老化及隔油池滿瀉問題。我們熟悉港島區喉管結構，提供高效、低噪音的專業通渠，絕不影響鄰居及商戶運作。",
     groups: [
@@ -100,10 +100,10 @@ const REGIONS = [
     icon: Building,
     name: "九龍區",
     en: "KOWLOON",
-    eta: "45 分鐘內",
-    desc: "專治舊式大廈喉管倒灌及食肆塞廁所，24/7 極速救亡。",
+    eta: "上門時間按安排確認",
+    desc: "處理舊式大廈、住宅及食肆常見渠務問題。",
     seoText:
-      "九龍區人口極度密集、食肆林立，旺角及深水埗等地的舊式大廈經常發生喉管倒灌及塞廁所的緊急情況。我們的九龍區車隊 24/7 候命，配備高壓水槍，瞬間擊退陳年頑固油垢。",
+      "九龍區人口密集、食肆林立，旺角及深水埗等地的舊式大廈較常出現喉管倒灌及座廁淤塞。師傅會先了解現場情況，再按需要安排合適工具及處理方式。",
     groups: [
       {
         label: "油尖旺區",
@@ -149,10 +149,10 @@ const REGIONS = [
     icon: Trees,
     name: "新界及離島",
     en: "NEW TERRITORIES & ISLANDS",
-    eta: "60 分鐘內",
-    desc: "配備大型吸車，專治村屋沙井滿瀉及戶外樹根纏繞。",
+    eta: "按交通及工具運送安排確認",
+    desc: "村屋、屋苑及離島服務按地點與所需設備確認安排。",
     seoText:
-      "新界區涵蓋大型私人屋苑及偏遠村屋。針對村屋常見的化糞池滿瀉、沙井淤塞或戶外樹根纏繞喉管等高難度問題，我們引進大型吸車及重型設備，提供徹底的解決方案。",
+      "新界及離島涵蓋大型屋苑、村屋及交通安排各異的地點。遇到化糞池、沙井淤塞或戶外渠管問題，可先提供位置及現場資料，再確認所需設備與服務安排。",
     groups: [
       {
         label: "沙田區",
@@ -243,6 +243,8 @@ const ALL_DISTRICTS = REGIONS.flatMap(r =>
   )
 );
 
+const COVERAGE_COUNT = new Set(ALL_DISTRICTS.map(item => item.district)).size;
+
 const AREAS_JSONLD = {
   "@context": "https://schema.org",
   "@type": "Service",
@@ -251,10 +253,102 @@ const AREAS_JSONLD = {
 };
 
 const STATS = [
-  { icon: MapPin, value: "78+", label: "覆蓋分區" },
-  { icon: Clock, value: "1 小時", label: "特快到達承諾" },
-  { icon: ShieldCheck, value: "統一價", label: "絕不因地區加價" },
+  {
+    icon: MapPin,
+    numericValue: COVERAGE_COUNT,
+    label: "主要服務地點",
+  },
+  {
+    icon: Building,
+    numericValue: DISTRICTS.length,
+    label: "專屬地區頁",
+  },
+  {
+    icon: ShieldCheck,
+    textValue: "先報價",
+    label: "動工前確認收費",
+  },
 ];
+
+function CountUpNumber({
+  value,
+  label,
+  duration = 1000,
+}: {
+  value: number;
+  label: string;
+  duration?: number;
+}) {
+  const [displayValue, setDisplayValue] = useState(value);
+  const elementRef = useRef<HTMLSpanElement>(null);
+  const hasAnimatedRef = useRef(false);
+
+  useEffect(() => {
+    const element = elementRef.current;
+
+    if (!element || hasAnimatedRef.current) return;
+
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (reducedMotion || typeof IntersectionObserver === "undefined") {
+      setDisplayValue(value);
+      hasAnimatedRef.current = true;
+      return;
+    }
+
+    let frameId = 0;
+
+    const observer = new IntersectionObserver(
+      entries => {
+        const entry = entries[0];
+
+        if (!entry?.isIntersecting || hasAnimatedRef.current) return;
+
+        hasAnimatedRef.current = true;
+        observer.disconnect();
+        setDisplayValue(0);
+
+        const startedAt = performance.now();
+
+        const update = (now: number) => {
+          const progress = Math.min((now - startedAt) / duration, 1);
+          const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+          setDisplayValue(Math.round(value * easedProgress));
+
+          if (progress < 1) {
+            frameId = requestAnimationFrame(update);
+          } else {
+            setDisplayValue(value);
+          }
+        };
+
+        frameId = requestAnimationFrame(update);
+      },
+      { threshold: 0.35 }
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(frameId);
+    };
+  }, [duration, value]);
+
+  return (
+    <>
+      <span ref={elementRef} aria-hidden="true" className="tabular-nums">
+        {displayValue.toLocaleString("zh-HK")}
+      </span>
+      <span className="sr-only">
+        {value.toLocaleString("zh-HK")} 個{label}
+      </span>
+    </>
+  );
+}
 
 function DistrictPill({
   name,
@@ -381,8 +475,8 @@ export default function Areas() {
   return (
     <div>
       <SEO
-        title="服務地區覆蓋｜港九新界24小時特快通渠上門｜通渠熊 DrainBear"
-        description="通渠熊 DrainBear 服務網絡覆蓋全港。無論您身處香港島(中環/銅鑼灣)、九龍(旺角/觀塘)、還是新界(沙田/荃灣/元朗)，我們的通渠車隊都能在 1 小時內特快到達。各區設有駐場通渠師傅，24小時緊急救亡。"
+        title="服務地區覆蓋｜港九新界及離島通渠查詢｜通渠熊 DrainBear"
+        description="通渠熊 DrainBear 提供港島、九龍、新界及離島主要地區渠務查詢。可按地區搜尋服務資料，並透過 WhatsApp 提供位置及問題詳情，確認上門安排與初步估價。"
         path="/areas"
         keywords="通渠服務地區, 港島通渠, 九龍通渠, 新界通渠, 中環通渠, 旺角通渠, 深水埗通渠, 銅鑼灣通渠, 北角通渠, 荃灣通渠, 元朗通渠, 屯門通渠, 將軍澳通渠, 沙田通渠, 觀塘通渠, 24小時通渠"
         jsonLd={areasJsonLd}
@@ -398,11 +492,11 @@ export default function Areas() {
               SERVICE AREAS
             </div>
             <h1 className="text-balance font-display text-4xl font-black text-navy md:text-5xl">
-              全港九新界 24 小時特快通渠
+              港九新界及離島通渠服務
             </h1>
             <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-              無論您身處港島半山豪宅、九龍鬧市舊樓，還是新界偏遠村屋，駐區師傅都能在
-              1 小時內極速到達，為您解決水管危機。
+              無論您身處港島、九龍、新界或離島，可先提供所在地點及渠務情況，
+              我們會按交通、工具運送及工作安排確認服務方式與上門時間。
             </p>
             {/* 地區速查 */}
             <div ref={searchRef} className="relative mx-auto mt-8 max-w-md">
@@ -472,8 +566,7 @@ export default function Areas() {
                     })
                   ) : (
                     <div className="px-4 py-4 text-sm text-muted-foreground">
-                      未找到「{query}」？我們仍然覆蓋全港，請直接致電{" "}
-                      {phoneDisplay} 確認。
+                      未找到「{query}」？請直接致電 {phoneDisplay} 確認。
                     </div>
                   )}
                 </div>
@@ -493,7 +586,11 @@ export default function Areas() {
                   strokeWidth={2.2}
                 />
                 <div className="mt-2 font-display text-xl font-black text-navy md:text-2xl">
-                  {s.value}
+                  {typeof s.numericValue === "number" ? (
+                    <CountUpNumber value={s.numericValue} label={s.label} />
+                  ) : (
+                    s.textValue
+                  )}
                 </div>
                 <div className="mt-1 text-xs text-muted-foreground md:text-sm">
                   {s.label}
@@ -519,7 +616,7 @@ export default function Areas() {
                 </h2>
               </div>
               <p className="max-w-md text-sm text-muted-foreground">
-                十八區全覆蓋。點擊你所在的分區，即可查看當區到達時間及專屬服務頁入口。
+                港九新界及離島主要地區均可查詢。點擊所在地區，即可查看服務資料及專屬服務頁入口。
               </p>
             </div>
             <HongKongMap />
@@ -531,11 +628,11 @@ export default function Areas() {
                 FEATURED DISTRICTS
               </div>
               <h2 className="font-display text-2xl font-black text-navy md:text-3xl">
-                十大熱門地區專屬服務頁
+                {DISTRICTS.length} 個熱門地區專屬服務頁
               </h2>
             </div>
             <p className="max-w-md text-sm text-muted-foreground">
-              涵蓋港九新界十個熱門地區，深入了解當區渠務特點、常見問題及駐區師傅服務承諾。
+              現有專屬頁涵蓋港九新界多個熱門地區，可查看當區常見渠務情況、服務流程及查詢方式。
             </p>
           </div>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -560,7 +657,7 @@ export default function Areas() {
                     {d.name}通渠專頁
                   </h3>
                   <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
-                    {d.heroDesc}
+                    查看{d.name}常見渠務情況、服務流程、附近服務範圍及查詢方式。
                   </p>
                   <div className="mt-4 flex flex-wrap gap-1.5">
                     {d.landmarks.slice(0, 3).map(l => (
@@ -582,7 +679,7 @@ export default function Areas() {
         </div>
       </section>
 
-      {/* 三大分區完整覆蓋（分頁籤式） */}
+      {/* 港九新界及離島服務範圍（分頁籤式） */}
       <section ref={coverageRef} className="bg-white py-12 md:py-16">
         <div className="container">
           <div className="reveal mb-8 flex flex-wrap items-end justify-between gap-3">
@@ -595,7 +692,7 @@ export default function Areas() {
               </h2>
             </div>
             <p className="max-w-md text-sm text-muted-foreground">
-              按行政區分組排列，一眼找到你的地區。綠色地區設有專屬服務頁，點擊直達。
+              按行政區及主要地點分組排列。綠色地區設有專屬服務頁，其他地區可先提供位置查詢安排。
             </p>
           </div>
 
@@ -646,7 +743,7 @@ export default function Areas() {
               </div>
               <span className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full bg-wagreen/10 px-4 py-2 text-sm font-bold text-wagreen-dark">
                 <Clock className="h-4 w-4" strokeWidth={2.5} />
-                {region.eta}到達
+                {region.eta}
               </span>
             </div>
 
@@ -680,17 +777,18 @@ export default function Areas() {
           </div>
         </div>
 
-        {/* 統一透明收費承諾 */}
+        {/* 估價及收費流程 */}
         <div className="container mt-16">
           <div className="dot-grid rounded-lg bg-navy px-8 py-12 text-center md:px-16">
             <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-white/10 ring-1 ring-white/20">
               <ShieldCheck className="h-6 w-6 text-wagreen" strokeWidth={2} />
             </div>
             <h2 className="text-balance font-display text-2xl font-black text-white md:text-3xl">
-              超越地區界限，統一透明收費
+              按地區及工程情況確認收費
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/60">
-              不管您在哪個分區，通渠熊均堅守「明碼實價、先報價後動工」原則，絕不因地區偏遠而坐地起價。不成功，不收費。
+              先透過 WhatsApp
+              提供位置、渠務問題及現場資料，我們會說明初步估價；師傅現場檢查後，動工前確認處理方式及總價。
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <WhatsAppButton
