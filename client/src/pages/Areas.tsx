@@ -340,7 +340,13 @@ function CountUpNumber({
 
   return (
     <>
-      <span ref={elementRef} aria-hidden="true" className="tabular-nums">
+      <span
+        ref={elementRef}
+        data-count-up-value={value}
+        data-count-up-current={displayValue}
+        aria-hidden="true"
+        className="tabular-nums"
+      >
         {displayValue.toLocaleString("zh-HK")}
       </span>
       <span className="sr-only">
