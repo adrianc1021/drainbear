@@ -103,7 +103,7 @@ function MobileCTABar() {
   const waTitle = estimate ? "發送估價詳情" : "WhatsApp 報價";
   const waSub = estimate
     ? `已附上估價 HK$${estimate.low.toLocaleString()}–${estimate.high.toLocaleString()}`
-    : "現在有師傅在線・即時回覆";
+    : "提供問題資料・方便跟進";
 
   return (
     <div
@@ -301,19 +301,19 @@ const FOOTER_STATS = [
 
 const FOOTER_AREAS = [
   {
-    name: "港島區通渠",
+    name: "港島主要服務地區",
     districts:
-      "中環・半山・灣仔・銅鑼灣・北角・鰂魚涌・太古城・柴灣・香港仔・跑馬地",
+      "中環・上環・西營盤・石塘咀・堅尼地城・半山・山頂・金鐘・灣仔・銅鑼灣・天后・大坑・跑馬地・北角・炮台山・鰂魚涌・太古城・西灣河・筲箕灣・柴灣・小西灣・香港仔・田灣・華富・鴨脷洲・黃竹坑・薄扶林・赤柱・淺水灣",
   },
   {
-    name: "九龍區通渠",
+    name: "九龍主要服務地區",
     districts:
-      "尖沙咀・旺角・油麻地・深水埗・長沙灣・九龍城・土瓜灣・黃大仙・觀塘・九龍灣",
+      "尖沙咀・佐敦・油麻地・旺角・太子・大角咀・深水埗・長沙灣・荔枝角・美孚・石硤尾・九龍塘・何文田・紅磡・黃埔・土瓜灣・九龍城・啟德・新蒲崗・黃大仙・樂富・鑽石山・慈雲山・彩虹・牛頭角・九龍灣・觀塘・秀茂坪・藍田・油塘",
   },
   {
-    name: "新界及離島通渠",
+    name: "新界及離島主要服務地區",
     districts:
-      "沙田・大圍・大埔・粉嶺・上水・荃灣・葵涌・屯門・元朗・將軍澳・西貢・東涌",
+      "沙田・大圍・火炭・石門・馬鞍山・大埔・太和・粉嶺・上水・荃灣・葵涌・葵芳・青衣・深井・馬灣・屯門・掃管笏・元朗・天水圍・錦田・洪水橋・將軍澳・寶琳・坑口・調景嶺・日出康城・西貢・清水灣・東涌・愉景灣・梅窩・長洲・南丫島・坪洲",
   },
 ];
 
@@ -420,7 +420,7 @@ function Footer() {
                 { label: "荃灣通渠", href: "/areas/tsuen-wan" },
                 { label: "屯門通渠", href: "/areas/tuen-mun" },
                 { label: "元朗通渠", href: "/areas/yuen-long" },
-                { label: "大圍通渠", href: "/areas/tai-wai" },
+                { label: "將軍澳通渠", href: "/areas/tseung-kwan-o" },
               ].map(item => (
                 <Link
                   key={item.href}
