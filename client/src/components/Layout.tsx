@@ -15,6 +15,7 @@ import {
   Award,
   ShieldCheck,
   ArrowUp,
+  ChevronDown,
 } from "lucide-react";
 import {
   trackCTA,
@@ -342,6 +343,60 @@ const FOOTER_AREAS = [
   },
 ];
 
+function FooterAreaAccordion({
+  area,
+  index,
+}: {
+  area: (typeof FOOTER_AREAS)[number];
+  index: number;
+}) {
+  const [open, setOpen] = useState(false);
+  const panelId = `footer-area-panel-${index}`;
+
+  return (
+    <section className="border-b border-white/10 py-1 last:border-b-0 md:border-0 md:py-0">
+      <button
+        type="button"
+        className="flex min-h-[52px] w-full items-center justify-between gap-4 py-2 text-left font-display text-sm font-bold text-white md:hidden"
+        aria-expanded={open}
+        aria-controls={panelId}
+        onClick={() => setOpen(current => !current)}
+      >
+        <span>{area.name}</span>
+        <ChevronDown
+          aria-hidden="true"
+          className={`h-4 w-4 shrink-0 text-wagreen transition-transform duration-200 ${
+            open ? "rotate-180" : ""
+          }`}
+        />
+      </button>
+
+      <Link
+        href="/areas"
+        className="btn-smooth hidden min-h-[44px] items-center font-display text-sm font-bold text-white hover:text-wagreen md:inline-flex"
+      >
+        {area.name}
+      </Link>
+
+      <div
+        id={panelId}
+        className={`${open ? "block" : "hidden"} pb-4 md:block md:pb-0`}
+      >
+        <p className="text-xs leading-relaxed text-white/70 md:mt-2">
+          {area.districts}
+        </p>
+
+        <Link
+          href="/areas"
+          className="mt-3 inline-flex min-h-[44px] items-center text-xs font-bold text-wagreen hover:text-white md:hidden"
+        >
+          查看完整服務地區
+        </Link>
+      </div>
+    </section>
+  );
+}
+
 function Footer() {
   const { phoneDisplay, phoneHref } = useContactSettings();
 
@@ -369,19 +424,9 @@ function Footer() {
 
       {/* SEO 地區連結區 */}
       <div className="border-b border-white/10">
-        <div className="container grid gap-8 py-10 md:grid-cols-3">
-          {FOOTER_AREAS.map(a => (
-            <div key={a.name}>
-              <Link
-                href="/areas"
-                className="btn-smooth inline-flex min-h-[44px] items-center font-display text-sm font-bold text-white hover:text-wagreen"
-              >
-                {a.name}
-              </Link>
-              <p className="mt-2 text-xs leading-relaxed text-white/70">
-                {a.districts}
-              </p>
-            </div>
+        <div className="container py-2 md:grid md:grid-cols-3 md:gap-8 md:py-10">
+          {FOOTER_AREAS.map((area, index) => (
+            <FooterAreaAccordion key={area.name} area={area} index={index} />
           ))}
         </div>
       </div>
