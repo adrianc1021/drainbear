@@ -125,6 +125,10 @@ export function initAnalytics() {
   if (initialized || typeof window === "undefined") return;
   initialized = true;
 
+  // 歸因保存不等於外送 Analytics：所有 hostname 都應先保存，
+  // GA4／Google Ads 外送仍由下方 production-host gate 控制。
+  captureInitialAttribution();
+
   window.dataLayer = window.dataLayer || [];
   window.gtag =
     window.gtag ||
@@ -154,8 +158,6 @@ export function initAnalytics() {
     document.head.appendChild(s);
     window.gtag("js", new Date());
   }
-
-  captureInitialAttribution();
 
   window.gtag("config", ga4Id, {
     send_page_view: false,

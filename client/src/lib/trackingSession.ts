@@ -82,8 +82,15 @@ export function captureInitialAttribution(): SessionAttribution {
     }
   }
 
-  const url = new URL(window.location.href);
-  const params = url.searchParams;
+  let params: URLSearchParams;
+
+  try {
+    params = new URL(window.location.href).searchParams;
+  } catch {
+    // 測試環境、受限 WebView 或不完整 location object 可能沒有有效 href。
+    // Attribution 初始化不可因 URL 解析失敗而中斷網站。
+    params = new URLSearchParams(window.location.search || "");
+  }
 
   const gclid = params.get("gclid");
   const gbraid = params.get("gbraid");
