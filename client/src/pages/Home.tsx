@@ -191,97 +191,142 @@ export default function Home() {
         jsonLd={HOME_JSONLD}
       />
       {/* ===== 區塊 1：Hero ===== */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-mist via-white to-white">
+      /* PR18_MOBILE_HERO */
+      <section
+        data-visual-section="home-hero"
+        className="relative isolate overflow-hidden border-b border-border/70 bg-white"
+      >
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.55]"
+          className="pointer-events-none absolute inset-0 -z-10"
+          aria-hidden="true"
           style={{
-            backgroundImage:
-              "radial-gradient(circle at 78% 30%, rgba(37,211,102,0.10) 0%, transparent 45%), radial-gradient(circle at 15% 75%, rgba(11,19,43,0.05) 0%, transparent 40%)",
+            background:
+              "radial-gradient(circle at 92% 12%, rgba(37,211,102,0.12), transparent 34%), linear-gradient(180deg, rgba(244,247,246,0.78), rgba(255,255,255,0) 68%)",
           }}
         />
-        <div className="container relative grid items-center gap-12 py-16 md:py-24 lg:grid-cols-2 lg:gap-16">
-          {/* 左側文案 */}
-          <div className="fade-up max-w-xl">
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-wagreen/30 bg-wagreen/10 px-4 py-1.5 text-xs font-bold tracking-[0.18em] text-wagreen-dark">
-              <Star className="h-3.5 w-3.5" strokeWidth={2.5} />
-              NEXT-GEN PLUMBING SOLUTIONS
-            </div>
-            <h1 className="text-balance font-display text-4xl font-black leading-[1.12] text-navy md:text-5xl lg:text-6xl">
-              塞渠爆喉？
-              <br />
-              <span className="bg-gradient-to-r from-wagreen to-emerald-500 bg-clip-text text-transparent">
-                通渠熊一Call即到。
+
+        <div className="container grid items-center gap-9 pb-10 pt-9 sm:pt-12 md:gap-12 md:pb-16 md:pt-16 lg:min-h-[680px] lg:grid-cols-[1.04fr_0.96fr] lg:gap-16 lg:py-20">
+          <div className="relative z-10 max-w-2xl">
+            <div className="mb-5 flex items-center gap-3">
+              <span
+                className="h-px w-8 bg-wagreen sm:w-10"
+                aria-hidden="true"
+              />
+              <span className="text-[11px] font-black uppercase tracking-[0.18em] text-navy/65 sm:text-xs">
+                香港專業通渠及喉管急救
               </span>
+            </div>
+
+            <h1 className="text-balance font-display text-[2.35rem] font-black leading-[1.05] tracking-[-0.035em] text-navy sm:text-5xl md:text-[3.45rem] lg:text-[4rem]">
+              塞渠爆喉，
+              <span className="mt-1 block text-wagreen-dark">唔使靠估。</span>
             </h1>
-            <p className="mt-6 text-base leading-relaxed text-muted-foreground md:text-lg">
-              香港頂尖水管急救團隊，24 小時全天候候命。引進外國頂級高壓設備與
-              CCTV 探測，明碼實價、極速到達、不成功不收費，服務覆蓋全港九新界。
+
+            <p className="mt-5 max-w-xl text-[15px] leading-7 text-muted-foreground sm:text-base md:mt-6 md:text-lg md:leading-8">
+              先了解現場情況，再安排合適師傅及設備。提供住宅、商業、高壓水槍洗渠及
+              CCTV 照喉服務，報價確認後才動工。
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+
+            <div className="mt-7 grid gap-3 sm:flex sm:flex-wrap sm:items-center md:mt-8">
               <a
-                href={whatsappHref("你好，我想立即獲取通渠報價。")}
+                href={whatsappHref("你好，我想查詢通渠服務及初步報價。")}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => {
                   trackCTA("whatsapp", "home_hero");
                   goThanksAfterWhatsApp("home_hero");
                 }}
-                className="btn-smooth inline-flex items-center justify-center gap-2 rounded-lg bg-wagreen px-7 py-3.5 text-base font-bold text-navy shadow-[0_8px_24px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark hover:shadow-[0_12px_32px_rgba(37,211,102,0.45)]"
+                className="btn-smooth inline-flex min-h-[50px] items-center justify-center gap-2 rounded-xl bg-wagreen px-6 py-3 text-sm font-black text-navy shadow-[0_8px_24px_rgba(37,211,102,0.2)] hover:bg-wagreen-dark sm:text-base"
               >
-                <MessageCircle className="h-5 w-5" strokeWidth={2.2} />
-                WhatsApp 免費報價
+                <MessageCircle className="h-5 w-5" strokeWidth={2.3} />
+                WhatsApp 查詢報價
               </a>
+
               <a
                 href={phoneHref}
                 onClick={() => trackCTA("phone", "home_hero")}
-                className="btn-smooth inline-flex items-center justify-center gap-2 rounded-lg bg-navy px-6 py-3.5 text-base font-bold text-white shadow-[0_8px_24px_rgba(11,19,43,0.25)] hover:bg-navy-light hover:shadow-[0_12px_32px_rgba(11,19,43,0.3)]"
+                className="btn-smooth inline-flex min-h-[50px] items-center justify-center gap-2 rounded-xl border border-navy/15 bg-white px-6 py-3 text-sm font-black text-navy hover:border-navy/35 hover:bg-mist sm:text-base"
               >
-                <Phone
-                  className="h-4.5 w-4.5 h-[18px] w-[18px]"
-                  strokeWidth={2.2}
-                />
-                {phoneDisplay}
+                <Phone className="h-[18px] w-[18px]" strokeWidth={2.3} />
+                致電 {phoneDisplay}
               </a>
             </div>
-            <p className="mt-5 text-xs text-muted-foreground">
-              先報價・後動工・不成功不收費・接納工程免檢查費
-            </p>
+
+            <ul
+              className="mt-6 grid grid-cols-2 gap-x-4 gap-y-3 border-t border-border/80 pt-5 text-xs font-bold text-navy/70 sm:flex sm:flex-wrap sm:gap-x-6"
+              aria-label="服務承諾"
+            >
+              <li className="flex items-center gap-2">
+                <BadgeCheck
+                  className="h-4 w-4 shrink-0 text-wagreen-dark"
+                  aria-hidden="true"
+                />
+                報價後動工
+              </li>
+              <li className="flex items-center gap-2">
+                <Clock
+                  className="h-4 w-4 shrink-0 text-wagreen-dark"
+                  aria-hidden="true"
+                />
+                24 小時可查詢
+              </li>
+              <li className="col-span-2 flex items-center gap-2 sm:col-span-1">
+                <MapPin
+                  className="h-4 w-4 shrink-0 text-wagreen-dark"
+                  aria-hidden="true"
+                />
+                覆蓋港九新界及離島
+              </li>
+            </ul>
           </div>
 
-          {/* 右側懸浮主圖 */}
-          <div className="relative fade-up" style={{ animationDelay: "120ms" }}>
-            <div className="pointer-events-none absolute -inset-6 rounded-[24px] bg-gradient-to-tr from-wagreen/15 via-transparent to-navy/10 blur-2xl" />
-            <div className="float-anim relative">
+          <div className="relative mx-auto w-full max-w-[560px] lg:mx-0 lg:max-w-none">
+            <div
+              className="absolute -inset-3 -z-10 rounded-[2rem] bg-wagreen/10 blur-2xl md:-inset-6"
+              aria-hidden="true"
+            />
+
+            <div className="relative overflow-hidden rounded-[1.5rem] border border-white/80 bg-mist shadow-[0_22px_60px_rgba(11,19,43,0.14)] md:rounded-[2rem]">
               <img
                 src={HERO_IMG}
-                alt="通渠熊專業師傅配備高壓通渠設備"
+                alt="通渠熊專業師傅準備通渠及喉管檢測設備"
                 width={768}
                 height={768}
                 loading="eager"
                 fetchPriority="high"
                 decoding="async"
-                className="w-full rounded-2xl object-cover shadow-[0_24px_64px_rgba(11,19,43,0.22)]"
+                className="aspect-[4/3] w-full object-cover object-top sm:aspect-[5/4] lg:aspect-[4/5]"
               />
-              <div className="absolute -bottom-5 -left-5 hidden items-center gap-3 rounded-lg bg-white px-5 py-4 shadow-[0_12px_32px_rgba(11,19,43,0.15)] md:flex">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-wagreen/12 text-wagreen">
-                  <Clock className="h-5 w-5" strokeWidth={2.2} />
-                </div>
-                <div>
-                  <div className="font-display text-sm font-extrabold text-navy">
-                    1 小時特快到達
-                  </div>
-                  <div className="text-xs text-muted-foreground">
-                    全港 24 小時候命
+
+              <div className="absolute inset-x-3 bottom-3 rounded-xl border border-white/70 bg-white/92 p-4 shadow-[0_10px_30px_rgba(11,19,43,0.12)] backdrop-blur-md sm:inset-x-auto sm:bottom-5 sm:left-5 sm:max-w-[250px]">
+                <div className="flex items-start gap-3">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-navy text-wagreen">
+                    <ScanEye
+                      className="h-5 w-5"
+                      strokeWidth={2.1}
+                      aria-hidden="true"
+                    />
+                  </span>
+                  <div>
+                    <p className="font-display text-sm font-black text-navy">
+                      先判斷，再處理
+                    </p>
+                    <p className="mt-1 text-xs leading-5 text-muted-foreground">
+                      按淤塞情況選用合適工具，減少不必要工程。
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
+
+            <div
+              className="absolute -right-3 -top-3 hidden h-20 w-20 rounded-full border border-wagreen/30 lg:block"
+              aria-hidden="true"
+            />
           </div>
         </div>
       </section>
-
       <ServiceQuickSelect />
-
       {/* ===== 區塊 2：暗色優勢列 ===== */}
       <section className="bg-navy">
         <div className="container grid grid-cols-1 gap-10 py-14 sm:grid-cols-2 md:py-16 lg:grid-cols-4">
@@ -306,7 +351,6 @@ export default function Home() {
           ))}
         </div>
       </section>
-
       {/* ===== 區塊 3：透明報價信任區塊 ===== */}
       <section className="dot-grid-light bg-white py-20 md:py-24">
         <div className="container">
@@ -355,7 +399,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* ===== 區塊 4：為什麼選擇我們 ===== */}
       <section className="bg-mist py-20 md:py-28">
         <div className="container grid items-center gap-12 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
@@ -425,7 +468,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* ===== 區塊 5：四大服務卡（每卡獨立 WhatsApp CTA）===== */}
       <section className="bg-white py-20 md:py-28">
         <div className="container">
@@ -499,7 +541,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* ===== 區塊 5.5：真實工程案例 + Google 評價入口 ===== */}
       <section className="bg-mist py-20 md:py-24">
         <div className="container">
@@ -618,7 +659,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* ===== 區塊 6：通渠小知識精選 ===== */}
       <section className="bg-white py-20 md:py-24">
         <div className="container">
@@ -666,7 +706,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* ===== CTA 收尾 ===== */}
       <section className="dot-grid bg-navy py-20 md:py-24">
         <div className="container reveal text-center">
