@@ -1,7 +1,7 @@
 /**
- * 通渠熊 DrainBear — Premium SaaS Minimalism
- * Header：Logo + 首頁/通渠服務/服務地區/常見問題 + 綠色「24hr 緊急報價」懸浮按鈕
- * Footer：橫向 4 組數據 + 公司資訊
+ * 通渠熊 DrainBear — Hong Kong Industrial Editorial
+ * Header：清晰品牌導覽 + 克制的 WhatsApp 行動入口
+ * Footer：服務資訊、主要地區與公司資料
  */
 import { ReactNode, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "wouter";
@@ -40,7 +40,7 @@ const NAV_ITEMS = [
 
 export function WhatsAppButton({
   className = "",
-  label = "24hr 緊急報價",
+  label = "WhatsApp 查詢",
   trackLocation = "shared_button",
 }: {
   className?: string;
@@ -58,7 +58,7 @@ export function WhatsAppButton({
         trackCTA("whatsapp", trackLocation);
         goThanksAfterWhatsApp(trackLocation);
       }}
-      className={`btn-smooth inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-wagreen px-5 py-2.5 text-sm font-bold text-navy shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark hover:shadow-[0_6px_24px_rgba(37,211,102,0.45)] ${className}`}
+      className={`btn-smooth inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-wagreen px-5 py-2.5 text-sm font-bold text-navy shadow-[0_2px_8px_rgba(11,19,43,0.1)] hover:bg-wagreen-dark hover:shadow-[0_5px_16px_rgba(11,19,43,0.14)] ${className}`}
     >
       <MessageCircle className="h-4 w-4" strokeWidth={2.5} />
       {label}
@@ -67,11 +67,11 @@ export function WhatsAppButton({
 }
 
 /**
- * 行動裝置底部固定 CTA 列（v2）：
- * - WhatsApp 為主 CTA（佔約 62% 闊度、副標「即時免費報價」提升點擊誘因）
- * - 電話為次 CTA（深色，僅圖標+短文字）
- * - 支援 iPhone 底部安全區（safe-area-inset-bottom）
- * - 向下捲動時自動收起、向上捲動或近頁底時重現，減少閱讀遮擋
+ * 行動裝置底部固定 CTA：
+ * - WhatsApp 為主 CTA（約 75% 闊度）
+ * - 電話為精簡次要 CTA
+ * - 支援 iPhone safe area
+ * - 向下捲動時收起，向上捲動或接近頁底時重現
  */
 function MobileCTABar() {
   const [hidden, setHidden] = useState(false);
@@ -107,16 +107,16 @@ function MobileCTABar() {
 
   return (
     <div
-      className={`fixed inset-x-0 bottom-0 z-50 border-t border-border bg-white/95 backdrop-blur-md transition-transform duration-300 md:hidden ${
+      className={`fixed inset-x-0 bottom-0 z-50 border-t border-border/80 bg-white/96 backdrop-blur-xl transition-transform duration-200 md:hidden ${
         hidden ? "pointer-events-none translate-y-full" : "translate-y-0"
       }`}
       style={{
         transitionTimingFunction: "cubic-bezier(0.23, 1, 0.32, 1)",
         paddingBottom: "env(safe-area-inset-bottom)",
-        boxShadow: "0 -6px 24px rgba(11,19,43,0.12)",
+        boxShadow: "0 -4px 18px rgba(11,19,43,0.09)",
       }}
     >
-      <div className="flex items-stretch gap-2.5 px-3 py-2.5">
+      <div className="flex items-stretch gap-2 px-3 py-2">
         <a
           href={waHref}
           target="_blank"
@@ -129,16 +129,12 @@ function MobileCTABar() {
             );
             goThanksAfterWhatsApp("mobile_bar");
           }}
-          className="btn-smooth flex min-h-[52px] flex-[1.6] items-center justify-center gap-2.5 rounded-lg bg-wagreen px-3 py-2.5 text-navy shadow-[0_4px_14px_rgba(37,211,102,0.4)] active:scale-[0.97]"
+          className="btn-smooth flex min-h-[54px] flex-[3] items-center justify-center gap-2.5 rounded-lg bg-wagreen px-3 py-2 text-navy shadow-[0_2px_8px_rgba(11,19,43,0.1)] active:scale-[0.98]"
         >
           <MessageCircle className="h-5 w-5 shrink-0" strokeWidth={2.4} />
           <span className="flex flex-col items-start leading-tight">
             <span className="text-[15px] font-bold">{waTitle}</span>
-            <span className="flex items-center gap-1.5 text-[10.5px] font-medium text-navy/80">
-              <span className="relative flex h-2 w-2 shrink-0">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-navy/30 [animation-duration:1.8s]" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-white shadow-[0_0_6px_rgba(255,255,255,0.9)]" />
-              </span>
+            <span className="max-w-[16rem] truncate text-[10.5px] font-medium text-navy/75">
               {waSub}
             </span>
           </span>
@@ -146,7 +142,7 @@ function MobileCTABar() {
         <a
           href={phoneHref}
           onClick={() => trackCTA("phone", "mobile_bar")}
-          className="btn-smooth flex min-h-[52px] flex-1 items-center justify-center gap-2 rounded-lg bg-navy px-3 py-2.5 text-white active:scale-[0.97]"
+          className="btn-smooth flex min-h-[54px] flex-1 items-center justify-center gap-1.5 rounded-lg bg-navy px-2 py-2 text-white active:scale-[0.98]"
         >
           <Phone className="h-[18px] w-[18px] shrink-0" strokeWidth={2.4} />
           <span className="text-[15px] font-bold">致電</span>
@@ -176,7 +172,7 @@ function BackToTop() {
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       aria-label="回到頂部"
-      className={`btn-smooth fixed right-4 z-40 flex h-11 w-11 items-center justify-center rounded-lg border border-border bg-white/95 text-navy shadow-[0_6px_20px_rgba(11,19,43,0.16)] backdrop-blur transition-all duration-300 hover:bg-mist active:scale-[0.94] md:right-6 ${
+      className={`btn-smooth fixed right-4 z-40 flex h-11 w-11 items-center justify-center rounded-lg border border-border bg-white/95 text-navy shadow-[0_4px_14px_rgba(11,19,43,0.11)] backdrop-blur transition-all duration-300 hover:bg-mist active:scale-[0.94] md:right-6 ${
         visible
           ? "translate-y-0 opacity-100"
           : "pointer-events-none translate-y-3 opacity-0"
@@ -202,23 +198,47 @@ function Header() {
 
   useEffect(() => setOpen(false), [location]);
 
+  useEffect(() => {
+    if (!open) return;
+
+    const previousOverflow = document.body.style.overflow;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setOpen(false);
+      }
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
+
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-200 ${
         scrolled
-          ? "bg-white/90 shadow-[0_2px_16px_rgba(11,19,43,0.08)] backdrop-blur-xl"
-          : "bg-white/60 backdrop-blur-md"
+          ? "border-border/80 bg-white/94 shadow-[0_2px_12px_rgba(11,19,43,0.055)] backdrop-blur-xl"
+          : "border-transparent bg-white/82 backdrop-blur-lg"
       }`}
     >
       <div className="container flex h-16 items-center justify-between md:h-[72px]">
-        <Link href="/" className="flex items-center gap-2.5">
+        <Link
+          href="/"
+          aria-label="通渠熊 DrainBear 首頁"
+          className="flex items-center gap-2.5"
+        >
           <img
             src={LOGO}
             alt="通渠熊 DrainBear Logo"
             className="h-10 w-10 md:h-11 md:w-11"
           />
-          <span className="font-display text-lg font-extrabold tracking-tight text-navy md:text-xl">
-            通渠熊 <span className="text-[#087a35]">DrainBear</span>
+          <span className="font-display text-lg font-black tracking-[-0.025em] text-navy md:text-xl">
+            通渠熊 <span className="text-navy/55">DrainBear</span>
           </span>
         </Link>
 
@@ -252,14 +272,19 @@ function Header() {
         <button
           className="btn-smooth -mr-2 flex h-12 w-12 items-center justify-center rounded-lg text-navy hover:bg-mist md:hidden"
           onClick={() => setOpen(!open)}
-          aria-label="開啟選單"
+          aria-label={open ? "關閉選單" : "開啟選單"}
+          aria-expanded={open}
+          aria-controls="mobile-navigation"
         >
           {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
       {open && (
-        <div className="border-t border-border bg-white px-4 pb-5 pt-2 shadow-lg md:hidden">
+        <div
+          id="mobile-navigation"
+          className="max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-border/80 bg-white px-5 pb-5 pt-3 shadow-[0_12px_28px_rgba(11,19,43,0.09)] md:hidden"
+        >
           {NAV_ITEMS.map(item => (
             <Link
               key={item.href}
@@ -271,7 +296,7 @@ function Header() {
                   destination_url: item.href,
                 })
               }
-              className={`block min-h-[48px] rounded-lg px-4 py-3 text-base font-medium ${
+              className={`flex min-h-12 items-center rounded-lg px-4 py-3 text-base font-medium ${
                 location === item.href
                   ? "bg-mist font-bold text-navy"
                   : "text-navy/70"
