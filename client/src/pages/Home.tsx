@@ -195,7 +195,7 @@ export default function Home() {
         jsonLd={HOME_JSONLD}
       />
       {/* ===== 區塊 1：Hero ===== */}
-      /* PR18_MOBILE_HERO */
+      {/* PR18_MOBILE_HERO */}
       <section
         data-visual-section="home-hero"
         className="relative isolate overflow-hidden border-b border-border/70 bg-white"

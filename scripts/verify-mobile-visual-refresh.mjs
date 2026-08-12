@@ -92,6 +92,15 @@ try {
       })
       .waitFor();
 
+    // PR18_HERO_MARKER_VISIBILITY_CHECK
+    const leakedHeroMarker = page.getByText("/* PR18_MOBILE_HERO */", {
+      exact: true,
+    });
+
+    if ((await leakedHeroMarker.count()) !== 0) {
+      throw new Error("PR18 Hero 開發標記意外顯示於頁面");
+    }
+
     await verifyNoHorizontalOverflow(page, `首頁 ${viewport.name}px`);
 
     const menuButton = page.locator(
