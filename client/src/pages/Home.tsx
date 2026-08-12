@@ -83,8 +83,12 @@ const IMG_HYDROJET =
 const IMG_CCTV =
   "https://res.cloudinary.com/pgjztf2p/image/upload/f_auto,q_auto:good,c_limit,w_640/v1785149606/3_olpvyt.png";
 const ADVANTAGES = [
-  { icon: BadgeCheck, title: "不成功不收費", desc: "明碼實價，絕不隱藏" },
-  { icon: Clock, title: "24/7 特快到達", desc: "全天候港九極速救亡" },
+  {
+    icon: BadgeCheck,
+    title: "收費條款事前說明",
+    desc: "明碼實價，收費事前說明",
+  },
+  { icon: Clock, title: "24 小時接受查詢", desc: "按地點及工作情況安排" },
   { icon: ScanEye, title: "CCTV 科技斷症", desc: "拒絕盲猜，精準定位" },
   { icon: Sparkles, title: "完工包清現場", desc: "極度注重衛生，企理無手尾" },
 ];
@@ -92,13 +96,13 @@ const ADVANTAGES = [
 const WHY_GRID = [
   {
     icon: Droplets,
-    title: "德國高壓水槍技術",
+    title: "高壓水槍處理",
     desc: "極限水壓精準擊碎陳年頑固污垢",
   },
   {
     icon: Receipt,
     title: "明碼實價・透明收費",
-    desc: "先報價後動工，絕不坐地起價",
+    desc: "先報價後動工，動工前確認總價",
   },
   {
     icon: Timer,
@@ -125,7 +129,7 @@ const TRUST_POINTS = [
   },
   {
     icon: ShieldCheck,
-    title: "絕無隱藏費用",
+    title: "費用事前說明",
     desc: "深夜附加費及其他費用會於動工前講明，確認最終總價才施工。",
   },
 ];
@@ -136,7 +140,7 @@ const HOME_SERVICES = [
     img: IMG_RESIDENTIAL,
     title: "住宅通渠急救",
     sub: "塞廁所 / 企缸 / 廚房去水",
-    desc: "24小時特快上門通渠，專治公屋、居屋及私人屋苑各類水管淤塞。採用專業手搖泵極速打通全屋去水位。極度注重衛生，完工包清理現場，絕不留手尾。",
+    desc: "24小時特快上門通渠，專治公屋、居屋及私人屋苑各類水管淤塞。採用專業手搖泵按情況疏通全屋去水位。極度注重衛生，完工包清理現場，絕不留手尾。",
     wa: "你好，我屋企塞渠，想查詢住宅通渠服務報價。",
   },
   {
@@ -152,7 +156,7 @@ const HOME_SERVICES = [
     img: IMG_HYDROJET,
     title: "高壓水槍洗渠",
     sub: "極限水壓粉碎陳年污垢",
-    desc: "引入頂級重型高壓水槍通渠車，以極限水壓徹底粉碎管壁硬化豬油膏、樹根及水泥沙石，深度清洗喉管杜絕頻繁淤塞，效果遠超傳統通渠。",
+    desc: "引入專業重型高壓水槍通渠車，以極限水壓徹底粉碎管壁硬化豬油膏、樹根及水泥沙石，深度清洗喉管處理管壁積聚污垢，按現場情況配合合適工具使用。",
     wa: "你好，我想查詢高壓水槍洗渠服務報價。",
   },
   {
@@ -184,10 +188,10 @@ export default function Home() {
   return (
     <div>
       <CmsPageSEO
-        title="通渠熊 DrainBear｜24小時通渠公司・全港特快上門・不成功不收費"
-        description="香港通渠救星！通渠熊專營24小時緊急通渠服務。配備德國高壓水槍洗渠及CCTV照喉技術，專治塞廁所、廚房星盆去水慢、企缸淤塞、食肆隔油池及大廈沙井。全港九新界特快上門，報價後動工，不成功不收費。"
+        title="通渠熊 DrainBear｜24小時通渠公司・全港特快上門・收費條款事前說明"
+        description="香港通渠救星！通渠熊專營24小時緊急通渠服務。配備德國高壓水槍洗渠及CCTV照喉技術，專治塞廁所、廚房星盆去水慢、企缸淤塞、食肆隔油池及大廈沙井。全港九新界特快上門，報價後動工，收費條款事前說明。"
         path="/"
-        keywords="香港通渠, 24小時通渠, 通渠公司推薦, 塞廁所, 廚房通渠, 高壓水槍洗渠, CCTV照喉, 隔油池清理, 不成功不收費, 通渠收費"
+        keywords="香港通渠, 24小時通渠, 通渠公司推薦, 塞廁所, 廚房通渠, 高壓水槍洗渠, CCTV照喉, 隔油池清理, 收費條款事前說明, 通渠收費"
         jsonLd={HOME_JSONLD}
       />
       {/* ===== 區塊 1：Hero ===== */}
@@ -352,7 +356,7 @@ export default function Home() {
         </div>
       </section>
       {/* ===== 區塊 3：透明報價信任區塊 ===== */}
-      <section className="dot-grid-light bg-white py-20 md:py-24">
+      <section className="dot-grid-light bg-white section-shell">
         <div className="container">
           <div className="reveal mx-auto max-w-2xl text-center">
             <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">
@@ -362,7 +366,7 @@ export default function Home() {
               透明報價，安心動工
             </h2>
             <p className="mt-4 text-muted-foreground">
-              我們堅持「接納工程免檢查費」及「報價後才動工」的承諾，讓每一次通渠服務都建立在絕對的信任與透明之上。
+              我們堅持「接納工程免檢查費」及「報價後才動工」的承諾，讓每一次通渠服務都建立在清晰的收費與施工安排之上。
             </p>
             <Link
               href="/guide"
@@ -451,18 +455,20 @@ export default function Home() {
             <div className="absolute -bottom-6 left-6 right-6 flex items-center justify-between rounded-lg bg-white/95 px-6 py-4 shadow-[0_12px_32px_rgba(11,19,43,0.15)] backdrop-blur md:left-10 md:right-auto md:gap-10">
               <div>
                 <div className="font-display text-2xl font-black text-navy">
-                  98%
+                  真實評價
                 </div>
                 <div className="text-xs text-muted-foreground">
-                  客戶五星好評
+                  Google 商家評價
                 </div>
               </div>
               <div className="h-10 w-px bg-border" />
               <div>
                 <div className="font-display text-2xl font-black text-navy">
-                  1000+
+                  工程紀錄
                 </div>
-                <div className="text-xs text-muted-foreground">成功案例</div>
+                <div className="text-xs text-muted-foreground">
+                  實際工程紀錄
+                </div>
               </div>
             </div>
           </div>
@@ -542,7 +548,7 @@ export default function Home() {
         </div>
       </section>
       {/* ===== 區塊 5.5：真實工程案例 + Google 評價入口 ===== */}
-      <section className="bg-mist py-20 md:py-24">
+      <section className="bg-mist section-shell">
         <div className="container">
           <div className="reveal max-w-xl">
             <div className="mb-2 text-xs font-bold tracking-[0.2em] text-safety">
@@ -660,7 +666,7 @@ export default function Home() {
         </div>
       </section>
       {/* ===== 區塊 6：通渠小知識精選 ===== */}
-      <section className="bg-white py-20 md:py-24">
+      <section className="bg-white section-shell">
         <div className="container">
           <div className="reveal flex flex-wrap items-end justify-between gap-4">
             <div>
@@ -707,7 +713,7 @@ export default function Home() {
         </div>
       </section>
       {/* ===== CTA 收尾 ===== */}
-      <section className="dot-grid bg-navy py-20 md:py-24">
+      <section className="dot-grid bg-navy section-shell">
         <div className="container reveal text-center">
           <h2 className="text-balance font-display text-3xl font-black text-white md:text-4xl">
             渠道告急？白熊師傅隨時候命。
@@ -735,7 +741,7 @@ export default function Home() {
             </a>
           </div>
           <p className="mt-5 text-xs text-white/70">
-            24 小時全港到達・不成功不收費・德國專業設備
+            24 小時接受查詢・收費條款事前說明・按情況選用設備
           </p>
         </div>
       </section>
