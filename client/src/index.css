@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * 通渠熊 DrainBear — Premium SaaS Minimalism
+ * 通渠熊 DrainBear — Hong Kong Industrial Editorial
  * 主色海軍藍 #0B132B｜CTA WhatsApp 綠 #25D366｜點綴安全橙 #FF7A00
  * 背景純白 + 淺灰藍 #F4F7FB｜圓角統一 8px｜嚴禁 Emoji，僅用 SVG 圖標
  */
@@ -68,6 +68,20 @@
   --wagreen-dark: #1eb556;
   --safety: #ff7a00;
   --mist: #f4f7fb;
+  --surface-warm: #fbfcfe;
+  --surface-soft: #f6f8fb;
+  --surface-strong: #eef2f7;
+  --text-secondary: #526078;
+  --text-tertiary: #6f7b91;
+  --border-subtle: #e7ebf1;
+  --shadow-soft:
+    0 1px 2px rgba(11, 19, 43, 0.04), 0 8px 24px rgba(11, 19, 43, 0.055);
+  --shadow-raised:
+    0 4px 12px rgba(11, 19, 43, 0.07), 0 16px 36px rgba(11, 19, 43, 0.09);
+  --motion-fast: 180ms;
+  --motion-base: 240ms;
+  --motion-reveal: 420ms;
+  --ease-out-brand: cubic-bezier(0.23, 1, 0.32, 1);
 
   --primary: #0b132b;
   --primary-foreground: #ffffff;
@@ -78,7 +92,7 @@
   --chart-3: var(--color-blue-600);
   --chart-4: var(--color-blue-700);
   --chart-5: var(--color-blue-800);
-  --radius: 0.5rem;
+  --radius: 0.75rem;
   --background: oklch(1 0 0);
   --foreground: #0b132b;
   --card: oklch(1 0 0);
@@ -186,8 +200,8 @@
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 1rem; /* 16px - mobile padding */
-    padding-right: 1rem;
+    padding-left: 1.25rem; /* 20px - mobile-first padding */
+    padding-right: 1.25rem;
   }
 
   .flex {
@@ -226,18 +240,18 @@
   }
   /* 卡片懸浮陰影 */
   .card-float {
-    box-shadow:
-      0 1px 3px rgba(11, 19, 43, 0.06),
-      0 8px 24px rgba(11, 19, 43, 0.07);
+    box-shadow: var(--shadow-soft);
     transition:
-      transform 220ms cubic-bezier(0.23, 1, 0.32, 1),
-      box-shadow 220ms cubic-bezier(0.23, 1, 0.32, 1);
+      transform var(--motion-base) var(--ease-out-brand),
+      box-shadow var(--motion-base) var(--ease-out-brand),
+      border-color var(--motion-fast) var(--ease-out-brand);
   }
-  .card-float:hover {
-    transform: translateY(-4px);
-    box-shadow:
-      0 4px 12px rgba(11, 19, 43, 0.08),
-      0 16px 40px rgba(11, 19, 43, 0.12);
+
+  @media (hover: hover) and (pointer: fine) {
+    .card-float:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-raised);
+    }
   }
   /* 綠色頂邊光條卡片（hover 顯示） */
   .card-accent {
@@ -275,7 +289,7 @@
     background-size: 22px 22px;
   }
   /* 懸浮主圖動畫 */
-  @media (prefers-reduced-motion: no-preference) {
+  @media (prefers-reduced-motion: no-preference) and (min-width: 1024px) {
     .float-anim {
       animation: floatY 6s ease-in-out infinite;
     }
@@ -289,12 +303,12 @@
       }
     }
     .fade-up {
-      animation: fadeUp 700ms cubic-bezier(0.23, 1, 0.32, 1) both;
+      animation: fadeUp var(--motion-reveal) var(--ease-out-brand) both;
     }
     @keyframes fadeUp {
       from {
         opacity: 0;
-        transform: translateY(24px);
+        transform: translateY(14px);
       }
       to {
         opacity: 1;
@@ -309,10 +323,10 @@
      */
     html.reveal-ready .reveal {
       opacity: 0;
-      transform: translateY(28px);
+      transform: translateY(14px);
       transition:
-        opacity 640ms cubic-bezier(0.23, 1, 0.32, 1),
-        transform 640ms cubic-bezier(0.23, 1, 0.32, 1);
+        opacity var(--motion-reveal) var(--ease-out-brand),
+        transform var(--motion-reveal) var(--ease-out-brand);
     }
     html.reveal-ready .reveal.reveal-in {
       opacity: 1;
@@ -321,5 +335,139 @@
   }
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+/* PR18_MOBILE_FIRST_FOUNDATION */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--surface-warm);
+    line-height: 1.65;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: rgba(255, 122, 0, 0.2);
+    color: var(--navy);
+  }
+
+  :where(
+    a[href],
+    button:not(:disabled),
+    input:not(:disabled),
+    select:not(:disabled),
+    textarea:not(:disabled),
+    [tabindex]:not([tabindex="-1"])
+  ):focus-visible {
+    outline: 3px solid rgba(255, 122, 0, 0.72);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .section-shell {
+    padding-block: clamp(4.5rem, 7vw, 7rem);
+  }
+
+  .section-shell-compact {
+    padding-block: clamp(3.5rem, 5vw, 5.5rem);
+  }
+
+  .section-header {
+    max-width: 42rem;
+  }
+
+  .section-kicker {
+    color: var(--safety);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  .display-title {
+    color: var(--navy);
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 7vw, 4.75rem);
+    font-weight: 900;
+    letter-spacing: -0.045em;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+
+  .section-title {
+    color: var(--navy);
+    font-family: var(--font-display);
+    font-size: clamp(1.875rem, 4.5vw, 3rem);
+    font-weight: 900;
+    letter-spacing: -0.035em;
+    line-height: 1.16;
+    text-wrap: balance;
+  }
+
+  .body-copy {
+    color: var(--text-secondary);
+    font-size: clamp(1rem, 1.5vw, 1.125rem);
+    line-height: 1.75;
+    max-width: 42rem;
+  }
+
+  .surface-card {
+    background: #ffffff;
+    border: 1px solid var(--border-subtle);
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .surface-panel {
+    background: var(--surface-soft);
+    border: 1px solid var(--border-subtle);
+    border-radius: 1.25rem;
+  }
+
+  .touch-target {
+    min-height: 2.75rem;
+    min-width: 2.75rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .section-kicker {
+    letter-spacing: 0.1em;
+  }
+
+  .body-copy {
+    line-height: 1.7;
+  }
+
+  .card-float {
+    box-shadow: 0 1px 2px rgba(11, 19, 43, 0.045);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .float-anim,
+  .fade-up,
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

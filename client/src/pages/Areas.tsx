@@ -46,7 +46,7 @@ const REGIONS = [
     eta: "上門時間按安排確認",
     desc: "熟悉商廈、住宅及樓齡較高樓宇的常見渠務情況。",
     seoText:
-      "港島區商廈林立，亦有不少樓齡較高的半山豪宅及唐樓，容易出現主渠老化及隔油池滿瀉問題。我們熟悉港島區喉管結構，提供高效、低噪音的專業通渠，絕不影響鄰居及商戶運作。",
+      "港島區商廈林立，亦有不少樓齡較高的半山豪宅及唐樓，容易出現主渠老化及隔油池滿瀉問題。我們熟悉港島區喉管結構，我們會按現場環境安排合適的處理方式，並盡量減少對鄰居及商戶運作的影響。",
     groups: [
       {
         label: "中西區",
@@ -371,7 +371,7 @@ function DistrictPill({
     <Link
       href={`/areas/${slug}`}
       data-district={name}
-      className={`btn-smooth inline-flex min-h-[44px] items-center gap-1 rounded-full border border-wagreen/40 bg-wagreen/10 px-4 py-2 text-sm font-bold text-wagreen-dark hover:bg-wagreen hover:text-white${hl}`}
+      className={`btn-smooth inline-flex min-h-[44px] items-center gap-1 rounded-full border border-wagreen/40 bg-wagreen/10 min-h-11 px-4 py-2 text-sm font-bold text-wagreen-dark hover:bg-wagreen hover:text-white${hl}`}
     >
       <MapPin className="h-3 w-3" strokeWidth={2.5} />
       {name}通渠
@@ -380,7 +380,7 @@ function DistrictPill({
   ) : (
     <span
       data-district={name}
-      className={`inline-flex min-h-[44px] items-center gap-1 rounded-full border border-border bg-mist px-4 py-2 text-sm font-medium text-navy${hl}`}
+      className={`inline-flex min-h-[44px] items-center gap-1 rounded-full border border-border bg-mist min-h-11 px-4 py-2 text-sm font-medium text-navy${hl}`}
     >
       <MapPin className="h-3 w-3 text-wagreen" strokeWidth={2.5} />
       {name}通渠
@@ -491,7 +491,10 @@ export default function Areas() {
       <Breadcrumbs items={AREAS_CRUMBS} />
 
       {/* Hero + 地區速查 */}
-      <section className="bg-gradient-to-b from-mist to-white py-14 md:py-20">
+      <section
+        className="bg-gradient-to-b from-mist to-white py-14 md:py-20"
+        data-visual-section="areas-hero"
+      >
         <div className="container">
           <div className="mx-auto max-w-2xl text-center">
             <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">
@@ -747,7 +750,7 @@ export default function Areas() {
                   {region.seoText}
                 </p>
               </div>
-              <span className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full bg-wagreen/10 px-4 py-2 text-sm font-bold text-wagreen-dark">
+              <span className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full bg-wagreen/10 min-h-11 px-4 py-2 text-sm font-bold text-wagreen-dark">
                 <Clock className="h-4 w-4" strokeWidth={2.5} />
                 {region.eta}
               </span>
