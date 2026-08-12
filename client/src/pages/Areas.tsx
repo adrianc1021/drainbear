@@ -48,10 +48,52 @@ const REGIONS = [
     seoText:
       "港島區商廈林立，亦有不少樓齡較高的半山豪宅及唐樓，容易出現主渠老化及隔油池滿瀉問題。我們熟悉港島區喉管結構，提供高效、低噪音的專業通渠，絕不影響鄰居及商戶運作。",
     groups: [
-      { label: "中西區", items: ["中環", "上環", "西環", "半山", "山頂", "金鐘"] },
-      { label: "灣仔區", items: ["灣仔", "銅鑼灣", "天后", "大坑", "跑馬地"] },
-      { label: "東區", items: ["北角", "鰂魚涌", "太古城", "西灣河", "筲箕灣", "柴灣", "小西灣"] },
-      { label: "南區", items: ["香港仔", "鴨脷洲", "黃竹坑", "薄扶林", "赤柱", "淺水灣"] },
+      {
+        label: "中西區",
+        items: [
+          "中環",
+          "上環",
+          "西營盤",
+          "石塘咀",
+          "堅尼地城",
+          "半山",
+          "山頂",
+          "金鐘",
+        ],
+      },
+      {
+        label: "灣仔區",
+        items: ["灣仔", "銅鑼灣", "天后", "大坑", "跑馬地", "渣甸山"],
+      },
+      {
+        label: "東區",
+        items: [
+          "北角",
+          "炮台山",
+          "鰂魚涌",
+          "太古城",
+          "西灣河",
+          "筲箕灣",
+          "杏花邨",
+          "柴灣",
+          "小西灣",
+        ],
+      },
+      {
+        label: "南區",
+        items: [
+          "香港仔",
+          "田灣",
+          "華富",
+          "鴨脷洲",
+          "黃竹坑",
+          "薄扶林",
+          "數碼港",
+          "赤柱",
+          "淺水灣",
+          "石澳",
+        ],
+      },
     ],
   },
   {
@@ -63,11 +105,44 @@ const REGIONS = [
     seoText:
       "九龍區人口極度密集、食肆林立，旺角及深水埗等地的舊式大廈經常發生喉管倒灌及塞廁所的緊急情況。我們的九龍區車隊 24/7 候命，配備高壓水槍，瞬間擊退陳年頑固油垢。",
     groups: [
-      { label: "油尖旺區", items: ["尖沙咀", "佐敦", "油麻地", "旺角", "太子", "大角咀"] },
-      { label: "深水埗區", items: ["深水埗", "長沙灣", "荔枝角", "美孚", "石硤尾"] },
-      { label: "九龍城區", items: ["九龍塘", "何文田", "紅磡", "土瓜灣", "九龍城", "啟德"] },
-      { label: "黃大仙區", items: ["新蒲崗", "黃大仙", "鑽石山", "彩虹"] },
-      { label: "觀塘區", items: ["牛頭角", "九龍灣", "觀塘", "藍田", "油塘"] },
+      {
+        label: "油尖旺區",
+        items: [
+          "尖沙咀",
+          "尖沙咀東",
+          "佐敦",
+          "油麻地",
+          "旺角",
+          "太子",
+          "大角咀",
+          "奧運",
+        ],
+      },
+      {
+        label: "深水埗區",
+        items: ["深水埗", "長沙灣", "荔枝角", "美孚", "石硤尾", "又一村"],
+      },
+      {
+        label: "九龍城區",
+        items: [
+          "九龍塘",
+          "何文田",
+          "紅磡",
+          "黃埔",
+          "土瓜灣",
+          "馬頭圍",
+          "九龍城",
+          "啟德",
+        ],
+      },
+      {
+        label: "黃大仙區",
+        items: ["新蒲崗", "黃大仙", "樂富", "鑽石山", "慈雲山", "彩虹"],
+      },
+      {
+        label: "觀塘區",
+        items: ["牛頭角", "九龍灣", "觀塘", "秀茂坪", "藍田", "油塘", "茶果嶺"],
+      },
     ],
   },
   {
@@ -79,27 +154,100 @@ const REGIONS = [
     seoText:
       "新界區涵蓋大型私人屋苑及偏遠村屋。針對村屋常見的化糞池滿瀉、沙井淤塞或戶外樹根纏繞喉管等高難度問題，我們引進大型吸車及重型設備，提供徹底的解決方案。",
     groups: [
-      { label: "沙田區", items: ["沙田", "大圍", "火炭", "馬鞍山"] },
-      { label: "大埔／北區", items: ["大埔", "太和", "粉嶺", "上水"] },
-      { label: "荃灣／葵青區", items: ["荃灣", "葵涌", "葵芳", "青衣", "深井", "馬灣"] },
-      { label: "屯門／元朗區", items: ["屯門", "掃管笏", "元朗", "天水圍", "錦田", "洪水橋"] },
-      { label: "西貢區", items: ["將軍澳", "日出康城", "調景嶺", "西貢", "清水灣"] },
-      { label: "離島區", items: ["東涌", "愉景灣", "馬灣島"] },
+      {
+        label: "沙田區",
+        items: ["沙田", "大圍", "火炭", "石門", "小瀝源", "馬鞍山", "烏溪沙"],
+      },
+      {
+        label: "大埔／北區",
+        items: [
+          "大埔",
+          "太和",
+          "大埔墟",
+          "林村",
+          "粉嶺",
+          "聯和墟",
+          "上水",
+          "古洞",
+          "打鼓嶺",
+        ],
+      },
+      {
+        label: "荃灣／葵青區",
+        items: [
+          "荃灣",
+          "荃景圍",
+          "葵涌",
+          "葵芳",
+          "葵興",
+          "青衣",
+          "深井",
+          "汀九",
+          "馬灣",
+        ],
+      },
+      {
+        label: "屯門／元朗區",
+        items: [
+          "屯門",
+          "屯門碼頭",
+          "掃管笏",
+          "黃金海岸",
+          "藍地",
+          "兆康",
+          "元朗",
+          "天水圍",
+          "錦田",
+          "八鄉",
+          "洪水橋",
+          "流浮山",
+        ],
+      },
+      {
+        label: "西貢區",
+        items: [
+          "將軍澳",
+          "寶琳",
+          "坑口",
+          "調景嶺",
+          "日出康城",
+          "西貢",
+          "清水灣",
+          "白沙灣",
+        ],
+      },
+      {
+        label: "離島區",
+        items: [
+          "東涌",
+          "欣澳",
+          "愉景灣",
+          "梅窩",
+          "大澳",
+          "長洲",
+          "南丫島",
+          "坪洲",
+        ],
+      },
     ],
   },
 ];
 
-const ALL_DISTRICTS = REGIONS.flatMap((r) =>
-  r.groups.flatMap((g) =>
-    g.items.map((d) => ({ district: d, region: r.name, regionIdx: REGIONS.indexOf(r) })),
-  ),
+const ALL_DISTRICTS = REGIONS.flatMap(r =>
+  r.groups.flatMap(g =>
+    g.items.map(d => ({
+      district: d,
+      region: r.name,
+      regionIdx: REGIONS.indexOf(r),
+    }))
+  )
 );
 
 const AREAS_JSONLD = {
   "@context": "https://schema.org",
   "@type": "Service",
   serviceType: "24 小時通渠服務",
-  areaServed: ALL_DISTRICTS.map((d) => ({ "@type": "Place", name: d.district })),
+  areaServed: ALL_DISTRICTS.map(d => ({ "@type": "Place", name: d.district })),
 };
 
 const STATS = [
@@ -108,7 +256,13 @@ const STATS = [
   { icon: ShieldCheck, value: "統一價", label: "絕不因地區加價" },
 ];
 
-function DistrictPill({ name, highlighted }: { name: string; highlighted?: boolean }) {
+function DistrictPill({
+  name,
+  highlighted,
+}: {
+  name: string;
+  highlighted?: boolean;
+}) {
   const slug = DISTRICT_PAGES[name];
   const hl = highlighted
     ? " ring-2 ring-safety ring-offset-2 animate-[pulse_1.2s_ease-in-out_2]"
@@ -135,8 +289,8 @@ function DistrictPill({ name, highlighted }: { name: string; highlighted?: boole
 }
 
 export default function Areas() {
-  const {phoneDisplay, phoneHref} = useContactSettings();
-  const {settings} = useSiteSettings();
+  const { phoneDisplay, phoneHref } = useContactSettings();
+  const { settings } = useSiteSettings();
 
   const areasJsonLd = {
     ...AREAS_JSONLD,
@@ -150,22 +304,28 @@ export default function Areas() {
   const [activeRegion, setActiveRegion] = useState(0);
   const [activeIdx, setActiveIdx] = useState(-1);
   const [open, setOpen] = useState(false);
-  const [highlightedDistrict, setHighlightedDistrict] = useState<string | null>(null);
+  const [highlightedDistrict, setHighlightedDistrict] = useState<string | null>(
+    null
+  );
   const searchRef = useRef<HTMLDivElement>(null);
   const coverageRef = useRef<HTMLElement>(null);
   const [, navigate] = useLocation();
   const matches = useMemo(() => {
     const q = query.trim();
     if (!q) return null;
-    return ALL_DISTRICTS.filter((d) => d.district.includes(q));
+    return ALL_DISTRICTS.filter(d => d.district.includes(q));
   }, [query]);
-  const visible = useMemo(() => (matches ? matches.slice(0, 6) : []), [matches]);
+  const visible = useMemo(
+    () => (matches ? matches.slice(0, 6) : []),
+    [matches]
+  );
   const region = REGIONS[activeRegion];
 
   // 點擊搜尋框以外區域時關閉建議
   useEffect(() => {
     const onDown = (e: MouseEvent) => {
-      if (searchRef.current && !searchRef.current.contains(e.target as Node)) setOpen(false);
+      if (searchRef.current && !searchRef.current.contains(e.target as Node))
+        setOpen(false);
     };
     document.addEventListener("mousedown", onDown);
     return () => document.removeEventListener("mousedown", onDown);
@@ -186,8 +346,13 @@ export default function Areas() {
     // 待分區籤內容切換後再捲動至該地區 pill
     requestAnimationFrame(() => {
       setTimeout(() => {
-        const el = coverageRef.current?.querySelector(`[data-district="${m.district}"]`);
-        (el ?? coverageRef.current)?.scrollIntoView({ behavior: "smooth", block: "center" });
+        const el = coverageRef.current?.querySelector(
+          `[data-district="${m.district}"]`
+        );
+        (el ?? coverageRef.current)?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
       }, 60);
     });
     window.setTimeout(() => setHighlightedDistrict(null), 3200);
@@ -200,10 +365,10 @@ export default function Areas() {
     }
     if (e.key === "ArrowDown") {
       e.preventDefault();
-      setActiveIdx((i) => (i + 1) % visible.length);
+      setActiveIdx(i => (i + 1) % visible.length);
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
-      setActiveIdx((i) => (i <= 0 ? visible.length - 1 : i - 1));
+      setActiveIdx(i => (i <= 0 ? visible.length - 1 : i - 1));
     } else if (e.key === "Enter") {
       e.preventDefault();
       goToDistrict(visible[activeIdx >= 0 ? activeIdx : 0]);
@@ -229,13 +394,15 @@ export default function Areas() {
       <section className="bg-gradient-to-b from-mist to-white py-14 md:py-20">
         <div className="container">
           <div className="mx-auto max-w-2xl text-center">
-            <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">SERVICE AREAS</div>
+            <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">
+              SERVICE AREAS
+            </div>
             <h1 className="text-balance font-display text-4xl font-black text-navy md:text-5xl">
               全港九新界 24 小時特快通渠
             </h1>
             <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-              無論您身處港島半山豪宅、九龍鬧市舊樓，還是新界偏遠村屋，駐區師傅都能在 1
-              小時內極速到達，為您解決水管危機。
+              無論您身處港島半山豪宅、九龍鬧市舊樓，還是新界偏遠村屋，駐區師傅都能在
+              1 小時內極速到達，為您解決水管危機。
             </p>
             {/* 地區速查 */}
             <div ref={searchRef} className="relative mx-auto mt-8 max-w-md">
@@ -243,7 +410,7 @@ export default function Areas() {
               <input
                 type="search"
                 value={query}
-                onChange={(e) => {
+                onChange={e => {
                   setQuery(e.target.value);
                   setOpen(true);
                   setActiveIdx(-1);
@@ -270,9 +437,16 @@ export default function Areas() {
                       const inner = (
                         <>
                           <span className="flex items-center gap-2.5">
-                            <MapPin className="h-4 w-4 text-wagreen" strokeWidth={2.4} />
-                            <span className="font-bold text-navy">{m.district}通渠</span>
-                            <span className="text-xs text-muted-foreground">{m.region}</span>
+                            <MapPin
+                              className="h-4 w-4 text-wagreen"
+                              strokeWidth={2.4}
+                            />
+                            <span className="font-bold text-navy">
+                              {m.district}通渠
+                            </span>
+                            <span className="text-xs text-muted-foreground">
+                              {m.region}
+                            </span>
                           </span>
                           <span className="inline-flex items-center gap-1 text-xs font-bold text-wagreen-dark">
                             {slug ? "專屬地區頁" : "查看覆蓋詳情"}
@@ -298,7 +472,8 @@ export default function Areas() {
                     })
                   ) : (
                     <div className="px-4 py-4 text-sm text-muted-foreground">
-                      未找到「{query}」？我們仍然覆蓋全港，請直接致電 {phoneDisplay} 確認。
+                      未找到「{query}」？我們仍然覆蓋全港，請直接致電{" "}
+                      {phoneDisplay} 確認。
                     </div>
                   )}
                 </div>
@@ -308,14 +483,21 @@ export default function Areas() {
 
           {/* 覆蓋統計帶 */}
           <div className="reveal mx-auto mt-12 grid max-w-3xl grid-cols-3 gap-4">
-            {STATS.map((s) => (
+            {STATS.map(s => (
               <div
                 key={s.label}
                 className="card-float rounded-lg border border-border bg-white px-4 py-5 text-center"
               >
-                <s.icon className="mx-auto h-5 w-5 text-wagreen" strokeWidth={2.2} />
-                <div className="mt-2 font-display text-xl font-black text-navy md:text-2xl">{s.value}</div>
-                <div className="mt-1 text-xs text-muted-foreground md:text-sm">{s.label}</div>
+                <s.icon
+                  className="mx-auto h-5 w-5 text-wagreen"
+                  strokeWidth={2.2}
+                />
+                <div className="mt-2 font-display text-xl font-black text-navy md:text-2xl">
+                  {s.value}
+                </div>
+                <div className="mt-1 text-xs text-muted-foreground md:text-sm">
+                  {s.label}
+                </div>
               </div>
             ))}
           </div>
@@ -329,7 +511,9 @@ export default function Areas() {
           <div className="reveal mb-12 md:mb-16">
             <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
               <div>
-                <div className="mb-2 text-xs font-bold tracking-[0.2em] text-safety">INTERACTIVE MAP</div>
+                <div className="mb-2 text-xs font-bold tracking-[0.2em] text-safety">
+                  INTERACTIVE MAP
+                </div>
                 <h2 className="font-display text-2xl font-black text-navy md:text-3xl">
                   點擊地圖，找到你的地區
                 </h2>
@@ -343,8 +527,12 @@ export default function Areas() {
 
           <div className="reveal mb-6 flex flex-wrap items-end justify-between gap-3">
             <div>
-              <div className="mb-2 text-xs font-bold tracking-[0.2em] text-safety">FEATURED DISTRICTS</div>
-              <h2 className="font-display text-2xl font-black text-navy md:text-3xl">十大熱門地區專屬服務頁</h2>
+              <div className="mb-2 text-xs font-bold tracking-[0.2em] text-safety">
+                FEATURED DISTRICTS
+              </div>
+              <h2 className="font-display text-2xl font-black text-navy md:text-3xl">
+                十大熱門地區專屬服務頁
+              </h2>
             </div>
             <p className="max-w-md text-sm text-muted-foreground">
               涵蓋港九新界十個熱門地區，深入了解當區渠務特點、常見問題及駐區師傅服務承諾。
@@ -368,12 +556,14 @@ export default function Areas() {
                       {d.en.toUpperCase()}
                     </span>
                   </div>
-                  <h3 className="mt-4 font-display text-xl font-black text-navy md:text-2xl">{d.name}通渠專頁</h3>
+                  <h3 className="mt-4 font-display text-xl font-black text-navy md:text-2xl">
+                    {d.name}通渠專頁
+                  </h3>
                   <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
                     {d.heroDesc}
                   </p>
                   <div className="mt-4 flex flex-wrap gap-1.5">
-                    {d.landmarks.slice(0, 3).map((l) => (
+                    {d.landmarks.slice(0, 3).map(l => (
                       <span
                         key={l}
                         className="rounded-full border border-border bg-white px-2.5 py-1 text-xs text-navy/70"
@@ -397,8 +587,12 @@ export default function Areas() {
         <div className="container">
           <div className="reveal mb-8 flex flex-wrap items-end justify-between gap-3">
             <div>
-              <div className="mb-2 text-xs font-bold tracking-[0.2em] text-safety">FULL COVERAGE</div>
-              <h2 className="font-display text-2xl font-black text-navy md:text-3xl">三大分區完整覆蓋</h2>
+              <div className="mb-2 text-xs font-bold tracking-[0.2em] text-safety">
+                FULL COVERAGE
+              </div>
+              <h2 className="font-display text-2xl font-black text-navy md:text-3xl">
+                三大分區完整覆蓋
+              </h2>
             </div>
             <p className="max-w-md text-sm text-muted-foreground">
               按行政區分組排列，一眼找到你的地區。綠色地區設有專屬服務頁，點擊直達。
@@ -434,12 +628,21 @@ export default function Areas() {
           </div>
 
           {/* 當前分區內容 */}
-          <div key={region.name} className="fade-up mt-6 rounded-lg border border-border bg-white p-6 md:p-8">
+          <div
+            key={region.name}
+            className="fade-up mt-6 rounded-lg border border-border bg-white p-6 md:p-8"
+          >
             <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
               <div className="max-w-2xl">
-                <div className="text-[11px] font-bold tracking-[0.2em] text-muted-foreground">{region.en}</div>
-                <h3 className="mt-1 font-display text-2xl font-black text-navy">{region.name}通渠服務</h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{region.seoText}</p>
+                <div className="text-[11px] font-bold tracking-[0.2em] text-muted-foreground">
+                  {region.en}
+                </div>
+                <h3 className="mt-1 font-display text-2xl font-black text-navy">
+                  {region.name}通渠服務
+                </h3>
+                <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
+                  {region.seoText}
+                </p>
               </div>
               <span className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full bg-wagreen/10 px-4 py-2 text-sm font-bold text-wagreen-dark">
                 <Clock className="h-4 w-4" strokeWidth={2.5} />
@@ -448,16 +651,27 @@ export default function Areas() {
             </div>
 
             <div className="mt-7 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
-              {region.groups.map((g) => (
+              {region.groups.map(g => (
                 <div key={g.label}>
                   <div className="flex items-center gap-2 border-b border-border pb-2">
-                    <MapPin className="h-3.5 w-3.5 text-wagreen" strokeWidth={2.5} />
-                    <span className="text-sm font-black text-navy">{g.label}</span>
-                    <span className="text-[11px] font-semibold text-muted-foreground">{g.items.length} 區</span>
+                    <MapPin
+                      className="h-3.5 w-3.5 text-wagreen"
+                      strokeWidth={2.5}
+                    />
+                    <span className="text-sm font-black text-navy">
+                      {g.label}
+                    </span>
+                    <span className="text-[11px] font-semibold text-muted-foreground">
+                      {g.items.length} 區
+                    </span>
                   </div>
                   <div className="mt-3 flex flex-wrap gap-2">
-                    {g.items.map((d) => (
-                      <DistrictPill key={d} name={d} highlighted={highlightedDistrict === d} />
+                    {g.items.map(d => (
+                      <DistrictPill
+                        key={d}
+                        name={d}
+                        highlighted={highlightedDistrict === d}
+                      />
                     ))}
                   </div>
                 </div>
@@ -479,7 +693,11 @@ export default function Areas() {
               不管您在哪個分區，通渠熊均堅守「明碼實價、先報價後動工」原則，絕不因地區偏遠而坐地起價。不成功，不收費。
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-              <WhatsAppButton className="px-8 py-4 text-base" label="查詢我的地區" trackLocation="areas_footer_cta" />
+              <WhatsAppButton
+                className="px-8 py-4 text-base"
+                label="查詢我的地區"
+                trackLocation="areas_footer_cta"
+              />
               <a
                 href={phoneHref}
                 onClick={() => trackCTA("phone", "areas_footer_cta")}
