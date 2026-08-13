@@ -194,7 +194,7 @@ function EditorialProcess() {
             </EditorialKicker>
             <h2
               id="home-process-heading"
-              className="mt-6 text-[clamp(2.75rem,7vw,6.5rem)] font-black leading-[1.04] tracking-[-0.04em]"
+              className="db-editorial-heading mt-6 text-white"
             >
               四步流程，
               <br />
@@ -333,10 +333,7 @@ function EditorialFinalCTA() {
 
         <div className="mt-8 grid gap-10 lg:grid-cols-[1.35fr_0.65fr] lg:items-end">
           <div>
-            <h2
-              id="home-final-cta-heading"
-              className="text-[clamp(3.2rem,8vw,7.5rem)] font-black leading-[1.08] tracking-[-0.035em] md:leading-[1.04] xl:leading-[1.02]"
-            >
+            <h2 id="home-final-cta-heading" className="db-final-cta-heading">
               緊急通渠？
               <br />
               立即聯絡。

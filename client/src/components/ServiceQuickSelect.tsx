@@ -56,7 +56,7 @@ export default function ServiceQuickSelect() {
             <EditorialKicker>Start here / 問題分類</EditorialKicker>
             <h2
               id="quick-service-heading"
-              className="mt-5 text-[clamp(2.3rem,5vw,4.75rem)] font-black leading-[1.06] tracking-[-0.04em] text-[var(--db-ink)]"
+              className="db-editorial-heading mt-5"
             >
               請選擇
               <br />
