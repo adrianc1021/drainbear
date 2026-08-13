@@ -798,3 +798,195 @@
 }
 
 /* PR20_EDITORIAL_FOUNDATION_END */
+
+/* HOME_VISUAL_POLISH_START
+ * Refined Chinese display rhythm, stronger body readability,
+ * restrained premium motion and interaction.
+ */
+
+.home-editorial {
+  --db-copy: #354052;
+  --db-copy-strong: #202b3d;
+}
+
+/* 大標題不再靠極端字級製造張力 */
+.home-editorial .db-display {
+  max-width: 10ch;
+  font-size: clamp(3.2rem, 6.6vw, 6.5rem);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  text-wrap: normal;
+}
+
+/* Section 標題降低最大尺寸，避免左重右輕 */
+.home-editorial .db-editorial-heading {
+  max-width: 9ch;
+  font-size: clamp(2.4rem, 4.35vw, 4rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-wrap: normal;
+}
+
+/* 首屏說明文字提高對比及閱讀節奏 */
+.home-editorial .db-lead {
+  color: var(--db-copy);
+  font-size: clamp(1rem, 1.15vw, 1.125rem);
+  line-height: 1.85;
+}
+
+/* 英文／中文 kicker 不再細到接近裝飾線 */
+.home-editorial .db-kicker {
+  font-size: 0.75rem;
+  line-height: 1.45;
+  letter-spacing: 0.14em;
+}
+
+/* 所有一般內文提高可讀性 */
+.home-editorial [data-pr20-section="quick-service"] p,
+.home-editorial [data-pr20-section="promise"] p,
+.home-editorial [data-pr20-section="services"] p,
+.home-editorial [data-pr20-section="cases"] p,
+.home-editorial [data-pr20-section="process"] p,
+.home-editorial [data-pr20-section="journal"] p {
+  color: var(--db-copy);
+}
+
+/* 案例及流程內容避免顏色太淡 */
+.home-editorial [data-pr20-section="cases"] article,
+.home-editorial [data-pr20-section="process"] article {
+  position: relative;
+  transition:
+    background-color 260ms var(--db-editorial-ease),
+    box-shadow 260ms var(--db-editorial-ease);
+}
+
+/* 列表左側安全橙指示線 */
+.home-editorial [data-pr20-section="cases"] article::before,
+.home-editorial [data-pr20-section="process"] article::before {
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  width: 3px;
+  background: var(--db-safety);
+  content: "";
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 320ms var(--db-editorial-ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .home-editorial [data-pr20-section="cases"] article:hover,
+  .home-editorial [data-pr20-section="process"] article:hover {
+    background: rgba(255, 255, 255, 0.42);
+    box-shadow: inset 0 0 0 1px rgba(11, 19, 43, 0.025);
+  }
+
+  .home-editorial [data-pr20-section="cases"] article:hover::before,
+  .home-editorial [data-pr20-section="process"] article:hover::before {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+}
+
+/* Hero：克制、分層進場 */
+@media (prefers-reduced-motion: no-preference) {
+  .home-editorial [data-pr20-section="hero"] .db-kicker {
+    animation: db-home-rise 620ms var(--db-editorial-ease) both;
+  }
+
+  .home-editorial [data-pr20-section="hero"] .db-display {
+    animation: db-home-rise 720ms var(--db-editorial-ease) 80ms both;
+  }
+
+  .home-editorial [data-pr20-section="hero"] .db-lead {
+    animation: db-home-rise 720ms var(--db-editorial-ease) 160ms both;
+  }
+
+  .home-editorial [data-pr20-section="hero"] .db-primary-action,
+  .home-editorial [data-pr20-section="hero"] .db-secondary-action {
+    animation: db-home-rise 680ms var(--db-editorial-ease) 240ms both;
+  }
+
+  .home-editorial [data-pr20-section="hero"] .db-media {
+    animation: db-home-media-reveal 900ms var(--db-editorial-ease) 100ms both;
+  }
+
+  @keyframes db-home-rise {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes db-home-media-reveal {
+    from {
+      clip-path: inset(0 0 10% 0);
+      opacity: 0;
+      transform: scale(1.025);
+    }
+
+    to {
+      clip-path: inset(0);
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+/* Tablet：進一步控制標題比例 */
+@media (min-width: 768px) and (max-width: 1100px) {
+  .home-editorial .db-display {
+    max-width: 9ch;
+    font-size: clamp(3.5rem, 6.4vw, 4.5rem);
+    line-height: 1.1;
+  }
+
+  .home-editorial .db-editorial-heading {
+    font-size: clamp(2.6rem, 4.4vw, 3.35rem);
+    line-height: 1.14;
+  }
+
+  .home-editorial [data-pr20-section="capability"] p {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+}
+
+/* Mobile：維持兩行而非放任單字跌落第三行 */
+@media (max-width: 767px) {
+  .home-editorial .db-display {
+    max-width: none;
+    font-size: clamp(2.9rem, 13vw, 4rem);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+  }
+
+  .home-editorial .db-editorial-heading {
+    max-width: none;
+    font-size: clamp(2.2rem, 10.5vw, 3rem);
+    line-height: 1.16;
+    letter-spacing: -0.015em;
+  }
+
+  .home-editorial .db-kicker {
+    font-size: 0.7rem;
+    letter-spacing: 0.11em;
+  }
+}
+
+/* Reduced-motion 使用者完全停用新增動畫 */
+@media (prefers-reduced-motion: reduce) {
+  .home-editorial [data-pr20-section="hero"] *,
+  .home-editorial [data-pr20-section="cases"] article::before,
+  .home-editorial [data-pr20-section="process"] article::before {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* HOME_VISUAL_POLISH_END */

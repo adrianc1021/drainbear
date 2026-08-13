@@ -115,7 +115,7 @@ function EditorialCases() {
           <div>
             <EditorialKicker>Field notes / 工程紀錄</EditorialKicker>
             <h2 id="home-cases-heading" className="db-editorial-heading mt-6">
-              實際個案，
+              工程實錄，
               <br />
               專業處理。
             </h2>
@@ -136,7 +136,7 @@ function EditorialCases() {
               <EditorialIndex>{study.number}</EditorialIndex>
 
               <div>
-                <div className="flex items-center gap-2 text-xs font-black uppercase tracking-[0.12em] text-[var(--db-safety)]">
+                <div className="flex items-center gap-2 text-sm font-black uppercase tracking-[0.08em] text-[var(--db-safety)]">
                   <MapPin className="h-4 w-4" aria-hidden="true" />
                   {study.area} / {study.type}
                 </div>
@@ -153,7 +153,7 @@ function EditorialCases() {
 
                 <dl className="mt-6 grid grid-cols-2 border-y border-[var(--db-rule)] py-4">
                   <div>
-                    <dt className="text-[0.65rem] font-black uppercase tracking-[0.14em] text-[var(--db-copy-light)]">
+                    <dt className="text-xs font-black uppercase tracking-[0.1em] text-[var(--db-copy)]">
                       Arrival record
                     </dt>
                     <dd className="mt-1 font-black text-[var(--db-ink)]">
@@ -162,7 +162,7 @@ function EditorialCases() {
                   </div>
 
                   <div className="border-l border-[var(--db-rule)] pl-5">
-                    <dt className="text-[0.65rem] font-black uppercase tracking-[0.14em] text-[var(--db-copy-light)]">
+                    <dt className="text-xs font-black uppercase tracking-[0.1em] text-[var(--db-copy)]">
                       Work duration
                     </dt>
                     <dd className="mt-1 font-black text-[var(--db-ink)]">
@@ -196,9 +196,9 @@ function EditorialProcess() {
               id="home-process-heading"
               className="mt-6 text-[clamp(2.75rem,7vw,6.5rem)] font-black leading-[1.04] tracking-[-0.04em]"
             >
-              四個步驟，
+              四步流程，
               <br />
-              流程清晰。
+              清楚跟進。
             </h2>
           </div>
 
@@ -221,7 +221,7 @@ function EditorialProcess() {
                 {step.title}
               </h3>
 
-              <p className="mt-4 text-sm leading-7 text-white/60">
+              <p className="mt-4 text-sm leading-7 text-white/75">
                 {step.description}
               </p>
 
@@ -254,9 +254,9 @@ function EditorialJournal() {
           <div>
             <EditorialKicker>Drain journal / 實用文章</EditorialKicker>
             <h2 id="home-journal-heading" className="db-editorial-heading mt-6">
-              專業渠務資訊，
+              渠務資訊，
               <br />
-              方便隨時查閱。
+              隨時查閱。
             </h2>
           </div>
 
@@ -337,9 +337,9 @@ function EditorialFinalCTA() {
               id="home-final-cta-heading"
               className="text-[clamp(3.2rem,8vw,7.5rem)] font-black leading-[1.08] tracking-[-0.035em] md:leading-[1.04] xl:leading-[1.02]"
             >
-              需要緊急通渠？
+              緊急通渠？
               <br />
-              立即聯絡我們。
+              立即聯絡。
             </h2>
 
             <p className="mt-8 max-w-2xl text-base font-bold leading-8 text-[var(--db-ink-deep)]/75 md:text-lg">

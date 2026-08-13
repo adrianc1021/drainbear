@@ -97,7 +97,7 @@ export function EditorialHero({ imageSrc }: { imageSrc?: string }) {
             <h1 id="home-editorial-heading" className="db-display mt-8">
               渠管淤塞，
               <br />
-              <span className="text-[var(--db-safety)]">專業評估處理。</span>
+              <span className="text-[var(--db-safety)]">專業評估。</span>
             </h1>
 
             <p className="db-lead mt-8 max-w-xl">
@@ -197,9 +197,9 @@ export function EditorialPromise() {
             id="editorial-promise-heading"
             className="db-editorial-heading mt-6"
           >
-            透明報價，
+            收費透明，
             <br />
-            確認收費後才動工。
+            確認後才動工。
           </h2>
 
           <div className="mt-8 flex flex-wrap gap-5">
@@ -266,7 +266,7 @@ export function EditorialCapability({ imageSrc }: { imageSrc?: string }) {
             >
               專業檢測，
               <br />
-              準確判斷管道狀況。
+              準確判斷。
             </h2>
           </div>
 
@@ -306,7 +306,7 @@ export function EditorialCapability({ imageSrc }: { imageSrc?: string }) {
                   {capability.title}
                 </h3>
 
-                <p className="text-sm leading-7 text-white/60">
+                <p className="text-sm leading-7 text-white/75">
                   {capability.description}
                 </p>
               </article>
@@ -335,7 +335,7 @@ export function EditorialServices() {
             >
               因應實際狀況，
               <br />
-              採用合適處理方案。
+              採用合適方案。
             </h2>
           </div>
 
