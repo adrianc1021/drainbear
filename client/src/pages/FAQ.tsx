@@ -1,6 +1,6 @@
 /**
  * 通渠熊 DrainBear — 常見問題
- * Accordion 折疊面板，預設隱藏答案
+ * Editorial accordion with accessible single-panel disclosure.
  */
 import {
   Accordion,
@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/accordion";
 import { HelpCircle } from "lucide-react";
 import { WhatsAppButton } from "@/components/Layout";
+import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
 import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
 
@@ -48,7 +49,7 @@ const FAQS = [
 const FAQ_JSONLD = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  mainEntity: FAQS.map((f) => ({
+  mainEntity: FAQS.map(f => ({
     "@type": "Question",
     name: f.q,
     acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -66,48 +67,55 @@ export default function FAQ() {
         jsonLd={FAQ_JSONLD}
         breadcrumbs={FAQ_CRUMBS}
       />
-      <Breadcrumbs items={FAQ_CRUMBS} />
-      <section className="bg-gradient-to-b from-mist to-white py-16 md:py-20">
-        <div className="container text-center">
-          <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">FAQ</div>
-          <h1 className="text-balance font-display text-4xl font-black text-navy md:text-5xl">
-            常見問題
-          </h1>
-          <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-            關於收費、施工及保養的疑問，白熊師傅在此一一解答。
-          </p>
-        </div>
-      </section>
 
-      <section className="bg-white pb-20 md:pb-24">
-        <div className="mx-auto max-w-3xl px-4">
-          <Accordion type="single" collapsible className="space-y-4">
-            {FAQS.map((f, i) => (
+      <Breadcrumbs items={FAQ_CRUMBS} />
+
+      <EditorialPageHero
+        kicker="FAQ / 常見問題"
+        title="常見問題"
+        description="以下整理有關上門檢查、報價、施工安排及管道保養的常見疑問，協助您在安排服務前掌握所需資料。"
+      />
+
+      <section className="site-content-section bg-white">
+        <div className="site-editorial-narrow">
+          <Accordion
+            type="single"
+            collapsible
+            className="site-editorial-accordion"
+          >
+            {FAQS.map((faq, index) => (
               <AccordionItem
-                key={i}
-                value={`faq-${i}`}
-                className="card-float rounded-lg border border-border bg-white px-6 data-[state=open]:border-wagreen/40"
+                key={faq.q}
+                value={`faq-${index}`}
+                className="site-editorial-accordion__item"
               >
-                <AccordionTrigger className="py-5 text-left font-display text-base font-bold text-navy hover:no-underline md:text-lg">
+                <AccordionTrigger className="site-editorial-accordion__trigger text-left hover:no-underline">
                   <span className="flex items-center gap-3">
-                    <HelpCircle className="h-5 w-5 shrink-0 text-wagreen" strokeWidth={2.2} />
-                    {f.q}
+                    <HelpCircle
+                      className="h-5 w-5 shrink-0 text-safety"
+                      strokeWidth={2.2}
+                      aria-hidden="true"
+                    />
+                    {faq.q}
                   </span>
                 </AccordionTrigger>
-                <AccordionContent className="pb-6 pl-8 text-base leading-relaxed text-muted-foreground">
-                  {f.a}
+
+                <AccordionContent className="site-editorial-accordion__answer">
+                  {faq.a}
                 </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
 
-          <div className="mt-14 rounded-lg bg-mist p-8 text-center md:p-10">
-            <h2 className="font-display text-xl font-black text-navy md:text-2xl">仍有其他疑問？</h2>
-            <p className="mt-2 text-sm text-muted-foreground md:text-base">
-              直接 WhatsApp 白熊師傅，即時解答並獲取免費初步報價。
+          <div className="site-editorial-callout">
+            <h2>仍有其他渠務疑問？</h2>
+            <p>
+              可透過 WhatsApp
+              提供問題位置、去水情況及現場相片，讓團隊先作初步了解。
             </p>
-            <div className="mt-6 flex justify-center">
-              <WhatsAppButton label="WhatsApp 即時查詢" trackLocation="faq_cta" />
+
+            <div className="mt-7">
+              <WhatsAppButton label="WhatsApp 查詢" trackLocation="faq_cta" />
             </div>
           </div>
         </div>
