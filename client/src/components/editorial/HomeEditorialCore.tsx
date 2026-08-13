@@ -21,8 +21,8 @@ const PROMISES = [
     description: "現場了解實際情況，雙方確認最終收費後才開始施工。",
   },
   {
-    title: "額外費用事前講明",
-    description: "深夜及特殊工具等安排會在動工前說明，避免事後爭拗。",
+    title: "額外費用事前說明",
+    description: "深夜及特殊工具等安排會在動工前說明，確保收費安排清晰透明。",
   },
 ] as const;
 
@@ -53,7 +53,7 @@ const SERVICES = [
   {
     number: "01",
     eyebrow: "Residential",
-    title: "住宅通渠急救",
+    title: "住宅通渠服務",
     description: "座廁、企缸、浴缸、廚房鋅盤及地台去水淤塞。",
     href: "/services/toilet-unblocking",
   },
@@ -95,9 +95,9 @@ export function EditorialHero({ imageSrc }: { imageSrc?: string }) {
             <EditorialKicker>Hong Kong / Drain service / 24H</EditorialKicker>
 
             <h1 id="home-editorial-heading" className="db-display mt-8">
-              塞渠爆喉，
+              渠管淤塞，
               <br />
-              <span className="text-[var(--db-safety)]">唔使靠估。</span>
+              <span className="text-[var(--db-safety)]">專業評估處理。</span>
             </h1>
 
             <p className="db-lead mt-8 max-w-xl">
@@ -199,7 +199,7 @@ export function EditorialPromise() {
           >
             透明報價，
             <br />
-            安心先至動工。
+            確認收費後才動工。
           </h2>
 
           <div className="mt-8 flex flex-wrap gap-5">
@@ -262,11 +262,11 @@ export function EditorialCapability({ imageSrc }: { imageSrc?: string }) {
             <EditorialKicker tone="light">Equipment / 現場判斷</EditorialKicker>
             <h2
               id="editorial-capability-heading"
-              className="mt-6 text-[clamp(2.6rem,6vw,5.9rem)] font-black leading-[0.94] tracking-[-0.055em] text-white"
+              className="mt-6 text-[clamp(2.6rem,6vw,5.9rem)] font-black leading-[1.04] tracking-[-0.04em] text-white"
             >
-              不是盲猜，
+              專業檢測，
               <br />
-              是有設備的判斷。
+              準確判斷管道狀況。
             </h2>
           </div>
 
@@ -333,9 +333,9 @@ export function EditorialServices() {
               id="editorial-services-heading"
               className="db-editorial-heading mt-6"
             >
-              對症處理，
+              因應實際狀況，
               <br />
-              唔係一招走天涯。
+              採用合適處理方案。
             </h2>
           </div>
 
@@ -401,7 +401,7 @@ export function EditorialServices() {
 
         <div className="mt-9 flex flex-col gap-6 border-l-2 border-[var(--db-safety)] pl-5 sm:flex-row sm:items-center sm:justify-between">
           <p className="max-w-2xl text-sm leading-7 text-[var(--db-copy)] md:text-base">
-            未肯定需要哪種設備？先傳送現場相片或影片，團隊會按實際情況初步了解。
+            如未能確定所需設備，可先傳送現場相片或影片，團隊將按實際情況作初步評估。
           </p>
 
           <div className="flex items-center gap-2 text-sm font-black">

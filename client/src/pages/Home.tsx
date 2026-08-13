@@ -115,9 +115,9 @@ function EditorialCases() {
           <div>
             <EditorialKicker>Field notes / 工程紀錄</EditorialKicker>
             <h2 id="home-cases-heading" className="db-editorial-heading mt-6">
-              現場問題，
+              實際個案，
               <br />
-              逐步處理。
+              專業處理。
             </h2>
           </div>
 
@@ -194,17 +194,16 @@ function EditorialProcess() {
             </EditorialKicker>
             <h2
               id="home-process-heading"
-              className="mt-6 text-[clamp(2.75rem,7vw,6.5rem)] font-black leading-[0.92] tracking-[-0.06em]"
+              className="mt-6 text-[clamp(2.75rem,7vw,6.5rem)] font-black leading-[1.04] tracking-[-0.04em]"
             >
-              四步，
+              四個步驟，
               <br />
-              唔兜圈。
+              流程清晰。
             </h2>
           </div>
 
           <p className="max-w-xl text-base leading-8 text-white/65 lg:justify-self-end">
-            先講清楚現場，再安排到場。服務流程保持簡單，
-            但每一步都要有足夠資料及雙方確認。
+            團隊會先了解現場情況，再安排合適人員到場。每個步驟均以充分資料及雙方確認為基礎。
           </p>
         </div>
 
@@ -255,9 +254,9 @@ function EditorialJournal() {
           <div>
             <EditorialKicker>Drain journal / 實用文章</EditorialKicker>
             <h2 id="home-journal-heading" className="db-editorial-heading mt-6">
-              渠務知識，
+              專業渠務資訊，
               <br />
-              留低慢慢睇。
+              方便隨時查閱。
             </h2>
           </div>
 
@@ -330,22 +329,22 @@ function EditorialFinalCTA() {
       data-pr20-section="final-cta"
     >
       <div className="db-container py-[var(--db-editorial-section)]">
-        <EditorialKicker>Emergency line / 24H inquiry</EditorialKicker>
+        <EditorialKicker>Emergency service / 24小時服務查詢</EditorialKicker>
 
         <div className="mt-8 grid gap-10 lg:grid-cols-[1.35fr_0.65fr] lg:items-end">
           <div>
             <h2
               id="home-final-cta-heading"
-              className="text-[clamp(3.2rem,8vw,7.5rem)] font-black leading-[1] tracking-[-0.04em] md:leading-[0.96] xl:leading-[0.92]"
+              className="text-[clamp(3.2rem,8vw,7.5rem)] font-black leading-[1.08] tracking-[-0.035em] md:leading-[1.04] xl:leading-[1.02]"
             >
-              塞渠告急？
+              需要緊急通渠？
               <br />
-              直接講情況。
+              立即聯絡我們。
             </h2>
 
             <p className="mt-8 max-w-2xl text-base font-bold leading-8 text-[var(--db-ink-deep)]/75 md:text-lg">
               提供地點、問題位置及現場相片或影片，
-              團隊會先了解情況，再確認可以安排的時間及下一步。
+              團隊會先作初步評估，再確認可安排的服務時間及後續處理方案。
             </p>
           </div>
 
