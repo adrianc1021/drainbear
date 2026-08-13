@@ -336,9 +336,9 @@ function EditorialFinalCTA() {
           <div>
             <h2
               id="home-final-cta-heading"
-              className="text-[clamp(3.2rem,9vw,8.5rem)] font-black leading-[0.84] tracking-[-0.07em]"
+              className="text-[clamp(3.2rem,8vw,7.5rem)] font-black leading-[1] tracking-[-0.04em] md:leading-[0.96] xl:leading-[0.92]"
             >
-              渠道告急？
+              塞渠告急？
               <br />
               直接講情況。
             </h2>
