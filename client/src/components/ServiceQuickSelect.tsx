@@ -53,20 +53,20 @@ export default function ServiceQuickSelect() {
       <div className="db-container py-16 md:py-24">
         <div className="grid gap-10 border-b border-[var(--db-rule)] pb-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
           <div>
-            <EditorialKicker>Start here / 先講情況</EditorialKicker>
+            <EditorialKicker>Start here / 問題分類</EditorialKicker>
             <h2
               id="quick-service-heading"
-              className="mt-5 text-[clamp(2.3rem,5vw,4.75rem)] font-black leading-[0.96] tracking-[-0.055em] text-[var(--db-ink)]"
+              className="mt-5 text-[clamp(2.3rem,5vw,4.75rem)] font-black leading-[1.06] tracking-[-0.04em] text-[var(--db-ink)]"
             >
-              你遇到
+              請選擇
               <br />
-              甚麼問題？
+              渠務問題類型
             </h2>
           </div>
 
           <p className="max-w-xl text-base leading-7 text-[var(--db-copy)] lg:justify-self-end lg:text-lg">
-            選擇最接近的情況，直接傳送預設查詢內容。未肯定原因亦唔緊要，
-            可先提供相片或影片，讓團隊初步了解。
+            請選擇最接近的渠務問題，系統會提供相應的查詢內容。如未能確定原因，
+            可先提供現場相片或影片，讓團隊作初步評估。
           </p>
         </div>
 
@@ -110,7 +110,7 @@ export default function ServiceQuickSelect() {
 
         <div className="mt-7 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
           <p className="text-sm leading-6 text-[var(--db-copy)]">
-            想先了解大概收費？計算機只作初步參考，最終以現場報價為準。
+            如需初步了解服務預算，可使用估價計算機；最終收費以現場報價為準。
           </p>
 
           <Link
