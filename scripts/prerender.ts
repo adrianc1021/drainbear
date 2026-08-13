@@ -307,6 +307,26 @@ async function waitForRouteSeo(page: Page, route: string) {
   );
 }
 
+async function getChromiumLaunchOptions() {
+  if (process.env.VERCEL !== "1") {
+    return {
+      headless: true as const,
+    };
+  }
+
+  const { default: serverlessChromium } = await import("@sparticuz/chromium");
+
+  const executablePath = await serverlessChromium.executablePath();
+
+  console.log("Using @sparticuz/chromium for Vercel prerender.");
+
+  return {
+    args: serverlessChromium.args,
+    executablePath,
+    headless: true as const,
+  };
+}
+
 async function prerender() {
   // Vite has just created dist/public. Do not remove it here,
   // otherwise compiled assets would be deleted before prerendering.
@@ -379,9 +399,7 @@ async function prerender() {
   try {
     await waitForServer();
 
-    browser = await chromium.launch({
-      headless: true,
-    });
+    browser = await chromium.launch(await getChromiumLaunchOptions());
 
     const page = await browser.newPage();
 
