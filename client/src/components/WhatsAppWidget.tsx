@@ -36,12 +36,13 @@ export default function WhatsAppWidget() {
 
   return (
     <div
-      className="pointer-events-none fixed bottom-[86px] right-3 z-[60] flex flex-col items-end md:bottom-6 md:right-6"
+      data-whatsapp-widget="true"
+      className="pointer-events-none fixed bottom-6 right-6 z-[60] hidden flex-col items-end md:flex"
       style={{ marginBottom: "env(safe-area-inset-bottom)" }}
     >
       {/* 對話卡 */}
       <div
-        className={`mb-3 w-[320px] max-w-[calc(100vw-1.5rem)] origin-bottom-right overflow-hidden rounded-lg bg-white shadow-[0_20px_60px_rgba(11,19,43,0.25)] ring-1 ring-border transition-all duration-200 ${
+        className={`mb-3 w-[320px] max-w-[calc(100vw-3rem)] origin-bottom-right overflow-hidden border border-navy/15 bg-white shadow-[0_24px_70px_rgba(11,19,43,0.22)] transition-all duration-200 ${
           open
             ? "pointer-events-auto translate-y-0 scale-100 opacity-100"
             : "pointer-events-none translate-y-2 scale-95 opacity-0"
@@ -66,7 +67,7 @@ export default function WhatsAppWidget() {
             <div className="font-display text-sm font-bold text-white">
               白熊師傅
             </div>
-            <div className="text-xs text-wagreen">在線・通常 1 分鐘內回覆</div>
+            <div className="text-xs text-wagreen">24 小時接受渠務查詢</div>
           </div>
           <button
             onClick={() => setOpen(false)}
@@ -80,7 +81,7 @@ export default function WhatsAppWidget() {
         {/* 訊息氣泡 */}
         <div className="bg-mist px-5 py-4">
           <div className="max-w-[85%] rounded-lg rounded-tl-none bg-white px-4 py-3 text-sm leading-relaxed text-navy shadow-sm">
-            你好！我係通渠熊白熊師傅。請問遇到咩渠務問題？揀個主題或直接開始對話，即時免費報價。
+            你好！請選擇最接近的渠務問題，或直接提供所在地區、現場相片及影片，方便團隊初步了解。
           </div>
         </div>
 
@@ -113,13 +114,13 @@ export default function WhatsAppWidget() {
               trackCTA("whatsapp", "floating_widget", "開始對話");
               goThanksAfterWhatsApp("floating_widget");
             }}
-            className="btn-smooth mt-1 flex items-center justify-center gap-2 rounded-lg bg-wagreen px-4 py-3 text-sm font-bold text-white shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark"
+            className="btn-smooth mt-1 flex items-center justify-center gap-2 border border-navy bg-wagreen px-4 py-3 text-sm font-black text-navy hover:bg-navy hover:text-white"
           >
             <MessageCircle className="h-4 w-4" strokeWidth={2.5} />
             開始 WhatsApp 對話
           </a>
           <p className="pt-1 text-center text-[11px] text-muted-foreground">
-            24 小時全天候・先報價後動工・不成功不收費
+            24 小時接受查詢・確認報價後才動工
           </p>
         </div>
       </div>

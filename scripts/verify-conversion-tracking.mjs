@@ -18,12 +18,18 @@ const required = [
   [thanks, "consumeWhatsAppHandoff"],
   [app, "trackPageView(location)"],
   [html, "send_page_view: false"],
+  [html, "productionTrackingHosts"],
+  [html, "productionTrackingHosts.has(window.location.hostname)"],
 ];
 
 for (const [source, pattern] of required) {
   if (!source.includes(pattern)) {
     throw new Error(`缺少 tracking pattern：${pattern}`);
   }
+}
+
+if (html.includes('src="https://www.googletagmanager.com/gtag/js')) {
+  throw new Error("client/index.html still loads gtag.js unconditionally");
 }
 
 if (thanks.includes("trackWhatsAppOpen(from)")) {
