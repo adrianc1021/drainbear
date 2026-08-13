@@ -89,7 +89,7 @@ export function EditorialHero({ imageSrc }: { imageSrc?: string }) {
       className="relative bg-[var(--db-paper)]"
       data-pr20-section="hero"
     >
-      <div className="db-container grid min-h-[calc(100svh-4rem)] gap-8 py-10 md:min-h-[720px] md:grid-cols-[1.02fr_0.98fr] md:items-stretch md:py-14 lg:min-h-[760px]">
+      <div className="home-hero-grid db-container grid min-h-[calc(100svh-4rem)] gap-8 py-10 md:min-h-[720px] md:grid-cols-[1.02fr_0.98fr] md:items-stretch md:py-14 lg:min-h-[760px]">
         <div className="flex flex-col justify-between py-4 md:py-8">
           <div>
             <EditorialKicker>Hong Kong / Drain service / 24H</EditorialKicker>
@@ -164,6 +164,8 @@ export function EditorialHero({ imageSrc }: { imageSrc?: string }) {
               width="1024"
               height="1280"
               fetchPriority="high"
+              decoding="async"
+              sizes="(min-width: 768px) 50vw, 100vw"
             />
           ) : (
             <div className="db-operational-grid flex h-full min-h-[420px] items-center justify-center bg-[var(--db-paper-deep)] p-12">
@@ -190,7 +192,7 @@ export function EditorialPromise() {
       className="db-section db-section--paper"
       data-pr20-section="promise"
     >
-      <div className="db-container grid gap-12 lg:grid-cols-[0.76fr_1.24fr] lg:gap-20">
+      <div className="home-promise-grid db-container grid gap-12 lg:grid-cols-[0.76fr_1.24fr] lg:gap-20">
         <div>
           <EditorialKicker>Our promise / 收費原則</EditorialKicker>
           <h2
@@ -276,7 +278,7 @@ export function EditorialCapability({ imageSrc }: { imageSrc?: string }) {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="home-capability-layout mt-12 grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="db-media min-h-[360px] bg-white/5 lg:min-h-[560px]">
             {imageSrc ? (
               <img
@@ -285,6 +287,8 @@ export function EditorialCapability({ imageSrc }: { imageSrc?: string }) {
                 width="1024"
                 height="1024"
                 loading="lazy"
+                decoding="async"
+                sizes="(min-width: 1024px) 46vw, 100vw"
               />
             ) : (
               <div className="db-operational-grid h-full min-h-[360px] opacity-30 lg:min-h-[560px]" />
@@ -365,7 +369,7 @@ export function EditorialServices() {
           </div>
         </div>
 
-        <div className="border-b border-[var(--db-rule)]">
+        <div className="home-service-list border-b border-[var(--db-rule)]">
           {SERVICES.map(service => (
             <Link
               key={service.number}
@@ -377,7 +381,7 @@ export function EditorialServices() {
                   destination_url: service.href,
                 })
               }
-              className="group grid gap-5 border-t border-[var(--db-rule)] py-8 text-[var(--db-ink)] transition-colors hover:bg-[var(--db-paper)] md:min-h-40 md:grid-cols-[3rem_7rem_minmax(0,1fr)_3rem] md:items-center md:px-5 lg:grid-cols-[4rem_9rem_minmax(0,1fr)_3rem]"
+              className="home-service-row group grid gap-5 border-t border-[var(--db-rule)] py-8 text-[var(--db-ink)] transition-colors hover:bg-[var(--db-paper)] md:min-h-40 md:grid-cols-[3rem_7rem_minmax(0,1fr)_3rem] md:items-center md:px-5 lg:grid-cols-[4rem_9rem_minmax(0,1fr)_3rem]"
             >
               <EditorialIndex>{service.number}</EditorialIndex>
 

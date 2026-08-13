@@ -111,7 +111,7 @@ function EditorialCases() {
       data-pr20-section="cases"
     >
       <div className="db-container py-[var(--db-editorial-section)]">
-        <div className="grid gap-8 border-b border-[var(--db-rule)] pb-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
+        <div className="home-section-head grid gap-8 border-b border-[var(--db-rule)] pb-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
           <div>
             <EditorialKicker>Field notes / 工程紀錄</EditorialKicker>
             <h2 id="home-cases-heading" className="db-editorial-heading mt-6">
@@ -127,11 +127,11 @@ function EditorialCases() {
           </p>
         </div>
 
-        <div className="border-b border-[var(--db-rule)]">
+        <div className="home-case-list border-b border-[var(--db-rule)]">
           {CASE_STUDIES.map(study => (
             <article
               key={study.number}
-              className="grid gap-6 border-t border-[var(--db-rule)] py-9 md:grid-cols-[4rem_0.7fr_1.3fr] md:py-12"
+              className="home-case-row grid gap-6 border-t border-[var(--db-rule)] py-9 md:grid-cols-[4rem_0.7fr_1.3fr] md:py-12"
             >
               <EditorialIndex>{study.number}</EditorialIndex>
 
@@ -187,7 +187,7 @@ function EditorialProcess() {
       data-pr20-section="process"
     >
       <div className="db-container py-[var(--db-editorial-section)]">
-        <div className="grid gap-8 border-b border-white/20 pb-10 lg:grid-cols-2 lg:items-end">
+        <div className="home-section-head home-section-head--dark grid gap-8 border-b border-white/20 pb-10 lg:grid-cols-2 lg:items-end">
           <div>
             <EditorialKicker tone="light">
               How it works / 處理流程
@@ -207,7 +207,7 @@ function EditorialProcess() {
           </p>
         </div>
 
-        <ol className="grid border-b border-white/20 md:grid-cols-2 xl:grid-cols-4">
+        <ol className="home-process-grid grid border-b border-white/20 md:grid-cols-2 xl:grid-cols-4">
           {PROCESS.map((step, index) => (
             <li
               key={step.number}
@@ -276,7 +276,7 @@ function EditorialJournal() {
           </Link>
         </div>
 
-        <div className="border-b border-[var(--db-rule)]">
+        <div className="home-journal-list border-b border-[var(--db-rule)]">
           {selectedPosts.map((post, index) => (
             <Link
               key={post.slug}
@@ -289,7 +289,7 @@ function EditorialJournal() {
                   destination_url: `/blog/${post.slug}`,
                 })
               }
-              className="group grid gap-5 border-t border-[var(--db-rule)] py-8 text-[var(--db-ink)] transition-colors hover:bg-[var(--db-paper)] sm:grid-cols-[4rem_0.7fr_1.3fr_auto] sm:items-center sm:px-5 md:min-h-36"
+              className="home-journal-row group grid gap-5 border-t border-[var(--db-rule)] py-8 text-[var(--db-ink)] transition-colors hover:bg-[var(--db-paper)] sm:grid-cols-[4rem_0.7fr_1.3fr_auto] sm:items-center sm:px-5 md:min-h-36"
             >
               <EditorialIndex>
                 {String(index + 1).padStart(2, "0")}
@@ -331,7 +331,7 @@ function EditorialFinalCTA() {
       <div className="db-container py-[var(--db-editorial-section)]">
         <EditorialKicker>Emergency service / 24小時服務查詢</EditorialKicker>
 
-        <div className="mt-8 grid gap-10 lg:grid-cols-[1.35fr_0.65fr] lg:items-end">
+        <div className="home-final-grid mt-8 grid gap-10 lg:grid-cols-[1.35fr_0.65fr] lg:items-end">
           <div>
             <h2 id="home-final-cta-heading" className="db-final-cta-heading">
               緊急通渠？

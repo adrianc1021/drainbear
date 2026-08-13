@@ -51,7 +51,7 @@ export default function ServiceQuickSelect() {
       data-pr20-section="quick-service"
     >
       <div className="db-container py-16 md:py-24">
-        <div className="grid gap-10 border-b border-[var(--db-rule)] pb-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
+        <div className="home-section-head grid gap-10 border-b border-[var(--db-rule)] pb-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
           <div>
             <EditorialKicker>Start here / 問題分類</EditorialKicker>
             <h2
@@ -70,7 +70,7 @@ export default function ServiceQuickSelect() {
           </p>
         </div>
 
-        <div className="border-b border-[var(--db-rule)]">
+        <div className="home-choice-grid border-b border-[var(--db-rule)]">
           {QUICK_SERVICES.map((service, index) => (
             <a
               key={service.id}
@@ -81,7 +81,7 @@ export default function ServiceQuickSelect() {
                 trackCTA("whatsapp", "home_quick_select", service.id);
                 goThanksAfterWhatsApp("home_quick_select");
               }}
-              className="group grid min-h-28 items-center gap-4 border-t border-[var(--db-rule)] py-6 text-[var(--db-ink)] transition-colors duration-200 hover:bg-[var(--db-paper)] focus-visible:bg-[var(--db-paper)] sm:grid-cols-[4rem_1fr_auto] sm:px-4 md:min-h-32 md:px-6"
+              className="home-choice-card group grid min-h-28 items-center gap-4 border-t border-[var(--db-rule)] py-6 text-[var(--db-ink)] transition-colors duration-200 hover:bg-[var(--db-paper)] focus-visible:bg-[var(--db-paper)] sm:grid-cols-[4rem_1fr_auto] sm:px-4 md:min-h-32 md:px-6"
               data-service-id={service.id}
             >
               <EditorialIndex>
