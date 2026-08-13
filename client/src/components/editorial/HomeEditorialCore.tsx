@@ -262,7 +262,7 @@ export function EditorialCapability({ imageSrc }: { imageSrc?: string }) {
             <EditorialKicker tone="light">Equipment / 現場判斷</EditorialKicker>
             <h2
               id="editorial-capability-heading"
-              className="mt-6 text-[clamp(2.6rem,6vw,5.9rem)] font-black leading-[1.04] tracking-[-0.04em] text-white"
+              className="db-editorial-heading mt-6 text-white"
             >
               專業檢測，
               <br />
@@ -326,7 +326,7 @@ export function EditorialServices() {
       data-pr20-section="services"
     >
       <div className="db-container">
-        <div className="grid gap-8 border-b border-[var(--db-rule)] pb-10 md:grid-cols-[1fr_auto] md:items-end">
+        <div className="grid gap-8 border-b border-[var(--db-rule)] pb-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(20rem,0.85fr)] lg:items-end">
           <div>
             <EditorialKicker>Our services / 專業服務</EditorialKicker>
             <h2
@@ -339,24 +339,30 @@ export function EditorialServices() {
             </h2>
           </div>
 
-          <Link
-            href="/services"
-            onClick={() =>
-              trackNavClick("navigation", {
-                cta_location: "home_services",
-                cta_label: "查看全部服務",
-                destination_url: "/services",
-              })
-            }
-            className="db-arrow-link"
-          >
-            查看全部服務
-            <ArrowRight
-              className="db-arrow-link__icon"
-              strokeWidth={2}
-              aria-hidden="true"
-            />
-          </Link>
+          <div className="flex max-w-xl flex-col items-start gap-5 lg:justify-self-end">
+            <p className="db-section-support">
+              由一般家居淤塞至商業渠務工程，團隊會按管道結構、淤塞程度及現場所需設備，建議合適處理方向。
+            </p>
+
+            <Link
+              href="/services"
+              onClick={() =>
+                trackNavClick("navigation", {
+                  cta_location: "home_services",
+                  cta_label: "查看全部服務",
+                  destination_url: "/services",
+                })
+              }
+              className="db-arrow-link"
+            >
+              查看全部服務
+              <ArrowRight
+                className="db-arrow-link__icon"
+                strokeWidth={2}
+                aria-hidden="true"
+              />
+            </Link>
+          </div>
         </div>
 
         <div className="border-b border-[var(--db-rule)]">
@@ -371,7 +377,7 @@ export function EditorialServices() {
                   destination_url: service.href,
                 })
               }
-              className="group grid gap-5 border-t border-[var(--db-rule)] py-8 text-[var(--db-ink)] transition-colors hover:bg-[var(--db-paper)] sm:grid-cols-[4rem_0.75fr_1.25fr_auto] sm:items-center sm:px-5 md:min-h-40"
+              className="group grid gap-5 border-t border-[var(--db-rule)] py-8 text-[var(--db-ink)] transition-colors hover:bg-[var(--db-paper)] md:min-h-40 md:grid-cols-[3rem_7rem_minmax(0,1fr)_3rem] md:items-center md:px-5 lg:grid-cols-[4rem_9rem_minmax(0,1fr)_3rem]"
             >
               <EditorialIndex>{service.number}</EditorialIndex>
 

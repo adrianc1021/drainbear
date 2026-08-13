@@ -799,70 +799,96 @@
 
 /* PR20_EDITORIAL_FOUNDATION_END */
 
-/* HOME_VISUAL_POLISH_START
- * Refined Chinese display rhythm, stronger body readability,
- * restrained premium motion and interaction.
+/* HOME_VISUAL_SYSTEM_PHASE1_START
+ * Stable Traditional Chinese typography and responsive homepage hierarchy.
+ * Important: do not constrain Chinese headings with ch units.
  */
 
 .home-editorial {
   --db-copy: #354052;
   --db-copy-strong: #202b3d;
+  --db-dark-copy: rgba(255, 255, 255, 0.78);
 }
 
-/* 大標題不再靠極端字級製造張力 */
+/*
+ * <br> controls the intended semantic line break.
+ * nowrap prevents a second browser-generated break inside each line.
+ */
+.home-editorial .db-display,
+.home-editorial .db-editorial-heading,
+.home-editorial .db-final-cta-heading {
+  max-width: none;
+  width: fit-content;
+  word-break: keep-all;
+  overflow-wrap: normal;
+  white-space: nowrap;
+  text-wrap: nowrap;
+}
+
 .home-editorial .db-display {
-  max-width: 10ch;
-  font-size: clamp(3.2rem, 6.6vw, 6.5rem);
+  font-size: clamp(3rem, 5.6vw, 5.75rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.home-editorial .db-editorial-heading {
+  font-size: clamp(2.35rem, 3.4vw, 3.5rem);
+  line-height: 1.16;
+  letter-spacing: -0.015em;
+}
+
+.home-editorial .db-final-cta-heading {
+  font-size: clamp(3rem, 6.6vw, 6.5rem);
+  font-weight: 900;
   line-height: 1.08;
   letter-spacing: -0.025em;
-  text-wrap: normal;
 }
 
-/* Section 標題降低最大尺寸，避免左重右輕 */
-.home-editorial .db-editorial-heading {
-  max-width: 9ch;
-  font-size: clamp(2.4rem, 4.35vw, 4rem);
-  line-height: 1.12;
-  letter-spacing: -0.02em;
-  text-wrap: normal;
-}
-
-/* 首屏說明文字提高對比及閱讀節奏 */
 .home-editorial .db-lead {
   color: var(--db-copy);
   font-size: clamp(1rem, 1.15vw, 1.125rem);
   line-height: 1.85;
 }
 
-/* 英文／中文 kicker 不再細到接近裝飾線 */
 .home-editorial .db-kicker {
   font-size: 0.75rem;
   line-height: 1.45;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.13em;
 }
 
-/* 所有一般內文提高可讀性 */
+/* Light sections use stronger copy without overriding dark sections. */
 .home-editorial [data-pr20-section="quick-service"] p,
 .home-editorial [data-pr20-section="promise"] p,
 .home-editorial [data-pr20-section="services"] p,
 .home-editorial [data-pr20-section="cases"] p,
-.home-editorial [data-pr20-section="process"] p,
 .home-editorial [data-pr20-section="journal"] p {
   color: var(--db-copy);
 }
 
-/* 案例及流程內容避免顏色太淡 */
+.home-editorial [data-pr20-section="capability"] p,
+.home-editorial [data-pr20-section="process"] p {
+  color: var(--db-dark-copy);
+}
+
+/* Editorial section introductions should read as one composed unit. */
+.home-editorial .db-section-support {
+  max-width: 34rem;
+  color: var(--db-copy);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+/* Cases and process rows receive restrained interaction feedback. */
 .home-editorial [data-pr20-section="cases"] article,
-.home-editorial [data-pr20-section="process"] article {
+.home-editorial [data-pr20-section="process"] li {
   position: relative;
   transition:
     background-color 260ms var(--db-editorial-ease),
     box-shadow 260ms var(--db-editorial-ease);
 }
 
-/* 列表左側安全橙指示線 */
 .home-editorial [data-pr20-section="cases"] article::before,
-.home-editorial [data-pr20-section="process"] article::before {
+.home-editorial [data-pr20-section="process"] li::before {
   position: absolute;
   inset-block: 0;
   left: 0;
@@ -875,46 +901,49 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .home-editorial [data-pr20-section="cases"] article:hover,
-  .home-editorial [data-pr20-section="process"] article:hover {
-    background: rgba(255, 255, 255, 0.42);
+  .home-editorial [data-pr20-section="cases"] article:hover {
+    background: rgba(255, 255, 255, 0.46);
     box-shadow: inset 0 0 0 1px rgba(11, 19, 43, 0.025);
   }
 
+  .home-editorial [data-pr20-section="process"] li:hover {
+    background: rgba(255, 255, 255, 0.035);
+  }
+
   .home-editorial [data-pr20-section="cases"] article:hover::before,
-  .home-editorial [data-pr20-section="process"] article:hover::before {
+  .home-editorial [data-pr20-section="process"] li:hover::before {
     transform: scaleY(1);
     transform-origin: top;
   }
 }
 
-/* Hero：克制、分層進場 */
+/* Restrained first-view motion. No infinite loops or layout animation. */
 @media (prefers-reduced-motion: no-preference) {
   .home-editorial [data-pr20-section="hero"] .db-kicker {
-    animation: db-home-rise 620ms var(--db-editorial-ease) both;
+    animation: db-home-rise 560ms var(--db-editorial-ease) both;
   }
 
   .home-editorial [data-pr20-section="hero"] .db-display {
-    animation: db-home-rise 720ms var(--db-editorial-ease) 80ms both;
+    animation: db-home-rise 680ms var(--db-editorial-ease) 70ms both;
   }
 
   .home-editorial [data-pr20-section="hero"] .db-lead {
-    animation: db-home-rise 720ms var(--db-editorial-ease) 160ms both;
+    animation: db-home-rise 680ms var(--db-editorial-ease) 140ms both;
   }
 
   .home-editorial [data-pr20-section="hero"] .db-primary-action,
   .home-editorial [data-pr20-section="hero"] .db-secondary-action {
-    animation: db-home-rise 680ms var(--db-editorial-ease) 240ms both;
+    animation: db-home-rise 640ms var(--db-editorial-ease) 210ms both;
   }
 
   .home-editorial [data-pr20-section="hero"] .db-media {
-    animation: db-home-media-reveal 900ms var(--db-editorial-ease) 100ms both;
+    animation: db-home-media-reveal 820ms var(--db-editorial-ease) 90ms both;
   }
 
   @keyframes db-home-rise {
     from {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(16px);
     }
 
     to {
@@ -925,9 +954,9 @@
 
   @keyframes db-home-media-reveal {
     from {
-      clip-path: inset(0 0 10% 0);
+      clip-path: inset(0 0 7% 0);
       opacity: 0;
-      transform: scale(1.025);
+      transform: scale(1.018);
     }
 
     to {
@@ -938,55 +967,64 @@
   }
 }
 
-/* Tablet：進一步控制標題比例 */
+/* Tablet: preserve hierarchy without squeezing headings into narrow columns. */
 @media (min-width: 768px) and (max-width: 1100px) {
   .home-editorial .db-display {
-    max-width: 9ch;
-    font-size: clamp(3.5rem, 6.4vw, 4.5rem);
-    line-height: 1.1;
+    font-size: clamp(3.45rem, 6vw, 4.25rem);
+    line-height: 1.12;
   }
 
   .home-editorial .db-editorial-heading {
-    font-size: clamp(2.6rem, 4.4vw, 3.35rem);
-    line-height: 1.14;
+    font-size: clamp(2.45rem, 4.5vw, 3.15rem);
+    line-height: 1.17;
   }
 
-  .home-editorial [data-pr20-section="capability"] p {
-    font-size: 1rem;
-    line-height: 1.8;
+  .home-editorial .db-final-cta-heading {
+    font-size: clamp(3.5rem, 7vw, 5rem);
+    line-height: 1.1;
   }
 }
 
-/* Mobile：維持兩行而非放任單字跌落第三行 */
+/* Mobile: complete lines, comfortable rhythm and no poster-like compression. */
 @media (max-width: 767px) {
   .home-editorial .db-display {
-    max-width: none;
-    font-size: clamp(2.9rem, 13vw, 4rem);
-    line-height: 1.12;
-    letter-spacing: -0.02em;
+    font-size: clamp(2.75rem, 12vw, 3.75rem);
+    line-height: 1.14;
+    letter-spacing: -0.015em;
   }
 
   .home-editorial .db-editorial-heading {
-    max-width: none;
-    font-size: clamp(2.2rem, 10.5vw, 3rem);
-    line-height: 1.16;
+    font-size: clamp(2.1rem, 9.2vw, 2.8rem);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .home-editorial .db-final-cta-heading {
+    font-size: clamp(2.8rem, 12vw, 4rem);
+    line-height: 1.13;
     letter-spacing: -0.015em;
   }
 
   .home-editorial .db-kicker {
     font-size: 0.7rem;
-    letter-spacing: 0.11em;
+    letter-spacing: 0.1em;
   }
 }
 
-/* Reduced-motion 使用者完全停用新增動畫 */
+@media (max-width: 359px) {
+  .home-editorial .db-editorial-heading {
+    font-size: 2rem;
+  }
+}
+
+/* Reduced-motion users receive immediately visible, static content. */
 @media (prefers-reduced-motion: reduce) {
   .home-editorial [data-pr20-section="hero"] *,
   .home-editorial [data-pr20-section="cases"] article::before,
-  .home-editorial [data-pr20-section="process"] article::before {
+  .home-editorial [data-pr20-section="process"] li::before {
     animation: none !important;
     transition: none !important;
   }
 }
 
-/* HOME_VISUAL_POLISH_END */
+/* HOME_VISUAL_SYSTEM_PHASE1_END */
