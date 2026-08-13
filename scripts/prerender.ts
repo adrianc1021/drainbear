@@ -1,13 +1,14 @@
 import { spawn } from "node:child_process";
 import fs from "node:fs/promises";
 import path from "node:path";
-import { chromium } from "playwright";
+import { chromium, type Page } from "playwright";
 
 const PORT = 4173;
 const BASE_URL = `http://127.0.0.1:${PORT}`;
 const SITE_URL = "https://drainbearhk.com";
-const OUTPUT_ROOT = path.resolve("dist/prerender");
-const ROUTE_MANIFEST = path.join(OUTPUT_ROOT, "routes.json");
+const OUTPUT_ROOT = path.resolve("dist/public");
+const PRERENDER_META_ROOT = path.resolve("dist/prerender");
+const ROUTE_MANIFEST = path.join(PRERENDER_META_ROOT, "routes.json");
 const SITEMAP_PATH = path.resolve("dist/public/sitemap.xml");
 
 const SANITY_PROJECT_ID = "oyph9zy1";
@@ -167,7 +168,7 @@ function getOutputPath(route: string) {
     return path.join(OUTPUT_ROOT, "index.html");
   }
 
-  return path.join(OUTPUT_ROOT, `${route.slice(1)}.html`);
+  return path.join(OUTPUT_ROOT, route.slice(1), "index.html");
 }
 
 async function waitForServer() {
@@ -238,10 +239,84 @@ async function updateSitemap(blogEntries: PublishedBlogEntry[]) {
   );
 }
 
+function normalizeRoutePath(value: string) {
+  let result = value || "/";
+
+  while (result.length > 1 && result.endsWith("/")) {
+    result = result.slice(0, -1);
+  }
+
+  return result;
+}
+
+async function waitForRouteSeo(page: Page, route: string) {
+  const expectedPath = normalizeRoutePath(route);
+  const deadline = Date.now() + 30_000;
+  let lastState: Record<string, unknown> = {};
+
+  while (Date.now() < deadline) {
+    const title = await page.title();
+    const canonicalHref = await page
+      .locator('link[rel="canonical"]')
+      .getAttribute("href");
+    const rootText = await page.locator("#root").textContent();
+    const seoReady = await page.locator("html").getAttribute("data-seo-ready");
+    const robots = await page
+      .locator('meta[name="robots"]')
+      .getAttribute("content");
+    const googlebot = await page
+      .locator('meta[name="googlebot"]')
+      .getAttribute("content");
+
+    let canonicalPath = "";
+
+    if (canonicalHref) {
+      canonicalPath = normalizeRoutePath(new URL(canonicalHref).pathname);
+    }
+
+    const noindexReady =
+      expectedPath !== "/thanks" ||
+      Boolean(robots?.includes("noindex") && googlebot?.includes("noindex"));
+
+    lastState = {
+      title,
+      canonicalPath,
+      expectedPath,
+      robots,
+      googlebot,
+      seoReady,
+      hasRootContent: Boolean(rootText?.trim()),
+    };
+
+    if (
+      title &&
+      canonicalPath === expectedPath &&
+      rootText?.trim() &&
+      seoReady === "true" &&
+      noindexReady
+    ) {
+      return;
+    }
+
+    await page.waitForTimeout(100);
+  }
+
+  throw new Error(
+    `Timed out waiting for route SEO: ${route}\n` +
+      JSON.stringify(lastState, null, 2)
+  );
+}
+
 async function prerender() {
-  await fs.rm(OUTPUT_ROOT, {
+  // Vite has just created dist/public. Do not remove it here,
+  // otherwise compiled assets would be deleted before prerendering.
+  await fs.rm(PRERENDER_META_ROOT, {
     recursive: true,
     force: true,
+  });
+
+  await fs.mkdir(PRERENDER_META_ROOT, {
+    recursive: true,
   });
 
   await fs.mkdir(OUTPUT_ROOT, {
@@ -327,18 +402,7 @@ async function prerender() {
         timeout: 30_000,
       });
 
-      await page.waitForFunction(() => {
-        const canonical = document.querySelector<HTMLLinkElement>(
-          'link[rel="canonical"]'
-        );
-
-        return Boolean(
-          document.title &&
-            canonical?.href &&
-            document.querySelector("#root")?.textContent?.trim() &&
-            document.documentElement.dataset.seoReady === "true"
-        );
-      });
+      await waitForRouteSeo(page, route);
 
       await page.waitForTimeout(50);
 
