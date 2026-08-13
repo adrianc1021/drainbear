@@ -14,7 +14,15 @@ const SANITY_PROJECT_ID = "oyph9zy1";
 const SANITY_DATASET = "production";
 const SANITY_API_VERSION = "2025-02-19";
 
-const STATIC_ROUTES = ["/", "/services", "/guide", "/areas", "/faq", "/blog"];
+const STATIC_ROUTES = [
+  "/",
+  "/services",
+  "/guide",
+  "/areas",
+  "/faq",
+  "/blog",
+  "/thanks",
+];
 
 const SERVICE_SLUGS = [
   "toilet-unblocking",
