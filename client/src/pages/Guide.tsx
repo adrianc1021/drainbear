@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
 import PriceCalculator from "@/components/PriceCalculator";
 import { WhatsAppButton } from "@/components/Layout";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
@@ -193,7 +194,7 @@ const HOWTO_JSONLD = {
 export default function Guide() {
   const { phoneDisplay, phoneHref, whatsappHref } = useContactSettings();
   return (
-    <div className="bg-white">
+    <div className="phase4-guide bg-white" data-phase4-page="guide">
       <SEO
         title="2026 最新通渠收費指南｜明碼實價・絕無隱藏收費｜通渠熊 DrainBear"
         description="想知通渠幾錢？通渠熊提供全透明的通渠收費表。由住宅手搖泵通渠、高壓氣泵，到商業高壓水槍洗渠及 CCTV 照喉，各項收費一目了然。承諾報價後才動工，絕不坐地起價，上門檢查費更可豁免。"
@@ -205,36 +206,34 @@ export default function Guide() {
       <Breadcrumbs items={CRUMBS} />
 
       {/* 頁首 */}
-      <section className="bg-gradient-to-b from-white to-mist pb-12 pt-8 md:pb-16 md:pt-10">
-        <div className="container">
-          <div className="max-w-3xl">
-            <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">
-              PRICING &amp; GUIDE
-            </div>
-            <h1 className="text-balance font-display text-3xl font-black leading-tight text-navy md:text-5xl">
-              通渠收費指南：明碼實價，唔使怕中伏
-            </h1>
-            <p className="mt-4 max-w-2xl leading-relaxed text-muted-foreground md:text-lg">
-              「通渠幾錢？」是我們每日最常收到的問題。這份指南公開通渠熊的收費參考、教你分辨良心通渠公司，
-              以及了解由報價到完工的完整流程——一切透明，決定權在你手。
-            </p>
-            <div className="mt-6 flex flex-wrap items-center gap-3">
-              <WhatsAppButton
-                label="WhatsApp 免費報價"
-                className="px-6 py-3"
-                trackLocation="guide_hero"
-              />
-              <a
-                href={phoneHref}
-                onClick={() => trackCTA("phone", "guide_hero")}
-                className="btn-smooth inline-flex items-center gap-2 rounded-lg border-2 border-navy/15 bg-white px-6 py-3 text-sm font-bold text-navy hover:border-navy/30"
-              >
-                {phoneDisplay}
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+      <EditorialPageHero
+        kicker="Pricing & guide / 收費指南"
+        title={
+          <>
+            通渠收費透明，
+            <br />
+            動工前確認實價
+          </>
+        }
+        description="公開常見服務收費參考、影響價格的因素，以及由報價到完工的流程。資料先講清楚，是否施工由你決定。"
+        actions={
+          <>
+            <WhatsAppButton
+              label="WhatsApp 免費報價"
+              className="phase4-primary-action"
+              trackLocation="guide_hero"
+            />
+            <a
+              href={phoneHref}
+              onClick={() => trackCTA("phone", "guide_hero")}
+              className="phase4-secondary-action"
+            >
+              致電 {phoneDisplay}
+            </a>
+          </>
+        }
+        className="phase4-guide__hero"
+      />
 
       {/* 收費參考表 */}
       <section className="py-14 md:py-20">

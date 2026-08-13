@@ -56,10 +56,12 @@ function isPotentialBlogRoute(urlPath: string) {
 
 function getPrerenderFilePath(distPath: string, urlPath: string) {
   const pathname = normalizePath(urlPath);
-  const relativePath =
-    pathname === "/" ? "index.html" : `${pathname.slice(1)}.html`;
 
-  return path.resolve(distPath, "..", "prerender", relativePath);
+  if (pathname === "/") {
+    return path.resolve(distPath, "index.html");
+  }
+
+  return path.resolve(distPath, pathname.slice(1), "index.html");
 }
 
 function loadPrerenderRoutes(distPath: string) {
