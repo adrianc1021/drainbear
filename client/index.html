@@ -1,22 +1,37 @@
 <!doctype html>
 <html lang="zh-Hant-HK">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      fetchpriority="low"
-      src="https://www.googletagmanager.com/gtag/js?id=AW-18128738982"
-    ></script>
+    <!-- Google tag: production hostnames only -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
+      (() => {
+        const productionTrackingHosts = new Set([
+          "drainbearhk.com",
+          "www.drainbearhk.com",
+        ]);
 
-      gtag("config", "AW-18128738982", {
-        send_page_view: false,
-      });
+        window.dataLayer = window.dataLayer || [];
+        window.gtag =
+          window.gtag ||
+          function gtag() {
+            window.dataLayer.push(arguments);
+          };
+
+        if (!productionTrackingHosts.has(window.location.hostname)) {
+          return;
+        }
+
+        const googleTag = document.createElement("script");
+        googleTag.async = true;
+        googleTag.fetchPriority = "low";
+        googleTag.src =
+          "https://www.googletagmanager.com/gtag/js?id=AW-18128738982";
+        document.head.appendChild(googleTag);
+
+        window.gtag("js", new Date());
+        window.gtag("config", "AW-18128738982", {
+          send_page_view: false,
+        });
+      })();
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
