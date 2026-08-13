@@ -59,7 +59,7 @@ export function WhatsAppButton({
         trackCTA("whatsapp", trackLocation);
         goThanksAfterWhatsApp(trackLocation);
       }}
-      className={`btn-smooth inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-wagreen px-5 py-2.5 text-sm font-bold text-navy shadow-[0_2px_8px_rgba(11,19,43,0.1)] hover:bg-wagreen-dark hover:shadow-[0_5px_16px_rgba(11,19,43,0.14)] ${className}`}
+      className={`btn-smooth inline-flex min-h-12 items-center justify-center gap-2 border border-navy bg-wagreen px-5 py-2.5 text-sm font-black tracking-[-0.01em] text-navy transition-colors hover:bg-navy hover:text-white ${className}`}
     >
       <MessageCircle className="h-4 w-4" strokeWidth={2.5} />
       {label}
@@ -108,7 +108,8 @@ function MobileCTABar() {
 
   return (
     <div
-      className={`fixed inset-x-0 bottom-0 z-50 border-t border-border/80 bg-white/96 backdrop-blur-xl transition-transform duration-200 md:hidden ${
+      data-mobile-cta="true"
+      className={`fixed inset-x-0 bottom-0 z-50 border-t border-navy/15 bg-white/96 backdrop-blur-xl transition-transform duration-200 md:hidden ${
         hidden ? "pointer-events-none translate-y-full" : "translate-y-0"
       }`}
       style={{
@@ -130,7 +131,7 @@ function MobileCTABar() {
             );
             goThanksAfterWhatsApp("mobile_bar");
           }}
-          className="btn-smooth flex min-h-[54px] flex-[3] items-center justify-center gap-2.5 rounded-lg bg-wagreen px-3 py-2 text-navy shadow-[0_2px_8px_rgba(11,19,43,0.1)] active:scale-[0.98]"
+          className="btn-smooth flex min-h-[54px] flex-[3] items-center justify-center gap-2.5 border border-navy bg-wagreen px-3 py-2 text-navy active:scale-[0.98]"
         >
           <MessageCircle className="h-5 w-5 shrink-0" strokeWidth={2.4} />
           <span className="flex flex-col items-start leading-tight">
@@ -143,7 +144,7 @@ function MobileCTABar() {
         <a
           href={phoneHref}
           onClick={() => trackCTA("phone", "mobile_bar")}
-          className="btn-smooth flex min-h-[54px] flex-1 items-center justify-center gap-1.5 rounded-lg bg-navy px-2 py-2 text-white active:scale-[0.98]"
+          className="btn-smooth flex min-h-[54px] flex-1 items-center justify-center gap-1.5 border border-navy bg-navy px-2 py-2 text-white active:scale-[0.98]"
         >
           <Phone className="h-[18px] w-[18px] shrink-0" strokeWidth={2.4} />
           <span className="text-[15px] font-bold">致電</span>
@@ -185,7 +186,11 @@ function BackToTop() {
   );
 }
 
-function Header() {
+function Header({
+  hideConversionCTA = false,
+}: {
+  hideConversionCTA?: boolean;
+}) {
   const [location] = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -221,10 +226,11 @@ function Header() {
 
   return (
     <header
+      data-site-header="true"
       className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-200 ${
         scrolled
-          ? "border-border/80 bg-white/94 shadow-[0_2px_12px_rgba(11,19,43,0.055)] backdrop-blur-xl"
-          : "border-transparent bg-white/82 backdrop-blur-lg"
+          ? "border-navy/15 bg-white/96 shadow-[0_8px_30px_rgba(11,19,43,0.06)] backdrop-blur-xl"
+          : "border-navy/10 bg-white/90 backdrop-blur-lg"
       }`}
     >
       <div className="container flex h-16 items-center justify-between md:h-[72px]">
@@ -255,10 +261,10 @@ function Header() {
                   destination_url: item.href,
                 })
               }
-              className={`btn-smooth rounded-lg px-4 py-2 text-sm font-medium ${
+              className={`btn-smooth relative inline-flex min-h-11 items-center px-3 text-sm font-bold transition-colors after:absolute after:inset-x-3 after:bottom-0 after:h-0.5 after:origin-left after:transition-transform ${
                 location === item.href
-                  ? "bg-mist text-navy font-bold"
-                  : "text-navy/70 hover:bg-mist hover:text-navy"
+                  ? "text-navy after:scale-x-100 after:bg-safety"
+                  : "text-navy/65 after:scale-x-0 after:bg-navy hover:text-navy hover:after:scale-x-100"
               }`}
             >
               {item.label}
@@ -266,9 +272,11 @@ function Header() {
           ))}
         </nav>
 
-        <div className="hidden md:block">
-          <WhatsAppButton trackLocation="header" />
-        </div>
+        {!hideConversionCTA ? (
+          <div data-header-whatsapp="true" className="hidden md:block">
+            <WhatsAppButton className="rounded-none" trackLocation="header" />
+          </div>
+        ) : null}
 
         <button
           className="btn-smooth -mr-2 flex h-12 w-12 items-center justify-center rounded-lg text-navy hover:bg-mist md:hidden"
@@ -306,12 +314,14 @@ function Header() {
               {item.label}
             </Link>
           ))}
-          <div className="mt-3 px-4">
-            <WhatsAppButton
-              className="w-full justify-center"
-              trackLocation="mobile_menu"
-            />
-          </div>
+          {!hideConversionCTA ? (
+            <div data-mobile-menu-whatsapp="true" className="mt-3 px-4">
+              <WhatsAppButton
+                className="w-full justify-center rounded-none"
+                trackLocation="mobile_menu"
+              />
+            </div>
+          ) : null}
         </div>
       )}
     </header>
@@ -401,7 +411,7 @@ function Footer() {
   const { phoneDisplay, phoneHref } = useContactSettings();
 
   return (
-    <footer className="bg-navy text-white">
+    <footer data-site-footer="true" className="bg-[#080f22] text-white">
       {/* 數據列 */}
       <div className="dot-grid border-b border-white/10">
         <div className="container grid grid-cols-2 gap-x-4 gap-y-10 py-12 md:grid-cols-4 md:gap-8 md:py-14">
@@ -410,7 +420,7 @@ function Footer() {
               key={s.label}
               className="flex flex-col items-center text-center"
             >
-              <span className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-lg bg-white/5 ring-1 ring-white/10">
+              <span className="mb-3 inline-flex h-11 w-11 items-center justify-center border border-white/15 bg-white/[0.03]">
                 <s.icon className="h-5 w-5 text-wagreen" strokeWidth={2} />
               </span>
               <div className="font-display text-3xl font-extrabold tracking-tight md:text-4xl">
@@ -518,6 +528,9 @@ function Footer() {
 
 export default function Layout({ children }: { children: ReactNode }) {
   const [location] = useLocation();
+  const pathname = location.split(/[?#]/)[0] || "/";
+  const suppressConversionChrome = pathname === "/thanks";
+
   useReveal();
 
   useEffect(() => {
@@ -540,18 +553,24 @@ export default function Layout({ children }: { children: ReactNode }) {
 
   return (
     <div className="flex min-h-screen flex-col bg-white">
-      <Header />
-      <main className="flex-1 pt-16 md:pt-[72px]">{children}</main>
+      <Header hideConversionCTA={suppressConversionChrome} />
+      <main id="main-content" className="flex-1 pt-16 md:pt-[72px]">
+        {children}
+      </main>
       <Footer />
-      {/* 佔位：避免內容及 Footer 被固定 CTA 列遮蓋（含 safe-area） */}
-      <div
-        className="pointer-events-none h-[68px] md:hidden"
-        style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
-        aria-hidden="true"
-      />
-      <MobileCTABar />
-      <WhatsAppWidget />
-      <BackToTop />
+      {!suppressConversionChrome ? (
+        <>
+          {/* 避免內容及 Footer 被固定 CTA 列遮蓋（含 safe-area） */}
+          <div
+            className="pointer-events-none h-[68px] md:hidden"
+            style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+            aria-hidden="true"
+          />
+          <MobileCTABar />
+          <WhatsAppWidget />
+          <BackToTop />
+        </>
+      ) : null}
     </div>
   );
 }
