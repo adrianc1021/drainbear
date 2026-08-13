@@ -60,8 +60,8 @@ const manifest = JSON.parse(
 for (const service of services) {
   const route = `/services/${service.slug}`;
   const outputPath = path.resolve(
-    "dist/prerender",
-    `services/${service.slug}.html`
+    "dist/public",
+    `services/${service.slug}/index.html`
   );
 
   await fs.access(outputPath);
@@ -165,7 +165,7 @@ try {
   }
 
   const servicesPrerenderedHtml = await fs.readFile(
-    path.resolve("dist/prerender/services.html"),
+    path.resolve("dist/public/services/index.html"),
     "utf8"
   );
 

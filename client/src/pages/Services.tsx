@@ -22,6 +22,7 @@ import { Link } from "wouter";
 import { WhatsAppButton } from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
 import { BUSINESS_ID, SITE_URL } from "@/config/site";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import {
@@ -179,7 +180,7 @@ const STEPS = [
 export default function Services() {
   const { whatsappHref } = useContactSettings();
   return (
-    <div>
+    <div className="phase4-services" data-phase4-page="services">
       <SEO
         title="通渠服務｜住宅通渠・食肆隔油池・高壓水槍洗渠・CCTV 照喉｜通渠熊 DrainBear"
         description="通渠熊提供全方位通渠服務：塞廁所、企缸、廚房鋅盤去水慢、食肆隔油池清理、大廈沙井主渠疏通、德國高壓水槍洗渠及 CCTV 照喉檢測。24 小時特快上門，先報價後動工，不成功不收費。"
@@ -190,19 +191,25 @@ export default function Services() {
       />
       <Breadcrumbs items={SERVICES_CRUMBS} />
       {/* 頁首 */}
-      <section className="bg-gradient-to-b from-mist to-white py-16 md:py-20">
-        <div className="container text-center">
-          <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">
-            OUR SERVICES
-          </div>
-          <h1 className="text-balance font-display text-4xl font-black text-navy md:text-5xl">
-            全方位通渠服務，無論塞得幾嚴重，我們都有計
-          </h1>
-          <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-            針對住宅及商業客戶的不同需求，以現代化設備與科學方法，提供精準、徹底、無手尾的水管急救方案。
-          </p>
-        </div>
-      </section>
+      <EditorialPageHero
+        kicker="Our services / 專業服務"
+        title={
+          <>
+            全方位通渠服務，
+            <br />
+            因應現場選擇方案
+          </>
+        }
+        description="由一般住宅淤塞到商業主渠工程，團隊會先了解管道結構、淤塞程度及現場環境，再建議合適設備與處理方向。"
+        actions={
+          <WhatsAppButton
+            className="phase4-primary-action"
+            label="WhatsApp 查詢報價"
+            trackLocation="services_hero"
+          />
+        }
+        className="phase4-services__hero"
+      />
 
       {/* 區塊 1：Z-Pattern 交替圖文 */}
       <section className="bg-white pb-8">
@@ -226,6 +233,10 @@ export default function Services() {
                 <img
                   src={s.img}
                   alt={s.title}
+                  width="1200"
+                  height="800"
+                  loading="lazy"
+                  decoding="async"
                   className="relative w-full rounded-2xl object-cover shadow-[0_16px_48px_rgba(11,19,43,0.16)]"
                 />
               </div>

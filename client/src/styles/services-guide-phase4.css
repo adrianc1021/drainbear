@@ -1,0 +1,687 @@
+/*
+ * DrainBear Phase 4
+ * Services, service-detail and pricing-guide editorial refinement.
+ */
+
+.phase4-services,
+.phase4-service-detail,
+.phase4-guide {
+  --phase4-paper: #f3f0e8;
+  --phase4-paper-soft: #f8f6f0;
+  --phase4-ink: #091226;
+  --phase4-copy: #445064;
+  --phase4-muted: #667187;
+  --phase4-rule: rgba(9, 18, 38, 0.16);
+  --phase4-rule-strong: rgba(9, 18, 38, 0.3);
+  --phase4-safety: #ff6b00;
+  --phase4-ease: cubic-bezier(0.23, 1, 0.32, 1);
+  overflow: clip;
+  background: var(--phase4-paper-soft);
+  color: var(--phase4-ink);
+}
+
+.phase4-services h1,
+.phase4-services h2,
+.phase4-services h3,
+.phase4-service-detail h1,
+.phase4-service-detail h2,
+.phase4-service-detail h3,
+.phase4-guide h1,
+.phase4-guide h2,
+.phase4-guide h3 {
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.phase4-services > section:not(.site-page-hero),
+.phase4-service-detail main > section,
+.phase4-guide > section:not(.site-page-hero) {
+  padding-block: clamp(4.5rem, 8vw, 7rem);
+}
+
+.phase4-primary-action {
+  min-height: 3.25rem;
+  border-radius: 0.375rem !important;
+  padding-inline: 1.4rem !important;
+  font-weight: 900 !important;
+  box-shadow: 0 14px 30px rgba(37, 211, 102, 0.18);
+}
+
+.phase4-secondary-action {
+  display: inline-flex;
+  min-height: 3.25rem;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid currentColor;
+  padding-inline: 0.2rem;
+  color: var(--phase4-ink);
+  font-size: 0.9375rem;
+  font-weight: 800;
+}
+
+/* ================================================== */
+/* Services                                           */
+/* ================================================== */
+
+.phase4-services__hero .site-page-hero__title {
+  max-width: 10em;
+}
+
+.phase4-services > section:nth-of-type(2) {
+  background: #fff;
+}
+
+.phase4-services > section:nth-of-type(2) > .container {
+  gap: clamp(5rem, 10vw, 9rem);
+  padding-block: 0;
+}
+
+.phase4-services > section:nth-of-type(2) > .container > div {
+  position: relative;
+  gap: clamp(2.5rem, 6vw, 6rem);
+  border-top: 1px solid var(--phase4-rule);
+  padding-top: clamp(3rem, 6vw, 5rem);
+}
+
+.phase4-services > section:nth-of-type(2) > .container > div:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.phase4-services > section:nth-of-type(2) > .container > div > div:first-child {
+  overflow: hidden;
+  background: var(--phase4-paper);
+}
+
+.phase4-services
+  > section:nth-of-type(2)
+  > .container
+  > div
+  > div:first-child
+  > div {
+  display: none;
+}
+
+.phase4-services > section:nth-of-type(2) img {
+  aspect-ratio: 3 / 2;
+  border-radius: 0.25rem;
+  box-shadow: none;
+  transition: transform 650ms var(--phase4-ease);
+}
+
+.phase4-services
+  > section:nth-of-type(2)
+  > .container
+  > div
+  > div:last-child
+  > div:first-child {
+  margin-bottom: 1.25rem;
+  border-left: 2px solid var(--phase4-safety);
+  border-radius: 0;
+  background: transparent;
+  padding: 0 0 0 0.75rem;
+  color: var(--phase4-muted);
+  letter-spacing: 0.1em;
+}
+
+.phase4-services > section:nth-of-type(2) h2 {
+  max-width: 12em;
+  font-size: clamp(2rem, 3.5vw, 3.25rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+.phase4-services > section:nth-of-type(2) p {
+  max-width: 36rem;
+  color: var(--phase4-copy);
+  font-size: clamp(1rem, 1.3vw, 1.075rem);
+  line-height: 1.85;
+}
+
+.phase4-services > section:nth-of-type(2) a {
+  color: var(--phase4-ink);
+}
+
+.phase4-services > section:nth-of-type(3) {
+  border-color: var(--phase4-rule);
+  background: var(--phase4-paper);
+}
+
+.phase4-services > section:nth-of-type(3) > .container > div:first-child,
+.phase4-services > section:nth-of-type(4) > .container > div:first-child,
+.phase4-services > section:nth-of-type(5) > .container > div:first-child {
+  margin-inline: 0;
+  max-width: 48rem;
+  text-align: left;
+}
+
+.phase4-services > section:nth-of-type(3) h2,
+.phase4-services > section:nth-of-type(4) h2,
+.phase4-services > section:nth-of-type(5) h2 {
+  font-size: clamp(2.25rem, 4vw, 4rem);
+  line-height: 1.12;
+}
+
+.phase4-services > section:nth-of-type(3) > .container > div:nth-child(2) {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 0;
+  border-bottom: 1px solid var(--phase4-rule);
+}
+
+.phase4-services > section:nth-of-type(3) a {
+  position: relative;
+  display: grid;
+  min-height: 8.5rem;
+  grid-template-columns: minmax(7rem, 0.3fr) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1.5rem;
+  border: 0;
+  border-top: 1px solid var(--phase4-rule);
+  border-radius: 0;
+  background: transparent;
+  padding: 1.5rem 1rem;
+  box-shadow: none;
+}
+
+.phase4-services > section:nth-of-type(3) a::before {
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  width: 3px;
+  background: var(--phase4-safety);
+  content: "";
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 260ms var(--phase4-ease);
+}
+
+.phase4-services > section:nth-of-type(3) a > span:first-child {
+  grid-column: 1;
+}
+
+.phase4-services > section:nth-of-type(3) a h3 {
+  grid-column: 2;
+  grid-row: 1;
+  margin-top: 0;
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+}
+
+.phase4-services > section:nth-of-type(3) a > span:last-child {
+  grid-column: 3;
+  grid-row: 1;
+  margin-top: 0;
+  color: var(--phase4-ink);
+}
+
+.phase4-services > section:nth-of-type(4) {
+  background: #fff;
+}
+
+.phase4-services > section:nth-of-type(4) > .container > div:nth-child(2) {
+  gap: 0;
+  border-top: 1px solid var(--phase4-rule);
+  border-bottom: 1px solid var(--phase4-rule);
+}
+
+.phase4-services > section:nth-of-type(4) .card-float {
+  border-radius: 0;
+  background: transparent;
+  padding: clamp(1.75rem, 4vw, 3rem);
+  box-shadow: none;
+}
+
+.phase4-services > section:nth-of-type(4) .card-float + .card-float {
+  border-top: 1px solid var(--phase4-rule);
+}
+
+.phase4-services > section:nth-of-type(4) .card-float > div {
+  gap: 1.5rem;
+}
+
+.phase4-services > section:nth-of-type(4) .card-float > div > div {
+  border-top: 1px solid var(--phase4-rule);
+  padding-top: 1.25rem;
+}
+
+.phase4-services > section:nth-of-type(5) {
+  position: relative;
+  background: var(--phase4-ink);
+}
+
+.phase4-services > section:nth-of-type(5)::after {
+  position: absolute;
+  right: -8rem;
+  bottom: -12rem;
+  width: 30rem;
+  height: 30rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+}
+
+.phase4-services > section:nth-of-type(5) > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.phase4-services > section:nth-of-type(5) > .container > div:nth-child(2) {
+  gap: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.phase4-services
+  > section:nth-of-type(5)
+  > .container
+  > div:nth-child(2)
+  > div {
+  align-items: flex-start;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  padding: 2rem 1rem;
+  text-align: left;
+}
+
+.phase4-services > section:nth-of-type(5) .absolute {
+  display: none;
+}
+
+/* ================================================== */
+/* Service detail                                     */
+/* ================================================== */
+
+.phase4-service-detail {
+  background: #fff;
+}
+
+.phase4-service-detail__hero {
+  border-bottom: 1px solid var(--phase4-rule);
+  background:
+    linear-gradient(90deg, rgba(255, 107, 0, 0.035), transparent 40%),
+    var(--phase4-paper);
+}
+
+.phase4-service-detail__hero > .container {
+  gap: clamp(2.5rem, 6vw, 6rem);
+}
+
+.phase4-service-detail__hero h1 {
+  max-width: 12em;
+  font-size: clamp(2.75rem, 5vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+.phase4-service-detail__hero p {
+  color: var(--phase4-copy);
+  line-height: 1.85;
+}
+
+.phase4-service-detail__hero > .container > div:last-child {
+  border-radius: 0.25rem;
+  box-shadow: 0 24px 60px rgba(9, 18, 38, 0.17);
+}
+
+.phase4-service-detail main > section:nth-of-type(2),
+.phase4-service-detail main > section:nth-of-type(4),
+.phase4-service-detail main > section:nth-of-type(6) {
+  background: #fff;
+}
+
+.phase4-service-detail main > section:nth-of-type(3),
+.phase4-service-detail main > section:nth-of-type(5) {
+  background: var(--phase4-paper-soft);
+}
+
+.phase4-service-detail main > section:nth-of-type(2) > .container {
+  gap: 0;
+  border-top: 1px solid var(--phase4-rule);
+  border-bottom: 1px solid var(--phase4-rule);
+}
+
+.phase4-service-detail main > section:nth-of-type(2) article {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  padding: clamp(2rem, 5vw, 3.5rem);
+}
+
+.phase4-service-detail main > section:nth-of-type(2) article + article {
+  border-top: 1px solid var(--phase4-rule);
+}
+
+.phase4-service-detail
+  main
+  > section:nth-of-type(3)
+  > .container
+  > div:first-child {
+  margin-inline: 0;
+  max-width: 44rem;
+  text-align: left;
+}
+
+.phase4-service-detail main > section:nth-of-type(3) ol {
+  gap: 0;
+  border-top: 1px solid var(--phase4-rule);
+}
+
+.phase4-service-detail main > section:nth-of-type(3) li {
+  position: relative;
+  border: 0;
+  border-bottom: 1px solid var(--phase4-rule);
+  border-radius: 0;
+  background: transparent;
+  padding: 2rem 1.25rem;
+}
+
+.phase4-service-detail main > section:nth-of-type(4) > .container {
+  gap: 0;
+}
+
+.phase4-service-detail main > section:nth-of-type(4) article {
+  border: 1px solid var(--phase4-rule);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.phase4-service-detail main > section:nth-of-type(4) article:last-child {
+  border-color: var(--phase4-ink);
+  background: var(--phase4-ink);
+}
+
+.phase4-service-detail main > section:nth-of-type(5) > .container {
+  max-width: 64rem;
+}
+
+.phase4-service-detail main > section:nth-of-type(5) > .container > div {
+  gap: 0;
+  border-bottom: 1px solid var(--phase4-rule);
+}
+
+.phase4-service-detail main > section:nth-of-type(5) article {
+  border: 0;
+  border-top: 1px solid var(--phase4-rule);
+  border-radius: 0;
+  background: transparent;
+  padding: 1.75rem 0;
+}
+
+.phase4-service-detail
+  main
+  > section:nth-of-type(6)
+  > .container
+  > div:nth-child(2) {
+  gap: 0;
+  border-bottom: 1px solid var(--phase4-rule);
+}
+
+.phase4-service-detail main > section:nth-of-type(6) a.group {
+  position: relative;
+  border: 0;
+  border-top: 1px solid var(--phase4-rule);
+  border-radius: 0;
+  padding: 1.75rem 1rem;
+  box-shadow: none;
+}
+
+.phase4-service-detail
+  main
+  > section:nth-of-type(6)
+  > .container
+  > div:last-child {
+  position: relative;
+  overflow: hidden;
+  border-top: 4px solid var(--phase4-safety);
+  border-radius: 0;
+  background: var(--phase4-ink);
+}
+
+/* ================================================== */
+/* Guide                                              */
+/* ================================================== */
+
+.phase4-guide__hero .site-page-hero__title {
+  max-width: 10em;
+}
+
+.phase4-guide > section:nth-of-type(2),
+.phase4-guide > section:nth-of-type(4),
+.phase4-guide > section:nth-of-type(6),
+.phase4-guide > section:nth-of-type(8) {
+  background: #fff;
+}
+
+.phase4-guide > section:nth-of-type(3),
+.phase4-guide > section:nth-of-type(5),
+.phase4-guide > section:nth-of-type(9) {
+  background: var(--phase4-paper-soft);
+}
+
+.phase4-guide > section > .container > div:first-child h2 {
+  font-size: clamp(2rem, 3.5vw, 3.25rem);
+  line-height: 1.15;
+}
+
+.phase4-guide .card-float {
+  border-radius: 0.25rem;
+  box-shadow: 0 1px 2px rgba(9, 18, 38, 0.04);
+}
+
+.phase4-guide > section:nth-of-type(2) .card-float {
+  border-color: var(--phase4-rule);
+}
+
+.phase4-guide table th,
+.phase4-guide table td {
+  padding-block: 1.15rem;
+}
+
+.phase4-guide table tbody tr {
+  border-bottom: 1px solid var(--phase4-rule);
+}
+
+.phase4-guide #calculator .card-float {
+  border-color: var(--phase4-rule);
+  border-radius: 0.25rem;
+  box-shadow: 0 18px 48px rgba(9, 18, 38, 0.09);
+}
+
+.phase4-guide #calculator button {
+  border-radius: 0.25rem;
+}
+
+.phase4-guide > section:nth-of-type(4) > .container > div:last-child,
+.phase4-guide > section:nth-of-type(5) > .container > div:nth-child(2),
+.phase4-guide > section:nth-of-type(8) > .container > div:nth-child(2) {
+  gap: 0;
+  border-top: 1px solid var(--phase4-rule);
+  border-bottom: 1px solid var(--phase4-rule);
+}
+
+.phase4-guide > section:nth-of-type(4) .card-float,
+.phase4-guide > section:nth-of-type(5) .card-float,
+.phase4-guide > section:nth-of-type(8) .card-float {
+  border: 0;
+  border-bottom: 1px solid var(--phase4-rule);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.phase4-guide > section:nth-of-type(6) {
+  position: relative;
+  background: var(--phase4-ink);
+}
+
+.phase4-guide > section:nth-of-type(6) > .container > div:nth-child(2) > div {
+  border-radius: 0.25rem;
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.phase4-guide > section:nth-of-type(9) {
+  padding-top: 1rem;
+}
+
+.phase4-guide > section:nth-of-type(9) .card-float {
+  border-top: 4px solid var(--phase4-safety);
+  border-radius: 0;
+  background: var(--phase4-ink);
+  box-shadow: none;
+}
+
+/* ================================================== */
+/* Interaction                                        */
+/* ================================================== */
+
+@media (hover: hover) and (pointer: fine) {
+  .phase4-services > section:nth-of-type(2) img:hover {
+    transform: scale(1.018);
+  }
+
+  .phase4-services > section:nth-of-type(3) a:hover {
+    transform: none;
+    background: rgba(255, 255, 255, 0.55);
+    box-shadow: none;
+  }
+
+  .phase4-services > section:nth-of-type(3) a:hover::before {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+
+  .phase4-services .card-float:hover,
+  .phase4-guide .card-float:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .phase4-service-detail main > section:nth-of-type(6) a.group:hover {
+    transform: none;
+    border-color: var(--phase4-rule);
+    background: var(--phase4-paper-soft);
+    box-shadow: none;
+  }
+}
+
+/* ================================================== */
+/* Desktop                                            */
+/* ================================================== */
+
+@media (min-width: 1024px) {
+  .phase4-services > section:nth-of-type(4) .card-float + .card-float,
+  .phase4-service-detail main > section:nth-of-type(2) article + article {
+    border-top: 0;
+    border-left: 1px solid var(--phase4-rule);
+  }
+
+  .phase4-service-detail main > section:nth-of-type(3) li + li {
+    border-left: 1px solid var(--phase4-rule);
+  }
+
+  .phase4-service-detail main > section:nth-of-type(4) article + article {
+    margin-left: 1.5rem;
+  }
+}
+
+/* ================================================== */
+/* Mobile                                             */
+/* ================================================== */
+
+@media (max-width: 767px) {
+  .phase4-services > section:not(.site-page-hero),
+  .phase4-service-detail main > section,
+  .phase4-guide > section:not(.site-page-hero) {
+    padding-block: 4.5rem;
+  }
+
+  .phase4-services__hero .site-page-hero__title,
+  .phase4-guide__hero .site-page-hero__title {
+    max-width: none;
+  }
+
+  .phase4-primary-action,
+  .phase4-secondary-action {
+    width: 100%;
+  }
+
+  .phase4-services > section:nth-of-type(2) > .container {
+    gap: 5rem;
+  }
+
+  .phase4-services > section:nth-of-type(2) > .container > div {
+    gap: 2rem;
+  }
+
+  .phase4-services > section:nth-of-type(3) a {
+    min-height: 9.5rem;
+    grid-template-columns: minmax(0, 1fr) 2.75rem;
+    gap: 0.75rem;
+    padding-inline: 0.5rem;
+  }
+
+  .phase4-services > section:nth-of-type(3) a > span:first-child {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .phase4-services > section:nth-of-type(3) a h3 {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .phase4-services > section:nth-of-type(3) a > span:last-child {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    align-self: center;
+    font-size: 0;
+  }
+
+  .phase4-services > section:nth-of-type(3) a > span:last-child svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .phase4-service-detail__hero h1 {
+    font-size: clamp(2.65rem, 11vw, 3.75rem);
+    line-height: 1.14;
+  }
+
+  .phase4-service-detail__hero > .container > div:first-child > div {
+    flex-direction: column;
+  }
+
+  .phase4-service-detail__hero a {
+    width: 100%;
+  }
+
+  .phase4-service-detail main > section:nth-of-type(4) article + article {
+    margin-top: 1rem;
+  }
+
+  .phase4-guide #calculator .grid-cols-2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .phase4-guide > section:nth-of-type(2) .overflow-x-auto {
+    max-width: 100%;
+    overscroll-behavior-inline: contain;
+  }
+}
+
+/* ================================================== */
+/* Reduced motion                                     */
+/* ================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .phase4-services *,
+  .phase4-services *::before,
+  .phase4-services *::after,
+  .phase4-service-detail *,
+  .phase4-service-detail *::before,
+  .phase4-service-detail *::after,
+  .phase4-guide *,
+  .phase4-guide *::before,
+  .phase4-guide *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

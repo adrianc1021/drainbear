@@ -66,7 +66,7 @@ export default function ServiceDetail() {
   };
 
   return (
-    <div>
+    <div className="phase4-service-detail" data-phase4-page="service-detail">
       <SEO
         title={service.title}
         description={service.description}
@@ -80,7 +80,7 @@ export default function ServiceDetail() {
       <Breadcrumbs items={crumbs} />
 
       <main>
-        <section className="bg-gradient-to-b from-mist to-white py-14 md:py-20">
+        <section className="phase4-service-detail__hero bg-gradient-to-b from-mist to-white py-14 md:py-20">
           <div className="container grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
             <div>
               <p className="text-xs font-bold tracking-[0.2em] text-safety">
@@ -134,6 +134,8 @@ export default function ServiceDetail() {
                 alt={service.imageAlt}
                 width="1200"
                 height="800"
+                fetchPriority="high"
+                decoding="async"
                 className="aspect-[3/2] w-full object-cover"
               />
             </div>
