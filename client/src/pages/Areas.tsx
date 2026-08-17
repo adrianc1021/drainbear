@@ -38,6 +38,8 @@ const AREAS_CRUMBS = [
 /** 已有專屬著陸頁的地區 → slug 對照（自動由 districtData 生成） */
 const DISTRICT_PAGES: Record<string, string> = DISTRICT_SLUGS;
 
+const SEARCH_LISTBOX_ID = "areas-search-listbox";
+
 const REGIONS = [
   {
     icon: Landmark,
@@ -243,6 +245,9 @@ const ALL_DISTRICTS = REGIONS.flatMap(r =>
   )
 );
 
+const getSearchOptionId = (district: (typeof ALL_DISTRICTS)[number]) =>
+  `areas-search-option-${ALL_DISTRICTS.indexOf(district)}`;
+
 const COVERAGE_COUNT = new Set(ALL_DISTRICTS.map(item => item.district)).size;
 
 const AREAS_JSONLD = {
@@ -409,6 +414,7 @@ export default function Areas() {
   );
   const searchRef = useRef<HTMLDivElement>(null);
   const coverageRef = useRef<HTMLElement>(null);
+  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const [, navigate] = useLocation();
   const matches = useMemo(() => {
     const q = query.trim();
@@ -419,13 +425,17 @@ export default function Areas() {
     () => (matches ? matches.slice(0, 6) : []),
     [matches]
   );
-  const region = REGIONS[activeRegion];
+  useEffect(() => {
+    setActiveIdx(current => (current >= visible.length ? -1 : current));
+  }, [visible.length]);
 
   // 點擊搜尋框以外區域時關閉建議
   useEffect(() => {
     const onDown = (e: MouseEvent) => {
-      if (searchRef.current && !searchRef.current.contains(e.target as Node))
+      if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
         setOpen(false);
+        setActiveIdx(-1);
+      }
     };
     document.addEventListener("mousedown", onDown);
     return () => document.removeEventListener("mousedown", onDown);
@@ -435,6 +445,7 @@ export default function Areas() {
   const goToDistrict = (m: (typeof ALL_DISTRICTS)[number]) => {
     trackCTA("map", "areas_search", m.district);
     setOpen(false);
+    setActiveIdx(-1);
     const slug = DISTRICT_PAGES[m.district];
     if (slug) {
       navigate(`/areas/${slug}`);
@@ -458,23 +469,56 @@ export default function Areas() {
     window.setTimeout(() => setHighlightedDistrict(null), 3200);
   };
 
+  const selectRegion = (index: number, shouldFocus = false) => {
+    setActiveRegion(index);
+
+    if (shouldFocus) {
+      requestAnimationFrame(() => tabRefs.current[index]?.focus());
+    }
+  };
+
   const onSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (!open || visible.length === 0) {
-      if (e.key === "Escape") setOpen(false);
+    if (e.key === "Escape") {
+      setOpen(false);
+      setActiveIdx(-1);
       return;
     }
+
+    if (visible.length === 0) return;
+
     if (e.key === "ArrowDown") {
       e.preventDefault();
+      setOpen(true);
       setActiveIdx(i => (i + 1) % visible.length);
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
+      setOpen(true);
       setActiveIdx(i => (i <= 0 ? visible.length - 1 : i - 1));
-    } else if (e.key === "Enter") {
+    } else if (e.key === "Enter" && open) {
       e.preventDefault();
       goToDistrict(visible[activeIdx >= 0 ? activeIdx : 0]);
-    } else if (e.key === "Escape") {
-      setOpen(false);
-      setActiveIdx(-1);
+    }
+  };
+
+  const onTabKeyDown = (
+    e: React.KeyboardEvent<HTMLButtonElement>,
+    index: number
+  ) => {
+    let nextIndex: number | null = null;
+
+    if (e.key === "ArrowRight") {
+      nextIndex = (index + 1) % REGIONS.length;
+    } else if (e.key === "ArrowLeft") {
+      nextIndex = (index - 1 + REGIONS.length) % REGIONS.length;
+    } else if (e.key === "Home") {
+      nextIndex = 0;
+    } else if (e.key === "End") {
+      nextIndex = REGIONS.length - 1;
+    }
+
+    if (nextIndex !== null) {
+      e.preventDefault();
+      selectRegion(nextIndex, true);
     }
   };
 
@@ -524,19 +568,25 @@ export default function Areas() {
                 className="h-13 w-full rounded-lg border border-border bg-white py-3.5 pl-12 pr-4 text-base text-navy shadow-sm outline-none transition-shadow placeholder:text-muted-foreground/70 focus:border-wagreen focus:ring-2 focus:ring-wagreen/25"
                 aria-label="搜尋服務地區"
                 role="combobox"
-                aria-expanded={open && !!matches}
+                aria-expanded={open && matches !== null}
                 aria-autocomplete="list"
-                aria-controls="areas-search-listbox"
+                aria-controls={SEARCH_LISTBOX_ID}
+                aria-activedescendant={
+                  activeIdx >= 0 && visible[activeIdx]
+                    ? getSearchOptionId(visible[activeIdx])
+                    : undefined
+                }
               />
               {open && matches && (
                 <div
-                  id="areas-search-listbox"
+                  id={SEARCH_LISTBOX_ID}
                   role="listbox"
                   className="absolute left-0 right-0 top-full z-20 mt-2 overflow-hidden rounded-lg border border-border bg-white text-left shadow-xl"
                 >
                   {matches.length > 0 ? (
                     visible.map((m, idx) => {
                       const slug = DISTRICT_PAGES[m.district];
+                      const optionId = getSearchOptionId(m);
                       const inner = (
                         <>
                           <span className="flex items-center gap-2.5">
@@ -560,9 +610,11 @@ export default function Areas() {
                       return (
                         <button
                           key={m.district}
+                          id={optionId}
                           type="button"
                           role="option"
                           aria-selected={activeIdx === idx}
+                          tabIndex={-1}
                           onClick={() => goToDistrict(m)}
                           onMouseEnter={() => setActiveIdx(idx)}
                           className={`flex w-full items-center justify-between px-4 py-3 text-left transition-colors ${
@@ -574,7 +626,11 @@ export default function Areas() {
                       );
                     })
                   ) : (
-                    <div className="px-4 py-4 text-sm text-muted-foreground">
+                    <div
+                      className="px-4 py-4 text-sm text-muted-foreground"
+                      role="status"
+                      aria-live="polite"
+                    >
                       未找到「{query}」？請直接致電 {phoneDisplay} 確認。
                     </div>
                   )}
@@ -714,10 +770,17 @@ export default function Areas() {
             {REGIONS.map((r, i) => (
               <button
                 key={r.name}
+                id={`areas-region-tab-${i}`}
+                ref={element => {
+                  tabRefs.current[i] = element;
+                }}
                 type="button"
                 role="tab"
                 aria-selected={activeRegion === i}
-                onClick={() => setActiveRegion(i)}
+                aria-controls={`areas-region-panel-${i}`}
+                tabIndex={activeRegion === i ? 0 : -1}
+                onClick={() => selectRegion(i)}
+                onKeyDown={e => onTabKeyDown(e, i)}
                 className={`btn-smooth flex min-h-[52px] flex-col items-center justify-center gap-0.5 rounded-md px-2 py-2.5 text-sm font-bold transition-colors md:flex-row md:gap-2.5 md:text-base ${
                   activeRegion === i
                     ? "bg-navy text-white shadow-[0_4px_16px_rgba(11,19,43,0.25)]"
@@ -733,57 +796,63 @@ export default function Areas() {
             ))}
           </div>
 
-          {/* 當前分區內容 */}
-          <div
-            key={region.name}
-            className="fade-up mt-6 rounded-lg border border-border bg-white p-6 md:p-8"
-          >
-            <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-              <div className="max-w-2xl">
-                <div className="text-[11px] font-bold tracking-[0.2em] text-muted-foreground">
-                  {region.en}
+          {/* 分區內容保留在 DOM，讓每個 tab 的 aria-controls 都指向有效 panel。 */}
+          {REGIONS.map((region, regionIndex) => (
+            <div
+              key={region.name}
+              id={`areas-region-panel-${regionIndex}`}
+              role="tabpanel"
+              aria-labelledby={`areas-region-tab-${regionIndex}`}
+              hidden={activeRegion !== regionIndex}
+              className="fade-up mt-6 rounded-lg border border-border bg-white p-6 md:p-8"
+            >
+              <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                <div className="max-w-2xl">
+                  <div className="text-[11px] font-bold tracking-[0.2em] text-muted-foreground">
+                    {region.en}
+                  </div>
+                  <h3 className="mt-1 font-display text-2xl font-black text-navy">
+                    {region.name}通渠服務
+                  </h3>
+                  <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
+                    {region.seoText}
+                  </p>
                 </div>
-                <h3 className="mt-1 font-display text-2xl font-black text-navy">
-                  {region.name}通渠服務
-                </h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
-                  {region.seoText}
-                </p>
+                <span className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full bg-wagreen/10 min-h-11 px-4 py-2 text-sm font-bold text-wagreen-dark">
+                  <Clock className="h-4 w-4" strokeWidth={2.5} />
+                  {region.eta}
+                </span>
               </div>
-              <span className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full bg-wagreen/10 min-h-11 px-4 py-2 text-sm font-bold text-wagreen-dark">
-                <Clock className="h-4 w-4" strokeWidth={2.5} />
-                {region.eta}
-              </span>
-            </div>
 
-            <div className="mt-7 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
-              {region.groups.map(g => (
-                <div key={g.label}>
-                  <div className="flex items-center gap-2 border-b border-border pb-2">
-                    <MapPin
-                      className="h-3.5 w-3.5 text-wagreen"
-                      strokeWidth={2.5}
-                    />
-                    <span className="text-sm font-black text-navy">
-                      {g.label}
-                    </span>
-                    <span className="text-[11px] font-semibold text-muted-foreground">
-                      {g.items.length} 區
-                    </span>
-                  </div>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {g.items.map(d => (
-                      <DistrictPill
-                        key={d}
-                        name={d}
-                        highlighted={highlightedDistrict === d}
+              <div className="mt-7 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
+                {region.groups.map(g => (
+                  <div key={g.label}>
+                    <div className="flex items-center gap-2 border-b border-border pb-2">
+                      <MapPin
+                        className="h-3.5 w-3.5 text-wagreen"
+                        strokeWidth={2.5}
                       />
-                    ))}
+                      <span className="text-sm font-black text-navy">
+                        {g.label}
+                      </span>
+                      <span className="text-[11px] font-semibold text-muted-foreground">
+                        {g.items.length} 區
+                      </span>
+                    </div>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {g.items.map(d => (
+                        <DistrictPill
+                          key={d}
+                          name={d}
+                          highlighted={highlightedDistrict === d}
+                        />
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+          ))}
         </div>
 
         {/* 估價及收費流程 */}
