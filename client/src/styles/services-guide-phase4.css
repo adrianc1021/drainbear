@@ -64,7 +64,23 @@
 /* ================================================== */
 
 .phase4-services__hero .site-page-hero__title {
-  max-width: 10em;
+  /* Keep the two-line Chinese headline inside its grid track. */
+  max-width: 100%;
+  font-size: clamp(2.75rem, 4vw, 4.25rem);
+  line-height: 1.12;
+  letter-spacing: 0;
+}
+
+.phase4-services__hero .site-page-hero__description {
+  max-width: 32rem;
+}
+
+@media (min-width: 900px) {
+  .phase4-services__hero .site-page-hero__inner {
+    grid-template-columns: minmax(0, 1.08fr) minmax(20rem, 0.92fr);
+    gap: clamp(2rem, 4vw, 4.5rem);
+    padding-block: clamp(3.5rem, 5vw, 5rem);
+  }
 }
 
 .phase4-services > section:nth-of-type(2) {
@@ -598,6 +614,11 @@
     max-width: none;
   }
 
+  .phase4-services__hero .site-page-hero__title {
+    font-size: clamp(2.6rem, 11vw, 3.75rem);
+    line-height: 1.14;
+  }
+
   .phase4-primary-action,
   .phase4-secondary-action {
     width: 100%;
@@ -664,6 +685,12 @@
   .phase4-guide > section:nth-of-type(2) .overflow-x-auto {
     max-width: 100%;
     overscroll-behavior-inline: contain;
+  }
+}
+
+@media (max-width: 359px) {
+  .phase4-services__hero .site-page-hero__title {
+    font-size: 2.125rem;
   }
 }
 

@@ -1,0 +1,127 @@
+/* Stage 6A: accessible secondary-page refinements. */
+
+.stage6a-map-district:focus-visible {
+  stroke: var(--site-safety) !important;
+  stroke-width: 4.5px !important;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 0 2px rgba(11, 19, 43, 0.9));
+}
+
+.stage6a-not-found {
+  min-height: 70vh;
+  border-bottom: 1px solid var(--site-rule);
+  background: var(--site-paper-soft);
+}
+
+.stage6a-not-found__hero {
+  width: min(100%, 80rem);
+  margin-inline: auto;
+  padding: clamp(4rem, 9vw, 7.5rem) clamp(1.25rem, 4vw, 2rem);
+}
+
+.stage6a-not-found__inner {
+  max-width: 44rem;
+}
+
+.stage6a-not-found__marker {
+  display: grid;
+  width: 3.25rem;
+  height: 3.25rem;
+  margin-bottom: 1.75rem;
+  place-items: center;
+  border: 1px solid var(--site-rule-strong);
+  border-bottom: 3px solid var(--site-safety);
+  color: var(--site-ink);
+}
+
+.stage6a-not-found__marker svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.stage6a-not-found h1 {
+  margin-top: 1.25rem;
+  color: var(--site-ink);
+  font-size: clamp(2.5rem, 6vw, 4.75rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+
+.stage6a-not-found__copy {
+  max-width: 36rem;
+  margin-top: 1.25rem;
+  color: var(--site-copy);
+  font-size: clamp(1rem, 1.4vw, 1.125rem);
+  line-height: 1.85;
+}
+
+.stage6a-not-found__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.stage6a-not-found__action {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  border: 1px solid var(--site-ink);
+  padding: 0.625rem 1rem;
+  font-size: 0.9375rem;
+  font-weight: 800;
+  line-height: 1.35;
+  text-decoration: none;
+  transition:
+    background-color 180ms var(--site-ease),
+    color 180ms var(--site-ease),
+    outline-color 180ms var(--site-ease);
+}
+
+.stage6a-not-found__action svg {
+  width: 1rem;
+  height: 1rem;
+  flex: none;
+}
+
+.stage6a-not-found__action--primary {
+  background: var(--site-ink);
+  color: white;
+}
+
+.stage6a-not-found__action--primary:hover {
+  background: var(--site-safety);
+  border-color: var(--site-safety);
+}
+
+.stage6a-not-found__action--secondary {
+  background: transparent;
+  color: var(--site-ink);
+}
+
+.stage6a-not-found__action--secondary:hover {
+  background: white;
+}
+
+.stage6a-not-found__action:focus-visible {
+  outline: 3px solid var(--site-safety);
+  outline-offset: 3px;
+}
+
+@media (max-width: 420px) {
+  .stage6a-not-found__actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage6a-map-district,
+  .stage6a-not-found__action {
+    transition: none;
+  }
+}
