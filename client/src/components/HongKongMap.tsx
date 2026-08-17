@@ -7,7 +7,11 @@
 import { useMemo, useRef, useState } from "react";
 import { useLocation } from "wouter";
 import { ArrowRight, Clock, MapPin, MessageCircle, X } from "lucide-react";
-import { MAP_DISTRICTS, MAP_VIEWBOX, type MapDistrict } from "@/lib/hkDistrictPaths";
+import {
+  MAP_DISTRICTS,
+  MAP_VIEWBOX,
+  type MapDistrict,
+} from "@/lib/hkDistrictPaths";
 import { getDistrict } from "@/lib/districtData";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
@@ -57,7 +61,7 @@ const REGION_FILL: Record<MapDistrict["region"], string> = {
 };
 
 export default function HongKongMap() {
-  const {whatsappHref} = useContactSettings();
+  const { whatsappHref } = useContactSettings();
   const [, navigate] = useLocation();
   const [hovered, setHovered] = useState<string | null>(null);
   const [selected, setSelected] = useState<MapDistrict | null>(null);
@@ -65,8 +69,8 @@ export default function HongKongMap() {
   const wrapRef = useRef<HTMLDivElement>(null);
 
   const hoveredDistrict = useMemo(
-    () => MAP_DISTRICTS.find((d) => d.id === hovered) ?? null,
-    [hovered],
+    () => MAP_DISTRICTS.find(d => d.id === hovered) ?? null,
+    [hovered]
   );
 
   const selectedPage = selected?.slug ? getDistrict(selected.slug) : undefined;
@@ -88,7 +92,7 @@ export default function HongKongMap() {
       navigate(`/areas/${d.slug}`);
       return;
     }
-    setSelected((prev) => (prev?.id === d.id ? prev : d));
+    setSelected(prev => (prev?.id === d.id ? prev : d));
   };
 
   return (
@@ -109,7 +113,7 @@ export default function HongKongMap() {
           role="group"
           aria-label="香港十八區服務地圖，點擊分區查看當區通渠服務"
         >
-          {MAP_DISTRICTS.map((d) => {
+          {MAP_DISTRICTS.map(d => {
             const active = hovered === d.id || selected?.id === d.id;
             return (
               <path
@@ -118,14 +122,15 @@ export default function HongKongMap() {
                 role="button"
                 tabIndex={0}
                 aria-label={`${d.name}${d.slug ? "（設有專屬服務頁）" : ""}`}
-                className={`cursor-pointer stroke-white transition-[fill-opacity,stroke-width] duration-150 focus:outline-none ${REGION_FILL[d.region]}`}
+                data-map-district={d.id}
+                className={`stage6a-map-district cursor-pointer stroke-white transition-[fill-opacity,stroke-width] duration-150 focus:outline-none ${REGION_FILL[d.region]}`}
                 style={{
                   fillOpacity: active ? 1 : 0.78,
                   strokeWidth: active ? 2.6 : 1.4,
                 }}
                 onMouseEnter={() => setHovered(d.id)}
                 onClick={() => handleSelect(d)}
-                onKeyDown={(e) => {
+                onKeyDown={e => {
                   if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
                     handleSelect(d);
@@ -135,9 +140,15 @@ export default function HongKongMap() {
             );
           })}
           {/* 有專頁地區的標記點 */}
-          {MAP_DISTRICTS.filter((d) => d.slug).map((d) => (
+          {MAP_DISTRICTS.filter(d => d.slug).map(d => (
             <g key={`dot-${d.id}`} className="pointer-events-none">
-              <circle cx={d.cx} cy={d.cy} r={9} className="fill-white" opacity={0.9} />
+              <circle
+                cx={d.cx}
+                cy={d.cy}
+                r={9}
+                className="fill-white"
+                opacity={0.9}
+              />
               <circle cx={d.cx} cy={d.cy} r={5.5} className="fill-safety" />
             </g>
           ))}
@@ -150,7 +161,9 @@ export default function HongKongMap() {
             style={{ left: tip.x, top: tip.y - 10 }}
           >
             <span className="font-bold">{hoveredDistrict.name}</span>
-            {hoveredDistrict.slug && <span className="ml-1.5 font-bold text-wagreen">設有專頁</span>}
+            {hoveredDistrict.slug && (
+              <span className="ml-1.5 font-bold text-wagreen">設有專頁</span>
+            )}
             <span className="mt-0.5 flex items-center gap-1 text-[11px] font-semibold text-white/85">
               <Clock className="h-3 w-3 text-wagreen" strokeWidth={2.5} />
               預計 {REGION_ETA[hoveredDistrict.region]}到達
@@ -185,7 +198,8 @@ export default function HongKongMap() {
             <div className="flex items-start justify-between">
               <div>
                 <div className="text-[11px] font-bold tracking-[0.2em] text-muted-foreground">
-                  {selected.nameEn.toUpperCase()}・{REGION_LABEL[selected.region]}
+                  {selected.nameEn.toUpperCase()}・
+                  {REGION_LABEL[selected.region]}
                 </div>
                 <h3 className="mt-1 font-display text-2xl font-black text-navy">
                   {selected.name}通渠服務
@@ -231,7 +245,9 @@ export default function HongKongMap() {
               </button>
             ) : (
               <a
-                href={whatsappHref(`你好，我喺${selected.name}，想查詢通渠服務報價。`)}
+                href={whatsappHref(
+                  `你好，我喺${selected.name}，想查詢通渠服務報價。`
+                )}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => {
@@ -250,9 +266,12 @@ export default function HongKongMap() {
             <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-white shadow-sm ring-1 ring-border">
               <MapPin className="h-6 w-6 text-wagreen" strokeWidth={2} />
             </div>
-            <h3 className="mt-4 font-display text-lg font-black text-navy">點擊地圖選擇你的地區</h3>
+            <h3 className="mt-4 font-display text-lg font-black text-navy">
+              點擊地圖選擇你的地區
+            </h3>
             <p className="mt-2 max-w-xs text-sm leading-relaxed text-muted-foreground">
-              十八區全覆蓋。橙點地區設有專屬服務頁，一按直達；其他地區可即時 WhatsApp 查詢，統一收費。
+              十八區全覆蓋。橙點地區設有專屬服務頁，一按直達；其他地區可即時
+              WhatsApp 查詢，統一收費。
             </p>
           </div>
         )}
