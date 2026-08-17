@@ -22,6 +22,7 @@ import PriceCalculator from "@/components/PriceCalculator";
 import { WhatsAppButton } from "@/components/Layout";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
+import { DISTRICT_SLUGS } from "@/lib/districtData";
 
 const CRUMBS = [
   { name: "首頁", path: "/" },
@@ -124,6 +125,13 @@ const AREA_SERVICE_LINKS = [
     focus: "村屋沙井滿瀉及戶外樹根纏繞",
   },
 ];
+
+function areaKeywordHref(keyword: string) {
+  const district = keyword.replace(/通渠$/, "");
+  const slug = DISTRICT_SLUGS[district];
+
+  return slug ? `/areas/${slug}` : "/areas#coverage";
+}
 
 const HOWTO_STEPS = [
   {
@@ -439,7 +447,7 @@ export default function Guide() {
                   {a.keywords.map(k => (
                     <Link
                       key={k}
-                      href="/areas"
+                      href={areaKeywordHref(k)}
                       className="btn-smooth inline-flex min-h-[40px] items-center rounded-full bg-white/10 px-3.5 py-1.5 text-xs text-white/80 hover:bg-wagreen hover:text-white"
                     >
                       {k}

@@ -24,6 +24,7 @@ import {
 import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
 import { getDistrict } from "@/lib/districtData";
 import NotFound from "@/pages/NotFound";
+import { BUSINESS_ID, SITE_URL } from "@/config/site";
 
 export default function District() {
   const {slug} = useParams<{slug: string}>();
@@ -43,13 +44,20 @@ export default function District() {
     {
       "@context": "https://schema.org",
       "@type": "Service",
+      "@id": `${SITE_URL}/areas/${d.slug}#service`,
+      url: `${SITE_URL}/areas/${d.slug}`,
+      name: `${d.name}通渠服務`,
       serviceType: `${d.name}24 小時通渠服務`,
       provider: {
-        "@type": "Plumber",
-        name: settings.businessName,
-        telephone: settings.phoneE164,
+        "@id": BUSINESS_ID,
       },
       areaServed: [d.name, ...d.nearby].map((n) => ({ "@type": "Place", name: n })),
+      availableChannel: {
+        "@type": "ServiceChannel",
+        serviceUrl: `${SITE_URL}/areas/${d.slug}`,
+        servicePhone: settings.phoneE164,
+        availableLanguage: ["zh-Hant", "zh-HK"],
+      },
     },
     {
       "@context": "https://schema.org",

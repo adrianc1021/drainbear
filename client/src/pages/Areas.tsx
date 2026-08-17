@@ -29,6 +29,7 @@ import {
 } from "@/contexts/SiteSettingsContext";
 import { trackCTA } from "@/lib/analytics";
 import { DISTRICTS, DISTRICT_SLUGS } from "@/lib/districtData";
+import { BUSINESS_ID, SITE_URL } from "@/config/site";
 
 const AREAS_CRUMBS = [
   { name: "首頁", path: "/" },
@@ -253,6 +254,8 @@ const COVERAGE_COUNT = new Set(ALL_DISTRICTS.map(item => item.district)).size;
 const AREAS_JSONLD = {
   "@context": "https://schema.org",
   "@type": "Service",
+  "@id": `${SITE_URL}/areas#service`,
+  url: `${SITE_URL}/areas`,
   serviceType: "24 小時通渠服務",
   areaServed: ALL_DISTRICTS.map(d => ({ "@type": "Place", name: d.district })),
 };
@@ -400,9 +403,13 @@ export default function Areas() {
   const areasJsonLd = {
     ...AREAS_JSONLD,
     provider: {
-      "@type": "Plumber",
-      name: settings.businessName,
-      telephone: settings.phoneE164,
+      "@id": BUSINESS_ID,
+    },
+    availableChannel: {
+      "@type": "ServiceChannel",
+      serviceUrl: `${SITE_URL}/areas`,
+      servicePhone: settings.phoneE164,
+      availableLanguage: ["zh-Hant", "zh-HK"],
     },
   };
   const [query, setQuery] = useState("");
@@ -745,7 +752,11 @@ export default function Areas() {
       </section>
 
       {/* 港九新界及離島服務範圍（分頁籤式） */}
-      <section ref={coverageRef} className="bg-white py-12 md:py-16">
+      <section
+        ref={coverageRef}
+        id="coverage"
+        className="scroll-mt-24 bg-white py-12 md:py-16"
+      >
         <div className="container">
           <div className="reveal mb-8 flex flex-wrap items-end justify-between gap-3">
             <div>
