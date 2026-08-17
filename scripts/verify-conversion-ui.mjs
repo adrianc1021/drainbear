@@ -106,6 +106,31 @@ try {
 
   console.log("PASS：估價計算機捷徑正確");
 
+  await calculatorLink.click();
+  await page.waitForURL(`${BASE_URL}/guide#calculator`, {
+    timeout: 10_000,
+  });
+  await page.getByRole("heading", { name: "即時估價計算機" }).waitFor({
+    state: "visible",
+    timeout: 15_000,
+  });
+  await page.waitForTimeout(100);
+
+  const calculatorTop = await page
+    .locator("#calculator")
+    .evaluate(element => element.getBoundingClientRect().top);
+
+  if (calculatorTop < 0 || calculatorTop > 180) {
+    throw new Error(`估價計算機捷徑未正確定位：top=${calculatorTop}`);
+  }
+
+  console.log("PASS：估價計算機捷徑會捲動到正確位置");
+
+  await page.goto(`${BASE_URL}/`, {
+    waitUntil: "domcontentloaded",
+    timeout: 30_000,
+  });
+
   await page.getByText("接納工程免檢查費", { exact: true }).first().waitFor({
     state: "visible",
     timeout: 10_000,

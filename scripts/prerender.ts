@@ -59,7 +59,7 @@ const STATIC_BLOG_SLUGS = [
 interface PublishedBlogEntry {
   slug: string;
   lastmod?: string;
-  source: "static" | "sanity";
+  source: "static" | "sanity" | "sitemap";
 }
 
 interface SanityBlogEntry {
@@ -136,6 +136,33 @@ async function loadPublishedSanityBlogs(): Promise<PublishedBlogEntry[]> {
       slug,
       lastmod: normalizeDate(item.updatedAt ?? item.publishedAt),
       source: "sanity",
+    });
+  }
+
+  return entries;
+}
+
+async function loadSitemapBlogFallback(): Promise<PublishedBlogEntry[]> {
+  const sitemap = await fs.readFile(
+    path.resolve("client/public/sitemap.xml"),
+    "utf8"
+  );
+  const entries: PublishedBlogEntry[] = [];
+  const urlPattern = /<url>([\s\S]*?)<\/url>/g;
+
+  for (const match of Array.from(sitemap.matchAll(urlPattern))) {
+    const block = match[1];
+    const slug = block
+      .match(/<loc>https:\/\/drainbearhk\.com\/blog\/([^<]+)<\/loc>/)?.[1]
+      ?.trim()
+      .toLowerCase();
+
+    if (!slug || !isValidSlug(slug)) continue;
+
+    entries.push({
+      slug,
+      lastmod: normalizeDate(block.match(/<lastmod>([^<]+)<\/lastmod>/)?.[1]),
+      source: "sitemap",
     });
   }
 
@@ -345,8 +372,21 @@ async function prerender() {
 
   console.log("Loading published Sanity blog routes...");
 
-  const sanityEntries = await loadPublishedSanityBlogs();
-  const blogEntries = mergeBlogEntries(sanityEntries);
+  let publishedBlogEntries: PublishedBlogEntry[];
+  let blogRouteSource = "Sanity";
+
+  try {
+    publishedBlogEntries = await loadPublishedSanityBlogs();
+  } catch (error) {
+    console.warn(
+      "Sanity unavailable; preserving published blog routes from sitemap.",
+      error
+    );
+    publishedBlogEntries = await loadSitemapBlogFallback();
+    blogRouteSource = "sitemap fallback";
+  }
+
+  const blogEntries = mergeBlogEntries(publishedBlogEntries);
 
   const routes = [
     ...STATIC_ROUTES,
@@ -374,7 +414,7 @@ async function prerender() {
   );
 
   console.log(
-    `Found ${sanityEntries.length} published Sanity blog article(s).`
+    `Found ${publishedBlogEntries.length} published blog article(s) via ${blogRouteSource}.`
   );
 
   const server = spawn(process.execPath, ["dist/index.js"], {
