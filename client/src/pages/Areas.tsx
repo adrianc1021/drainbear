@@ -523,7 +523,7 @@ export default function Areas() {
   };
 
   return (
-    <div>
+    <div className="areas-editorial" data-phase4-page="areas">
       <SEO
         title="服務地區覆蓋｜港九新界及離島通渠查詢｜通渠熊 DrainBear"
         description="通渠熊 DrainBear 提供港島、九龍、新界及離島主要地區渠務查詢。可按地區搜尋服務資料，並透過 WhatsApp 提供位置及問題詳情，確認上門安排與初步估價。"
