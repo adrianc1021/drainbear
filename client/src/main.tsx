@@ -6,6 +6,7 @@ import "./styles/home-editorial-phase3.css";
 import "./styles/services-guide-phase4.css";
 import "./styles/site-chrome-phase5.css";
 import "./styles/secondary-pages-stage6a.css";
+import "./styles/editorial-art-direction.css";
 
 const queryClient = new QueryClient({
   defaultOptions: {
