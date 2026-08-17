@@ -1,0 +1,217 @@
+/*
+ * DrainBear art direction
+ * Content-led layouts inspired by Swiss grids, Braun utility and Hong Kong
+ * wayfinding. This layer is intentionally last-loaded so the visual language
+ * can evolve without changing page markup or conversion behavior.
+ */
+
+:root {
+  --db-art-rule: rgba(11, 19, 43, 0.18);
+  --db-art-paper: #f3f0e8;
+}
+
+/* Shared editorial stories use image, type and rules for hierarchy. */
+.site-feature-story,
+.site-article-card {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.site-article-card {
+  border-inline: 0;
+  border-bottom: 1px solid var(--db-art-rule);
+}
+
+.site-feature-story:hover,
+.site-article-card:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.site-editorial-callout {
+  border-radius: 0 !important;
+  background: var(--site-ink) !important;
+}
+
+.home-editorial [data-pr20-section="final-cta"] {
+  background: var(--db-safety) !important;
+}
+
+.home-editorial [data-pr20-section="final-cta"]::after {
+  display: none;
+}
+
+.home-editorial .home-final-grid a:first-child {
+  box-shadow: 0 5px 0 rgba(11, 19, 43, 0.2) !important;
+}
+
+.home-editorial .home-final-grid a:hover {
+  transform: none !important;
+}
+
+/* The service and guide pages read as editorial sequences, not collections of
+ * floating SaaS panels. Keep borders useful, remove decorative elevation. */
+.phase4-services .card-float,
+.phase4-guide .card-float,
+.phase4-services .card-accent,
+.phase4-guide .card-accent {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.phase4-services .card-float:hover,
+.phase4-guide .card-float:hover,
+.phase4-services .card-accent:hover,
+.phase4-guide .card-accent:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.phase4-services img {
+  border-radius: 2px !important;
+  box-shadow: none !important;
+}
+
+.phase4-services .rounded-2xl,
+.phase4-services .rounded-xl {
+  border-radius: 2px !important;
+}
+
+.phase4-services .rounded-full,
+.phase4-guide .rounded-full {
+  border-radius: 2px !important;
+}
+
+/* Replace tag pills with compact wayfinding labels. */
+.phase4-services > section:nth-of-type(2) > .container > div > div:last-child > div:first-child,
+.phase4-guide > section .rounded-full.bg-navy {
+  border-left: 2px solid var(--safety);
+  background: transparent !important;
+  padding-left: 0.75rem;
+  color: var(--navy) !important;
+}
+
+.phase4-guide > section .rounded-full.bg-navy {
+  top: -1px;
+  left: 1.5rem;
+  border-left: 0;
+  border-bottom: 2px solid var(--safety);
+  padding: 0.35rem 0.1rem;
+  color: var(--wagreen) !important;
+}
+
+/* Guide grids become ruled lists with a clear reading rhythm. */
+.phase4-guide > section:nth-of-type(4) .card-float,
+.phase4-guide > section:nth-of-type(6) .card-float,
+.phase4-guide > section:nth-of-type(8) .card-float {
+  border: 0 !important;
+  border-top: 1px solid var(--db-art-rule) !important;
+  background: transparent !important;
+}
+
+.phase4-guide > section:nth-of-type(4) .card-float:last-child,
+.phase4-guide > section:nth-of-type(6) .card-float:last-child,
+.phase4-guide > section:nth-of-type(8) .card-float:last-child {
+  border-bottom: 1px solid var(--db-art-rule) !important;
+}
+
+.phase4-guide > section:last-of-type {
+  background: var(--db-art-paper) !important;
+}
+
+.phase4-guide > section:last-of-type .card-float {
+  border-top: 4px solid var(--safety) !important;
+  background: var(--navy) !important;
+}
+
+/* Areas: district information is a directory. Use a grid and rules instead
+ * of a repeated set of gradient cards. */
+.areas-editorial .card-float,
+.areas-editorial .card-accent {
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.areas-editorial .card-accent {
+  border: 0 !important;
+  border-top: 1px solid var(--db-art-rule) !important;
+  padding-inline: 0 !important;
+}
+
+.areas-editorial .card-accent:hover {
+  transform: none !important;
+  background: var(--db-art-paper) !important;
+}
+
+.areas-editorial .card-accent .rounded-full {
+  border-radius: 2px !important;
+}
+
+.areas-editorial [role="tabpanel"] {
+  border-radius: 0 !important;
+  border-inline: 0 !important;
+  border-top: 1px solid var(--db-art-rule) !important;
+  border-bottom: 1px solid var(--db-art-rule) !important;
+  background: transparent !important;
+}
+
+.areas-editorial .dot-grid {
+  border-radius: 0 !important;
+  border-top: 4px solid var(--safety);
+}
+
+/* Conversion actions remain deliberately assertive and easy to scan. */
+[data-header-whatsapp="true"] a,
+[data-mobile-menu-whatsapp="true"] a,
+[data-mobile-cta="true"] a,
+.phase4-primary-action,
+[data-whatsapp-widget="true"] button,
+[data-whatsapp-widget="true"] a.bg-wagreen {
+  border-radius: 2px !important;
+}
+
+.phase4-primary-action,
+[data-mobile-menu-whatsapp="true"] .bg-wagreen,
+[data-mobile-cta="true"] .bg-wagreen,
+[data-whatsapp-widget="true"] a.bg-wagreen {
+  box-shadow: 0 5px 0 rgba(11, 19, 43, 0.16) !important;
+  font-weight: 900 !important;
+}
+
+/* Avoid cramped display typography on narrow Chinese layouts. */
+.phase4-services h1,
+.phase4-services h2,
+.phase4-guide h1,
+.phase4-guide h2,
+.areas-editorial h1,
+.areas-editorial h2,
+.home-editorial h1,
+.home-editorial h2 {
+  letter-spacing: 0 !important;
+}
+
+@media (max-width: 639px) {
+  .phase4-services > section:nth-of-type(2) > .container,
+  .phase4-guide > section > .container {
+    padding-inline: 1.25rem;
+  }
+
+  .phase4-guide > section:last-of-type .card-float {
+    padding-inline: 1.25rem !important;
+  }
+
+  .areas-editorial .card-accent {
+    padding-block: 1.5rem !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .phase4-services *,
+  .phase4-guide *,
+  .areas-editorial * {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
