@@ -4,6 +4,7 @@ import App from "./App";
 import "./index.css";
 import "./styles/home-editorial-phase3.css";
 import "./styles/services-guide-phase4.css";
+import "./styles/site-chrome-phase5.css";
 
 const queryClient = new QueryClient({
   defaultOptions: {

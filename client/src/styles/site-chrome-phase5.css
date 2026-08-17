@@ -1,0 +1,201 @@
+/*
+ * DrainBear Stage 5 — Shared site chrome
+ * Header / mobile navigation / footer / conversion chrome / accessibility
+ */
+
+:root {
+  --site-header-z: 70;
+  --site-conversion-z: 55;
+  --site-dialog-z: 100;
+  --site-toast-z: 120;
+}
+
+/* Keyboard-only skip link */
+.site-skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 140;
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ffffff;
+  border-radius: 8px;
+  background: var(--navy);
+  padding: 0.65rem 1rem;
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 800;
+  box-shadow: 0 8px 30px rgba(11, 19, 43, 0.24);
+  transform: translateY(calc(-100% - 1.5rem));
+  transition: transform 180ms ease;
+}
+
+.site-skip-link:focus {
+  transform: translateY(0);
+  outline: 3px solid var(--safety);
+  outline-offset: 2px;
+}
+
+/* Shared header hierarchy */
+[data-site-header="true"] {
+  z-index: var(--site-header-z);
+}
+
+.site-header__row {
+  gap: 0.75rem;
+}
+
+.site-header__brand {
+  flex-shrink: 0;
+}
+
+.site-header__brand-text,
+.site-header__nav-link {
+  white-space: nowrap;
+}
+
+.site-header__desktop-nav {
+  flex: 1 1 auto;
+  justify-content: center;
+}
+
+.site-header__whatsapp {
+  flex-shrink: 0;
+}
+
+/* Mobile menu */
+#mobile-navigation {
+  max-height: calc(100dvh - 4rem);
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-bottom: calc(1.5rem + env(safe-area-inset-bottom));
+  box-shadow: 0 18px 38px rgba(11, 19, 43, 0.13);
+}
+
+#mobile-navigation a:focus-visible,
+[data-mobile-menu-trigger="true"]:focus-visible,
+[data-mobile-cta="true"] a:focus-visible,
+[data-whatsapp-widget="true"] button:focus-visible,
+[data-whatsapp-widget="true"] a:focus-visible {
+  outline: 3px solid var(--safety);
+  outline-offset: 2px;
+}
+
+/* Conversion chrome layers */
+[data-mobile-cta="true"] {
+  z-index: var(--site-conversion-z);
+}
+
+[data-whatsapp-widget="true"] {
+  z-index: 60;
+}
+
+[data-slot="dialog-overlay"] {
+  z-index: var(--site-dialog-z) !important;
+}
+
+[data-slot="dialog-content"] {
+  z-index: calc(var(--site-dialog-z) + 1) !important;
+}
+
+[data-sonner-toaster] {
+  z-index: var(--site-toast-z) !important;
+}
+
+/* Tablet: keep six links, brand and WhatsApp on one line */
+@media (min-width: 768px) and (max-width: 1100px) {
+  .site-header__row {
+    gap: 0.35rem;
+    padding-inline: 1rem;
+  }
+
+  .site-header__brand {
+    gap: 0.4rem;
+  }
+
+  .site-header__brand img {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .site-header__brand-text {
+    font-size: 1rem;
+  }
+
+  .site-header__brand-en {
+    display: none;
+  }
+
+  .site-header__desktop-nav {
+    gap: 0;
+  }
+
+  .site-header__nav-link {
+    min-height: 44px;
+    padding-inline: 0.45rem;
+    font-size: 0.75rem;
+    letter-spacing: -0.02em;
+  }
+
+  .site-header__nav-link::after {
+    right: 0.45rem;
+    left: 0.45rem;
+  }
+
+  .site-header__whatsapp a {
+    min-height: 44px;
+    gap: 0.35rem;
+    padding-inline: 0.65rem;
+    font-size: 0.75rem;
+  }
+
+  .site-header__whatsapp svg {
+    width: 0.95rem;
+    height: 0.95rem;
+  }
+}
+
+/* Small mobile brand safety */
+@media (max-width: 389px) {
+  .site-header__brand {
+    gap: 0.45rem;
+  }
+
+  .site-header__brand img {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .site-header__brand-text {
+    font-size: 1rem;
+  }
+
+  .site-header__brand-en {
+    display: none;
+  }
+}
+
+/* Respect safe areas on modern iPhones */
+@supports (padding: max(0px)) {
+  [data-mobile-cta="true"] > div {
+    padding-right: max(0.75rem, env(safe-area-inset-right));
+    padding-left: max(0.75rem, env(safe-area-inset-left));
+  }
+}
+
+/* Motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .site-skip-link,
+  #mobile-navigation *,
+  [data-mobile-cta="true"],
+  [data-whatsapp-widget="true"] *,
+  button[aria-label="回到頂部"] {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

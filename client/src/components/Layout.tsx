@@ -194,6 +194,10 @@ function Header({
   const [location] = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const mobileNavigationRef = useRef<HTMLDivElement>(null);
+  const firstMobileLinkRef = useRef<HTMLAnchorElement>(null);
+  const mobileMenuWasOpenRef = useRef(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -205,13 +209,60 @@ function Header({
   useEffect(() => setOpen(false), [location]);
 
   useEffect(() => {
-    if (!open) return;
+    if (!open) {
+      if (mobileMenuWasOpenRef.current) {
+        menuButtonRef.current?.focus();
+      }
+
+      mobileMenuWasOpenRef.current = false;
+      return;
+    }
+
+    mobileMenuWasOpenRef.current = true;
 
     const previousOverflow = document.body.style.overflow;
+    const focusFrame = window.requestAnimationFrame(() => {
+      firstMobileLinkRef.current?.focus();
+    });
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
+        event.preventDefault();
         setOpen(false);
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+
+      const focusableElements = Array.from(
+        mobileNavigationRef.current?.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        ) ?? []
+      ).filter(element => {
+        const style = window.getComputedStyle(element);
+
+        return (
+          style.display !== "none" &&
+          style.visibility !== "hidden" &&
+          !element.hasAttribute("inert")
+        );
+      });
+
+      if (focusableElements.length === 0) {
+        event.preventDefault();
+        return;
+      }
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+      const activeElement = document.activeElement;
+
+      if (event.shiftKey && activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+      } else if (!event.shiftKey && activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
       }
     };
 
@@ -219,6 +270,7 @@ function Header({
     window.addEventListener("keydown", onKeyDown);
 
     return () => {
+      window.cancelAnimationFrame(focusFrame);
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
     };
@@ -233,23 +285,30 @@ function Header({
           : "border-navy/10 bg-white/90 backdrop-blur-lg"
       }`}
     >
-      <div className="container flex h-16 items-center justify-between md:h-[72px]">
+      <div className="site-header__row container flex h-16 items-center justify-between md:h-[72px]">
         <Link
           href="/"
           aria-label="通渠熊 DrainBear 首頁"
-          className="flex items-center gap-2.5"
+          data-site-brand="header"
+          className="site-header__brand flex min-w-0 items-center gap-2.5"
         >
           <img
             src={LOGO}
             alt="通渠熊 DrainBear Logo"
             className="h-10 w-10 md:h-11 md:w-11"
           />
-          <span className="font-display text-lg font-black tracking-[-0.025em] text-navy md:text-xl">
-            通渠熊 <span className="text-navy/55">DrainBear</span>
+          <span className="site-header__brand-text font-display text-lg font-black tracking-[-0.025em] text-navy md:text-xl">
+            通渠熊{" "}
+            <span className="site-header__brand-en text-navy/55">
+              DrainBear
+            </span>
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex">
+        <nav
+          aria-label="主要導覽"
+          className="site-header__desktop-nav hidden min-w-0 items-center gap-1 md:flex"
+        >
           {NAV_ITEMS.map(item => (
             <Link
               key={item.href}
@@ -261,7 +320,7 @@ function Header({
                   destination_url: item.href,
                 })
               }
-              className={`btn-smooth relative inline-flex min-h-11 items-center px-3 text-sm font-bold transition-colors after:absolute after:inset-x-3 after:bottom-0 after:h-0.5 after:origin-left after:transition-transform ${
+              className={`site-header__nav-link btn-smooth relative inline-flex min-h-11 items-center px-3 text-sm font-bold transition-colors after:absolute after:inset-x-3 after:bottom-0 after:h-0.5 after:origin-left after:transition-transform ${
                 location === item.href
                   ? "text-navy after:scale-x-100 after:bg-safety"
                   : "text-navy/65 after:scale-x-0 after:bg-navy hover:text-navy hover:after:scale-x-100"
@@ -273,13 +332,18 @@ function Header({
         </nav>
 
         {!hideConversionCTA ? (
-          <div data-header-whatsapp="true" className="hidden md:block">
+          <div
+            data-header-whatsapp="true"
+            className="site-header__whatsapp hidden md:block"
+          >
             <WhatsAppButton className="rounded-none" trackLocation="header" />
           </div>
         ) : null}
 
         <button
-          className="btn-smooth -mr-2 flex h-12 w-12 items-center justify-center rounded-lg text-navy hover:bg-mist md:hidden"
+          ref={menuButtonRef}
+          data-mobile-menu-trigger="true"
+          className="btn-smooth -mr-2 flex h-12 w-12 shrink-0 items-center justify-center rounded-lg text-navy hover:bg-mist md:hidden"
           onClick={() => setOpen(!open)}
           aria-label={open ? "關閉選單" : "開啟選單"}
           aria-expanded={open}
@@ -291,11 +355,18 @@ function Header({
 
       {open && (
         <div
+          ref={mobileNavigationRef}
           id="mobile-navigation"
+          data-mobile-navigation="true"
+          role="dialog"
+          aria-modal="true"
+          aria-label="手機導覽選單"
           className="max-h-[calc(100dvh-4rem)] overflow-y-auto border-t border-border/80 bg-white px-5 pb-5 pt-3 shadow-[0_12px_28px_rgba(11,19,43,0.09)] md:hidden"
         >
-          {NAV_ITEMS.map(item => (
+          {NAV_ITEMS.map((item, index) => (
             <Link
+              ref={index === 0 ? firstMobileLinkRef : undefined}
+              data-mobile-nav-link="true"
               key={item.href}
               href={item.href}
               onClick={() =>
@@ -528,7 +599,10 @@ function Footer() {
 
 export default function Layout({ children }: { children: ReactNode }) {
   const [location] = useLocation();
-  const pathname = location.split(/[?#]/)[0] || "/";
+  const routerPathname = location.split(/[?#]/)[0] || "/";
+  const browserPathname =
+    typeof window === "undefined" ? routerPathname : window.location.pathname;
+  const pathname = browserPathname.replace(/\/+$/, "") || "/";
   const suppressConversionChrome = pathname === "/thanks";
 
   useReveal();
@@ -553,8 +627,15 @@ export default function Layout({ children }: { children: ReactNode }) {
 
   return (
     <div className="flex min-h-screen flex-col bg-white">
+      <a href="#main-content" className="site-skip-link">
+        跳到主要內容
+      </a>
       <Header hideConversionCTA={suppressConversionChrome} />
-      <main id="main-content" className="flex-1 pt-16 md:pt-[72px]">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="flex-1 pt-16 outline-none md:pt-[72px]"
+      >
         {children}
       </main>
       <Footer />
