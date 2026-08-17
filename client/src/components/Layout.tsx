@@ -72,31 +72,12 @@ export function WhatsAppButton({
  * - WhatsApp 為主 CTA（約 75% 闊度）
  * - 電話為精簡次要 CTA
  * - 支援 iPhone safe area
- * - 向下捲動時收起，向上捲動或接近頁底時重現
+ * - 全程固定顯示，讓緊急服務 CTA 在任何閱讀位置都可見
  */
 function MobileCTABar() {
-  const [hidden, setHidden] = useState(false);
-  const lastY = useRef(0);
   const { estimate } = useEstimate();
   const { phoneDisplay, phoneHref, whatsappDefaultHref, whatsappHref } =
     useContactSettings();
-
-  useEffect(() => {
-    const onScroll = () => {
-      const y = window.scrollY;
-      const nearBottom =
-        window.innerHeight + y >= document.body.scrollHeight - 160;
-      // 向下捲超過 12px 才收起，向上捲、頁頂或近頁底即重現
-      if (nearBottom || y < 80 || y < lastY.current - 4) {
-        setHidden(false);
-      } else if (y > lastY.current + 12) {
-        setHidden(true);
-      }
-      lastY.current = y;
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   const waHref = estimate
     ? whatsappHref(estimate.waMessage)
@@ -109,9 +90,7 @@ function MobileCTABar() {
   return (
     <div
       data-mobile-cta="true"
-      className={`fixed inset-x-0 bottom-0 z-50 border-t border-navy/15 bg-white/96 backdrop-blur-xl transition-transform duration-200 md:hidden ${
-        hidden ? "pointer-events-none translate-y-full" : "translate-y-0"
-      }`}
+      className="fixed inset-x-0 bottom-0 z-50 border-t border-navy/15 bg-white/96 backdrop-blur-xl md:hidden"
       style={{
         transitionTimingFunction: "cubic-bezier(0.23, 1, 0.32, 1)",
         paddingBottom: "env(safe-area-inset-bottom)",
