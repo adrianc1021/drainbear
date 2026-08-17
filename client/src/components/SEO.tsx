@@ -39,6 +39,21 @@ function setCanonical(url: string) {
   element.setAttribute("href", url);
 }
 
+function setAlternate(hreflang: string, url: string) {
+  let element = document.head.querySelector<HTMLLinkElement>(
+    `link[rel="alternate"][hreflang="${hreflang}"]`
+  );
+
+  if (!element) {
+    element = document.createElement("link");
+    element.setAttribute("rel", "alternate");
+    element.setAttribute("hreflang", hreflang);
+    document.head.appendChild(element);
+  }
+
+  element.setAttribute("href", url);
+}
+
 function setJsonLd(id: string, data: object | object[]) {
   let element = document.getElementById(id) as HTMLScriptElement | null;
 
@@ -151,6 +166,8 @@ export default function SEO({
     );
 
     setCanonical(canonicalPageUrl);
+    setAlternate("zh-Hant-HK", canonicalPageUrl);
+    setAlternate("x-default", canonicalPageUrl);
 
     setMeta("property", "og:title", socialTitle);
     setMeta("property", "og:description", socialDescription);
@@ -175,6 +192,13 @@ export default function SEO({
     setMeta("name", "twitter:title", socialTitle);
     setMeta("name", "twitter:description", socialDescription);
     setMeta("name", "twitter:image", socialImage);
+    setMeta(
+      "name",
+      "twitter:image:alt",
+      imageAlt ||
+        settings.defaultOgImage?.alt ||
+        `${settings.businessName}｜香港專業通渠服務`
+    );
 
     // 全站統一商家實體。
     // 暫時使用Organization，避免提供未核實或不完整地址。
@@ -232,6 +256,27 @@ export default function SEO({
     }
 
     document.documentElement.dataset.seoReady = "true";
+
+    const hash = window.location.hash.slice(1);
+
+    if (hash) {
+      let targetId = hash;
+
+      try {
+        targetId = decodeURIComponent(hash);
+      } catch {
+        // Malformed URL escapes should not break page metadata or navigation.
+      }
+
+      const frameId = window.requestAnimationFrame(() => {
+        document.getElementById(targetId)?.scrollIntoView({
+          block: "start",
+        });
+      });
+
+      return () => window.cancelAnimationFrame(frameId);
+    }
+
     window.scrollTo(0, 0);
   }, [
     title,
