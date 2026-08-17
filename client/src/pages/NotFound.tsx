@@ -1,18 +1,12 @@
 import SEO from "@/components/SEO";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle, Home } from "lucide-react";
+import { FileQuestion, Home, Wrench } from "lucide-react";
 import { useLocation } from "wouter";
+import { Link } from "wouter";
 
 export default function NotFound() {
-  const [location, setLocation] = useLocation();
+  const [location] = useLocation();
 
-  const currentPath =
-    location && location.startsWith("/") ? location : "/404";
-
-  const handleGoHome = () => {
-    setLocation("/");
-  };
+  const currentPath = location && location.startsWith("/") ? location : "/404";
 
   return (
     <>
@@ -23,41 +17,41 @@ export default function NotFound() {
         noindex
       />
 
-      <main className="flex min-h-[70vh] w-full items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
-        <Card className="mx-4 w-full max-w-lg border-0 bg-white/80 shadow-lg backdrop-blur-sm">
-          <CardContent className="pb-8 pt-8 text-center">
-            <div className="mb-6 flex justify-center">
-              <div className="relative">
-                <div className="absolute inset-0 animate-pulse rounded-full bg-red-100" />
-                <AlertCircle className="relative h-16 w-16 text-red-500" />
-              </div>
+      <main className="stage6a-not-found">
+        <section className="stage6a-not-found__hero">
+          <div className="stage6a-not-found__inner">
+            <div className="stage6a-not-found__marker" aria-hidden="true">
+              <FileQuestion />
             </div>
-
-            <h1 className="mb-2 text-4xl font-bold text-slate-900">
-              404
-            </h1>
-
-            <h2 className="mb-4 text-xl font-semibold text-slate-700">
-              找不到頁面
-            </h2>
-
-            <p className="mb-8 leading-relaxed text-slate-600">
-              你瀏覽的頁面不存在、已經移除，
-              <br />
-              或者網址輸入錯誤。
+            <p className="site-editorial-kicker">
+              <span aria-hidden="true" />
+              ERROR 404
             </p>
-
-            <div className="flex justify-center">
-              <Button
-                onClick={handleGoHome}
-                className="rounded-lg bg-navy px-6 py-2.5 text-white shadow-md transition-all duration-200 hover:bg-navy-light hover:shadow-lg"
+            <h1>找不到頁面</h1>
+            <p className="stage6a-not-found__copy">
+              你瀏覽的頁面不存在、已經移除，或網址輸入錯誤。
+            </p>
+            <nav
+              className="stage6a-not-found__actions"
+              aria-label="找不到頁面選項"
+            >
+              <Link
+                href="/"
+                className="stage6a-not-found__action stage6a-not-found__action--primary"
               >
-                <Home className="mr-2 h-4 w-4" />
+                <Home aria-hidden="true" />
                 返回首頁
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+              </Link>
+              <Link
+                href="/services"
+                className="stage6a-not-found__action stage6a-not-found__action--secondary"
+              >
+                <Wrench aria-hidden="true" />
+                查看主要服務
+              </Link>
+            </nav>
+          </div>
+        </section>
       </main>
     </>
   );
