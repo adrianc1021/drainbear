@@ -11,6 +11,10 @@ export const sanityConfig = {
 
 export const sanityClient = createClient(sanityConfig);
 
+// Homepage article previews should reflect newly published CMS content without
+// waiting for the public CDN cache to expire.
+export const sanityFreshClient = sanityClient.withConfig({useCdn: false});
+
 const imageBuilder = createImageUrlBuilder(sanityClient);
 
 export function sanityImage(

@@ -81,6 +81,12 @@ export function getStaticBlogPosts(): BlogPostView[] {
   return BLOG_POSTS.map(mapStaticBlogPost);
 }
 
+export function getLatestStaticBlogPosts(limit: number): BlogPostView[] {
+  return getStaticBlogPosts()
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, limit);
+}
+
 export function getStaticBlogPostBySlug(slug: string): BlogPostView | null {
   const post = getPostBySlug(slug);
   return post ? mapStaticBlogPost(post) : null;
@@ -116,10 +122,45 @@ export function mergeBlogPosts(sanityPosts: SanityBlogPost[]): BlogPostView[] {
   });
 }
 
+export function mergeLatestBlogPosts(
+  sanityPosts: SanityBlogPost[],
+  limit: number
+): BlogPostView[] {
+  const merged = new Map<string, BlogPostView>();
+
+  for (const sanityPost of sanityPosts) {
+    if (!sanityPost.slug) continue;
+
+    const key = sanityPost.slug.trim().toLowerCase();
+    if (!key) continue;
+
+    merged.set(key, mapSanityBlogPost(sanityPost));
+  }
+
+  for (const staticPost of BLOG_POSTS) {
+    const key = staticPost.slug.trim().toLowerCase();
+    if (!key || merged.has(key)) continue;
+
+    merged.set(key, mapStaticBlogPost(staticPost));
+  }
+
+  return Array.from(merged.values())
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, limit);
+}
+
 export async function fetchBlogPosts(): Promise<BlogPostView[]> {
   const { getPublishedBlogPosts } = await import("@/lib/sanity/queries");
   const sanityPosts = await getPublishedBlogPosts();
   return mergeBlogPosts(sanityPosts ?? []);
+}
+
+export async function fetchLatestBlogPosts(
+  limit: number
+): Promise<BlogPostView[]> {
+  const { getLatestPublishedBlogPosts } = await import("@/lib/sanity/queries");
+  const sanityPosts = await getLatestPublishedBlogPosts();
+  return mergeLatestBlogPosts(sanityPosts ?? [], limit);
 }
 
 export async function fetchBlogPostBySlug(

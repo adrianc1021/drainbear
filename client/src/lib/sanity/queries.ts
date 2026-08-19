@@ -1,4 +1,4 @@
-import { sanityClient } from "./client";
+import { sanityClient, sanityFreshClient } from "./client";
 import type { PageSeo, SanityBlogPost, SiteSettings } from "./types";
 
 export const siteSettingsQuery = `
@@ -79,7 +79,7 @@ const blogPostFields = `
     }
   },
   publishedAt,
-  updatedAt,
+  "updatedAt": coalesce(updatedAt, _updatedAt, publishedAt),
   readMins,
   featured,
   instagramUrl,
@@ -122,6 +122,25 @@ export const publishedBlogPostBySlugQuery = `
   }
 `;
 
+export const latestPublishedBlogPostsQuery = `
+  *[
+    _type == "blogPost" &&
+    defined(slug.current) &&
+    defined(publishedAt) &&
+    publishedAt <= now()
+  ] | order(publishedAt desc)[0...3] {
+    _id,
+    title,
+    "slug": slug.current,
+    category,
+    excerpt,
+    publishedAt,
+    "updatedAt": coalesce(updatedAt, _updatedAt, publishedAt),
+    readMins,
+    featured
+  }
+`;
+
 export function getSiteSettings() {
   return sanityClient.fetch<SiteSettings | null>(siteSettingsQuery);
 }
@@ -132,6 +151,12 @@ export function getPageSeo(path: string) {
 
 export function getPublishedBlogPosts() {
   return sanityClient.fetch<SanityBlogPost[]>(publishedBlogPostsQuery);
+}
+
+export function getLatestPublishedBlogPosts() {
+  return sanityFreshClient.fetch<SanityBlogPost[]>(
+    latestPublishedBlogPostsQuery
+  );
 }
 
 export function getPublishedBlogPostBySlug(slug: string) {

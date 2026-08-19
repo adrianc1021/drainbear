@@ -70,7 +70,7 @@ export interface SanityBlogPost {
   category: string;
   excerpt: string;
   coverImage?: SanityImageData;
-  body: SanityBlogBodyBlock[];
+  body?: SanityBlogBodyBlock[];
   publishedAt: string;
   updatedAt?: string;
   readMins: number;

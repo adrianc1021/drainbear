@@ -25,7 +25,7 @@ import {
   trackCTA,
   trackNavClick,
 } from "@/lib/analytics";
-import { useBlogPosts } from "@/lib/useBlog";
+import { useLatestBlogPosts } from "@/lib/useBlog";
 
 const HERO_IMAGE =
   "https://res.cloudinary.com/pgjztf2p/image/upload/f_auto,q_auto:good,c_fill,w_1920,h_1080/v1785149473/why_sv7tw9.png";
@@ -240,8 +240,7 @@ function EditorialProcess() {
 }
 
 function EditorialJournal() {
-  const { posts } = useBlogPosts();
-  const selectedPosts = posts.slice(0, 3);
+  const { posts: selectedPosts } = useLatestBlogPosts(3);
 
   return (
     <section
