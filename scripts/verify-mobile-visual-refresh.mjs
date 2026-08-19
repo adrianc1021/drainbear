@@ -88,7 +88,7 @@ try {
 
     await page
       .getByRole("heading", {
-        name: /塞渠爆喉.*唔使靠估/,
+        name: /香港 24 小時.*通渠服務.*專業評估/,
       })
       .waitFor();
 

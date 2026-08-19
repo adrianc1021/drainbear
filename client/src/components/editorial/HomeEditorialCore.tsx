@@ -95,9 +95,9 @@ export function EditorialHero({ imageSrc }: { imageSrc?: string }) {
             <EditorialKicker>Hong Kong / Drain service / 24H</EditorialKicker>
 
             <h1 id="home-editorial-heading" className="db-display mt-8">
-              香港 24 小時通渠服務，
-              <br />
-              <span className="text-[var(--db-safety)]">專業評估。</span>
+              <span className="block">香港 24 小時</span>
+              <span className="block">通渠服務，</span>
+              <span className="block text-[var(--db-safety)]">專業評估。</span>
             </h1>
 
             <p className="db-lead mt-8 max-w-xl">
