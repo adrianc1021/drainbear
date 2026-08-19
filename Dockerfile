@@ -12,6 +12,7 @@ RUN pnpm install --frozen-lockfile
 
 COPY . .
 
+ARG VITE_GOOGLE_ADS_WHATSAPP_LABEL
 RUN pnpm build
 
 FROM node:22-bookworm-slim AS production

@@ -62,6 +62,9 @@
 （只填 `AW-.../` 後面的部分），然後重新部署；只更新 Runtime 環境而不重建前端，
 已發布的 JavaScript 不會取得新值。
 
+Render 會把 Docker 服務的環境變數轉為 build argument；專案的 `Dockerfile`
+必須宣告同名 `ARG`，Vite 才能在建置時把 Label 寫入前端 bundle。
+
 建議初期設為 Secondary；有真實 qualified lead 後再改用 Offline Conversion 作 Primary。
 
 ## Privacy

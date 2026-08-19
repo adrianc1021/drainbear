@@ -5,6 +5,7 @@ const tracking = fs.readFileSync("client/src/lib/trackingSession.ts", "utf8");
 const thanks = fs.readFileSync("client/src/pages/Thanks.tsx", "utf8");
 const app = fs.readFileSync("client/src/App.tsx", "utf8");
 const html = fs.readFileSync("client/index.html", "utf8");
+const dockerfile = fs.readFileSync("Dockerfile", "utf8");
 
 const required = [
   [analytics, "G-7JEL7SLBGQ"],
@@ -22,6 +23,7 @@ const required = [
   [html, "send_page_view: false"],
   [html, "productionTrackingHosts"],
   [html, "productionTrackingHosts.has(window.location.hostname)"],
+  [dockerfile, "ARG VITE_GOOGLE_ADS_WHATSAPP_LABEL"],
 ];
 
 for (const [source, pattern] of required) {
@@ -55,4 +57,5 @@ console.log("PASS：WhatsApp handoff 一次性 token 已加入");
 console.log("PASS：UTM／click ID type attribution 已加入");
 console.log("PASS：PII 防護仍然存在");
 console.log("PASS：Google Ads Conversion Label 採可選配置");
+console.log("PASS：Render Docker build 可取得 Google Ads Conversion Label");
 console.log("PASS：quote_calculator_start 明確送往 Google Ads Destination");
