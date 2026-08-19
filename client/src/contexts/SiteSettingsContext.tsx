@@ -1,10 +1,11 @@
 import {
   createContext,
+  useEffect,
   useContext,
   useMemo,
+  useState,
   type ReactNode,
 } from "react";
-import {useQuery} from "@tanstack/react-query";
 import {
   BUSINESS_NAME,
   DEFAULT_OG_IMAGE,
@@ -14,7 +15,6 @@ import {
   PHONE_DISPLAY,
   WHATSAPP_NUMBER,
 } from "@/lib/contact";
-import {getSiteSettings} from "@/lib/sanity/queries";
 import type {SiteSettings} from "@/lib/sanity/types";
 
 const FALLBACK_SITE_SETTINGS: SiteSettings = {
@@ -67,13 +67,31 @@ export function SiteSettingsProvider({
 }: {
   children: ReactNode;
 }) {
-  const {data, isLoading} = useQuery({
-    queryKey: ["sanity", "siteSettings"],
-    queryFn: getSiteSettings,
-    staleTime: 5 * 60 * 1000,
-    retry: 1,
-    refetchOnWindowFocus: false,
-  });
+  const [data, setData] = useState<SiteSettings | null>(null);
+
+  useEffect(() => {
+    let active = true;
+
+    const load = () => {
+      void import("@/lib/sanity/queries")
+        .then(({ getSiteSettings }) => getSiteSettings())
+        .then(result => {
+          if (active) setData(result);
+        })
+        .catch(() => {
+          // Contact and SEO fallbacks keep the site fully usable without the CMS.
+        });
+    };
+
+    const idleId = window.requestIdleCallback?.(load, { timeout: 1500 });
+    const timeoutId = idleId === undefined ? window.setTimeout(load, 1) : null;
+
+    return () => {
+      active = false;
+      if (idleId !== undefined) window.cancelIdleCallback?.(idleId);
+      if (timeoutId !== null) window.clearTimeout(timeoutId);
+    };
+  }, []);
 
   const settings = useMemo<SiteSettings>(
     () => ({
@@ -93,10 +111,10 @@ export function SiteSettingsProvider({
   const value = useMemo<SiteSettingsContextValue>(
     () => ({
       settings,
-      isLoading,
+      isLoading: false,
       isCmsAvailable: Boolean(data),
     }),
-    [settings, isLoading, data]
+    [settings, data]
   );
 
   return (

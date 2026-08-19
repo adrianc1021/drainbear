@@ -1,11 +1,6 @@
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
-import { useContactSettings } from "@/contexts/SiteSettingsContext";
-import {
-  goThanksAfterWhatsApp,
-  trackCTA,
-  trackNavClick,
-} from "@/lib/analytics";
+import { trackNavClick } from "@/lib/analytics";
 import {
   EditorialIndex,
   EditorialKicker,
@@ -16,34 +11,29 @@ const QUICK_SERVICES = [
     id: "toilet",
     label: "廁所／座廁淤塞",
     description: "去水慢、倒灌或完全淤塞",
-    message:
-      "你好，我想查詢塞廁所通渠服務。請問可否先提供初步估價及預計到達時間？",
+    href: "/services/toilet-unblocking",
   },
   {
-    id: "kitchen-bathroom",
-    label: "廚房／浴室去水",
-    description: "鋅盤、企缸、浴缸或地台去水",
-    message:
-      "你好，我想查詢廚房鋅盤或浴室去水通渠服務。請問可否先提供初步估價及預計到達時間？",
+    id: "bathroom",
+    label: "企缸／浴室去水",
+    description: "企缸、浴缸、頭髮或地台去水淤塞",
+    href: "/services/bathroom-drain-unblocking",
   },
   {
-    id: "commercial",
-    label: "食肆／商業渠務",
-    description: "隔油池、商舖去水或大廈主渠",
-    message:
-      "你好，我想查詢食肆或商業場所通渠服務。請問可否先提供初步估價及預計到達時間？",
+    id: "kitchen",
+    label: "廚房鋅盤淤塞",
+    description: "鋅盤去水慢、油脂積聚或倒灌",
+    href: "/services/kitchen-sink-unblocking",
   },
   {
-    id: "diagnosis",
-    label: "未能確定問題",
-    description: "需要高壓水槍或 CCTV 檢測建議",
-    message: "你好，我未能確定渠務問題原因，想提供相片或影片作初步了解及報價。",
+    id: "backflow",
+    label: "污水渠倒灌",
+    description: "低層去水口湧水、屎渠或主渠倒灌",
+    href: "/services/sewage-backflow",
   },
 ] as const;
 
 export default function ServiceQuickSelect() {
-  const { whatsappHref } = useContactSettings();
-
   return (
     <section
       aria-labelledby="quick-service-heading"
@@ -72,15 +62,16 @@ export default function ServiceQuickSelect() {
 
         <div className="home-choice-grid border-b border-[var(--db-rule)]">
           {QUICK_SERVICES.map((service, index) => (
-            <a
+            <Link
               key={service.id}
-              href={whatsappHref(service.message)}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => {
-                trackCTA("whatsapp", "home_quick_select", service.id);
-                goThanksAfterWhatsApp("home_quick_select");
-              }}
+              href={service.href}
+              onClick={() =>
+                trackNavClick("service", {
+                  cta_location: "home_quick_select",
+                  cta_label: service.label,
+                  destination_url: service.href,
+                })
+              }
               className="home-choice-card group grid min-h-28 items-center gap-4 border-t border-[var(--db-rule)] py-6 text-[var(--db-ink)] transition-colors duration-200 hover:bg-[var(--db-paper)] focus-visible:bg-[var(--db-paper)] sm:grid-cols-[4rem_1fr_auto] sm:px-4 md:min-h-32 md:px-6"
               data-service-id={service.id}
             >
@@ -98,13 +89,13 @@ export default function ServiceQuickSelect() {
               </span>
 
               <span className="flex h-11 w-11 items-center justify-center border border-[var(--db-rule-strong)] transition-all duration-200 group-hover:border-[var(--db-ink)] group-hover:bg-[var(--db-ink)] group-hover:text-white">
-                <MessageCircle
+                <ArrowRight
                   className="h-5 w-5"
                   strokeWidth={2}
                   aria-hidden="true"
                 />
               </span>
-            </a>
+            </Link>
           ))}
         </div>
 

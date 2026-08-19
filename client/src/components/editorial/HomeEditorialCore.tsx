@@ -53,9 +53,9 @@ const SERVICES = [
   {
     number: "01",
     eyebrow: "Residential",
-    title: "住宅通渠服務",
-    description: "座廁、企缸、浴缸、廚房鋅盤及地台去水淤塞。",
-    href: "/services/toilet-unblocking",
+    title: "浴室及企缸通渠",
+    description: "處理企缸塞、浴缸去水慢、頭髮及番梘垢淤塞。",
+    href: "/services/bathroom-drain-unblocking",
   },
   {
     number: "02",
@@ -95,14 +95,14 @@ export function EditorialHero({ imageSrc }: { imageSrc?: string }) {
             <EditorialKicker>Hong Kong / Drain service / 24H</EditorialKicker>
 
             <h1 id="home-editorial-heading" className="db-display mt-8">
-              渠管淤塞，
+              香港 24 小時通渠服務，
               <br />
               <span className="text-[var(--db-safety)]">專業評估。</span>
             </h1>
 
             <p className="db-lead mt-8 max-w-xl">
-              先了解現場情況，再按需要安排設備。報價及收費條款確認後才動工，
-              完成後測試去水並整理現場。
+              處理塞廁所、企缸及浴室去水、廚房鋅盤淤塞與污水倒灌。
+              先了解現場情況及確認收費，再按需要安排合適設備。
             </p>
 
             <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
@@ -173,6 +173,8 @@ export function EditorialHero({ imageSrc }: { imageSrc?: string }) {
                 src="/favicon-512x512.png"
                 alt=""
                 aria-hidden="true"
+                width="176"
+                height="176"
                 className="h-44 w-44 object-contain opacity-15"
               />
             </div>

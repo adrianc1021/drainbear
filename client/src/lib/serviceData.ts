@@ -108,9 +108,9 @@ export const SERVICE_PAGES: ServicePageData[] = [
       },
     ],
     relatedSlugs: [
+      "bathroom-drain-unblocking",
+      "sewage-backflow",
       "cctv-drain-inspection",
-      "main-drain-manhole",
-      "kitchen-sink-unblocking",
     ],
   },
   {
@@ -191,9 +191,179 @@ export const SERVICE_PAGES: ServicePageData[] = [
       },
     ],
     relatedSlugs: [
+      "bathroom-drain-unblocking",
       "high-pressure-jetting",
       "cctv-drain-inspection",
+    ],
+  },
+  {
+    slug: "bathroom-drain-unblocking",
+    name: "企缸、浴缸及浴室通渠",
+    shortName: "浴室／企缸通渠",
+    eyebrow: "BATHROOM DRAIN",
+    title: "企缸塞、浴缸去水慢｜浴室頭髮塞渠處理｜通渠熊",
+    description:
+      "企缸塞、浴缸去水慢或沖涼後積水？了解頭髮、番梘垢及地台去水堵塞的常見成因、處理流程與收費因素，可經 WhatsApp 傳送影片作初步估價。",
+    heroTitle: "企缸塞、浴缸去水慢，先分辨隔渣位還是喉管堵塞",
+    heroDescription:
+      "頭髮會與番梘垢在去水隔、隔氣及喉管內逐步積聚。若清理表面後仍然去水慢，堵塞位置可能已深入喉管，需要按現場情況處理。",
+    image:
+      "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A1_vyqcil.png",
+    imageAlt: "香港企缸、浴缸及浴室頭髮塞渠處理服務",
+    whatsappMessage:
+      "你好，我想查詢企缸／浴缸／浴室去水通渠。現時有去水慢或積水問題，請告訴我需要拍攝哪些資料作初步估價。",
+    symptoms: [
+      "沖涼期間企缸或浴缸水位逐漸上升",
+      "關水後要很久才完全退水",
+      "清走去水口表面頭髮後仍然去水慢",
+      "浴室地台去水位出現異味、咕嚕聲或倒灌",
+    ],
+    causes: [
+      "頭髮與番梘垢在隔渣位或隔氣內纏結",
+      "較深入的支喉長期積聚毛髮及污垢",
+      "去水喉斜度、接駁或老化問題令污物容易停留",
+      "多個去水位同時受影響，可能涉及共用喉管",
+    ],
+    process: [
+      {
+        title: "了解積水情況",
+        description:
+          "先了解受影響位置、退水時間，以及洗手盆或地台去水有沒有同時變慢。",
+      },
+      {
+        title: "檢查去水口及隔氣",
+        description:
+          "查看可見毛髮、隔渣配件及接駁情況，初步判斷堵塞深度。",
+      },
+      {
+        title: "確認處理方法",
+        description:
+          "按喉管結構與堵塞位置建議機械疏通或其他合適方法，動工前確認收費。",
+      },
+      {
+        title: "測試排水",
+        description:
+          "完成後以足夠水量測試企缸、浴缸及相關去水位，並整理施工位置。",
+      },
+    ],
+    priceFactors: [
+      "堵塞位於去水隔、隔氣或較深入支喉",
+      "頭髮及污垢的積聚程度",
+      "是否需要拆裝去水配件或隔氣",
+      "浴室空間、喉管走向及施工難度",
+    ],
+    suitableFor: [
+      "企缸塞及沖涼積水",
+      "浴缸去水慢",
+      "頭髮塞渠反覆出現",
+      "浴室地台去水堵塞",
+    ],
+    faqs: [
+      {
+        question: "企缸隔頭髮後仍去水慢，是否代表喉管已塞？",
+        answer:
+          "有可能。隔走表面頭髮只能處理去水口附近的污物；若退水仍慢，毛髮及番梘垢可能已積聚在隔氣或更深入支喉。",
+      },
+      {
+        question: "可以用化學通渠水處理浴室頭髮塞渠嗎？",
+        answer:
+          "不建議反覆或混合使用化學通渠劑。藥劑可能殘留在積水中，增加接觸及後續施工風險，亦未必能完整清除纏結的毛髮。",
+      },
+      {
+        question: "企缸和地台去水同時變慢代表甚麼？",
+        answer:
+          "兩個位置同時受影響，可能表示堵塞位於匯合後的支喉。若座廁或其他去水位亦有異常，便要進一步檢查共用喉管。",
+      },
+    ],
+    relatedSlugs: [
       "toilet-unblocking",
+      "kitchen-sink-unblocking",
+      "sewage-backflow",
+    ],
+  },
+  {
+    slug: "sewage-backflow",
+    name: "污水渠倒灌處理",
+    shortName: "污水倒灌",
+    eyebrow: "SEWAGE BACKFLOW",
+    title: "污水渠倒灌｜低層水渠、屎渠倒灌處理｜通渠熊",
+    description:
+      "污水渠倒灌、水渠倒灌或低層單位去水口湧出污水？了解即時安全措施、常見成因、檢查流程及影響報價的因素，及早判斷局部支喉或大廈主渠問題。",
+    heroTitle: "污水渠倒灌要先停止用水，再判斷受影響範圍",
+    heroDescription:
+      "低層地台、座廁或鋅盤湧出污水，可能涉及單位支喉或大廈共用主渠。應先避免接觸污水及繼續用水，再記錄倒灌位置與受影響樓層。",
+    image:
+      "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A2_onju5z.png",
+    imageAlt: "香港低層單位污水渠及水渠倒灌處理",
+    whatsappMessage:
+      "你好，我想查詢污水渠倒灌。請告訴我需要提供哪些倒灌位置、樓層及現場影片，以便先判斷情況和作初步估價。",
+    symptoms: [
+      "低層地台去水位、企缸或座廁湧出污水",
+      "樓上用水時，本單位去水口出現倒灌",
+      "多個去水位同時發出咕嚕聲或水位上升",
+      "沙井高水位、滿瀉或有強烈污水異味",
+    ],
+    causes: [
+      "單位支喉被紙巾、油脂或異物堵塞",
+      "大廈共用主渠積聚污物或沉積物",
+      "沙井或下游排水位置受阻",
+      "喉管變形、破損或其他結構問題",
+    ],
+    process: [
+      {
+        title: "先控制現場風險",
+        description:
+          "建議暫停相關位置用水、避免接觸污水，並記錄首次倒灌的時間及位置。",
+      },
+      {
+        title: "確認影響範圍",
+        description:
+          "了解涉及多少潔具、單位或樓層，並向管理處查詢共用喉管是否亦有異常。",
+      },
+      {
+        title: "檢查入口及流向",
+        description:
+          "按現場可用的清潔口、沙井及喉管走向，判斷堵塞方向和合適處理方法。",
+      },
+      {
+        title: "疏通及排水測試",
+        description:
+          "確認方案與收費後施工，完成後觀察水位、流向及相關去水位置。",
+      },
+    ],
+    priceFactors: [
+      "問題屬於單位支喉還是大廈共用主渠",
+      "倒灌範圍、堵塞位置及嚴重程度",
+      "清潔口或沙井的可達程度",
+      "是否需要高壓清洗、影像檢測或額外清理",
+    ],
+    suitableFor: [
+      "低層單位污水倒灌",
+      "地台去水口湧出污水",
+      "多個去水位同時異常",
+      "沙井滿瀉及主渠倒灌",
+    ],
+    faqs: [
+      {
+        question: "污水渠倒灌時應該先做甚麼？",
+        answer:
+          "先停止使用受影響的座廁、鋅盤及去水位置，避免赤腳接觸污水，並通知同住者或管理處。可在安全距離拍攝倒灌位置及水位變化供判斷。",
+      },
+      {
+        question: "如何分辨單位支喉還是大廈主渠倒灌？",
+        answer:
+          "若只有一個潔具受影響，可能屬局部支喉；若多個去水位、低層單位或沙井同時異常，則較可能涉及共用喉管，仍要按現場檢查確認。",
+      },
+      {
+        question: "水位退回去後是否代表問題已解決？",
+        answer:
+          "不一定。水位暫時回落可能只是用水量減少，堵塞仍然存在；再次大量用水時可能重現倒灌，應安排檢查。",
+      },
+    ],
+    relatedSlugs: [
+      "main-drain-manhole",
+      "toilet-unblocking",
+      "cctv-drain-inspection",
     ],
   },
   {
@@ -275,7 +445,7 @@ export const SERVICE_PAGES: ServicePageData[] = [
     relatedSlugs: [
       "cctv-drain-inspection",
       "main-drain-manhole",
-      "kitchen-sink-unblocking",
+      "sewage-backflow",
     ],
   },
   {
@@ -356,7 +526,7 @@ export const SERVICE_PAGES: ServicePageData[] = [
     relatedSlugs: [
       "high-pressure-jetting",
       "main-drain-manhole",
-      "toilet-unblocking",
+      "sewage-backflow",
     ],
   },
   {
@@ -436,9 +606,9 @@ export const SERVICE_PAGES: ServicePageData[] = [
       },
     ],
     relatedSlugs: [
+      "sewage-backflow",
       "high-pressure-jetting",
       "cctv-drain-inspection",
-      "toilet-unblocking",
     ],
   },
 ];

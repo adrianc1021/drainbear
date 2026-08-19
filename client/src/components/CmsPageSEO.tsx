@@ -1,6 +1,6 @@
-import {useQuery} from "@tanstack/react-query";
-import SEO, {type SEOProps} from "@/components/SEO";
-import {getPageSeo} from "@/lib/sanity/queries";
+import { useEffect, useState } from "react";
+import SEO, { type SEOProps } from "@/components/SEO";
+import type { PageSeo } from "@/lib/sanity/types";
 
 interface CmsPageSEOProps extends SEOProps {
   cmsPath?: string;
@@ -11,21 +11,38 @@ export default function CmsPageSEO({
   ...fallback
 }: CmsPageSEOProps) {
   const queryPath = cmsPath ?? fallback.path;
+  const [data, setData] = useState<PageSeo | null>(null);
 
-  const {data, isLoading} = useQuery({
-    queryKey: ["sanity", "pageSeo", queryPath],
-    queryFn: () => getPageSeo(queryPath),
-    staleTime: 5 * 60 * 1000,
-    retry: 1,
-    refetchOnWindowFocus: false,
-  });
+  useEffect(() => {
+    let active = true;
+
+    const load = () => {
+      void import("@/lib/sanity/queries")
+        .then(({ getPageSeo }) => getPageSeo(queryPath))
+        .then(result => {
+          if (active) setData(result);
+        })
+        .catch(() => {
+          // The static fallback metadata is complete when the CMS is unavailable.
+        });
+    };
+
+    const idleId = window.requestIdleCallback?.(load, { timeout: 1500 });
+    const timeoutId = idleId === undefined ? window.setTimeout(load, 1) : null;
+
+    return () => {
+      active = false;
+      if (idleId !== undefined) window.cancelIdleCallback?.(idleId);
+      if (timeoutId !== null) window.clearTimeout(timeoutId);
+    };
+  }, [queryPath]);
 
   const seo = data?.seo;
 
   return (
     <SEO
       {...fallback}
-      contentReady={!isLoading}
+      contentReady
       title={seo?.metaTitle || fallback.title}
       description={seo?.metaDescription || fallback.description}
       keywords={

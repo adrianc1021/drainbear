@@ -16,6 +16,14 @@ const services = [
     h1: "鋅盤去水慢，通常不只是一小撮食物殘渣",
   },
   {
+    slug: "bathroom-drain-unblocking",
+    h1: "企缸塞、浴缸去水慢，先分辨隔渣位還是喉管堵塞",
+  },
+  {
+    slug: "sewage-backflow",
+    h1: "污水渠倒灌要先停止用水，再判斷受影響範圍",
+  },
+  {
     slug: "high-pressure-jetting",
     h1: "反覆淤塞，不一定適合只做局部打通",
   },
@@ -75,7 +83,7 @@ for (const service of services) {
   }
 }
 
-console.log("PASS：5 個服務頁已加入 prerender manifest 及 sitemap");
+console.log("PASS：7 個服務頁已加入 prerender manifest 及 sitemap");
 
 const server = spawn("node", ["dist/index.js"], {
   env: {
@@ -177,7 +185,7 @@ try {
     }
   }
 
-  console.log("PASS：/services prerender HTML 包含 5 個服務頁內部連結");
+  console.log("PASS：/services prerender HTML 包含 7 個服務頁內部連結");
 
   await page.goto(`${BASE_URL}/services`, {
     waitUntil: "domcontentloaded",
@@ -202,7 +210,7 @@ try {
     });
   }
 
-  console.log("PASS：服務總覽包含 5 個可導航的服務頁內部連結");
+  console.log("PASS：服務總覽包含 7 個可導航的服務頁內部連結");
 
   if (pageErrors.length > 0) {
     throw new Error(`測試期間出現 ${pageErrors.length} 個 page error`);

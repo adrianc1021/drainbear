@@ -28,6 +28,8 @@ const STATIC_ROUTES = [
 const SERVICE_SLUGS = [
   "toilet-unblocking",
   "kitchen-sink-unblocking",
+  "bathroom-drain-unblocking",
+  "sewage-backflow",
   "high-pressure-jetting",
   "cctv-drain-inspection",
   "main-drain-manhole",

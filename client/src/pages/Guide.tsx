@@ -23,6 +23,7 @@ import { WhatsAppButton } from "@/components/Layout";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
 import { DISTRICT_SLUGS } from "@/lib/districtData";
+import { BUSINESS_ID, SITE_URL } from "@/config/site";
 
 const CRUMBS = [
   { name: "首頁", path: "/" },
@@ -34,36 +35,50 @@ const PRICE_TABLE = [
   {
     service: "坐廁 / 馬桶淤塞疏通",
     range: "HK$600 起",
+    price: 600,
+    href: "/services/toilet-unblocking",
     note: "視乎淤塞物性質，硬物需用專業工具",
   },
   {
     service: "廚房鋅盤 / 星盆去水慢",
     range: "HK$500 起",
+    price: 500,
+    href: "/services/kitchen-sink-unblocking",
     note: "陳年豬油膏或需高壓處理",
   },
   {
     service: "企缸 / 浴缸 / 地台去水位",
     range: "HK$500 起",
+    price: 500,
+    href: "/services/bathroom-drain-unblocking",
     note: "頭髮番梘垢淤塞為主",
   },
   {
     service: "大廈主渠 / 沙井疏通",
     range: "HK$1,800 起",
+    price: 1800,
+    href: "/services/main-drain-manhole",
     note: "需重型設備，按現場情況報價",
   },
   {
     service: "食肆隔油池清理",
     range: "HK$2,500 起",
+    price: 2500,
+    href: "/services",
     note: "可安排定期保養計劃",
   },
   {
     service: "高壓水槍洗渠（全屋 / 全舖）",
     range: "HK$2,800 起",
+    price: 2800,
+    href: "/services/high-pressure-jetting",
     note: "按喉管長度及淤塞程度報價",
   },
   {
     service: "CCTV 照喉檢測連報告",
     range: "HK$1,500 起",
+    price: 1500,
+    href: "/services/cctv-drain-inspection",
     note: "接納工程報價可豁免檢測費",
   },
 ];
@@ -75,7 +90,7 @@ const CHOOSE_TIPS = [
   },
   {
     title: "問清楚收費包含甚麼",
-    desc: "報價應列明是否包括上門費、夜間附加費及完工清潔。通渠熊承諾報價即最終價，絕無隱藏收費。",
+    desc: "報價應列明是否包括上門檢查、夜間附加費、特殊工具及完工清潔；師傅現場檢查後，應在動工前確認最終總收費。",
   },
   {
     title: "選擇有科技斷症的公司",
@@ -83,7 +98,7 @@ const CHOOSE_TIPS = [
   },
   {
     title: "留意「不成功不收費」條款",
-    desc: "純異物淤塞打不通不收費是行業良心標準；但喉管破損需維修屬另一種工程，事前應清楚分辨。",
+    desc: "如服務設有「不成功不收費」，應先問清適用範圍。喉管破損、拆裝或檢測可能屬另一項工程，事前要確認條款。",
   },
 ];
 
@@ -159,11 +174,11 @@ const HOWTO_STEPS = [
 const GUIDE_FAQS = [
   {
     q: "通渠收費一般是多少？",
-    a: "香港通渠收費視乎淤塞位置及嚴重程度：坐廁淤塞約 HK$600 起，廚房鋅盤約 HK$500 起，大廈主渠或沙井工程約 HK$1,800 起。通渠熊承諾動工前確認總價，不成功不收費。",
+    a: "香港通渠收費視乎淤塞位置及嚴重程度：坐廁淤塞約 HK$600 起，廚房鋅盤約 HK$500 起，大廈主渠或沙井工程約 HK$1,800 起。師傅現場檢查後會在動工前確認最終總價。",
   },
   {
     q: "通渠公司幾耐可以到？",
-    a: "通渠熊承諾全港 1 小時特快到達，24 小時全天候候命，覆蓋港島、九龍、新界及離島，深夜緊急塞渠亦可即時安排師傅出動。",
+    a: "可安排時間會受所在地點、交通、師傅及設備調配影響。提供地區、堵塞位置與現場影片後，團隊會確認可安排的上門時間；深夜服務的附加費亦會事先說明。",
   },
   {
     q: "自己倒通渠水得唔得？",
@@ -199,16 +214,57 @@ const HOWTO_JSONLD = {
   })),
 };
 
+const PRICING_SERVICE_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": `${SITE_URL}/guide#drain-service-pricing`,
+  name: "香港通渠服務及收費參考",
+  serviceType: "通渠服務",
+  url: `${SITE_URL}/guide`,
+  provider: { "@id": BUSINESS_ID },
+  areaServed: "Hong Kong",
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "通渠收費參考",
+    itemListElement: PRICE_TABLE.map(item => ({
+      "@type": "Offer",
+      name: item.service,
+      url: `${SITE_URL}${item.href}`,
+      priceSpecification: {
+        "@type": "UnitPriceSpecification",
+        priceCurrency: "HKD",
+        minPrice: item.price,
+      },
+      description: `${item.range}；${item.note}。最終收費於現場檢查後、動工前確認。`,
+    })),
+  },
+};
+
+const GUIDE_WEBPAGE_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": `${SITE_URL}/guide#webpage`,
+  url: `${SITE_URL}/guide`,
+  name: "香港通渠價錢、費用及收費指南",
+  dateModified: "2026-08-19",
+  mainEntity: { "@id": `${SITE_URL}/guide#drain-service-pricing` },
+};
+
 export default function Guide() {
   const { phoneDisplay, phoneHref, whatsappHref } = useContactSettings();
   return (
     <div className="phase4-guide bg-white" data-phase4-page="guide">
       <SEO
-        title="2026 最新通渠收費指南｜明碼實價・絕無隱藏收費｜通渠熊 DrainBear"
-        description="想知通渠幾錢？通渠熊提供全透明的通渠收費表。由住宅手搖泵通渠、高壓氣泵，到商業高壓水槍洗渠及 CCTV 照喉，各項收費一目了然。承諾報價後才動工，絕不坐地起價，上門檢查費更可豁免。"
+        title="2026 香港通渠價錢｜通渠收費、費用及報價參考｜通渠熊"
+        description="想知香港通渠幾錢？查看坐廁、廚房鋅盤、企缸浴缸、大廈主渠、高壓洗渠及 CCTV 照喉的通渠價錢與費用參考，並了解影響最終報價的因素。"
         path="/guide"
-        keywords="通渠收費, 通渠幾錢, 通渠價錢, 塞廁所收費, 高壓通渠收費, CCTV照喉價錢, 通渠報價, 明碼實價"
-        jsonLd={[FAQ_JSONLD, HOWTO_JSONLD]}
+        keywords="通渠價錢, 通渠價格, 通渠費用, 通渠收費, 通渠報價, 通渠幾錢, 塞廁所收費, 高壓通渠收費, CCTV照喉價錢"
+        jsonLd={[
+          GUIDE_WEBPAGE_JSONLD,
+          PRICING_SERVICE_JSONLD,
+          FAQ_JSONLD,
+          HOWTO_JSONLD,
+        ]}
         breadcrumbs={CRUMBS}
       />
       <Breadcrumbs items={CRUMBS} />
@@ -218,12 +274,12 @@ export default function Guide() {
         kicker="Pricing & guide / 收費指南"
         title={
           <>
-            通渠收費透明，
+            香港通渠價錢及收費，
             <br />
-            動工前確認實價
+            動工前確認報價
           </>
         }
-        description="公開常見服務收費參考、影響價格的因素，以及由報價到完工的流程。資料先講清楚，是否施工由你決定。"
+        description="整理常見通渠價格、費用和起始收費，並說明影響最終報價的因素。想知通渠幾錢，可先按堵塞位置查看參考，再提供現場資料作初步估價。"
         actions={
           <>
             <WhatsAppButton
@@ -252,10 +308,13 @@ export default function Guide() {
             </div>
             <div>
               <h2 className="font-display text-2xl font-black text-navy md:text-3xl">
-                2026 通渠收費參考表
+                2026 香港通渠價錢及費用參考表
               </h2>
               <p className="mt-2 max-w-2xl text-sm text-muted-foreground md:text-base">
                 以下為常見通渠服務的起始價錢，最終收費會於師傅上門評估後、動工前一次過確認。
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                最後更新：2026 年 8 月 19 日
               </p>
             </div>
           </div>
@@ -280,7 +339,12 @@ export default function Guide() {
                       className={i % 2 === 1 ? "bg-mist/60" : "bg-white"}
                     >
                       <td className="px-5 py-4 font-semibold text-navy">
-                        {r.service}
+                        <Link
+                          href={r.href}
+                          className="underline decoration-navy/25 underline-offset-4 hover:decoration-navy"
+                        >
+                          {r.service}
+                        </Link>
                       </td>
                       <td className="whitespace-nowrap px-5 py-4 font-display font-extrabold text-wagreen-dark">
                         {r.range}
@@ -299,7 +363,7 @@ export default function Guide() {
                 strokeWidth={2.2}
               />
               以上價錢僅供參考，實際收費視乎現場淤塞程度、樓層及施工難度而定。深夜時段（23:00–07:00）設合理附加費，
-              出發前先提供初步估價；師傅現場檢查後、動工前確認最終總收費，絕不坐地起價。純異物淤塞打不通，分毫不收。
+              出發前先提供初步估價；師傅現場檢查後、動工前確認最終總收費。不同問題所需設備及施工範圍並不相同。
             </div>
           </div>
         </div>
@@ -429,7 +493,7 @@ export default function Guide() {
                 全港 18 區通渠服務覆蓋
               </h2>
               <p className="mt-2 max-w-2xl text-sm text-white/60 md:text-base">
-                港島、九龍、新界及離島均有駐區師傅，就近出動，1 小時特快到達。
+                港島、九龍、新界及離島均可先提供地點查詢，再按交通、師傅及設備安排確認上門時間。
               </p>
             </div>
           </div>
@@ -521,8 +585,8 @@ export default function Guide() {
               仲喺度格價？直接攞個實價最快。
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-sm text-white/60 md:text-base">
-              影低塞渠位置，WhatsApp
-              傳過嚟，三分鐘內回覆初步報價。先報價、後動工、不成功不收費。
+              影低塞渠位置，透過 WhatsApp 傳送地點、相片或影片，
+              團隊會先了解情況；師傅現場檢查後、動工前確認最終收費。
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
               <WhatsAppButton

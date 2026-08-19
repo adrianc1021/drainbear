@@ -3,7 +3,14 @@
  * Header：清晰品牌導覽 + 克制的 WhatsApp 行動入口
  * Footer：服務資訊、主要地區與公司資料
  */
-import { ReactNode, useEffect, useRef, useState } from "react";
+import {
+  lazy,
+  ReactNode,
+  Suspense,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Link, useLocation } from "wouter";
 import {
   Menu,
@@ -23,12 +30,13 @@ import {
   trackNavClick,
 } from "@/lib/analytics";
 import { useEstimate } from "@/contexts/EstimateContext";
-import WhatsAppWidget from "@/components/WhatsAppWidget";
 import { useReveal } from "@/hooks/useReveal";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
 
 const LOGO =
   "https://res.cloudinary.com/pgjztf2p/image/upload/f_auto,q_auto:eco,c_fill,w_96,h_96/v1785147037/LOGO_dmyalo.png";
+
+const WhatsAppWidget = lazy(() => import("@/components/WhatsAppWidget"));
 
 const NAV_ITEMS = [
   { label: "首頁", href: "/" },
@@ -165,6 +173,31 @@ function BackToTop() {
   );
 }
 
+function DeferredDesktopWhatsAppWidget() {
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    if (!window.matchMedia("(min-width: 768px)").matches) return;
+
+    const show = () => setReady(true);
+    const idleId = window.requestIdleCallback?.(show, { timeout: 2000 });
+    const timeoutId = idleId === undefined ? window.setTimeout(show, 1200) : null;
+
+    return () => {
+      if (idleId !== undefined) window.cancelIdleCallback?.(idleId);
+      if (timeoutId !== null) window.clearTimeout(timeoutId);
+    };
+  }, []);
+
+  if (!ready) return null;
+
+  return (
+    <Suspense fallback={null}>
+      <WhatsAppWidget />
+    </Suspense>
+  );
+}
+
 function Header({
   hideConversionCTA = false,
 }: {
@@ -274,6 +307,8 @@ function Header({
           <img
             src={LOGO}
             alt="通渠熊 DrainBear Logo"
+            width="96"
+            height="96"
             className="h-10 w-10 md:h-11 md:w-11"
           />
           <span className="site-header__brand-text font-display text-lg font-black tracking-[-0.025em] text-navy md:text-xl">
@@ -496,6 +531,8 @@ function Footer() {
           <img
             src={LOGO}
             alt="通渠熊 DrainBear"
+            width="96"
+            height="96"
             className="h-9 w-9 brightness-0 invert opacity-90"
           />
           <span className="font-display text-lg font-extrabold">
@@ -627,7 +664,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             aria-hidden="true"
           />
           <MobileCTABar />
-          <WhatsAppWidget />
+          <DeferredDesktopWhatsAppWidget />
           <BackToTop />
         </>
       ) : null}

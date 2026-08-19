@@ -59,6 +59,8 @@ export default function WhatsAppWidget() {
             <img
               src={LOGO}
               alt="通渠熊 DrainBear"
+              width="96"
+              height="96"
               className="h-10 w-10 rounded-full bg-white p-1"
             />
             <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-navy bg-wagreen" />

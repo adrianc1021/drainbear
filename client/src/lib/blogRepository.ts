@@ -3,10 +3,6 @@ import {
   getPostBySlug,
   type BlogPost as StaticBlogPost,
 } from "@/lib/blogData";
-import {
-  getPublishedBlogPostBySlug,
-  getPublishedBlogPosts,
-} from "@/lib/sanity/queries";
 import type {
   SanityBlogBodyBlock,
   SanityBlogPost,
@@ -121,6 +117,7 @@ export function mergeBlogPosts(sanityPosts: SanityBlogPost[]): BlogPostView[] {
 }
 
 export async function fetchBlogPosts(): Promise<BlogPostView[]> {
+  const { getPublishedBlogPosts } = await import("@/lib/sanity/queries");
   const sanityPosts = await getPublishedBlogPosts();
   return mergeBlogPosts(sanityPosts ?? []);
 }
@@ -132,6 +129,7 @@ export async function fetchBlogPostBySlug(
 
   if (!normalizedSlug) return null;
 
+  const { getPublishedBlogPostBySlug } = await import("@/lib/sanity/queries");
   const sanityPost = await getPublishedBlogPostBySlug(normalizedSlug);
 
   if (sanityPost) {
