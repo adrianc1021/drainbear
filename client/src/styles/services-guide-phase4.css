@@ -458,7 +458,7 @@
 .phase4-guide__hero .site-page-hero__title {
   /* Keep the fixed line break inside the heading grid track on wide screens. */
   max-width: 100%;
-  font-size: clamp(2.75rem, 4vw, 4.25rem);
+  font-size: clamp(2.75rem, 4vw, 3.75rem);
   line-height: 1.12;
   letter-spacing: 0;
 }
@@ -624,6 +624,11 @@
   .phase4-services__hero .site-page-hero__title,
   .phase4-guide__hero .site-page-hero__title {
     max-width: none;
+  }
+
+  .phase4-guide__hero .site-page-hero__title {
+    word-break: normal;
+    overflow-wrap: anywhere;
   }
 
   .phase4-services__hero .site-page-hero__title {
