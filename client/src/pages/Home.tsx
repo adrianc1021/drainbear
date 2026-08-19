@@ -27,7 +27,7 @@ import {
 } from "@/lib/analytics";
 import { useLatestBlogPosts } from "@/lib/useBlog";
 
-const HERO_IMAGE = "/images/home-drain-technician.jpg";
+const HERO_IMAGE = "/images/home-drain-technician-wide.jpg";
 
 const CAPABILITY_IMAGE = "/images/home-cctv-inspection.jpg";
 
