@@ -29,8 +29,7 @@ import { useLatestBlogPosts } from "@/lib/useBlog";
 
 const HERO_IMAGE = "/images/home-drain-technician.jpg";
 
-const CAPABILITY_IMAGE =
-  "https://res.cloudinary.com/pgjztf2p/image/upload/f_auto,q_auto:good,c_fill,w_960,h_1152/v1785164195/A4_hiufrh.png";
+const CAPABILITY_IMAGE = "/images/home-cctv-inspection.jpg";
 
 const CASE_STUDIES = [
   {

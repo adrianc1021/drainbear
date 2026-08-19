@@ -275,8 +275,8 @@ export function EditorialCapability({ imageSrc }: { imageSrc?: string }) {
               <img
                 src={imageSrc}
                 alt="通渠熊團隊使用渠務檢測設備"
-                width="1024"
-                height="1024"
+                width="960"
+                height="1280"
                 loading="lazy"
                 decoding="async"
                 sizes="(min-width: 1024px) 46vw, 100vw"

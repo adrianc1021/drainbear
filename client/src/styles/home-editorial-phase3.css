@@ -194,7 +194,7 @@
 
 .home-editorial .home-capability-layout .db-media {
   min-height: 0;
-  aspect-ratio: 5 / 6;
+  aspect-ratio: 3 / 4;
 }
 
 .home-editorial .home-capability-layout article {
@@ -506,7 +506,7 @@
   }
 
   .home-editorial .home-capability-layout .db-media {
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 4 / 5;
   }
 }
 
@@ -557,7 +557,7 @@
   }
 
   .home-editorial .home-capability-layout .db-media {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 3 / 4;
   }
 
   .home-editorial .home-service-row {
