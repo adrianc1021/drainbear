@@ -456,7 +456,19 @@
 /* ================================================== */
 
 .phase4-guide__hero .site-page-hero__title {
-  max-width: 10em;
+  /* Keep the fixed line break inside the heading grid track on wide screens. */
+  max-width: 100%;
+  font-size: clamp(2.75rem, 4vw, 4.25rem);
+  line-height: 1.12;
+  letter-spacing: 0;
+}
+
+@media (min-width: 900px) {
+  .phase4-guide__hero .site-page-hero__inner {
+    grid-template-columns: minmax(0, 1.08fr) minmax(20rem, 0.92fr);
+    gap: clamp(2rem, 4vw, 4.5rem);
+    padding-block: clamp(3.5rem, 5vw, 5rem);
+  }
 }
 
 .phase4-guide > section:nth-of-type(2),

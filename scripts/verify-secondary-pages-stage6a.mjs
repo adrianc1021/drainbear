@@ -38,6 +38,20 @@ async function assertNoOverflow(page, label) {
   );
 }
 
+async function assertGuideHeroFits(page, label) {
+  const dimensions = await page
+    .locator(".phase4-guide__hero .site-page-hero__title")
+    .evaluate(title => ({
+      clientWidth: title.clientWidth,
+      scrollWidth: title.scrollWidth,
+    }));
+
+  assert(
+    dimensions.scrollWidth <= dimensions.clientWidth + 1,
+    `${label}：收費指南標題超出欄位 ${JSON.stringify(dimensions)}`
+  );
+}
+
 async function assertTabPanelIntegrity(page) {
   const result = await page.locator('[role="tab"]').evaluateAll(tabs =>
     tabs.map(tab => {
@@ -280,6 +294,7 @@ try {
     { width: 768, height: 1024 },
     { width: 1024, height: 900 },
     { width: 1440, height: 1000 },
+    { width: 1707, height: 900 },
   ]) {
     const context = await browser.newContext({ viewport });
     const page = await context.newPage();
@@ -290,6 +305,9 @@ try {
     await assertNoOverflow(page, `${viewport.width}px /areas`);
     await page.goto(`${BASE_URL}/404`, { waitUntil: "networkidle" });
     await assertNoOverflow(page, `${viewport.width}px /404`);
+    await page.goto(`${BASE_URL}/guide`, { waitUntil: "networkidle" });
+    await assertNoOverflow(page, `${viewport.width}px /guide`);
+    await assertGuideHeroFits(page, `${viewport.width}px /guide`);
     assert(
       pageErrors.length === 0,
       `${viewport.width}px 出現 ${pageErrors.length} 個 page errors`
