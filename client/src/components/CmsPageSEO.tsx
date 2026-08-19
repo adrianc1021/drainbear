@@ -4,16 +4,23 @@ import type { PageSeo } from "@/lib/sanity/types";
 
 interface CmsPageSEOProps extends SEOProps {
   cmsPath?: string;
+  cmsEnabled?: boolean;
 }
 
 export default function CmsPageSEO({
   cmsPath,
+  cmsEnabled = true,
   ...fallback
 }: CmsPageSEOProps) {
   const queryPath = cmsPath ?? fallback.path;
   const [data, setData] = useState<PageSeo | null>(null);
 
   useEffect(() => {
+    if (!cmsEnabled) {
+      setData(null);
+      return;
+    }
+
     let active = true;
 
     const load = () => {
@@ -35,7 +42,7 @@ export default function CmsPageSEO({
       if (idleId !== undefined) window.cancelIdleCallback?.(idleId);
       if (timeoutId !== null) window.clearTimeout(timeoutId);
     };
-  }, [queryPath]);
+  }, [cmsEnabled, queryPath]);
 
   const seo = data?.seo;
 

@@ -379,6 +379,7 @@ export default function Home() {
   return (
     <div className="home-editorial">
       <CmsPageSEO
+        cmsEnabled={false}
         title="香港24小時通渠服務｜塞廁所・企缸・鋅盤・污水倒灌｜通渠熊"
         description="通渠熊提供香港24小時通渠查詢，處理塞廁所、企缸及浴室去水、廚房鋅盤淤塞、污水倒灌、大廈主渠與沙井問題。先了解現場及確認收費，再安排合適設備處理。"
         path="/"
