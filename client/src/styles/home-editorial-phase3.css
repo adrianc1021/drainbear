@@ -678,8 +678,9 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center;
+  background: #f5f6f3;
+  object-fit: contain;
+  object-position: right center;
 }
 
 .home-conversion-hero__wash {
@@ -855,7 +856,7 @@
   }
 
   .home-conversion-hero__image {
-    object-position: 63% center;
+    object-position: right center;
   }
 
   .home-conversion-hero__layout {
@@ -876,7 +877,7 @@
   .home-conversion-hero__image {
     top: auto;
     height: 48%;
-    object-position: 68% bottom;
+    object-position: right bottom;
   }
 
   .home-conversion-hero__wash {

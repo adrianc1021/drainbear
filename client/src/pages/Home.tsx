@@ -27,8 +27,7 @@ import {
 } from "@/lib/analytics";
 import { useLatestBlogPosts } from "@/lib/useBlog";
 
-const HERO_IMAGE =
-  "https://res.cloudinary.com/pgjztf2p/image/upload/f_auto,q_auto:good,c_fill,w_1920,h_1080/v1785149473/why_sv7tw9.png";
+const HERO_IMAGE = "/images/home-drain-technician.jpg";
 
 const CAPABILITY_IMAGE =
   "https://res.cloudinary.com/pgjztf2p/image/upload/f_auto,q_auto:good,c_fill,w_960,h_1152/v1785164195/A4_hiufrh.png";

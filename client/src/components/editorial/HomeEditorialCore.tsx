@@ -94,8 +94,8 @@ export function EditorialHero({ imageSrc }: { imageSrc?: string }) {
           className="home-conversion-hero__image"
           src={imageSrc}
           alt="通渠熊師傅使用通渠機處理淤塞"
-          width="1920"
-          height="1080"
+          width="960"
+          height="1280"
           fetchPriority="high"
           decoding="async"
           sizes="100vw"
