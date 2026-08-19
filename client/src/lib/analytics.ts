@@ -94,10 +94,34 @@ const IS_DEV = Boolean(import.meta.env.DEV);
 const DEV_DEBUG_ENABLED = import.meta.env.VITE_GA4_DEBUG === "true";
 
 const PRODUCTION_HOSTS = new Set(["drainbearhk.com", "www.drainbearhk.com"]);
+const GOOGLE_ADS_DESTINATION_ID = "AW-18128738982";
 
 function isProductionTrackingHost() {
   if (typeof window === "undefined") return false;
   return PRODUCTION_HOSTS.has(window.location.hostname);
+}
+
+/**
+ * 將事件只送往 Google Ads，避免同一事件同時再送一次到 GA4。
+ * Ads 只在正式網域啟用，且不依賴 GA4 是否正確配置。
+ */
+function sendGoogleAdsEvent(
+  eventName: string,
+  destination = GOOGLE_ADS_DESTINATION_ID,
+  params: Record<string, string | number> = {}
+) {
+  if (
+    typeof window === "undefined" ||
+    !window.gtag ||
+    !isProductionTrackingHost()
+  ) {
+    return;
+  }
+
+  window.gtag("event", eventName, {
+    ...params,
+    send_to: destination,
+  });
 }
 
 /**
@@ -392,16 +416,12 @@ export function trackWhatsAppHandoff(
     import.meta.env.VITE_GOOGLE_ADS_WHATSAPP_LABEL as string | undefined
   )?.trim();
 
-  if (
-    window.gtag &&
-    adsLabel &&
-    /^[A-Za-z0-9_-]{4,64}$/.test(adsLabel) &&
-    isGa4Active()
-  ) {
-    window.gtag("event", "conversion", {
-      send_to: `AW-18128738982/${adsLabel}`,
-      transport_type: "beacon",
-    });
+  if (adsLabel && /^[A-Za-z0-9_-]{4,64}$/.test(adsLabel)) {
+    sendGoogleAdsEvent(
+      "conversion",
+      `${GOOGLE_ADS_DESTINATION_ID}/${adsLabel}`,
+      { transport_type: "beacon" }
+    );
   }
 }
 
@@ -442,6 +462,7 @@ export function trackContactFormError(formName: string, errorType: string) {
 /** 估價計算機開始互動(去重由呼叫端保證:每次頁面瀏覽只呼叫一次) */
 export function trackQuoteCalculatorStart() {
   sendEvent("quote_calculator_start", { cta_location: "price_calculator" });
+  sendGoogleAdsEvent("quote_calculator_start");
 }
 
 /** 估價計算機完成估價(去重由呼叫端保證:同一次頁面瀏覽同一組合只呼叫一次;topic 為選項摘要,不含個人資料) */

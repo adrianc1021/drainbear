@@ -51,9 +51,16 @@
 
 ## Google Ads
 
+`quote_calculator_start` 會在正式網域直接送往 Google Ads Destination
+`AW-18128738982`，並另外送往 GA4；兩個目的地明確分開，避免 GA4 重複事件。
+
 建立 Website Conversion Action 後，將 Conversion Label 設定到：
 
 `VITE_GOOGLE_ADS_WHATSAPP_LABEL`
+
+這是 Vite build-time 環境變數。必須在 Render 的正式服務加入實際 Label
+（只填 `AW-.../` 後面的部分），然後重新部署；只更新 Runtime 環境而不重建前端，
+已發布的 JavaScript 不會取得新值。
 
 建議初期設為 Secondary；有真實 qualified lead 後再改用 Offline Conversion 作 Primary。
 

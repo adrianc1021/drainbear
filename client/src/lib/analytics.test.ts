@@ -5,7 +5,7 @@
  * 註:vitest 下 import.meta.env.DEV = true 且未設 GA4 ID,
  * 因此事件走 dataLayer 佇列路徑 — 正好驗證「GA4 未設定時不報錯」的行為。
  */
-import { beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   __resetAnalyticsStateForTests,
   initAnalytics,
@@ -17,6 +17,7 @@ import {
   trackContactFormSubmit,
   trackQuoteCalculatorComplete,
   trackQuoteCalculatorStart,
+  trackWhatsAppHandoff,
   trackWhatsAppOpen,
 } from "./analytics";
 
@@ -44,6 +45,10 @@ beforeEach(() => {
   };
   g.document = { title: "通渠服務｜通渠熊" };
   __resetAnalyticsStateForTests();
+});
+
+afterEach(() => {
+  vi.unstubAllEnvs();
 });
 
 // ---------------------------------------------------------------------------
@@ -205,6 +210,69 @@ describe("純事件 Helper(不持有跨頁面去重狀態)", () => {
     const submits = eventsNamed("contact_form_submit");
     expect(submits).toHaveLength(1);
     expect(submits[0].form_name).toBe("inquiry_form");
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Google Ads 事件路由
+// ---------------------------------------------------------------------------
+
+describe("Google Ads 事件路由", () => {
+  function useProductionHost() {
+    const gtag = vi.fn();
+    const currentWindow = (globalThis as Record<string, any>).window;
+    currentWindow.location.hostname = "drainbearhk.com";
+    currentWindow.gtag = gtag;
+    return gtag;
+  }
+
+  it("quote_calculator_start 只明確送往 Ads destination", () => {
+    const gtag = useProductionHost();
+
+    trackQuoteCalculatorStart();
+
+    expect(gtag).toHaveBeenCalledTimes(1);
+    expect(gtag).toHaveBeenCalledWith("event", "quote_calculator_start", {
+      send_to: "AW-18128738982",
+    });
+  });
+
+  it("非正式網域不會外送 Google Ads 事件", () => {
+    const gtag = vi.fn();
+    const currentWindow = (globalThis as Record<string, any>).window;
+    currentWindow.location.hostname = "localhost";
+    currentWindow.gtag = gtag;
+
+    trackQuoteCalculatorStart();
+
+    expect(gtag).not.toHaveBeenCalled();
+  });
+
+  it("有效 WhatsApp label 會送出一次 Ads conversion", () => {
+    vi.stubEnv("VITE_GOOGLE_ADS_WHATSAPP_LABEL", "test_Label-123");
+    const gtag = useProductionHost();
+
+    trackWhatsAppHandoff("mobile_bar", {
+      traffic_source: "google",
+      traffic_medium: "cpc",
+      landing_page: "/",
+      click_id_type: "gclid",
+    });
+
+    expect(gtag).toHaveBeenCalledTimes(1);
+    expect(gtag).toHaveBeenCalledWith("event", "conversion", {
+      send_to: "AW-18128738982/test_Label-123",
+      transport_type: "beacon",
+    });
+  });
+
+  it("缺少 WhatsApp label 時不會誤送 conversion", () => {
+    vi.stubEnv("VITE_GOOGLE_ADS_WHATSAPP_LABEL", "");
+    const gtag = useProductionHost();
+
+    trackWhatsAppHandoff("mobile_bar", { landing_page: "/" });
+
+    expect(gtag).not.toHaveBeenCalled();
   });
 });
 

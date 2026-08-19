@@ -10,6 +10,8 @@ const required = [
   [analytics, "G-7JEL7SLBGQ"],
   [analytics, "whatsapp_handoff"],
   [analytics, "VITE_GOOGLE_ADS_WHATSAPP_LABEL"],
+  [analytics, 'sendGoogleAdsEvent("quote_calculator_start")'],
+  [analytics, 'const GOOGLE_ADS_DESTINATION_ID = "AW-18128738982"'],
   [analytics, "send_page_view: false"],
   [tracking, "consumeWhatsAppHandoff"],
   [tracking, "sessionStorage"],
@@ -53,3 +55,4 @@ console.log("PASS：WhatsApp handoff 一次性 token 已加入");
 console.log("PASS：UTM／click ID type attribution 已加入");
 console.log("PASS：PII 防護仍然存在");
 console.log("PASS：Google Ads Conversion Label 採可選配置");
+console.log("PASS：quote_calculator_start 明確送往 Google Ads Destination");
