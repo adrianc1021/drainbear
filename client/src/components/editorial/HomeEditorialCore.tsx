@@ -86,101 +86,90 @@ export function EditorialHero({ imageSrc }: { imageSrc?: string }) {
   return (
     <section
       aria-labelledby="home-editorial-heading"
-      className="relative bg-[var(--db-paper)]"
+      className="home-conversion-hero"
       data-pr20-section="hero"
     >
-      <div className="home-hero-grid db-container grid min-h-[calc(100svh-4rem)] gap-8 py-10 md:min-h-[720px] md:grid-cols-[1.02fr_0.98fr] md:items-stretch md:py-14 lg:min-h-[760px]">
-        <div className="flex flex-col justify-between py-4 md:py-8">
-          <div>
-            <EditorialKicker>Hong Kong / Drain service / 24H</EditorialKicker>
+      {imageSrc ? (
+        <img
+          className="home-conversion-hero__image"
+          src={imageSrc}
+          alt="通渠熊師傅使用通渠機處理淤塞"
+          width="1920"
+          height="1080"
+          fetchPriority="high"
+          decoding="async"
+          sizes="100vw"
+        />
+      ) : null}
 
-            <h1 id="home-editorial-heading" className="db-display mt-8">
-              <span className="block">香港 24 小時</span>
-              <span className="block">通渠服務，</span>
-              <span className="block text-[var(--db-safety)]">專業評估。</span>
-            </h1>
+      <div className="home-conversion-hero__wash" aria-hidden="true" />
 
-            <p className="db-lead mt-8 max-w-xl">
-              處理塞廁所、企缸及浴室去水、廚房鋅盤淤塞與污水倒灌。
-              先了解現場情況及確認收費，再按需要安排合適設備。
-            </p>
+      <div className="db-container home-conversion-hero__layout">
+        <div className="home-conversion-hero__content">
+          <EditorialKicker>港九新界・住宅及商業渠務</EditorialKicker>
 
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
-              <a
-                href={whatsappDefaultHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => {
-                  trackCTA("whatsapp", "home_hero");
-                  goThanksAfterWhatsApp("home_hero");
-                }}
-                className="db-primary-action"
-              >
-                <MessageCircle
-                  className="h-5 w-5"
-                  strokeWidth={2.2}
-                  aria-hidden="true"
-                />
-                WhatsApp 查詢報價
-              </a>
+          <h1 id="home-editorial-heading" className="db-display">
+            <span className="block">香港 24 小時</span>
+            <span className="block">緊急通渠服務</span>
+          </h1>
 
-              <a
-                href={phoneHref}
-                onClick={() => trackCTA("phone", "home_hero")}
-                className="db-secondary-action"
-              >
-                <Phone
-                  className="h-4 w-4"
-                  strokeWidth={2.2}
-                  aria-hidden="true"
-                />
-                {phoneDisplay}
-              </a>
-            </div>
+          <p className="home-conversion-hero__promise">
+            先了解情況及報價，確認後才動工
+          </p>
+
+          <p className="db-lead home-conversion-hero__lead">
+            處理塞廁所、企缸去水、廚房鋅盤淤塞及污水倒灌。
+            可先透過 WhatsApp 提供位置、相片或影片，讓團隊作初步評估。
+          </p>
+
+          <div className="home-conversion-hero__actions">
+            <a
+              href={whatsappDefaultHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => {
+                trackCTA("whatsapp", "home_hero");
+                goThanksAfterWhatsApp("home_hero");
+              }}
+              className="db-primary-action"
+            >
+              <MessageCircle
+                className="h-5 w-5"
+                strokeWidth={2.2}
+                aria-hidden="true"
+              />
+              WhatsApp 查詢報價
+            </a>
+
+            <a
+              href={phoneHref}
+              onClick={() => trackCTA("phone", "home_hero")}
+              className="db-secondary-action"
+            >
+              <Phone
+                className="h-4 w-4"
+                strokeWidth={2.2}
+                aria-hidden="true"
+              />
+              {phoneDisplay}
+            </a>
           </div>
 
-          <div className="mt-12 grid grid-cols-2 border-y border-[var(--db-rule)] text-xs font-black tracking-[0.08em] sm:grid-cols-4">
-            {["住宅通渠", "商業工程", "高壓洗渠", "CCTV 檢測"].map(
-              (label, index) => (
-                <span
-                  key={label}
-                  className="flex min-h-14 items-center gap-2 border-[var(--db-rule)] py-3 pr-2 even:border-l sm:border-l sm:first:border-l-0 sm:px-3"
-                >
-                  <EditorialIndex>
-                    {String(index + 1).padStart(2, "0")}
-                  </EditorialIndex>
-                  {label}
-                </span>
+          <ul className="home-conversion-hero__proofs" aria-label="服務承諾">
+            {["確認收費後才動工", "接納工程免檢查費", "按情況安排合適設備"].map(
+              item => (
+                <li key={item}>
+                  <Check aria-hidden="true" />
+                  {item}
+                </li>
               )
             )}
-          </div>
+          </ul>
         </div>
 
-        <div className="db-media min-h-[420px] md:min-h-0">
-          {imageSrc ? (
-            <img
-              src={imageSrc}
-              alt="通渠熊團隊進行專業渠務工程"
-              width="1024"
-              height="1280"
-              fetchPriority="high"
-              decoding="async"
-              sizes="(min-width: 768px) 50vw, 100vw"
-            />
-          ) : (
-            <div className="db-operational-grid flex h-full min-h-[420px] items-center justify-center bg-[var(--db-paper-deep)] p-12">
-              <img
-                src="/favicon-512x512.png"
-                alt=""
-                aria-hidden="true"
-                width="176"
-                height="176"
-                className="h-44 w-44 object-contain opacity-15"
-              />
-            </div>
-          )}
-
-          <span className="db-image-label">Field operation / DB–01</span>
+        <div className="home-conversion-hero__field-note" aria-hidden="true">
+          <span>DrainBear</span>
+          現場通渠處理
         </div>
       </div>
     </section>

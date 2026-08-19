@@ -28,10 +28,10 @@ import {
 import { useBlogPosts } from "@/lib/useBlog";
 
 const HERO_IMAGE =
-  "https://res.cloudinary.com/pgjztf2p/image/upload/f_auto,q_auto:good,c_limit,w_960/v1785149281/copy_of_a_portrait_of_a_young_handsome_asian_male_plumbin-1785149206310_mmq04g.png";
+  "https://res.cloudinary.com/pgjztf2p/image/upload/f_auto,q_auto:good,c_fill,w_1920,h_1080/v1785149473/why_sv7tw9.png";
 
 const CAPABILITY_IMAGE =
-  "https://res.cloudinary.com/pgjztf2p/image/upload/f_auto,q_auto:good,c_limit,w_960/v1785149473/why_sv7tw9.png";
+  "https://res.cloudinary.com/pgjztf2p/image/upload/f_auto,q_auto:good,c_fill,w_960,h_1152/v1785164195/A4_hiufrh.png";
 
 const CASE_STUDIES = [
   {
@@ -375,6 +375,40 @@ function EditorialFinalCTA() {
   );
 }
 
+function EditorialPhotoQuoteCTA() {
+  const { whatsappDefaultHref } = useContactSettings();
+
+  return (
+    <section
+      className="home-photo-quote"
+      aria-labelledby="home-photo-quote-heading"
+      data-pr20-section="photo-quote"
+    >
+      <div className="db-container home-photo-quote__inner">
+        <div>
+          <p className="home-photo-quote__eyebrow">WhatsApp 相片初步評估</p>
+          <h2 id="home-photo-quote-heading">
+            未確定淤塞原因？先傳送現場相片或短片。
+          </h2>
+        </div>
+
+        <a
+          href={whatsappDefaultHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => {
+            trackCTA("whatsapp", "home_photo_quote");
+            goThanksAfterWhatsApp("home_photo_quote");
+          }}
+        >
+          <MessageCircle aria-hidden="true" />
+          傳送相片查詢
+        </a>
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
   return (
     <div className="home-editorial">
@@ -389,6 +423,7 @@ export default function Home() {
 
       <EditorialHero imageSrc={HERO_IMAGE} />
       <ServiceQuickSelect />
+      <EditorialPhotoQuoteCTA />
       <EditorialPromise />
       <EditorialCapability imageSrc={CAPABILITY_IMAGE} />
       <EditorialServices />
