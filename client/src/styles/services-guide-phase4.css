@@ -526,6 +526,66 @@
   background: linear-gradient(135deg, #fff 0%, #fbfaf6 100%);
 }
 
+.phase4-guide #calculator .calculator-intro {
+  max-width: 46rem;
+}
+
+.phase4-guide #calculator .calculator-option {
+  position: relative;
+  overflow: hidden;
+  border-color: rgba(9, 18, 38, 0.14);
+  background: rgba(255, 255, 255, 0.78);
+  transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+.phase4-guide #calculator .calculator-option:hover {
+  transform: translateY(-1px);
+  border-color: rgba(9, 18, 38, 0.35);
+  box-shadow: 0 6px 16px rgba(9, 18, 38, 0.07);
+}
+
+.phase4-guide #calculator .calculator-option[aria-pressed="true"] {
+  border-color: #25d366;
+  background: rgba(37, 211, 102, 0.09);
+  box-shadow: 0 6px 18px rgba(37, 211, 102, 0.13);
+}
+
+.phase4-guide #calculator .calculator-option-icon {
+  border-radius: 0.2rem;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+.phase4-guide #calculator .calculator-option-check {
+  animation: calculator-check-in 180ms ease both;
+}
+
+.phase4-guide #calculator .calculator-step-value {
+  min-width: 0;
+}
+
+.phase4-guide #calculator .calculator-price {
+  font-size: clamp(2.25rem, 4vw, 3.35rem);
+  line-height: 1;
+}
+
+.phase4-guide #calculator .calculator-price-currency {
+  margin-right: 0.25rem;
+  font-size: 0.46em;
+  letter-spacing: 0;
+  vertical-align: 0.2em;
+}
+
+.phase4-guide #calculator .calculator-price-divider {
+  margin-inline: 0.2rem;
+  color: rgba(255, 255, 255, 0.32);
+  font-weight: 400;
+}
+
+@keyframes calculator-check-in {
+  from { opacity: 0; transform: scale(0.7); }
+  to { opacity: 1; transform: scale(1); }
+}
+
 .phase4-guide #calculator .calculator-result {
   min-height: 25rem;
   background-color: #091226;
@@ -676,6 +736,24 @@
 
   .phase4-guide #calculator [data-calculator-step] > span:last-child {
     max-width: 8rem;
+  }
+
+  .phase4-guide #calculator .calculator-intro h2 {
+    font-size: 1.5rem;
+  }
+
+  .phase4-guide #calculator .calculator-option {
+    min-height: 3.25rem;
+    padding-inline: 0.75rem;
+  }
+
+  .phase4-guide #calculator .calculator-option-icon {
+    height: 1.75rem;
+    width: 1.75rem;
+  }
+
+  .phase4-guide #calculator .calculator-step-value {
+    max-width: 7rem;
   }
 
   .phase4-services > section:not(.site-page-hero),

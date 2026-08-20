@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import {
   Bath,
   Building2,
+  Check,
   CookingPot,
   Droplets,
   Home,
@@ -166,15 +167,19 @@ export default function PriceCalculator() {
   }, [result, waMsg, setEstimate]);
 
   const StepTitle = ({ n, text }: { n: number; text: string }) => (
-    <div className="mb-3 flex items-center justify-between gap-3" data-calculator-step={n}>
+    <div className="calculator-step-title mb-3 flex items-center justify-between gap-3" data-calculator-step={n}>
       <div className="flex min-w-0 items-center gap-2.5">
-      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-navy font-display text-xs font-black text-wagreen">
-        {n}
-      </span>
-      <h3 className="font-display text-base font-bold text-navy">{text}</h3>
+        <span className="calculator-step-number flex h-7 w-7 items-center justify-center rounded-full bg-navy font-display text-xs font-black text-wagreen">
+          {n}
+        </span>
+        <h3 className="font-display text-base font-bold text-navy">{text}</h3>
       </div>
-      <span className="truncate text-xs font-semibold text-muted-foreground">
-        {n === 1 ? selectedLocation?.label : n === 2 ? selectedBuilding?.label : selectedTime?.label.split("（")[0]}
+      <span className={`calculator-step-value truncate text-xs font-semibold ${
+        (n === 1 ? selectedLocation : n === 2 ? selectedBuilding : selectedTime)
+          ? "text-navy"
+          : "text-muted-foreground/60"
+      }`}>
+        {n === 1 ? selectedLocation?.label || "尚未選擇" : n === 2 ? selectedBuilding?.label || "尚未選擇" : selectedTime?.label.split("（")[0] || "尚未選擇"}
       </span>
     </div>
   );
@@ -192,14 +197,17 @@ export default function PriceCalculator() {
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`btn-smooth flex min-h-[48px] min-w-0 items-center gap-2.5 rounded-lg border px-4 py-3 text-left text-sm font-semibold ${
+      className={`calculator-option btn-smooth flex min-h-[56px] min-w-0 items-center gap-2.5 rounded-lg border px-4 py-3 text-left text-sm font-semibold ${
         active
           ? "border-wagreen bg-wagreen/10 text-wagreen-dark shadow-[0_2px_12px_rgba(37,211,102,0.18)]"
           : "border-border bg-white text-navy/75 hover:border-navy/30 hover:text-navy"
       }`}
     >
-      <o.icon className={`h-4.5 w-4.5 h-[18px] w-[18px] shrink-0 ${active ? "text-wagreen-dark" : "text-navy/40"}`} strokeWidth={2.2} />
-      {o.label}
+      <span className={`calculator-option-icon flex h-8 w-8 shrink-0 items-center justify-center ${active ? "bg-wagreen text-white" : "bg-mist text-navy/45"}`}>
+        <o.icon className="h-[17px] w-[17px]" strokeWidth={2.2} />
+      </span>
+      <span className="min-w-0 flex-1 leading-snug">{o.label}</span>
+      {active && <Check className="calculator-option-check h-4 w-4 shrink-0 text-wagreen-dark" strokeWidth={2.8} aria-hidden="true" />}
     </button>
   );
 
@@ -208,6 +216,16 @@ export default function PriceCalculator() {
       <div className="grid lg:grid-cols-[minmax(0,1fr)_360px]">
         {/* 左：三步選擇 */}
         <div className="calculator-inputs p-6 md:p-10">
+          <div className="calculator-intro mb-7">
+            <div className="flex items-end justify-between gap-4">
+              <div>
+                <p className="text-xs font-bold tracking-[0.16em] text-safety">QUICK ESTIMATE</p>
+                <h2 className="mt-2 font-display text-2xl font-black text-navy md:text-3xl">先了解大概預算</h2>
+              </div>
+              <span className="shrink-0 border border-navy/15 px-2.5 py-1.5 text-[11px] font-bold text-navy/60">約 10 秒</span>
+            </div>
+            <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">按實際情況選擇三項資料，即時取得通渠初步價格範圍。</p>
+          </div>
           <div className="calculator-progress mb-7 border-b border-border pb-5">
             <div className="flex items-center justify-between gap-4">
             <div>
@@ -288,12 +306,12 @@ export default function PriceCalculator() {
           aria-live="polite"
           aria-atomic="true"
         >
-          <div className="text-xs font-bold tracking-[0.2em] text-wagreen">ESTIMATED PRICE</div>
+          <div className="calculator-result-kicker text-xs font-bold tracking-[0.2em] text-wagreen">你的初步估價</div>
           {result ? (
             <>
-              <div className="mt-3 font-display text-3xl font-black tracking-tight md:text-4xl">
-                HK${result.low.toLocaleString()}
-                <span className="mx-1 text-white/40">–</span>
+              <div className="calculator-price mt-3 font-display font-black tracking-tight">
+                <span className="calculator-price-currency">HK$</span>{result.low.toLocaleString()}
+                <span className="calculator-price-divider">–</span>
                 {result.high.toLocaleString()}
               </div>
               <div className="mt-4 flex flex-wrap gap-2 text-[11px] font-semibold text-white/65">
@@ -329,7 +347,7 @@ export default function PriceCalculator() {
             </>
           ) : (
             <>
-              <div className="mt-3 font-display text-3xl font-black tracking-tight text-white/25 md:text-4xl">
+              <div className="calculator-price calculator-price--empty mt-3 font-display font-black tracking-tight text-white/25">
                 HK$ ——
               </div>
               <p className="mt-3 text-sm leading-relaxed text-white/60">
