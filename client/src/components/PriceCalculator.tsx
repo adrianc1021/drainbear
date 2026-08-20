@@ -69,9 +69,18 @@ function roundTo50(n: number) {
 
 export default function PriceCalculator() {
   const {whatsappHref} = useContactSettings();
-  const [loc, setLoc] = useState<string | null>(null);
-  const [bld, setBld] = useState<string | null>(null);
-  const [time, setTime] = useState<string>("day");
+  const [loc, setLoc] = useState<string | null>(() => {
+    const value = new URLSearchParams(window.location.search).get("location");
+    return LOCATIONS.some(option => option.id === value) ? value : null;
+  });
+  const [bld, setBld] = useState<string | null>(() => {
+    const value = new URLSearchParams(window.location.search).get("building");
+    return BUILDINGS.some(option => option.id === value) ? value : null;
+  });
+  const [time, setTime] = useState<string>(() => {
+    const value = new URLSearchParams(window.location.search).get("time");
+    return TIMES.some(option => option.id === value) ? value! : "day";
+  });
   const { setEstimate } = useEstimate();
   const recordEstimate = trpc.estimate.record.useMutation();
 
@@ -84,6 +93,14 @@ export default function PriceCalculator() {
     const high = roundTo50(l.base[1] * b.factor * t.factor);
     return { low, high, l, b, t };
   }, [loc, bld, time]);
+
+  const completedSteps = Number(Boolean(loc)) + Number(Boolean(bld)) + 1;
+  const resetCalculator = () => {
+    setLoc(null);
+    setBld(null);
+    setTime("day");
+    window.history.replaceState(null, "", `${window.location.pathname}#calculator`);
+  };
 
   const waMsg = result
     ? `你好，我想查詢通渠報價：${result.l.label}淤塞，樓宇類型係${result.b.label}，${result.t.label}上門。網上估價約 HK$${result.low}–${result.high}，請確認實際報價。`
@@ -146,7 +163,7 @@ export default function PriceCalculator() {
   }, [result, waMsg, setEstimate]);
 
   const StepTitle = ({ n, text }: { n: number; text: string }) => (
-    <div className="mb-3 flex items-center gap-2.5">
+    <div className="mb-3 flex items-center gap-2.5" data-calculator-step={n}>
       <span className="flex h-7 w-7 items-center justify-center rounded-full bg-navy font-display text-xs font-black text-wagreen">
         {n}
       </span>
@@ -167,7 +184,7 @@ export default function PriceCalculator() {
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`btn-smooth flex min-h-[48px] items-center gap-2.5 rounded-lg border px-4 py-3 text-left text-sm font-semibold ${
+      className={`btn-smooth flex min-h-[48px] min-w-0 items-center gap-2.5 rounded-lg border px-4 py-3 text-left text-sm font-semibold ${
         active
           ? "border-wagreen bg-wagreen/10 text-wagreen-dark shadow-[0_2px_12px_rgba(37,211,102,0.18)]"
           : "border-border bg-white text-navy/75 hover:border-navy/30 hover:text-navy"
@@ -183,6 +200,25 @@ export default function PriceCalculator() {
       <div className="grid lg:grid-cols-[1fr_340px]">
         {/* 左：三步選擇 */}
         <div className="p-6 md:p-8">
+          <div className="mb-7 flex items-center justify-between gap-4 border-b border-border pb-4">
+            <div>
+              <p className="text-xs font-bold tracking-[0.16em] text-safety">
+                即時估價流程
+              </p>
+              <p className="mt-1 text-sm font-semibold text-navy">
+                已完成 {completedSteps} / 3 步
+              </p>
+            </div>
+            {(loc || bld || time !== "day") && (
+              <button
+                type="button"
+                onClick={resetCalculator}
+                className="min-h-11 px-2 text-xs font-bold text-muted-foreground underline underline-offset-4 hover:text-navy"
+              >
+                重新選擇
+              </button>
+            )}
+          </div>
           <StepTitle n={1} text="邊度塞咗？" />
           <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
             {LOCATIONS.map((o) => (
@@ -234,7 +270,11 @@ export default function PriceCalculator() {
         </div>
 
         {/* 右：估價結果 */}
-        <div className="dot-grid flex flex-col justify-center bg-navy p-6 text-white md:p-8">
+        <div
+          className="dot-grid flex flex-col justify-center bg-navy p-6 text-white md:p-8"
+          aria-live="polite"
+          aria-atomic="true"
+        >
           <div className="text-xs font-bold tracking-[0.2em] text-wagreen">ESTIMATED PRICE</div>
           {result ? (
             <>
@@ -242,6 +282,11 @@ export default function PriceCalculator() {
                 HK${result.low.toLocaleString()}
                 <span className="mx-1 text-white/40">–</span>
                 {result.high.toLocaleString()}
+              </div>
+              <div className="mt-4 flex flex-wrap gap-2 text-[11px] font-semibold text-white/65">
+                <span className="border border-white/15 px-2.5 py-1">{result.l.label}</span>
+                <span className="border border-white/15 px-2.5 py-1">{result.b.label}</span>
+                <span className="border border-white/15 px-2.5 py-1">{result.t.label.split("（")[0]}</span>
               </div>
               <p className="mt-3 text-sm leading-relaxed text-white/60">
                 {result.l.label}・{result.b.label}・{result.t.id === "night" ? "深夜時段" : "日間時段"}

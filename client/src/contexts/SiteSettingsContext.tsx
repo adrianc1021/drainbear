@@ -84,7 +84,8 @@ export function SiteSettingsProvider({
     };
 
     const idleId = window.requestIdleCallback?.(load, { timeout: 1500 });
-    const timeoutId = idleId === undefined ? window.setTimeout(load, 1) : null;
+    const timeoutId =
+      idleId === undefined ? window.setTimeout(load, 1500) : null;
 
     return () => {
       active = false;

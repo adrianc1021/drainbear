@@ -9,17 +9,29 @@ import { EstimateProvider } from "./contexts/EstimateContext";
 import { SiteSettingsProvider } from "./contexts/SiteSettingsContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { initAnalytics, trackPageView } from "./lib/analytics";
+import {
+  loadAreas,
+  loadBlog,
+  loadBlogPost,
+  loadDistrict,
+  loadFAQ,
+  loadGuide,
+  loadNotFound,
+  loadServiceDetail,
+  loadServices,
+  loadThanks,
+} from "./lib/routePrefetch";
 
-const Services = lazy(() => import("./pages/Services"));
-const ServiceDetail = lazy(() => import("./pages/ServiceDetail"));
-const Areas = lazy(() => import("./pages/Areas"));
-const District = lazy(() => import("./pages/District"));
-const FAQ = lazy(() => import("./pages/FAQ"));
-const Blog = lazy(() => import("./pages/Blog"));
-const BlogPost = lazy(() => import("./pages/BlogPost"));
-const Guide = lazy(() => import("./pages/GuideRoute"));
-const Thanks = lazy(() => import("./pages/Thanks"));
-const NotFound = lazy(() => import("./pages/NotFound"));
+const Services = lazy(loadServices);
+const ServiceDetail = lazy(loadServiceDetail);
+const Areas = lazy(loadAreas);
+const District = lazy(loadDistrict);
+const FAQ = lazy(loadFAQ);
+const Blog = lazy(loadBlog);
+const BlogPost = lazy(loadBlogPost);
+const Guide = lazy(loadGuide);
+const Thanks = lazy(loadThanks);
+const NotFound = lazy(loadNotFound);
 
 initAnalytics();
 

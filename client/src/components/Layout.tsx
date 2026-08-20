@@ -32,6 +32,7 @@ import {
 import { useEstimate } from "@/contexts/EstimateContext";
 import { useReveal } from "@/hooks/useReveal";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
+import { prefetchRoute } from "@/lib/routePrefetch";
 
 const LOGO =
   "https://res.cloudinary.com/pgjztf2p/image/upload/f_auto,q_auto:eco,c_fill,w_96,h_96/v1785147037/LOGO_dmyalo.png";
@@ -327,6 +328,9 @@ function Header({
             <Link
               key={item.href}
               href={item.href}
+              onMouseEnter={() => prefetchRoute(item.href)}
+              onFocus={() => prefetchRoute(item.href)}
+              onTouchStart={() => prefetchRoute(item.href)}
               onClick={() =>
                 trackNavClick("navigation", {
                   cta_location: "header",

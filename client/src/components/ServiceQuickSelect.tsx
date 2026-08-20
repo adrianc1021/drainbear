@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 import { trackNavClick } from "@/lib/analytics";
+import { prefetchRoute } from "@/lib/routePrefetch";
 import {
   EditorialIndex,
   EditorialKicker,
@@ -106,6 +107,9 @@ export default function ServiceQuickSelect() {
 
           <Link
             href="/guide#calculator"
+            onMouseEnter={() => prefetchRoute("/guide#calculator")}
+            onFocus={() => prefetchRoute("/guide#calculator")}
+            onTouchStart={() => prefetchRoute("/guide#calculator")}
             onClick={() =>
               trackNavClick("pricing", {
                 cta_location: "home_quick_select",

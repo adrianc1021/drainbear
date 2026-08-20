@@ -22,7 +22,15 @@ import {
   trackNavClick,
 } from "@/lib/analytics";
 import { getServicePage } from "@/lib/serviceData";
+import { prefetchRoute } from "@/lib/routePrefetch";
 import NotFound from "@/pages/NotFound";
+
+const CALCULATOR_LOCATION_BY_SLUG: Record<string, string> = {
+  "toilet-unblocking": "toilet",
+  "bathroom-drain-unblocking": "shower",
+  "kitchen-sink-unblocking": "sink",
+  "sewage-backflow": "mainpipe",
+};
 
 export default function ServiceDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -33,6 +41,9 @@ export default function ServiceDetail() {
   if (!service) return <NotFound />;
 
   const path = `/services/${service.slug}`;
+  const calculatorHref = `/guide?location=${encodeURIComponent(
+    CALCULATOR_LOCATION_BY_SLUG[service.slug] || ""
+  )}#calculator`;
   const whatsappUrl = whatsappHref(service.whatsappMessage);
   const crumbs = [
     { name: "首頁", path: "/" },
@@ -262,12 +273,15 @@ export default function ServiceDetail() {
                 ))}
               </ul>
               <Link
-                href="/guide#calculator"
+                href={calculatorHref}
+                onMouseEnter={() => prefetchRoute(calculatorHref)}
+                onFocus={() => prefetchRoute(calculatorHref)}
+                onTouchStart={() => prefetchRoute(calculatorHref)}
                 onClick={() =>
                   trackNavClick("pricing", {
                     cta_location: "service_detail_price_factors",
                     cta_label: "使用估價計算機",
-                    destination_url: "/guide#calculator",
+                    destination_url: calculatorHref,
                     service_name: service.slug,
                   })
                 }
