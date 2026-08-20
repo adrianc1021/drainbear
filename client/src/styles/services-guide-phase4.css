@@ -320,6 +320,10 @@
   gap: clamp(2.5rem, 6vw, 6rem);
 }
 
+.phase4-service-detail__hero > .container > div {
+  min-width: 0;
+}
+
 .phase4-service-detail__hero h1 {
   max-width: 12em;
   font-size: clamp(2.75rem, 5vw, 5rem);
@@ -681,6 +685,8 @@
   .phase4-service-detail__hero h1 {
     font-size: clamp(2.65rem, 11vw, 3.75rem);
     line-height: 1.14;
+    overflow-wrap: anywhere;
+    word-break: normal;
   }
 
   .phase4-service-detail__hero > .container > div:first-child > div {
