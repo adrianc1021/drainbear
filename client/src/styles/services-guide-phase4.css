@@ -521,6 +521,26 @@
   border-radius: 0.25rem;
 }
 
+.phase4-guide #calculator .calculator-progress {
+  position: relative;
+}
+
+.phase4-guide #calculator [data-calculator-step] > span:last-child {
+  max-width: 11rem;
+  text-align: right;
+}
+
+.phase4-guide #calculator .calculator-result-cta {
+  width: 100%;
+  letter-spacing: 0.01em;
+}
+
+.phase4-guide #calculator .calculator-result-cta:focus-visible,
+.phase4-guide #calculator button:focus-visible {
+  outline: 3px solid rgba(37, 211, 102, 0.45);
+  outline-offset: 3px;
+}
+
 .phase4-guide > section:nth-of-type(4) > .container > div:last-child,
 .phase4-guide > section:nth-of-type(5) > .container > div:nth-child(2),
 .phase4-guide > section:nth-of-type(8) > .container > div:nth-child(2) {

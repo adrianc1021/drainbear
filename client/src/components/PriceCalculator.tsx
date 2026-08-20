@@ -95,6 +95,9 @@ export default function PriceCalculator() {
   }, [loc, bld, time]);
 
   const completedSteps = Number(Boolean(loc)) + Number(Boolean(bld)) + 1;
+  const selectedLocation = LOCATIONS.find(option => option.id === loc);
+  const selectedBuilding = BUILDINGS.find(option => option.id === bld);
+  const selectedTime = TIMES.find(option => option.id === time);
   const resetCalculator = () => {
     setLoc(null);
     setBld(null);
@@ -163,11 +166,16 @@ export default function PriceCalculator() {
   }, [result, waMsg, setEstimate]);
 
   const StepTitle = ({ n, text }: { n: number; text: string }) => (
-    <div className="mb-3 flex items-center gap-2.5" data-calculator-step={n}>
+    <div className="mb-3 flex items-center justify-between gap-3" data-calculator-step={n}>
+      <div className="flex min-w-0 items-center gap-2.5">
       <span className="flex h-7 w-7 items-center justify-center rounded-full bg-navy font-display text-xs font-black text-wagreen">
         {n}
       </span>
       <h3 className="font-display text-base font-bold text-navy">{text}</h3>
+      </div>
+      <span className="truncate text-xs font-semibold text-muted-foreground">
+        {n === 1 ? selectedLocation?.label : n === 2 ? selectedBuilding?.label : selectedTime?.label.split("（")[0]}
+      </span>
     </div>
   );
 
@@ -200,7 +208,8 @@ export default function PriceCalculator() {
       <div className="grid lg:grid-cols-[1fr_340px]">
         {/* 左：三步選擇 */}
         <div className="p-6 md:p-8">
-          <div className="mb-7 flex items-center justify-between gap-4 border-b border-border pb-4">
+          <div className="calculator-progress mb-7 border-b border-border pb-5">
+            <div className="flex items-center justify-between gap-4">
             <div>
               <p className="text-xs font-bold tracking-[0.16em] text-safety">
                 即時估價流程
@@ -218,6 +227,10 @@ export default function PriceCalculator() {
                 重新選擇
               </button>
             )}
+            </div>
+            <div className="mt-4 h-1.5 overflow-hidden bg-navy/10" aria-hidden="true">
+              <div className="h-full bg-wagreen transition-[width] duration-500" style={{ width: `${(completedSteps / 3) * 100}%` }} />
+            </div>
           </div>
           <StepTitle n={1} text="邊度塞咗？" />
           <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
@@ -301,7 +314,7 @@ export default function PriceCalculator() {
                   trackCTA("whatsapp", "price_calculator", `${result.l.label}_${result.b.label}_${result.t.id}`);
                   goThanksAfterWhatsApp("price_calculator");
                 }}
-                className="btn-smooth mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-wagreen px-6 py-3.5 text-sm font-bold text-white shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark"
+                className="calculator-result-cta btn-smooth mt-6 inline-flex min-h-14 items-center justify-center gap-2 rounded-lg bg-wagreen px-6 py-4 text-sm font-bold text-white shadow-[0_4px_18px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark"
               >
                 <MessageCircle className="h-[18px] w-[18px]" strokeWidth={2.4} />
                 WhatsApp 確認實際報價
