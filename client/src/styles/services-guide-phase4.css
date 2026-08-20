@@ -735,3 +735,94 @@
     transition: none !important;
   }
 }
+
+/* ================================================== */
+/* Service detail visual refinement                   */
+/* ================================================== */
+
+.phase4-service-detail__hero > .container {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+}
+
+.phase4-service-detail__hero h1 {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+  word-break: normal;
+}
+
+.phase4-service-detail__hero > .container > div:last-child {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--phase4-ink);
+}
+
+.phase4-service-detail__hero > .container > div:last-child img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.phase4-service-detail main > section:nth-of-type(2) article {
+  position: relative;
+}
+
+.phase4-service-detail main > section:nth-of-type(2) article:first-child::before,
+.phase4-service-detail main > section:nth-of-type(2) article:last-child::before {
+  position: absolute;
+  top: 0;
+  left: clamp(2rem, 5vw, 3.5rem);
+  width: 2.5rem;
+  height: 3px;
+  background: var(--phase4-safety);
+  content: "";
+}
+
+.phase4-service-detail main > section:nth-of-type(2) article:last-child::before {
+  background: #46c878;
+}
+
+.phase4-service-detail main > section:nth-of-type(3) ol {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.phase4-service-detail main > section:nth-of-type(3) li {
+  min-height: 12rem;
+  padding-block: 2.25rem;
+}
+
+.phase4-service-detail main > section:nth-of-type(4) article:first-child {
+  background: var(--phase4-paper-soft);
+}
+
+.phase4-service-detail main > section:nth-of-type(4) article:last-child {
+  box-shadow: 0 18px 40px rgba(9, 18, 38, 0.12);
+}
+
+@media (min-width: 1024px) {
+  .phase4-service-detail__hero h1 {
+    font-size: clamp(3rem, 4.35vw, 4.4rem);
+    line-height: 1.08;
+  }
+}
+
+@media (max-width: 767px) {
+  .phase4-service-detail__hero > .container {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .phase4-service-detail__hero h1 {
+    font-size: clamp(2.55rem, 10.5vw, 3.5rem);
+    line-height: 1.12;
+  }
+
+  .phase4-service-detail__hero > .container > div:last-child img {
+    aspect-ratio: 3 / 2;
+  }
+
+  .phase4-service-detail main > section:nth-of-type(3) li {
+    min-height: 0;
+  }
+}
