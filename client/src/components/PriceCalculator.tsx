@@ -204,10 +204,10 @@ export default function PriceCalculator() {
   );
 
   return (
-    <div className="card-float overflow-hidden rounded-lg border border-border bg-white">
-      <div className="grid lg:grid-cols-[1fr_340px]">
+    <div className="calculator-shell card-float overflow-hidden rounded-lg border border-border bg-white">
+      <div className="grid lg:grid-cols-[minmax(0,1fr)_360px]">
         {/* 左：三步選擇 */}
-        <div className="p-6 md:p-8">
+        <div className="calculator-inputs p-6 md:p-10">
           <div className="calculator-progress mb-7 border-b border-border pb-5">
             <div className="flex items-center justify-between gap-4">
             <div>
@@ -284,7 +284,7 @@ export default function PriceCalculator() {
 
         {/* 右：估價結果 */}
         <div
-          className="dot-grid flex flex-col justify-center bg-navy p-6 text-white md:p-8"
+          className="calculator-result dot-grid flex flex-col justify-center bg-navy p-6 text-white md:p-10"
           aria-live="polite"
           aria-atomic="true"
         >
