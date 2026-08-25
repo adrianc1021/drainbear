@@ -48,6 +48,7 @@ async function inspectPage(page) {
     };
 
     const clippedControls = [];
+    const textOverflows = [];
 
     for (const element of document.querySelectorAll("a, button")) {
       if (
@@ -69,6 +70,25 @@ async function inspectPage(page) {
           element.scrollHeight > element.clientHeight + 2)
       ) {
         clippedControls.push(
+          element.textContent.trim().replace(/\s+/g, " ").slice(0, 100)
+        );
+      }
+    }
+
+    for (const element of document.querySelectorAll(
+      "h1, h2, h3, h4, h5, h6, p, li, dt, dd"
+    )) {
+      if (
+        !isVisible(element) ||
+        !element.textContent?.trim() ||
+        element.className?.toString().includes("truncate") ||
+        element.className?.toString().includes("line-clamp")
+      ) {
+        continue;
+      }
+
+      if (element.scrollWidth > element.clientWidth + 2) {
+        textOverflows.push(
           element.textContent.trim().replace(/\s+/g, " ").slice(0, 100)
         );
       }
@@ -103,6 +123,7 @@ async function inspectPage(page) {
       ),
       h1OverlapsHeroMedia,
       clippedControls,
+      textOverflows,
     };
   });
 }
@@ -180,6 +201,11 @@ try {
       if (result.clippedControls.length > 0) {
         problems.push(
           `clipped controls: ${result.clippedControls.join(" | ")}`
+        );
+      }
+      if (result.textOverflows.length > 0) {
+        problems.push(
+          `text overflow: ${result.textOverflows.join(" | ")}`
         );
       }
 

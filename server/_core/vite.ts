@@ -38,6 +38,16 @@ function normalizePath(urlPath: string) {
   return urlPath.replace(/\/+$/, "");
 }
 
+function getTrailingSlashRedirect(url: string, pathname: string) {
+  const rawPathname = url.split("?")[0] || "/";
+
+  if (rawPathname === "/" || !rawPathname.endsWith("/")) {
+    return null;
+  }
+
+  return `${pathname}${url.slice(rawPathname.length)}`;
+}
+
 function isStaticPublicRoute(urlPath: string) {
   const pathname = normalizePath(urlPath);
 
@@ -136,6 +146,12 @@ export async function setupVite(app: Express, server: Server) {
       const isKnownRoute =
         isStaticPublicRoute(pathname) || isPotentialBlogRoute(pathname);
 
+      const trailingSlashRedirect = getTrailingSlashRedirect(url, pathname);
+
+      if (isKnownRoute && trailingSlashRedirect) {
+        return res.redirect(301, trailingSlashRedirect);
+      }
+
       applyRobotsHeaders(pathname, isKnownRoute, res);
 
       res
@@ -164,14 +180,22 @@ export function serveStatic(app: Express) {
   app.use(
     express.static(distPath, {
       index: false,
+      redirect: false,
     })
   );
 
   app.use("*", (req, res) => {
-    const pathname = normalizePath(req.originalUrl.split("?")[0] || "/");
+    const url = req.originalUrl;
+    const pathname = normalizePath(url.split("?")[0] || "/");
 
     const isKnownRoute =
       isStaticPublicRoute(pathname) || prerenderRoutes.has(pathname);
+
+    const trailingSlashRedirect = getTrailingSlashRedirect(url, pathname);
+
+    if (isKnownRoute && trailingSlashRedirect) {
+      return res.redirect(301, trailingSlashRedirect);
+    }
 
     applyRobotsHeaders(pathname, isKnownRoute, res);
 

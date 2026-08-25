@@ -115,6 +115,20 @@ try {
   for (const service of services) {
     const route = `/services/${service.slug}`;
 
+    const trailingSlashResponse = await fetch(`${BASE_URL}${route}/`, {
+      redirect: "manual",
+    });
+    const redirectLocation = trailingSlashResponse.headers.get("location");
+
+    if (
+      trailingSlashResponse.status !== 301 ||
+      redirectLocation !== route
+    ) {
+      throw new Error(
+        `${route}/ 必須 301 到 ${route}，實際 ${trailingSlashResponse.status} ${redirectLocation ?? ""}`
+      );
+    }
+
     const response = await page.goto(`${BASE_URL}${route}`, {
       waitUntil: "domcontentloaded",
       timeout: 30_000,

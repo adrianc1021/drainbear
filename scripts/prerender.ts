@@ -10,6 +10,7 @@ const OUTPUT_ROOT = path.resolve("dist/public");
 const PRERENDER_META_ROOT = path.resolve("dist/prerender");
 const ROUTE_MANIFEST = path.join(PRERENDER_META_ROOT, "routes.json");
 const SITEMAP_PATH = path.resolve("dist/public/sitemap.xml");
+const SOURCE_SITEMAP_PATH = path.resolve("client/public/sitemap.xml");
 
 const SANITY_PROJECT_ID = "oyph9zy1";
 const SANITY_DATASET = "production";
@@ -62,6 +63,13 @@ interface PublishedBlogEntry {
   slug: string;
   lastmod?: string;
   source: "static" | "sanity" | "sitemap";
+}
+
+interface SitemapEntry {
+  route: string;
+  changefreq: "weekly" | "monthly" | "yearly";
+  priority: string;
+  lastmod?: string;
 }
 
 interface SanityBlogEntry {
@@ -227,16 +235,37 @@ function escapeXml(value: string) {
     .replaceAll("'", "&apos;");
 }
 
-async function updateSitemap(blogEntries: PublishedBlogEntry[]) {
-  let sitemap = await fs.readFile(SITEMAP_PATH, "utf8");
+function getSitemapEntries(blogEntries: PublishedBlogEntry[]): SitemapEntry[] {
+  const entries: SitemapEntry[] = [
+    { route: "/", changefreq: "weekly", priority: "1.0" },
+    { route: "/services", changefreq: "monthly", priority: "0.9" },
+    ...SERVICE_SLUGS.map(slug => ({
+      route: `/services/${slug}`,
+      changefreq: "monthly" as const,
+      priority: "0.8",
+    })),
+    { route: "/guide", changefreq: "monthly", priority: "0.9" },
+    { route: "/areas", changefreq: "monthly", priority: "0.8" },
+    ...DISTRICT_SLUGS.map(slug => ({
+      route: `/areas/${slug}`,
+      changefreq: "monthly" as const,
+      priority: "0.8",
+    })),
+    { route: "/faq", changefreq: "monthly", priority: "0.7" },
+    { route: "/blog", changefreq: "weekly", priority: "0.8" },
+    ...blogEntries.map(entry => ({
+      route: `/blog/${entry.slug}`,
+      lastmod: entry.lastmod,
+      changefreq: "monthly" as const,
+      priority: "0.7",
+    })),
+  ];
 
-  // Build 每次重新生成全部文章 URL，避免舊 CMS 文章或 noIndex 文章殘留。
-  sitemap = sitemap.replace(
-    /\s*<url>\s*<loc>https:\/\/drainbearhk\.com\/blog\/[^<]+<\/loc>[\s\S]*?<\/url>/g,
-    ""
-  );
+  return entries;
+}
 
-  const blogXml = blogEntries
+function renderSitemap(entries: SitemapEntry[]) {
+  const urls = entries
     .map(entry => {
       const lastmod = entry.lastmod
         ? `\n    <lastmod>${escapeXml(entry.lastmod)}</lastmod>`
@@ -244,27 +273,34 @@ async function updateSitemap(blogEntries: PublishedBlogEntry[]) {
 
       return [
         "  <url>",
-        `    <loc>${SITE_URL}/blog/${escapeXml(entry.slug)}</loc>${lastmod}`,
-        "    <changefreq>monthly</changefreq>",
-        "    <priority>0.7</priority>",
+        `    <loc>${SITE_URL}${escapeXml(entry.route)}</loc>${lastmod}`,
+        `    <changefreq>${entry.changefreq}</changefreq>`,
+        `    <priority>${entry.priority}</priority>`,
         "  </url>",
       ].join("\n");
     })
     .join("\n");
 
-  if (!sitemap.includes("</urlset>")) {
-    throw new Error("Invalid sitemap.xml: missing </urlset>");
-  }
-
-  sitemap = sitemap.replace(
+  return [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    urls,
     "</urlset>",
-    `${blogXml ? `\n${blogXml}\n` : "\n"}</urlset>`
-  );
+    "",
+  ].join("\n");
+}
 
+async function updateSitemap(blogEntries: PublishedBlogEntry[]) {
+  const entries = getSitemapEntries(blogEntries);
+  const sitemap = renderSitemap(entries);
+
+  // Keep the build artifact and the checked-in fallback in sync. The fallback
+  // is used when Sanity is temporarily unavailable during a later build.
   await fs.writeFile(SITEMAP_PATH, sitemap, "utf8");
+  await fs.writeFile(SOURCE_SITEMAP_PATH, sitemap, "utf8");
 
   console.log(
-    `Updated sitemap with ${blogEntries.length} published blog routes.`
+    `Rebuilt sitemap with ${entries.length} indexable URLs (${blogEntries.length} blog routes).`
   );
 }
 

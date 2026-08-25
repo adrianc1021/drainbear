@@ -8,6 +8,7 @@
     "build": "pnpm build:app && pnpm prerender",
     "build:app": "vite build && esbuild server/_core/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
     "prerender": "tsx scripts/prerender.ts",
+    "verify:sitemap": "node scripts/verify-sitemap-consistency.mjs",
     "start": "NODE_ENV=production node dist/index.js",
     "check": "tsc --noEmit",
     "format": "prettier --write .",
