@@ -3,6 +3,8 @@ type RouteLoader = () => Promise<unknown>;
 export const ROUTE_LOADERS: Record<string, RouteLoader> = {
   "/services": () => import("@/pages/Services"),
   "/services/:slug": () => import("@/pages/ServiceDetail"),
+  "/drain-diagnosis": () => import("@/pages/DrainDiagnosis"),
+  "/service-process": () => import("@/pages/ServiceProcess"),
   "/guide": () => import("@/pages/GuideRoute"),
   "/areas": () => import("@/pages/Areas"),
   "/areas/:slug": () => import("@/pages/District"),
@@ -34,6 +36,14 @@ export function loadServices() {
 
 export function loadServiceDetail() {
   return import("@/pages/ServiceDetail");
+}
+
+export function loadDrainDiagnosis() {
+  return import("@/pages/DrainDiagnosis");
+}
+
+export function loadServiceProcess() {
+  return import("@/pages/ServiceProcess");
 }
 
 export function loadAreas() {

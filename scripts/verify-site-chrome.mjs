@@ -296,8 +296,9 @@ try {
 
     const tabletResult = await page.evaluate(() => {
       const header = document.querySelector('[data-site-header="true"]');
-
       const nav = document.querySelector('nav[aria-label="主要導覽"]');
+      const brand = document.querySelector('[data-site-brand="header"]');
+      const whatsapp = document.querySelector('[data-header-whatsapp="true"]');
 
       const links = nav
         ? [...nav.querySelectorAll("a")].filter(element => {
@@ -314,6 +315,9 @@ try {
         : [];
 
       const headerRect = header?.getBoundingClientRect();
+      const brandRect = brand?.getBoundingClientRect();
+      const navRect = nav?.getBoundingClientRect();
+      const whatsappRect = whatsapp?.getBoundingClientRect();
 
       return {
         documentScrollWidth: document.documentElement.scrollWidth,
@@ -321,12 +325,15 @@ try {
         headerLeft: headerRect?.left ?? -1,
         headerRight: headerRect?.right ?? -1,
         visibleNavLinks: links.length,
+        brandNavGap: brandRect && navRect ? navRect.left - brandRect.right : -1,
+        navWhatsappGap:
+          navRect && whatsappRect ? whatsappRect.left - navRect.right : -1,
       };
     });
 
     assert(
-      tabletResult.visibleNavLinks === 6,
-      `${width}px：預期 6 個 desktop navigation links，實際 ${tabletResult.visibleNavLinks}`
+      tabletResult.visibleNavLinks === 7,
+      `${width}px：預期 7 個 desktop navigation links，實際 ${tabletResult.visibleNavLinks}`
     );
 
     assert(
@@ -345,8 +352,13 @@ try {
       `${width}px：Header WhatsApp CTA 應該可見`
     );
 
+    assert(
+      tabletResult.brandNavGap >= 0 && tabletResult.navWhatsappGap >= 0,
+      `${width}px：品牌、導覽或 WhatsApp CTA 互相重疊 ${JSON.stringify(tabletResult)}`
+    );
+
     console.log(
-      `PASS：${width}px header 六個 links、WhatsApp CTA、無水平 overflow`
+      `PASS：${width}px header 七個 links、WhatsApp CTA、無重疊或水平 overflow`
     );
 
     await context.close();

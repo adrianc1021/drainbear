@@ -13,17 +13,21 @@ import {
   loadAreas,
   loadBlog,
   loadBlogPost,
+  loadDrainDiagnosis,
   loadDistrict,
   loadFAQ,
   loadGuide,
   loadNotFound,
   loadServiceDetail,
   loadServices,
+  loadServiceProcess,
   loadThanks,
 } from "./lib/routePrefetch";
 
 const Services = lazy(loadServices);
 const ServiceDetail = lazy(loadServiceDetail);
+const DrainDiagnosis = lazy(loadDrainDiagnosis);
+const ServiceProcess = lazy(loadServiceProcess);
 const Areas = lazy(loadAreas);
 const District = lazy(loadDistrict);
 const FAQ = lazy(loadFAQ);
@@ -69,6 +73,8 @@ function Router() {
           <Route path="/" component={Home} />
           <Route path="/services" component={Services} />
           <Route path="/services/:slug" component={ServiceDetail} />
+          <Route path="/drain-diagnosis" component={DrainDiagnosis} />
+          <Route path="/service-process" component={ServiceProcess} />
           <Route path="/guide" component={Guide} />
           <Route path="/areas" component={Areas} />
           <Route path="/areas/:slug" component={District} />

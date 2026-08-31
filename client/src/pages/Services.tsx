@@ -17,6 +17,7 @@ import {
   Bath,
   UtensilsCrossed,
   CircleAlert,
+  ClipboardCheck,
 } from "lucide-react";
 import { Link } from "wouter";
 import { WhatsAppButton } from "@/components/Layout";
@@ -31,6 +32,7 @@ import {
   trackNavClick,
 } from "@/lib/analytics";
 import { SERVICE_PAGES } from "@/lib/serviceData";
+import { prefetchRoute } from "@/lib/routePrefetch";
 
 const SERVICES_CRUMBS = [
   { name: "首頁", path: "/" },
@@ -210,6 +212,66 @@ export default function Services() {
         }
         className="phase4-services__hero"
       />
+
+      <section className="border-y border-border bg-mist py-8">
+        <div className="container grid gap-4 md:grid-cols-2">
+          <Link
+            href="/drain-diagnosis"
+            onMouseEnter={() => prefetchRoute("/drain-diagnosis")}
+            onFocus={() => prefetchRoute("/drain-diagnosis")}
+            onTouchStart={() => prefetchRoute("/drain-diagnosis")}
+            onClick={() =>
+              trackNavClick("cta", {
+                cta_location: "services_decision_tools",
+                cta_label: "渠務問題快速判斷",
+                destination_url: "/drain-diagnosis",
+              })
+            }
+            className="group flex min-h-[112px] items-center gap-5 rounded-lg border border-border bg-white px-6 py-5 transition hover:border-navy/35 hover:shadow-md"
+          >
+            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-wagreen/15 text-wagreen-dark">
+              <Search className="h-5 w-5" />
+            </span>
+            <span className="min-w-0">
+              <span className="block font-display text-lg font-black text-navy">
+                不確定問題在哪裏？
+              </span>
+              <span className="mt-1 block text-sm leading-relaxed text-muted-foreground">
+                按位置及症狀取得初步處理方向
+              </span>
+            </span>
+            <ArrowRight className="ml-auto h-5 w-5 shrink-0 text-navy/35 transition-transform group-hover:translate-x-1" />
+          </Link>
+
+          <Link
+            href="/service-process"
+            onMouseEnter={() => prefetchRoute("/service-process")}
+            onFocus={() => prefetchRoute("/service-process")}
+            onTouchStart={() => prefetchRoute("/service-process")}
+            onClick={() =>
+              trackNavClick("navigation", {
+                cta_location: "services_decision_tools",
+                cta_label: "上門服務與報價原則",
+                destination_url: "/service-process",
+              })
+            }
+            className="group flex min-h-[112px] items-center gap-5 rounded-lg border border-border bg-white px-6 py-5 transition hover:border-navy/35 hover:shadow-md"
+          >
+            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-safety/10 text-safety">
+              <ClipboardCheck className="h-5 w-5" />
+            </span>
+            <span className="min-w-0">
+              <span className="block font-display text-lg font-black text-navy">
+                報價與追加工序如何確認？
+              </span>
+              <span className="mt-1 block text-sm leading-relaxed text-muted-foreground">
+                查看上門檢查、動工及收費界線
+              </span>
+            </span>
+            <ArrowRight className="ml-auto h-5 w-5 shrink-0 text-navy/35 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </div>
+      </section>
 
       {/* 區塊 1：Z-Pattern 交替圖文 */}
       <section className="bg-white pb-8">

@@ -34,10 +34,16 @@ const LOGO =
 const NAV_ITEMS = [
   { label: "首頁", href: "/" },
   { label: "通渠服務", href: "/services" },
+  { label: "問題判斷", href: "/drain-diagnosis" },
   { label: "收費指南", href: "/guide" },
   { label: "服務地區", href: "/areas" },
   { label: "通渠小知識", href: "/blog" },
   { label: "常見問題", href: "/faq" },
+];
+
+const FOOTER_NAV_ITEMS = [
+  ...NAV_ITEMS,
+  { label: "服務流程", href: "/service-process" },
 ];
 
 export function WhatsAppButton({
@@ -517,7 +523,7 @@ function Footer() {
           </span>
         </div>
         <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-white/60">
-          {NAV_ITEMS.map(item => (
+          {FOOTER_NAV_ITEMS.map(item => (
             <Link
               key={item.href}
               href={item.href}

@@ -6,6 +6,8 @@
 
 - [首頁](https://drainbearhk.com/): 香港通渠服務總覽、查詢入口及服務流程
 - [專業服務](https://drainbearhk.com/services): 住宅、商業、高壓水槍及 CCTV 照喉服務
+- [渠務問題快速判斷](https://drainbearhk.com/drain-diagnosis): 按位置、症狀、影響範圍及現場風險整理初步處理方向
+- [上門服務流程與報價原則](https://drainbearhk.com/service-process): 聯絡、現場檢查、動工前確認總價及追加工序界線
 - [收費指南](https://drainbearhk.com/guide): 報價原則、常見費用項目與即時估價參考
 - [服務地區](https://drainbearhk.com/areas): 港島、九龍、新界及離島地區入口
 - [常見問題](https://drainbearhk.com/faq): 上門檢查、通渠水、報價及施工問題
@@ -14,6 +16,7 @@
 ## 實體與聯絡
 
 - 品牌：通渠熊 DrainBear
+- 商家形式：上門服務商家，不設門市接待
 - 地區：香港（港島、九龍、新界及離島；實際安排以確認為準）
 - 查詢電話：+852 9558 8260
 - WhatsApp：<https://wa.me/85295588260>
