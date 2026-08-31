@@ -50,6 +50,9 @@ const DISTRICT_SLUGS = [
 ];
 
 const STATIC_BLOG_SLUGS = [
+  "whatsapp-drain-quote-checklist",
+  "drain-tool-selection-guide",
+  "read-cctv-drain-inspection-report",
   "prevent-kitchen-sink-clog",
   "why-not-drain-cleaner",
   "toilet-clog-emergency-guide",

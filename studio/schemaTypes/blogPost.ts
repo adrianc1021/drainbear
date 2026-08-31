@@ -226,6 +226,26 @@ export const blogPost = defineType({
     }),
 
     defineField({
+      name: 'authorName',
+      title: '作者／編輯名稱',
+      description: '必須使用真實可公開的個人或團隊名稱，會顯示在文章及結構化資料。',
+      type: 'string',
+      group: 'distribution',
+      initialValue: '通渠熊編輯團隊',
+      validation: (rule) => rule.required().max(80),
+    }),
+
+    defineField({
+      name: 'reviewerName',
+      title: '內容審閱者',
+      description: '選填；填寫實際審閱內容的個人或團隊，不應虛構資格。',
+      type: 'string',
+      group: 'distribution',
+      initialValue: '通渠熊渠務團隊',
+      validation: (rule) => rule.max(80),
+    }),
+
+    defineField({
       name: 'updatedAt',
       title: '內容更新日期',
       description: '文章有重大內容更新時填寫；一般小修改可以留空。',

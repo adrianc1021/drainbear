@@ -80,6 +80,8 @@ const blogPostFields = `
   },
   publishedAt,
   "updatedAt": coalesce(updatedAt, _updatedAt, publishedAt),
+  authorName,
+  reviewerName,
   readMins,
   featured,
   instagramUrl,
@@ -136,6 +138,8 @@ export const latestPublishedBlogPostsQuery = `
     excerpt,
     publishedAt,
     "updatedAt": coalesce(updatedAt, _updatedAt, publishedAt),
+    authorName,
+    reviewerName,
     readMins,
     featured
   }

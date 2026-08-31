@@ -73,6 +73,8 @@ export interface SanityBlogPost {
   body?: SanityBlogBodyBlock[];
   publishedAt: string;
   updatedAt?: string;
+  authorName?: string;
+  reviewerName?: string;
   readMins: number;
   featured?: boolean;
   instagramUrl?: string;

@@ -3,14 +3,7 @@
  * Header：清晰品牌導覽 + 克制的 WhatsApp 行動入口
  * Footer：服務資訊、主要地區與公司資料
  */
-import {
-  lazy,
-  ReactNode,
-  Suspense,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "wouter";
 import {
   Menu,
@@ -33,11 +26,10 @@ import { useEstimate } from "@/contexts/EstimateContext";
 import { useReveal } from "@/hooks/useReveal";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import { prefetchRoute } from "@/lib/routePrefetch";
+import WhatsAppWidget from "@/components/WhatsAppWidget";
 
 const LOGO =
   "https://res.cloudinary.com/pgjztf2p/image/upload/f_auto,q_auto:eco,c_fill,w_96,h_96/v1785147037/LOGO_dmyalo.png";
-
-const WhatsAppWidget = lazy(() => import("@/components/WhatsAppWidget"));
 
 const NAV_ITEMS = [
   { label: "首頁", href: "/" },
@@ -93,8 +85,8 @@ function MobileCTABar() {
     : whatsappDefaultHref;
   const waTitle = estimate ? "發送估價詳情" : "WhatsApp 報價";
   const waSub = estimate
-    ? `已附上估價 HK$${estimate.low.toLocaleString()}–${estimate.high.toLocaleString()}`
-    : "提供問題資料・方便跟進";
+    ? `初步 HK$${estimate.low.toLocaleString()}–${estimate.high.toLocaleString()}・到場確認`
+    : "傳送位置及相片・加快初步判斷";
 
   return (
     <div
@@ -111,6 +103,7 @@ function MobileCTABar() {
           href={waHref}
           target="_blank"
           rel="noopener noreferrer"
+          aria-label={`${waTitle}：${waSub}`}
           onClick={() => {
             trackCTA(
               "whatsapp",
@@ -119,20 +112,21 @@ function MobileCTABar() {
             );
             goThanksAfterWhatsApp("mobile_bar");
           }}
-          className="btn-smooth flex min-h-[54px] flex-[3] items-center justify-center gap-2.5 border border-navy bg-wagreen px-3 py-2 text-navy active:scale-[0.98]"
+          className="btn-smooth flex min-h-[56px] min-w-0 flex-[3] items-center justify-center gap-2.5 border border-navy bg-wagreen px-3 py-2 text-navy active:scale-[0.98]"
         >
           <MessageCircle className="h-5 w-5 shrink-0" strokeWidth={2.4} />
-          <span className="flex flex-col items-start leading-tight">
+          <span className="min-w-0 flex flex-col items-start leading-tight">
             <span className="text-[15px] font-bold">{waTitle}</span>
-            <span className="max-w-[16rem] truncate text-[10.5px] font-medium text-navy/75">
+            <span className="max-w-full truncate text-[10.5px] font-medium text-navy/75">
               {waSub}
             </span>
           </span>
         </a>
         <a
           href={phoneHref}
+          aria-label={`致電 ${phoneDisplay}`}
           onClick={() => trackCTA("phone", "mobile_bar")}
-          className="btn-smooth flex min-h-[54px] flex-1 items-center justify-center gap-1.5 border border-navy bg-navy px-2 py-2 text-white active:scale-[0.98]"
+          className="btn-smooth flex min-h-[56px] flex-1 items-center justify-center gap-1.5 border border-navy bg-navy px-2 py-2 text-white active:scale-[0.98]"
         >
           <Phone className="h-[18px] w-[18px] shrink-0" strokeWidth={2.4} />
           <span className="text-[15px] font-bold">致電</span>
@@ -175,28 +169,7 @@ function BackToTop() {
 }
 
 function DeferredDesktopWhatsAppWidget() {
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    if (!window.matchMedia("(min-width: 768px)").matches) return;
-
-    const show = () => setReady(true);
-    const idleId = window.requestIdleCallback?.(show, { timeout: 2000 });
-    const timeoutId = idleId === undefined ? window.setTimeout(show, 1200) : null;
-
-    return () => {
-      if (idleId !== undefined) window.cancelIdleCallback?.(idleId);
-      if (timeoutId !== null) window.clearTimeout(timeoutId);
-    };
-  }, []);
-
-  if (!ready) return null;
-
-  return (
-    <Suspense fallback={null}>
-      <WhatsAppWidget />
-    </Suspense>
-  );
+  return <WhatsAppWidget />;
 }
 
 function Header({
@@ -558,6 +531,11 @@ function Footer() {
           <ShieldCheck className="h-4 w-4 text-wagreen" />
           先報價・動工前確認總價
         </div>
+      </div>
+      <div className="border-t border-white/10">
+        <p className="container py-5 text-center text-[11px] leading-5 text-white/55 md:text-left">
+          營銷說明：特快／一小時到達為目標安排，實際時間視乎地區、交通、師傅及設備供應；「不成功不收費」適用於事前確認的合資格疏通項目，檢測、拆裝、維修、特殊設備或已完成的獨立工序或另行報價。所有新增費用均應在動工前確認。
+        </p>
       </div>
       <div className="border-t border-white/10 py-5 text-center text-xs text-white/70">
         <a
