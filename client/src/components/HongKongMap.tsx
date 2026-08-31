@@ -126,14 +126,15 @@ export default function HongKongMap() {
                 className={`stage6a-map-district cursor-pointer stroke-white transition-[fill-opacity,stroke-width] duration-150 focus:outline-none ${REGION_FILL[d.region]}`}
                 style={{
                   fillOpacity: active ? 1 : 0.78,
-                  strokeWidth: active ? 2.6 : 1.4,
+                  strokeWidth: 4.5,
                 }}
                 onMouseEnter={() => setHovered(d.id)}
                 onClick={() => handleSelect(d)}
                 onKeyDown={e => {
                   if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
-                    handleSelect(d);
+                    trackCTA("map", "areas_map", d.name);
+                    setSelected(prev => (prev?.id === d.id ? prev : d));
                   }
                 }}
               />
@@ -166,7 +167,7 @@ export default function HongKongMap() {
             )}
             <span className="mt-0.5 flex items-center gap-1 text-[11px] font-semibold text-white/85">
               <Clock className="h-3 w-3 text-wagreen" strokeWidth={2.5} />
-              預計 {REGION_ETA[hoveredDistrict.region]}到達
+              預計最快 {REGION_ETA[hoveredDistrict.region]}到達*
             </span>
           </div>
         )}
@@ -202,7 +203,7 @@ export default function HongKongMap() {
                   {REGION_LABEL[selected.region]}
                 </div>
                 <h3 className="mt-1 font-display text-2xl font-black text-navy">
-                  {selected.name}通渠服務
+                  {selected.name.replace(/區$/, "")}通渠服務
                 </h3>
               </div>
               <button
@@ -217,21 +218,27 @@ export default function HongKongMap() {
 
             <div className="mt-3 inline-flex w-fit items-center gap-1.5 rounded-full bg-wagreen/10 px-3 py-1 text-xs font-bold text-wagreen-dark">
               <Clock className="h-3 w-3" strokeWidth={2.5} />
-              {REGION_ETA[selected.region]}特快到達
+              最快 {REGION_ETA[selected.region]}特快到達*
             </div>
 
             <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
               {selected.slug ? (
                 <>
                   覆蓋{PAGE_HINT[selected.id] ?? `${selected.name}全區`}
-                  。此區設有專屬服務頁，可了解當區常見渠務問題、真實案例與駐區師傅承諾。
+                  。此區設有專屬服務頁，可了解當區常見渠務問題及服務安排。
                 </>
               ) : (
                 <>
                   覆蓋{COVERAGE_HINT[selected.id] ?? `${selected.name}全區`}
-                  。駐區師傅 24 小時候命，收費與市區統一，絕不因地區加價。
+                  。24
+                  小時接受查詢，團隊會按位置、交通及所需設備確認上門安排與報價。
                 </>
               )}
+            </p>
+
+            <p className="mt-3 text-[11px] leading-relaxed text-muted-foreground">
+              *
+              到達時間為目標安排，視乎即時交通、地點、師傅及設備供應，查詢時確認。
             </p>
 
             {selected.slug ? (
@@ -270,8 +277,8 @@ export default function HongKongMap() {
               點擊地圖選擇你的地區
             </h3>
             <p className="mt-2 max-w-xs text-sm leading-relaxed text-muted-foreground">
-              十八區全覆蓋。橙點地區設有專屬服務頁，一按直達；其他地區可即時
-              WhatsApp 查詢，統一收費。
+              十八區均可查詢。橙點地區設有專屬服務頁；其他地區可用 WhatsApp
+              提供位置及現場資料，再確認安排與報價。
             </p>
           </div>
         )}

@@ -28,6 +28,8 @@ export interface BlogPostView {
   category: string;
   date: string;
   updatedAt?: string;
+  authorName: string;
+  reviewerName?: string;
   readMins: number;
   excerpt: string;
   keywords: string[];
@@ -51,6 +53,8 @@ export function mapSanityBlogPost(post: SanityBlogPost): BlogPostView {
     category: getCategoryLabel(post.category),
     date: post.publishedAt,
     updatedAt: post.updatedAt,
+    authorName: post.authorName?.trim() || "通渠熊編輯團隊",
+    reviewerName: post.reviewerName?.trim() || "通渠熊渠務團隊",
     readMins: post.readMins,
     excerpt: post.excerpt,
     keywords: post.seo?.focusKeywords ?? [],
@@ -69,6 +73,9 @@ export function mapStaticBlogPost(post: StaticBlogPost): BlogPostView {
     title: post.title,
     category: post.category,
     date: post.date,
+    updatedAt: post.updatedAt,
+    authorName: post.authorName ?? "通渠熊編輯團隊",
+    reviewerName: post.reviewerName ?? "通渠熊渠務團隊",
     readMins: post.readMins,
     excerpt: post.excerpt,
     keywords: post.keywords,

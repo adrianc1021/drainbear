@@ -1,5 +1,6 @@
 /* Stage 6A: accessible secondary-page refinements. */
 
+.stage6a-map-district:focus,
 .stage6a-map-district:focus-visible {
   stroke: var(--site-safety) !important;
   stroke-width: 4.5px !important;

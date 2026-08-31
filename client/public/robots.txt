@@ -1,4 +1,18 @@
 User-agent: *
 Allow: /
 
+# AI search and answer systems may access the same public, indexable content.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://drainbearhk.com/sitemap.xml
+Host: https://drainbearhk.com

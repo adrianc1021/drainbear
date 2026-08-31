@@ -16,6 +16,7 @@ import {
   Search,
   ShieldCheck,
   Trees,
+  X,
 } from "lucide-react";
 import { Link } from "wouter";
 import { useLocation } from "wouter";
@@ -40,6 +41,7 @@ const AREAS_CRUMBS = [
 const DISTRICT_PAGES: Record<string, string> = DISTRICT_SLUGS;
 
 const SEARCH_LISTBOX_ID = "areas-search-listbox";
+const SEARCH_STATUS_ID = "areas-search-status";
 
 const REGIONS = [
   {
@@ -438,14 +440,14 @@ export default function Areas() {
 
   // 點擊搜尋框以外區域時關閉建議
   useEffect(() => {
-    const onDown = (e: MouseEvent) => {
+    const onDown = (e: PointerEvent) => {
       if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
         setOpen(false);
         setActiveIdx(-1);
       }
     };
-    document.addEventListener("mousedown", onDown);
-    return () => document.removeEventListener("mousedown", onDown);
+    document.addEventListener("pointerdown", onDown);
+    return () => document.removeEventListener("pointerdown", onDown);
   }, []);
 
   /** 選定一個建議：有專頁 → 跳轉專頁；無專頁 → 切換分區籤、捲動至覆蓋清單並高亮該地區 pill */
@@ -572,24 +574,55 @@ export default function Areas() {
                 onFocus={() => setOpen(true)}
                 onKeyDown={onSearchKeyDown}
                 placeholder="輸入你的地區，如：旺角、沙田…"
-                className="h-13 w-full rounded-lg border border-border bg-white py-3.5 pl-12 pr-4 text-base text-navy shadow-sm outline-none transition-shadow placeholder:text-muted-foreground/70 focus:border-wagreen focus:ring-2 focus:ring-wagreen/25"
+                className="h-13 w-full rounded-lg border border-border bg-white py-3.5 pl-12 pr-12 text-base text-navy shadow-sm outline-none transition-shadow placeholder:text-muted-foreground/70 focus:border-wagreen focus:ring-2 focus:ring-wagreen/25"
                 aria-label="搜尋服務地區"
                 role="combobox"
                 aria-expanded={open && matches !== null}
                 aria-autocomplete="list"
                 aria-controls={SEARCH_LISTBOX_ID}
+                aria-describedby={SEARCH_STATUS_ID}
                 aria-activedescendant={
                   activeIdx >= 0 && visible[activeIdx]
                     ? getSearchOptionId(visible[activeIdx])
                     : undefined
                 }
               />
+              {query ? (
+                <button
+                  type="button"
+                  aria-label="清除地區搜尋"
+                  onClick={() => {
+                    setQuery("");
+                    setOpen(false);
+                    setActiveIdx(-1);
+                  }}
+                  className="absolute right-1.5 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-md text-muted-foreground hover:bg-mist hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wagreen"
+                >
+                  <X className="h-4 w-4" strokeWidth={2.4} />
+                </button>
+              ) : null}
+              <span
+                id={SEARCH_STATUS_ID}
+                className="sr-only"
+                aria-live="polite"
+              >
+                {matches === null
+                  ? "輸入地區名稱搜尋"
+                  : matches.length > 0
+                    ? `找到 ${matches.length} 個地區，顯示首 ${visible.length} 個結果`
+                    : `未找到 ${query} 的地區結果`}
+              </span>
               {open && matches && (
                 <div
                   id={SEARCH_LISTBOX_ID}
                   role="listbox"
-                  className="absolute left-0 right-0 top-full z-20 mt-2 overflow-hidden rounded-lg border border-border bg-white text-left shadow-xl"
+                  className="absolute left-0 right-0 top-full z-30 mt-2 max-h-[min(22rem,52dvh)] overflow-y-auto overscroll-contain rounded-lg border border-border bg-white text-left shadow-xl"
                 >
+                  {matches.length > 0 ? (
+                    <div className="sticky top-0 z-10 border-b border-border bg-mist px-4 py-2 text-xs font-semibold text-muted-foreground">
+                      找到 {matches.length} 個地區
+                    </div>
+                  ) : null}
                   {matches.length > 0 ? (
                     visible.map((m, idx) => {
                       const slug = DISTRICT_PAGES[m.district];
@@ -624,7 +657,7 @@ export default function Areas() {
                           tabIndex={-1}
                           onClick={() => goToDistrict(m)}
                           onMouseEnter={() => setActiveIdx(idx)}
-                          className={`flex w-full items-center justify-between px-4 py-3 text-left transition-colors ${
+                          className={`flex min-h-14 w-full items-center justify-between gap-3 px-4 py-3 text-left transition-colors ${
                             activeIdx === idx ? "bg-mist" : "hover:bg-mist"
                           }`}
                         >

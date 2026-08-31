@@ -8,6 +8,7 @@ import { PortableText, type PortableTextComponents } from "@portabletext/react";
 import {
   CalendarDays,
   Clock,
+  UserRound,
   ArrowLeft,
   ArrowRight,
   Lightbulb,
@@ -289,7 +290,7 @@ export default function BlogPost() {
     keywords: post.keywords.join(", "),
     author: {
       "@type": "Organization",
-      name: settings.businessName,
+      name: post.authorName,
       url: settings.siteUrl,
     },
     publisher: {
@@ -346,17 +347,33 @@ export default function BlogPost() {
             {post.title}
           </h1>
 
-          <div className="mt-5 flex flex-wrap items-center gap-5 text-sm text-muted-foreground">
+          <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
             <span className="inline-flex items-center gap-1.5">
               <CalendarDays className="h-4 w-4" />
-              {formatDate(post.date)}
+              發布 {formatDate(post.date)}
             </span>
+
+            {post.updatedAt && post.updatedAt !== post.date ? (
+              <span>更新 {formatDate(post.updatedAt)}</span>
+            ) : null}
 
             <span className="inline-flex items-center gap-1.5">
               <Clock className="h-4 w-4" />
               {post.readMins} 分鐘閱讀
             </span>
+
+            <span className="inline-flex items-center gap-1.5 sm:border-l sm:border-border sm:pl-5">
+              <UserRound className="h-4 w-4" />
+              作者：{post.authorName}
+            </span>
           </div>
+
+          {post.reviewerName ? (
+            <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+              內容審閱：{post.reviewerName}
+              。文章提供一般渠務資訊；實際管道狀況、工具、到場時間及收費須按現場與服務安排確認。
+            </p>
+          ) : null}
 
           {post.coverImage?.url && (
             <figure className="mt-8 overflow-hidden rounded-lg border border-border bg-white">
