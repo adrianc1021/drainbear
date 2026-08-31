@@ -41,6 +41,10 @@ const NAV_ITEMS = [
   { label: "常見問題", href: "/faq" },
 ];
 
+function isNavItemActive(location: string, href: string) {
+  return location === href || (href !== "/" && location.startsWith(`${href}/`));
+}
+
 const FOOTER_NAV_ITEMS = [
   ...NAV_ITEMS,
   { label: "服務流程", href: "/service-process" },
@@ -327,8 +331,11 @@ function Header({
                   destination_url: item.href,
                 })
               }
+              aria-current={
+                isNavItemActive(location, item.href) ? "page" : undefined
+              }
               className={`site-header__nav-link btn-smooth relative inline-flex min-h-11 items-center px-3 text-sm font-bold transition-colors after:absolute after:inset-x-3 after:bottom-0 after:h-0.5 after:origin-left after:transition-transform ${
-                location === item.href
+                isNavItemActive(location, item.href)
                   ? "text-navy after:scale-x-100 after:bg-safety"
                   : "text-navy/65 after:scale-x-0 after:bg-navy hover:text-navy hover:after:scale-x-100"
               }`}
@@ -376,6 +383,9 @@ function Header({
               data-mobile-nav-link="true"
               key={item.href}
               href={item.href}
+              aria-current={
+                isNavItemActive(location, item.href) ? "page" : undefined
+              }
               onClick={() =>
                 trackNavClick("navigation", {
                   cta_location: "mobile_menu",
@@ -384,7 +394,7 @@ function Header({
                 })
               }
               className={`flex min-h-12 items-center rounded-lg px-4 py-3 text-base font-medium ${
-                location === item.href
+                isNavItemActive(location, item.href)
                   ? "bg-mist font-bold text-navy"
                   : "text-navy/70"
               }`}

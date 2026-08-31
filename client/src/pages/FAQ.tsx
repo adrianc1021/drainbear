@@ -2,12 +2,6 @@
  * 通渠熊 DrainBear — 常見問題
  * Editorial accordion with accessible single-panel disclosure.
  */
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { HelpCircle } from "lucide-react";
 import { WhatsAppButton } from "@/components/Layout";
 import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
@@ -26,7 +20,7 @@ const FAQS = [
   },
   {
     q: "通渠過程會弄髒我的家居嗎？",
-    a: "絕對不會。施工有保護措施，完工保證還原整潔。",
+    a: "施工會按現場情況採取保護措施，完工後整理受影響的工作位置。",
   },
   {
     q: "倒了「通渠水」依然堵塞怎麼辦？",
@@ -34,11 +28,11 @@ const FAQS = [
   },
   {
     q: "「不成功不收費」是真的嗎？",
-    a: "絕對真確。純異物淤塞打不通絕不收費。需維修換喉則另作報價。",
+    a: "適用範圍會在安排前說明；如純疏通未能完成，相關處理及其他維修會另行解釋和報價。",
   },
   {
     q: "深夜緊急堵塞收費會大幅提高嗎？",
-    a: "深夜有合理附加費，但保證出發前確認最終總收費，絕不坐地起價。",
+    a: "深夜時段可能有附加費，團隊會在動工前說明並確認最終總收費。",
   },
   {
     q: "會無故要求客人更換喉管嗎？",
@@ -78,18 +72,13 @@ export default function FAQ() {
 
       <section className="site-content-section bg-white">
         <div className="site-editorial-narrow">
-          <Accordion
-            type="single"
-            collapsible
-            className="site-editorial-accordion"
-          >
-            {FAQS.map((faq, index) => (
-              <AccordionItem
+          <div className="site-editorial-accordion">
+            {FAQS.map(faq => (
+              <details
                 key={faq.q}
-                value={`faq-${index}`}
                 className="site-editorial-accordion__item"
               >
-                <AccordionTrigger className="site-editorial-accordion__trigger text-left hover:no-underline">
+                <summary className="site-editorial-accordion__trigger list-none text-left">
                   <span className="flex items-center gap-3">
                     <HelpCircle
                       className="h-5 w-5 shrink-0 text-safety"
@@ -98,14 +87,14 @@ export default function FAQ() {
                     />
                     {faq.q}
                   </span>
-                </AccordionTrigger>
+                </summary>
 
-                <AccordionContent className="site-editorial-accordion__answer">
+                <p className="site-editorial-accordion__answer">
                   {faq.a}
-                </AccordionContent>
-              </AccordionItem>
+                </p>
+              </details>
             ))}
-          </Accordion>
+          </div>
 
           <div className="site-editorial-callout">
             <h2>仍有其他渠務疑問？</h2>
