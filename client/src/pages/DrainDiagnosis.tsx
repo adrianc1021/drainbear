@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import DistrictAutocomplete from "@/components/DistrictAutocomplete";
 import SEO from "@/components/SEO";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import { useEstimate } from "@/contexts/EstimateContext";
@@ -31,6 +32,7 @@ import {
   trackCTA,
   trackNavClick,
 } from "@/lib/analytics";
+import type { MapDistrict } from "@/lib/hkDistrictPaths";
 
 const CRUMBS = [
   { name: "首頁", path: "/" },
@@ -42,15 +44,6 @@ const STEPS = [
   { label: "主要情況", shortLabel: "情況" },
   { label: "影響範圍", shortLabel: "範圍" },
   { label: "現場風險", shortLabel: "風險" },
-] as const;
-
-const SERVICE_AREAS = [
-  "港島",
-  "九龍",
-  "新界東",
-  "新界西",
-  "離島",
-  "暫時未能確認",
 ] as const;
 
 interface ChoiceGridProps<T extends string> {
@@ -113,7 +106,7 @@ export default function DrainDiagnosis() {
   const [symptom, setSymptom] = useState<DiagnosisSymptom>();
   const [scope, setScope] = useState<DiagnosisScope>();
   const [risk, setRisk] = useState<DiagnosisRisk>();
-  const [serviceArea, setServiceArea] = useState("");
+  const [serviceArea, setServiceArea] = useState<MapDistrict | null>(null);
   const startedRef = useRef(false);
   const completedResultRef = useRef<string | undefined>(undefined);
 
@@ -139,7 +132,7 @@ export default function DrainDiagnosis() {
     return [
       result.whatsappMessage,
       serviceArea
-        ? `大概服務地區：${serviceArea}`
+        ? `大概服務地區：${serviceArea.name}`
         : "大概服務地區：稍後在 WhatsApp 補充",
     ].join("\n");
   }, [result, serviceArea]);
@@ -150,7 +143,7 @@ export default function DrainDiagnosis() {
     setDiagnosis({
       topic: `diagnosis_${result.trackingTopic}`,
       summary: serviceArea
-        ? `${serviceArea}・已整理症狀`
+        ? `${serviceArea.name}・已整理症狀`
         : "已整理症狀・補充地區及相片",
       waMessage: handoffMessage,
     });
@@ -169,7 +162,7 @@ export default function DrainDiagnosis() {
     setSymptom(undefined);
     setScope(undefined);
     setRisk(undefined);
-    setServiceArea("");
+    setServiceArea(null);
     setDiagnosis(null);
     setStep(0);
     completedResultRef.current = undefined;
@@ -400,25 +393,26 @@ export default function DrainDiagnosis() {
                       <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
                         處理方法、是否需要拆裝或檢測，以及最終收費均要在現場檢查後、動工前確認。
                       </p>
-                      <label
-                        htmlFor="diagnosis-service-area"
-                        className="mt-5 block text-sm font-bold text-navy"
-                      >
-                        大概服務地區（可稍後補充）
-                      </label>
-                      <select
-                        id="diagnosis-service-area"
+                      <DistrictAutocomplete
                         value={serviceArea}
-                        onChange={event => setServiceArea(event.target.value)}
-                        className="mt-2 min-h-12 w-full rounded-lg border border-navy/25 bg-white px-3 text-base text-navy focus:border-navy focus:outline-none focus:ring-2 focus:ring-safety/50"
-                      >
-                        <option value="">選擇地區</option>
-                        {SERVICE_AREAS.map(area => (
-                          <option key={area} value={area}>
-                            {area}
-                          </option>
-                        ))}
-                      </select>
+                        onChange={setServiceArea}
+                        label="大概服務地區（可稍後補充）"
+                      />
+                      {serviceArea ? (
+                        <Link
+                          href={
+                            serviceArea.slug
+                              ? `/areas/${serviceArea.slug}`
+                              : "/areas#coverage"
+                          }
+                          className="mt-2 inline-flex min-h-11 items-center gap-1 text-sm font-bold text-wagreen-dark hover:text-navy"
+                        >
+                          {serviceArea.slug
+                            ? `查看${serviceArea.name}地區服務資料`
+                            : "查看全港服務覆蓋資料"}
+                          <ArrowRight className="h-4 w-4" />
+                        </Link>
+                      ) : null}
                     </div>
                   </div>
 

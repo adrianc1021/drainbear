@@ -293,6 +293,13 @@ export default function BlogPost() {
       name: post.authorName,
       url: settings.siteUrl,
     },
+    reviewedBy: post.reviewerName
+      ? {
+          "@type": "Organization",
+          name: post.reviewerName,
+          url: settings.siteUrl,
+        }
+      : undefined,
     publisher: {
       "@type": "Organization",
       name: settings.businessName,
@@ -368,12 +375,37 @@ export default function BlogPost() {
             </span>
           </div>
 
-          {post.reviewerName ? (
-            <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-              內容審閱：{post.reviewerName}
-              。文章提供一般渠務資訊；實際管道狀況、工具、到場時間及收費須按現場與服務安排確認。
+          <aside
+            className="mt-7 border-y border-border py-5"
+            aria-labelledby="article-content-details"
+          >
+            <h2 id="article-content-details" className="sr-only">
+              文章內容資料
+            </h2>
+            <dl className="grid gap-5 text-sm sm:grid-cols-3">
+              <div>
+                <dt className="font-bold text-navy">資料整理與撰寫</dt>
+                <dd className="mt-1 text-muted-foreground">
+                  {post.authorName}
+                </dd>
+              </div>
+              <div>
+                <dt className="font-bold text-navy">服務流程及安全資訊審閱</dt>
+                <dd className="mt-1 text-muted-foreground">
+                  {post.reviewerName || "通渠熊渠務團隊"}
+                </dd>
+              </div>
+              <div>
+                <dt className="font-bold text-navy">最後更新</dt>
+                <dd className="mt-1 text-muted-foreground">
+                  {formatDate(post.updatedAt || post.date)}
+                </dd>
+              </div>
+            </dl>
+            <p className="mt-5 text-xs leading-relaxed text-muted-foreground">
+              內容根據服務流程、設備用途及一般渠務安全原則整理。網上資料不能取代現場檢查；實際管道狀況、工具、到場時間及收費須按現場與服務安排確認。
             </p>
-          ) : null}
+          </aside>
 
           {post.coverImage?.url && (
             <figure className="mt-8 overflow-hidden rounded-lg border border-border bg-white">

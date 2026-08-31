@@ -92,9 +92,21 @@ try {
 
     await completeBackflowFlow(page);
 
-    await page
-      .getByLabel("大概服務地區（可稍後補充）")
-      .selectOption({ label: "九龍" });
+    const districtInput = page.getByRole("combobox", {
+      name: "大概服務地區（可稍後補充）",
+    });
+    await districtInput.fill("九");
+    await page.getByRole("option", { name: /九龍城區/ }).click();
+
+    const coverageHref = await page
+      .getByRole("link", { name: "查看全港服務覆蓋資料" })
+      .getAttribute("href");
+
+    if (coverageHref !== "/areas#coverage") {
+      throw new Error(
+        `District without a dedicated page used an unexpected link: ${coverageHref}`
+      );
+    }
 
     const whatsappHref = await page
       .getByRole("link", { name: "將判斷結果傳給師傅" })
@@ -103,7 +115,7 @@ try {
     if (
       !whatsappHref?.startsWith("https://wa.me/") ||
       !decodeURIComponent(whatsappHref).includes("污水或積水倒灌") ||
-      !decodeURIComponent(whatsappHref).includes("大概服務地區：九龍")
+      !decodeURIComponent(whatsappHref).includes("大概服務地區：九龍城區")
     ) {
       throw new Error(
         "Diagnosis result did not produce the expected WhatsApp handoff"
@@ -120,10 +132,23 @@ try {
 
       if (
         !mobileHref ||
-        !decodeURIComponent(mobileHref).includes("大概服務地區：九龍")
+        !decodeURIComponent(mobileHref).includes("大概服務地區：九龍城區")
       ) {
         throw new Error("Mobile CTA did not retain the diagnosis handoff");
       }
+    }
+
+    await districtInput.fill("觀塘");
+    await page.getByRole("option", { name: /觀塘區/ }).click();
+
+    const districtPageHref = await page
+      .getByRole("link", { name: "查看觀塘區地區服務資料" })
+      .getAttribute("href");
+
+    if (districtPageHref !== "/areas/kwun-tong") {
+      throw new Error(
+        `District with a dedicated page used an unexpected link: ${districtPageHref}`
+      );
     }
 
     const diagnosisEvents = await page.evaluate(() =>

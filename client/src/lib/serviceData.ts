@@ -12,6 +12,12 @@ export interface ServicePageData {
   description: string;
   heroTitle: string;
   heroDescription: string;
+  answerSummary: {
+    handles: string;
+    suitableWhen: string;
+    limitation: string;
+    confirmBeforeWork: string;
+  };
   image: string;
   imageAlt: string;
   whatsappMessage: string;
@@ -39,6 +45,14 @@ export const SERVICE_PAGES: ServicePageData[] = [
     heroTitle: "坐廁淤塞、去水慢或倒灌，先判斷堵塞位置",
     heroDescription:
       "由紙巾及異物堵塞，到座廁隔氣或公共喉管問題，處理方法並不一樣。師傅會按現場情況檢查，動工前確認方案及最終收費。",
+    answerSummary: {
+      handles: "坐廁去水慢、完全淤塞、水位上升、倒灌及懷疑異物堵塞。",
+      suitableWhen:
+        "只有坐廁受影響，或需要判斷問題位於座廁、支喉還是公共喉管。",
+      limitation: "硬物位置、座廁結構及公共喉管狀況，單靠相片未必能夠確認。",
+      confirmBeforeWork:
+        "現場檢查堵塞範圍、是否需要拆裝、處理方法及最終總收費。",
+    },
     image:
       "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A1_vyqcil.png",
     imageAlt: "香港住宅坐廁及馬桶通渠服務",
@@ -124,6 +138,12 @@ export const SERVICE_PAGES: ServicePageData[] = [
     heroTitle: "鋅盤去水慢，通常不只是一小撮食物殘渣",
     heroDescription:
       "油脂會在喉管內逐層積聚，再黏住食物碎屑。若只短暫打穿一個小孔，問題容易重來；處理前應先判斷堵塞範圍。",
+    answerSummary: {
+      handles: "廚房鋅盤去水慢、積水、異味、咕嚕聲及反覆淤塞。",
+      suitableWhen: "懷疑油脂、食物殘渣，或隔氣與去水支喉內有沉積物。",
+      limitation: "牆內喉管走向及沉積範圍，通常要在現場測試後才能判斷。",
+      confirmBeforeWork: "確認堵塞位置、是否拆洗隔氣、所需工具及最終總收費。",
+    },
     image:
       "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A1_vyqcil.png",
     imageAlt: "香港廚房鋅盤去水慢及油脂淤塞通渠",
@@ -207,6 +227,12 @@ export const SERVICE_PAGES: ServicePageData[] = [
     heroTitle: "企缸塞、浴缸去水慢，先分辨隔渣位還是喉管堵塞",
     heroDescription:
       "頭髮會與番梘垢在去水隔、隔氣及喉管內逐步積聚。若清理表面後仍然去水慢，堵塞位置可能已深入喉管，需要按現場情況處理。",
+    answerSummary: {
+      handles: "浴室地台、企缸或浴缸去水慢、積水、異味及倒灌。",
+      suitableWhen: "懷疑頭髮、番梘垢或沉積物堵塞去水隔、隔氣與支喉。",
+      limitation: "多個去水位同時受影響時，問題可能不只在表面去水隔。",
+      confirmBeforeWork: "檢查受影響範圍、堵塞深度、處理方法及最終總收費。",
+    },
     image:
       "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A1_vyqcil.png",
     imageAlt: "香港企缸、浴缸及浴室頭髮塞渠處理服務",
@@ -232,8 +258,7 @@ export const SERVICE_PAGES: ServicePageData[] = [
       },
       {
         title: "檢查去水口及隔氣",
-        description:
-          "查看可見毛髮、隔渣配件及接駁情況，初步判斷堵塞深度。",
+        description: "查看可見毛髮、隔渣配件及接駁情況，初步判斷堵塞深度。",
       },
       {
         title: "確認處理方法",
@@ -292,6 +317,13 @@ export const SERVICE_PAGES: ServicePageData[] = [
     heroTitle: "污水渠倒灌要先停止用水，再判斷受影響範圍",
     heroDescription:
       "低層地台、座廁或鋅盤湧出污水，可能涉及單位支喉或大廈共用主渠。應先避免接觸污水及繼續用水，再記錄倒灌位置與受影響樓層。",
+    answerSummary: {
+      handles: "座廁、地台或其他去水位出現污水倒灌、外溢與異味。",
+      suitableWhen: "低層位置或多個去水位同時受影響，需要先控制外溢風險。",
+      limitation: "倒灌源頭及公共喉管責任範圍，需要結合現場和物業資料判斷。",
+      confirmBeforeWork:
+        "確認安全措施、堵塞範圍、施工入口、責任界線及最終收費。",
+    },
     image:
       "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A2_onju5z.png",
     imageAlt: "香港低層單位污水渠及水渠倒灌處理",
@@ -377,6 +409,12 @@ export const SERVICE_PAGES: ServicePageData[] = [
     heroTitle: "反覆淤塞，不一定適合只做局部打通",
     heroDescription:
       "高壓水流可用於清理部分管壁油垢及沉積物，但施工前仍要評估喉管物料、走向、接駁及現場排水條件。",
+    answerSummary: {
+      handles: "主渠或較長管段內的油脂、泥沙與管壁沉積物。",
+      suitableWhen: "一般機械疏通後仍反覆淤塞，或需要清洗較大範圍管壁。",
+      limitation: "老化、破裂或走向未明的喉管，未必適合直接使用高壓水力。",
+      confirmBeforeWork: "檢查喉管狀況、入口與排水出口、保護措施及最終收費。",
+    },
     image:
       "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A3_fyozug.png",
     imageAlt: "香港高壓水槍洗渠及主渠清洗服務",
@@ -459,6 +497,12 @@ export const SERVICE_PAGES: ServicePageData[] = [
     heroTitle: "反覆淤塞或問題位置不明，先用影像了解管內情況",
     heroDescription:
       "CCTV 管道鏡頭可在合適的喉管及檢查口條件下，協助查看堵塞物、積垢、接駁或可見破損，減少單靠估計。",
+    answerSummary: {
+      handles: "檢查喉內積垢、可見破損、異物、接駁狀況及大概走向。",
+      suitableWhen: "問題反覆出現、堵塞原因未明，或處理前後需要影像協助判斷。",
+      limitation: "鏡頭受入口、管徑、彎位和堵塞程度限制，未必能到達所有位置。",
+      confirmBeforeWork: "確認檢查範圍、可用入口、是否先疏通及影像交付安排。",
+    },
     image:
       "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A4_hiufrh.png",
     imageAlt: "香港 CCTV 照喉及排水管道影像檢測",
@@ -540,6 +584,13 @@ export const SERVICE_PAGES: ServicePageData[] = [
     heroTitle: "多個單位或去水位同時受影響，問題可能在主渠",
     heroDescription:
       "主渠及沙井問題涉及較大排水範圍，處理前應了解受影響位置、沙井水位、渠管走向及物業責任範圍。",
+    answerSummary: {
+      handles: "大廈主渠倒灌、沙井高水位或滿瀉，以及多個去水位同時淤塞。",
+      suitableWhen: "問題涉及多個單位、樓層、去水位或物業共用排水系統。",
+      limitation: "渠管走向、堵塞位置及物業責任，不能只憑單一去水位判斷。",
+      confirmBeforeWork:
+        "確認受影響範圍、沙井與施工入口、責任安排、方案及收費。",
+    },
     image:
       "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A2_onju5z.png",
     imageAlt: "香港大廈主渠倒灌及沙井滿瀉通渠",

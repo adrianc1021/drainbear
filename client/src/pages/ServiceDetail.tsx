@@ -210,6 +210,40 @@ export default function ServiceDetail() {
           </div>
         </section>
 
+        <section
+          className="border-b border-border bg-mist/55 py-10"
+          aria-labelledby="service-answer-summary"
+        >
+          <div className="container">
+            <p className="text-xs font-bold tracking-[0.18em] text-safety">
+              QUICK ANSWER
+            </p>
+            <h2
+              id="service-answer-summary"
+              className="mt-2 font-display text-2xl font-black text-navy"
+            >
+              這項服務如何判斷是否適用
+            </h2>
+            <dl className="mt-7 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                ["處理甚麼", service.answerSummary.handles],
+                ["何時適用", service.answerSummary.suitableWhen],
+                ["主要限制", service.answerSummary.limitation],
+                ["動工前確認", service.answerSummary.confirmBeforeWork],
+              ].map(([term, description]) => (
+                <div key={term} className="border-l-2 border-wagreen pl-4">
+                  <dt className="font-display text-sm font-black text-navy">
+                    {term}
+                  </dt>
+                  <dd className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {description}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </section>
+
         <section className="bg-white py-14 md:py-20">
           <div className="container grid gap-10 lg:grid-cols-2">
             <article>
