@@ -54,7 +54,8 @@
 |---|---|---|---|
 | `phone_click` | 電話 CTA 點擊 | cta_location, page_path, page_title | ✅ 已接(全站 8+ 位置) |
 | `whatsapp_click` | WhatsApp CTA 點擊 | cta_location, page_path, page_title, topic | ✅ 已接(全站 15+ 位置) |
-| `whatsapp_open` | /thanks 頁載入(對話開啟代理轉換) | cta_location(來源位置), page_path | ✅ 已接 |
+| `whatsapp_handoff` | WhatsApp 點擊後成功抵達 `/thanks` 並消耗一次性 token（成功交接代理轉換） | cta_location(來源位置), page_path, 歸因參數 | ✅ 正式報表事件 |
+| `whatsapp_open` | 舊版 `/thanks` page-load 事件 | cta_location(來源位置), page_path | ⚠️ 僅歷史兼容，不應納入新報表 |
 | `contact_form_start` | 表格開始填寫(每表格一次) | form_name, cta_location | 🟡 helper 已備,前台尚無表格 |
 | `contact_form_submit` | 伺服器確認提交成功後 | form_name, cta_location | 🟡 helper 已備 |
 | `contact_form_error` | 表格提交失敗 | form_name, error_type(不含錯誤內文) | 🟡 helper 已備 |
@@ -117,7 +118,7 @@ read_percent    閱讀捲動百分比
 |---|---|---|
 | `whatsapp_click` | `whatsapp_click` | 不變 |
 | `phone_click` | `phone_click` | 不變 |
-| `whatsapp_open` | `whatsapp_open` | 不變 |
+| `whatsapp_open` | `whatsapp_open` | 舊版兼容事件；新流程以 `whatsapp_handoff` 為準 |
 | `map_district_click` | `area_click` | 統一命名;GA4 未接駁,無歷史數據斷層 |
 | — | `page_view`(SPA)、`quote_calculator_*`、`blog_post_click`、`blog_read`、`navigation_click`、`contact_form_*` | 新增 |
 

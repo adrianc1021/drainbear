@@ -364,7 +364,7 @@ export function trackCTA(
  * WhatsApp 點擊後跳轉感謝頁(/thanks):
  * - WhatsApp 於新分頁/App 開啟(原 <a target="_blank"> 行為不變,不阻擋開啟)
  * - 原分頁延遲 600ms 導向 /thanks?from=<cta_location>
- * - /thanks 頁面觸發 whatsapp_open 事件,作為「真實對話開啟率」的代理轉化指標
+ * - /thanks 頁面觸發 whatsapp_handoff 事件,作為「成功交接率」的代理轉換指標
  */
 export function goThanksAfterWhatsApp(location: string) {
   if (typeof window === "undefined") return;
@@ -385,7 +385,7 @@ export function goThanksAfterWhatsApp(location: string) {
 
 /**
  * 舊事件保留作歷史兼容；新前台不再以單純 /thanks page load
- * 觸發 whatsapp_open。
+ * 觸發 whatsapp_open。正式報表應使用 whatsapp_handoff。
  */
 export function trackWhatsAppOpen(from: string) {
   sendEvent("whatsapp_open", {

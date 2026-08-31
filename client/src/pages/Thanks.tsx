@@ -1,6 +1,6 @@
 /**
  * 通渠熊 DrainBear — WhatsApp 查詢感謝頁
- * 目的：WhatsApp CTA 點擊後原分頁跳轉至此，觸發 GA4 whatsapp_open 轉化事件，
+ * 目的：WhatsApp CTA 點擊後原分頁跳轉至此，觸發 GA4 whatsapp_handoff 轉換事件，
  *       量度真實對話開啟率；同時提供等候指引、電話後備及導流內容。
  * 風格：Premium SaaS Minimalism
  */
