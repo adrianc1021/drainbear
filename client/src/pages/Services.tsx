@@ -60,7 +60,7 @@ const SERVICES = [
     icon: Waves,
     tag: "HYDRO JETTING",
     title: "高壓水槍洗渠",
-    desc: "引進頂級高壓水槍車，以極限水壓將硬化油垢、水泥及陳年污垢徹底粉碎沖走，令喉管回復暢通如新，效果遠勝傳統通渠方法。",
+    desc: "按喉管物料、入口及沉積物狀況評估高壓水槍，處理油垢、沉積物及部分硬化物，工程後測試排水情況。",
     img: "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A3_fyozug.png",
     wa: "你好，我想查詢高壓水槍洗渠服務報價。",
   },
@@ -83,12 +83,12 @@ const DETAIL_GROUPS = [
       {
         icon: CircleAlert,
         title: "坐廁及馬桶淤塞",
-        desc: "專治硬物掉入或紙巾淤塞，高壓氣泵極速疏通，免拆馬桶。",
+        desc: "針對硬物掉入或紙巾淤塞，按現場情況評估高壓氣泵等工具，盡量減少拆裝。",
       },
       {
         icon: UtensilsCrossed,
         title: "廚房鋅盤去水慢",
-        desc: "針對 U 型喉管內的陳年豬油膏及廚餘殘渣，徹底清除油脂。",
+        desc: "針對 U 型喉管內積聚的豬油膏及廚餘殘渣，按範圍選擇合適方法清理。",
       },
       {
         icon: Bath,
@@ -115,7 +115,7 @@ const DETAIL_GROUPS = [
       {
         icon: Waves,
         title: "德國高壓洗渠車",
-        desc: "極限水壓粉碎管壁硬化水泥及油塊，深度清洗管道。",
+        desc: "按喉管狀況評估高壓水力，處理管壁油垢、沉積物及部分硬化物。",
       },
       {
         icon: Building2,
@@ -175,7 +175,7 @@ const STEPS = [
     icon: Sparkles,
     step: "04",
     title: "清理現場",
-    desc: "完工後測試去水，徹底清潔施工位置",
+    desc: "完工後測試去水，整理受工程影響的施工位置",
   },
 ];
 
