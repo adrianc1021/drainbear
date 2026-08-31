@@ -82,17 +82,25 @@ export function WhatsAppButton({
  * - 全程固定顯示，讓緊急服務 CTA 在任何閱讀位置都可見
  */
 function MobileCTABar() {
-  const { estimate } = useEstimate();
+  const { estimate, diagnosis } = useEstimate();
   const { phoneDisplay, phoneHref, whatsappDefaultHref, whatsappHref } =
     useContactSettings();
 
   const waHref = estimate
     ? whatsappHref(estimate.waMessage)
-    : whatsappDefaultHref;
-  const waTitle = estimate ? "發送估價詳情" : "WhatsApp 報價";
+    : diagnosis
+      ? whatsappHref(diagnosis.waMessage)
+      : whatsappDefaultHref;
+  const waTitle = estimate
+    ? "發送估價詳情"
+    : diagnosis
+      ? "發送判斷結果"
+      : "WhatsApp 報價";
   const waSub = estimate
     ? `初步 HK$${estimate.low.toLocaleString()}–${estimate.high.toLocaleString()}・到場確認`
-    : "傳送位置及相片・加快初步判斷";
+    : diagnosis
+      ? diagnosis.summary
+      : "傳送位置及相片・加快初步判斷";
 
   return (
     <div
@@ -114,7 +122,9 @@ function MobileCTABar() {
             trackCTA(
               "whatsapp",
               "mobile_bar",
-              estimate ? `estimate_${estimate.low}-${estimate.high}` : undefined
+              estimate
+                ? `estimate_${estimate.low}-${estimate.high}`
+                : diagnosis?.topic
             );
             goThanksAfterWhatsApp("mobile_bar");
           }}

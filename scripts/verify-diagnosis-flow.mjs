@@ -92,17 +92,38 @@ try {
 
     await completeBackflowFlow(page);
 
+    await page
+      .getByLabel("大概服務地區（可稍後補充）")
+      .selectOption({ label: "九龍" });
+
     const whatsappHref = await page
       .getByRole("link", { name: "將判斷結果傳給師傅" })
       .getAttribute("href");
 
     if (
       !whatsappHref?.startsWith("https://wa.me/") ||
-      !decodeURIComponent(whatsappHref).includes("污水或積水倒灌")
+      !decodeURIComponent(whatsappHref).includes("污水或積水倒灌") ||
+      !decodeURIComponent(whatsappHref).includes("大概服務地區：九龍")
     ) {
       throw new Error(
         "Diagnosis result did not produce the expected WhatsApp handoff"
       );
+    }
+
+    if (viewport.name === "mobile") {
+      const mobileCta = page.locator('[data-mobile-cta="true"]');
+      await mobileCta.getByText("發送判斷結果", { exact: true }).waitFor();
+
+      const mobileHref = await mobileCta
+        .locator('a[href^="https://wa.me/"]')
+        .getAttribute("href");
+
+      if (
+        !mobileHref ||
+        !decodeURIComponent(mobileHref).includes("大概服務地區：九龍")
+      ) {
+        throw new Error("Mobile CTA did not retain the diagnosis handoff");
+      }
     }
 
     const diagnosisEvents = await page.evaluate(() =>

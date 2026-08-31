@@ -60,6 +60,30 @@ const REQUOTE_CASES = [
   "原先工序完成後，客戶另行要求影像檢測、維修或其他獨立工作",
 ] as const;
 
+const METHOD_COMPARISON = [
+  {
+    title: "機械疏通",
+    purpose: "恢復局部通道",
+    suitable: "異物、紙巾、頭髮或較集中的堵塞",
+    limitation: "成功恢復去水，不等於整段管壁已完全清潔。",
+    href: "/services/toilet-unblocking",
+  },
+  {
+    title: "高壓水槍清洗",
+    purpose: "清理較大範圍管壁沉積物",
+    suitable: "油脂、淤泥、長距離喉管或反覆積垢",
+    limitation: "施工前要評估喉管物料、狀況、入口及排污條件。",
+    href: "/services/high-pressure-jetting",
+  },
+  {
+    title: "CCTV 照喉",
+    purpose: "觀察管內可見情況",
+    suitable: "反覆淤塞、問題位置不明或懷疑破損",
+    limitation: "它是檢查而非疏通；視線亦會受積水、急彎及污物限制。",
+    href: "/services/cctv-drain-inspection",
+  },
+] as const;
+
 const PAGE_JSON_LD = {
   "@context": "https://schema.org",
   "@type": "WebPage",
@@ -181,6 +205,64 @@ export default function ServiceProcess() {
         </section>
 
         <section className="py-16 md:py-20">
+          <div className="container">
+            <div className="max-w-3xl">
+              <p className="text-xs font-bold tracking-[0.18em] text-safety">
+                METHOD COMPARISON / 方法比較
+              </p>
+              <h2 className="mt-3 font-display text-3xl font-black text-navy md:text-4xl">
+                打通、清洗與檢查，不是同一件事
+              </h2>
+              <p className="mt-4 leading-relaxed text-muted-foreground">
+                合適方法取決於問題目的與管道條件。先分清楚工序希望解決甚麼，較容易比較報價及避免不必要工程。
+              </p>
+            </div>
+
+            <div className="mt-10 overflow-x-auto border-y border-border">
+              <table className="w-full min-w-[760px] border-collapse text-left">
+                <thead>
+                  <tr className="bg-navy text-white">
+                    <th className="px-5 py-4 text-sm font-bold">方法</th>
+                    <th className="px-5 py-4 text-sm font-bold">主要目的</th>
+                    <th className="px-5 py-4 text-sm font-bold">
+                      常見適用情況
+                    </th>
+                    <th className="px-5 py-4 text-sm font-bold">需要留意</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {METHOD_COMPARISON.map(method => (
+                    <tr
+                      key={method.title}
+                      className="border-b border-border last:border-b-0"
+                    >
+                      <th className="px-5 py-5 align-top font-display font-black text-navy">
+                        <Link
+                          href={method.href}
+                          className="inline-flex items-center gap-2 hover:text-wagreen-dark"
+                        >
+                          {method.title}
+                          <ArrowRight className="h-4 w-4" />
+                        </Link>
+                      </th>
+                      <td className="px-5 py-5 align-top text-sm leading-relaxed text-navy">
+                        {method.purpose}
+                      </td>
+                      <td className="px-5 py-5 align-top text-sm leading-relaxed text-muted-foreground">
+                        {method.suitable}
+                      </td>
+                      <td className="px-5 py-5 align-top text-sm leading-relaxed text-muted-foreground">
+                        {method.limitation}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section className="border-t border-border py-16 md:py-20">
           <div className="container grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
             <div>
               <div className="flex items-center gap-3">

@@ -13,6 +13,7 @@ import { Link } from "wouter";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import SEO from "@/components/SEO";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
+import { useEstimate } from "@/contexts/EstimateContext";
 import {
   buildDiagnosisResult,
   DIAGNOSIS_LOCATIONS,
@@ -41,6 +42,15 @@ const STEPS = [
   { label: "主要情況", shortLabel: "情況" },
   { label: "影響範圍", shortLabel: "範圍" },
   { label: "現場風險", shortLabel: "風險" },
+] as const;
+
+const SERVICE_AREAS = [
+  "港島",
+  "九龍",
+  "新界東",
+  "新界西",
+  "離島",
+  "暫時未能確認",
 ] as const;
 
 interface ChoiceGridProps<T extends string> {
@@ -97,11 +107,13 @@ function ChoiceGrid<T extends string>({
 
 export default function DrainDiagnosis() {
   const { whatsappHref } = useContactSettings();
+  const { setDiagnosis } = useEstimate();
   const [step, setStep] = useState(0);
   const [location, setLocation] = useState<DiagnosisLocation>();
   const [symptom, setSymptom] = useState<DiagnosisSymptom>();
   const [scope, setScope] = useState<DiagnosisScope>();
   const [risk, setRisk] = useState<DiagnosisRisk>();
+  const [serviceArea, setServiceArea] = useState("");
   const startedRef = useRef(false);
   const completedResultRef = useRef<string | undefined>(undefined);
 
@@ -121,6 +133,29 @@ export default function DrainDiagnosis() {
     });
   }, [result]);
 
+  const handoffMessage = useMemo(() => {
+    if (!result) return "";
+
+    return [
+      result.whatsappMessage,
+      serviceArea
+        ? `大概服務地區：${serviceArea}`
+        : "大概服務地區：稍後在 WhatsApp 補充",
+    ].join("\n");
+  }, [result, serviceArea]);
+
+  useEffect(() => {
+    if (!result) return;
+
+    setDiagnosis({
+      topic: `diagnosis_${result.trackingTopic}`,
+      summary: serviceArea
+        ? `${serviceArea}・已整理症狀`
+        : "已整理症狀・補充地區及相片",
+      waMessage: handoffMessage,
+    });
+  }, [handoffMessage, result, serviceArea, setDiagnosis]);
+
   const markStarted = () => {
     if (startedRef.current) return;
     startedRef.current = true;
@@ -134,6 +169,8 @@ export default function DrainDiagnosis() {
     setSymptom(undefined);
     setScope(undefined);
     setRisk(undefined);
+    setServiceArea("");
+    setDiagnosis(null);
     setStep(0);
     completedResultRef.current = undefined;
   };
@@ -363,12 +400,31 @@ export default function DrainDiagnosis() {
                       <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
                         處理方法、是否需要拆裝或檢測，以及最終收費均要在現場檢查後、動工前確認。
                       </p>
+                      <label
+                        htmlFor="diagnosis-service-area"
+                        className="mt-5 block text-sm font-bold text-navy"
+                      >
+                        大概服務地區（可稍後補充）
+                      </label>
+                      <select
+                        id="diagnosis-service-area"
+                        value={serviceArea}
+                        onChange={event => setServiceArea(event.target.value)}
+                        className="mt-2 min-h-12 w-full rounded-lg border border-navy/25 bg-white px-3 text-base text-navy focus:border-navy focus:outline-none focus:ring-2 focus:ring-safety/50"
+                      >
+                        <option value="">選擇地區</option>
+                        {SERVICE_AREAS.map(area => (
+                          <option key={area} value={area}>
+                            {area}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                   </div>
 
                   <div className="mt-10 flex flex-col gap-3 sm:flex-row">
                     <a
-                      href={whatsappHref(result.whatsappMessage)}
+                      href={whatsappHref(handoffMessage)}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => {
