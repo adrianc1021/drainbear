@@ -19,6 +19,8 @@ const SANITY_API_VERSION = "2025-02-19";
 const STATIC_ROUTES = [
   "/",
   "/services",
+  "/drain-diagnosis",
+  "/service-process",
   "/guide",
   "/areas",
   "/faq",
@@ -242,6 +244,8 @@ function getSitemapEntries(blogEntries: PublishedBlogEntry[]): SitemapEntry[] {
   const entries: SitemapEntry[] = [
     { route: "/", changefreq: "weekly", priority: "1.0" },
     { route: "/services", changefreq: "monthly", priority: "0.9" },
+    { route: "/drain-diagnosis", changefreq: "monthly", priority: "0.9" },
+    { route: "/service-process", changefreq: "monthly", priority: "0.8" },
     ...SERVICE_SLUGS.map(slug => ({
       route: `/services/${slug}`,
       changefreq: "monthly" as const,

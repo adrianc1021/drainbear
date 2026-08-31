@@ -24,7 +24,16 @@ for (const crawler of ["GPTBot", "ClaudeBot", "PerplexityBot", "Google-Extended"
   assert(new RegExp(`User-agent:\\s*${crawler}`, "i").test(robots), `${crawler} is not explicitly covered`);
 }
 
-for (const route of ["/", "/services", "/guide", "/areas", "/faq", "/blog"]) {
+for (const route of [
+  "/",
+  "/services",
+  "/drain-diagnosis",
+  "/service-process",
+  "/guide",
+  "/areas",
+  "/faq",
+  "/blog",
+]) {
   assert(llms.includes(`https://drainbearhk.com${route}`), `llms.txt is missing ${route}`);
 }
 

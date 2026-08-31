@@ -34,10 +34,16 @@ const LOGO =
 const NAV_ITEMS = [
   { label: "首頁", href: "/" },
   { label: "通渠服務", href: "/services" },
+  { label: "問題判斷", href: "/drain-diagnosis" },
   { label: "收費指南", href: "/guide" },
   { label: "服務地區", href: "/areas" },
   { label: "通渠小知識", href: "/blog" },
   { label: "常見問題", href: "/faq" },
+];
+
+const FOOTER_NAV_ITEMS = [
+  ...NAV_ITEMS,
+  { label: "服務流程", href: "/service-process" },
 ];
 
 export function WhatsAppButton({
@@ -76,17 +82,25 @@ export function WhatsAppButton({
  * - 全程固定顯示，讓緊急服務 CTA 在任何閱讀位置都可見
  */
 function MobileCTABar() {
-  const { estimate } = useEstimate();
+  const { estimate, diagnosis } = useEstimate();
   const { phoneDisplay, phoneHref, whatsappDefaultHref, whatsappHref } =
     useContactSettings();
 
   const waHref = estimate
     ? whatsappHref(estimate.waMessage)
-    : whatsappDefaultHref;
-  const waTitle = estimate ? "發送估價詳情" : "WhatsApp 報價";
+    : diagnosis
+      ? whatsappHref(diagnosis.waMessage)
+      : whatsappDefaultHref;
+  const waTitle = estimate
+    ? "發送估價詳情"
+    : diagnosis
+      ? "發送判斷結果"
+      : "WhatsApp 報價";
   const waSub = estimate
     ? `初步 HK$${estimate.low.toLocaleString()}–${estimate.high.toLocaleString()}・到場確認`
-    : "傳送位置及相片・加快初步判斷";
+    : diagnosis
+      ? diagnosis.summary
+      : "傳送位置及相片・加快初步判斷";
 
   return (
     <div
@@ -108,7 +122,9 @@ function MobileCTABar() {
             trackCTA(
               "whatsapp",
               "mobile_bar",
-              estimate ? `estimate_${estimate.low}-${estimate.high}` : undefined
+              estimate
+                ? `estimate_${estimate.low}-${estimate.high}`
+                : diagnosis?.topic
             );
             goThanksAfterWhatsApp("mobile_bar");
           }}
@@ -517,7 +533,7 @@ function Footer() {
           </span>
         </div>
         <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-white/60">
-          {NAV_ITEMS.map(item => (
+          {FOOTER_NAV_ITEMS.map(item => (
             <Link
               key={item.href}
               href={item.href}

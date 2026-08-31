@@ -153,6 +153,63 @@ export default function ServiceDetail() {
           </div>
         </section>
 
+        <section className="border-b border-border bg-white py-8">
+          <div className="container grid gap-4 md:grid-cols-2">
+            <Link
+              href="/drain-diagnosis"
+              onMouseEnter={() => prefetchRoute("/drain-diagnosis")}
+              onFocus={() => prefetchRoute("/drain-diagnosis")}
+              onTouchStart={() => prefetchRoute("/drain-diagnosis")}
+              onClick={() =>
+                trackNavClick("cta", {
+                  cta_location: "service_detail_support_links",
+                  cta_label: "重新判斷症狀",
+                  destination_url: "/drain-diagnosis",
+                  service_name: service.slug,
+                })
+              }
+              className="group flex min-h-[92px] items-center gap-4 rounded-lg border border-border bg-mist/45 px-5 py-4 hover:border-navy/35 hover:bg-white"
+            >
+              <Search className="h-6 w-6 shrink-0 text-wagreen-dark" />
+              <span>
+                <span className="block font-display font-black text-navy">
+                  症狀與這項服務不完全相符？
+                </span>
+                <span className="mt-1 block text-sm text-muted-foreground">
+                  使用快速判斷工具整理影響範圍
+                </span>
+              </span>
+              <ArrowRight className="ml-auto h-4 w-4 shrink-0 text-navy/35 transition-transform group-hover:translate-x-1" />
+            </Link>
+            <Link
+              href="/service-process"
+              onMouseEnter={() => prefetchRoute("/service-process")}
+              onFocus={() => prefetchRoute("/service-process")}
+              onTouchStart={() => prefetchRoute("/service-process")}
+              onClick={() =>
+                trackNavClick("navigation", {
+                  cta_location: "service_detail_support_links",
+                  cta_label: "服務及報價原則",
+                  destination_url: "/service-process",
+                  service_name: service.slug,
+                })
+              }
+              className="group flex min-h-[92px] items-center gap-4 rounded-lg border border-border bg-mist/45 px-5 py-4 hover:border-navy/35 hover:bg-white"
+            >
+              <ShieldCheck className="h-6 w-6 shrink-0 text-safety" />
+              <span>
+                <span className="block font-display font-black text-navy">
+                  先了解報價與追加工序界線
+                </span>
+                <span className="mt-1 block text-sm text-muted-foreground">
+                  查看現場檢查及動工前確認原則
+                </span>
+              </span>
+              <ArrowRight className="ml-auto h-4 w-4 shrink-0 text-navy/35 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+        </section>
+
         <section className="bg-white py-14 md:py-20">
           <div className="container grid gap-10 lg:grid-cols-2">
             <article>

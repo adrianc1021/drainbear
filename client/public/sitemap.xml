@@ -11,6 +11,16 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://drainbearhk.com/drain-diagnosis</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://drainbearhk.com/service-process</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://drainbearhk.com/services/toilet-unblocking</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
