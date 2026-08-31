@@ -232,6 +232,13 @@ export default function SEO({
         "@type": "Country",
         name: "Hong Kong",
       },
+      knowsAbout: [
+        "住宅通渠",
+        "商業通渠",
+        "高壓水槍洗渠",
+        "CCTV 照喉檢測",
+        "喉管淤塞預防",
+      ],
     });
 
     if (jsonLd) {

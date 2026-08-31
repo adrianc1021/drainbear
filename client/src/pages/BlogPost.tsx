@@ -356,6 +356,10 @@ export default function BlogPost() {
               <Clock className="h-4 w-4" />
               {post.readMins} 分鐘閱讀
             </span>
+
+            <span className="border-l border-border pl-5">
+              通渠熊團隊整理・資料按頁面日期更新
+            </span>
           </div>
 
           {post.coverImage?.url && (
