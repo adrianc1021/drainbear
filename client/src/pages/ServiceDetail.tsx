@@ -41,9 +41,10 @@ export default function ServiceDetail() {
   if (!service) return <NotFound />;
 
   const path = `/services/${service.slug}`;
-  const calculatorHref = `/guide?location=${encodeURIComponent(
-    CALCULATOR_LOCATION_BY_SLUG[service.slug] || ""
-  )}#calculator`;
+  const calculatorLocation = CALCULATOR_LOCATION_BY_SLUG[service.slug];
+  const calculatorHref = calculatorLocation
+    ? `/guide?location=${encodeURIComponent(calculatorLocation)}#calculator`
+    : "/guide#calculator";
   const whatsappUrl = whatsappHref(service.whatsappMessage);
   const crumbs = [
     { name: "首頁", path: "/" },
