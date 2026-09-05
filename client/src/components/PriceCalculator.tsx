@@ -82,6 +82,10 @@ export default function PriceCalculator() {
     const value = new URLSearchParams(window.location.search).get("time");
     return TIMES.some(option => option.id === value) ? value! : "day";
   });
+  const [timeTouched, setTimeTouched] = useState(() => {
+    const value = new URLSearchParams(window.location.search).get("time");
+    return TIMES.some(option => option.id === value);
+  });
   const { setEstimate } = useEstimate();
   const recordEstimate = trpc.estimate.record.useMutation();
 
@@ -89,20 +93,28 @@ export default function PriceCalculator() {
     const l = LOCATIONS.find((o) => o.id === loc);
     const b = BUILDINGS.find((o) => o.id === bld);
     const t = TIMES.find((o) => o.id === time);
-    if (!l?.base || !b?.factor || !t?.factor) return null;
+    if (!l?.base || !b?.factor || !t?.factor || !timeTouched) return null;
     const low = roundTo50(l.base[0] * b.factor * t.factor);
     const high = roundTo50(l.base[1] * b.factor * t.factor);
     return { low, high, l, b, t };
-  }, [loc, bld, time]);
+  }, [loc, bld, time, timeTouched]);
 
-  const completedSteps = Number(Boolean(loc)) + Number(Boolean(bld)) + 1;
+  const completedSteps = Number(Boolean(loc)) + Number(Boolean(bld)) + Number(timeTouched);
   const selectedLocation = LOCATIONS.find(option => option.id === loc);
   const selectedBuilding = BUILDINGS.find(option => option.id === bld);
-  const selectedTime = TIMES.find(option => option.id === time);
+  const selectedTime = timeTouched ? TIMES.find(option => option.id === time) : undefined;
+  const nextStepLabel = !loc
+    ? "先選擇堵塞位置"
+    : !bld
+      ? "再選擇樓宇類型"
+      : !timeTouched
+        ? "最後選擇上門時段"
+        : "資料已完成，可即時查詢";
   const resetCalculator = () => {
     setLoc(null);
     setBld(null);
     setTime("day");
+    setTimeTouched(false);
     window.history.replaceState(null, "", `${window.location.pathname}#calculator`);
   };
 
@@ -236,7 +248,7 @@ export default function PriceCalculator() {
                 已完成 {completedSteps} / 3 步
               </p>
             </div>
-            {(loc || bld || time !== "day") && (
+            {(loc || bld || timeTouched) && (
               <button
                 type="button"
                 onClick={resetCalculator}
@@ -289,10 +301,11 @@ export default function PriceCalculator() {
                 <OptionBtn
                   key={o.id}
                   o={o}
-                  active={time === o.id}
+                  active={timeTouched && time === o.id}
                   onClick={() => {
                     handleCalculatorStart();
                     setTime(o.id);
+                    setTimeTouched(true);
                   }}
                 />
               ))}
@@ -351,7 +364,7 @@ export default function PriceCalculator() {
                 HK$ ——
               </div>
               <p className="mt-3 text-sm leading-relaxed text-white/60">
-                完成左邊 3 個選項，即刻睇到你嘅初步估價範圍。唔使留電話，唔會有人 sell 你。
+                {nextStepLabel}，即刻睇到初步估價範圍。唔使留電話，唔會有人 sell 你。
               </p>
               <div className="mt-6 flex items-center gap-2 text-xs text-white/40">
                 <Droplets className="h-4 w-4 text-wagreen/60" strokeWidth={2} />
