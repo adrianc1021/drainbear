@@ -319,7 +319,7 @@ export default function Guide() {
             </div>
           </div>
           <div className="card-float overflow-hidden rounded-lg border border-border bg-white">
-            <div className="overflow-x-auto">
+            <div className="guide-price-table hidden overflow-x-auto md:block">
               <table className="w-full min-w-[560px] text-left text-sm">
                 <thead>
                   <tr className="bg-navy text-white">
@@ -356,6 +356,26 @@ export default function Guide() {
                   ))}
                 </tbody>
               </table>
+            </div>
+            <div className="guide-price-mobile divide-y divide-border md:hidden">
+              {PRICE_TABLE.map(r => (
+                <article key={r.service} className="bg-white px-5 py-5">
+                  <div className="flex items-start justify-between gap-4">
+                    <Link
+                      href={r.href}
+                      className="min-w-0 text-sm font-bold leading-relaxed text-navy underline decoration-navy/25 underline-offset-4"
+                    >
+                      {r.service}
+                    </Link>
+                    <span className="shrink-0 whitespace-nowrap font-display text-sm font-extrabold text-wagreen-dark">
+                      {r.range}
+                    </span>
+                  </div>
+                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                    {r.note}
+                  </p>
+                </article>
+              ))}
             </div>
             <div className="flex items-start gap-2.5 border-t border-border bg-mist/40 px-5 py-4 text-xs leading-relaxed text-muted-foreground">
               <AlertTriangle
