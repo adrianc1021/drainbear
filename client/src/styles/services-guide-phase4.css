@@ -511,6 +511,14 @@
   border-bottom: 1px solid var(--phase4-rule);
 }
 
+.phase4-guide .guide-price-mobile article:first-child {
+  background: var(--phase4-paper-soft);
+}
+
+.phase4-guide .guide-price-mobile article p {
+  max-width: 42rem;
+}
+
 .phase4-guide #calculator .card-float {
   border-color: var(--phase4-rule);
   border-radius: 0.25rem;
@@ -754,6 +762,10 @@
 
   .phase4-guide #calculator .calculator-step-value {
     max-width: 7rem;
+  }
+
+  .phase4-guide .guide-price-mobile {
+    display: block;
   }
 
   .phase4-services > section:not(.site-page-hero),
