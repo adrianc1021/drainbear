@@ -71,7 +71,7 @@ function getPrerenderFilePath(distPath: string, urlPath: string) {
     return path.resolve(distPath, "index.html");
   }
 
-  return path.resolve(distPath, pathname.slice(1), "index.html");
+  return path.resolve(distPath, `${pathname.slice(1)}.html`);
 }
 
 function loadPrerenderRoutes(distPath: string) {
