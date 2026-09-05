@@ -14,8 +14,6 @@ import {
 } from "@/components/editorial/EditorialPrimitives";
 import {
   BUSINESS_ID,
-  BUSINESS_NAME,
-  SITE_NAME,
   SITE_URL,
   WEBSITE_ID,
 } from "@/config/site";
@@ -90,14 +88,22 @@ const PROCESS = [
 
 const HOME_JSONLD = {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  "@id": WEBSITE_ID,
+  "@type": "WebPage",
+  "@id": `${SITE_URL}/#webpage`,
   url: `${SITE_URL}/`,
-  name: SITE_NAME,
-  alternateName: [BUSINESS_NAME, "DrainBear", "drainbearhk.com"],
+  name: "香港 24 小時通渠服務｜通渠熊 DrainBear",
+  description:
+    "香港住宅及商業通渠服務總覽，涵蓋座廁、鋅盤、企缸、主渠沙井、污水倒灌、高壓水槍及 CCTV 照喉。",
   inLanguage: "zh-Hant-HK",
-  publisher: {
+  isPartOf: {
+    "@id": WEBSITE_ID,
+  },
+  about: {
     "@id": BUSINESS_ID,
+  },
+  primaryImageOfPage: {
+    "@type": "ImageObject",
+    url: `${SITE_URL}${HERO_IMAGE}`,
   },
 };
 
