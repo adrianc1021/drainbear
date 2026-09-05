@@ -156,13 +156,17 @@ export default function SEO({
     setMeta(
       "name",
       "robots",
-      noindex ? "noindex, follow" : "index, follow, max-image-preview:large"
+      noindex
+        ? "noindex, follow"
+        : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
     );
 
     setMeta(
       "name",
       "googlebot",
-      noindex ? "noindex, follow" : "index, follow, max-image-preview:large"
+      noindex
+        ? "noindex, follow"
+        : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
     );
 
     setCanonical(canonicalPageUrl);
@@ -200,44 +204,58 @@ export default function SEO({
         `${settings.businessName}｜香港專業通渠服務`
     );
 
-    // 全站統一商家實體。
-    // 暫時使用Organization，避免提供未核實或不完整地址。
+    // 用同一組穩定 ID 連接商家與網站，讓搜尋及答案系統識別實體關係。
     setJsonLd("jsonld-business", {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "@id": `${siteUrl}/#organization`,
-      name: settings.businessName,
-      alternateName: ["通渠熊", "DrainBear"],
-      url: `${siteUrl}/`,
-      logo: {
-        "@type": "ImageObject",
-        url: toAbsoluteUrl("/favicon-512x512.png"),
-        width: 512,
-        height: 512,
-      },
-      image: toAbsoluteUrl(
-        settings.defaultOgImage?.url ||
-          "/favicon-512x512.png"
-      ),
-      description: settings.businessDescription,
-      telephone: settings.phoneE164,
-      contactPoint: {
-        "@type": "ContactPoint",
-        telephone: settings.phoneE164,
-        contactType: "customer service",
-        areaServed: "HK",
-        availableLanguage: ["zh-Hant", "zh-HK", "en"],
-      },
-      areaServed: {
-        "@type": "Country",
-        name: "Hong Kong",
-      },
-      knowsAbout: [
-        "住宅通渠",
-        "商業通渠",
-        "高壓水槍洗渠",
-        "CCTV 照喉檢測",
-        "喉管淤塞預防",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": `${siteUrl}/#organization`,
+          name: settings.businessName,
+          alternateName: ["通渠熊", "DrainBear"],
+          url: `${siteUrl}/`,
+          logo: {
+            "@type": "ImageObject",
+            url: toAbsoluteUrl("/favicon-512x512.png"),
+            width: 512,
+            height: 512,
+          },
+          image: toAbsoluteUrl(
+            settings.defaultOgImage?.url ||
+              "/favicon-512x512.png"
+          ),
+          description: settings.businessDescription,
+          telephone: settings.phoneE164,
+          contactPoint: {
+            "@type": "ContactPoint",
+            telephone: settings.phoneE164,
+            contactType: "customer service",
+            areaServed: "HK",
+            availableLanguage: ["zh-Hant", "zh-HK", "en"],
+          },
+          areaServed: {
+            "@type": "Country",
+            name: "Hong Kong",
+          },
+          knowsAbout: [
+            "住宅通渠",
+            "商業通渠",
+            "高壓水槍洗渠",
+            "CCTV 照喉檢測",
+            "喉管淤塞預防",
+          ],
+        },
+        {
+          "@type": "WebSite",
+          "@id": `${siteUrl}/#website`,
+          url: `${siteUrl}/`,
+          name: settings.businessName,
+          alternateName: "DrainBear",
+          inLanguage: "zh-Hant-HK",
+          publisher: {
+            "@id": `${siteUrl}/#organization`,
+          },
+        },
       ],
     });
 
