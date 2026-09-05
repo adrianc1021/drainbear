@@ -210,7 +210,8 @@ function getOutputPath(route: string) {
     return path.join(OUTPUT_ROOT, "index.html");
   }
 
-  return path.join(OUTPUT_ROOT, route.slice(1), "index.html");
+  // Vercel cleanUrls maps /faq to /faq.html without a redirect cycle.
+  return path.join(OUTPUT_ROOT, `${route.slice(1)}.html`);
 }
 
 async function waitForServer() {
