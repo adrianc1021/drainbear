@@ -10,6 +10,8 @@ export const ROUTE_LOADERS: Record<string, RouteLoader> = {
   "/areas/:slug": () => import("@/pages/District"),
   "/blog": () => import("@/pages/Blog"),
   "/blog/:slug": () => import("@/pages/BlogPost"),
+  "/cases": () => import("@/pages/CaseStudies"),
+  "/cases/:slug": () => import("@/pages/CaseStudyDetail"),
   "/faq": () => import("@/pages/FAQ"),
   "/thanks": () => import("@/pages/Thanks"),
 };
@@ -19,7 +21,15 @@ const prefetchedRoutes = new Set<string>();
 /** Start downloading a likely next route without blocking the current page. */
 export function prefetchRoute(href: string) {
   const path = href.split(/[?#]/)[0] || "/";
-  const key = path.startsWith("/services/") ? "/services/:slug" : path;
+  const key = path.startsWith("/services/")
+    ? "/services/:slug"
+    : path.startsWith("/areas/")
+      ? "/areas/:slug"
+      : path.startsWith("/blog/")
+        ? "/blog/:slug"
+        : path.startsWith("/cases/")
+          ? "/cases/:slug"
+          : path;
   const loader = ROUTE_LOADERS[key];
 
   if (!loader || prefetchedRoutes.has(key)) return;
@@ -64,6 +74,14 @@ export function loadBlog() {
 
 export function loadBlogPost() {
   return import("@/pages/BlogPost");
+}
+
+export function loadCaseStudies() {
+  return import("@/pages/CaseStudies");
+}
+
+export function loadCaseStudyDetail() {
+  return import("@/pages/CaseStudyDetail");
 }
 
 export function loadGuide() {

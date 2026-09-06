@@ -10,7 +10,17 @@ const coverageNames = Array.from(
 ).flatMap(match =>
   Array.from(match[1].matchAll(/"([^"]+)"/g), item => item[1])
 );
+const groupNames = Array.from(
+  regionSource.matchAll(/label:\s*"([^"]+)"/g),
+  match => match[1]
+);
 const uniqueCoverageNames = new Set(coverageNames);
+for (const groupName of groupNames) {
+  for (const name of groupName.split("／")) {
+    uniqueCoverageNames.add(name);
+    uniqueCoverageNames.add(name.replace(/區$/, ""));
+  }
+}
 
 if (uniqueCoverageNames.size === 0) {
   throw new Error("未能從 Areas.tsx 讀取服務地區清單");
@@ -20,7 +30,8 @@ console.log("REGIONS 地區總數:", uniqueCoverageNames.size);
 
 const districtSource =
   readFileSync("client/src/lib/districtData.ts", "utf8") +
-  readFileSync("client/src/lib/districtData2.ts", "utf8");
+  readFileSync("client/src/lib/districtData2.ts", "utf8") +
+  readFileSync("client/src/lib/districtData3.ts", "utf8");
 const districtPages = Array.from(
   districtSource.matchAll(/\{\s*slug:\s*"([^"]+)",\s*name:\s*"([^"]+)"/g),
   match => ({ slug: match[1], name: match[2] })
@@ -28,6 +39,10 @@ const districtPages = Array.from(
 
 if (districtPages.length === 0) {
   throw new Error("未能讀取地區著陸頁資料");
+}
+
+if (districtPages.length !== 18) {
+  throw new Error(`預期 18 個專屬地區頁，實際 ${districtPages.length} 個`);
 }
 
 console.log("著陸頁地區:", districtPages.map(page => page.name).join(","));

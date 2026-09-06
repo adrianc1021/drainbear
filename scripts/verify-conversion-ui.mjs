@@ -152,11 +152,11 @@ try {
 
   const footerAreaCount = await footerAreas.getByRole("link").count();
 
-  if (footerAreaCount !== 10) {
-    throw new Error(`Footer 熱門地區連結預期 10 個，實際 ${footerAreaCount}`);
+  if (footerAreaCount !== 18) {
+    throw new Error(`Footer 熱門地區連結預期 18 個，實際 ${footerAreaCount}`);
   }
 
-  console.log("PASS：Footer 10 個熱門地區連結正確");
+  console.log("PASS：Footer 18 個熱門地區連結正確");
 
   await page.goto(`${BASE_URL}/guide`, {
     waitUntil: "domcontentloaded",

@@ -98,7 +98,7 @@ for (const route of sitemapRoutes) {
 
   const htmlPath = route === "/"
     ? path.join(OUTPUT_ROOT, "index.html")
-    : path.join(OUTPUT_ROOT, route.slice(1), "index.html");
+    : path.join(OUTPUT_ROOT, `${route.slice(1)}.html`);
   const html = await fs.readFile(htmlPath, "utf8");
   const robots = extractMetaContent(html, "robots")?.toLowerCase() ?? "";
   const googlebot = extractMetaContent(html, "googlebot")?.toLowerCase() ?? "";

@@ -80,3 +80,27 @@ export interface SanityBlogPost {
   instagramUrl?: string;
   seo: SeoData;
 }
+
+export interface SanityCaseStudy {
+  _id: string;
+  updatedAt?: string;
+  title: string;
+  slug: string;
+  district: string;
+  serviceType: string;
+  projectDate: string;
+  summary: string;
+  problem: string;
+  workPerformed: string;
+  result: string;
+  arrivalMinutes?: number;
+  durationMinutes?: number;
+  equipmentUsed?: string[];
+  coverImage?: SanityImageData;
+  beforeImages?: SanityImageData[];
+  afterImages?: SanityImageData[];
+  featured?: boolean;
+  homepageOrder?: number;
+  instagramUrl?: string;
+  seo: SeoData;
+}

@@ -27,6 +27,7 @@ import { useReveal } from "@/hooks/useReveal";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import { prefetchRoute } from "@/lib/routePrefetch";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
+import { DISTRICTS } from "@/lib/districtData";
 
 const LOGO =
   "https://res.cloudinary.com/pgjztf2p/image/upload/f_auto,q_auto:eco,c_fill,w_96,h_96/v1785147037/LOGO_dmyalo.png";
@@ -37,6 +38,7 @@ const NAV_ITEMS = [
   { label: "問題判斷", href: "/drain-diagnosis" },
   { label: "收費指南", href: "/guide" },
   { label: "服務地區", href: "/areas" },
+  { label: "工程案例", href: "/cases" },
   { label: "通渠小知識", href: "/blog" },
   { label: "常見問題", href: "/faq" },
 ];
@@ -585,18 +587,13 @@ function Footer() {
               aria-label="熱門通渠服務地區"
               className="flex flex-wrap gap-x-4 gap-y-2"
             >
-              {[
-                { label: "觀塘通渠", href: "/areas/kwun-tong" },
-                { label: "沙田通渠", href: "/areas/sha-tin" },
-                { label: "旺角通渠", href: "/areas/mong-kok" },
-                { label: "深水埗通渠", href: "/areas/sham-shui-po" },
-                { label: "銅鑼灣通渠", href: "/areas/causeway-bay" },
-                { label: "北角通渠", href: "/areas/north-point" },
-                { label: "荃灣通渠", href: "/areas/tsuen-wan" },
-                { label: "屯門通渠", href: "/areas/tuen-mun" },
-                { label: "元朗通渠", href: "/areas/yuen-long" },
-                { label: "將軍澳通渠", href: "/areas/tseung-kwan-o" },
-              ].map(item => (
+              {DISTRICTS.map(district => {
+                const item = {
+                  label: `${district.name}通渠`,
+                  href: `/areas/${district.slug}`,
+                };
+
+                return (
                 <Link
                   key={item.href}
                   href={item.href}
@@ -612,7 +609,8 @@ function Footer() {
                 >
                   {item.label}
                 </Link>
-              ))}
+                );
+              })}
             </nav>
           </div>
         </div>

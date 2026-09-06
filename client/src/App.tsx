@@ -13,6 +13,8 @@ import {
   loadAreas,
   loadBlog,
   loadBlogPost,
+  loadCaseStudies,
+  loadCaseStudyDetail,
   loadDrainDiagnosis,
   loadDistrict,
   loadFAQ,
@@ -33,6 +35,8 @@ const District = lazy(loadDistrict);
 const FAQ = lazy(loadFAQ);
 const Blog = lazy(loadBlog);
 const BlogPost = lazy(loadBlogPost);
+const CaseStudies = lazy(loadCaseStudies);
+const CaseStudyDetail = lazy(loadCaseStudyDetail);
 const Guide = lazy(loadGuide);
 const Thanks = lazy(loadThanks);
 const NotFound = lazy(loadNotFound);
@@ -80,6 +84,8 @@ function Router() {
           <Route path="/areas/:slug" component={District} />
           <Route path="/blog" component={Blog} />
           <Route path="/blog/:slug" component={BlogPost} />
+          <Route path="/cases" component={CaseStudies} />
+          <Route path="/cases/:slug" component={CaseStudyDetail} />
           <Route path="/faq" component={FAQ} />
           <Route path="/thanks" component={Thanks} />
           <Route path="/404" component={NotFound} />

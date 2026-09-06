@@ -195,9 +195,9 @@ try {
 
   const expectedLandingPageCount = dedicatedAreaPaths.length;
 
-  if (expectedLandingPageCount !== 10) {
+  if (expectedLandingPageCount !== 18) {
     throw new Error(
-      `預期 10 個專屬地區 route，實際 ${expectedLandingPageCount} 個：${dedicatedAreaPaths.join(", ")}`
+      `預期 18 個專屬地區 route，實際 ${expectedLandingPageCount} 個：${dedicatedAreaPaths.join(", ")}`
     );
   }
 

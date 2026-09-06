@@ -116,6 +116,46 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://drainbearhk.com/areas/central-western</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://drainbearhk.com/areas/southern</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://drainbearhk.com/areas/kowloon-city</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://drainbearhk.com/areas/kwai-tsing</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://drainbearhk.com/areas/wong-tai-sin</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://drainbearhk.com/areas/islands</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://drainbearhk.com/areas/north-district</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://drainbearhk.com/areas/tai-po</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://drainbearhk.com/faq</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -246,5 +286,10 @@
     <loc>https://drainbearhk.com/blog/why-not-drain-cleaner</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://drainbearhk.com/cases</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>

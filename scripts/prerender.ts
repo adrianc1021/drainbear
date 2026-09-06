@@ -25,6 +25,7 @@ const STATIC_ROUTES = [
   "/areas",
   "/faq",
   "/blog",
+  "/cases",
   "/thanks",
 ];
 
@@ -49,6 +50,14 @@ const DISTRICT_SLUGS = [
   "yuen-long",
   "tuen-mun",
   "tseung-kwan-o",
+  "central-western",
+  "southern",
+  "kowloon-city",
+  "kwai-tsing",
+  "wong-tai-sin",
+  "islands",
+  "north-district",
+  "tai-po",
 ];
 
 const STATIC_BLOG_SLUGS = [
@@ -80,6 +89,18 @@ interface SitemapEntry {
 interface SanityBlogEntry {
   slug?: string;
   publishedAt?: string;
+  updatedAt?: string;
+}
+
+interface PublishedCaseEntry {
+  slug: string;
+  lastmod?: string;
+  source: "sanity" | "sitemap";
+}
+
+interface SanityCaseEntry {
+  slug?: string;
+  projectDate?: string;
   updatedAt?: string;
 }
 
@@ -157,6 +178,44 @@ async function loadPublishedSanityBlogs(): Promise<PublishedBlogEntry[]> {
   return entries;
 }
 
+async function loadPublishedSanityCases(): Promise<PublishedCaseEntry[]> {
+  const query = `
+    *[
+      _type == "caseStudy" &&
+      defined(slug.current) &&
+      defined(projectDate) &&
+      coalesce(seo.noIndex, false) == false
+    ] | order(projectDate desc) {
+      "slug": slug.current,
+      projectDate,
+      "updatedAt": _updatedAt
+    }
+  `;
+  const endpoint = new URL(
+    `https://${SANITY_PROJECT_ID}.api.sanity.io/v${SANITY_API_VERSION}/data/query/${SANITY_DATASET}`
+  );
+  endpoint.searchParams.set("query", query);
+
+  const response = await fetch(endpoint, { headers: { Accept: "application/json" } });
+  if (!response.ok) {
+    throw new Error(`Sanity case query failed: HTTP ${response.status} ${response.statusText}`);
+  }
+
+  const payload = (await response.json()) as { result?: SanityCaseEntry[] };
+  return (payload.result ?? []).map(item => {
+    const slug = item.slug?.trim().toLowerCase();
+    if (!slug || !isValidSlug(slug)) {
+      throw new Error(`Invalid Sanity case slug: ${slug || "(empty)"}`);
+    }
+
+    return {
+      slug,
+      lastmod: normalizeDate(item.updatedAt ?? item.projectDate),
+      source: "sanity" as const,
+    };
+  });
+}
+
 async function loadSitemapBlogFallback(): Promise<PublishedBlogEntry[]> {
   const sitemap = await fs.readFile(
     path.resolve("client/public/sitemap.xml"),
@@ -172,6 +231,28 @@ async function loadSitemapBlogFallback(): Promise<PublishedBlogEntry[]> {
       ?.trim()
       .toLowerCase();
 
+    if (!slug || !isValidSlug(slug)) continue;
+
+    entries.push({
+      slug,
+      lastmod: normalizeDate(block.match(/<lastmod>([^<]+)<\/lastmod>/)?.[1]),
+      source: "sitemap",
+    });
+  }
+
+  return entries;
+}
+
+async function loadSitemapCaseFallback(): Promise<PublishedCaseEntry[]> {
+  const sitemap = await fs.readFile(SOURCE_SITEMAP_PATH, "utf8");
+  const entries: PublishedCaseEntry[] = [];
+
+  for (const match of Array.from(sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g))) {
+    const block = match[1];
+    const slug = block
+      .match(/<loc>https:\/\/drainbearhk\.com\/cases\/([^<]+)<\/loc>/)?.[1]
+      ?.trim()
+      .toLowerCase();
     if (!slug || !isValidSlug(slug)) continue;
 
     entries.push({
@@ -241,7 +322,10 @@ function escapeXml(value: string) {
     .replaceAll("'", "&apos;");
 }
 
-function getSitemapEntries(blogEntries: PublishedBlogEntry[]): SitemapEntry[] {
+function getSitemapEntries(
+  blogEntries: PublishedBlogEntry[],
+  caseEntries: PublishedCaseEntry[]
+): SitemapEntry[] {
   const entries: SitemapEntry[] = [
     { route: "/", changefreq: "weekly", priority: "1.0" },
     { route: "/services", changefreq: "monthly", priority: "0.9" },
@@ -263,6 +347,13 @@ function getSitemapEntries(blogEntries: PublishedBlogEntry[]): SitemapEntry[] {
     { route: "/blog", changefreq: "weekly", priority: "0.8" },
     ...blogEntries.map(entry => ({
       route: `/blog/${entry.slug}`,
+      lastmod: entry.lastmod,
+      changefreq: "monthly" as const,
+      priority: "0.7",
+    })),
+    { route: "/cases", changefreq: "monthly", priority: "0.8" },
+    ...caseEntries.map(entry => ({
+      route: `/cases/${entry.slug}`,
       lastmod: entry.lastmod,
       changefreq: "monthly" as const,
       priority: "0.7",
@@ -298,8 +389,11 @@ function renderSitemap(entries: SitemapEntry[]) {
   ].join("\n");
 }
 
-async function updateSitemap(blogEntries: PublishedBlogEntry[]) {
-  const entries = getSitemapEntries(blogEntries);
+async function updateSitemap(
+  blogEntries: PublishedBlogEntry[],
+  caseEntries: PublishedCaseEntry[]
+) {
+  const entries = getSitemapEntries(blogEntries, caseEntries);
   const sitemap = renderSitemap(entries);
 
   // Keep the build artifact and the checked-in fallback in sync. The fallback
@@ -308,7 +402,7 @@ async function updateSitemap(blogEntries: PublishedBlogEntry[]) {
   await fs.writeFile(SOURCE_SITEMAP_PATH, sitemap, "utf8");
 
   console.log(
-    `Rebuilt sitemap with ${entries.length} indexable URLs (${blogEntries.length} blog routes).`
+    `Rebuilt sitemap with ${entries.length} indexable URLs (${blogEntries.length} blog routes, ${caseEntries.length} case routes).`
   );
 }
 
@@ -434,11 +528,26 @@ async function prerender() {
 
   const blogEntries = mergeBlogEntries(publishedBlogEntries);
 
+  let caseEntries: PublishedCaseEntry[];
+  let caseRouteSource = "Sanity";
+
+  try {
+    caseEntries = await loadPublishedSanityCases();
+  } catch (error) {
+    console.warn(
+      "Sanity unavailable; preserving published case routes from sitemap.",
+      error
+    );
+    caseEntries = await loadSitemapCaseFallback();
+    caseRouteSource = "sitemap fallback";
+  }
+
   const routes = [
     ...STATIC_ROUTES,
     ...SERVICE_SLUGS.map(slug => `/services/${slug}`),
     ...DISTRICT_SLUGS.map(slug => `/areas/${slug}`),
     ...blogEntries.map(entry => `/blog/${entry.slug}`),
+    ...caseEntries.map(entry => `/cases/${entry.slug}`),
   ];
 
   if (new Set(routes).size !== routes.length) {
@@ -461,6 +570,9 @@ async function prerender() {
 
   console.log(
     `Found ${publishedBlogEntries.length} published blog article(s) via ${blogRouteSource}.`
+  );
+  console.log(
+    `Found ${caseEntries.length} published case study/studies via ${caseRouteSource}.`
   );
 
   const server = spawn(process.execPath, ["dist/index.js"], {
@@ -524,7 +636,7 @@ async function prerender() {
     }
 
     await page.close();
-    await updateSitemap(blogEntries);
+    await updateSitemap(blogEntries, caseEntries);
 
     console.log(`Successfully prerendered ${routes.length} routes.`);
   } finally {

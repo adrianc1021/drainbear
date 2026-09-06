@@ -24,7 +24,7 @@ import {
 import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
 import { getDistrict } from "@/lib/districtData";
 import NotFound from "@/pages/NotFound";
-import { BUSINESS_ID, SITE_URL } from "@/config/site";
+import { BUSINESS_ID, SITE_URL, WEBSITE_ID } from "@/config/site";
 
 export default function District() {
   const {slug} = useParams<{slug: string}>();
@@ -41,6 +41,18 @@ export default function District() {
   ];
 
   const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": `${SITE_URL}/areas/${d.slug}#webpage`,
+      url: `${SITE_URL}/areas/${d.slug}`,
+      name: `${d.name}通渠服務`,
+      description: d.metaDescription,
+      dateModified: "2026-09-06",
+      inLanguage: "zh-Hant-HK",
+      isPartOf: { "@id": WEBSITE_ID },
+      about: { "@id": `${SITE_URL}/areas/${d.slug}#service` },
+    },
     {
       "@context": "https://schema.org",
       "@type": "Service",
@@ -242,6 +254,18 @@ export default function District() {
               className="btn-smooth inline-flex min-h-[44px] items-center gap-1.5 font-bold text-navy/70 hover:gap-2.5 hover:text-navy"
             >
               試用估價計算機 <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              href="/drain-diagnosis"
+              className="btn-smooth inline-flex min-h-[44px] items-center gap-1.5 font-bold text-navy/70 hover:gap-2.5 hover:text-navy"
+            >
+              先判斷淤塞問題 <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              href="/cases"
+              className="btn-smooth inline-flex min-h-[44px] items-center gap-1.5 font-bold text-navy/70 hover:gap-2.5 hover:text-navy"
+            >
+              查看工程案例 <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>

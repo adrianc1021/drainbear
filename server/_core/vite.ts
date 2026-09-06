@@ -9,10 +9,13 @@ import viteConfig from "../../vite.config";
 const STATIC_PUBLIC_ROUTES = new Set([
   "/",
   "/services",
+  "/drain-diagnosis",
+  "/service-process",
   "/guide",
   "/areas",
   "/faq",
   "/blog",
+  "/cases",
   "/thanks",
 ]);
 
@@ -27,6 +30,14 @@ const DISTRICT_SLUGS = new Set([
   "yuen-long",
   "tuen-mun",
   "tseung-kwan-o",
+  "central-western",
+  "southern",
+  "kowloon-city",
+  "kwai-tsing",
+  "wong-tai-sin",
+  "islands",
+  "north-district",
+  "tai-po",
 ]);
 
 interface RouteManifest {
@@ -62,6 +73,10 @@ function isStaticPublicRoute(urlPath: string) {
 
 function isPotentialBlogRoute(urlPath: string) {
   return /^\/blog\/[a-z0-9]+(?:-[a-z0-9]+)*$/.test(normalizePath(urlPath));
+}
+
+function isPotentialCaseRoute(urlPath: string) {
+  return /^\/cases\/[a-z0-9]+(?:-[a-z0-9]+)*$/.test(normalizePath(urlPath));
 }
 
 function getPrerenderFilePath(distPath: string, urlPath: string) {
@@ -144,7 +159,9 @@ export async function setupVite(app: Express, server: Server) {
 
       // 開發環境允許合法格式 Blog Slug，實際文章由 Sanity 查詢。
       const isKnownRoute =
-        isStaticPublicRoute(pathname) || isPotentialBlogRoute(pathname);
+        isStaticPublicRoute(pathname) ||
+        isPotentialBlogRoute(pathname) ||
+        isPotentialCaseRoute(pathname);
 
       const trailingSlashRedirect = getTrailingSlashRedirect(url, pathname);
 

@@ -1,7 +1,7 @@
 /**
  * 通渠熊 DrainBear — 地區著陸頁資料
  * 每區獨立長內容：當區特色、常見問題場景、鄰近地點、FAQ（SEO 長尾關鍵字覆蓋）
- * 第一批：觀塘、沙田；第二批（districtData2.ts）：旺角、深水埗、銅鑼灣、北角、荃灣、元朗、屯門、將軍澳
+ * 第一批：觀塘、沙田；第二批：八個熱門地區；第三批：補齊八個主要行政區專頁
  */
 export interface DistrictInfo {
   slug: string;
@@ -125,14 +125,27 @@ const DISTRICTS_BATCH1: DistrictInfo[] = [
 ];
 
 import { DISTRICTS_BATCH2 } from "./districtData2";
+import { DISTRICTS_BATCH3 } from "./districtData3";
 
-/** 全部已有專屬著陸頁的地區（10 區） */
-export const DISTRICTS: DistrictInfo[] = [...DISTRICTS_BATCH1, ...DISTRICTS_BATCH2];
+/** 全部已有專屬著陸頁的地區（18 頁） */
+export const DISTRICTS: DistrictInfo[] = [
+  ...DISTRICTS_BATCH1,
+  ...DISTRICTS_BATCH2,
+  ...DISTRICTS_BATCH3,
+];
 
 /** 地區名 → slug 對照（供 pill 連結使用） */
 export const DISTRICT_SLUGS: Record<string, string> = Object.fromEntries(
   DISTRICTS.map((d) => [d.name, d.slug]),
 );
+
+// 四個既有熱門地區頁同時承接所屬行政區的地圖入口，避免重複薄內容頁。
+Object.assign(DISTRICT_SLUGS, {
+  "油尖旺": "mong-kok",
+  "灣仔": "causeway-bay",
+  "東區": "north-point",
+  "西貢": "tseung-kwan-o",
+});
 
 export function getDistrict(slug: string) {
   return DISTRICTS.find((d) => d.slug === slug);

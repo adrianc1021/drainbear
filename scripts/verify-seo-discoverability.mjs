@@ -33,6 +33,7 @@ for (const route of [
   "/areas",
   "/faq",
   "/blog",
+  "/cases",
 ]) {
   assert(llms.includes(`https://drainbearhk.com${route}`), `llms.txt is missing ${route}`);
 }
@@ -42,6 +43,6 @@ assert(llms.includes("以確認的現場報價為準"), "llms.txt is missing its
 assert(llms.includes("不代表任何排名、推薦或引用保證"), "llms.txt must not promise AI citations");
 assert(vercel.buildCommand === "pnpm build", "Vercel must run the complete build");
 assert(vercel.outputDirectory === "dist/public", "Vercel output directory must be dist/public");
-assert(vercel.rewrites?.some(rule => rule.source === "/(.*)" && rule.destination === "/index.html"), "Vercel SPA fallback rewrite is missing");
+assert(!vercel.rewrites?.some(rule => rule.source === "/(.*)" && rule.destination === "/index.html"), "Vercel catch-all rewrite would bypass prerendered pages");
 
 console.log("PASS: SEO discoverability files and Vercel fallback are configured");

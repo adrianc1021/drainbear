@@ -24,41 +24,43 @@ import {
   trackNavClick,
 } from "@/lib/analytics";
 import { useLatestBlogPosts } from "@/lib/useBlog";
+import { formatCaseDate, formatMinutes } from "@/lib/caseRepository";
+import { useFeaturedCaseStudies } from "@/lib/useCases";
 
 const HERO_IMAGE = "/images/home-drain-technician-wide.jpg";
 
 const CAPABILITY_IMAGE = "/images/home-cctv-inspection.jpg";
 
-const CASE_STUDIES = [
+const COMMON_SCENARIOS = [
   {
     number: "01",
     area: "觀塘",
     type: "商業工程",
-    title: "工廈食堂去水位嚴重淤塞",
+    title: "工廈食堂去水位反覆淤塞",
     description:
-      "活化工廈內食堂鋅盤及地台去水完全停滯，高壓水槍沖洗約 15 米排水管，清除管壁積聚油脂，再即場放水測試。",
-    arrival: "42 分鐘",
-    duration: "約 1.5 小時",
+      "商業廚房常見油脂附於管壁。處理前要先了解隔油設施、受影響管段及營業時段，再決定是否需要高壓清洗。",
+    arrival: "按位置確認",
+    duration: "視管段而定",
   },
   {
     number: "02",
     area: "沙田",
     type: "村屋工程",
-    title: "村屋沙井雨後滿瀉",
+    title: "村屋沙井雨後滿溢",
     description:
-      "大圍村屋沙井雨後倒灌後院，到場抽走積水後以 CCTV 檢查，發現樹根進入管道，再按現場情況處理及測試排水。",
-    arrival: "55 分鐘",
-    duration: "約 2 小時",
+      "應先停止大量排水並隔離污染範圍，再按沙井水位、車輛通道及是否懷疑樹根入侵，安排抽吸、清洗或 CCTV 檢查。",
+    arrival: "按交通確認",
+    duration: "視設備而定",
   },
   {
     number: "03",
     area: "旺角",
     type: "住宅工程",
-    title: "唐樓座廁深夜淤塞",
+    title: "唐樓座廁及共用渠異常",
     description:
-      "深夜接獲座廁淤塞倒灌查詢，師傅到場檢查後，以合適通渠工具疏通；動工前確認收費，完成後清理工作位置。",
-    arrival: "31 分鐘",
-    duration: "約 45 分鐘",
+      "若只有一個座廁受影響，可能是潔具或單位支渠；若多戶同時倒灌，應通知管理處並檢查大廈共用主渠。",
+    arrival: "先確認範圍",
+    duration: "視渠位而定",
   },
 ] as const;
 
@@ -108,6 +110,22 @@ const HOME_JSONLD = {
 };
 
 function EditorialCases() {
+  const { studies, isLoading } = useFeaturedCaseStudies(3);
+  const hasVerifiedStudies = studies.length > 0;
+  const records = hasVerifiedStudies
+    ? studies.map((study, index) => ({
+        number: String(index + 1).padStart(2, "0"),
+        area: study.district,
+        type: study.serviceLabel,
+        title: study.title,
+        description: study.summary,
+        arrival: formatMinutes(study.arrivalMinutes) || "未有紀錄",
+        duration: formatMinutes(study.durationMinutes) || "未有紀錄",
+        slug: study.slug,
+        date: formatCaseDate(study.projectDate),
+      }))
+    : COMMON_SCENARIOS.map(study => ({ ...study, slug: undefined, date: undefined }));
+
   return (
     <section
       aria-labelledby="home-cases-heading"
@@ -117,22 +135,23 @@ function EditorialCases() {
       <div className="db-container py-[var(--db-editorial-section)]">
         <div className="home-section-head grid gap-8 border-b border-[var(--db-rule)] pb-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
           <div>
-            <EditorialKicker>Field notes / 工程紀錄</EditorialKicker>
+            <EditorialKicker>{hasVerifiedStudies ? "Field notes / 工程紀錄" : "Decision guide / 常見場景"}</EditorialKicker>
             <h2 id="home-cases-heading" className="db-editorial-heading mt-6">
-              工程實錄，
+              {hasVerifiedStudies ? "已核實紀錄，" : "先判斷範圍，"}
               <br />
-              專業處理。
+              再選處理方法。
             </h2>
           </div>
 
           <p className="max-w-xl text-base leading-8 text-[var(--db-copy)] lg:justify-self-end">
-            以下為實際工程紀錄摘要。不同樓宇、管道結構及淤塞程度會影響處理方法，
-            到場時間與施工時間不構成服務保證。
+            {hasVerifiedStudies
+              ? "以下資料來自已公開的真實工程紀錄。不同樓宇、管道結構及淤塞程度會影響處理方法，紀錄不構成其他個案的時間或結果保證。"
+              : "以下是常見情況的判斷示例，並非指定客戶工程。真實案例只會在資料、日期及相片完成核對後公開。"}
           </p>
         </div>
 
         <div className="home-case-list border-b border-[var(--db-rule)]">
-          {CASE_STUDIES.map(study => (
+          {records.map(study => (
             <article
               key={study.number}
               className="home-case-row grid gap-6 border-t border-[var(--db-rule)] py-9 md:grid-cols-[4rem_0.7fr_1.3fr] md:py-12"
@@ -155,13 +174,19 @@ function EditorialCases() {
                   {study.description}
                 </p>
 
+                {study.slug ? (
+                  <Link href={`/cases/${study.slug}`} className="mt-4 inline-flex min-h-11 items-center gap-2 font-black text-[var(--db-ink)] hover:text-[var(--db-safety)]">
+                    查看完整紀錄 <ArrowRight className="h-4 w-4" />
+                  </Link>
+                ) : null}
+
                 <dl className="mt-6 grid grid-cols-2 border-y border-[var(--db-rule)] py-4">
                   <div>
                     <dt className="text-xs font-black uppercase tracking-[0.1em] text-[var(--db-copy)]">
-                      Arrival record
+                      {study.date ? "Project date" : "Arrival"}
                     </dt>
                     <dd className="mt-1 font-black text-[var(--db-ink)]">
-                      {study.arrival}
+                      {study.date || study.arrival}
                     </dd>
                   </div>
 
@@ -177,6 +202,14 @@ function EditorialCases() {
               </div>
             </article>
           ))}
+        </div>
+        <div className="mt-7 flex flex-wrap items-center justify-between gap-4">
+          <p className="text-sm leading-6 text-[var(--db-copy)]">
+            {isLoading ? "正在同步已公開工程紀錄…" : "只有已完成資料核對的案例才會公開。"}
+          </p>
+          <Link href="/cases" className="inline-flex min-h-11 items-center gap-2 font-black text-[var(--db-ink)] hover:text-[var(--db-safety)]">
+            查看工程案例 <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </div>
     </section>
