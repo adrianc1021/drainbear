@@ -1,0 +1,243 @@
+/*
+ * DrainBear visual upgrade
+ * A restrained, image-led editorial layer for the complete site.
+ * Keep conversion controls direct and keep content inside predictable tracks.
+ */
+
+:root {
+  --db-vu-ink: #11161a;
+  --db-vu-paper: #f5f6f3;
+  --db-vu-paper-deep: #e7ebe6;
+  --db-vu-orange: #eb5b19;
+  --db-vu-green: #25d366;
+  --db-vu-rule: rgba(17, 22, 26, 0.16);
+}
+
+/* Shared chrome: a quiet frame with one unmistakable safety-orange signal. */
+[data-site-header="true"] {
+  border-top: 3px solid var(--db-vu-orange);
+}
+
+[data-site-header="true"] .site-header__row {
+  min-height: 4.5rem;
+  padding-inline: clamp(1.25rem, 4vw, 4.5rem);
+}
+
+[data-site-header="true"] .site-header__brand img {
+  border: 1px solid rgba(17, 22, 26, 0.18);
+  background: var(--db-vu-paper);
+  padding: 0.18rem;
+}
+
+[data-site-header="true"] .site-header__nav-link {
+  letter-spacing: 0;
+}
+
+[data-site-header="true"] .site-header__nav-link[aria-current="page"] {
+  font-weight: 900;
+}
+
+[data-site-header="true"] [data-header-whatsapp="true"] a {
+  min-height: 2.9rem;
+  padding-inline: 1.1rem;
+  box-shadow: 3px 3px 0 rgba(17, 22, 26, 0.16);
+}
+
+/* Homepage hero: use a solid editorial field instead of a soft card or blob. */
+.home-conversion-hero {
+  border-bottom: 1px solid var(--db-vu-rule);
+  background: var(--db-vu-paper);
+}
+
+.home-conversion-hero__image {
+  filter: saturate(0.82) contrast(1.04);
+}
+
+.home-conversion-hero__wash {
+  width: 59%;
+  background: rgba(248, 249, 247, 0.94);
+}
+
+.home-conversion-hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 43rem;
+  padding-block: 1.5rem;
+}
+
+.home-conversion-hero__content::before {
+  position: absolute;
+  top: 0;
+  left: -1.25rem;
+  width: 3px;
+  height: 4.75rem;
+  background: var(--db-vu-orange);
+  content: "";
+}
+
+.home-conversion-hero .db-display {
+  max-width: 10.5em;
+  text-wrap: balance;
+}
+
+.home-conversion-hero__field-note {
+  border-left: 3px solid var(--db-vu-orange);
+  box-shadow: 4px 4px 0 rgba(17, 22, 26, 0.18);
+}
+
+.home-conversion-hero__proofs {
+  max-width: 41rem;
+}
+
+.home-photo-quote {
+  border-block: 1px solid rgba(17, 22, 26, 0.2);
+}
+
+.home-photo-quote a,
+.home-editorial .db-primary-action {
+  border-radius: 2px;
+  box-shadow: 4px 4px 0 rgba(17, 22, 26, 0.2);
+}
+
+/* Services index: remove the remaining soft SaaS treatment from image rows. */
+.phase4-services > section:nth-of-type(2) > .container > div > div:first-child > div,
+.phase4-services > section:nth-of-type(2) .pointer-events-none {
+  display: none !important;
+}
+
+.phase4-services > section:nth-of-type(2) img {
+  border: 1px solid var(--db-vu-rule);
+  box-shadow: 10px 10px 0 var(--db-vu-paper-deep) !important;
+  filter: saturate(0.86) contrast(1.03);
+}
+
+.phase4-services > section:nth-of-type(2) > .container > div > div:last-child {
+  min-width: 0;
+}
+
+.phase4-services > section:nth-of-type(2) > .container > div > div:last-child > div:first-child {
+  width: fit-content;
+  max-width: 100%;
+}
+
+.phase4-services > section:nth-of-type(2) a {
+  position: relative;
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  border-bottom: 1px solid currentColor;
+  padding-inline: 0.15rem;
+  font-weight: 900;
+}
+
+.phase4-services > section:nth-of-type(3) a,
+.phase4-services > section:nth-of-type(4) .card-float,
+.phase4-services > section:nth-of-type(5) .card-float {
+  border-radius: 0 !important;
+}
+
+.phase4-services > section:nth-of-type(3) a:hover,
+.phase4-services > section:nth-of-type(4) .card-float:hover,
+.phase4-services > section:nth-of-type(5) .card-float:hover {
+  background: var(--db-vu-paper) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Inner service pages: stronger image frame and a calmer, readable hero. */
+.phase4-service-detail__hero {
+  background: var(--db-vu-paper) !important;
+  border-bottom: 1px solid var(--db-vu-rule);
+}
+
+.phase4-service-detail__hero h1 {
+  max-width: 14em;
+  line-height: 1.12;
+  letter-spacing: 0;
+}
+
+.phase4-service-detail__hero > .container > div:last-child {
+  border: 1px solid var(--db-vu-rule);
+  border-radius: 0 !important;
+  box-shadow: 10px 10px 0 var(--db-vu-paper-deep) !important;
+}
+
+.phase4-service-detail__hero > .container > div:last-child img {
+  filter: saturate(0.84) contrast(1.04);
+}
+
+/* Pricing and information pages: tables and utility links read as documents. */
+.phase4-guide .card-float,
+.phase4-guide .card-accent {
+  border-radius: 0 !important;
+}
+
+.phase4-guide .guide-price-table th {
+  letter-spacing: 0;
+}
+
+.phase4-guide .guide-price-table tbody tr {
+  transition: background-color 180ms ease;
+}
+
+.phase4-guide .guide-price-table tbody tr:hover {
+  background: #eef4ee !important;
+}
+
+/* Footer gets a measured baseline and keeps long district strings contained. */
+[data-site-footer="true"] .container {
+  max-width: 88rem;
+}
+
+[data-site-footer="true"] p,
+[data-site-footer="true"] a {
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 1024px) {
+  .home-conversion-hero__layout {
+    grid-template-columns: minmax(0, 0.9fr) minmax(25rem, 1.1fr);
+  }
+
+  .home-conversion-hero__content {
+    padding-block: 2.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  [data-site-header="true"] .site-header__row {
+    min-height: 4rem;
+  }
+
+  .home-conversion-hero__wash {
+    width: 100%;
+    height: 62%;
+    background: rgba(248, 249, 247, 0.95);
+  }
+
+  .home-conversion-hero__content {
+    padding-block: 0.75rem;
+  }
+
+  .home-conversion-hero__content::before {
+    left: -0.75rem;
+    height: 3.5rem;
+  }
+
+  .home-conversion-hero__field-note {
+    right: 1.25rem;
+    left: 1.25rem;
+    justify-content: space-between;
+  }
+
+  .phase4-services > section:nth-of-type(2) img,
+  .phase4-service-detail__hero > .container > div:last-child {
+    box-shadow: 6px 6px 0 var(--db-vu-paper-deep) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .phase4-guide .guide-price-table tbody tr {
+    transition: none;
+  }
+}
