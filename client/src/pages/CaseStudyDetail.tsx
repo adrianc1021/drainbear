@@ -64,10 +64,10 @@ export default function CaseStudyDetail() {
         <>
           <article>
             <header className="border-b border-[var(--db-rule)]">
-              <div className="db-container grid gap-10 py-12 md:py-18 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
+              <div className="db-container grid gap-10 py-12 md:py-18 lg:grid-cols-[minmax(0,1.05fr)_minmax(18rem,0.75fr)] lg:items-end lg:gap-16">
                 <div>
                   <p className="text-xs font-black uppercase tracking-[0.15em] text-[var(--db-safety)]">{study.serviceLabel}</p>
-                  <h1 className="mt-5 max-w-4xl font-display text-4xl font-black leading-[1.08] text-[var(--db-ink)] md:text-6xl">{study.title}</h1>
+                  <h1 className="case-study-detail__title mt-5 max-w-3xl font-display font-black leading-[1.1] text-[var(--db-ink)]">{study.title}</h1>
                   <p className="mt-6 max-w-3xl text-lg leading-8 text-[var(--db-copy)]">{study.summary}</p>
                 </div>
                 <dl className="grid grid-cols-2 border-y border-[var(--db-rule)] text-sm">

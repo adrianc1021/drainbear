@@ -52,17 +52,17 @@ export default function CaseStudies() {
       />
       <Breadcrumbs items={CRUMBS} />
 
-      <header className="border-b border-[var(--db-rule)]">
-        <div className="db-container grid gap-10 py-14 md:py-20 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
+      <header className="case-studies-hero border-b border-[var(--db-rule)]">
+        <div className="db-container grid gap-8 py-14 md:py-20 lg:grid-cols-[minmax(0,0.95fr)_minmax(18rem,0.85fr)] lg:items-end lg:gap-16">
           <div>
             <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--db-safety)]">
               Field records / 工程紀錄
             </p>
-            <h1 className="mt-5 max-w-3xl font-display text-4xl font-black leading-[1.08] text-[var(--db-ink)] md:text-6xl">
+            <h1 className="case-studies-hero__title mt-5 max-w-2xl font-display font-black text-[var(--db-ink)]">
               現場問題、做法與結果，逐項記錄。
             </h1>
           </div>
-          <p className="max-w-2xl text-base leading-8 text-[var(--db-copy)] lg:justify-self-end">
+          <p className="max-w-xl text-base leading-8 text-[var(--db-copy)] lg:justify-self-end">
             此頁只顯示已在內容系統正式發佈的工程紀錄。個案會隱去客戶完整地址，並列出工程日期、地區、設備及完成測試；不同現場不能視為固定報價或時間保證。
           </p>
         </div>
@@ -76,10 +76,10 @@ export default function CaseStudies() {
         ) : studies.length ? (
           <div className="border-b border-[var(--db-rule)]">
             {studies.map((study, index) => (
-              <article key={study._id} className="border-t border-[var(--db-rule)] py-9 md:py-12">
+              <article key={study._id} className="case-studies-row border-t border-[var(--db-rule)] py-10 md:py-14">
                 <Link
                   href={`/cases/${study.slug}`}
-                  className="group grid gap-7 lg:grid-cols-[4rem_minmax(0,0.8fr)_minmax(0,1.2fr)]"
+                  className="group grid gap-7 lg:grid-cols-[3rem_minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-10"
                 >
                   <span className="text-sm font-black text-[var(--db-safety)]">
                     {String(index + 1).padStart(2, "0")}
