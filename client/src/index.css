@@ -157,7 +157,18 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    box-sizing: border-box;
   }
+
+  html,
+  body,
+  #root {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: clip;
+  }
+
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-sans);
@@ -170,8 +181,40 @@
     font-family: var(--font-display);
     letter-spacing: -0.02em;
   }
-  :where(h1, h2, h3, h4, h5, h6, p, a, button, li, dt, dd) {
+  :where(h1, h2, h3, h4, h5, h6) {
+    overflow-wrap: normal;
+    word-break: keep-all;
+    text-wrap: balance;
+  }
+
+  :where(p, a, button, li, dt, dd, label, figcaption) {
+    overflow-wrap: break-word;
+    word-break: normal;
+  }
+
+  :where(img, svg, video, canvas, iframe) {
+    display: block;
+    max-width: 100%;
+  }
+
+  :where(pre, code, kbd, samp) {
+    max-width: 100%;
     overflow-wrap: anywhere;
+    white-space: pre-wrap;
+  }
+
+  :where(table) {
+    max-width: 100%;
+    border-collapse: collapse;
+  }
+
+  :where(th, td) {
+    overflow-wrap: break-word;
+    word-break: normal;
+  }
+
+  :where(button, a) {
+    min-width: 0;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
