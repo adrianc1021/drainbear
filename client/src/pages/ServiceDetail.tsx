@@ -154,7 +154,7 @@ export default function ServiceDetail() {
           </div>
         </section>
 
-        <section className="border-b border-border bg-white py-8">
+        <section className="service-support border-b border-border bg-white py-8">
           <div className="container grid gap-4 md:grid-cols-2">
             <Link
               href="/drain-diagnosis"
@@ -212,7 +212,7 @@ export default function ServiceDetail() {
         </section>
 
         <section
-          className="border-b border-border bg-mist/55 py-10"
+          className="service-answer border-b border-border bg-mist/55 py-10"
           aria-labelledby="service-answer-summary"
         >
           <div className="container">
@@ -245,7 +245,7 @@ export default function ServiceDetail() {
           </div>
         </section>
 
-        <section className="bg-white py-14 md:py-20">
+        <section className="service-symptoms bg-white py-14 md:py-20">
           <div className="container grid gap-10 lg:grid-cols-2">
             <article>
               <div className="flex items-center gap-3">
@@ -289,7 +289,7 @@ export default function ServiceDetail() {
           </div>
         </section>
 
-        <section className="bg-mist py-14 md:py-20">
+        <section className="service-steps bg-mist py-14 md:py-20">
           <div className="container">
             <div className="mx-auto max-w-2xl text-center">
               <p className="text-xs font-bold tracking-[0.2em] text-safety">
@@ -324,7 +324,7 @@ export default function ServiceDetail() {
           </div>
         </section>
 
-        <section className="bg-white py-14 md:py-20">
+        <section className="service-costs bg-white py-14 md:py-20">
           <div className="container grid gap-8 lg:grid-cols-2">
             <article className="rounded-xl border border-border p-7 md:p-8">
               <div className="flex items-center gap-3">
@@ -386,7 +386,7 @@ export default function ServiceDetail() {
           </div>
         </section>
 
-        <section className="bg-mist py-14 md:py-20">
+        <section className="service-faq bg-mist py-14 md:py-20">
           <div className="container max-w-3xl">
             <h2 className="font-display text-3xl font-black text-navy">
               {service.shortName}常見問題
@@ -409,7 +409,7 @@ export default function ServiceDetail() {
           </div>
         </section>
 
-        <section className="bg-white py-14 md:py-20">
+        <section className="service-related bg-white py-14 md:py-20">
           <div className="container">
             <h2 className="font-display text-2xl font-black text-navy">
               相關通渠服務

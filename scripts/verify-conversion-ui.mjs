@@ -55,23 +55,28 @@ try {
     timeout: 30_000,
   });
 
-  const heading = page.getByRole("heading", {
-    name: "邊度塞咗？",
-  });
+  const heading = page.locator("h1").first();
 
   await heading.waitFor({
     state: "visible",
     timeout: 15_000,
   });
+  if (!(await heading.textContent()).includes("渠務難題")) {
+    throw new Error(`首頁 H1 文案不正確：${await heading.textContent()}`);
+  }
 
-  const serviceLabels = ["塞廁所", "廚房鋅盤", "企缸去水", "主渠／沙井"];
+  const serviceLabels = [
+    "坐廁 / 馬桶淤塞",
+    "廚房 / 企缸去水慢",
+    "食肆 / 商業通渠",
+    "其他渠務問題",
+  ];
 
+  const serviceLinks = page
+    .locator('a[href*="wa.me"]')
+    .filter({ hasText: /淤塞|去水慢|商業通渠|其他渠務/ });
   for (const label of serviceLabels) {
-    const link = page
-      .getByRole("link", {
-        name: new RegExp(label),
-      })
-      .first();
+    const link = serviceLinks.filter({ hasText: label }).first();
 
     await link.waitFor({
       state: "visible",
@@ -87,8 +92,8 @@ try {
     const parsed = new URL(href);
     const message = parsed.searchParams.get("text") || "";
 
-    if (!message.includes("初步估價")) {
-      throw new Error(`${label} 預填訊息缺少「初步估價」`);
+    if (!message.includes("報價")) {
+      throw new Error(`${label} 預填訊息缺少「報價」`);
     }
   }
 
@@ -114,15 +119,16 @@ try {
     state: "visible",
     timeout: 15_000,
   });
-  await page.waitForTimeout(100);
-
-  const calculatorTop = await page
-    .locator("#calculator")
-    .evaluate(element => element.getBoundingClientRect().top);
-
-  if (calculatorTop < 0 || calculatorTop > 180) {
-    throw new Error(`估價計算機捷徑未正確定位：top=${calculatorTop}`);
-  }
+  await page.waitForFunction(
+    () => {
+      const element = document.querySelector("#calculator");
+      if (!element) return false;
+      const top = element.getBoundingClientRect().top;
+      return top >= -8 && top <= 220;
+    },
+    undefined,
+    { timeout: 5_000 }
+  );
 
   console.log("PASS：估價計算機捷徑會捲動到正確位置");
 

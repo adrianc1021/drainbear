@@ -186,7 +186,7 @@ export default function PriceCalculator() {
         </span>
         <h3 className="font-display text-base font-bold text-navy">{text}</h3>
       </div>
-      <span className={`calculator-step-value truncate text-xs font-semibold ${
+      <span className={`calculator-step-value text-xs font-semibold ${
         (n === 1 ? selectedLocation : n === 2 ? selectedBuilding : selectedTime)
           ? "text-navy"
           : "text-muted-foreground/60"
@@ -263,7 +263,7 @@ export default function PriceCalculator() {
             </div>
           </div>
           <StepTitle n={1} text="邊度塞咗？" />
-          <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
+          <div className="calculator-options grid gap-2.5">
             {LOCATIONS.map((o) => (
               <OptionBtn
                 key={o.id}
@@ -279,7 +279,7 @@ export default function PriceCalculator() {
 
           <div className="mt-7">
             <StepTitle n={2} text="乜嘢樓宇類型？" />
-            <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+            <div className="calculator-options grid gap-2.5">
               {BUILDINGS.map((o) => (
                 <OptionBtn
                   key={o.id}
@@ -296,7 +296,7 @@ export default function PriceCalculator() {
 
           <div className="mt-7">
             <StepTitle n={3} text="幾時要上門？" />
-            <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+            <div className="calculator-options calculator-options--times grid gap-2.5">
               {TIMES.map((o) => (
                 <OptionBtn
                   key={o.id}
@@ -323,9 +323,10 @@ export default function PriceCalculator() {
           {result ? (
             <>
               <div className="calculator-price mt-3 font-display font-black tracking-tight">
-                <span className="calculator-price-currency">HK$</span>{result.low.toLocaleString()}
+                <span className="calculator-price-currency">HK$</span>
+                <span className="calculator-price-amount">{result.low.toLocaleString()}</span>
                 <span className="calculator-price-divider">–</span>
-                {result.high.toLocaleString()}
+                <span className="calculator-price-amount">{result.high.toLocaleString()}</span>
               </div>
               <div className="mt-4 flex flex-wrap gap-2 text-[11px] font-semibold text-white/65">
                 <span className="border border-white/15 px-2.5 py-1">{result.l.label}</span>

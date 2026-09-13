@@ -75,7 +75,7 @@ export function WhatsAppButton({
       className={`btn-smooth inline-flex min-h-12 items-center justify-center gap-2 border border-navy bg-wagreen px-5 py-2.5 text-sm font-black tracking-[-0.01em] text-navy transition-colors hover:bg-navy hover:text-white ${className}`}
     >
       <MessageCircle className="h-4 w-4" strokeWidth={2.5} />
-      {label}
+      <span>{label}</span>
     </a>
   );
 }

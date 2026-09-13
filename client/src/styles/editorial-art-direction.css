@@ -83,7 +83,7 @@
 }
 
 /* Replace tag pills with compact wayfinding labels. */
-.phase4-services > section:nth-of-type(2) > .container > div > div:last-child > div:first-child,
+.phase4-services > .services-stories > .container > div > div:last-child > div:first-child,
 .phase4-guide > section .rounded-full.bg-navy {
   border-left: 2px solid var(--safety);
   background: transparent !important;
@@ -192,7 +192,7 @@
 }
 
 @media (max-width: 639px) {
-  .phase4-services > section:nth-of-type(2) > .container,
+  .phase4-services > .services-stories > .container,
   .phase4-guide > section > .container {
     padding-inline: 1.25rem;
   }

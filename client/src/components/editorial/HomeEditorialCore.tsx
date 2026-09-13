@@ -84,92 +84,56 @@ export function EditorialHero({ imageSrc }: { imageSrc?: string }) {
   const { phoneDisplay, phoneHref, whatsappDefaultHref } = useContactSettings();
 
   return (
-    <section
-      aria-labelledby="home-editorial-heading"
-      className="home-conversion-hero"
-      data-pr20-section="hero"
-    >
-      {imageSrc ? (
-        <img
-          className="home-conversion-hero__image"
-          src={imageSrc}
-          alt="通渠熊師傅使用通渠機處理淤塞"
-          width="1280"
-          height="960"
-          fetchPriority="high"
-          decoding="async"
-          sizes="100vw"
-        />
-      ) : null}
-
-      <div className="home-conversion-hero__wash" aria-hidden="true" />
-
-      <div className="db-container home-conversion-hero__layout">
-        <div className="home-conversion-hero__content">
-          <EditorialKicker>港九新界・住宅及商業渠務</EditorialKicker>
-
-          <h1 id="home-editorial-heading" className="db-display">
-            <span className="block">香港 24 小時</span>
-            <span className="block">緊急通渠服務</span>
+    <section aria-labelledby="home-editorial-heading" className="brand-hero" data-pr20-section="hero">
+      <div className="db-container brand-hero__grid">
+        <div className="brand-hero__copy">
+          <EditorialKicker>香港 24 小時通渠服務</EditorialKicker>
+          <h1 id="home-editorial-heading">
+            渠務難題，<br /><span>交給通渠熊。</span>
           </h1>
-
-          <p className="home-conversion-hero__promise">
-            先了解情況及報價，確認後才動工
+          <p className="brand-hero__intro">
+            從家居去水，到大廈主渠。<br />
+            先了解問題、清楚報價，再安排合適處理。
           </p>
-
-          <p className="db-lead home-conversion-hero__lead">
-            處理塞廁所、企缸去水、廚房鋅盤淤塞及污水倒灌。
-            可先透過 WhatsApp 提供位置、相片或影片，讓團隊作初步評估。
+          <p className="brand-hero__description">
+            塞廁所、企缸去水慢、鋅盤淤塞或污水倒灌？
+            傳送位置及現場相片，讓團隊幫你判斷下一步。
           </p>
-
-          <div className="home-conversion-hero__actions">
-            <a
-              href={whatsappDefaultHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => {
-                trackCTA("whatsapp", "home_hero");
-                goThanksAfterWhatsApp("home_hero");
-              }}
-              className="db-primary-action"
-            >
-              <MessageCircle
-                className="h-5 w-5"
-                strokeWidth={2.2}
-                aria-hidden="true"
-              />
-              WhatsApp 查詢報價
+          <div className="brand-hero__actions">
+            <a href={whatsappDefaultHref} target="_blank" rel="noopener noreferrer"
+              onClick={() => { trackCTA("whatsapp", "home_hero"); goThanksAfterWhatsApp("home_hero"); }}
+              className="db-primary-action">
+              <MessageCircle className="h-5 w-5 shrink-0" aria-hidden="true" />
+              <span>WhatsApp 查詢報價</span>
             </a>
-
-            <a
-              href={phoneHref}
-              onClick={() => trackCTA("phone", "home_hero")}
-              className="db-secondary-action"
-            >
-              <Phone
-                className="h-4 w-4"
-                strokeWidth={2.2}
-                aria-hidden="true"
-              />
-              {phoneDisplay}
+            <a href={phoneHref} onClick={() => trackCTA("phone", "home_hero")} className="db-secondary-action">
+              <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
+              <span>{phoneDisplay}</span>
             </a>
           </div>
-
-          <ul className="home-conversion-hero__proofs" aria-label="服務承諾">
-            {["確認收費後才動工", "接納工程免檢查費", "按情況安排合適設備"].map(
-              item => (
-                <li key={item}>
-                  <Check aria-hidden="true" />
-                  {item}
-                </li>
-              )
-            )}
+          <ul className="brand-hero__assurances" aria-label="服務安排">
+            {["確認收費後動工", "按現場選擇設備", "完成後測試去水"].map(item => (
+              <li key={item}><Check aria-hidden="true" /><span>{item}</span></li>
+            ))}
           </ul>
         </div>
-
-        <div className="home-conversion-hero__field-note" aria-hidden="true">
-          <span>DrainBear</span>
-          現場通渠處理
+        {imageSrc ? (
+          <figure className="brand-hero__media">
+            <img src={imageSrc} alt="通渠熊師傅使用通渠機處理淤塞"
+              width="1280" height="960" fetchPriority="high" decoding="async"
+              sizes="(min-width: 1024px) 50vw, 100vw" />
+            <figcaption><span>住宅・商業・大廈渠務</span><span>DrainBear / 香港</span></figcaption>
+          </figure>
+        ) : null}
+      </div>
+      <div className="brand-hero__directory">
+        <div className="db-container">
+          <p>先找到你的處理方向</p>
+          <nav aria-label="首頁快速入口">
+            <Link href="/services">通渠服務 <ArrowRight aria-hidden="true" /></Link>
+            <Link href="/guide#calculator">估價計算機 <ArrowRight aria-hidden="true" /></Link>
+            <Link href="/areas">查看服務地區 <ArrowRight aria-hidden="true" /></Link>
+          </nav>
         </div>
       </div>
     </section>

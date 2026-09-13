@@ -4,7 +4,7 @@ import { chromium } from "playwright";
 const PORT = Number(process.env.ROUTE_CONSISTENCY_PORT || 4281);
 const BASE_URL = `http://127.0.0.1:${PORT}`;
 const routes = [
-  ["/", "香港24小時通渠服務", "香港 24 小時緊急通渠服務", "首頁"],
+  ["/", "香港24小時通渠服務", "渠務難題，交給通渠熊。", "首頁"],
   ["/services", "通渠服務｜住宅通渠", "通渠服務", "通渠服務"],
   [
     "/services/toilet-unblocking",

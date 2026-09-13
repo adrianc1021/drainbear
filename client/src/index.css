@@ -182,8 +182,8 @@
     letter-spacing: -0.02em;
   }
   :where(h1, h2, h3, h4, h5, h6) {
-    overflow-wrap: normal;
-    word-break: keep-all;
+    overflow-wrap: anywhere;
+    word-break: normal;
     text-wrap: balance;
   }
 
@@ -260,6 +260,11 @@
   }
 
   .db-container > * {
+    min-width: 0;
+  }
+
+  .flex > *,
+  .inline-flex > * {
     min-width: 0;
   }
 
@@ -799,6 +804,9 @@
   letter-spacing: 0.15em;
   padding: 0.75rem 0.9rem;
   position: absolute;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
   text-transform: uppercase;
 }
 
@@ -876,14 +884,14 @@
 
 /*
  * <br> controls the intended semantic line break.
- * nowrap prevents a second browser-generated break inside each line.
+ * Additional wrapping is allowed when a Chinese line exceeds its container.
  */
 .home-editorial .db-display,
 .home-editorial .db-editorial-heading,
 .home-editorial .db-final-cta-heading {
   max-width: 100%;
   width: auto;
-  word-break: keep-all;
+  word-break: normal;
   overflow-wrap: break-word;
   white-space: normal;
   text-wrap: balance;

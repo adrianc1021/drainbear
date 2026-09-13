@@ -271,7 +271,7 @@ try {
 
   /*
    * Tablet widths:
-   * desktop navigation remains visible and no horizontal overflow
+   * compact navigation opens without squeezing or overlapping the header
    */
   for (const width of [768, 1024]) {
     const context = await browser.newContext({
@@ -285,14 +285,10 @@ try {
       timeout: 30_000,
     });
 
-    await page
-      .getByRole("navigation", {
-        name: "主要導覽",
-      })
-      .waitFor({
-        state: "visible",
-        timeout: 15_000,
-      });
+    await page.locator('[data-site-header="true"]').waitFor({
+      state: "visible",
+      timeout: 15_000,
+    });
 
     const tabletResult = await page.evaluate(() => {
       const header = document.querySelector('[data-site-header="true"]');
@@ -316,8 +312,10 @@ try {
 
       const headerRect = header?.getBoundingClientRect();
       const brandRect = brand?.getBoundingClientRect();
-      const navRect = nav?.getBoundingClientRect();
       const whatsappRect = whatsapp?.getBoundingClientRect();
+      const menuRect = document
+        .querySelector('[data-mobile-menu-trigger="true"]')
+        ?.getBoundingClientRect();
 
       return {
         documentScrollWidth: document.documentElement.scrollWidth,
@@ -325,15 +323,16 @@ try {
         headerLeft: headerRect?.left ?? -1,
         headerRight: headerRect?.right ?? -1,
         visibleNavLinks: links.length,
-        brandNavGap: brandRect && navRect ? navRect.left - brandRect.right : -1,
-        navWhatsappGap:
-          navRect && whatsappRect ? whatsappRect.left - navRect.right : -1,
+        brandWhatsappGap:
+          brandRect && whatsappRect ? whatsappRect.left - brandRect.right : -1,
+        whatsappMenuGap:
+          whatsappRect && menuRect ? menuRect.left - whatsappRect.right : -1,
       };
     });
 
     assert(
-      tabletResult.visibleNavLinks === 7,
-      `${width}px：預期 7 個 desktop navigation links，實際 ${tabletResult.visibleNavLinks}`
+      tabletResult.visibleNavLinks === 0,
+      `${width}px：折疊導覽時不應顯示 desktop links，實際 ${tabletResult.visibleNavLinks}`
     );
 
     assert(
@@ -353,12 +352,26 @@ try {
     );
 
     assert(
-      tabletResult.brandNavGap >= 0 && tabletResult.navWhatsappGap >= 0,
-      `${width}px：品牌、導覽或 WhatsApp CTA 互相重疊 ${JSON.stringify(tabletResult)}`
+      await isVisible(page.locator('[data-mobile-menu-trigger="true"]')),
+      `${width}px：應顯示可用的折疊選單按鈕`
     );
+    assert(
+      tabletResult.brandWhatsappGap >= 0 && tabletResult.whatsappMenuGap >= 0,
+      `${width}px：品牌、WhatsApp 或選單互相重疊 ${JSON.stringify(tabletResult)}`
+    );
+    await page.getByRole("button", { name: "開啟選單", exact: true }).click();
+    await page.locator('[data-mobile-navigation="true"]').waitFor();
+    assert(
+      (await page.locator('[data-mobile-nav-link="true"]').count()) === 8,
+      `${width}px：折疊選單應包含全部八個主要入口`
+    );
+    await page.keyboard.press("Escape");
+    await page
+      .locator('[data-mobile-navigation="true"]')
+      .waitFor({ state: "detached" });
 
     console.log(
-      `PASS：${width}px header 七個 links、WhatsApp CTA、無重疊或水平 overflow`
+      `PASS：${width}px 折疊選單八個入口、WhatsApp CTA、無重疊或水平 overflow`
     );
 
     await context.close();
@@ -394,6 +407,42 @@ try {
       !(await isVisible(page.locator('[data-mobile-cta="true"]'))),
       "1440px：Mobile CTA 不應可見"
     );
+
+    const headerContact = page.locator('[data-header-whatsapp="true"] a');
+    await headerContact.evaluate(element => {
+      element.style.transition = "none";
+    });
+    await headerContact.hover();
+    await page.waitForFunction(
+      () => {
+        const style = getComputedStyle(
+          document.querySelector('[data-header-whatsapp="true"] a')
+        );
+        const luminance = color => {
+          const rgb = color
+            .match(/[\d.]+/g)
+            .slice(0, 3)
+            .map(Number)
+            .map(value => {
+              const channel = value / 255;
+              return channel <= 0.04045
+                ? channel / 12.92
+                : ((channel + 0.055) / 1.055) ** 2.4;
+            });
+          return rgb[0] * 0.2126 + rgb[1] * 0.7152 + rgb[2] * 0.0722;
+        };
+        const ink = luminance(style.color),
+          background = luminance(style.backgroundColor);
+        return (
+          (Math.max(ink, background) + 0.05) /
+            (Math.min(ink, background) + 0.05) >=
+          4.5
+        );
+      },
+      undefined,
+      { timeout: 2000 }
+    );
+    await page.mouse.move(0, 0);
 
     await page.keyboard.press("Tab");
 

@@ -213,7 +213,7 @@ export default function Services() {
         className="phase4-services__hero"
       />
 
-      <section className="border-y border-border bg-mist py-8">
+      <section className="services-tools border-y border-border bg-mist py-8">
         <div className="container grid gap-4 md:grid-cols-2">
           <Link
             href="/drain-diagnosis"
@@ -274,7 +274,7 @@ export default function Services() {
       </section>
 
       {/* 區塊 1：Z-Pattern 交替圖文 */}
-      <section className="bg-white pb-8">
+      <section className="services-stories bg-white pb-8">
         <div className="container flex flex-col gap-20 py-10 md:gap-28">
           {SERVICES.map((s, i) => (
             <div
@@ -336,7 +336,7 @@ export default function Services() {
         </div>
       </section>
 
-      <section className="border-y border-border bg-white py-16 md:py-20">
+      <section className="services-directory border-y border-border bg-white py-16 md:py-20">
         <div className="container">
           <div className="mx-auto max-w-2xl text-center">
             <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">
@@ -381,7 +381,7 @@ export default function Services() {
       </section>
 
       {/* 區塊 2：細分服務範疇 */}
-      <section className="bg-mist py-20 md:py-24">
+      <section className="services-scope bg-mist py-20 md:py-24">
         <div className="container">
           <div className="text-center">
             <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">
@@ -433,7 +433,7 @@ export default function Services() {
       </section>
 
       {/* 區塊 3：4 步解除危機 */}
-      <section className="bg-navy py-20 md:py-24">
+      <section className="services-process bg-navy py-20 md:py-24">
         <div className="container">
           <div className="text-center">
             <div className="mb-3 text-xs font-bold tracking-[0.2em] text-wagreen">

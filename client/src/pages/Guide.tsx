@@ -360,14 +360,14 @@ export default function Guide() {
             <div className="guide-price-mobile divide-y divide-border md:hidden">
               {PRICE_TABLE.map(r => (
                 <article key={r.service} className="bg-white px-5 py-5">
-                  <div className="flex items-start justify-between gap-4">
+                  <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
                     <Link
                       href={r.href}
                       className="min-w-0 text-sm font-bold leading-relaxed text-navy underline decoration-navy/25 underline-offset-4"
                     >
                       {r.service}
                     </Link>
-                    <span className="shrink-0 whitespace-nowrap font-display text-sm font-extrabold text-wagreen-dark">
+                    <span className="max-w-full break-words font-display text-sm font-extrabold text-wagreen-dark">
                       {r.range}
                     </span>
                   </div>

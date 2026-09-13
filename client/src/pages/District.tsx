@@ -85,7 +85,7 @@ export default function District() {
   const waDistrict = whatsappHref(`你好，我喺${d.name}，想查詢通渠服務報價。`);
 
   return (
-    <div>
+    <div className="district-editorial">
       <SEO
         title={`${d.name}通渠｜24 小時特快上門・1 小時到達・不成功不收費｜通渠熊 DrainBear`}
         description={d.metaDescription}
