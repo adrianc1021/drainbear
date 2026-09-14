@@ -465,7 +465,7 @@ export default function ServiceDetail() {
                     `service_detail_footer_${service.slug}`
                   );
                 }}
-                className="mt-7 inline-flex min-h-[48px] items-center justify-center gap-2 rounded-lg bg-wagreen px-8 py-3.5 font-bold text-white hover:bg-wagreen-dark"
+                className="btn-smooth mt-7 inline-flex min-h-[48px] max-w-full items-center justify-center gap-2 rounded-lg bg-wagreen px-8 py-3.5 font-bold text-white hover:bg-wagreen-dark"
               >
                 <MessageCircle className="h-5 w-5" />
                 WhatsApp 查詢
