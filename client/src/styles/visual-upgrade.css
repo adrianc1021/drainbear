@@ -60,6 +60,14 @@ a svg {
   flex-shrink: 0;
 }
 
+/* CTAs remain inside narrow viewports when users enlarge text. */
+.btn-smooth {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
 /* Enlarged text must not turn callout padding into a narrow, clipped column. */
 .site-editorial-callout {
   padding-inline: clamp(20px, 5vw, 56px);
