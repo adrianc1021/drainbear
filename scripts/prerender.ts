@@ -2,6 +2,7 @@ import { spawn } from "node:child_process";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { chromium, type Page } from "playwright";
+import { assessPrerenderSnapshot } from "./prerender-readiness";
 
 const PORT = 4173;
 const BASE_URL = `http://127.0.0.1:${PORT}`;
@@ -76,7 +77,7 @@ const STATIC_BLOG_SLUGS = [
 interface PublishedBlogEntry {
   slug: string;
   lastmod?: string;
-  source: "static" | "sanity" | "sitemap";
+  source: "static" | "sanity";
 }
 
 interface SitemapEntry {
@@ -95,7 +96,7 @@ interface SanityBlogEntry {
 interface PublishedCaseEntry {
   slug: string;
   lastmod?: string;
-  source: "sanity" | "sitemap";
+  source: "sanity";
 }
 
 interface SanityCaseEntry {
@@ -156,16 +157,19 @@ async function loadPublishedSanityBlogs(): Promise<PublishedBlogEntry[]> {
   const payload = (await response.json()) as {
     result?: SanityBlogEntry[];
   };
+  if (!Array.isArray(payload?.result)) {
+    throw new Error(
+      "Sanity blog route query returned no valid result array; refusing to publish."
+    );
+  }
 
   const entries: PublishedBlogEntry[] = [];
 
-  for (const item of payload.result ?? []) {
+  for (const item of payload.result) {
     const slug = item.slug?.trim().toLowerCase();
 
-    if (!slug) continue;
-
-    if (!isValidSlug(slug)) {
-      throw new Error(`Invalid Sanity blog slug: ${slug}`);
+    if (!slug || !isValidSlug(slug)) {
+      throw new Error(`Invalid Sanity blog slug: ${slug || "(empty)"}`);
     }
 
     entries.push({
@@ -196,13 +200,22 @@ async function loadPublishedSanityCases(): Promise<PublishedCaseEntry[]> {
   );
   endpoint.searchParams.set("query", query);
 
-  const response = await fetch(endpoint, { headers: { Accept: "application/json" } });
+  const response = await fetch(endpoint, {
+    headers: { Accept: "application/json" },
+  });
   if (!response.ok) {
-    throw new Error(`Sanity case query failed: HTTP ${response.status} ${response.statusText}`);
+    throw new Error(
+      `Sanity case query failed: HTTP ${response.status} ${response.statusText}`
+    );
   }
 
   const payload = (await response.json()) as { result?: SanityCaseEntry[] };
-  return (payload.result ?? []).map(item => {
+  if (!Array.isArray(payload?.result)) {
+    throw new Error(
+      "Sanity case route query returned no valid result array; refusing to publish."
+    );
+  }
+  return payload.result.map(item => {
     const slug = item.slug?.trim().toLowerCase();
     if (!slug || !isValidSlug(slug)) {
       throw new Error(`Invalid Sanity case slug: ${slug || "(empty)"}`);
@@ -214,55 +227,6 @@ async function loadPublishedSanityCases(): Promise<PublishedCaseEntry[]> {
       source: "sanity" as const,
     };
   });
-}
-
-async function loadSitemapBlogFallback(): Promise<PublishedBlogEntry[]> {
-  const sitemap = await fs.readFile(
-    path.resolve("client/public/sitemap.xml"),
-    "utf8"
-  );
-  const entries: PublishedBlogEntry[] = [];
-  const urlPattern = /<url>([\s\S]*?)<\/url>/g;
-
-  for (const match of Array.from(sitemap.matchAll(urlPattern))) {
-    const block = match[1];
-    const slug = block
-      .match(/<loc>https:\/\/drainbearhk\.com\/blog\/([^<]+)<\/loc>/)?.[1]
-      ?.trim()
-      .toLowerCase();
-
-    if (!slug || !isValidSlug(slug)) continue;
-
-    entries.push({
-      slug,
-      lastmod: normalizeDate(block.match(/<lastmod>([^<]+)<\/lastmod>/)?.[1]),
-      source: "sitemap",
-    });
-  }
-
-  return entries;
-}
-
-async function loadSitemapCaseFallback(): Promise<PublishedCaseEntry[]> {
-  const sitemap = await fs.readFile(SOURCE_SITEMAP_PATH, "utf8");
-  const entries: PublishedCaseEntry[] = [];
-
-  for (const match of Array.from(sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g))) {
-    const block = match[1];
-    const slug = block
-      .match(/<loc>https:\/\/drainbearhk\.com\/cases\/([^<]+)<\/loc>/)?.[1]
-      ?.trim()
-      .toLowerCase();
-    if (!slug || !isValidSlug(slug)) continue;
-
-    entries.push({
-      slug,
-      lastmod: normalizeDate(block.match(/<lastmod>([^<]+)<\/lastmod>/)?.[1]),
-      source: "sitemap",
-    });
-  }
-
-  return entries;
 }
 
 function mergeBlogEntries(
@@ -396,8 +360,8 @@ async function updateSitemap(
   const entries = getSitemapEntries(blogEntries, caseEntries);
   const sitemap = renderSitemap(entries);
 
-  // Keep the build artifact and the checked-in fallback in sync. The fallback
-  // is used when Sanity is temporarily unavailable during a later build.
+  // Keep the build artifact and checked-in sitemap in sync. Route discovery
+  // always uses the current published CMS results, never this historical file.
   await fs.writeFile(SITEMAP_PATH, sitemap, "utf8");
   await fs.writeFile(SOURCE_SITEMAP_PATH, sitemap, "utf8");
 
@@ -406,64 +370,38 @@ async function updateSitemap(
   );
 }
 
-function normalizeRoutePath(value: string) {
-  let result = value || "/";
-
-  while (result.length > 1 && result.endsWith("/")) {
-    result = result.slice(0, -1);
-  }
-
-  return result;
-}
-
 async function waitForRouteSeo(page: Page, route: string) {
-  const expectedPath = normalizeRoutePath(route);
   const deadline = Date.now() + 30_000;
   let lastState: Record<string, unknown> = {};
 
   while (Date.now() < deadline) {
-    const title = await page.title();
-    const canonicalHref = await page
-      .locator('link[rel="canonical"]')
-      .getAttribute("href");
-    const rootText = await page.locator("#root").textContent();
-    const seoReady = await page.locator("html").getAttribute("data-seo-ready");
-    const robots = await page
-      .locator('meta[name="robots"]')
-      .getAttribute("content");
-    const googlebot = await page
-      .locator('meta[name="googlebot"]')
-      .getAttribute("content");
-
-    let canonicalPath = "";
-
-    if (canonicalHref) {
-      canonicalPath = normalizeRoutePath(new URL(canonicalHref).pathname);
-    }
-
-    const noindexReady =
-      expectedPath !== "/thanks" ||
-      Boolean(robots?.includes("noindex") && googlebot?.includes("noindex"));
-
-    lastState = {
-      title,
-      canonicalPath,
-      expectedPath,
-      robots,
-      googlebot,
-      seoReady,
-      hasRootContent: Boolean(rootText?.trim()),
-    };
-
-    if (
-      title &&
-      canonicalPath === expectedPath &&
-      rootText?.trim() &&
-      seoReady === "true" &&
-      noindexReady
-    ) {
-      return;
-    }
+    const state = await page.evaluate(() => ({
+      title: document.title,
+      canonicalHref:
+        document.querySelector('link[rel="canonical"]')?.getAttribute("href") ??
+        null,
+      rootText: document.querySelector("#root")?.textContent ?? null,
+      heading: document.querySelector("h1")?.textContent ?? null,
+      seoReady: document.documentElement.dataset.seoReady ?? null,
+      seoCmsError: document.documentElement.dataset.seoCmsError ?? null,
+      cmsLoadingCount: document.querySelectorAll('[data-cms-loading="true"]')
+        .length,
+      cmsErrorCount: document.querySelectorAll('[data-cms-error="true"]')
+        .length,
+      robots:
+        document
+          .querySelector('meta[name="robots"]')
+          ?.getAttribute("content") ?? null,
+      googlebot:
+        document
+          .querySelector('meta[name="googlebot"]')
+          ?.getAttribute("content") ?? null,
+    }));
+    const result = assessPrerenderSnapshot(state, route, SITE_URL);
+    lastState = { ...state, rootText: state.rootText?.slice(0, 300), result };
+    if (result.error)
+      throw new Error(`Unsafe prerender for ${route}: ${result.error}`);
+    if (result.ready) return;
 
     await page.waitForTimeout(100);
   }
@@ -495,6 +433,16 @@ async function getChromiumLaunchOptions() {
 }
 
 async function prerender() {
+  console.log("Loading current published Sanity blog and case routes...");
+
+  // A stale sitemap cannot prove that newly published URLs are accounted for.
+  // Both CMS queries must succeed before modifying artifacts or rendering.
+  const [publishedBlogEntries, caseEntries] = await Promise.all([
+    loadPublishedSanityBlogs(),
+    loadPublishedSanityCases(),
+  ]);
+  const blogEntries = mergeBlogEntries(publishedBlogEntries);
+
   // Vite has just created dist/public. Do not remove it here,
   // otherwise compiled assets would be deleted before prerendering.
   await fs.rm(PRERENDER_META_ROOT, {
@@ -509,38 +457,6 @@ async function prerender() {
   await fs.mkdir(OUTPUT_ROOT, {
     recursive: true,
   });
-
-  console.log("Loading published Sanity blog routes...");
-
-  let publishedBlogEntries: PublishedBlogEntry[];
-  let blogRouteSource = "Sanity";
-
-  try {
-    publishedBlogEntries = await loadPublishedSanityBlogs();
-  } catch (error) {
-    console.warn(
-      "Sanity unavailable; preserving published blog routes from sitemap.",
-      error
-    );
-    publishedBlogEntries = await loadSitemapBlogFallback();
-    blogRouteSource = "sitemap fallback";
-  }
-
-  const blogEntries = mergeBlogEntries(publishedBlogEntries);
-
-  let caseEntries: PublishedCaseEntry[];
-  let caseRouteSource = "Sanity";
-
-  try {
-    caseEntries = await loadPublishedSanityCases();
-  } catch (error) {
-    console.warn(
-      "Sanity unavailable; preserving published case routes from sitemap.",
-      error
-    );
-    caseEntries = await loadSitemapCaseFallback();
-    caseRouteSource = "sitemap fallback";
-  }
 
   const routes = [
     ...STATIC_ROUTES,
@@ -569,10 +485,10 @@ async function prerender() {
   );
 
   console.log(
-    `Found ${publishedBlogEntries.length} published blog article(s) via ${blogRouteSource}.`
+    `Found ${publishedBlogEntries.length} published blog article(s) via Sanity.`
   );
   console.log(
-    `Found ${caseEntries.length} published case study/studies via ${caseRouteSource}.`
+    `Found ${caseEntries.length} published case study/studies via Sanity.`
   );
 
   const server = spawn(process.execPath, ["dist/index.js"], {

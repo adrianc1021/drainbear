@@ -197,6 +197,12 @@ export const latestPublishedBlogPostsQuery = `
     "slug": slug.current,
     category,
     excerpt,
+    "coverImage": coverImage {
+      alt,
+      "url": asset->url,
+      "width": asset->metadata.dimensions.width,
+      "height": asset->metadata.dimensions.height
+    },
     publishedAt,
     "updatedAt": coalesce(updatedAt, _updatedAt, publishedAt),
     authorName,

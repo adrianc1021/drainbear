@@ -61,43 +61,30 @@ try {
     state: "visible",
     timeout: 15_000,
   });
-  if (!(await heading.textContent()).includes("渠務難題")) {
+  if (!(await heading.textContent()).includes("香港通渠")) {
     throw new Error(`首頁 H1 文案不正確：${await heading.textContent()}`);
   }
 
-  const serviceLabels = [
-    "坐廁 / 馬桶淤塞",
-    "廚房 / 企缸去水慢",
-    "食肆 / 商業通渠",
-    "其他渠務問題",
+  const serviceDestinations = [
+    ["toilet", "/services/toilet-unblocking"],
+    ["bathroom", "/services/bathroom-drain-unblocking"],
+    ["kitchen", "/services/kitchen-sink-unblocking"],
+    ["backflow", "/services/sewage-backflow"],
   ];
-
-  const serviceLinks = page
-    .locator('a[href*="wa.me"]')
-    .filter({ hasText: /淤塞|去水慢|商業通渠|其他渠務/ });
-  for (const label of serviceLabels) {
-    const link = serviceLinks.filter({ hasText: label }).first();
-
-    await link.waitFor({
-      state: "visible",
-      timeout: 10_000,
-    });
-
-    const href = await link.getAttribute("href");
-
-    if (!href || !href.startsWith("https://wa.me/")) {
-      throw new Error(`${label} WhatsApp URL 不正確：${href}`);
-    }
-
-    const parsed = new URL(href);
-    const message = parsed.searchParams.get("text") || "";
-
-    if (!message.includes("報價")) {
-      throw new Error(`${label} 預填訊息缺少「報價」`);
-    }
+  for (const [id, destination] of serviceDestinations) {
+    const link = page.locator(`[data-service-id="${id}"]`);
+    await link.waitFor({ state: "visible" });
+    if ((await link.getAttribute("href")) !== destination)
+      throw new Error(`${id} 服務入口錯誤`);
   }
-
-  console.log("PASS：四個服務快捷選擇可見且 WhatsApp 訊息正確");
+  const contact = page.locator('.brand-hero__actions a[href*="wa.me"]');
+  const contactUrl = new URL(await contact.getAttribute("href"));
+  if (
+    contactUrl.hostname !== "wa.me" ||
+    !contactUrl.searchParams.get("text")?.includes("報價")
+  )
+    throw new Error("首頁 WhatsApp 查詢訊息錯誤");
+  console.log("PASS：四個服務快捷入口及 WhatsApp 查詢訊息正確");
 
   const calculatorLink = page.getByRole("link", {
     name: /使用即時估價計算機/,

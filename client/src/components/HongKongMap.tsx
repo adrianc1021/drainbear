@@ -22,12 +22,6 @@ const REGION_LABEL: Record<MapDistrict["region"], string> = {
   nt: "新界及離島",
 };
 
-const REGION_ETA: Record<MapDistrict["region"], string> = {
-  hki: "45 分鐘內",
-  kln: "45 分鐘內",
-  nt: "60 分鐘內",
-};
-
 /** 無專頁地區的覆蓋範圍簡述（點擊資訊卡顯示） */
 const COVERAGE_HINT: Record<string, string> = {
   "central-western": "中環・上環・西環・半山・山頂",
@@ -167,7 +161,7 @@ export default function HongKongMap() {
             )}
             <span className="mt-0.5 flex items-center gap-1 text-[11px] font-semibold text-white/85">
               <Clock className="h-3 w-3 text-wagreen" strokeWidth={2.5} />
-              預計最快 {REGION_ETA[hoveredDistrict.region]}到達*
+              提供位置後確認到場時間
             </span>
           </div>
         )}
@@ -218,27 +212,25 @@ export default function HongKongMap() {
 
             <div className="mt-3 inline-flex w-fit items-center gap-1.5 rounded-full bg-wagreen/10 px-3 py-1 text-xs font-bold text-wagreen-dark">
               <Clock className="h-3 w-3" strokeWidth={2.5} />
-              最快 {REGION_ETA[selected.region]}特快到達*
+              按位置及設備確認到場時間
             </div>
 
             <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
               {selected.slug ? (
                 <>
-                  覆蓋{PAGE_HINT[selected.id] ?? `${selected.name}全區`}
-                  。此區設有專屬服務頁，可了解當區常見渠務問題及服務安排。
+                  {PAGE_HINT[selected.id] ?? COVERAGE_HINT[selected.id] ?? selected.name}
+                  可查詢服務。此區設有專屬服務頁，可了解當區常見渠務問題及服務安排。
                 </>
               ) : (
                 <>
-                  覆蓋{COVERAGE_HINT[selected.id] ?? `${selected.name}全區`}
-                  。24
-                  小時接受查詢，團隊會按位置、交通及所需設備確認上門安排與報價。
+                  {COVERAGE_HINT[selected.id] ?? selected.name}可查詢服務。24
+                  小時接受查詢，團隊會按位置、交通及所需設備確認可達範圍與上門安排。
                 </>
               )}
             </p>
 
             <p className="mt-3 text-[11px] leading-relaxed text-muted-foreground">
-              *
-              到達時間為目標安排，視乎即時交通、地點、師傅及設備供應，查詢時確認。
+              到場時間按交通、地點、人員及設備供應確認；離島亦需確認船期及運送條件。先提供初步估算，現場檢查後確認總價才動工。
             </p>
 
             {selected.slug ? (

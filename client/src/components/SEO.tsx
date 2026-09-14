@@ -3,7 +3,7 @@
  * 每頁獨立 title / description / canonical / Open Graph / JSON-LD
  */
 import { useEffect } from "react";
-import {useSiteSettings} from "@/contexts/SiteSettingsContext";
+import { useSiteSettings } from "@/contexts/SiteSettingsContext";
 
 function setMeta(attr: "name" | "property", key: string, content: string) {
   let element = document.head.querySelector<HTMLMetaElement>(
@@ -76,6 +76,8 @@ export interface SEOProps {
   ogDescription?: string;
   imageAlt?: string;
   contentReady?: boolean;
+  metadataReady?: boolean;
+  metadataError?: boolean;
   jsonLd?: object | object[];
   keywords?: string;
   image?: string;
@@ -96,6 +98,8 @@ export default function SEO({
   ogDescription,
   imageAlt,
   contentReady = true,
+  metadataReady = true,
+  metadataError = false,
   jsonLd,
   keywords,
   image,
@@ -106,13 +110,14 @@ export default function SEO({
   const {
     settings,
     isLoading: isSiteSettingsLoading,
+    hasCmsError: hasSiteSettingsError,
   } = useSiteSettings();
 
   useEffect(() => {
-    const isSeoReady =
-      contentReady && !isSiteSettingsLoading;
-
-    if (!isSeoReady) {
+    document.documentElement.dataset.seoCmsError = String(
+      metadataError || hasSiteSettingsError
+    );
+    if (!contentReady) {
       document.documentElement.dataset.seoReady = "false";
       return;
     }
@@ -123,9 +128,7 @@ export default function SEO({
     const toAbsoluteUrl = (value = "/") => {
       if (/^https?:\/\//i.test(value)) return value;
 
-      const normalizedValue = value.startsWith("/")
-        ? value
-        : `/${value}`;
+      const normalizedValue = value.startsWith("/") ? value : `/${value}`;
 
       return new URL(normalizedValue, `${siteUrl}/`).toString();
     };
@@ -135,9 +138,7 @@ export default function SEO({
       ? toAbsoluteUrl(canonicalUrl)
       : pageUrl;
     const socialImage = toAbsoluteUrl(
-      image ||
-        settings.defaultOgImage?.url ||
-        "/favicon-512x512.png"
+      image || settings.defaultOgImage?.url || "/favicon-512x512.png"
     );
     const socialTitle = ogTitle || title;
     const socialDescription = ogDescription || description;
@@ -177,11 +178,7 @@ export default function SEO({
     setMeta("property", "og:description", socialDescription);
     setMeta("property", "og:url", canonicalPageUrl);
     setMeta("property", "og:type", type);
-    setMeta(
-      "property",
-      "og:site_name",
-      settings.businessName
-    );
+    setMeta("property", "og:site_name", settings.businessName);
     setMeta("property", "og:locale", "zh_HK");
     setMeta("property", "og:image", socialImage);
     setMeta(
@@ -221,8 +218,7 @@ export default function SEO({
             height: 512,
           },
           image: toAbsoluteUrl(
-            settings.defaultOgImage?.url ||
-              "/favicon-512x512.png"
+            settings.defaultOgImage?.url || "/favicon-512x512.png"
           ),
           description: settings.businessDescription,
           telephone: settings.phoneE164,
@@ -280,7 +276,37 @@ export default function SEO({
       document.getElementById("jsonld-breadcrumb")?.remove();
     }
 
-    document.documentElement.dataset.seoReady = "true";
+    // Visitors get complete fallback metadata immediately. Prerender must wait
+    // until the CMS has resolved so canonical/noindex overrides are not lost.
+    document.documentElement.dataset.seoReady = String(
+      metadataReady && !isSiteSettingsLoading
+    );
+  }, [
+    title,
+    description,
+    path,
+    canonicalUrl,
+    ogTitle,
+    ogDescription,
+    imageAlt,
+    contentReady,
+    metadataReady,
+    metadataError,
+    isSiteSettingsLoading,
+    hasSiteSettingsError,
+    jsonLd,
+    keywords,
+    image,
+    type,
+    breadcrumbs,
+    noindex,
+    settings,
+  ]);
+
+  // Metadata can refresh after a visitor has started reading. Navigation
+  // scrolling belongs to the route/content lifecycle, not a CMS refresh.
+  useEffect(() => {
+    if (!contentReady) return;
 
     const hash = window.location.hash.slice(1);
 
@@ -303,24 +329,7 @@ export default function SEO({
     }
 
     window.scrollTo(0, 0);
-  }, [
-    title,
-    description,
-    path,
-    canonicalUrl,
-    ogTitle,
-    ogDescription,
-    imageAlt,
-    contentReady,
-    isSiteSettingsLoading,
-    jsonLd,
-    keywords,
-    image,
-    type,
-    breadcrumbs,
-    noindex,
-    settings,
-  ]);
+  }, [path, contentReady]);
 
   return null;
 }

@@ -4,7 +4,7 @@ import { chromium } from "playwright";
 const PORT = Number(process.env.ROUTE_CONSISTENCY_PORT || 4281);
 const BASE_URL = `http://127.0.0.1:${PORT}`;
 const routes = [
-  ["/", "香港24小時通渠服務", "渠務難題，交給通渠熊。", "首頁"],
+  ["/", "香港通渠服務", "香港通渠，先報價後動工。", "首頁"],
   ["/services", "通渠服務｜住宅通渠", "通渠服務", "通渠服務"],
   [
     "/services/toilet-unblocking",
@@ -20,7 +20,7 @@ const routes = [
   ],
   ["/guide", "香港通渠價錢", "香港通渠價錢及收費，動工前確認報價", "收費指南"],
   ["/areas", "服務地區覆蓋", "港九新界及離島通渠服務", "服務地區"],
-  ["/areas/kwun-tong", "觀塘通渠", "觀塘通渠｜24 小時特快上門", "服務地區"],
+  ["/areas/kwun-tong", "觀塘通渠", "觀塘通渠", "服務地區"],
   ["/areas/tai-po", "大埔通渠", "大埔通渠｜村屋、屋苑及食肆渠務", "服務地區"],
   ["/cases", "通渠工程案例", "現場問題、做法與結果", "工程案例"],
   ["/faq", "常見問題", "常見問題", "常見問題"],

@@ -23,6 +23,15 @@ const isLocalPreview = ["127.0.0.1", "localhost"].includes(
 );
 const publishedCmsResponses = new Map();
 
+async function settleTextLayout(page) {
+  await page.evaluate(async () => {
+    await document.fonts.ready;
+    await new Promise(resolve =>
+      requestAnimationFrame(() => requestAnimationFrame(resolve))
+    );
+  });
+}
+
 async function inspect(page) {
   return page.evaluate(() => {
     const problems = new Set();
@@ -174,12 +183,14 @@ for (const engine of engines) {
           await page.addStyleTag({
             content: `html { font-size: ${textScale * 100}% !important; }`,
           });
+          await settleTextLayout(page);
         }
         const problems = await inspect(page);
         if (problems.length)
           failures.push(`${engine} ${width} ${route}: ${problems.join(" | ")}`);
         if (interactions) {
           const checkState = async state => {
+            await settleTextLayout(page);
             const issues = await inspect(page);
             if (issues.length)
               failures.push(

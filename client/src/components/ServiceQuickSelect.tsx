@@ -1,33 +1,33 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Bath, CookingPot, Droplets, Waves } from "lucide-react";
 import { Link } from "wouter";
 import { trackNavClick } from "@/lib/analytics";
 import { prefetchRoute } from "@/lib/routePrefetch";
-import {
-  EditorialIndex,
-  EditorialKicker,
-} from "@/components/editorial/EditorialPrimitives";
 
 const QUICK_SERVICES = [
   {
     id: "toilet",
+    icon: Droplets,
     label: "廁所／座廁淤塞",
     description: "去水慢、倒灌或完全淤塞",
     href: "/services/toilet-unblocking",
   },
   {
     id: "bathroom",
+    icon: Bath,
     label: "企缸／浴室去水",
     description: "企缸、浴缸、頭髮或地台去水淤塞",
     href: "/services/bathroom-drain-unblocking",
   },
   {
     id: "kitchen",
+    icon: CookingPot,
     label: "廚房鋅盤淤塞",
     description: "鋅盤去水慢、油脂積聚或倒灌",
     href: "/services/kitchen-sink-unblocking",
   },
   {
     id: "backflow",
+    icon: Waves,
     label: "污水渠倒灌",
     description: "低層去水口湧水、屎渠或主渠倒灌",
     href: "/services/sewage-backflow",
@@ -44,25 +44,18 @@ export default function ServiceQuickSelect() {
       <div className="db-container py-16 md:py-24">
         <div className="home-section-head grid gap-10 border-b border-[var(--db-rule)] pb-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
           <div>
-            <EditorialKicker>Start here / 問題分類</EditorialKicker>
-            <h2
-              id="quick-service-heading"
-              className="db-editorial-heading mt-5"
-            >
-              請選擇
-              <br />
-              渠務問題類型
+            <h2 id="quick-service-heading" className="db-editorial-heading">
+              哪裏出現淤塞？
             </h2>
           </div>
 
           <p className="max-w-xl text-base leading-7 text-[var(--db-copy)] lg:justify-self-end lg:text-lg">
-            請選擇最接近的渠務問題，系統會提供相應的查詢內容。如未能確定原因，
-            可先提供現場相片或影片，讓團隊作初步評估。
+            選擇最接近的情況，查看處理方法、收費因素與應注意的事項。
           </p>
         </div>
 
         <div className="home-choice-grid border-b border-[var(--db-rule)]">
-          {QUICK_SERVICES.map((service, index) => (
+          {QUICK_SERVICES.map(service => (
             <Link
               key={service.id}
               href={service.href}
@@ -73,12 +66,10 @@ export default function ServiceQuickSelect() {
                   destination_url: service.href,
                 })
               }
-              className="home-choice-card group grid min-h-28 items-center gap-4 border-t border-[var(--db-rule)] py-6 text-[var(--db-ink)] transition-colors duration-200 hover:bg-[var(--db-paper)] focus-visible:bg-[var(--db-paper)] sm:grid-cols-[4rem_1fr_auto] sm:px-4 md:min-h-32 md:px-6"
+              className="home-choice-card"
               data-service-id={service.id}
             >
-              <EditorialIndex>
-                {String(index + 1).padStart(2, "0")}
-              </EditorialIndex>
+              <service.icon className="home-choice-icon" aria-hidden="true" />
 
               <span className="min-w-0">
                 <span className="block text-xl font-black tracking-[-0.025em] sm:text-2xl md:text-3xl">
@@ -89,7 +80,7 @@ export default function ServiceQuickSelect() {
                 </span>
               </span>
 
-              <span className="flex h-11 w-11 items-center justify-center border border-[var(--db-rule-strong)] transition-all duration-200 group-hover:border-[var(--db-ink)] group-hover:bg-[var(--db-ink)] group-hover:text-white">
+              <span className="home-choice-arrow">
                 <ArrowRight
                   className="h-5 w-5"
                   strokeWidth={2}

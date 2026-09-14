@@ -198,6 +198,19 @@ export function serveStatic(app: Express) {
     express.static(distPath, {
       index: false,
       redirect: false,
+      setHeaders(res, filePath) {
+        const relativeFile = path.relative(distPath, filePath).split(path.sep).join("/");
+        // Vite changes this URL whenever content changes, so returning visitors
+        // can reuse bundles without revalidation. Never apply this to HTML or
+        // replaceable public images, which must pick up the next deployment.
+        const fingerprintedAsset = /^assets\/.+-[\w-]{8,}\.(?:js|css|woff2?|ttf|otf|png|jpe?g|webp|avif|svg)$/i.test(relativeFile);
+        res.setHeader(
+          "Cache-Control",
+          fingerprintedAsset
+            ? "public, max-age=31536000, immutable"
+            : "public, max-age=0, must-revalidate",
+        );
+      },
     })
   );
 

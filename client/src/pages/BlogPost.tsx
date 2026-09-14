@@ -171,7 +171,7 @@ export default function BlogPost() {
 
   const { post, isLoading, isNotFound, error } = useBlogPost(slug);
 
-  const { posts } = useBlogPosts();
+  const { posts, isLoading: isRelatedLoading, error: relatedError } = useBlogPosts();
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
@@ -312,7 +312,7 @@ export default function BlogPost() {
   };
 
   return (
-    <div>
+    <div data-cms-loading={isLoading || isRelatedLoading} data-cms-error={Boolean(error || relatedError)}>
       <SEO
         title={seoTitle}
         description={seoDescription}
@@ -323,6 +323,7 @@ export default function BlogPost() {
         image={seoImage}
         imageAlt={seoImageAlt}
         type="article"
+        metadataReady={!isLoading}
         keywords={post.keywords.join(", ")}
         jsonLd={jsonLd}
         noindex={Boolean(post.seo?.noIndex)}

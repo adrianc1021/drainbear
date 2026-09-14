@@ -58,7 +58,7 @@ export default function Blog() {
   const [featured, ...rest] = posts;
 
   return (
-    <div>
+    <div data-cms-loading={isLoading} data-cms-error={Boolean(error)}>
       <SEO
         title="通渠小知識｜防塞喉管實用建議・通渠迷思拆解｜通渠熊 DrainBear"
         description="白熊師傅分享香港家居及商業渠務知識：防塞喉管、通渠收費、緊急處理、CCTV照渠及日常保養實用指南。"

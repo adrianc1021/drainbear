@@ -6,16 +6,9 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import {
-  BUSINESS_NAME,
-  DEFAULT_OG_IMAGE,
-  SITE_URL,
-} from "@/config/site";
-import {
-  PHONE_DISPLAY,
-  WHATSAPP_NUMBER,
-} from "@/lib/contact";
-import type {SiteSettings} from "@/lib/sanity/types";
+import { BUSINESS_NAME, DEFAULT_OG_IMAGE, SITE_URL } from "@/config/site";
+import { PHONE_DISPLAY, WHATSAPP_NUMBER } from "@/lib/contact";
+import type { SiteSettings } from "@/lib/sanity/types";
 
 const FALLBACK_SITE_SETTINGS: SiteSettings = {
   businessName: BUSINESS_NAME,
@@ -35,10 +28,9 @@ const FALLBACK_SITE_SETTINGS: SiteSettings = {
     alt: "通渠熊 DrainBear 香港24小時專業通渠服務",
   },
   defaultSeo: {
-    metaTitle:
-      "通渠熊 DrainBear｜24小時通渠公司・全港特快上門・不成功不收費",
+    metaTitle: "香港通渠服務｜先報價後動工・24小時查詢｜通渠熊 DrainBear",
     metaDescription:
-      "香港通渠救星！通渠熊提供24小時緊急通渠服務，配備高壓水槍洗渠及CCTV照喉技術，處理塞廁所、廚房去水、企缸淤塞、食肆隔油池及大廈沙井，全港九新界特快上門，報價後動工。",
+      "通渠熊提供香港住宅及商業通渠查詢，涵蓋座廁、鋅盤、企缸、隔油池及主渠沙井。先提供現場資料，再確認上門時間及所需設備，現場確認總收費後才動工。",
     canonicalUrl: `${SITE_URL}/`,
     noIndex: false,
   },
@@ -48,26 +40,24 @@ interface SiteSettingsContextValue {
   settings: SiteSettings;
   isLoading: boolean;
   isCmsAvailable: boolean;
+  hasCmsError: boolean;
 }
 
-const SiteSettingsContext =
-  createContext<SiteSettingsContextValue | null>(null);
+const SiteSettingsContext = createContext<SiteSettingsContextValue | null>(
+  null
+);
 
 export function buildWhatsAppUrl(number: string, message?: string) {
   const normalizedNumber = number.replace(/\D/g, "");
   const baseUrl = `https://wa.me/${normalizedNumber}`;
 
-  return message
-    ? `${baseUrl}?text=${encodeURIComponent(message)}`
-    : baseUrl;
+  return message ? `${baseUrl}?text=${encodeURIComponent(message)}` : baseUrl;
 }
 
-export function SiteSettingsProvider({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export function SiteSettingsProvider({ children }: { children: ReactNode }) {
   const [data, setData] = useState<SiteSettings | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasCmsError, setHasCmsError] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -80,6 +70,10 @@ export function SiteSettingsProvider({
         })
         .catch(() => {
           // Contact and SEO fallbacks keep the site fully usable without the CMS.
+          if (active) setHasCmsError(true);
+        })
+        .finally(() => {
+          if (active) setIsLoading(false);
         });
     };
 
@@ -112,10 +106,11 @@ export function SiteSettingsProvider({
   const value = useMemo<SiteSettingsContextValue>(
     () => ({
       settings,
-      isLoading: false,
+      isLoading,
       isCmsAvailable: Boolean(data),
+      hasCmsError,
     }),
-    [settings, data]
+    [settings, data, isLoading, hasCmsError]
   );
 
   return (
@@ -129,16 +124,14 @@ export function useSiteSettings() {
   const context = useContext(SiteSettingsContext);
 
   if (!context) {
-    throw new Error(
-      "useSiteSettings must be used inside SiteSettingsProvider"
-    );
+    throw new Error("useSiteSettings must be used inside SiteSettingsProvider");
   }
 
   return context;
 }
 
 export function useContactSettings() {
-  const {settings} = useSiteSettings();
+  const { settings } = useSiteSettings();
 
   return useMemo(
     () => ({

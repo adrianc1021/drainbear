@@ -1,4 +1,11 @@
-import { ArrowRight, Check, MessageCircle, Phone } from "lucide-react";
+import {
+  ArrowRight,
+  Check,
+  Camera,
+  Droplets,
+  MessageCircle,
+  Phone,
+} from "lucide-react";
 import { Link } from "wouter";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import {
@@ -84,55 +91,80 @@ export function EditorialHero({ imageSrc }: { imageSrc?: string }) {
   const { phoneDisplay, phoneHref, whatsappDefaultHref } = useContactSettings();
 
   return (
-    <section aria-labelledby="home-editorial-heading" className="brand-hero" data-pr20-section="hero">
+    <section
+      aria-labelledby="home-editorial-heading"
+      className="brand-hero"
+      data-pr20-section="hero"
+    >
       <div className="db-container brand-hero__grid">
         <div className="brand-hero__copy">
-          <EditorialKicker>香港 24 小時通渠服務</EditorialKicker>
+          <p className="brand-hero__service-label">24 小時通渠查詢</p>
           <h1 id="home-editorial-heading">
-            渠務難題，<br /><span>交給通渠熊。</span>
+            香港通渠，
+            <br />
+            先報價後動工。
           </h1>
           <p className="brand-hero__intro">
-            從家居去水，到大廈主渠。<br />
-            先了解問題、清楚報價，再安排合適處理。
-          </p>
-          <p className="brand-hero__description">
-            塞廁所、企缸去水慢、鋅盤淤塞或污水倒灌？
-            傳送位置及現場相片，讓團隊幫你判斷下一步。
+            塞廁所、鋅盤塞、企缸去水慢？傳相片及地點，先了解問題及收費。
           </p>
           <div className="brand-hero__actions">
-            <a href={whatsappDefaultHref} target="_blank" rel="noopener noreferrer"
-              onClick={() => { trackCTA("whatsapp", "home_hero"); goThanksAfterWhatsApp("home_hero"); }}
-              className="db-primary-action">
+            <a
+              href={whatsappDefaultHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => {
+                trackCTA("whatsapp", "home_hero");
+                goThanksAfterWhatsApp("home_hero");
+              }}
+              className="db-primary-action"
+            >
               <MessageCircle className="h-5 w-5 shrink-0" aria-hidden="true" />
               <span>WhatsApp 查詢報價</span>
             </a>
-            <a href={phoneHref} onClick={() => trackCTA("phone", "home_hero")} className="db-secondary-action">
+            <a
+              href={phoneHref}
+              onClick={() => trackCTA("phone", "home_hero")}
+              className="db-secondary-action"
+            >
               <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
               <span>{phoneDisplay}</span>
             </a>
           </div>
-          <ul className="brand-hero__assurances" aria-label="服務安排">
-            {["確認收費後動工", "按現場選擇設備", "完成後測試去水"].map(item => (
-              <li key={item}><Check aria-hidden="true" /><span>{item}</span></li>
-            ))}
-          </ul>
         </div>
         {imageSrc ? (
           <figure className="brand-hero__media">
-            <img src={imageSrc} alt="通渠熊師傅使用通渠機處理淤塞"
-              width="1280" height="960" fetchPriority="high" decoding="async"
-              sizes="(min-width: 1024px) 50vw, 100vw" />
-            <figcaption><span>住宅・商業・大廈渠務</span><span>DrainBear / 香港</span></figcaption>
+            <img
+              src={imageSrc}
+              alt="通渠機處理浴室去水口的服務示意"
+              width="1280"
+              height="960"
+              fetchPriority="high"
+              decoding="async"
+              sizes="(min-width: 1024px) 50vw, 100vw"
+            />
+            <figcaption>
+              <span>由家居去水，到大廈主渠。</span>
+              <span>服務示意圖片</span>
+            </figcaption>
+            <p className="brand-hero__note">
+              上門時間按地區、交通及所需設備確認。
+            </p>
           </figure>
         ) : null}
       </div>
       <div className="brand-hero__directory">
         <div className="db-container">
-          <p>先找到你的處理方向</p>
+          <p>想先了解？</p>
           <nav aria-label="首頁快速入口">
-            <Link href="/services">通渠服務 <ArrowRight aria-hidden="true" /></Link>
-            <Link href="/guide#calculator">估價計算機 <ArrowRight aria-hidden="true" /></Link>
-            <Link href="/areas">查看服務地區 <ArrowRight aria-hidden="true" /></Link>
+            <Link href="/services">
+              通渠服務 <ArrowRight aria-hidden="true" />
+            </Link>
+            <Link href="/guide#calculator">
+              估價計算機 <ArrowRight aria-hidden="true" />
+            </Link>
+            <Link href="/areas">
+              查看服務地區 <ArrowRight aria-hidden="true" />
+            </Link>
           </nav>
         </div>
       </div>
@@ -149,15 +181,17 @@ export function EditorialPromise() {
     >
       <div className="home-promise-grid db-container grid gap-12 lg:grid-cols-[0.76fr_1.24fr] lg:gap-20">
         <div>
-          <EditorialKicker>Our promise / 收費原則</EditorialKicker>
+          <EditorialKicker>收費原則</EditorialKicker>
           <h2
             id="editorial-promise-heading"
             className="db-editorial-heading mt-6"
           >
-            收費透明，
-            <br />
-            確認後才動工。
+            先問清楚，才安心。
           </h2>
+          <p className="home-pricing-summary">
+            一般鋅盤、企缸疏通 HK$500 起；座廁 HK$600
+            起。起步價並非所有情況的總價，實際收費需先檢查。
+          </p>
 
           <div className="mt-8 flex flex-wrap gap-5">
             <Link
@@ -181,26 +215,22 @@ export function EditorialPromise() {
           </div>
         </div>
 
-        <ol className="border-b border-[var(--db-rule)]">
-          {PROMISES.map((promise, index) => (
-            <li
-              key={promise.title}
-              className="grid gap-4 border-t border-[var(--db-rule)] py-7 sm:grid-cols-[4rem_0.8fr_1.2fr] sm:gap-7 md:py-9"
-            >
-              <EditorialIndex>
-                {String(index + 1).padStart(2, "0")}
-              </EditorialIndex>
+        <ul className="home-promise-list">
+          {PROMISES.map(promise => (
+            <li key={promise.title} className="home-promise-item">
+              <Check aria-hidden="true" />
+              <div>
+                <h3 className="text-lg font-black tracking-[-0.02em] md:text-xl">
+                  {promise.title}
+                </h3>
 
-              <h3 className="text-lg font-black tracking-[-0.02em] md:text-xl">
-                {promise.title}
-              </h3>
-
-              <p className="text-sm leading-7 text-[var(--db-copy)] md:text-base">
-                {promise.description}
-              </p>
+                <p className="text-sm leading-7 text-[var(--db-copy)] md:text-base">
+                  {promise.description}
+                </p>
+              </div>
             </li>
           ))}
-        </ol>
+        </ul>
       </div>
     </section>
   );
@@ -216,14 +246,12 @@ export function EditorialCapability({ imageSrc }: { imageSrc?: string }) {
       <div className="db-container">
         <div className="grid gap-8 border-b border-white/20 pb-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
           <div>
-            <EditorialKicker tone="light">Equipment / 現場判斷</EditorialKicker>
+            <EditorialKicker tone="light">現場判斷</EditorialKicker>
             <h2
               id="editorial-capability-heading"
               className="db-editorial-heading mt-6 text-white"
             >
-              專業檢測，
-              <br />
-              準確判斷。
+              看清問題，才選工具。
             </h2>
           </div>
 
@@ -238,7 +266,7 @@ export function EditorialCapability({ imageSrc }: { imageSrc?: string }) {
             {imageSrc ? (
               <img
                 src={imageSrc}
-                alt="通渠熊團隊使用渠務檢測設備"
+                alt="渠務檢測設備的服務示意"
                 width="960"
                 height="1280"
                 loading="lazy"
@@ -248,19 +276,12 @@ export function EditorialCapability({ imageSrc }: { imageSrc?: string }) {
             ) : (
               <div className="db-operational-grid h-full min-h-[360px] opacity-30 lg:min-h-[560px]" />
             )}
-            <span className="db-image-label">Equipment check / DB–02</span>
+            <span className="db-image-label">設備應用示意</span>
           </div>
 
           <div className="border-b border-white/20">
-            {CAPABILITIES.map((capability, index) => (
-              <article
-                key={capability.code}
-                className="grid gap-4 border-t border-white/20 py-7 sm:grid-cols-[5.5rem_0.9fr_1.1fr] sm:gap-6"
-              >
-                <span className="font-mono text-sm font-black tracking-[0.08em] text-[var(--db-safety)]">
-                  {capability.code}
-                </span>
-
+            {CAPABILITIES.map(capability => (
+              <article key={capability.code} className="home-capability-item">
                 <h3 className="text-lg font-black text-white">
                   {capability.title}
                 </h3>
@@ -270,6 +291,22 @@ export function EditorialCapability({ imageSrc }: { imageSrc?: string }) {
                 </p>
               </article>
             ))}
+            <nav
+              className="home-equipment-links"
+              aria-label="商業渠務及檢測服務"
+            >
+              <Link href="/services/main-drain-manhole">
+                大廈主渠與沙井 <ArrowRight aria-hidden="true" />
+              </Link>
+              <Link href="/services/high-pressure-jetting">
+                <Droplets aria-hidden="true" />
+                高壓水槍洗渠
+              </Link>
+              <Link href="/services/cctv-drain-inspection">
+                <Camera aria-hidden="true" />
+                CCTV 照喉檢測
+              </Link>
+            </nav>
           </div>
         </div>
       </div>

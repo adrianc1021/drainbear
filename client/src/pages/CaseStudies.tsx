@@ -40,7 +40,7 @@ export default function CaseStudies() {
   ];
 
   return (
-    <div className="bg-[var(--db-paper)]">
+    <div className="bg-[var(--db-paper)]" data-cms-loading={isLoading} data-cms-error={Boolean(error)}>
       <SEO
         title="通渠工程案例｜現場問題、處理方法與完成結果｜通渠熊"
         description="查看通渠熊已核實並由 CMS 發佈的渠務工程紀錄，包括地區、現場問題、使用設備、處理步驟及完成測試。"

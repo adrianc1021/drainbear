@@ -48,7 +48,6 @@ export default function District() {
       url: `${SITE_URL}/areas/${d.slug}`,
       name: `${d.name}通渠服務`,
       description: d.metaDescription,
-      dateModified: "2026-09-06",
       inLanguage: "zh-Hant-HK",
       isPartOf: { "@id": WEBSITE_ID },
       about: { "@id": `${SITE_URL}/areas/${d.slug}#service` },
@@ -59,7 +58,7 @@ export default function District() {
       "@id": `${SITE_URL}/areas/${d.slug}#service`,
       url: `${SITE_URL}/areas/${d.slug}`,
       name: `${d.name}通渠服務`,
-      serviceType: `${d.name}24 小時通渠服務`,
+      serviceType: `${d.name}通渠服務（24 小時接受查詢）`,
       provider: {
         "@id": BUSINESS_ID,
       },
@@ -87,7 +86,7 @@ export default function District() {
   return (
     <div className="district-editorial">
       <SEO
-        title={`${d.name}通渠｜24 小時特快上門・1 小時到達・不成功不收費｜通渠熊 DrainBear`}
+        title={`${d.name}通渠｜24 小時查詢・先報價後動工｜通渠熊 DrainBear`}
         description={d.metaDescription}
         path={`/areas/${d.slug}`}
         keywords={d.keywords}
@@ -132,7 +131,7 @@ export default function District() {
               </a>
             </div>
             <p className="mt-4 text-xs text-muted-foreground">
-              先報價・後動工・不成功不收費・上門檢查費全免
+              現場檢查後確認總價才動工・接納工程可免檢查費
             </p>
           </div>
         </div>
@@ -163,16 +162,16 @@ export default function District() {
             </div>
           </article>
 
-          {/* 側欄：服務承諾卡 */}
+          {/* 側欄：服務安排及收費 */}
           <aside className="reveal">
             <div className="card-float card-accent rounded-lg border border-border bg-white p-7">
-              <h3 className="font-display text-lg font-black text-navy">{d.name}區服務承諾</h3>
+              <h3 className="font-display text-lg font-black text-navy">{d.name}區服務安排</h3>
               <ul className="mt-5 space-y-4">
                 {[
-                  { icon: Clock, text: `${d.name}及鄰近地區 1 小時內到達` },
-                  { icon: BadgeCheck, text: "出發前確認總價，絕不坐地起價" },
-                  { icon: ShieldCheck, text: "不成功不收費，上門檢查費全免" },
-                  { icon: Wrench, text: "高壓水槍 + CCTV 照喉科技斷症" },
+                  { icon: Clock, text: "按位置、交通及設備供應確認到場時間" },
+                  { icon: BadgeCheck, text: "先提供初步估算，現場確認總價才動工" },
+                  { icon: ShieldCheck, text: "接納工程可免檢查費，查詢時說明條件" },
+                  { icon: Wrench, text: "按渠況選用通渠工具、高壓水槍或 CCTV 照喉" },
                 ].map((i) => (
                   <li key={i.text} className="flex items-start gap-3 text-sm text-navy/80">
                     <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-navy text-wagreen">
@@ -276,10 +275,10 @@ export default function District() {
         <div className="container">
           <div className="dot-grid rounded-lg bg-navy px-8 py-12 text-center md:px-16">
             <h2 className="text-balance font-display text-2xl font-black text-white md:text-3xl">
-              {d.name}塞渠？白熊師傅隨時候命。
+              {d.name}塞渠？先提供位置及渠況。
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/60">
-              同時覆蓋{d.nearby.join("、")}等鄰近地區，收費一致，絕不因地區加價。
+              {d.nearby.join("、")}等鄰近地區亦可查詢。提供位置及渠況後，先確認可達範圍、設備與上門安排。
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <a

@@ -6,17 +6,9 @@ import {
   EditorialCapability,
   EditorialHero,
   EditorialPromise,
-  EditorialServices,
 } from "@/components/editorial/HomeEditorialCore";
-import {
-  EditorialIndex,
-  EditorialKicker,
-} from "@/components/editorial/EditorialPrimitives";
-import {
-  BUSINESS_ID,
-  SITE_URL,
-  WEBSITE_ID,
-} from "@/config/site";
+import { EditorialKicker } from "@/components/editorial/EditorialPrimitives";
+import { BUSINESS_ID, SITE_URL, WEBSITE_ID } from "@/config/site";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import {
   goThanksAfterWhatsApp,
@@ -26,6 +18,7 @@ import {
 import { useLatestBlogPosts } from "@/lib/useBlog";
 import { formatCaseDate, formatMinutes } from "@/lib/caseRepository";
 import { useFeaturedCaseStudies } from "@/lib/useCases";
+import { createImageSrcSet, optimizedImageUrl } from "@/lib/imageOptimization";
 
 const HERO_IMAGE = "/images/home-drain-technician-wide.jpg";
 
@@ -110,7 +103,7 @@ const HOME_JSONLD = {
 };
 
 function EditorialCases() {
-  const { studies, isLoading } = useFeaturedCaseStudies(3);
+  const { studies, isLoading, error } = useFeaturedCaseStudies(3);
   const hasVerifiedStudies = studies.length > 0;
   const records = hasVerifiedStudies
     ? studies.map((study, index) => ({
@@ -123,23 +116,33 @@ function EditorialCases() {
         duration: formatMinutes(study.durationMinutes) || "未有紀錄",
         slug: study.slug,
         date: formatCaseDate(study.projectDate),
+        image: study.coverImage,
       }))
-    : COMMON_SCENARIOS.map(study => ({ ...study, slug: undefined, date: undefined }));
+    : COMMON_SCENARIOS.map(study => ({
+        ...study,
+        slug: undefined,
+        date: undefined,
+        image: undefined,
+      }));
 
   return (
     <section
       aria-labelledby="home-cases-heading"
       className="bg-[var(--db-paper)]"
       data-pr20-section="cases"
+      data-cms-loading={isLoading}
+      data-cms-error={Boolean(error)}
     >
       <div className="db-container py-[var(--db-editorial-section)]">
         <div className="home-section-head grid gap-8 border-b border-[var(--db-rule)] pb-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
           <div>
-            <EditorialKicker>{hasVerifiedStudies ? "Field notes / 工程紀錄" : "Decision guide / 常見場景"}</EditorialKicker>
+            <EditorialKicker>
+              {hasVerifiedStudies ? "工程紀錄" : "常見情況"}
+            </EditorialKicker>
             <h2 id="home-cases-heading" className="db-editorial-heading mt-6">
-              {hasVerifiedStudies ? "已核實紀錄，" : "先判斷範圍，"}
-              <br />
-              再選處理方法。
+              {hasVerifiedStudies
+                ? "看看同類問題怎樣處理。"
+                : "先了解問題影響的範圍。"}
             </h2>
           </div>
 
@@ -150,16 +153,27 @@ function EditorialCases() {
           </p>
         </div>
 
-        <div className="home-case-list border-b border-[var(--db-rule)]">
+        <div className="home-evidence-list">
           {records.map(study => (
             <article
               key={study.number}
-              className="home-case-row grid gap-6 border-t border-[var(--db-rule)] py-9 md:grid-cols-[4rem_0.7fr_1.3fr] md:py-12"
+              className={`home-evidence${study.image?.url ? " home-evidence--with-image" : ""}`}
             >
-              <EditorialIndex>{study.number}</EditorialIndex>
-
+              {study.image?.url ? (
+                <img
+                  className="home-evidence__image"
+                  src={optimizedImageUrl(study.image.url, 800)}
+                  srcSet={createImageSrcSet(study.image.url, [360, 640, 800])}
+                  sizes="(min-width: 900px) 35vw, 100vw"
+                  alt={study.image.alt || study.title}
+                  width={study.image.width || 1200}
+                  height={study.image.height || 800}
+                  loading="lazy"
+                  decoding="async"
+                />
+              ) : null}
               <div>
-                <div className="flex items-center gap-2 text-sm font-black uppercase tracking-[0.08em] text-[var(--db-safety)]">
+                <div className="flex flex-wrap items-center gap-2 text-sm font-semibold text-[var(--db-safety)]">
                   <MapPin className="h-4 w-4" aria-hidden="true" />
                   {study.area} / {study.type}
                 </div>
@@ -167,23 +181,23 @@ function EditorialCases() {
                 <h3 className="mt-4 text-2xl font-black tracking-[-0.035em] text-[var(--db-ink)] md:text-3xl">
                   {study.title}
                 </h3>
-              </div>
-
-              <div>
-                <p className="text-sm leading-7 text-[var(--db-copy)] md:text-base">
+                <p className="mt-4 text-sm leading-7 text-[var(--db-copy)] md:text-base">
                   {study.description}
                 </p>
 
                 {study.slug ? (
-                  <Link href={`/cases/${study.slug}`} className="mt-4 inline-flex min-h-11 items-center gap-2 font-black text-[var(--db-ink)] hover:text-[var(--db-safety)]">
+                  <Link
+                    href={`/cases/${study.slug}`}
+                    className="mt-4 inline-flex min-h-11 items-center gap-2 font-black text-[var(--db-ink)] hover:text-[var(--db-safety)]"
+                  >
                     查看完整紀錄 <ArrowRight className="h-4 w-4" />
                   </Link>
                 ) : null}
 
                 <dl className="mt-6 grid grid-cols-2 border-y border-[var(--db-rule)] py-4">
                   <div>
-                    <dt className="text-xs font-black uppercase tracking-[0.1em] text-[var(--db-copy)]">
-                      {study.date ? "Project date" : "Arrival"}
+                    <dt className="text-xs font-semibold text-[var(--db-copy)]">
+                      {study.date ? "工程日期" : "上門安排"}
                     </dt>
                     <dd className="mt-1 font-black text-[var(--db-ink)]">
                       {study.date || study.arrival}
@@ -191,8 +205,8 @@ function EditorialCases() {
                   </div>
 
                   <div className="border-l border-[var(--db-rule)] pl-5">
-                    <dt className="text-xs font-black uppercase tracking-[0.1em] text-[var(--db-copy)]">
-                      Work duration
+                    <dt className="text-xs font-semibold text-[var(--db-copy)]">
+                      工程時間
                     </dt>
                     <dd className="mt-1 font-black text-[var(--db-ink)]">
                       {study.duration}
@@ -205,9 +219,14 @@ function EditorialCases() {
         </div>
         <div className="mt-7 flex flex-wrap items-center justify-between gap-4">
           <p className="text-sm leading-6 text-[var(--db-copy)]">
-            {isLoading ? "正在同步已公開工程紀錄…" : "只有已完成資料核對的案例才會公開。"}
+            {isLoading
+              ? "正在同步已公開工程紀錄…"
+              : "只有已完成資料核對的案例才會公開。"}
           </p>
-          <Link href="/cases" className="inline-flex min-h-11 items-center gap-2 font-black text-[var(--db-ink)] hover:text-[var(--db-safety)]">
+          <Link
+            href="/cases"
+            className="inline-flex min-h-11 items-center gap-2 font-black text-[var(--db-ink)] hover:text-[var(--db-safety)]"
+          >
             查看工程案例 <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
@@ -226,16 +245,12 @@ function EditorialProcess() {
       <div className="db-container py-[var(--db-editorial-section)]">
         <div className="home-section-head home-section-head--dark grid gap-8 border-b border-white/20 pb-10 lg:grid-cols-2 lg:items-end">
           <div>
-            <EditorialKicker tone="light">
-              How it works / 處理流程
-            </EditorialKicker>
+            <EditorialKicker tone="light">處理流程</EditorialKicker>
             <h2
               id="home-process-heading"
               className="db-editorial-heading mt-6 text-white"
             >
-              四步流程，
-              <br />
-              清楚跟進。
+              由查詢到完工，清楚跟進。
             </h2>
           </div>
 
@@ -277,22 +292,22 @@ function EditorialProcess() {
 }
 
 function EditorialJournal() {
-  const { posts: selectedPosts } = useLatestBlogPosts(3);
+  const { posts: selectedPosts, isLoading, error } = useLatestBlogPosts(3);
 
   return (
     <section
       aria-labelledby="home-journal-heading"
       className="bg-white"
       data-pr20-section="journal"
+      data-cms-loading={isLoading}
+      data-cms-error={Boolean(error)}
     >
       <div className="db-container py-[var(--db-editorial-section)]">
         <div className="flex flex-col gap-7 border-b border-[var(--db-rule)] pb-9 md:flex-row md:items-end md:justify-between">
           <div>
-            <EditorialKicker>Drain journal / 實用文章</EditorialKicker>
+            <EditorialKicker>最新實用文章</EditorialKicker>
             <h2 id="home-journal-heading" className="db-editorial-heading mt-6">
-              渠務資訊，
-              <br />
-              隨時查閱。
+              有些問題，可以先知道。
             </h2>
           </div>
 
@@ -312,8 +327,8 @@ function EditorialJournal() {
           </Link>
         </div>
 
-        <div className="home-journal-list border-b border-[var(--db-rule)]">
-          {selectedPosts.map((post, index) => (
+        <div className="home-reading-grid">
+          {selectedPosts.map(post => (
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
@@ -325,26 +340,38 @@ function EditorialJournal() {
                   destination_url: `/blog/${post.slug}`,
                 })
               }
-              className="home-journal-row group grid gap-5 border-t border-[var(--db-rule)] py-8 text-[var(--db-ink)] transition-colors hover:bg-[var(--db-paper)] sm:grid-cols-[4rem_0.7fr_1.3fr_auto] sm:items-center sm:px-5 md:min-h-36"
+              className="home-reading"
             >
-              <EditorialIndex>
-                {String(index + 1).padStart(2, "0")}
-              </EditorialIndex>
-
-              <span className="text-xs font-black uppercase tracking-[0.12em] text-[var(--db-safety)]">
-                {post.category} / {post.readMins} min
+              {post.coverImage?.url ? (
+                <img
+                  src={optimizedImageUrl(post.coverImage.url, 640)}
+                  srcSet={createImageSrcSet(
+                    post.coverImage.url,
+                    [320, 480, 640, 960, 1280]
+                  )}
+                  sizes="(min-width: 768px) calc((min(100vw, 84rem) - clamp(2.5rem, 8vw, 7rem) - 4rem) / 3), calc(100vw - clamp(2.5rem, 8vw, 7rem))"
+                  alt={post.coverImage.alt || post.title}
+                  width={post.coverImage.width || 1200}
+                  height={post.coverImage.height || 800}
+                  loading="lazy"
+                  decoding="async"
+                />
+              ) : null}
+              <span className="home-reading__meta">
+                {post.category}・{post.readMins} 分鐘閱讀
               </span>
 
               <span>
                 <span className="block text-xl font-black tracking-[-0.03em] md:text-2xl">
                   {post.title}
                 </span>
-                <span className="mt-2 line-clamp-2 block text-sm leading-6 text-[var(--db-copy)]">
+                <span className="mt-2 block text-sm leading-6 text-[var(--db-copy)]">
                   {post.excerpt}
                 </span>
               </span>
 
-              <span className="flex h-11 w-11 items-center justify-center border border-[var(--db-rule-strong)] transition-all group-hover:border-[var(--db-ink)] group-hover:bg-[var(--db-ink)] group-hover:text-white">
+              <span className="home-reading__link">
+                閱讀文章
                 <ArrowRight className="h-5 w-5" aria-hidden="true" />
               </span>
             </Link>
@@ -365,7 +392,7 @@ function EditorialFinalCTA() {
       data-pr20-section="final-cta"
     >
       <div className="db-container py-[var(--db-editorial-section)]">
-        <EditorialKicker>Emergency service / 24小時服務查詢</EditorialKicker>
+        <EditorialKicker>24 小時服務查詢</EditorialKicker>
 
         <div className="home-final-grid mt-8 grid gap-10 lg:grid-cols-[1.35fr_0.65fr] lg:items-end">
           <div>
@@ -450,8 +477,8 @@ export default function Home() {
     <div className="home-editorial">
       <CmsPageSEO
         cmsEnabled={false}
-        title="香港24小時通渠服務｜塞廁所・企缸・鋅盤・污水倒灌｜通渠熊"
-        description="通渠熊提供香港24小時通渠查詢，處理塞廁所、企缸及浴室去水、廚房鋅盤淤塞、污水倒灌、大廈主渠與沙井問題。先了解現場及確認收費，再安排合適設備處理。"
+        title="香港通渠服務｜先報價後動工・24小時查詢｜通渠熊"
+        description="塞廁所、鋅盤塞、企缸去水慢或污水倒灌？通渠熊提供香港住宅及商業通渠查詢。查看收費參考與工程紀錄，WhatsApp 傳相片及地點，先了解問題，現場確認總價後才動工。"
         path="/"
         keywords="香港通渠, 24小時通渠, 塞廁所, 企缸塞, 浴室去水慢, 廚房鋅盤塞, 污水渠倒灌, 高壓水槍洗渠, CCTV照喉, 通渠收費"
         jsonLd={HOME_JSONLD}
@@ -459,11 +486,10 @@ export default function Home() {
 
       <EditorialHero imageSrc={HERO_IMAGE} />
       <ServiceQuickSelect />
-      <EditorialPhotoQuoteCTA />
       <EditorialPromise />
-      <EditorialCapability imageSrc={CAPABILITY_IMAGE} />
-      <EditorialServices />
       <EditorialCases />
+      <EditorialPhotoQuoteCTA />
+      <EditorialCapability imageSrc={CAPABILITY_IMAGE} />
       <EditorialProcess />
       <EditorialJournal />
       <EditorialFinalCTA />

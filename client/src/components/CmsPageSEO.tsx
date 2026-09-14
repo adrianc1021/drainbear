@@ -14,10 +14,14 @@ export default function CmsPageSEO({
 }: CmsPageSEOProps) {
   const queryPath = cmsPath ?? fallback.path;
   const [data, setData] = useState<PageSeo | null>(null);
+  const [resolvedPath, setResolvedPath] = useState<string | null>(null);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
+    setData(null);
+    setResolvedPath(null);
+    setHasError(false);
     if (!cmsEnabled) {
-      setData(null);
       return;
     }
 
@@ -31,6 +35,10 @@ export default function CmsPageSEO({
         })
         .catch(() => {
           // The static fallback metadata is complete when the CMS is unavailable.
+          if (active) setHasError(true);
+        })
+        .finally(() => {
+          if (active) setResolvedPath(queryPath);
         });
     };
 
@@ -44,12 +52,15 @@ export default function CmsPageSEO({
     };
   }, [cmsEnabled, queryPath]);
 
-  const seo = data?.seo;
+  // A route change must not briefly reuse the previous page's CMS canonical.
+  const seo = cmsEnabled && resolvedPath === queryPath ? data?.seo : undefined;
 
   return (
     <SEO
       {...fallback}
-      contentReady
+      contentReady={fallback.contentReady}
+      metadataReady={!cmsEnabled || resolvedPath === queryPath}
+      metadataError={cmsEnabled && hasError}
       title={seo?.metaTitle || fallback.title}
       description={seo?.metaDescription || fallback.description}
       keywords={

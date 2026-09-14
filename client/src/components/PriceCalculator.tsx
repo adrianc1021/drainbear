@@ -369,7 +369,7 @@ export default function PriceCalculator() {
               </p>
               <div className="mt-6 flex items-center gap-2 text-xs text-white/40">
                 <Droplets className="h-4 w-4 text-wagreen/60" strokeWidth={2} />
-                估價完全免費・報價即最終價
+                免費初步估算・現場確認總價才動工
               </div>
             </>
           )}
