@@ -6,6 +6,21 @@
   "trailingSlash": false,
   "headers": [
     {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "drainbear.vercel.app"
+        }
+      ],
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
       "source": "/assets/:file(.+-[A-Za-z0-9_-]{8,}\\.(?:js|css|woff2?|ttf|otf|png|jpe?g|webp|avif|svg))",
       "headers": [
         {

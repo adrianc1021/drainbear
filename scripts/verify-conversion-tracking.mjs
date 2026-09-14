@@ -5,6 +5,7 @@ const tracking = fs.readFileSync("client/src/lib/trackingSession.ts", "utf8");
 const thanks = fs.readFileSync("client/src/pages/Thanks.tsx", "utf8");
 const app = fs.readFileSync("client/src/App.tsx", "utf8");
 const html = fs.readFileSync("client/index.html", "utf8");
+const googleLoader = fs.readFileSync("client/src/lib/googleTagLoader.ts", "utf8");
 const dockerfile = fs.readFileSync("Dockerfile", "utf8");
 
 const required = [
@@ -23,6 +24,9 @@ const required = [
   [html, "send_page_view: false"],
   [html, "productionTrackingHosts"],
   [html, "productionTrackingHosts.has(window.location.hostname)"],
+  [googleLoader, "scheduleGoogleTag"],
+  [googleLoader, 'window.addEventListener("pointerdown"'],
+  [googleLoader, "FALLBACK_DELAY_MS"],
   [dockerfile, "ARG VITE_GOOGLE_ADS_WHATSAPP_LABEL"],
 ];
 
@@ -34,6 +38,10 @@ for (const [source, pattern] of required) {
 
 if (html.includes('src="https://www.googletagmanager.com/gtag/js')) {
   throw new Error("client/index.html still loads gtag.js unconditionally");
+}
+
+if (html.includes("googletagmanager.com/gtag/js?id=")) {
+  throw new Error("client/index.html still creates the external gtag script");
 }
 
 if (thanks.includes("trackWhatsAppOpen(from)")) {

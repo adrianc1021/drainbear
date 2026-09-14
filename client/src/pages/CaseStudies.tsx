@@ -1,6 +1,7 @@
 import { ArrowRight, CalendarDays, MapPin } from "lucide-react";
 import { Link } from "wouter";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import QuoteRequestForm from "@/components/QuoteRequestForm";
 import SEO from "@/components/SEO";
 import { WhatsAppButton } from "@/components/Layout";
 import { BUSINESS_ID, SITE_URL, WEBSITE_ID } from "@/config/site";
@@ -124,6 +125,16 @@ export default function CaseStudies() {
           </p>
         ) : null}
       </main>
+
+      <section className="border-y border-[var(--db-rule)] bg-white">
+        <div className="db-container py-12 md:py-16">
+          <QuoteRequestForm
+            location="cases_quote_form"
+            title="你的現場，未必與公開案例完全相同"
+            description="提供地區、問題位置及大概情況，團隊會按你的資料作初步跟進；不同管道仍需按現場確認。"
+          />
+        </div>
+      </section>
 
       <section className="bg-[var(--db-ink)] text-white">
         <div className="db-container grid gap-8 py-12 md:grid-cols-[1fr_auto] md:items-center">

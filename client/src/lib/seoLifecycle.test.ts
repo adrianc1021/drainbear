@@ -142,4 +142,18 @@ describe("SEO metadata lifecycle", () => {
     expect(document.documentElement.dataset.seoReady).toBe("false");
     expect(window.scrollTo).not.toHaveBeenCalled();
   });
+
+  it("supports an explicit nofollow directive for non-indexed conversion routes", () => {
+    renderSeo({ noindex: true, nofollow: true });
+    expect(
+      document.head
+        .querySelector('meta[name="robots"]')
+        ?.getAttribute("content"),
+    ).toBe("noindex, nofollow");
+    expect(
+      document.head
+        .querySelector('meta[name="googlebot"]')
+        ?.getAttribute("content"),
+    ).toBe("noindex, nofollow");
+  });
 });

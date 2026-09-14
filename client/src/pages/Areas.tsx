@@ -482,7 +482,10 @@ export default function Areas() {
     setActiveRegion(index);
 
     if (shouldFocus) {
-      requestAnimationFrame(() => tabRefs.current[index]?.focus());
+      // Tabs stay mounted while panels toggle, so the target ref is available
+      // immediately. Synchronous focus keeps rapid arrow-key presses in sync
+      // with the selected tab instead of waiting for the next animation frame.
+      tabRefs.current[index]?.focus();
     }
   };
 

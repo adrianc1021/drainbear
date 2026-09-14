@@ -28,8 +28,9 @@
 - **開發環境(`import.meta.env.DEV`)**:預設不上報 GA4,避免污染正式數據。
 - **事件目的地隔離**:GA4 啟用時,`sendEvent()` 及 `trackPageView()` 均帶
   `send_to: <GA4 Measurement ID>`,自訂事件只送 GA4,不會流向 Google Ads Destination。
-- **Google Ads Tag `AW-18128738982`**:由 `client/index.html` 載入,**不受本模組影響**;
-  GA4 重用同一 gtag.js 及 dataLayer,不會重複載入腳本。
+- **Google Ads Tag `AW-18128738982`**:由 `client/index.html` 先排入 dataLayer;
+  外部 `gtag.js` 在首次互動後載入,無互動時於頁面 load 後延遲載入。GA4 重用同一
+  gtag.js 及 dataLayer,不會重複載入腳本。
 
 ## 去重責任劃分
 
@@ -55,9 +56,9 @@
 | `phone_click` | 電話 CTA 點擊 | cta_location, page_path, page_title | ✅ 已接(全站 8+ 位置) |
 | `whatsapp_click` | WhatsApp CTA 點擊 | cta_location, page_path, page_title, topic | ✅ 已接(全站 15+ 位置) |
 | `whatsapp_open` | /thanks 頁載入(對話開啟代理轉換) | cta_location(來源位置), page_path | ✅ 已接 |
-| `contact_form_start` | 表格開始填寫(每表格一次) | form_name, cta_location | 🟡 helper 已備,前台尚無表格 |
-| `contact_form_submit` | 伺服器確認提交成功後 | form_name, cta_location | 🟡 helper 已備 |
-| `contact_form_error` | 表格提交失敗 | form_name, error_type(不含錯誤內文) | 🟡 helper 已備 |
+| `contact_form_start` | 表格開始填寫(每表格一次) | form_name, cta_location | ✅ 已接(首頁、指南、服務及案例頁) |
+| `contact_form_submit` | 伺服器確認提交成功後 | form_name, cta_location | ✅ 已接 |
+| `contact_form_error` | 表格提交失敗 | form_name, error_type(不含錯誤內文), cta_location | ✅ 已接 |
 | `quote_calculator_start` | 估價計算機首次互動(每次頁面瀏覽一次,Component 去重) | cta_location | ✅ 已接 |
 | `quote_calculator_complete` | 估價完成(每次頁面瀏覽同組合一次,Component 去重) | cta_location, topic(選項摘要) | ✅ 已接 |
 

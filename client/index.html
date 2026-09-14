@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="zh-Hant-HK">
   <head>
-    <!-- Google tag: production hostnames only -->
+    <!-- Google tag queue; the external script is loaded after user interaction -->
     <script>
       (() => {
         const productionTrackingHosts = new Set([
@@ -9,23 +9,16 @@
           "www.drainbearhk.com",
         ]);
 
+        if (!productionTrackingHosts.has(window.location.hostname)) {
+          return;
+        }
+
         window.dataLayer = window.dataLayer || [];
         window.gtag =
           window.gtag ||
           function gtag() {
             window.dataLayer.push(arguments);
           };
-
-        if (!productionTrackingHosts.has(window.location.hostname)) {
-          return;
-        }
-
-        const googleTag = document.createElement("script");
-        googleTag.async = true;
-        googleTag.fetchPriority = "low";
-        googleTag.src =
-          "https://www.googletagmanager.com/gtag/js?id=AW-18128738982";
-        document.head.appendChild(googleTag);
 
         window.gtag("js", new Date());
         window.gtag("config", "AW-18128738982", {

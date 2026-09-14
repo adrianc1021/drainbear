@@ -1,6 +1,7 @@
 import { ArrowRight, MapPin, MessageCircle, Phone } from "lucide-react";
 import { Link } from "wouter";
 import CmsPageSEO from "@/components/CmsPageSEO";
+import QuoteRequestForm from "@/components/QuoteRequestForm";
 import ServiceQuickSelect from "@/components/ServiceQuickSelect";
 import {
   EditorialCapability,
@@ -472,6 +473,32 @@ function EditorialPhotoQuoteCTA() {
   );
 }
 
+function EditorialQuoteForm() {
+  return (
+    <section
+      className="border-b border-[var(--db-rule)] bg-white"
+      aria-labelledby="home-quote-section-heading"
+    >
+      <div className="db-container py-[var(--db-editorial-section)]">
+        <div className="mb-8 max-w-2xl">
+          <EditorialKicker>不只限於 WhatsApp</EditorialKicker>
+          <h2
+            id="home-quote-section-heading"
+            className="db-editorial-heading mt-6"
+          >
+            想先留下資料，再由團隊跟進？
+          </h2>
+        </div>
+        <QuoteRequestForm
+          location="home_quote_form"
+          title="先留下資料，團隊再回覆你"
+          description="適合想先整理資料、比較方案，或需要同事／管理處跟進的查詢。"
+        />
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
   return (
     <div className="home-editorial">
@@ -489,6 +516,7 @@ export default function Home() {
       <EditorialPromise />
       <EditorialCases />
       <EditorialPhotoQuoteCTA />
+      <EditorialQuoteForm />
       <EditorialCapability imageSrc={CAPABILITY_IMAGE} />
       <EditorialProcess />
       <EditorialJournal />

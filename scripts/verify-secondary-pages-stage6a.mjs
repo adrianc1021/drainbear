@@ -260,6 +260,11 @@ try {
       (await page.locator('[data-header-whatsapp="true"]').count()) === 0,
       "/thanks 不應有 Header WhatsApp CTA"
     );
+    assert(
+      (await page.locator('meta[name="robots"]').getAttribute("content")) ===
+        "noindex, nofollow",
+      "/thanks 必須 noindex, nofollow"
+    );
 
     const notFoundResponse = await page.goto(
       `${BASE_URL}/stage6a-missing-route`,

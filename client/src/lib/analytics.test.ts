@@ -13,6 +13,7 @@ import {
   sendEvent,
   trackBlogRead,
   trackCTA,
+  trackContactFormError,
   trackContactFormStart,
   trackContactFormSubmit,
   trackQuoteCalculatorComplete,
@@ -210,6 +211,14 @@ describe("純事件 Helper(不持有跨頁面去重狀態)", () => {
     const submits = eventsNamed("contact_form_submit");
     expect(submits).toHaveLength(1);
     expect(submits[0].form_name).toBe("inquiry_form");
+  });
+
+  it("trackContactFormError 記錄表格來源位置但不帶錯誤內文", () => {
+    trackContactFormError("inquiry_form", "validation", "guide_quote_form");
+    const errors = eventsNamed("contact_form_error");
+    expect(errors).toHaveLength(1);
+    expect(errors[0].error_type).toBe("validation");
+    expect(errors[0].cta_location).toBe("guide_quote_form");
   });
 });
 

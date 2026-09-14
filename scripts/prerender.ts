@@ -35,6 +35,7 @@ const SERVICE_SLUGS = [
   "kitchen-sink-unblocking",
   "bathroom-drain-unblocking",
   "sewage-backflow",
+  "grease-trap-cleaning",
   "high-pressure-jetting",
   "cctv-drain-inspection",
   "main-drain-manhole",

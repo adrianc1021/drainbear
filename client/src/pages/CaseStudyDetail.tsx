@@ -1,6 +1,7 @@
 import { CalendarDays, Clock, MapPin, Wrench } from "lucide-react";
 import { useParams } from "wouter";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import QuoteRequestForm from "@/components/QuoteRequestForm";
 import SEO from "@/components/SEO";
 import { WhatsAppButton } from "@/components/Layout";
 import { BUSINESS_ID, SITE_URL, WEBSITE_ID } from "@/config/site";
@@ -125,6 +126,16 @@ export default function CaseStudyDetail() {
               </section>
             ) : null}
           </article>
+
+          <section className="border-y border-[var(--db-rule)] bg-white">
+            <div className="db-container py-12 md:py-16">
+              <QuoteRequestForm
+                location={`case_detail_${study.slug}`}
+                title="遇到相似問題？先留下現場資料"
+                description="公開案例只代表一次工程；留下你的地區和問題描述，團隊會按實際情況再跟進。"
+              />
+            </div>
+          </section>
 
           <section className="bg-[var(--db-ink)] text-white">
             <div className="db-container grid gap-7 py-12 md:grid-cols-[1fr_auto] md:items-center">

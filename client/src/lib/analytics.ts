@@ -18,8 +18,8 @@
  * - 開發環境:預設不上報 GA4(避免污染正式數據);設 VITE_GA4_DEBUG="true"
  *   可於開發環境以 debug_mode 上報,事件會出現在 GA4 DebugView
  *
- * Google Ads:client/index.html 已載入 gtag.js(AW-18128738982)。本模組
- * 重用同一 gtag.js 及 dataLayer,只以 gtag('config', 'G-…') 附加 GA4,
+ * Google Ads:client/index.html 先建立 dataLayer 並排入 AW config。本模組
+ * 延遲載入共用 gtag.js,並以 gtag('config', 'G-…') 附加 GA4,
  * 絕不重複載入腳本,也不改動 Ads 轉換設定。所有自訂事件均以 send_to
  * 明確指定 GA4 Measurement ID,避免誤送到 Google Ads Destination。
  *
@@ -32,6 +32,11 @@ import {
   createWhatsAppHandoff,
   type SessionAttribution,
 } from "./trackingSession";
+import {
+  __resetGoogleTagLoaderForTests,
+  loadGoogleTag,
+  scheduleGoogleTag,
+} from "./googleTagLoader";
 
 declare global {
   interface Window {
@@ -171,17 +176,8 @@ export function initAnalytics() {
     return;
   }
 
-  // 重用已存在的 gtag.js(index.html Google Ads 片段已載入),避免重複載入。
-  const alreadyLoaded = Boolean(
-    document.querySelector('script[src*="googletagmanager.com/gtag/js"]')
-  );
-  if (!alreadyLoaded) {
-    const s = document.createElement("script");
-    s.async = true;
-    s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(ga4Id)}`;
-    document.head.appendChild(s);
-    window.gtag("js", new Date());
-  }
+  // config 先排入 dataLayer；外部 gtag.js 移離首屏關鍵路徑。
+  scheduleGoogleTag(ga4Id);
 
   window.gtag("config", ga4Id, {
     send_page_view: false,
@@ -286,6 +282,7 @@ export function sendEvent(
 
   const ga4Id = resolveGa4Id();
   if (window.gtag && ga4Id && isGa4Active()) {
+    loadGoogleTag(ga4Id);
     window.gtag("event", eventName, { ...clean, send_to: ga4Id });
     return;
   }
@@ -447,10 +444,15 @@ export function trackContactFormSubmit(formName: string, location?: string) {
 }
 
 /** 表格提交錯誤(只傳錯誤類型,不傳錯誤訊息內文以免夾帶個人資料) */
-export function trackContactFormError(formName: string, errorType: string) {
+export function trackContactFormError(
+  formName: string,
+  errorType: string,
+  location?: string,
+) {
   sendEvent("contact_form_error", {
     form_name: formName,
     error_type: errorType,
+    ...(location ? { cta_location: location } : {}),
   });
 }
 
@@ -531,4 +533,5 @@ export function __resetAnalyticsStateForTests() {
   initialized = false;
   lastTrackedPath = null;
   invalidIdWarned = false;
+  __resetGoogleTagLoaderForTests();
 }

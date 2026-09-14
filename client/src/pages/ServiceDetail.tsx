@@ -10,6 +10,9 @@ import {
 } from "lucide-react";
 import { Link, useParams } from "wouter";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import QuoteRequestForm, {
+  type InquiryServiceType,
+} from "@/components/QuoteRequestForm";
 import SEO from "@/components/SEO";
 import {
   useContactSettings,
@@ -30,6 +33,18 @@ const CALCULATOR_LOCATION_BY_SLUG: Record<string, string> = {
   "bathroom-drain-unblocking": "shower",
   "kitchen-sink-unblocking": "sink",
   "sewage-backflow": "mainpipe",
+  "grease-trap-cleaning": "grease",
+};
+
+const INQUIRY_TYPE_BY_SLUG: Record<string, InquiryServiceType> = {
+  "toilet-unblocking": "residential",
+  "kitchen-sink-unblocking": "residential",
+  "bathroom-drain-unblocking": "residential",
+  "sewage-backflow": "commercial",
+  "high-pressure-jetting": "hydrojet",
+  "cctv-drain-inspection": "cctv",
+  "main-drain-manhole": "commercial",
+  "grease-trap-cleaning": "commercial",
 };
 
 export default function ServiceDetail() {
@@ -406,6 +421,18 @@ export default function ServiceDetail() {
                 </article>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section className="service-quote border-y border-border bg-white py-14 md:py-20">
+          <div className="container">
+            <QuoteRequestForm
+              location={`service_${service.slug}`}
+              title={`想查詢${service.shortName}？`}
+              description="留下基本資料和現場情況，團隊會先了解問題，再按實際條件確認安排與報價。"
+              defaultServiceType={INQUIRY_TYPE_BY_SLUG[service.slug]}
+              defaultMessage={`我想查詢${service.name}，請按我的情況提供初步方向。`}
+            />
           </div>
         </section>
 

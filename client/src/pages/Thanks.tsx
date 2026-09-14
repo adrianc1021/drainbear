@@ -90,6 +90,7 @@ export default function Thanks() {
         description="感謝查詢通渠熊 24 小時通渠服務，師傅將於 1 分鐘內回覆。如未能開啟 WhatsApp，歡迎直接致電 24 小時熱線。"
         path="/thanks"
         noindex
+        nofollow
       />
       <section className="bg-gradient-to-b from-mist to-white py-16 md:py-24">
         <div className="container max-w-2xl text-center">

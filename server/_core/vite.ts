@@ -229,7 +229,7 @@ export function serveStatic(app: Express) {
 
     applyRobotsHeaders(pathname, isKnownRoute, res);
 
-    if (isKnownRoute && pathname !== "/thanks") {
+    if (isKnownRoute) {
       const prerenderFile = getPrerenderFilePath(distPath, pathname);
 
       if (fs.existsSync(prerenderFile)) {

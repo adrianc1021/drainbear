@@ -4,6 +4,7 @@ import { lazy, Suspense, useEffect } from "react";
 import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Layout from "./components/Layout";
+import TrpcProvider from "./components/TrpcProvider";
 import Home from "./pages/Home";
 import { EstimateProvider } from "./contexts/EstimateContext";
 import { SiteSettingsProvider } from "./contexts/SiteSettingsContext";
@@ -101,13 +102,15 @@ function App() {
     <ErrorBoundary>
       <SiteSettingsProvider>
         <ThemeProvider defaultTheme="light">
-          <EstimateProvider>
-            <TooltipProvider>
-              <Toaster />
-              <PageViewTracker />
-              <Router />
-            </TooltipProvider>
-          </EstimateProvider>
+          <TrpcProvider>
+            <EstimateProvider>
+              <TooltipProvider>
+                <Toaster />
+                <PageViewTracker />
+                <Router />
+              </TooltipProvider>
+            </EstimateProvider>
+          </TrpcProvider>
         </ThemeProvider>
       </SiteSettingsProvider>
     </ErrorBoundary>

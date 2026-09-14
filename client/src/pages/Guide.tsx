@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import QuoteRequestForm from "@/components/QuoteRequestForm";
 import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
 import PriceCalculator from "@/components/PriceCalculator";
 import { WhatsAppButton } from "@/components/Layout";
@@ -64,7 +65,7 @@ const PRICE_TABLE = [
     service: "食肆隔油池清理",
     range: "HK$2,500 起",
     price: 2500,
-    href: "/services",
+    href: "/services/grease-trap-cleaning",
     note: "可安排定期保養計劃",
   },
   {
@@ -407,6 +408,16 @@ export default function Guide() {
           <div className="reveal">
             <PriceCalculator />
           </div>
+        </div>
+      </section>
+
+      <section className="border-y border-border bg-white py-14 md:py-20">
+        <div className="container">
+          <QuoteRequestForm
+            location="guide_quote_form"
+            title="看完價錢，想按你的情況再報價？"
+            description="留下稱呼、電話、地區和問題描述，團隊會先按資料跟進；最終方案及收費仍會在動工前確認。"
+          />
         </div>
       </section>
 

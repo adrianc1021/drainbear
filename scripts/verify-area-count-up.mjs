@@ -328,7 +328,7 @@ try {
   /*
    * Prerender HTML 必須包含最終統計，而非 0。
    */
-  const prerenderFile = "dist/prerender/areas.html";
+  const prerenderFile = "dist/public/areas.html";
 
   if (!fs.existsSync(prerenderFile)) {
     throw new Error(`找不到 ${prerenderFile}`);

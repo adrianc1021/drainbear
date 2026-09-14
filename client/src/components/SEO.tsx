@@ -87,6 +87,7 @@ export interface SEOProps {
     path: string;
   }[];
   noindex?: boolean;
+  nofollow?: boolean;
 }
 
 export default function SEO({
@@ -106,6 +107,7 @@ export default function SEO({
   type = "website",
   breadcrumbs,
   noindex = false,
+  nofollow = false,
 }: SEOProps) {
   const {
     settings,
@@ -158,7 +160,7 @@ export default function SEO({
       "name",
       "robots",
       noindex
-        ? "noindex, follow"
+        ? `noindex, ${nofollow ? "nofollow" : "follow"}`
         : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
     );
 
@@ -166,7 +168,7 @@ export default function SEO({
       "name",
       "googlebot",
       noindex
-        ? "noindex, follow"
+        ? `noindex, ${nofollow ? "nofollow" : "follow"}`
         : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
     );
 
