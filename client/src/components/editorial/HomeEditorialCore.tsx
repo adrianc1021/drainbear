@@ -5,6 +5,8 @@ import {
   Droplets,
   MessageCircle,
   Phone,
+  ShieldCheck,
+  Timer,
 } from "lucide-react";
 import { Link } from "wouter";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
@@ -98,14 +100,20 @@ export function EditorialHero({ imageSrc }: { imageSrc?: string }) {
     >
       <div className="db-container brand-hero__grid">
         <div className="brand-hero__copy">
-          <p className="brand-hero__service-label">24 小時通渠查詢</p>
+          <p className="brand-hero__service-label">
+            <span aria-hidden="true" />
+            港九新界・住宅及商業渠務
+          </p>
           <h1 id="home-editorial-heading">
-            香港通渠，
+            香港通渠，24 小時
             <br />
-            先報價後動工。
+            緊急服務
           </h1>
           <p className="brand-hero__intro">
-            塞廁所、鋅盤塞、企缸去水慢？傳相片及地點，先了解問題及收費。
+            先了解情況及報價，確認後才動工。
+          </p>
+          <p className="brand-hero__description">
+            塞廁所、企缸去水、廚房鋅盤淤塞或污水倒灌？傳送地點及現場相片，讓團隊作初步評估。
           </p>
           <div className="brand-hero__actions">
             <a
@@ -147,11 +155,16 @@ export function EditorialHero({ imageSrc }: { imageSrc?: string }) {
               <span>服務示意圖片</span>
             </figcaption>
             <p className="brand-hero__note">
-              上門時間按地區、交通及所需設備確認。
+              服務時間按地區、交通及所需設備確認。
             </p>
           </figure>
         ) : null}
       </div>
+      <ul className="brand-hero__proofs db-container" aria-label="服務承諾">
+        <li><ShieldCheck aria-hidden="true" /><span>確認收費後才動工</span></li>
+        <li><Timer aria-hidden="true" /><span>24 小時接受查詢</span></li>
+        <li><Check aria-hidden="true" /><span>完工後測試去水</span></li>
+      </ul>
       <div className="brand-hero__directory">
         <div className="db-container">
           <p>想先了解？</p>
