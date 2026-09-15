@@ -2,7 +2,7 @@
 
 ## Production IDs
 
-- GA4 Measurement ID: `G-7JEL7SLBGQ`
+- GA4 Measurement ID: `G-05DW80HCTS`
 - Google Ads Destination: `AW-18128738982`
 
 以上 ID 為公開 Tracking ID，不屬於 Secret。

@@ -12,14 +12,15 @@
  * - VITE_GA4_MEASUREMENT_ID(建議)或 VITE_GA4_ID(舊名兼容)或 window.__GA4_ID__
  * - Measurement ID 必須符合 G-XXXXXXXXXX 格式;格式不正確時 GA4 不會初始化、
  *   錯誤值不會傳給 gtag config,網站照常運作(開發環境顯示警告)
- * - 未設定 GA4 ID:網站正常運作,不載入額外腳本;事件只推入當前頁面的
- *   dataLayer 作除錯/相容用途 —— 該佇列不會永久儲存,重新整理即消失,
+ * - 預設採用目前正式資料串流;有效 env 或 window 設定可覆寫它。無效的非空
+ *   覆寫值不會初始化 GA4；網站仍正常運作，事件只會推入當前頁面的 dataLayer
+ *   作除錯/相容用途 —— 該佇列不會永久儲存,重新整理即消失,
  *   亦不能補回 GA4 安裝前的歷史數據
  * - 開發環境:預設不上報 GA4(避免污染正式數據);設 VITE_GA4_DEBUG="true"
  *   可於開發環境以 debug_mode 上報,事件會出現在 GA4 DebugView
  *
  * Google Ads:client/index.html 先建立 dataLayer 並排入 AW config。本模組
- * 延遲載入共用 gtag.js,並以 gtag('config', 'G-…') 附加 GA4,
+ * 立即載入共用 gtag.js,並以 gtag('config', 'G-…') 附加 GA4,
  * 絕不重複載入腳本,也不改動 Ads 轉換設定。所有自訂事件均以 send_to
  * 明確指定 GA4 Measurement ID,避免誤送到 Google Ads Destination。
  *
@@ -71,7 +72,7 @@ function rawGa4Id(): string | undefined {
   const fromEnv =
     (import.meta.env.VITE_GA4_MEASUREMENT_ID as string | undefined) ||
     (import.meta.env.VITE_GA4_ID as string | undefined);
-  const id = fromWindow || fromEnv || "G-7JEL7SLBGQ";
+  const id = fromWindow || fromEnv || "G-05DW80HCTS";
   return id && id.trim() ? id.trim() : undefined;
 }
 
@@ -176,7 +177,7 @@ export function initAnalytics() {
     return;
   }
 
-  // config 先排入 dataLayer；外部 gtag.js 移離首屏關鍵路徑。
+  // config 先排入 dataLayer；tag 必須立即下載，避免短暫首訪遺失 page_view。
   scheduleGoogleTag(ga4Id);
 
   window.gtag("config", ga4Id, {
@@ -301,8 +302,8 @@ export function sendEvent(
 let lastTrackedPath: string | null = null;
 
 /**
- * SPA 路由變更 page_view(首次載入由 gtag config 的 send_page_view 處理,
- * 呼叫端應跳過第一次)。連續同一路徑不重複上報。
+ * 首次載入及 SPA 路由變更 page_view。gtag config 已設 send_page_view:false，
+ * 因此呼叫端必須包括第一次。連續同一路徑不重複上報。
  * 以 send_to 明確指定 GA4 Measurement ID。
  */
 export function trackPageView(path: string) {

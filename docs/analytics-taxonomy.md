@@ -15,22 +15,23 @@
 |---|---|---|
 | `VITE_GA4_MEASUREMENT_ID` | 前端 env(建議) | GA4 Measurement ID(`G-XXXXXXXXXX`) |
 | `VITE_GA4_ID` | 前端 env(舊名兼容) | 同上,`VITE_GA4_MEASUREMENT_ID` 優先 |
-| `window.__GA4_ID__` | index.html(後備) | 不經 build 注入 ID 的方式 |
+| `window.__GA4_ID__` | index.html(覆寫) | 不經 build 注入 ID 的方式；優先於 env 與內建正式 ID |
 | `VITE_GA4_DEBUG` | 前端 env | `"true"` 時開發環境亦上報(帶 `debug_mode`,事件入 GA4 DebugView) |
 
 行為:
-- **未設定 GA4 ID**:不載入任何額外腳本,網站正常運作。事件仍推入當前頁面的
-  `dataLayer`,**僅作除錯/相容用途**——`dataLayer` 只存在於當前頁面的記憶體,
-  **不會永久儲存**,亦**不能補回 GA4 安裝前的歷史數據**;正式收數由設定
-  Measurement ID 當日開始。
+- **正式預設資料串流**:網站內建 `G-05DW80HCTS`，首次頁面瀏覽會立即開始載入
+  Google tag。有效的 env 或 `window.__GA4_ID__` 可覆寫它；格式錯誤的非空覆寫值會
+  停止 GA4 初始化，網站仍正常運作。此情況下事件只推入當前頁面的 `dataLayer`，
+  **僅作除錯/相容用途**——`dataLayer` 只存在於當前頁面的記憶體，**不會永久儲存**，
+  亦**不能補回 GA4 安裝前的歷史數據**。
 - **ID 格式驗證**:只接受合法 `G-` 格式(`isValidGa4Id()`)。值存在但格式錯誤時
   不初始化 GA4、不呼叫 `gtag('config', …)`,開發環境顯示不含該值的警告,網站照常運作。
 - **開發環境(`import.meta.env.DEV`)**:預設不上報 GA4,避免污染正式數據。
 - **事件目的地隔離**:GA4 啟用時,`sendEvent()` 及 `trackPageView()` 均帶
   `send_to: <GA4 Measurement ID>`,自訂事件只送 GA4,不會流向 Google Ads Destination。
 - **Google Ads Tag `AW-18128738982`**:由 `client/index.html` 先排入 dataLayer;
-  外部 `gtag.js` 在首次互動後載入,無互動時於頁面 load 後延遲載入。GA4 重用同一
-  gtag.js 及 dataLayer,不會重複載入腳本。
+  Analytics 初始化時立即載入外部 `gtag.js`。GA4 與 Ads 重用同一 gtag.js 及
+  dataLayer，不會重複載入腳本。
 
 ## 去重責任劃分
 
@@ -73,7 +74,7 @@
 | `cta_click` | 一般 CTA 點擊 | cta_location, cta_label, destination_url | 🟡 `trackNavClick("cta", …)` 可用 |
 | `service_click` | 服務項目點擊 | service_name, cta_location, destination_url | 🟡 `trackNavClick("service", …)` 可用 |
 | `pricing_click` | 收費相關連結點擊 | cta_location, cta_label, destination_url | 🟡 `trackNavClick("pricing", …)` 可用 |
-| `page_view` | SPA 路由變更(首次載入由 gtag config 處理) | page_path, page_title, page_location | ✅ 已接(App.tsx PageViewTracker) |
+| `page_view` | 首次載入及 SPA 路由變更（由 App.tsx PageViewTracker 手動發送） | page_path, page_title, page_location | ✅ 已接(App.tsx PageViewTracker) |
 
 ## 通用參數(白名單)
 

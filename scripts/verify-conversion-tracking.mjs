@@ -9,7 +9,7 @@ const googleLoader = fs.readFileSync("client/src/lib/googleTagLoader.ts", "utf8"
 const dockerfile = fs.readFileSync("Dockerfile", "utf8");
 
 const required = [
-  [analytics, "G-7JEL7SLBGQ"],
+  [analytics, "G-05DW80HCTS"],
   [analytics, "whatsapp_handoff"],
   [analytics, "VITE_GOOGLE_ADS_WHATSAPP_LABEL"],
   [analytics, 'sendGoogleAdsEvent("quote_calculator_start")'],
@@ -24,9 +24,8 @@ const required = [
   [html, "send_page_view: false"],
   [html, "productionTrackingHosts"],
   [html, "productionTrackingHosts.has(window.location.hostname)"],
-  [googleLoader, "scheduleGoogleTag"],
-  [googleLoader, 'window.addEventListener("pointerdown"'],
-  [googleLoader, "FALLBACK_DELAY_MS"],
+  [googleLoader, "loadGoogleTag"],
+  [googleLoader, "scheduleGoogleTag(destinationId: string)"],
   [dockerfile, "ARG VITE_GOOGLE_ADS_WHATSAPP_LABEL"],
 ];
 
@@ -42,6 +41,16 @@ if (html.includes('src="https://www.googletagmanager.com/gtag/js')) {
 
 if (html.includes("googletagmanager.com/gtag/js?id=")) {
   throw new Error("client/index.html still creates the external gtag script");
+}
+
+if (
+  googleLoader.includes("FALLBACK_DELAY_MS") ||
+  googleLoader.includes('window.addEventListener("pointerdown"') ||
+  !/function scheduleGoogleTag\(destinationId: string\)\s*\{\s*loadGoogleTag\(destinationId\);\s*\}/.test(
+    googleLoader
+  )
+) {
+  throw new Error("Google tag must load immediately; delayed interaction loading is not allowed");
 }
 
 if (thanks.includes("trackWhatsAppOpen(from)")) {
@@ -67,3 +76,4 @@ console.log("PASS：PII 防護仍然存在");
 console.log("PASS：Google Ads Conversion Label 採可選配置");
 console.log("PASS：Render Docker build 可取得 Google Ads Conversion Label");
 console.log("PASS：quote_calculator_start 明確送往 Google Ads Destination");
+console.log("PASS：Google tag 於首次頁面瀏覽立即載入");
