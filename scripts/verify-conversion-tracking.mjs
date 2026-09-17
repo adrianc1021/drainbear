@@ -29,9 +29,8 @@ const required = [
   [html, "send_page_view: false"],
   [html, "productionTrackingHosts"],
   [html, "productionTrackingHosts.has(window.location.hostname)"],
-  [googleLoader, "scheduleGoogleTag"],
-  [googleLoader, 'window.addEventListener("pointerdown"'],
-  [googleLoader, "FALLBACK_DELAY_MS"],
+  [googleLoader, "loadGoogleTag"],
+  [googleLoader, "scheduleGoogleTag(destinationId: string)"],
   [dockerfile, "ARG VITE_GA4_MEASUREMENT_ID"],
   [dockerfile, "ARG VITE_GOOGLE_ADS_WHATSAPP_LABEL"],
   [dockerfile, "ARG VITE_GOOGLE_ADS_PHONE_LABEL"],
@@ -61,6 +60,16 @@ if (html.includes("googletagmanager.com/gtag/js?id=")) {
   throw new Error("client/index.html still creates the external gtag script");
 }
 
+if (
+  googleLoader.includes("FALLBACK_DELAY_MS") ||
+  googleLoader.includes('window.addEventListener("pointerdown"') ||
+  !/function scheduleGoogleTag\(destinationId: string\)\s*\{\s*loadGoogleTag\(destinationId\);\s*\}/.test(
+    googleLoader
+  )
+) {
+  throw new Error("Google tag must load immediately; delayed interaction loading is not allowed");
+}
+
 if (thanks.includes("trackWhatsAppOpen(from)")) {
   throw new Error("Thanks 仍使用舊 whatsapp_open page-load tracking");
 }
@@ -85,3 +94,4 @@ console.log("PASS：Google Ads Conversion Label 採可選配置");
 console.log("PASS：正式 GA4 property 已切換至 G-05DW80HCTS");
 console.log("PASS：Render Docker build 可取得 Google Ads Conversion Label");
 console.log("PASS：quote_calculator_start 明確送往 Google Ads Destination");
+console.log("PASS：Google tag 於首次頁面瀏覽立即載入");
