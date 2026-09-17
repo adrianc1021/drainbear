@@ -132,14 +132,14 @@ export default function CaseStudyDetail() {
               <QuoteRequestForm
                 location={`case_detail_${study.slug}`}
                 title="遇到相似問題？先留下現場資料"
-                description="公開案例只代表一次工程；留下你的地區和問題描述，團隊會按實際情況再跟進。"
+                description="公開案例只代表一次工程；留下您的地區和問題描述，團隊會按實際情況再跟進。"
               />
             </div>
           </section>
 
           <section className="bg-[var(--db-ink)] text-white">
             <div className="db-container grid gap-7 py-12 md:grid-cols-[1fr_auto] md:items-center">
-              <div><h2 className="text-3xl font-black">遇到相似渠務問題？</h2><p className="mt-3 text-white/70">先傳送位置與現場相片，團隊會按你的實際情況判斷。</p></div>
+              <div><h2 className="text-3xl font-black">遇到相似渠務問題？</h2><p className="mt-3 text-white/70">先傳送位置與現場相片，團隊會按您的實際情況判斷。</p></div>
               <WhatsAppButton label="WhatsApp 傳送資料" trackLocation="case_detail_footer" className="w-full md:w-auto" />
             </div>
           </section>

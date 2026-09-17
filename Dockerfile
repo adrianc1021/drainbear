@@ -12,7 +12,10 @@ RUN pnpm install --frozen-lockfile
 
 COPY . .
 
+ARG VITE_GA4_MEASUREMENT_ID
 ARG VITE_GOOGLE_ADS_WHATSAPP_LABEL
+ARG VITE_GOOGLE_ADS_PHONE_LABEL
+ARG VITE_GOOGLE_ADS_FORM_LABEL
 RUN pnpm build
 
 FROM node:22-bookworm-slim AS production

@@ -18,7 +18,7 @@ const FALLBACK_SITE_SETTINGS: SiteSettings = {
   phoneDisplay: PHONE_DISPLAY,
   phoneE164: "+85295588260",
   whatsappNumber: WHATSAPP_NUMBER,
-  whatsappDefaultMessage: "你好，我想查詢通渠服務及報價。",
+  whatsappDefaultMessage: "您好，我想查詢通渠服務及報價。",
   googleBusinessUrl:
     "https://www.google.com/maps/search/%E9%80%9A%E6%B8%A0%E7%86%8A+DrainBear",
   featuredBlogCount: 3,

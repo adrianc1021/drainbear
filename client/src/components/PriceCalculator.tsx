@@ -119,7 +119,7 @@ export default function PriceCalculator() {
   };
 
   const waMsg = result
-    ? `你好，我想查詢通渠報價：${result.l.label}淤塞，樓宇類型係${result.b.label}，${result.t.label}上門。網上估價約 HK$${result.low}–${result.high}，請確認實際報價。`
+    ? `您好，我想查詢通渠報價：${result.l.label}出現淤塞，樓宇類型為${result.b.label}，需要於${result.t.label}安排上門服務。網上初步估價約為 HK$${result.low}–${result.high}，請協助確認實際報價。`
     : undefined;
 
   // 估價結果同步至全域 Context：底部 CTA 列即時改用預填估價詳情
@@ -231,10 +231,10 @@ export default function PriceCalculator() {
           <div className="calculator-intro mb-7">
             <div className="flex items-end justify-between gap-4">
               <div>
-                <p className="text-xs font-bold tracking-[0.16em] text-safety">QUICK ESTIMATE</p>
-                <h2 className="mt-2 font-display text-2xl font-black text-navy md:text-3xl">先了解大概預算</h2>
+                <p className="text-xs font-bold tracking-[0.16em] text-safety">初步估價</p>
+                <h2 className="mt-2 font-display text-2xl font-black text-navy md:text-3xl">先了解預算範圍</h2>
               </div>
-              <span className="shrink-0 border border-navy/15 px-2.5 py-1.5 text-[11px] font-bold text-navy/60">約 10 秒</span>
+              <span className="shrink-0 border border-navy/15 px-2.5 py-1.5 text-[11px] font-bold text-navy/60">約 10 秒完成</span>
             </div>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">按實際情況選擇三項資料，即時取得通渠初步價格範圍。</p>
           </div>
@@ -245,7 +245,7 @@ export default function PriceCalculator() {
                 即時估價流程
               </p>
               <p className="mt-1 text-sm font-semibold text-navy">
-                已完成 {completedSteps} / 3 步
+                已完成 {completedSteps} / 3 個步驟
               </p>
             </div>
             {(loc || bld || timeTouched) && (
@@ -262,7 +262,7 @@ export default function PriceCalculator() {
               <div className="h-full bg-wagreen transition-[width] duration-500" style={{ width: `${(completedSteps / 3) * 100}%` }} />
             </div>
           </div>
-          <StepTitle n={1} text="邊度塞咗？" />
+          <StepTitle n={1} text="哪一個位置出現淤塞？" />
           <div className="calculator-options grid gap-2.5">
             {LOCATIONS.map((o) => (
               <OptionBtn
@@ -278,7 +278,7 @@ export default function PriceCalculator() {
           </div>
 
           <div className="mt-7">
-            <StepTitle n={2} text="乜嘢樓宇類型？" />
+            <StepTitle n={2} text="樓宇類型是甚麼？" />
             <div className="calculator-options grid gap-2.5">
               {BUILDINGS.map((o) => (
                 <OptionBtn
@@ -295,7 +295,7 @@ export default function PriceCalculator() {
           </div>
 
           <div className="mt-7">
-            <StepTitle n={3} text="幾時要上門？" />
+            <StepTitle n={3} text="需要哪一個上門時段？" />
             <div className="calculator-options calculator-options--times grid gap-2.5">
               {TIMES.map((o) => (
                 <OptionBtn
@@ -319,7 +319,7 @@ export default function PriceCalculator() {
           aria-live="polite"
           aria-atomic="true"
         >
-          <div className="calculator-result-kicker text-xs font-bold tracking-[0.2em] text-wagreen">你的初步估價</div>
+          <div className="calculator-result-kicker text-xs font-bold tracking-[0.2em] text-wagreen">您的初步估價</div>
           {result ? (
             <>
               <div className="calculator-price mt-3 font-display font-black tracking-tight">
@@ -353,10 +353,10 @@ export default function PriceCalculator() {
               </a>
               <p className="mt-3 flex items-center gap-1.5 text-[11px] font-medium text-wagreen">
                 <span className="inline-flex h-1.5 w-1.5 rounded-full bg-wagreen" />
-                估價已同步至頁底 WhatsApp 按鈕，一按即可發送
+                估價資料已同步至頁底 WhatsApp 按鈕，可直接發送
               </p>
               <p className="mt-4 text-[11px] leading-relaxed text-white/40">
-                以上為初步估算，僅供參考。實際收費以師傅上門評估後、動工前確認為準。純異物淤塞打不通，分毫不收。
+                以上為初步估算，僅供參考。實際收費須由師傅到場評估，並於動工前確認；如屬事前確認的合資格疏通項目，相關收費安排按已確認條款執行。
               </p>
             </>
           ) : (
@@ -365,11 +365,11 @@ export default function PriceCalculator() {
                 HK$ ——
               </div>
               <p className="mt-3 text-sm leading-relaxed text-white/60">
-                {nextStepLabel}，即刻睇到初步估價範圍。唔使留電話，唔會有人 sell 你。
+                {nextStepLabel}，即可查看初步估價範圍。毋須先行留下電話，資料只會用於回應本次查詢。
               </p>
               <div className="mt-6 flex items-center gap-2 text-xs text-white/40">
                 <Droplets className="h-4 w-4 text-wagreen/60" strokeWidth={2} />
-                免費初步估算・現場確認總價才動工
+                免費初步估算・現場確認總價後才開始工程
               </div>
             </>
           )}

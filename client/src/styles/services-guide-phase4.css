@@ -29,8 +29,8 @@
 .phase4-guide h1,
 .phase4-guide h2,
 .phase4-guide h3 {
-  word-break: normal;
-  overflow-wrap: anywhere;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 .phase4-services > section:not(.site-page-hero),
@@ -539,7 +539,7 @@
 }
 
 .phase4-guide #calculator .calculator-option > span {
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .phase4-guide #calculator .calculator-step-title {
@@ -591,7 +591,7 @@
 .phase4-guide #calculator .calculator-price-amount {
   min-width: 0;
   max-width: 100%;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .phase4-guide #calculator .calculator-price-currency {
@@ -798,8 +798,8 @@
   }
 
   .phase4-guide__hero .site-page-hero__title {
-    word-break: normal;
-    overflow-wrap: anywhere;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
 
   .phase4-services__hero .site-page-hero__title {
@@ -852,8 +852,8 @@
   .phase4-service-detail__hero h1 {
     font-size: clamp(2.65rem, 11vw, 3.75rem);
     line-height: 1.14;
-    overflow-wrap: anywhere;
-    word-break: normal;
+    overflow-wrap: break-word;
+    word-break: keep-all;
   }
 
   .phase4-service-detail__hero > .container > div:first-child > div {

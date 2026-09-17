@@ -117,7 +117,7 @@ export default function FAQ() {
       <Breadcrumbs items={FAQ_CRUMBS} />
 
       <EditorialPageHero
-        kicker="FAQ / 常見問題"
+        kicker="常見問題"
         title="常見問題"
         description="以直接答案整理收費、緊急處理、上門安排、施工及管道保養問題，方便您快速判斷下一步。"
       />

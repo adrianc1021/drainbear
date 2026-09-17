@@ -157,7 +157,7 @@ try {
   });
 
   await page
-    .getByText(/出發前先提供初步估價及預計到達時間/)
+    .getByText(/團隊會先提供初步估價及可安排時段/)
     .first()
     .waitFor({
       state: "attached",
@@ -165,7 +165,7 @@ try {
     });
 
   await page
-    .getByText(/師傅現場檢查後、動工前確認最終總收費/)
+    .getByText(/師傅到場檢查後，於動工前確認最終總收費/)
     .first()
     .waitFor({
       state: "attached",

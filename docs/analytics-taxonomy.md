@@ -19,10 +19,9 @@
 | `VITE_GA4_DEBUG` | 前端 env | `"true"` 時開發環境亦上報(帶 `debug_mode`,事件入 GA4 DebugView) |
 
 行為:
-- **未設定 GA4 ID**:不載入任何額外腳本,網站正常運作。事件仍推入當前頁面的
-  `dataLayer`,**僅作除錯/相容用途**——`dataLayer` 只存在於當前頁面的記憶體,
-  **不會永久儲存**,亦**不能補回 GA4 安裝前的歷史數據**;正式收數由設定
-  Measurement ID 當日開始。
+- **正式網域的 GA4 fallback**:若 Render 沒有注入 `VITE_GA4_MEASUREMENT_ID`,
+  使用目前正式 Property `G-05DW80HCTS`，避免靜默回到已停用的舊 Property。
+  Preview／開發環境仍預設不上報。
 - **ID 格式驗證**:只接受合法 `G-` 格式(`isValidGa4Id()`)。值存在但格式錯誤時
   不初始化 GA4、不呼叫 `gtag('config', …)`,開發環境顯示不含該值的警告,網站照常運作。
 - **開發環境(`import.meta.env.DEV`)**:預設不上報 GA4,避免污染正式數據。
@@ -31,6 +30,9 @@
 - **Google Ads Tag `AW-18128738982`**:由 `client/index.html` 先排入 dataLayer;
   外部 `gtag.js` 在首次互動後載入,無互動時於頁面 load 後延遲載入。GA4 重用同一
   gtag.js 及 dataLayer,不會重複載入腳本。
+- **Google Ads conversion**:WhatsApp CTA 直接送往
+  `AW-18128738982/CSxUCPrKmOQcEKa1usRD`；電話及表格 conversion label 以
+  `VITE_GOOGLE_ADS_PHONE_LABEL`／`VITE_GOOGLE_ADS_FORM_LABEL` 可選配置。
 
 ## 去重責任劃分
 

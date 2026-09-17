@@ -173,7 +173,7 @@ for (const engine of engines) {
         await page.locator("h1").first().waitFor();
         await page.evaluate(() => document.fonts.ready);
         const title = await page.locator("h1").first().textContent();
-        if (/文章暫時未能載入|找不到頁面/.test(title)) {
+        if (route !== "/404" && /文章暫時未能載入|找不到頁面/.test(title)) {
           failures.push(
             `${engine} ${width} ${route}: expected content missing (${title})`
           );

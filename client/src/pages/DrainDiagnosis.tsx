@@ -194,7 +194,7 @@ export default function DrainDiagnosis() {
           <div className="container grid items-end gap-8 lg:grid-cols-[1fr_0.7fr]">
             <div className="max-w-3xl">
               <p className="text-xs font-bold tracking-[0.18em] text-safety">
-                DRAIN CHECK / 問題判斷
+                現場問題判斷
               </p>
               <h1 className="mt-3 text-balance font-display text-4xl font-black text-navy md:text-5xl">
                 先看症狀，再決定下一步

@@ -275,11 +275,45 @@ describe("Google Ads 事件路由", () => {
     });
   });
 
-  it("缺少 WhatsApp label 時不會誤送 conversion", () => {
+  it("WhatsApp 點擊會立即送 conversion，/thanks handoff 不會重複", () => {
     vi.stubEnv("VITE_GOOGLE_ADS_WHATSAPP_LABEL", "");
     const gtag = useProductionHost();
 
+    trackCTA("whatsapp", "mobile_bar");
     trackWhatsAppHandoff("mobile_bar", { landing_page: "/" });
+
+    expect(gtag).toHaveBeenCalledTimes(1);
+    expect(gtag).toHaveBeenCalledWith("event", "conversion", {
+      send_to: "AW-18128738982/CSxUCPrKmOQcEKa1usRD",
+      transport_type: "beacon",
+    });
+  });
+
+  it("電話及表格可按設定送出各自的 Ads conversion", () => {
+    vi.stubEnv("VITE_GOOGLE_ADS_PHONE_LABEL", "phone_Label-123");
+    vi.stubEnv("VITE_GOOGLE_ADS_FORM_LABEL", "form_Label-123");
+    const gtag = useProductionHost();
+
+    trackCTA("phone", "header");
+    trackContactFormSubmit("inquiry_form", "home_quote_form");
+
+    expect(gtag).toHaveBeenNthCalledWith(1, "event", "conversion", {
+      send_to: "AW-18128738982/phone_Label-123",
+      transport_type: "beacon",
+    });
+    expect(gtag).toHaveBeenNthCalledWith(2, "event", "conversion", {
+      send_to: "AW-18128738982/form_Label-123",
+      transport_type: "beacon",
+    });
+  });
+
+  it("電話及表格沒有 label 時不會誤送 Ads conversion", () => {
+    vi.stubEnv("VITE_GOOGLE_ADS_PHONE_LABEL", "");
+    vi.stubEnv("VITE_GOOGLE_ADS_FORM_LABEL", "");
+    const gtag = useProductionHost();
+
+    trackCTA("phone", "header");
+    trackContactFormSubmit("inquiry_form", "home_quote_form");
 
     expect(gtag).not.toHaveBeenCalled();
   });

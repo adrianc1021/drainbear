@@ -1,0 +1,282 @@
+/*
+ * DrainBear homepage mobile pass.
+ * Keep the existing editorial composition while protecting narrow screens,
+ * touch targets and the reading order of conversion content.
+ */
+
+@media (max-width: 767px) {
+  html {
+    scroll-padding-top: 4.75rem;
+  }
+
+  .mobile-cta-spacer {
+    height: calc(4.5rem + 1px + env(safe-area-inset-bottom));
+  }
+
+  /* The open menu behaves like a full-screen mobile surface above the page. */
+  #mobile-navigation {
+    min-height: calc(100dvh - 4rem);
+    height: calc(100dvh - 4rem);
+    max-height: calc(100dvh - 4rem);
+  }
+
+  button[aria-label="回到頂部"] {
+    bottom: calc(4.75rem + 1rem + env(safe-area-inset-bottom)) !important;
+  }
+
+  /* Let Chinese headings find their own line breaks instead of orphaning punctuation. */
+  .home-editorial .db-scene-hero h1 br,
+  .home-editorial .home-field-showcase__copy h2 br,
+  .home-editorial .db-diagnosis-story__intro h2 br,
+  .home-editorial .db-method-comparison__intro h2 br,
+  .home-editorial .db-home-faq__intro h2 br,
+  .home-editorial .db-final-cta-heading br {
+    display: none;
+  }
+
+  .home-editorial .db-scene-hero h1 {
+    font-size: 2.25rem;
+    line-height: 1.14;
+    letter-spacing: 0;
+  }
+
+  .home-editorial .db-scene-hero__scene-copy h2 {
+    font-size: 1.5rem;
+    line-height: 1.3;
+    letter-spacing: 0;
+  }
+
+  .home-editorial .db-diagnosis-story__intro h2,
+  .home-editorial .db-method-comparison__intro h2,
+  .home-editorial .db-home-faq__intro h2 {
+    font-size: 2.1rem;
+    line-height: 1.18;
+    letter-spacing: 0;
+  }
+
+  /* The desktop grid's start alignment otherwise shrink-wraps this visual on mobile. */
+  .home-editorial .db-diagnosis-story__layout {
+    align-items: stretch;
+    gap: 1.75rem;
+  }
+
+  .home-editorial .db-diagnosis-story__visual-wrap {
+    width: 100%;
+  }
+
+  .home-editorial .db-diagnosis-story,
+  .home-editorial .db-method-comparison,
+  .home-editorial .db-home-faq {
+    padding-block: 4rem;
+  }
+
+  .home-editorial .db-diagnosis-story__intro,
+  .home-editorial .db-method-comparison__intro {
+    padding-bottom: 2rem;
+  }
+
+  .home-editorial .db-diagnosis-story__layout {
+    padding-top: 2rem;
+  }
+
+  .home-editorial .db-diagnosis-console {
+    padding: 0.9rem;
+  }
+
+  .home-editorial .db-diagnosis-console__screen {
+    margin-top: 0.8rem;
+    padding: 1.1rem;
+  }
+
+  .home-editorial .db-diagnosis-console__signal {
+    min-height: 5.75rem;
+    gap: 0.9rem;
+    padding-block: 1.25rem;
+  }
+
+  .home-editorial .db-diagnosis-console__icon {
+    width: 3.65rem;
+    height: 3.65rem;
+  }
+
+  .home-editorial .db-diagnosis-console__signal-summary strong {
+    font-size: 1.45rem;
+  }
+
+  .home-editorial .db-diagnosis-console__signal-summary span {
+    font-size: 0.75rem;
+  }
+
+  .home-editorial .db-diagnosis-console__fact {
+    gap: 0.55rem;
+    padding-block: 0.7rem;
+  }
+
+  .home-editorial .db-diagnosis-console__fact-copy strong {
+    font-size: 0.76rem;
+  }
+
+  .home-editorial .db-diagnosis-console__fact small {
+    max-width: 5.4rem;
+    font-size: 0.58rem;
+  }
+
+  .home-editorial .db-method-comparison__panel-title > span:last-child,
+  .home-editorial .db-method-comparison__note > span {
+    min-width: 0;
+  }
+
+  .home-editorial .db-method-comparison__panel-title h3 {
+    overflow-wrap: break-word;
+    word-break: normal;
+  }
+
+  .home-editorial .db-scene-hero__visual {
+    min-height: clamp(18rem, 82vw, 22rem);
+  }
+
+  .home-editorial .db-scene-hero__visual-brief {
+    padding: 1rem 1rem 7rem;
+  }
+
+  .home-editorial .db-scene-hero__visual-brief-content {
+    padding-block: 2rem;
+  }
+
+  .home-editorial .db-scene-hero__visual-brief-content strong {
+    font-size: 1.6rem;
+  }
+
+  .home-editorial .db-scene-hero__controls {
+    gap: 0.65rem;
+    padding: 0.55rem 0.65rem 0.5rem;
+  }
+
+  .home-editorial .db-scene-hero__tabs {
+    column-gap: 0.4rem;
+  }
+
+  .home-editorial .db-scene-hero__tabs button {
+    min-height: 2.75rem;
+    justify-content: flex-start;
+    line-height: 1.35;
+    white-space: normal;
+  }
+
+  .home-editorial .db-scene-hero__navigation {
+    gap: 0.35rem;
+  }
+
+  .home-editorial .db-scene-hero__navigation button {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .home-editorial .db-scene-hero__scene-link {
+    min-height: 2.75rem;
+    padding-top: 0.2rem;
+    white-space: normal;
+  }
+
+  .home-editorial .db-scene-hero__scroll-cue {
+    min-height: 2.75rem;
+    align-items: center;
+    margin-top: 0.35rem;
+    padding-block: 0.5rem;
+  }
+
+  .home-editorial .home-field-showcase__grid {
+    gap: 2rem;
+    padding-block: 4rem;
+  }
+
+  .home-editorial .home-field-showcase__media {
+    aspect-ratio: 4 / 3;
+  }
+
+  .home-editorial .home-field-showcase__copy h2 {
+    font-size: 2rem;
+    line-height: 1.2;
+    letter-spacing: 0;
+  }
+
+  [data-quote-request-form] input,
+  [data-quote-request-form] select,
+  [data-quote-request-form] textarea {
+    font-size: 16px;
+  }
+
+  [data-quote-request-form] input,
+  [data-quote-request-form] select {
+    min-height: 3.25rem;
+  }
+
+  [data-quote-request-form] textarea {
+    min-height: 8rem;
+  }
+
+  [data-quote-request-form] button[type="submit"] {
+    min-height: 3.25rem;
+  }
+
+  .home-editorial .db-method-comparison__link,
+  .home-editorial .db-home-faq__all-link {
+    min-height: 2.75rem;
+  }
+}
+
+/*
+ * Tablet and narrow-desktop guardrails.
+ * The homepage uses large editorial type on wide screens; keep the two-column
+ * layout readable before it reaches the full mobile stacking breakpoint.
+ */
+@media (min-width: 768px) and (max-width: 1100px) {
+  .home-editorial .home-field-showcase__copy h2 {
+    font-size: 3rem;
+    line-height: 1.2;
+  }
+
+  .home-editorial .db-diagnosis-story__intro h2,
+  .home-editorial .db-method-comparison__intro h2,
+  .home-editorial .db-home-faq__intro h2 {
+    font-size: 3.5rem;
+    line-height: 1.14;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 899px) {
+  .home-editorial .db-scene-hero h1 {
+    font-size: 3rem;
+    line-height: 1.12;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1100px) {
+  .home-editorial .db-scene-hero h1 {
+    font-size: 3.5rem;
+    line-height: 1.08;
+  }
+}
+
+@media (max-width: 359px) {
+  .home-editorial .db-scene-hero__metric {
+    padding-inline: 0.5rem;
+  }
+
+  .home-editorial .db-scene-hero__metric strong {
+    font-size: 0.88rem;
+  }
+
+  .home-editorial .db-scene-hero__metric small {
+    font-size: 0.58rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-editorial .db-scene-hero__backdrop img,
+  .home-editorial .db-scene-hero__scene-copy,
+  .home-editorial .db-scene-hero__visual,
+  .home-editorial .db-diagnosis-console__signal {
+    animation: none;
+  }
+}

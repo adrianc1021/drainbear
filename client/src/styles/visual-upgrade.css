@@ -52,8 +52,8 @@ h3,
 h4,
 h5,
 h6 {
-  word-break: normal;
-  overflow-wrap: anywhere;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 button svg,
 a svg {
@@ -792,6 +792,17 @@ a svg {
   line-height: 1.35;
   font-weight: 750;
   overflow-wrap: anywhere;
+  word-break: normal;
+}
+.district-editorial .district-faq-question {
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+.district-editorial .district-faq-question > span:last-child {
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow-wrap: break-word;
   word-break: normal;
 }
 .district-editorial .card-float {

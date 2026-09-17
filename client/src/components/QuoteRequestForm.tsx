@@ -50,8 +50,8 @@ function getErrorType(error: unknown) {
 
 function QuoteRequestFormContent({
   location,
-  title = "先留下資料，團隊再回覆你",
-  description = "簡單描述堵塞位置和所在地區，方便我們先了解情況，再確認安排與報價。",
+  title = "先留下資料，團隊再回覆您",
+  description = "請提供堵塞位置及所在地區，方便團隊初步了解情況，再確認服務安排及報價。",
   defaultServiceType = "",
   defaultMessage = "",
   className = "",
@@ -128,7 +128,7 @@ function QuoteRequestFormContent({
     >
       <div className="max-w-2xl">
         <p className="text-xs font-black tracking-[0.14em] text-[var(--db-safety)]">
-          QUICK QUOTE / 報價查詢
+          報價查詢
         </p>
         <h2 className="mt-3 text-2xl font-black text-[var(--db-ink)] md:text-3xl">
           {title}
@@ -149,7 +149,7 @@ function QuoteRequestFormContent({
             <div>
               <h3 className="font-black text-[var(--db-ink)]">查詢已收到</h3>
               <p className="mt-2 text-sm leading-7 text-[var(--db-copy)]">
-                團隊會按你提供的資料回覆。如情況需要即時處理，可直接致電 {phoneDisplay}。
+                團隊會按您提供的資料回覆。如情況需要即時處理，可直接致電 {phoneDisplay}。
               </p>
               <a
                 href={phoneHref}

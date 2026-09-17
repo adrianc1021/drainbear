@@ -152,23 +152,23 @@ function areaKeywordHref(keyword: string) {
 const HOWTO_STEPS = [
   {
     step: "1",
-    title: "WhatsApp 影相報價",
-    desc: "拍下塞渠位置相片或影片，傳送至 WhatsApp，客服即時初步評估並報價。",
+    title: "WhatsApp 傳送現場資料",
+    desc: "拍攝淤塞位置的相片或短片，透過 WhatsApp 傳送，團隊會按資料作初步評估。",
   },
   {
     step: "2",
-    title: "確認價錢及時間",
-    desc: "出發前先提供初步估價及預計到達時間；師傅現場檢查後、動工前確認最終總收費，深夜附加費亦會事先講明。",
+    title: "確認收費及時段",
+    desc: "團隊會先提供初步估價及可安排時段；師傅到場檢查後，於動工前確認最終總收費，深夜附加費亦會事先說明。",
   },
   {
     step: "3",
-    title: "師傅上門疏通",
-    desc: "施工前鋪設保護墊，按淤塞性質選用手搖泵、電動通渠機或高壓水槍。",
+    title: "師傅到場疏通",
+    desc: "施工前鋪設保護墊，並按淤塞性質選用手動工具、電動通渠機或高壓水槍。",
   },
   {
     step: "4",
-    title: "測試及清理現場",
-    desc: "完工後即場測試去水，徹底清潔施工範圍，滿意後才收費。",
+    title: "完成測試及現場整理",
+    desc: "工程完成後測試排水情況，並整理受影響的施工位置；實際收費按已確認的報價執行。",
   },
 ];
 
@@ -178,16 +178,16 @@ const GUIDE_FAQS = [
     a: "香港通渠收費視乎淤塞位置及嚴重程度：坐廁淤塞約 HK$600 起，廚房鋅盤約 HK$500 起，大廈主渠或沙井工程約 HK$1,800 起。師傅現場檢查後會在動工前確認最終總價。",
   },
   {
-    q: "通渠公司幾耐可以到？",
-    a: "可安排時間會受所在地點、交通、師傅及設備調配影響。提供地區、堵塞位置與現場影片後，團隊會確認可安排的上門時間；深夜服務的附加費亦會事先說明。",
+    q: "通渠公司何時可以到場？",
+    a: "可安排時間會受所在地點、交通、人員及設備調配影響。提供地區、淤塞位置與現場短片後，團隊會確認可安排的上門時段；深夜服務的附加費亦會事先說明。",
   },
   {
-    q: "自己倒通渠水得唔得？",
-    a: "強烈不建議。市面通渠水屬強酸強鹼，對付豬油膏及頭髮效果有限，反而會腐蝕喉管造成穿漏，令維修費用大增。物理疏通（通渠機、高壓水槍）才是治本方法。",
+    q: "可以自行使用化學通渠劑嗎？",
+    a: "不建議自行使用。市面化學通渠劑的腐蝕性較強，對豬油膏及頭髮的效果有限，亦可能增加喉管受損及後續施工的風險。應按現場情況評估手動工具、通渠機或高壓水槍等處理方法。",
   },
   {
-    q: "點樣先知道喉管需唔需要更換？",
-    a: "CCTV 照喉可在合適入口及管道條件下協助查看內部狀況；影像結果仍要配合現場檢查，才可判斷疏通、檢測或維修方向。",
+    q: "如何判斷喉管是否需要更換？",
+    a: "CCTV 照喉可在入口及管道條件合適時協助查看內部狀況；影像結果仍須配合現場檢查，才可判斷應採用疏通、檢測或維修方案。",
   },
 ];
 
@@ -206,7 +206,7 @@ const HOWTO_JSONLD = {
   "@type": "HowTo",
   name: "香港通渠服務流程：由報價到完工 4 步",
   description:
-    "通渠熊 DrainBear 標準服務流程：WhatsApp 影相報價、確認價錢、師傅上門疏通、測試及清理現場。",
+    "通渠熊 DrainBear 標準服務流程：透過 WhatsApp 傳送現場資料、確認收費、師傅到場疏通，以及完成測試及現場整理。",
   step: HOWTO_STEPS.map((s, i) => ({
     "@type": "HowToStep",
     position: i + 1,
@@ -257,7 +257,7 @@ export default function Guide() {
     <div className="phase4-guide bg-white" data-phase4-page="guide">
       <SEO
         title="2026 香港通渠價錢｜通渠收費、費用及報價參考｜通渠熊"
-        description="想知香港通渠幾錢？查看坐廁、廚房鋅盤、企缸浴缸、大廈主渠、高壓洗渠及 CCTV 照喉的通渠價錢與費用參考，並了解影響最終報價的因素。"
+        description="查看坐廁、廚房鋅盤、企缸浴缸、大廈主渠、高壓洗渠及 CCTV 照喉的通渠價錢與費用參考，並了解影響最終報價的因素。"
         path="/guide"
         keywords="通渠價錢, 通渠價格, 通渠費用, 通渠收費, 通渠報價, 通渠幾錢, 塞廁所收費, 高壓通渠收費, CCTV照喉價錢"
         jsonLd={[
@@ -272,7 +272,7 @@ export default function Guide() {
 
       {/* 頁首 */}
       <EditorialPageHero
-        kicker="Pricing & guide / 收費指南"
+        kicker="收費指南"
         title={
           <>
             香港通渠價錢及收費，
@@ -280,7 +280,7 @@ export default function Guide() {
             動工前確認報價
           </>
         }
-        description="整理常見通渠價格、費用和起始收費，並說明影響最終報價的因素。想知通渠幾錢，可先按堵塞位置查看參考，再提供現場資料作初步估價。"
+        description="整理常見通渠價格、費用及起始收費，並說明影響最終報價的因素。可先按淤塞位置查看參考，再提供現場資料作初步估價。"
         actions={
           <>
             <WhatsAppButton
@@ -309,10 +309,10 @@ export default function Guide() {
             </div>
             <div>
               <h2 className="font-display text-2xl font-black text-navy md:text-3xl">
-                2026 香港通渠價錢及費用參考表
+                2026 年香港通渠價錢及費用參考
               </h2>
               <p className="mt-2 max-w-2xl text-sm text-muted-foreground md:text-base">
-                以下為常見通渠服務的起始價錢，最終收費會於師傅上門評估後、動工前一次過確認。
+                以下列出常見通渠服務的起始收費。師傅完成現場評估後，會在動工前確認最終總額。
               </p>
               <p className="mt-1 text-xs text-muted-foreground">
                 最後更新：2026 年 8 月 19 日
@@ -395,13 +395,13 @@ export default function Guide() {
         <div className="container">
           <div className="reveal mb-8 max-w-xl">
             <div className="mb-2 text-xs font-bold tracking-[0.2em] text-safety">
-              PRICE ESTIMATOR
+              初步估價
             </div>
             <h2 className="font-display text-2xl font-black text-navy md:text-3xl">
               即時估價計算機
             </h2>
             <p className="mt-3 text-sm text-muted-foreground md:text-base">
-              揀好堵塞位置、樓宇類型同上門時段，即刻睇到初步估價範圍，一撳即可用
+              選擇淤塞位置、樓宇類型及上門時段，即可查看初步估價範圍，並可透過
               WhatsApp 確認實際報價。
             </p>
           </div>
@@ -415,7 +415,7 @@ export default function Guide() {
         <div className="container">
           <QuoteRequestForm
             location="guide_quote_form"
-            title="看完價錢，想按你的情況再報價？"
+            title="如需按您的情況提供報價，請留下資料"
             description="留下稱呼、電話、地區和問題描述，團隊會先按資料跟進；最終方案及收費仍會在動工前確認。"
           />
         </div>
@@ -430,10 +430,10 @@ export default function Guide() {
             </div>
             <div>
               <h2 className="font-display text-2xl font-black text-navy md:text-3xl">
-                揀選通渠公司 4 大貼士
+                選擇通渠公司的四項參考
               </h2>
               <p className="mt-2 max-w-2xl text-sm text-muted-foreground md:text-base">
-                坊間通渠服務質素參差，記住以下四點，就能避開絕大部分陷阱。
+                通渠服務的收費及安排各有不同，建議先核對以下四項資料，再決定是否安排工程。
               </p>
             </div>
           </div>
@@ -472,7 +472,7 @@ export default function Guide() {
                 服務流程：4 步由報價到完工
               </h2>
               <p className="mt-2 max-w-2xl text-sm text-muted-foreground md:text-base">
-                每一步都清晰透明，你隨時知道下一步會發生甚麼、需要付多少。
+                流程安排清晰透明，您可了解下一步安排及預計收費。
               </p>
             </div>
           </div>
@@ -483,7 +483,7 @@ export default function Guide() {
                 className="card-float relative rounded-lg border border-border bg-white p-6"
               >
                 <div className="absolute -top-3 left-5 rounded-full bg-navy px-3 py-1 font-display text-xs font-extrabold text-wagreen">
-                  STEP {s.step}
+                步驟 {s.step}
                 </div>
                 <h3 className="mt-3 font-display text-base font-bold text-navy">
                   {s.title}
@@ -496,7 +496,7 @@ export default function Guide() {
           </div>
           <div className="mt-10 flex justify-center">
             <a
-              href={whatsappHref("你好，我想影相俾師傅估價，麻煩晒。")}
+              href={whatsappHref("您好，我想透過相片查詢通渠初步估價，請協助說明需要提供的資料。")}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => {
@@ -506,7 +506,7 @@ export default function Guide() {
               className="btn-smooth inline-flex items-center gap-2 rounded-lg bg-wagreen px-7 py-3.5 text-sm font-bold text-white shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark"
             >
               <MessageCircle className="h-4 w-4" strokeWidth={2.5} />
-              立即影相免費估價
+              傳送相片，取得初步估價
             </a>
           </div>
         </div>
@@ -613,10 +613,10 @@ export default function Guide() {
         <div className="container">
           <div className="card-float rounded-lg bg-navy px-6 py-10 text-center text-white md:px-12 md:py-14">
             <h2 className="text-balance font-display text-2xl font-black md:text-3xl">
-              仲喺度格價？直接攞個實價最快。
+              如需按實際情況估價，請先提供現場資料。
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-sm text-white/60 md:text-base">
-              影低塞渠位置，透過 WhatsApp 傳送地點、相片或影片，
+              拍攝淤塞位置，透過 WhatsApp 傳送地點、相片或短片，
               團隊會先了解情況；師傅現場檢查後、動工前確認最終收費。
             </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">

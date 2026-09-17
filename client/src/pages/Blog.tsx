@@ -72,7 +72,7 @@ export default function Blog() {
       <Breadcrumbs items={BLOG_CRUMBS} />
 
       <EditorialPageHero
-        kicker="Drain journal / 實用文章"
+        kicker="實用文章"
         title="通渠小知識"
         description="整理香港家居及商業渠務的日常保養、常見問題及處理資訊，方便在需要時快速查閱。"
       />

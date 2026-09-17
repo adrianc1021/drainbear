@@ -62,7 +62,7 @@ const sitemapRoutes = toSet(rawUrls);
 const manifest = JSON.parse(manifestText);
 const manifestRoutes = toSet(manifest.routes ?? []);
 const indexableRoutes = new Set(
-  [...manifestRoutes].filter(route => route !== "/thanks")
+  [...manifestRoutes].filter(route => !["/thanks", "/404"].includes(route))
 );
 
 if (rawUrls.length !== sitemapRoutes.size) {

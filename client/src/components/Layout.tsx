@@ -109,52 +109,59 @@ function MobileCTABar() {
       : "傳送位置及相片・加快初步判斷";
 
   return (
-    <div
-      data-mobile-cta="true"
-      className="fixed inset-x-0 bottom-0 z-50 border-t border-navy/15 bg-white/96 backdrop-blur-xl md:hidden"
-      style={{
-        transitionTimingFunction: "cubic-bezier(0.23, 1, 0.32, 1)",
-        paddingBottom: "env(safe-area-inset-bottom)",
-        boxShadow: "0 -4px 18px rgba(11,19,43,0.09)",
-      }}
-    >
-      <div className="flex items-stretch gap-2 px-3 py-2">
-        <a
-          href={waHref}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`${waTitle}：${waSub}`}
-          onClick={() => {
-            trackCTA(
-              "whatsapp",
-              "mobile_bar",
-              estimate
-                ? `estimate_${estimate.low}-${estimate.high}`
-                : diagnosis?.topic
-            );
-            goThanksAfterWhatsApp("mobile_bar");
-          }}
-          className="btn-smooth flex min-h-[56px] min-w-0 flex-[3] items-center justify-center gap-2.5 border border-navy bg-wagreen px-3 py-2 text-navy active:scale-[0.98]"
-        >
-          <MessageCircle className="h-5 w-5 shrink-0" strokeWidth={2.4} />
-          <span className="min-w-0 flex flex-col items-start leading-tight">
-            <span className="text-[15px] font-bold">{waTitle}</span>
-            <span className="max-w-full truncate text-[10.5px] font-medium text-navy/75">
-              {waSub}
+    <>
+      <div
+        className="mobile-cta-spacer pointer-events-none md:hidden"
+        style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+        aria-hidden="true"
+      />
+      <div
+        data-mobile-cta="true"
+        className="fixed inset-x-0 bottom-0 z-50 border-t border-navy/15 bg-white/96 backdrop-blur-xl md:hidden"
+        style={{
+          transitionTimingFunction: "cubic-bezier(0.23, 1, 0.32, 1)",
+          paddingBottom: "env(safe-area-inset-bottom)",
+          boxShadow: "0 -4px 18px rgba(11,19,43,0.09)",
+        }}
+      >
+        <div className="flex items-stretch gap-2 px-3 py-2">
+          <a
+            href={waHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${waTitle}：${waSub}`}
+            onClick={() => {
+              trackCTA(
+                "whatsapp",
+                "mobile_bar",
+                estimate
+                  ? `estimate_${estimate.low}-${estimate.high}`
+                  : diagnosis?.topic
+              );
+              goThanksAfterWhatsApp("mobile_bar");
+            }}
+            className="btn-smooth flex min-h-[56px] min-w-0 flex-[3] items-center justify-center gap-2.5 border border-navy bg-wagreen px-3 py-2 text-navy active:scale-[0.98]"
+          >
+            <MessageCircle className="h-5 w-5 shrink-0" strokeWidth={2.4} />
+            <span className="min-w-0 flex flex-col items-start leading-tight">
+              <span className="text-[15px] font-bold">{waTitle}</span>
+              <span className="max-w-full truncate text-[10.5px] font-medium text-navy/75">
+                {waSub}
+              </span>
             </span>
-          </span>
-        </a>
-        <a
-          href={phoneHref}
-          aria-label={`致電 ${phoneDisplay}`}
-          onClick={() => trackCTA("phone", "mobile_bar")}
-          className="btn-smooth flex min-h-[56px] flex-1 items-center justify-center gap-1.5 border border-navy bg-navy px-2 py-2 text-white active:scale-[0.98]"
-        >
-          <Phone className="h-[18px] w-[18px] shrink-0" strokeWidth={2.4} />
-          <span className="text-[15px] font-bold">致電</span>
-        </a>
+          </a>
+          <a
+            href={phoneHref}
+            aria-label={`致電 ${phoneDisplay}`}
+            onClick={() => trackCTA("phone", "mobile_bar")}
+            className="btn-smooth flex min-h-[56px] flex-1 items-center justify-center gap-1.5 border border-navy bg-navy px-2 py-2 text-white active:scale-[0.98]"
+          >
+            <Phone className="h-[18px] w-[18px] shrink-0" strokeWidth={2.4} />
+            <span className="text-[15px] font-bold">致電</span>
+          </a>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
@@ -182,7 +189,7 @@ function BackToTop() {
         visible
           ? "translate-y-0 opacity-100"
           : "pointer-events-none translate-y-3 opacity-0"
-      } bottom-[150px] md:bottom-[104px]`}
+      } bottom-[calc(4.75rem+1rem+env(safe-area-inset-bottom))] md:bottom-[104px]`}
       style={{ transitionTimingFunction: "cubic-bezier(0.23, 1, 0.32, 1)" }}
     >
       <ArrowUp className="h-5 w-5" strokeWidth={2.4} />
@@ -200,6 +207,7 @@ function Header({
   hideConversionCTA?: boolean;
 }) {
   const [location] = useLocation();
+  const isHome = location === "/";
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
@@ -288,6 +296,8 @@ function Header({
     <header
       data-site-header="true"
       className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-200 ${
+        isHome ? "site-header--home" : ""
+      } ${isHome && scrolled ? "site-header--home-scrolled" : ""} ${
         scrolled
           ? "border-navy/15 bg-white/96 shadow-[0_8px_30px_rgba(11,19,43,0.06)] backdrop-blur-xl"
           : "border-navy/10 bg-white/90 backdrop-blur-lg"
@@ -298,7 +308,7 @@ function Header({
           href="/"
           aria-label="通渠熊 DrainBear 首頁"
           data-site-brand="header"
-          className="site-header__brand flex min-w-0 items-center gap-2.5"
+          className="site-header__brand flex min-h-11 min-w-0 items-center gap-2.5"
         >
           <img
             src={LOGO}
@@ -562,7 +572,7 @@ function Footer() {
       </div>
       <div className="border-t border-white/10">
         <p className="container py-5 text-center text-[11px] leading-5 text-white/55 md:text-left">
-          營銷說明：特快／一小時到達為目標安排，實際時間視乎地區、交通、師傅及設備供應；「不成功不收費」適用於事前確認的合資格疏通項目，檢測、拆裝、維修、特殊設備或已完成的獨立工序或另行報價。所有新增費用均應在動工前確認。
+          服務說明：優先安排為目標安排，實際時間受地區、交通、人員及設備供應影響；「不成功不收費」適用於事前確認的合資格疏通項目，檢測、拆裝、維修、特殊設備或已完成的獨立工序可另行報價。所有新增費用均應在動工前確認。
         </p>
       </div>
       <div className="border-t border-white/10 py-5 text-center text-xs text-white/70">
@@ -594,21 +604,21 @@ function Footer() {
                 };
 
                 return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() =>
-                    trackNavClick("area", {
-                      cta_location: "footer_popular_areas",
-                      cta_label: item.label,
-                      area_name: item.label.replace("通渠", ""),
-                      destination_url: item.href,
-                    })
-                  }
-                  className="text-sm text-white/70 transition-colors hover:text-white"
-                >
-                  {item.label}
-                </Link>
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() =>
+                      trackNavClick("area", {
+                        cta_location: "footer_popular_areas",
+                        cta_label: item.label,
+                        area_name: item.label.replace("通渠", ""),
+                        destination_url: item.href,
+                      })
+                    }
+                    className="inline-flex min-h-11 items-center text-sm text-white/70 transition-colors hover:text-white"
+                  >
+                    {item.label}
+                  </Link>
                 );
               })}
             </nav>
@@ -625,6 +635,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   const browserPathname =
     typeof window === "undefined" ? routerPathname : window.location.pathname;
   const pathname = browserPathname.replace(/\/+$/, "") || "/";
+  const isHome = pathname === "/";
   const suppressConversionChrome = pathname === "/thanks";
 
   useReveal();
@@ -656,7 +667,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <main
         id="main-content"
         tabIndex={-1}
-        className="flex-1 pt-16 outline-none md:pt-[72px]"
+        className={`flex-1 outline-none ${isHome ? "home-main" : "pt-16 md:pt-[72px]"}`}
       >
         {children}
       </main>
@@ -664,11 +675,6 @@ export default function Layout({ children }: { children: ReactNode }) {
       {!suppressConversionChrome ? (
         <>
           {/* 避免內容及 Footer 被固定 CTA 列遮蓋（含 safe-area） */}
-          <div
-            className="pointer-events-none h-[68px] md:hidden"
-            style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
-            aria-hidden="true"
-          />
           <MobileCTABar />
           <DeferredDesktopWhatsAppWidget />
           <BackToTop />

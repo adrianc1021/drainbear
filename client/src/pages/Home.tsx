@@ -1,11 +1,14 @@
-import { ArrowRight, MapPin, MessageCircle, Phone } from "lucide-react";
+import { ArrowRight, Check, MapPin, MessageCircle, Phone } from "lucide-react";
 import { Link } from "wouter";
 import CmsPageSEO from "@/components/CmsPageSEO";
+import DrainDiagnosisStory from "@/components/DrainDiagnosisStory";
+import DrainHomeFaq from "@/components/DrainHomeFaq";
+import DrainMethodComparison from "@/components/DrainMethodComparison";
 import QuoteRequestForm from "@/components/QuoteRequestForm";
 import ServiceQuickSelect from "@/components/ServiceQuickSelect";
+import DrainHeroScenes from "@/components/DrainHeroScenes";
 import {
   EditorialCapability,
-  EditorialHero,
   EditorialPromise,
 } from "@/components/editorial/HomeEditorialCore";
 import { EditorialKicker } from "@/components/editorial/EditorialPrimitives";
@@ -25,14 +28,16 @@ const HERO_IMAGE = "/images/home-drain-technician-wide.jpg";
 
 const CAPABILITY_IMAGE = "/images/home-cctv-inspection.jpg";
 
+const FIELD_IMAGE = "/images/home-drain-technician.jpg";
+
 const COMMON_SCENARIOS = [
   {
     number: "01",
     area: "觀塘",
     type: "商業工程",
-    title: "工廈食堂去水位反覆淤塞",
+    title: "工廈食堂排水位反覆淤塞",
     description:
-      "商業廚房常見油脂附於管壁。處理前要先了解隔油設施、受影響管段及營業時段，再決定是否需要高壓清洗。",
+      "商業廚房常見油脂附著於管壁。處理前要先了解隔油設施、受影響管段及營業時段，再決定是否需要高壓清洗。",
     arrival: "按位置確認",
     duration: "視管段而定",
   },
@@ -42,7 +47,7 @@ const COMMON_SCENARIOS = [
     type: "村屋工程",
     title: "村屋沙井雨後滿溢",
     description:
-      "應先停止大量排水並隔離污染範圍，再按沙井水位、車輛通道及是否懷疑樹根入侵，安排抽吸、清洗或 CCTV 檢查。",
+      "應先停止大量排水並隔離受污染範圍，再按沙井水位、車輛通道及是否懷疑樹根入侵，安排抽吸、清洗或 CCTV 檢查。",
     arrival: "按交通確認",
     duration: "視設備而定",
   },
@@ -50,9 +55,9 @@ const COMMON_SCENARIOS = [
     number: "03",
     area: "旺角",
     type: "住宅工程",
-    title: "唐樓座廁及共用渠異常",
+    title: "唐樓座廁及共用主渠異常",
     description:
-      "若只有一個座廁受影響，可能是潔具或單位支渠；若多戶同時倒灌，應通知管理處並檢查大廈共用主渠。",
+      "若只有一個座廁受影響，可能是潔具或單位支管；若多戶同時倒灌，應通知管理處並檢查大廈共用主渠。",
     arrival: "先確認範圍",
     duration: "視渠位而定",
   },
@@ -62,7 +67,7 @@ const PROCESS = [
   {
     number: "01",
     title: "傳送現場資料",
-    description: "透過 WhatsApp 提供地點、淤塞位置，以及現場相片或短片。",
+    description: "透過 WhatsApp 提供所在地區、淤塞位置及現場相片或短片。",
   },
   {
     number: "02",
@@ -404,7 +409,7 @@ function EditorialFinalCTA() {
             </h2>
 
             <p className="mt-8 max-w-2xl text-base font-bold leading-8 text-[var(--db-ink-deep)]/75 md:text-lg">
-              提供地點、問題位置及現場相片或影片，
+              提供所在地區、受影響位置及現場相片或短片，
               團隊會先作初步評估，再確認可安排的服務時間及後續處理方案。
             </p>
           </div>
@@ -452,7 +457,7 @@ function EditorialPhotoQuoteCTA() {
         <div>
           <p className="home-photo-quote__eyebrow">WhatsApp 相片初步評估</p>
           <h2 id="home-photo-quote-heading">
-            未確定淤塞原因？先傳送現場相片或短片。
+            尚未確定淤塞原因？可先提供現場相片或短片。
           </h2>
         </div>
 
@@ -468,6 +473,69 @@ function EditorialPhotoQuoteCTA() {
           <MessageCircle aria-hidden="true" />
           傳送相片查詢
         </a>
+      </div>
+    </section>
+  );
+}
+
+function FieldEvidenceShowcase() {
+  return (
+    <section
+      className="home-field-showcase"
+      aria-labelledby="home-field-showcase-heading"
+      data-pr20-section="field-evidence"
+    >
+      <div className="db-container home-field-showcase__grid">
+        <figure className="home-field-showcase__media">
+          <img
+            src={FIELD_IMAGE}
+            alt="師傅檢查浴室排水管道的服務示意圖"
+            width="960"
+            height="1280"
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>
+            <span>現場資料</span>
+            <span>服務示意圖</span>
+          </figcaption>
+        </figure>
+
+        <div className="home-field-showcase__copy">
+          <EditorialKicker>現場資料</EditorialKicker>
+          <h2 id="home-field-showcase-heading">
+            資料越清楚，
+            <br />
+            現場安排越準確。
+          </h2>
+          <p>
+            提供所在地區、排水位置、異常時間，以及相片或短片，團隊即可先了解受影響範圍，安排合適的跟進方式。
+          </p>
+          <ul>
+            <li>
+              <Check aria-hidden="true" /> 確認受影響的排水位
+            </li>
+            <li>
+              <Check aria-hidden="true" /> 說明住宅或商業用途
+            </li>
+            <li>
+              <Check aria-hidden="true" /> 補充是否出現倒灌或異味
+            </li>
+          </ul>
+          <Link
+            href="/drain-diagnosis"
+            onClick={() =>
+              trackNavClick("navigation", {
+                cta_location: "home_field_evidence",
+                cta_label: "開始問題判斷",
+                destination_url: "/drain-diagnosis",
+              })
+            }
+            className="db-diagnosis-cta"
+          >
+            開始問題判斷 <ArrowRight className="db-arrow-link__icon" />
+          </Link>
+        </div>
       </div>
     </section>
   );
@@ -491,7 +559,7 @@ function EditorialQuoteForm() {
         </div>
         <QuoteRequestForm
           location="home_quote_form"
-          title="先留下資料，團隊再回覆你"
+          title="先留下資料，團隊再回覆您"
           description="適合想先整理資料、比較方案，或需要同事／管理處跟進的查詢。"
         />
       </div>
@@ -504,22 +572,26 @@ export default function Home() {
     <div className="home-editorial">
       <CmsPageSEO
         cmsEnabled={false}
-        title="香港通渠服務｜先報價後動工・24小時查詢｜通渠熊"
-        description="塞廁所、鋅盤塞、企缸去水慢或污水倒灌？通渠熊提供香港住宅及商業通渠查詢。查看收費參考與工程紀錄，WhatsApp 傳相片及地點，先了解問題，現場確認總價後才動工。"
+        title="香港通渠服務｜先報價後動工・24 小時查詢｜通渠熊 DrainBear"
+        description="通渠熊 DrainBear 提供香港住宅及商業通渠服務，處理座廁、鋅盤、企缸、主渠及污水倒灌等問題。可透過 WhatsApp 提供位置及相片，了解初步處理方向，現場確認收費後才動工。"
         path="/"
         keywords="香港通渠, 24小時通渠, 塞廁所, 企缸塞, 浴室去水慢, 廚房鋅盤塞, 污水渠倒灌, 高壓水槍洗渠, CCTV照喉, 通渠收費"
         jsonLd={HOME_JSONLD}
       />
 
-      <EditorialHero imageSrc={HERO_IMAGE} />
+      <DrainHeroScenes imageSrc={HERO_IMAGE} />
+      <FieldEvidenceShowcase />
       <ServiceQuickSelect />
+      <DrainDiagnosisStory />
       <EditorialPromise />
       <EditorialCases />
+      <DrainMethodComparison />
       <EditorialPhotoQuoteCTA />
       <EditorialQuoteForm />
       <EditorialCapability imageSrc={CAPABILITY_IMAGE} />
       <EditorialProcess />
       <EditorialJournal />
+      <DrainHomeFaq />
       <EditorialFinalCTA />
     </div>
   );

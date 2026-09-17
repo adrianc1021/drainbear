@@ -12,16 +12,16 @@ const LOGO =
   "https://res.cloudinary.com/pgjztf2p/image/upload/f_auto,q_auto:eco,c_fill,w_96,h_96/v1785314740/A_pure_black_and_white_vector_mascot_logo_of_a_con-1785146902762_k8ruvx.jpg";
 
 const QUICK_TOPICS = [
-  { label: "坐廁 / 馬桶淤塞", msg: "你好，我屋企坐廁塞咗，想查詢通渠報價。" },
+  { label: "坐廁／馬桶淤塞", msg: "您好，我想查詢坐廁／馬桶淤塞的通渠報價。" },
   {
-    label: "廚房 / 企缸去水慢",
-    msg: "你好，我想查詢廚房鋅盤或企缸去水慢嘅通渠報價。",
+    label: "廚房／企缸排水緩慢",
+    msg: "您好，我想查詢廚房鋅盤或企缸排水緩慢的通渠報價。",
   },
   {
-    label: "食肆 / 商業通渠",
-    msg: "你好，我想查詢食肆或商業場所嘅通渠服務報價。",
+    label: "食肆／商業場所通渠",
+    msg: "您好，我想查詢食肆或商業場所的通渠服務報價。",
   },
-  { label: "其他渠務問題", msg: "你好，我想查詢通渠服務報價。" },
+  { label: "其他渠務問題", msg: "您好，我想查詢通渠服務報價。" },
 ];
 
 export default function WhatsAppWidget() {
@@ -83,7 +83,7 @@ export default function WhatsAppWidget() {
         {/* 訊息氣泡 */}
         <div className="bg-mist px-5 py-4">
           <div className="max-w-[85%] rounded-lg rounded-tl-none bg-white px-4 py-3 text-sm leading-relaxed text-navy shadow-sm">
-            你好！請選擇最接近的渠務問題，或直接提供所在地區、現場相片及影片，方便團隊初步了解。
+            您好！請選擇最接近的渠務問題，或直接提供所在地區、現場相片及影片，方便團隊作初步了解。
           </div>
         </div>
 
@@ -109,7 +109,7 @@ export default function WhatsAppWidget() {
             </a>
           ))}
           <a
-            href={whatsappHref("你好，我想查詢通渠服務報價。")}
+            href={whatsappHref("您好，我想查詢通渠服務報價。")}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => {
@@ -119,10 +119,10 @@ export default function WhatsAppWidget() {
             className="btn-smooth mt-1 flex items-center justify-center gap-2 border border-navy bg-wagreen px-4 py-3 text-sm font-black text-navy hover:bg-navy hover:text-white"
           >
             <MessageCircle className="h-4 w-4" strokeWidth={2.5} />
-            開始 WhatsApp 對話
+            開始 WhatsApp 查詢
           </a>
           <p className="pt-1 text-center text-[11px] text-muted-foreground">
-            24 小時接受查詢・確認報價後才動工
+            24 小時接受查詢・確認收費後才開始工程
           </p>
         </div>
       </div>

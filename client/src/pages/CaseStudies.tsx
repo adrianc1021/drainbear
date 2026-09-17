@@ -112,7 +112,7 @@ export default function CaseStudies() {
             <div>
               <h2 className="text-2xl font-black text-[var(--db-ink)]">工程資料正在整理</h2>
               <p className="mt-3 leading-7 text-[var(--db-copy)]">
-                暫未有已完成核對並公開的案例。我們不會以示例內容冒充真實工程；你仍可傳送現場資料，由團隊按實際情況提供初步方向。
+                暫未有已完成核對並公開的案例。我們不會以示例內容冒充真實工程；您仍可傳送現場資料，由團隊按實際情況提供初步方向。
               </p>
             </div>
             <WhatsAppButton className="w-full md:w-fit md:justify-self-end" label="WhatsApp 傳送現場資料" trackLocation="cases_empty" />
@@ -130,8 +130,8 @@ export default function CaseStudies() {
         <div className="db-container py-12 md:py-16">
           <QuoteRequestForm
             location="cases_quote_form"
-            title="你的現場，未必與公開案例完全相同"
-            description="提供地區、問題位置及大概情況，團隊會按你的資料作初步跟進；不同管道仍需按現場確認。"
+            title="您的現場情況，未必與公開案例完全相同"
+            description="提供地區、問題位置及大概情況，團隊會按您提供的資料作初步跟進；不同管道仍需按現場確認。"
           />
         </div>
       </section>
@@ -139,7 +139,7 @@ export default function CaseStudies() {
       <section className="bg-[var(--db-ink)] text-white">
         <div className="db-container grid gap-8 py-12 md:grid-cols-[1fr_auto] md:items-center">
           <div>
-            <h2 className="text-3xl font-black">你的情況未必與案例完全相同。</h2>
+            <h2 className="text-3xl font-black">您的情況未必與案例完全相同。</h2>
             <p className="mt-3 max-w-2xl leading-7 text-white/70">傳送地點、淤塞位置及相片或短片，團隊會先了解情況，再確認方案與收費。</p>
           </div>
           <WhatsAppButton label="WhatsApp 即時查詢" trackLocation="cases_footer" className="w-full md:w-auto" />

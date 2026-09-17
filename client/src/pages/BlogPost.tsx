@@ -239,7 +239,7 @@ export default function BlogPost() {
       <div className="bg-white py-24">
         <SEO
           title="找不到文章｜通渠熊 DrainBear"
-          description="你所尋找的文章不存在或尚未發布。"
+          description="您所尋找的文章不存在或尚未發布。"
           path={`/blog/${slug}`}
           noindex
         />
@@ -482,12 +482,12 @@ export default function BlogPost() {
 
           <div className="mt-14 rounded-lg bg-navy p-8 text-center md:p-10">
             <h2 className="font-display text-xl font-black text-white md:text-2xl">
-              渠道問題揮之不去？
+              渠務問題仍未解決？
             </h2>
 
             <p className="mx-auto mt-2 max-w-md text-sm text-white/60 md:text-base">
-              WhatsApp 白熊師傅，影相或拍片描述情況，即時免費初步報價，24
-              小時候命。
+              請透過 WhatsApp 提供位置、相片或短片，團隊會先了解現場情況，
+              再確認可安排的服務及收費。
             </p>
 
             <div className="mt-6 flex justify-center">

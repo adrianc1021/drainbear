@@ -11,4 +11,4 @@ export function waLink(message?: string) {
   return message ? `${base}?text=${encodeURIComponent(message)}` : base;
 }
 
-export const WA_DEFAULT = waLink("你好，我想查詢通渠服務報價。");
+export const WA_DEFAULT = waLink("您好，我想查詢通渠服務報價。");

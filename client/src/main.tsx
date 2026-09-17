@@ -7,6 +7,8 @@ import "./styles/site-chrome-phase5.css";
 import "./styles/secondary-pages-stage6a.css";
 import "./styles/editorial-art-direction.css";
 import "./styles/visual-upgrade.css";
+import "./styles/home-reference-inspired.css";
+import "./styles/home-mobile-optimization.css";
 
 const root = document.getElementById("root");
 

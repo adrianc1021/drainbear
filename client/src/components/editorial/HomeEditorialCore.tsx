@@ -59,28 +59,28 @@ const CAPABILITIES = [
 const SERVICES = [
   {
     number: "01",
-    eyebrow: "Residential",
+    eyebrow: "住宅服務",
     title: "浴室及企缸通渠",
     description: "處理企缸塞、浴缸去水慢、頭髮及番梘垢淤塞。",
     href: "/services/bathroom-drain-unblocking",
   },
   {
     number: "02",
-    eyebrow: "Commercial",
+    eyebrow: "商業服務",
     title: "食肆及商業通渠",
     description: "隔油池、商舖去水、大廈主渠及沙井渠務問題。",
     href: "/services/main-drain-manhole",
   },
   {
     number: "03",
-    eyebrow: "Hydro jetting",
+    eyebrow: "高壓清洗",
     title: "高壓水槍洗渠",
     description: "處理頑固油垢、沉積物及需要深層沖洗的管道。",
     href: "/services/high-pressure-jetting",
   },
   {
     number: "04",
-    eyebrow: "Inspection",
+    eyebrow: "管道檢測",
     title: "CCTV 照喉檢測",
     description: "協助判斷淤塞位置、管道狀態及後續處理方向。",
     href: "/services/cctv-drain-inspection",
@@ -105,7 +105,7 @@ export function EditorialHero({ imageSrc }: { imageSrc?: string }) {
             先報價後動工。
           </h1>
           <p className="brand-hero__intro">
-            塞廁所、鋅盤塞、企缸去水慢？傳相片及地點，先了解問題及收費。
+            座廁、鋅盤或企缸排水緩慢？提供相片及地點，先了解現場狀況及收費原則。
           </p>
           <div className="brand-hero__actions">
             <a
@@ -324,7 +324,7 @@ export function EditorialServices() {
       <div className="db-container">
         <div className="grid gap-8 border-b border-[var(--db-rule)] pb-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(20rem,0.85fr)] lg:items-end">
           <div>
-            <EditorialKicker>Our services / 專業服務</EditorialKicker>
+            <EditorialKicker>專業服務</EditorialKicker>
             <h2
               id="editorial-services-heading"
               className="db-editorial-heading mt-6"

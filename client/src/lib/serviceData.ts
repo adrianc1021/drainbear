@@ -57,7 +57,7 @@ export const SERVICE_PAGES: ServicePageData[] = [
       "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A1_vyqcil.png",
     imageAlt: "香港住宅坐廁及馬桶通渠服務",
     whatsappMessage:
-      "你好，我想查詢坐廁／馬桶通渠。情況是去水慢、淤塞或倒灌，請先提供初步估價及需要拍攝的資料。",
+      "您好，我想查詢坐廁／馬桶通渠。現時有排水緩慢、淤塞或倒灌情況，請先說明初步估價及需要拍攝的資料。",
     symptoms: [
       "沖水後水位持續上升，需要很久才回落",
       "座廁發出咕嚕聲或出現異味",
@@ -148,7 +148,7 @@ export const SERVICE_PAGES: ServicePageData[] = [
       "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A1_vyqcil.png",
     imageAlt: "香港廚房鋅盤去水慢及油脂淤塞通渠",
     whatsappMessage:
-      "你好，我想查詢廚房鋅盤通渠。現時有去水慢、倒灌或異味問題，請先提供初步估價及需要拍攝的資料。",
+      "您好，我想查詢廚房鋅盤通渠。現時有排水緩慢、倒灌或異味問題，請先說明初步估價及需要拍攝的資料。",
     symptoms: [
       "放水後鋅盤水位逐漸上升",
       "排水時出現咕嚕聲或油膉異味",
@@ -240,7 +240,7 @@ export const SERVICE_PAGES: ServicePageData[] = [
     image: "/images/home-drain-technician-wide.jpg",
     imageAlt: "食肆隔油池清理服務示意",
     whatsappMessage:
-      "你好，我想查詢食肆隔油池清理。現場有積油、異味、滿溢或排水變慢，請告訴我需要提供哪些相片及資料作初步估價。",
+      "您好，我想查詢食肆隔油池清理。現場有積油、異味、滿溢或排水緩慢情況，請說明需要提供哪些相片及資料作初步估價。",
     symptoms: [
       "隔油池油脂積聚明顯，清潔週期愈來愈短",
       "廚房去水有油膉異味或排水速度下降",
@@ -331,7 +331,7 @@ export const SERVICE_PAGES: ServicePageData[] = [
       "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A1_vyqcil.png",
     imageAlt: "香港企缸、浴缸及浴室頭髮塞渠處理服務",
     whatsappMessage:
-      "你好，我想查詢企缸／浴缸／浴室去水通渠。現時有去水慢或積水問題，請告訴我需要拍攝哪些資料作初步估價。",
+      "您好，我想查詢企缸／浴缸／浴室排水通渠。現時有排水緩慢或積水問題，請說明需要拍攝哪些資料作初步估價。",
     symptoms: [
       "沖涼期間企缸或浴缸水位逐漸上升",
       "關水後要很久才完全退水",
@@ -422,7 +422,7 @@ export const SERVICE_PAGES: ServicePageData[] = [
       "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A2_onju5z.png",
     imageAlt: "香港低層單位污水渠及水渠倒灌處理",
     whatsappMessage:
-      "你好，我想查詢污水渠倒灌。請告訴我需要提供哪些倒灌位置、樓層及現場影片，以便先判斷情況和作初步估價。",
+      "您好，我想查詢污水渠倒灌。請說明需要提供哪些倒灌位置、樓層及現場短片，以便先判斷情況及作初步估價。",
     symptoms: [
       "低層地台去水位、企缸或座廁湧出污水",
       "樓上用水時，本單位去水口出現倒灌",
@@ -513,7 +513,7 @@ export const SERVICE_PAGES: ServicePageData[] = [
       "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A3_fyozug.png",
     imageAlt: "香港高壓水槍洗渠及主渠清洗服務",
     whatsappMessage:
-      "你好，我想查詢高壓水槍洗渠。請問我需要提供哪些現場相片、喉管資料或過往淤塞情況，以便先作初步估價？",
+      "您好，我想查詢高壓水槍洗渠。請說明需要提供哪些現場相片、喉管資料或過往淤塞情況，以便先作初步估價。",
     symptoms: [
       "同一段喉管在短時間內反覆淤塞",
       "食肆或廚房排水系統積聚大量油垢",
@@ -601,7 +601,7 @@ export const SERVICE_PAGES: ServicePageData[] = [
       "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A4_hiufrh.png",
     imageAlt: "香港 CCTV 照喉及排水管道影像檢測",
     whatsappMessage:
-      "你好，我想查詢 CCTV 照喉檢測。喉管有反覆淤塞或問題位置不明，請先提供所需資料及初步估價。",
+      "您好，我想查詢 CCTV 照喉檢測。喉管有反覆淤塞或問題位置不明，請先提供所需資料及初步估價。",
     symptoms: [
       "同一位置通渠後仍反覆出現問題",
       "懷疑有異物但無法確定位置",
@@ -689,7 +689,7 @@ export const SERVICE_PAGES: ServicePageData[] = [
       "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A2_onju5z.png",
     imageAlt: "香港大廈主渠倒灌及沙井滿瀉通渠",
     whatsappMessage:
-      "你好，我想查詢大廈主渠／沙井通渠。現場有倒灌、滿瀉或多個去水位受影響，請告訴我需要提供哪些資料作初步估價。",
+      "您好，我想查詢大廈主渠／沙井通渠。現場有倒灌、滿瀉或多個排水位置受影響，請說明需要提供哪些資料作初步估價。",
     symptoms: [
       "低層單位或地面去水位出現倒灌",
       "多個廁所、鋅盤或地台去水同時變慢",

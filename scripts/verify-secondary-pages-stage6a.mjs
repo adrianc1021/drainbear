@@ -279,7 +279,7 @@ try {
     );
     assert(
       (await page.locator('link[rel="canonical"]').getAttribute("href")) ===
-        "https://drainbearhk.com/stage6a-missing-route",
+        "https://drainbearhk.com/404",
       "unknown route canonical 錯誤"
     );
     assert(

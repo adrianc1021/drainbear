@@ -26,6 +26,10 @@ import {
 } from "@/lib/analytics";
 import { getServicePage } from "@/lib/serviceData";
 import { prefetchRoute } from "@/lib/routePrefetch";
+import {
+  cloudinaryImageSrcSet,
+  cloudinaryImageUrl,
+} from "@/lib/cloudinary";
 import NotFound from "@/pages/NotFound";
 
 const CALCULATOR_LOCATION_BY_SLUG: Record<string, string> = {
@@ -61,6 +65,9 @@ export default function ServiceDetail() {
     ? `/guide?location=${encodeURIComponent(calculatorLocation)}#calculator`
     : "/guide#calculator";
   const whatsappUrl = whatsappHref(service.whatsappMessage);
+  const serviceImage = cloudinaryImageUrl(service.image, 960);
+  const serviceImageSrcSet = cloudinaryImageSrcSet(service.image);
+  const serviceSocialImage = cloudinaryImageUrl(service.image, 1200);
   const crumbs = [
     { name: "首頁", path: "/" },
     { name: "通渠服務", path: "/services" },
@@ -75,7 +82,7 @@ export default function ServiceDetail() {
     serviceType: service.name,
     description: service.description,
     url: `${SITE_URL}${path}`,
-    image: service.image,
+    image: serviceSocialImage,
     provider: {
       "@id": BUSINESS_ID,
       name: settings.businessName,
@@ -98,7 +105,7 @@ export default function ServiceDetail() {
         title={service.title}
         description={service.description}
         path={path}
-        image={service.image}
+        image={serviceSocialImage}
         imageAlt={service.imageAlt}
         jsonLd={serviceJsonLd}
         breadcrumbs={crumbs}
@@ -157,10 +164,12 @@ export default function ServiceDetail() {
 
             <div className="relative overflow-hidden rounded-2xl bg-navy shadow-[0_20px_60px_rgba(11,19,43,0.18)]">
               <img
-                src={service.image}
+                src={serviceImage}
+                srcSet={serviceImageSrcSet}
                 alt={service.imageAlt}
                 width="1200"
                 height="800"
+                sizes="(min-width: 1024px) 46vw, 100vw"
                 fetchPriority="high"
                 decoding="async"
                 className="aspect-[3/2] w-full object-cover"
@@ -232,7 +241,7 @@ export default function ServiceDetail() {
         >
           <div className="container">
             <p className="text-xs font-bold tracking-[0.18em] text-safety">
-              QUICK ANSWER
+              服務適用情況
             </p>
             <h2
               id="service-answer-summary"
@@ -308,7 +317,7 @@ export default function ServiceDetail() {
           <div className="container">
             <div className="mx-auto max-w-2xl text-center">
               <p className="text-xs font-bold tracking-[0.2em] text-safety">
-                SERVICE PROCESS
+                服務流程
               </p>
               <h2 className="mt-3 font-display text-3xl font-black text-navy md:text-4xl">
                 處理流程
@@ -325,7 +334,7 @@ export default function ServiceDetail() {
                   className="rounded-xl border border-border bg-white p-6"
                 >
                   <span className="font-display text-xs font-black tracking-[0.18em] text-safety">
-                    STEP {String(index + 1).padStart(2, "0")}
+                    步驟 {String(index + 1).padStart(2, "0")}
                   </span>
                   <h3 className="mt-3 font-display text-lg font-black text-navy">
                     {step.title}

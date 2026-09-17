@@ -17,6 +17,7 @@ const STATIC_PUBLIC_ROUTES = new Set([
   "/blog",
   "/cases",
   "/thanks",
+  "/404",
 ]);
 
 const DISTRICT_SLUGS = new Set([
@@ -115,6 +116,8 @@ function applyRobotsHeaders(
 ) {
   if (pathname === "/thanks") {
     res.set("X-Robots-Tag", "noindex, nofollow");
+  } else if (pathname === "/404") {
+    res.set("X-Robots-Tag", "noindex, follow");
   } else if (!isKnownRoute) {
     res.set("X-Robots-Tag", "noindex, follow");
   }
@@ -237,6 +240,14 @@ export function serveStatic(app: Express) {
       }
 
       console.warn(`Prerendered HTML not found for ${pathname}`);
+    }
+
+    if (!isKnownRoute) {
+      const notFoundFile = path.resolve(distPath, "404.html");
+
+      if (fs.existsSync(notFoundFile)) {
+        return res.status(404).sendFile(notFoundFile);
+      }
     }
 
     return res

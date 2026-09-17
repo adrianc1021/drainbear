@@ -245,7 +245,7 @@ export default function HongKongMap() {
             ) : (
               <a
                 href={whatsappHref(
-                  `你好，我喺${selected.name}，想查詢通渠服務報價。`
+                  `您好，我位於${selected.name}，想查詢通渠服務報價。`
                 )}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -266,7 +266,7 @@ export default function HongKongMap() {
               <MapPin className="h-6 w-6 text-wagreen" strokeWidth={2} />
             </div>
             <h3 className="mt-4 font-display text-lg font-black text-navy">
-              點擊地圖選擇你的地區
+              點擊地圖選擇您的地區
             </h3>
             <p className="mt-2 max-w-xs text-sm leading-relaxed text-muted-foreground">
               十八區均可查詢。橙點地區設有專屬服務頁；其他地區可用 WhatsApp

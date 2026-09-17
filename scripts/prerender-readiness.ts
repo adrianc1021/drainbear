@@ -38,7 +38,11 @@ export function assessPrerenderSnapshot(
         "CMS content or metadata failed to load; refusing to publish fallback HTML.",
     };
   }
+  const isIntentionalNoindexRoute =
+    expectedPath === "/thanks" || expectedPath === "/404";
+
   if (
+    !isIntentionalNoindexRoute &&
     /^(?:暫時無法載入文章|文章暫時未能載入|找不到(?:頁面|文章|工程案例)|404|(?:page )?not found)$/i.test(
       state.heading?.trim() || ""
     )
@@ -63,7 +67,7 @@ export function assessPrerenderSnapshot(
   const googlebotNoindex = /(?:^|[\s,])noindex(?:$|[\s,])/i.test(
     state.googlebot || ""
   );
-  if (expectedPath === "/thanks")
+  if (isIntentionalNoindexRoute)
     return { ready: robotsNoindex && googlebotNoindex };
   if (robotsNoindex || googlebotNoindex) {
     return {

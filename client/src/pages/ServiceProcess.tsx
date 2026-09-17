@@ -111,7 +111,7 @@ export default function ServiceProcess() {
           <div className="container grid gap-10 lg:grid-cols-[1fr_0.55fr] lg:items-end">
             <div>
               <p className="text-xs font-bold tracking-[0.18em] text-wagreen">
-                SERVICE STANDARD / 服務說明
+                服務標準
               </p>
               <h1 className="mt-3 max-w-4xl text-balance font-display text-4xl font-black md:text-5xl">
                 上門服務如何安排，報價如何確認
@@ -130,7 +130,7 @@ export default function ServiceProcess() {
           <div className="container">
             <div className="max-w-2xl">
               <p className="text-xs font-bold tracking-[0.18em] text-safety">
-                FROM ENQUIRY TO COMPLETION
+                由查詢至完工
               </p>
               <h2 className="mt-3 font-display text-3xl font-black text-navy md:text-4xl">
                 四個服務階段
@@ -208,7 +208,7 @@ export default function ServiceProcess() {
           <div className="container">
             <div className="max-w-3xl">
               <p className="text-xs font-bold tracking-[0.18em] text-safety">
-                METHOD COMPARISON / 方法比較
+                方法比較
               </p>
               <h2 className="mt-3 font-display text-3xl font-black text-navy md:text-4xl">
                 打通、清洗與檢查，不是同一件事
@@ -218,7 +218,7 @@ export default function ServiceProcess() {
               </p>
             </div>
 
-            <div className="mt-10 overflow-x-auto border-y border-border">
+            <div className="mt-10 hidden overflow-x-auto border-y border-border md:block">
               <table className="w-full min-w-[760px] border-collapse text-left">
                 <thead>
                   <tr className="bg-navy text-white">
@@ -239,7 +239,7 @@ export default function ServiceProcess() {
                       <th className="px-5 py-5 align-top font-display font-black text-navy">
                         <Link
                           href={method.href}
-                          className="inline-flex items-center gap-2 hover:text-wagreen-dark"
+                          className="inline-flex min-h-11 items-center gap-2 hover:text-wagreen-dark"
                         >
                           {method.title}
                           <ArrowRight className="h-4 w-4" />
@@ -258,6 +258,46 @@ export default function ServiceProcess() {
                   ))}
                 </tbody>
               </table>
+            </div>
+
+            <div className="mt-10 divide-y divide-border border-y border-border md:hidden">
+              {METHOD_COMPARISON.map(method => (
+                <article key={method.title} className="py-6">
+                  <Link
+                    href={method.href}
+                    className="inline-flex min-h-11 max-w-full items-center gap-2 font-display text-xl font-black text-navy"
+                  >
+                    <span>{method.title}</span>
+                    <ArrowRight className="h-4 w-4 shrink-0" />
+                  </Link>
+                  <dl className="mt-5 grid gap-4">
+                    <div>
+                      <dt className="text-xs font-bold tracking-[0.12em] text-navy/55">
+                        主要目的
+                      </dt>
+                      <dd className="mt-1 leading-relaxed text-navy">
+                        {method.purpose}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt className="text-xs font-bold tracking-[0.12em] text-navy/55">
+                        常見適用情況
+                      </dt>
+                      <dd className="mt-1 leading-relaxed text-muted-foreground">
+                        {method.suitable}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt className="text-xs font-bold tracking-[0.12em] text-navy/55">
+                        需要留意
+                      </dt>
+                      <dd className="mt-1 leading-relaxed text-muted-foreground">
+                        {method.limitation}
+                      </dd>
+                    </div>
+                  </dl>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -286,10 +326,10 @@ export default function ServiceProcess() {
 
             <div className="bg-navy px-7 py-9 text-white md:px-10">
               <h2 className="font-display text-2xl font-black md:text-3xl">
-                「特快」及「不成功不收費」如何理解
+                「優先安排」及「不成功不收費」如何理解
               </h2>
               <p className="mt-5 leading-relaxed text-white/70">
-                特快／一小時到達是目標安排，實際時間視乎地區、交通、師傅及設備供應。「不成功不收費」只適用於事前確認的合資格疏通項目；檢測、拆裝、維修、特殊設備或已完成的獨立工序可另行報價。任何新增費用都應在相關工序開始前確認。
+                「優先安排」只是目標安排，實際時間受地區、交通、人員及設備供應影響。「不成功不收費」只適用於事前確認的合資格疏通項目；檢測、拆裝、維修、特殊設備或已完成的獨立工序可另行報價。任何新增費用均應在相關工序開始前確認。
               </p>
               <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                 <Link

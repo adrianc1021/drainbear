@@ -150,11 +150,15 @@ try {
 
     await apartmentOption.click();
 
-    const estimateCard = page
-      .getByText("ESTIMATED PRICE", {
+    const dayOption = page
+      .getByText("日間（07:00–23:00）", {
         exact: true,
       })
-      .locator("..");
+      .first();
+
+    await dayOption.click();
+
+    const estimateCard = page.locator(".calculator-result").first();
 
     const estimateHandle = await estimateCard.elementHandle();
 

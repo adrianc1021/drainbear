@@ -29,46 +29,46 @@ import { consumeWhatsAppHandoff } from "@/lib/trackingSession";
 const NEXT_STEPS = [
   {
     icon: MessageCircle,
-    title: "1. 傳送相片或短片",
-    desc: "在 WhatsApp 對話中補充堵塞位置的相片或短片，師傅可更快斷症、報價更準確。",
+    title: "1. 傳送現場相片或短片",
+    desc: "可在 WhatsApp 對話中補充堵塞位置的相片或短片，方便團隊作初步判斷及估價。",
   },
   {
     icon: Clock,
-    title: "2. 師傅 1 分鐘內回覆",
-    desc: "在線師傅會即時確認你的地區及情況，提供免費初步報價，絕無隱藏收費。",
+    title: "2. 團隊確認資料",
+    desc: "團隊會按所在地區及現場資料回覆可安排的服務時段與初步估價。",
   },
   {
     icon: Wrench,
-    title: "3. 確認後極速上門",
-    desc: "同意報價後即刻出發，全港 1 小時內特快到達，先報價、後動工。",
+    title: "3. 確認收費後安排工程",
+    desc: "確認報價後，團隊會按已確認的時間安排工程；實際到場時間受交通、人員及設備供應影響。",
   },
 ];
 
 /* 等候期間 FAQ：服務流程 + 收費標準 */
 const THANKS_FAQS = [
   {
-    q: "通渠收費大概幾多錢？",
-    a: "常見服務參考價：坐廁/馬桶淤塞 HK$600 起、廚房鋅盤 HK$500 起、企缸/地台去水位 HK$500 起、大廈主渠/沙井 HK$1,800 起、高壓水槍洗渠 HK$2,800 起。師傅會在動工前一次過確認總價，絕不坐地起價；純異物淤塞打不通，分毫不收。",
+    q: "通渠收費大約是多少？",
+    a: "常見服務參考價：坐廁／馬桶淤塞 HK$600 起、廚房鋅盤 HK$500 起、企缸／地台去水位 HK$500 起、大廈主渠／沙井 HK$1,800 起、高壓水槍洗渠 HK$2,800 起。實際收費須由師傅到場評估，並於動工前確認。",
   },
   {
-    q: "報價之後仲會唔會加價？",
-    a: "不會。通渠熊堅持「先報價、後動工」：師傅上門評估後、動工前確認最終總收費（已包上門費及完工清潔），深夜時段（23:00–07:00）附加費亦會一併講明。你確認價錢後才開工，絕無隱藏收費。",
+    q: "確認報價後會否再收取額外費用？",
+    a: "通渠熊採用「先報價、後動工」原則：師傅到場評估後，會在動工前說明並確認最終總收費。深夜時段（23:00–07:00）或特殊設備的附加費，亦會一併列明；未經確認的費用不會安排施工。",
   },
   {
-    q: "師傅幾耐會到？服務範圍包唔包我嗰區？",
-    a: "全港 1 小時特快到達，24 小時全天候候命，覆蓋港島、九龍、新界及離島 32+ 分區，統一收費、絕不因地區加價。深夜緊急塞渠亦可即時安排師傅出動。",
+    q: "何時可以到場？我的地區是否在服務範圍內？",
+    a: "港島、九龍、新界及離島均可先行查詢。到場時間受所在地區、交通、進場條件、人員及設備供應影響；團隊收到位置及現場資料後，會回覆可安排的時段與初步估算。",
   },
   {
-    q: "上門會用咩方法通渠？",
-    a: "師傅會按淤塞性質選用最合適工具：手搖泵、電動通渠機或高壓水槍；懷疑喉管破損時會用 CCTV 照喉檢測，有片有真相，是堵塞便疏通、確認破損才建議維修，絕不無故推銷換喉工程。",
+    q: "到場後會採用甚麼方法通渠？",
+    a: "師傅會按淤塞性質選用合適工具，例如手動工具、電動通渠機或高壓水槍；如懷疑喉管破損，則會按需要建議 CCTV 照喉檢測。任何額外工程或維修建議，均會先作出說明並另行報價。",
   },
   {
-    q: "「不成功不收費」點樣計？",
-    a: "凡屬異物淤塞（豬油膏、頭髮、紙巾、濕紙巾等）而未能成功疏通，我們分毫不收，上門檢查費亦全免。如檢測後確認屬喉管破損需維修，則屬另一種工程，師傅會先解釋清楚並另行報價，由你決定是否進行。",
+    q: "「不成功不收費」適用於哪些情況？",
+    a: "此安排只適用於事前確認的合資格疏通項目，具體範圍及條款會在安排服務前說明。如檢測後確認屬喉管破損或其他需要維修的工程，團隊會先解釋情況並另行報價，由客戶決定是否進行。",
   },
   {
-    q: "等緊回覆，我可以做啲咩令報價更快？",
-    a: "可以在 WhatsApp 對話中補充：堵塞位置的相片或短片、所在地區及樓宇類型（住宅/村屋/商舖）、大概發生時間。資料愈齊，師傅斷症愈快，通常 1 分鐘內就能給你初步報價。",
+    q: "等候回覆期間可以準備甚麼資料？",
+    a: "可在 WhatsApp 對話中補充堵塞位置的相片或短片、所在地區、樓宇類型（住宅／村屋／商舖）及大概發生時間。如曾使用化學通渠劑、拆喉或出現污水倒灌，亦請一併說明。",
   },
 ];
 
@@ -87,7 +87,7 @@ export default function Thanks() {
     <div>
       <SEO
         title="已開啟 WhatsApp 對話｜通渠熊 DrainBear"
-        description="感謝查詢通渠熊 24 小時通渠服務，師傅將於 1 分鐘內回覆。如未能開啟 WhatsApp，歡迎直接致電 24 小時熱線。"
+        description="感謝查詢通渠熊 24 小時通渠服務。請在 WhatsApp 提供所在地區及現場資料；如未能開啟 WhatsApp，歡迎直接致電查詢。"
         path="/thanks"
         noindex
         nofollow
@@ -101,9 +101,8 @@ export default function Thanks() {
             WhatsApp 對話已開啟
           </h1>
           <p className="mx-auto mt-4 max-w-lg text-muted-foreground">
-            感謝查詢！在線師傅會於{" "}
-            <strong className="text-navy">1 分鐘內</strong>回覆你。 請留意
-            WhatsApp 通知，或按以下步驟令報價更快更準。
+            感謝查詢！團隊會按您提供的資料回覆可安排的服務時段及初步估價。
+            請留意 WhatsApp 通知，並按以下步驟準備資料。
           </p>
 
           {/* 後備入口 */}
@@ -116,7 +115,7 @@ export default function Thanks() {
               className="btn-smooth inline-flex items-center gap-2 rounded-lg bg-wagreen px-6 py-3 text-sm font-bold text-white shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark"
             >
               <MessageCircle className="h-4 w-4" strokeWidth={2.5} />
-              未開啟到？再按一次
+              未能開啟 WhatsApp？再次查詢
             </a>
             <a
               href={phoneHref}
@@ -129,16 +128,16 @@ export default function Thanks() {
           </div>
           <p className="mt-4 text-xs text-muted-foreground">
             <ShieldCheck className="mr-1 inline h-3.5 w-3.5 text-wagreen" />
-            先報價・後動工・不成功不收費・上門檢查費全免
+            先報價・後動工・合資格項目按已確認條款處理
           </p>
         </div>
       </section>
 
-      {/* 接下來會發生咩事 */}
+      {/* 接下來的服務安排 */}
       <section className="bg-white pb-16 md:pb-20">
         <div className="container max-w-4xl">
           <h2 className="reveal text-center font-display text-2xl font-black text-navy md:text-3xl">
-            接下來 3 步，極速解決塞渠
+            接下來三個步驟，了解服務安排
           </h2>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {NEXT_STEPS.map((s, i) => (
@@ -163,7 +162,7 @@ export default function Thanks() {
           {/* 等候時導流 */}
           <div className="reveal mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm">
             <span className="text-muted-foreground">
-              等候回覆時，不妨了解一下：
+              等候回覆期間，可先了解以下內容：
             </span>
             <Link
               href="/guide"
@@ -192,13 +191,13 @@ export default function Thanks() {
         <div className="container max-w-3xl">
           <div className="reveal text-center">
             <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">
-              WHILE YOU WAIT
+              等候回覆期間
             </div>
             <h2 className="font-display text-2xl font-black text-navy md:text-3xl">
-              等候回覆時，先了解服務流程同收費
+              等候回覆期間，先了解服務流程及收費
             </h2>
             <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground md:text-base">
-              以下是客戶查詢時最關心的幾條問題，睇完之後同師傅溝通會更快更順。
+              以下整理客戶查詢時常見的問題，方便您與團隊溝通及準備資料。
             </p>
           </div>
           <div className="reveal mt-8">
@@ -224,7 +223,7 @@ export default function Thanks() {
             </Accordion>
           </div>
           <div className="reveal mt-6 text-center text-sm text-muted-foreground">
-            想睇完整價目表同揀公司貼士？
+            如需查看完整價目表及選擇服務供應商的參考資料，
             <Link
               href="/guide"
               className="btn-smooth ml-2 inline-flex items-center gap-1.5 font-bold text-wagreen-dark hover:gap-2.5"

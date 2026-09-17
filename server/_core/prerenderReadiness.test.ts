@@ -71,4 +71,20 @@ describe("prerender publication readiness", () => {
       ).ready
     ).toBe(false);
   });
+  it("allows the real 404 document only with both noindex directives", () => {
+    const notFound = {
+      ...ready,
+      canonicalHref: "https://drainbearhk.com/404",
+      heading: "找不到頁面",
+      robots: "noindex, follow",
+      googlebot: "noindex, follow",
+    };
+    expect(assessPrerenderSnapshot(notFound, "/404").ready).toBe(true);
+    expect(
+      assessPrerenderSnapshot(
+        { ...notFound, robots: "index, follow" },
+        "/404"
+      ).ready
+    ).toBe(false);
+  });
 });

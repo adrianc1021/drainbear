@@ -12,9 +12,8 @@
  * - VITE_GA4_MEASUREMENT_ID(建議)或 VITE_GA4_ID(舊名兼容)或 window.__GA4_ID__
  * - Measurement ID 必須符合 G-XXXXXXXXXX 格式;格式不正確時 GA4 不會初始化、
  *   錯誤值不會傳給 gtag config,網站照常運作(開發環境顯示警告)
- * - 未設定 GA4 ID:網站正常運作,不載入額外腳本;事件只推入當前頁面的
- *   dataLayer 作除錯/相容用途 —— 該佇列不會永久儲存,重新整理即消失,
- *   亦不能補回 GA4 安裝前的歷史數據
+ * - 正式網域若沒有注入 GA4 ID,使用目前正式 Property 的後備值；Preview／開發
+ *   環境仍預設不上報，避免污染正式數據
  * - 開發環境:預設不上報 GA4(避免污染正式數據);設 VITE_GA4_DEBUG="true"
  *   可於開發環境以 debug_mode 上報,事件會出現在 GA4 DebugView
  *
@@ -71,7 +70,10 @@ function rawGa4Id(): string | undefined {
   const fromEnv =
     (import.meta.env.VITE_GA4_MEASUREMENT_ID as string | undefined) ||
     (import.meta.env.VITE_GA4_ID as string | undefined);
-  const id = fromWindow || fromEnv || "G-7JEL7SLBGQ";
+  // This is the live production property. Keep a deterministic fallback so a
+  // missing Render build variable cannot silently send events to the retired
+  // property that Google Ads still lists as a destination.
+  const id = fromWindow || fromEnv || "G-05DW80HCTS";
   return id && id.trim() ? id.trim() : undefined;
 }
 
@@ -100,6 +102,29 @@ const DEV_DEBUG_ENABLED = import.meta.env.VITE_GA4_DEBUG === "true";
 
 const PRODUCTION_HOSTS = new Set(["drainbearhk.com", "www.drainbearhk.com"]);
 const GOOGLE_ADS_DESTINATION_ID = "AW-18128738982";
+const DEFAULT_GOOGLE_ADS_WHATSAPP_LABEL = "CSxUCPrKmOQcEKa1usRD";
+
+type GoogleAdsConversionKind = "whatsapp" | "phone" | "form";
+
+const sentGoogleAdsConversions = new Set<GoogleAdsConversionKind>();
+
+function resolveGoogleAdsConversionLabel(
+  kind: GoogleAdsConversionKind
+): string | undefined {
+  const configured =
+    kind === "whatsapp"
+      ? (import.meta.env.VITE_GOOGLE_ADS_WHATSAPP_LABEL as
+          | string
+          | undefined)
+      : kind === "phone"
+        ? (import.meta.env.VITE_GOOGLE_ADS_PHONE_LABEL as string | undefined)
+        : (import.meta.env.VITE_GOOGLE_ADS_FORM_LABEL as string | undefined);
+  const fallback =
+    kind === "whatsapp" ? DEFAULT_GOOGLE_ADS_WHATSAPP_LABEL : undefined;
+  const label = (configured?.trim() || fallback)?.trim();
+
+  return label && /^[A-Za-z0-9_-]{4,64}$/.test(label) ? label : undefined;
+}
 
 function isProductionTrackingHost() {
   if (typeof window === "undefined") return false;
@@ -120,13 +145,41 @@ function sendGoogleAdsEvent(
     !window.gtag ||
     !isProductionTrackingHost()
   ) {
-    return;
+    return false;
+  }
+
+  // A CTA is the first interaction on most ad visits. Start the shared tag
+  // immediately so the queued beacon is not stranded when WhatsApp opens an
+  // app and backgrounds this page.
+  if (
+    typeof document !== "undefined" &&
+    typeof document.querySelector === "function" &&
+    typeof document.createElement === "function"
+  ) {
+    loadGoogleTag(resolveGa4Id() || GOOGLE_ADS_DESTINATION_ID);
   }
 
   window.gtag("event", eventName, {
     ...params,
     send_to: destination,
   });
+  return true;
+}
+
+function sendGoogleAdsConversion(kind: GoogleAdsConversionKind) {
+  if (sentGoogleAdsConversions.has(kind)) return false;
+
+  const label = resolveGoogleAdsConversionLabel(kind);
+  if (!label) return false;
+
+  const sent = sendGoogleAdsEvent(
+    "conversion",
+    `${GOOGLE_ADS_DESTINATION_ID}/${label}`,
+    { transport_type: "beacon" }
+  );
+
+  if (sent) sentGoogleAdsConversions.add(kind);
+  return sent;
 }
 
 /**
@@ -355,12 +408,17 @@ export function trackCTA(
     cta_location: location,
     ...(topic ? { topic } : {}),
   });
+
+  // Count the user action immediately. The /thanks handoff remains a GA4
+  // quality signal, but it is too late to be the only Ads conversion on
+  // mobile browsers that hand control to the WhatsApp app.
+  sendGoogleAdsConversion(channel);
 }
 
 /**
  * WhatsApp 點擊後跳轉感謝頁(/thanks):
  * - WhatsApp 於新分頁/App 開啟(原 <a target="_blank"> 行為不變,不阻擋開啟)
- * - 原分頁延遲 600ms 導向 /thanks?from=<cta_location>
+ * - 原分頁立即導向 /thanks?from=<cta_location>
  * - /thanks 頁面觸發 whatsapp_open 事件,作為「真實對話開啟率」的代理轉化指標
  */
 export function goThanksAfterWhatsApp(location: string) {
@@ -369,15 +427,14 @@ export function goThanksAfterWhatsApp(location: string) {
   captureInitialAttribution();
   createWhatsAppHandoff(location);
 
-  window.setTimeout(() => {
-    // 使用 wouter 以外的原生導向,確保任何組件情境都可用
-    window.history.pushState(
-      null,
-      "",
-      `/thanks?from=${encodeURIComponent(location)}`
-    );
-    window.dispatchEvent(new PopStateEvent("popstate"));
-  }, 600);
+  // 使用 wouter 以外的原生導向,確保任何組件情境都可用。先完成 SPA
+  // 導向，再讓原本的 target="_blank" 連結開啟 WhatsApp。
+  window.history.pushState(
+    null,
+    "",
+    `/thanks?from=${encodeURIComponent(location)}`
+  );
+  window.dispatchEvent(new PopStateEvent("popstate"));
 }
 
 /**
@@ -409,17 +466,10 @@ export function trackWhatsAppHandoff(
     click_id_type: attribution.click_id_type,
   });
 
-  const adsLabel = (
-    import.meta.env.VITE_GOOGLE_ADS_WHATSAPP_LABEL as string | undefined
-  )?.trim();
-
-  if (adsLabel && /^[A-Za-z0-9_-]{4,64}$/.test(adsLabel)) {
-    sendGoogleAdsEvent(
-      "conversion",
-      `${GOOGLE_ADS_DESTINATION_ID}/${adsLabel}`,
-      { transport_type: "beacon" }
-    );
-  }
+  // Fallback for handoffs created by older CTA components or a click where
+  // the tag stub was not ready yet. The in-memory guard prevents duplicates
+  // in the normal click -> /thanks SPA flow.
+  sendGoogleAdsConversion("whatsapp");
 }
 
 // ---------------------------------------------------------------------------
@@ -441,6 +491,7 @@ export function trackContactFormSubmit(formName: string, location?: string) {
     form_name: formName,
     ...(location ? { cta_location: location } : {}),
   });
+  sendGoogleAdsConversion("form");
 }
 
 /** 表格提交錯誤(只傳錯誤類型,不傳錯誤訊息內文以免夾帶個人資料) */
@@ -533,5 +584,6 @@ export function __resetAnalyticsStateForTests() {
   initialized = false;
   lastTrackedPath = null;
   invalidIdWarned = false;
+  sentGoogleAdsConversions.clear();
   __resetGoogleTagLoaderForTests();
 }

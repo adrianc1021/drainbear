@@ -33,6 +33,10 @@ import {
 } from "@/lib/analytics";
 import { SERVICE_PAGES } from "@/lib/serviceData";
 import { prefetchRoute } from "@/lib/routePrefetch";
+import {
+  cloudinaryImageSrcSet,
+  cloudinaryImageUrl,
+} from "@/lib/cloudinary";
 
 const SERVICES_CRUMBS = [
   { name: "首頁", path: "/" },
@@ -46,7 +50,7 @@ const SERVICES = [
     title: "住宅通渠急救",
     desc: "針對一般家庭的廚房星盆、浴室去水位及座廁淤塞，專業手搖泵極速打通，過程注重家居保護，完工包清理，還原企理現場。",
     img: "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A1_vyqcil.png",
-    wa: "你好，我想查詢住宅通渠服務報價。",
+    wa: "您好，我想查詢住宅通渠服務報價。",
   },
   {
     icon: Building2,
@@ -54,23 +58,23 @@ const SERVICES = [
     title: "商業重型通渠",
     desc: "專治食肆隔油池爆滿、大廈主渠倒灌等重型工程。配備工業級設備及大型吸車，將營業損失減至最低，深夜施工亦可安排。",
     img: "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A2_onju5z.png",
-    wa: "你好，我想查詢商業重型通渠服務報價。",
+    wa: "您好，我想查詢商業重型通渠服務報價。",
   },
   {
     icon: Waves,
-    tag: "HYDRO JETTING",
+    tag: "高壓水槍洗渠",
     title: "高壓水槍洗渠",
     desc: "按喉管物料、入口及沉積物狀況評估高壓水槍，處理油垢、沉積物及部分硬化物，工程後測試排水情況。",
     img: "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A3_fyozug.png",
-    wa: "你好，我想查詢高壓水槍洗渠服務報價。",
+    wa: "您好，我想查詢高壓水槍洗渠服務報價。",
   },
   {
     icon: Video,
-    tag: "CCTV INSPECTION",
+    tag: "CCTV 照喉檢測",
     title: "CCTV 照喉檢測",
     desc: "高清防水鏡頭深入喉管探測，精準定位淤塞物及破損位置，科學斷症、有片有真相，杜絕盲猜式維修及不必要的換喉工程。",
     img: "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A4_hiufrh.png",
-    wa: "你好，我想查詢 CCTV 照喉檢測服務報價。",
+    wa: "您好，我想查詢 CCTV 照喉檢測服務報價。",
   },
 ];
 
@@ -157,19 +161,19 @@ const STEPS = [
     icon: MessageCircle,
     step: "01",
     title: "WhatsApp 報價",
-    desc: "影相或拍片描述情況，即時獲取初步報價",
+    desc: "透過相片或短片描述情況，取得初步估價",
   },
   {
     icon: Search,
     step: "02",
-    title: "特快上門檢查",
-    desc: "師傅到達現場，精準評估並確認最終收費",
+    title: "到場檢查及確認",
+    desc: "師傅到場了解實際情況，評估處理方法並確認最終收費",
   },
   {
     icon: Wrench,
     step: "03",
     title: "專業施工",
-    desc: "確認報價後立即動工，不成功不收費",
+    desc: "確認報價後開始工程；合資格項目按已確認條款處理",
   },
   {
     icon: Sparkles,
@@ -185,7 +189,7 @@ export default function Services() {
     <div className="phase4-services" data-phase4-page="services">
       <SEO
         title="通渠服務｜住宅通渠・食肆隔油池・高壓水槍洗渠・CCTV 照喉｜通渠熊 DrainBear"
-        description="通渠熊提供全方位通渠服務：塞廁所、企缸、廚房鋅盤去水慢、食肆隔油池清理、大廈沙井主渠疏通、德國高壓水槍洗渠及 CCTV 照喉檢測。24 小時特快上門，先報價後動工，不成功不收費。"
+        description="通渠熊提供住宅及商業通渠服務，涵蓋座廁、企缸、廚房鋅盤、食肆隔油池、大廈主渠、高壓水槍洗渠及 CCTV 照喉檢測。24 小時接受查詢，先確認收費後開始工程；合資格項目按已確認條款處理。"
         path="/services"
         keywords="通渠服務, 塞廁所, 企缸塞, 廚房去水慢, 隔油池清理, 高壓水槍洗渠, CCTV照喉, 沙井疏通, 24小時通渠"
         jsonLd={SERVICES_JSONLD}
@@ -194,7 +198,7 @@ export default function Services() {
       <Breadcrumbs items={SERVICES_CRUMBS} />
       {/* 頁首 */}
       <EditorialPageHero
-        kicker="Our services / 專業服務"
+        kicker="專業服務"
         title={
           <>
             全方位通渠服務，
@@ -293,10 +297,12 @@ export default function Services() {
                   }`}
                 />
                 <img
-                  src={s.img}
+                  src={cloudinaryImageUrl(s.img, 960)}
+                  srcSet={cloudinaryImageSrcSet(s.img)}
                   alt={s.title}
                   width="1200"
                   height="800"
+                  sizes="(min-width: 1024px) 50vw, (min-width: 640px) 90vw, 100vw"
                   loading="lazy"
                   decoding="async"
                   className="relative w-full rounded-2xl object-cover shadow-[0_16px_48px_rgba(11,19,43,0.16)]"
@@ -340,7 +346,7 @@ export default function Services() {
         <div className="container">
           <div className="mx-auto max-w-2xl text-center">
             <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">
-              SERVICE GUIDES
+              服務指南
             </div>
             <h2 className="font-display text-3xl font-black text-navy md:text-4xl">
               按問題查看處理方法
@@ -385,7 +391,7 @@ export default function Services() {
         <div className="container">
           <div className="text-center">
             <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">
-              SERVICE SCOPE
+              服務範圍
             </div>
             <h2 className="text-balance font-display text-3xl font-black text-navy md:text-4xl">
               服務範疇一覽
@@ -437,10 +443,10 @@ export default function Services() {
         <div className="container">
           <div className="text-center">
             <div className="mb-3 text-xs font-bold tracking-[0.2em] text-wagreen">
-              HOW IT WORKS
+              服務流程
             </div>
             <h2 className="text-balance font-display text-3xl font-black text-white md:text-4xl">
-              4 步解除危機
+              由查詢至完成的四個步驟
             </h2>
             <p className="mx-auto mt-4 max-w-lg text-white/55">
               流程簡單透明，由報價到完工清潔，每一步都清晰明確。
@@ -458,7 +464,7 @@ export default function Services() {
                   <st.icon className="h-7 w-7 text-wagreen" strokeWidth={2} />
                 </div>
                 <div className="mt-4 font-display text-xs font-extrabold tracking-[0.25em] text-safety">
-                  STEP {st.step}
+                  步驟 {st.step}
                 </div>
                 <h3 className="mt-2 font-display text-lg font-bold text-white">
                   {st.title}
@@ -470,7 +476,7 @@ export default function Services() {
           <div className="mt-14 flex justify-center">
             <WhatsAppButton
               className="px-8 py-4 text-base"
-              label="立即開始第一步"
+              label="開始服務查詢"
               trackLocation="services_footer_cta"
             />
           </div>

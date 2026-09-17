@@ -7,11 +7,16 @@ const app = fs.readFileSync("client/src/App.tsx", "utf8");
 const html = fs.readFileSync("client/index.html", "utf8");
 const googleLoader = fs.readFileSync("client/src/lib/googleTagLoader.ts", "utf8");
 const dockerfile = fs.readFileSync("Dockerfile", "utf8");
+const trackingDocs = fs.readFileSync("docs/tracking-rollout-pr19.md", "utf8");
 
 const required = [
-  [analytics, "G-7JEL7SLBGQ"],
+  [analytics, "G-05DW80HCTS"],
   [analytics, "whatsapp_handoff"],
+  [analytics, "DEFAULT_GOOGLE_ADS_WHATSAPP_LABEL"],
   [analytics, "VITE_GOOGLE_ADS_WHATSAPP_LABEL"],
+  [analytics, "VITE_GOOGLE_ADS_PHONE_LABEL"],
+  [analytics, "VITE_GOOGLE_ADS_FORM_LABEL"],
+  [analytics, "sendGoogleAdsConversion"],
   [analytics, 'sendGoogleAdsEvent("quote_calculator_start")'],
   [analytics, 'const GOOGLE_ADS_DESTINATION_ID = "AW-18128738982"'],
   [analytics, "send_page_view: false"],
@@ -27,12 +32,24 @@ const required = [
   [googleLoader, "scheduleGoogleTag"],
   [googleLoader, 'window.addEventListener("pointerdown"'],
   [googleLoader, "FALLBACK_DELAY_MS"],
+  [dockerfile, "ARG VITE_GA4_MEASUREMENT_ID"],
   [dockerfile, "ARG VITE_GOOGLE_ADS_WHATSAPP_LABEL"],
+  [dockerfile, "ARG VITE_GOOGLE_ADS_PHONE_LABEL"],
+  [dockerfile, "ARG VITE_GOOGLE_ADS_FORM_LABEL"],
 ];
 
 for (const [source, pattern] of required) {
   if (!source.includes(pattern)) {
     throw new Error(`缺少 tracking pattern：${pattern}`);
+  }
+}
+
+for (const [sourceName, source] of [
+  ["analytics.ts", analytics],
+  ["tracking-rollout-pr19.md", trackingDocs],
+]) {
+  if (source.includes("G-7JEL7SLBGQ")) {
+    throw new Error(`${sourceName} still references the retired GA4 property`);
   }
 }
 
@@ -65,5 +82,6 @@ console.log("PASS：WhatsApp handoff 一次性 token 已加入");
 console.log("PASS：UTM／click ID type attribution 已加入");
 console.log("PASS：PII 防護仍然存在");
 console.log("PASS：Google Ads Conversion Label 採可選配置");
+console.log("PASS：正式 GA4 property 已切換至 G-05DW80HCTS");
 console.log("PASS：Render Docker build 可取得 Google Ads Conversion Label");
 console.log("PASS：quote_calculator_start 明確送往 Google Ads Destination");

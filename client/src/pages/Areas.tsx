@@ -554,7 +554,7 @@ export default function Areas() {
         <div className="container">
           <div className="mx-auto max-w-2xl text-center">
             <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">
-              SERVICE AREAS
+              服務地區
             </div>
             <h1 className="text-balance font-display text-4xl font-black text-navy md:text-5xl">
               港九新界及離島通渠服務
@@ -576,7 +576,7 @@ export default function Areas() {
                 }}
                 onFocus={() => setOpen(true)}
                 onKeyDown={onSearchKeyDown}
-                placeholder="輸入你的地區，如：旺角、沙田…"
+                placeholder="輸入您的地區，例如：旺角、沙田…"
                 className="h-13 w-full rounded-lg border border-border bg-white py-3.5 pl-12 pr-12 text-base text-navy shadow-sm outline-none transition-shadow placeholder:text-muted-foreground/70 focus:border-wagreen focus:ring-2 focus:ring-wagreen/25"
                 aria-label="搜尋服務地區"
                 role="combobox"
@@ -717,10 +717,10 @@ export default function Areas() {
             <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
               <div>
                 <div className="mb-2 text-xs font-bold tracking-[0.2em] text-safety">
-                  INTERACTIVE MAP
+                  互動地圖
                 </div>
                 <h2 className="font-display text-2xl font-black text-navy md:text-3xl">
-                  點擊地圖，找到你的地區
+                  點擊地圖，查看您的地區
                 </h2>
               </div>
               <p className="max-w-md text-sm text-muted-foreground">
@@ -733,7 +733,7 @@ export default function Areas() {
           <div className="reveal mb-6 flex flex-wrap items-end justify-between gap-3">
             <div>
               <div className="mb-2 text-xs font-bold tracking-[0.2em] text-safety">
-                FEATURED DISTRICTS
+                專屬服務地區
               </div>
               <h2 className="font-display text-2xl font-black text-navy md:text-3xl">
                 {DISTRICTS.length} 個熱門地區專屬服務頁
@@ -797,7 +797,7 @@ export default function Areas() {
           <div className="reveal mb-8 flex flex-wrap items-end justify-between gap-3">
             <div>
               <div className="mb-2 text-xs font-bold tracking-[0.2em] text-safety">
-                FULL COVERAGE
+                完整服務範圍
               </div>
               <h2 className="font-display text-2xl font-black text-navy md:text-3xl">
                 三大分區完整覆蓋

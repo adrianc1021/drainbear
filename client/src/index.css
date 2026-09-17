@@ -182,8 +182,8 @@
     letter-spacing: -0.02em;
   }
   :where(h1, h2, h3, h4, h5, h6) {
-    overflow-wrap: anywhere;
-    word-break: normal;
+    overflow-wrap: break-word;
+    word-break: keep-all;
     text-wrap: balance;
   }
 
@@ -891,7 +891,7 @@
 .home-editorial .db-final-cta-heading {
   max-width: 100%;
   width: auto;
-  word-break: normal;
+  word-break: keep-all;
   overflow-wrap: break-word;
   white-space: normal;
   text-wrap: balance;

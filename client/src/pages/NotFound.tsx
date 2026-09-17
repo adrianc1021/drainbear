@@ -1,19 +1,14 @@
 import SEO from "@/components/SEO";
 import { FileQuestion, Home, Wrench } from "lucide-react";
-import { useLocation } from "wouter";
 import { Link } from "wouter";
 
 export default function NotFound() {
-  const [location] = useLocation();
-
-  const currentPath = location && location.startsWith("/") ? location : "/404";
-
   return (
     <>
       <SEO
         title="找不到頁面｜通渠熊"
-        description="你瀏覽的頁面不存在、已經移除或網址輸入錯誤。"
-        path={currentPath}
+        description="您瀏覽的頁面不存在、已經移除或網址輸入錯誤。"
+        path="/404"
         noindex
       />
 
@@ -29,7 +24,7 @@ export default function NotFound() {
             </p>
             <h1>找不到頁面</h1>
             <p className="stage6a-not-found__copy">
-              你瀏覽的頁面不存在、已經移除，或網址輸入錯誤。
+              您瀏覽的頁面不存在、已經移除，或網址輸入錯誤。
             </p>
             <nav
               className="stage6a-not-found__actions"

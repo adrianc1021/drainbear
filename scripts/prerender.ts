@@ -28,6 +28,7 @@ const STATIC_ROUTES = [
   "/blog",
   "/cases",
   "/thanks",
+  "/404",
 ];
 
 const SERVICE_SLUGS = [

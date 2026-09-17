@@ -27,10 +27,9 @@ import NotFound from "@/pages/NotFound";
 import { BUSINESS_ID, SITE_URL, WEBSITE_ID } from "@/config/site";
 
 export default function District() {
-  const {slug} = useParams<{slug: string}>();
-  const {phoneDisplay, phoneHref, whatsappHref} =
-    useContactSettings();
-  const {settings} = useSiteSettings();
+  const { slug } = useParams<{ slug: string }>();
+  const { phoneDisplay, phoneHref, whatsappHref } = useContactSettings();
+  const { settings } = useSiteSettings();
   const d = getDistrict(slug || "");
   if (!d) return <NotFound />;
 
@@ -62,7 +61,10 @@ export default function District() {
       provider: {
         "@id": BUSINESS_ID,
       },
-      areaServed: [d.name, ...d.nearby].map((n) => ({ "@type": "Place", name: n })),
+      areaServed: [d.name, ...d.nearby].map(n => ({
+        "@type": "Place",
+        name: n,
+      })),
       availableChannel: {
         "@type": "ServiceChannel",
         serviceUrl: `${SITE_URL}/areas/${d.slug}`,
@@ -73,7 +75,7 @@ export default function District() {
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      mainEntity: d.faqs.map((f) => ({
+      mainEntity: d.faqs.map(f => ({
         "@type": "Question",
         name: f.q,
         acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -81,7 +83,9 @@ export default function District() {
     },
   ];
 
-  const waDistrict = whatsappHref(`你好，我喺${d.name}，想查詢通渠服務報價。`);
+  const waDistrict = whatsappHref(
+    `您好，我位於${d.name}，想查詢通渠服務報價。`
+  );
 
   return (
     <div className="district-editorial">
@@ -106,7 +110,9 @@ export default function District() {
             <h1 className="text-balance font-display text-4xl font-black text-navy md:text-5xl">
               {d.heroTitle}
             </h1>
-            <p className="mt-4 text-muted-foreground md:text-lg">{d.heroDesc}</p>
+            <p className="mt-4 text-muted-foreground md:text-lg">
+              {d.heroDesc}
+            </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <a
                 href={waDistrict}
@@ -144,13 +150,16 @@ export default function District() {
             <h2 className="font-display text-2xl font-black text-navy md:text-3xl">
               {d.name}區渠務特點
             </h2>
-            {d.intro.map((p) => (
-              <p key={p.slice(0, 12)} className="mt-4 leading-relaxed text-muted-foreground">
+            {d.intro.map(p => (
+              <p
+                key={p.slice(0, 12)}
+                className="mt-4 leading-relaxed text-muted-foreground"
+              >
                 {p}
               </p>
             ))}
             <div className="mt-6 flex flex-wrap gap-2">
-              {d.landmarks.map((l) => (
+              {d.landmarks.map(l => (
                 <span
                   key={l}
                   className="inline-flex items-center gap-1 rounded-full border border-border bg-mist px-3.5 py-1.5 text-sm font-medium text-navy"
@@ -165,15 +174,29 @@ export default function District() {
           {/* 側欄：服務安排及收費 */}
           <aside className="reveal">
             <div className="card-float card-accent rounded-lg border border-border bg-white p-7">
-              <h3 className="font-display text-lg font-black text-navy">{d.name}區服務安排</h3>
+              <h3 className="font-display text-lg font-black text-navy">
+                {d.name}區服務安排
+              </h3>
               <ul className="mt-5 space-y-4">
                 {[
                   { icon: Clock, text: "按位置、交通及設備供應確認到場時間" },
-                  { icon: BadgeCheck, text: "先提供初步估算，現場確認總價才動工" },
-                  { icon: ShieldCheck, text: "接納工程可免檢查費，查詢時說明條件" },
-                  { icon: Wrench, text: "按渠況選用通渠工具、高壓水槍或 CCTV 照喉" },
-                ].map((i) => (
-                  <li key={i.text} className="flex items-start gap-3 text-sm text-navy/80">
+                  {
+                    icon: BadgeCheck,
+                    text: "先提供初步估算，現場確認總價才動工",
+                  },
+                  {
+                    icon: ShieldCheck,
+                    text: "接納工程可免檢查費，查詢時說明條件",
+                  },
+                  {
+                    icon: Wrench,
+                    text: "按渠況選用通渠工具、高壓水槍或 CCTV 照喉",
+                  },
+                ].map(i => (
+                  <li
+                    key={i.text}
+                    className="flex items-start gap-3 text-sm text-navy/80"
+                  >
                     <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-navy text-wagreen">
                       <i.icon className="h-4 w-4" strokeWidth={2.2} />
                     </span>
@@ -182,7 +205,11 @@ export default function District() {
                 ))}
               </ul>
               <div className="mt-6">
-                <WhatsAppButton className="w-full justify-center" label="立即免費報價" trackLocation="district_sidebar" />
+                <WhatsAppButton
+                  className="w-full justify-center"
+                  label="查詢初步估價"
+                  trackLocation="district_sidebar"
+                />
               </div>
             </div>
           </aside>
@@ -194,7 +221,7 @@ export default function District() {
         <div className="container">
           <div className="reveal mb-10 max-w-xl">
             <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">
-              COMMON ISSUES
+              常見情況
             </div>
             <h2 className="font-display text-2xl font-black text-navy md:text-3xl">
               {d.name}最常見的 4 大渠務求助
@@ -207,8 +234,12 @@ export default function District() {
                 className="card-float card-accent reveal rounded-lg border border-border bg-white p-6"
                 data-reveal-delay={i * 70}
               >
-                <div className="mb-3 font-display text-base font-black text-navy">{p.title}</div>
-                <p className="text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
+                <div className="mb-3 font-display text-base font-black text-navy">
+                  {p.title}
+                </div>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  {p.desc}
+                </p>
               </div>
             ))}
           </div>
@@ -228,11 +259,11 @@ export default function District() {
                 className="card-float reveal rounded-lg border border-border bg-white p-6"
                 data-reveal-delay={i * 70}
               >
-                <h3 className="flex items-start gap-2.5 font-bold text-navy">
+                <h3 className="district-faq-question flex items-start gap-2.5 font-bold text-navy">
                   <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-wagreen/10 text-xs font-black text-wagreen-dark">
                     Q
                   </span>
-                  {f.q}
+                  <span>{f.q}</span>
                 </h3>
                 <p className="mt-3 pl-[34px] text-sm leading-relaxed text-muted-foreground">
                   {f.a}
@@ -278,7 +309,8 @@ export default function District() {
               {d.name}塞渠？先提供位置及渠況。
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/60">
-              {d.nearby.join("、")}等鄰近地區亦可查詢。提供位置及渠況後，先確認可達範圍、設備與上門安排。
+              {d.nearby.join("、")}
+              等鄰近地區亦可查詢。提供位置及渠況後，先確認可達範圍、設備與上門安排。
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <a
@@ -292,7 +324,7 @@ export default function District() {
                 className="btn-smooth inline-flex items-center gap-2 rounded-lg bg-wagreen px-8 py-4 text-base font-bold text-white shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark"
               >
                 <MessageCircle className="h-5 w-5" strokeWidth={2.4} />
-                WhatsApp 即時報價
+                WhatsApp 查詢初步估價
               </a>
               <a
                 href={phoneHref}

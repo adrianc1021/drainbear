@@ -7,29 +7,29 @@ const QUICK_SERVICES = [
   {
     id: "toilet",
     icon: Droplets,
-    label: "廁所／座廁淤塞",
-    description: "去水慢、倒灌或完全淤塞",
+    label: "座廁淤塞",
+    description: "排水緩慢、倒灌或完全淤塞",
     href: "/services/toilet-unblocking",
   },
   {
     id: "bathroom",
     icon: Bath,
-    label: "企缸／浴室去水",
-    description: "企缸、浴缸、頭髮或地台去水淤塞",
+    label: "浴室排水淤塞",
+    description: "淋浴間、浴缸、頭髮或地台排水淤塞",
     href: "/services/bathroom-drain-unblocking",
   },
   {
     id: "kitchen",
     icon: CookingPot,
     label: "廚房鋅盤淤塞",
-    description: "鋅盤去水慢、油脂積聚或倒灌",
+    description: "鋅盤排水緩慢、油脂積聚或倒灌",
     href: "/services/kitchen-sink-unblocking",
   },
   {
     id: "backflow",
     icon: Waves,
     label: "污水渠倒灌",
-    description: "低層去水口湧水、屎渠或主渠倒灌",
+    description: "低層排水位湧水、污水渠或主渠倒灌",
     href: "/services/sewage-backflow",
   },
 ] as const;
@@ -45,7 +45,7 @@ export default function ServiceQuickSelect() {
         <div className="home-section-head grid gap-10 border-b border-[var(--db-rule)] pb-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-end">
           <div>
             <h2 id="quick-service-heading" className="db-editorial-heading">
-              哪裏出現淤塞？
+              哪一個位置出現淤塞？
             </h2>
           </div>
 
