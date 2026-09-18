@@ -15,6 +15,8 @@ import {
   Award,
   ShieldCheck,
   ArrowUp,
+  ArrowRight,
+  ArrowUpRight,
   ChevronDown,
 } from "lucide-react";
 import {
@@ -508,95 +510,166 @@ function FooterAreaAccordion({
 }
 
 function Footer() {
-  const { phoneDisplay, phoneHref } = useContactSettings();
+  const { phoneDisplay, phoneHref, whatsappDefaultHref } = useContactSettings();
 
   return (
-    <footer data-site-footer="true" className="bg-[#080f22] text-white">
-      {/* 數據列 */}
-      <div className="dot-grid border-b border-white/10">
-        <div className="container grid grid-cols-2 gap-x-4 gap-y-10 py-12 md:grid-cols-4 md:gap-8 md:py-14">
-          {FOOTER_STATS.map(s => (
-            <div
-              key={s.label}
-              className="flex flex-col items-center text-center"
-            >
-              <span className="mb-3 inline-flex h-11 w-11 items-center justify-center border border-white/15 bg-white/[0.03]">
-                <s.icon className="h-5 w-5 text-wagreen" strokeWidth={2} />
-              </span>
-              <div className="font-display text-3xl font-extrabold tracking-tight md:text-4xl">
-                {s.value}
-              </div>
-              <div className="mt-1 text-sm text-white/60">{s.label}</div>
+    <footer data-site-footer="true" className="db-site-footer text-white">
+      <section
+        className="db-site-footer__action"
+        aria-labelledby="footer-action-heading"
+      >
+        <div className="db-container">
+          <div className="db-site-footer__brandline">
+            <div className="db-site-footer__brand">
+              <img
+                src={LOGO}
+                alt="通渠熊 DrainBear"
+                width="96"
+                height="96"
+                loading="lazy"
+              />
+              <span>通渠熊 DrainBear</span>
             </div>
-          ))}
-        </div>
-      </div>
+            <span className="db-site-footer__brand-context">
+              香港住宅及商業渠務
+            </span>
+          </div>
 
-      {/* SEO 地區連結區 */}
-      <div className="border-b border-white/10">
-        <div className="container py-2 md:grid md:grid-cols-3 md:gap-8 md:py-10">
-          {FOOTER_AREAS.map((area, index) => (
-            <FooterAreaAccordion key={area.name} area={area} index={index} />
-          ))}
-        </div>
-      </div>
+          <div className="db-site-footer__action-grid">
+            <div>
+              <p className="db-site-footer__eyebrow">現場資料先行</p>
+              <h2 id="footer-action-heading">
+                先說明問題，
+                <br />
+                再安排合適處理。
+              </h2>
+              <p className="db-site-footer__action-copy">
+                提供所在地區、受影響位置及相片或短片，團隊先了解情況，再確認可安排的服務時間及後續方案。
+              </p>
+            </div>
 
-      <div className="container flex flex-col items-center justify-between gap-6 py-10 md:flex-row">
-        <div className="flex items-center gap-2.5">
-          <img
-            src={LOGO}
-            alt="通渠熊 DrainBear"
-            width="96"
-            height="96"
-            className="h-9 w-9 brightness-0 invert opacity-90"
-          />
-          <span className="font-display text-lg font-extrabold">
-            通渠熊 DrainBear
-          </span>
+            <div className="db-site-footer__action-controls">
+              <a
+                href={whatsappDefaultHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => {
+                  trackCTA("whatsapp", "footer_action");
+                  goThanksAfterWhatsApp("footer_action");
+                }}
+                className="db-site-footer__primary-action"
+              >
+                <MessageCircle aria-hidden="true" />
+                <span>WhatsApp 查詢報價</span>
+                <ArrowUpRight aria-hidden="true" />
+              </a>
+              <a
+                href={phoneHref}
+                onClick={() => trackCTA("phone", "footer_action")}
+                className="db-site-footer__secondary-action"
+              >
+                <Phone aria-hidden="true" />
+                <span>24 小時查詢：{phoneDisplay}</span>
+              </a>
+              <p className="db-site-footer__action-note">
+                <ShieldCheck aria-hidden="true" />
+                動工前確認處理方法及收費
+              </p>
+            </div>
+          </div>
+
+          <div className="db-site-footer__signals" aria-label="服務安排原則">
+            {FOOTER_STATS.map(s => (
+              <div key={s.label} className="db-site-footer__signal">
+                <s.icon aria-hidden="true" />
+                <span>
+                  <strong>{s.value}</strong>
+                  <small>{s.label}</small>
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
-        <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-white/60">
-          {FOOTER_NAV_ITEMS.map(item => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="btn-smooth inline-flex min-h-[44px] items-center px-1 hover:text-white"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-        <div className="flex items-center gap-2 text-sm text-white/60">
-          <ShieldCheck className="h-4 w-4 text-wagreen" />
-          先報價・動工前確認總價
-        </div>
-      </div>
-      <div className="border-t border-white/10">
-        <p className="container py-5 text-center text-[11px] leading-5 text-white/55 md:text-left">
-          服務說明：優先安排為目標安排，實際時間受地區、交通、人員及設備供應影響；「不成功不收費」適用於事前確認的合資格疏通項目，檢測、拆裝、維修、特殊設備或已完成的獨立工序可另行報價。所有新增費用均應在動工前確認。
-        </p>
-      </div>
-      <div className="border-t border-white/10 py-5 text-center text-xs text-white/70">
-        <a
-          href={phoneHref}
-          onClick={() => trackCTA("phone", "footer")}
-          className="btn-smooth inline-flex min-h-[44px] items-center px-2 hover:text-white"
-        >
-          24 小時查詢：{phoneDisplay}
-        </a>
-        <span className="mx-2">|</span>© {new Date().getFullYear()} 通渠熊
-        DrainBear Limited.
-        版權所有。提供港島、九龍、新界及離島渠務查詢；服務安排按所在地點、交通及工具運送情況確認。
-      </div>
-      <div className="border-t border-white/10">
-        <div className="container py-6">
-          <div className="flex flex-col gap-3 md:flex-row md:items-center">
-            <p className="shrink-0 text-xs font-bold tracking-[0.14em] text-white/55">
-              熱門地區
+      </section>
+
+      <section className="db-site-footer__directory" aria-label="網站導覽">
+        <div className="db-container db-site-footer__directory-grid">
+          <div className="db-site-footer__directory-intro">
+            <p className="db-site-footer__eyebrow">DrainBear / 服務目錄</p>
+            <h2>
+              由問題判斷，
+              <br />
+              到現場安排。
+            </h2>
+            <p>
+              探索通渠服務、收費指南、問題判斷及各區服務資料，先整理需要，再提出查詢。
             </p>
-            <nav
-              aria-label="熱門通渠服務地區"
-              className="flex flex-wrap gap-x-4 gap-y-2"
-            >
+          </div>
+
+          <div className="db-site-footer__nav-group">
+            <p className="db-site-footer__nav-label">主要內容</p>
+            <nav aria-label="主要網站內容">
+              {FOOTER_NAV_ITEMS.slice(0, 5).map(item => (
+                <Link key={item.href} href={item.href}>
+                  {item.label}
+                  <ArrowUpRight aria-hidden="true" />
+                </Link>
+              ))}
+            </nav>
+          </div>
+
+          <div className="db-site-footer__nav-group">
+            <p className="db-site-footer__nav-label">查詢工具</p>
+            <nav aria-label="查詢及服務工具">
+              {FOOTER_NAV_ITEMS.slice(5).map(item => (
+                <Link key={item.href} href={item.href}>
+                  {item.label}
+                  <ArrowUpRight aria-hidden="true" />
+                </Link>
+              ))}
+              <Link href="/drain-diagnosis">
+                開始問題判斷
+                <ArrowUpRight aria-hidden="true" />
+              </Link>
+            </nav>
+          </div>
+        </div>
+      </section>
+
+      <section
+        className="db-site-footer__areas"
+        aria-labelledby="footer-areas-heading"
+      >
+        <div className="db-container">
+          <div className="db-site-footer__areas-heading">
+            <div>
+              <p className="db-site-footer__eyebrow">服務地區</p>
+              <h2 id="footer-areas-heading">
+                港九新界及離島，按位置確認安排。
+              </h2>
+            </div>
+            <Link href="/areas" className="db-site-footer__text-link">
+              查看完整地區資料
+              <ArrowRight aria-hidden="true" />
+            </Link>
+          </div>
+
+          <div className="db-site-footer__area-grid">
+            {FOOTER_AREAS.map((area, index) => (
+              <FooterAreaAccordion key={area.name} area={area} index={index} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section
+        className="db-site-footer__popular"
+        aria-labelledby="footer-popular-heading"
+      >
+        <div className="db-container">
+          <div className="db-site-footer__popular-heading">
+            <p id="footer-popular-heading">熱門地區</p>
+            <nav aria-label="熱門通渠服務地區">
               {DISTRICTS.map(district => {
                 const item = {
                   label: `${district.name}通渠`,
@@ -615,7 +688,6 @@ function Footer() {
                         destination_url: item.href,
                       })
                     }
-                    className="inline-flex min-h-11 items-center text-sm text-white/70 transition-colors hover:text-white"
                   >
                     {item.label}
                   </Link>
@@ -624,7 +696,21 @@ function Footer() {
             </nav>
           </div>
         </div>
-      </div>
+      </section>
+
+      <section className="db-site-footer__legal">
+        <div className="db-container">
+          <p>
+            服務說明：優先安排為目標安排，實際時間受地區、交通、人員及設備供應影響；「不成功不收費」適用於事前確認的合資格疏通項目，檢測、拆裝、維修、特殊設備或已完成的獨立工序可另行報價。所有新增費用均應在動工前確認。
+          </p>
+          <div>
+            <span>
+              © {new Date().getFullYear()} 通渠熊 DrainBear Limited. 版權所有。
+            </span>
+            <span>提供港島、九龍、新界及離島渠務查詢。</span>
+          </div>
+        </div>
+      </section>
     </footer>
   );
 }

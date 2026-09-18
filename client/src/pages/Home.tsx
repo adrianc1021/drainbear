@@ -123,12 +123,19 @@ function EditorialCases() {
         slug: study.slug,
         date: formatCaseDate(study.projectDate),
         image: study.coverImage,
+        imageSrc: undefined,
       }))
     : COMMON_SCENARIOS.map(study => ({
         ...study,
         slug: undefined,
         date: undefined,
         image: undefined,
+        imageSrc:
+          study.number === "01"
+            ? FIELD_IMAGE
+            : study.number === "02"
+              ? CAPABILITY_IMAGE
+              : HERO_IMAGE,
       }));
 
   return (
@@ -163,17 +170,25 @@ function EditorialCases() {
           {records.map(study => (
             <article
               key={study.number}
-              className={`home-evidence${study.image?.url ? " home-evidence--with-image" : ""}`}
+              className={`home-evidence${study.image?.url || study.imageSrc ? " home-evidence--with-image" : ""}`}
             >
-              {study.image?.url ? (
+              {study.image?.url || study.imageSrc ? (
                 <img
                   className="home-evidence__image"
-                  src={optimizedImageUrl(study.image.url, 800)}
-                  srcSet={createImageSrcSet(study.image.url, [360, 640, 800])}
+                  src={
+                    study.image?.url
+                      ? optimizedImageUrl(study.image.url, 800)
+                      : study.imageSrc
+                  }
+                  srcSet={
+                    study.image?.url
+                      ? createImageSrcSet(study.image.url, [360, 640, 800])
+                      : undefined
+                  }
                   sizes="(min-width: 900px) 35vw, 100vw"
-                  alt={study.image.alt || study.title}
-                  width={study.image.width || 1200}
-                  height={study.image.height || 800}
+                  alt={study.image?.alt || `${study.title}服務示意圖片`}
+                  width={study.image?.width || 1200}
+                  height={study.image?.height || 800}
                   loading="lazy"
                   decoding="async"
                 />
