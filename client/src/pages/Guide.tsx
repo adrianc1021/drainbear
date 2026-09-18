@@ -281,6 +281,11 @@ export default function Guide() {
           </>
         }
         description="整理常見通渠價格、費用及起始收費，並說明影響最終報價的因素。可先按淤塞位置查看參考，再提供現場資料作初步估價。"
+        media={{
+          src: "/images/home-cctv-inspection.jpg",
+          alt: "通渠師傅使用設備檢查排水管道",
+          caption: "收費參考以常見工序整理，最終報價須按現場確認",
+        }}
         actions={
           <>
             <WhatsAppButton
@@ -483,7 +488,7 @@ export default function Guide() {
                 className="card-float relative rounded-lg border border-border bg-white p-6"
               >
                 <div className="absolute -top-3 left-5 rounded-full bg-navy px-3 py-1 font-display text-xs font-extrabold text-wagreen">
-                步驟 {s.step}
+                  步驟 {s.step}
                 </div>
                 <h3 className="mt-3 font-display text-base font-bold text-navy">
                   {s.title}
@@ -496,7 +501,9 @@ export default function Guide() {
           </div>
           <div className="mt-10 flex justify-center">
             <a
-              href={whatsappHref("您好，我想透過相片查詢通渠初步估價，請協助說明需要提供的資料。")}
+              href={whatsappHref(
+                "您好，我想透過相片查詢通渠初步估價，請協助說明需要提供的資料。"
+              )}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => {

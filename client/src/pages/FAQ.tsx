@@ -72,7 +72,8 @@ const FAQ_JSONLD = {
   "@id": `${SITE_URL}/faq#webpage`,
   url: `${SITE_URL}/faq`,
   name: "香港通渠常見問題",
-  description: "香港通渠收費、緊急處理、通渠水、CCTV 照喉及上門安排的直接解答。",
+  description:
+    "香港通渠收費、緊急處理、通渠水、CCTV 照喉及上門安排的直接解答。",
   inLanguage: "zh-Hant-HK",
   dateModified: "2026-09-06",
   isPartOf: { "@id": WEBSITE_ID },
@@ -120,6 +121,11 @@ export default function FAQ() {
         kicker="常見問題"
         title="常見問題"
         description="以直接答案整理收費、緊急處理、上門安排、施工及管道保養問題，方便您快速判斷下一步。"
+        media={{
+          src: "/images/home-drain-technician.jpg",
+          alt: "通渠師傅在住宅現場處理排水問題",
+          caption: "如有污水外溢或水位上升，請先停止用水並提供現場資料",
+        }}
       />
 
       <section className="border-b border-border bg-mist/55 py-10">
@@ -137,7 +143,9 @@ export default function FAQ() {
               ["03", "不要再加入通渠水或其他化學劑"],
             ].map(([step, text]) => (
               <li key={step} className="border-l-2 border-wagreen pl-4">
-                <span className="text-xs font-black text-wagreen-dark">{step}</span>
+                <span className="text-xs font-black text-wagreen-dark">
+                  {step}
+                </span>
                 <p className="mt-1 text-sm font-semibold leading-relaxed text-navy">
                   {text}
                 </p>
@@ -151,10 +159,7 @@ export default function FAQ() {
         <div className="site-editorial-narrow">
           <div className="site-editorial-accordion">
             {FAQS.map(faq => (
-              <details
-                key={faq.q}
-                className="site-editorial-accordion__item"
-              >
+              <details key={faq.q} className="site-editorial-accordion__item">
                 <summary className="site-editorial-accordion__trigger list-none text-left">
                   <span className="flex items-center gap-3">
                     <HelpCircle
@@ -166,14 +171,15 @@ export default function FAQ() {
                   </span>
                 </summary>
 
-                <p className="site-editorial-accordion__answer">
-                  {faq.a}
-                </p>
+                <p className="site-editorial-accordion__answer">{faq.a}</p>
               </details>
             ))}
           </div>
 
-          <nav className="mt-14 border-t border-border pt-9" aria-label="相關渠務指南">
+          <nav
+            className="mt-14 border-t border-border pt-9"
+            aria-label="相關渠務指南"
+          >
             <h2 className="font-display text-2xl font-black text-navy">
               進一步判斷與報價資料
             </h2>

@@ -33,10 +33,7 @@ import {
 } from "@/lib/analytics";
 import { SERVICE_PAGES } from "@/lib/serviceData";
 import { prefetchRoute } from "@/lib/routePrefetch";
-import {
-  cloudinaryImageSrcSet,
-  cloudinaryImageUrl,
-} from "@/lib/cloudinary";
+import { cloudinaryImageSrcSet, cloudinaryImageUrl } from "@/lib/cloudinary";
 
 const SERVICES_CRUMBS = [
   { name: "首頁", path: "/" },
@@ -207,6 +204,11 @@ export default function Services() {
           </>
         }
         description="由一般住宅淤塞到商業主渠工程，團隊會先了解管道結構、淤塞程度及現場環境，再建議合適設備與處理方向。"
+        media={{
+          src: "/images/home-drain-technician-wide.jpg",
+          alt: "通渠師傅在現場檢查排水管道",
+          caption: "服務示意圖・實際處理方法按現場確認",
+        }}
         actions={
           <WhatsAppButton
             className="phase4-primary-action"

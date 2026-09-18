@@ -75,6 +75,11 @@ export default function Blog() {
         kicker="實用文章"
         title="通渠小知識"
         description="整理香港家居及商業渠務的日常保養、常見問題及處理資訊，方便在需要時快速查閱。"
+        media={{
+          src: "/images/home-cctv-inspection.jpg",
+          alt: "排水管道檢查設備示意圖",
+          caption: "由日常防塞到工程判斷，按需要查閱相關資料",
+        }}
       />
 
       <section className="site-content-section bg-white">

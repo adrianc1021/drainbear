@@ -30,6 +30,7 @@ import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import { prefetchRoute } from "@/lib/routePrefetch";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
 import { DISTRICTS } from "@/lib/districtData";
+import { SERVICE_PAGES } from "@/lib/serviceData";
 
 const LOGO =
   "https://res.cloudinary.com/pgjztf2p/image/upload/f_auto,q_auto:eco,c_fill,w_96,h_96/v1785147037/LOGO_dmyalo.png";
@@ -607,9 +608,19 @@ function Footer() {
           </div>
 
           <div className="db-site-footer__nav-group">
-            <p className="db-site-footer__nav-label">主要內容</p>
-            <nav aria-label="主要網站內容">
-              {FOOTER_NAV_ITEMS.slice(0, 5).map(item => (
+            <p className="db-site-footer__nav-label">服務及工具</p>
+            <nav aria-label="服務及查詢工具">
+              <Link href="/services">
+                全部通渠服務
+                <ArrowUpRight aria-hidden="true" />
+              </Link>
+              {SERVICE_PAGES.map(service => (
+                <Link key={service.slug} href={`/services/${service.slug}`}>
+                  {service.shortName}
+                  <ArrowUpRight aria-hidden="true" />
+                </Link>
+              ))}
+              {FOOTER_NAV_ITEMS.slice(2, 4).map(item => (
                 <Link key={item.href} href={item.href}>
                   {item.label}
                   <ArrowUpRight aria-hidden="true" />
@@ -619,16 +630,16 @@ function Footer() {
           </div>
 
           <div className="db-site-footer__nav-group">
-            <p className="db-site-footer__nav-label">查詢工具</p>
-            <nav aria-label="查詢及服務工具">
-              {FOOTER_NAV_ITEMS.slice(5).map(item => (
+            <p className="db-site-footer__nav-label">網站及資料</p>
+            <nav aria-label="網站內容及資料">
+              {FOOTER_NAV_ITEMS.slice(4).map(item => (
                 <Link key={item.href} href={item.href}>
                   {item.label}
                   <ArrowUpRight aria-hidden="true" />
                 </Link>
               ))}
               <Link href="/drain-diagnosis">
-                開始問題判斷
+                問題判斷工具
                 <ArrowUpRight aria-hidden="true" />
               </Link>
             </nav>

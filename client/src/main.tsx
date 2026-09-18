@@ -10,6 +10,7 @@ import "./styles/visual-upgrade.css";
 import "./styles/home-reference-inspired.css";
 import "./styles/home-mobile-optimization.css";
 import "./styles/motionsites-reference-refresh.css";
+import "./styles/motionsites-inner-pages.css";
 
 const root = document.getElementById("root");
 

@@ -1,0 +1,156 @@
+/*
+ * Inner-page visual layer inspired by MotionSites prompt patterns.
+ * The layout language is rebuilt for DrainBear with original copy, imagery
+ * and conversion paths.
+ */
+
+.site-page-hero__media {
+  min-width: 0;
+  margin-top: clamp(2rem, 4vw, 3.25rem);
+  border-top: 1px solid var(--site-rule);
+  padding-top: 0.85rem;
+}
+
+.site-page-hero--with-media .site-page-hero__support {
+  align-self: center;
+}
+
+.site-page-hero__media img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--site-rule);
+  background: var(--site-ink);
+  object-fit: cover;
+}
+
+.site-page-hero__media figcaption,
+.areas-editorial__hero-media figcaption,
+.case-studies-hero__media figcaption {
+  margin-top: 0.65rem;
+  color: var(--site-muted);
+  font-size: 0.7rem;
+  line-height: 1.6;
+}
+
+.site-page-hero__media figcaption::before,
+.areas-editorial__hero-media figcaption::before,
+.case-studies-hero__media figcaption::before {
+  display: inline-block;
+  width: 1.25rem;
+  height: 1px;
+  margin: 0 0.5rem 0.2rem 0;
+  background: var(--site-safety);
+  content: "";
+}
+
+.areas-editorial [data-visual-section="areas-hero"] {
+  background: var(--site-paper);
+  border-bottom: 1px solid var(--site-rule);
+}
+
+.areas-editorial__hero-grid {
+  display: grid;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: end;
+}
+
+.areas-editorial__hero-grid > div:first-child {
+  margin-inline: 0;
+  text-align: left;
+}
+
+.areas-editorial__hero-grid > div:first-child p {
+  margin-inline: 0;
+}
+
+.areas-editorial__hero-grid > div:first-child .relative {
+  margin-inline: 0;
+}
+
+.areas-editorial__hero-media {
+  min-width: 0;
+  margin: 0;
+  border-top: 1px solid var(--site-rule);
+  padding-top: 0.85rem;
+}
+
+.areas-editorial__hero-media img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--site-rule);
+  object-fit: cover;
+}
+
+.case-studies-hero__grid {
+  display: grid;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: end;
+  padding-block: clamp(3.5rem, 7vw, 6.5rem);
+}
+
+.case-studies-hero__support {
+  min-width: 0;
+}
+
+.case-studies-hero__media {
+  min-width: 0;
+  margin: 2rem 0 0;
+  border-top: 1px solid var(--db-rule);
+  padding-top: 0.85rem;
+}
+
+.case-studies-hero__media img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--db-rule);
+  object-fit: cover;
+}
+
+@media (min-width: 900px) {
+  .site-page-hero--with-media .site-page-hero__inner {
+    align-items: center;
+  }
+
+  .areas-editorial__hero-grid,
+  .case-studies-hero__grid {
+    grid-template-columns: minmax(0, 0.9fr) minmax(18rem, 1.1fr);
+  }
+
+  .site-page-hero__media img {
+    aspect-ratio: 16 / 8.5;
+  }
+}
+
+@media (max-width: 899px) {
+  .areas-editorial__hero-grid > div:first-child {
+    max-width: 42rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .areas-editorial__hero-grid > div:first-child {
+    text-align: left;
+  }
+
+  .areas-editorial__hero-grid > div:first-child h1 {
+    max-width: 13em;
+    font-size: clamp(2.35rem, 11vw, 3.35rem);
+    line-height: 1.14;
+  }
+
+  .areas-editorial__hero-media img,
+  .case-studies-hero__media img {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-page-hero__media img,
+  .areas-editorial__hero-media img,
+  .case-studies-hero__media img {
+    transition: none;
+  }
+}

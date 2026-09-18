@@ -37,6 +37,8 @@ const AREAS_CRUMBS = [
   { name: "服務地區", path: "/areas" },
 ];
 
+const AREAS_HERO_IMAGE = "/images/home-drain-technician-wide.jpg";
+
 /** 已有專屬著陸頁的地區 → slug 對照（自動由 districtData 生成） */
 const DISTRICT_PAGES: Record<string, string> = DISTRICT_SLUGS;
 
@@ -552,134 +554,149 @@ export default function Areas() {
         data-visual-section="areas-hero"
       >
         <div className="container">
-          <div className="mx-auto max-w-2xl text-center">
-            <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">
-              服務地區
-            </div>
-            <h1 className="text-balance font-display text-4xl font-black text-navy md:text-5xl">
-              港九新界及離島通渠服務
-            </h1>
-            <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-              無論您身處港島、九龍、新界或離島，可先提供所在地點及渠務情況，
-              我們會按交通、工具運送及工作安排確認服務方式與上門時間。
-            </p>
-            {/* 地區速查 */}
-            <div ref={searchRef} className="relative mx-auto mt-8 max-w-md">
-              <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
-              <input
-                type="search"
-                value={query}
-                onChange={e => {
-                  setQuery(e.target.value);
-                  setOpen(true);
-                  setActiveIdx(-1);
-                }}
-                onFocus={() => setOpen(true)}
-                onKeyDown={onSearchKeyDown}
-                placeholder="輸入您的地區，例如：旺角、沙田…"
-                className="h-13 w-full rounded-lg border border-border bg-white py-3.5 pl-12 pr-12 text-base text-navy shadow-sm outline-none transition-shadow placeholder:text-muted-foreground/70 focus:border-wagreen focus:ring-2 focus:ring-wagreen/25"
-                aria-label="搜尋服務地區"
-                role="combobox"
-                aria-expanded={open && matches !== null}
-                aria-autocomplete="list"
-                aria-controls={SEARCH_LISTBOX_ID}
-                aria-describedby={SEARCH_STATUS_ID}
-                aria-activedescendant={
-                  activeIdx >= 0 && visible[activeIdx]
-                    ? getSearchOptionId(visible[activeIdx])
-                    : undefined
-                }
-              />
-              {query ? (
-                <button
-                  type="button"
-                  aria-label="清除地區搜尋"
-                  onClick={() => {
-                    setQuery("");
-                    setOpen(false);
+          <div className="areas-editorial__hero-grid">
+            <div className="mx-auto max-w-2xl text-center">
+              <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">
+                服務地區
+              </div>
+              <h1 className="text-balance font-display text-4xl font-black text-navy md:text-5xl">
+                港九新界及離島通渠服務
+              </h1>
+              <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
+                無論您身處港島、九龍、新界或離島，可先提供所在地點及渠務情況，
+                我們會按交通、工具運送及工作安排確認服務方式與上門時間。
+              </p>
+              {/* 地區速查 */}
+              <div ref={searchRef} className="relative mx-auto mt-8 max-w-md">
+                <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+                <input
+                  type="search"
+                  value={query}
+                  onChange={e => {
+                    setQuery(e.target.value);
+                    setOpen(true);
                     setActiveIdx(-1);
                   }}
-                  className="absolute right-1.5 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-md text-muted-foreground hover:bg-mist hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wagreen"
+                  onFocus={() => setOpen(true)}
+                  onKeyDown={onSearchKeyDown}
+                  placeholder="輸入您的地區，例如：旺角、沙田…"
+                  className="h-13 w-full rounded-lg border border-border bg-white py-3.5 pl-12 pr-12 text-base text-navy shadow-sm outline-none transition-shadow placeholder:text-muted-foreground/70 focus:border-wagreen focus:ring-2 focus:ring-wagreen/25"
+                  aria-label="搜尋服務地區"
+                  role="combobox"
+                  aria-expanded={open && matches !== null}
+                  aria-autocomplete="list"
+                  aria-controls={SEARCH_LISTBOX_ID}
+                  aria-describedby={SEARCH_STATUS_ID}
+                  aria-activedescendant={
+                    activeIdx >= 0 && visible[activeIdx]
+                      ? getSearchOptionId(visible[activeIdx])
+                      : undefined
+                  }
+                />
+                {query ? (
+                  <button
+                    type="button"
+                    aria-label="清除地區搜尋"
+                    onClick={() => {
+                      setQuery("");
+                      setOpen(false);
+                      setActiveIdx(-1);
+                    }}
+                    className="absolute right-1.5 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-md text-muted-foreground hover:bg-mist hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wagreen"
+                  >
+                    <X className="h-4 w-4" strokeWidth={2.4} />
+                  </button>
+                ) : null}
+                <span
+                  id={SEARCH_STATUS_ID}
+                  className="sr-only"
+                  aria-live="polite"
                 >
-                  <X className="h-4 w-4" strokeWidth={2.4} />
-                </button>
-              ) : null}
-              <span
-                id={SEARCH_STATUS_ID}
-                className="sr-only"
-                aria-live="polite"
-              >
-                {matches === null
-                  ? "輸入地區名稱搜尋"
-                  : matches.length > 0
-                    ? `找到 ${matches.length} 個地區，顯示首 ${visible.length} 個結果`
-                    : `未找到 ${query} 的地區結果`}
-              </span>
-              {open && matches && (
-                <div
-                  id={SEARCH_LISTBOX_ID}
-                  role="listbox"
-                  className="absolute left-0 right-0 top-full z-30 mt-2 max-h-[min(22rem,52dvh)] overflow-y-auto overscroll-contain rounded-lg border border-border bg-white text-left shadow-xl"
-                >
-                  {matches.length > 0 ? (
-                    <div className="sticky top-0 z-10 border-b border-border bg-mist px-4 py-2 text-xs font-semibold text-muted-foreground">
-                      找到 {matches.length} 個地區
-                    </div>
-                  ) : null}
-                  {matches.length > 0 ? (
-                    visible.map((m, idx) => {
-                      const slug = DISTRICT_PAGES[m.district];
-                      const optionId = getSearchOptionId(m);
-                      const inner = (
-                        <>
-                          <span className="flex items-center gap-2.5">
-                            <MapPin
-                              className="h-4 w-4 text-wagreen"
-                              strokeWidth={2.4}
-                            />
-                            <span className="font-bold text-navy">
-                              {m.district}通渠
+                  {matches === null
+                    ? "輸入地區名稱搜尋"
+                    : matches.length > 0
+                      ? `找到 ${matches.length} 個地區，顯示首 ${visible.length} 個結果`
+                      : `未找到 ${query} 的地區結果`}
+                </span>
+                {open && matches && (
+                  <div
+                    id={SEARCH_LISTBOX_ID}
+                    role="listbox"
+                    className="absolute left-0 right-0 top-full z-30 mt-2 max-h-[min(22rem,52dvh)] overflow-y-auto overscroll-contain rounded-lg border border-border bg-white text-left shadow-xl"
+                  >
+                    {matches.length > 0 ? (
+                      <div className="sticky top-0 z-10 border-b border-border bg-mist px-4 py-2 text-xs font-semibold text-muted-foreground">
+                        找到 {matches.length} 個地區
+                      </div>
+                    ) : null}
+                    {matches.length > 0 ? (
+                      visible.map((m, idx) => {
+                        const slug = DISTRICT_PAGES[m.district];
+                        const optionId = getSearchOptionId(m);
+                        const inner = (
+                          <>
+                            <span className="flex items-center gap-2.5">
+                              <MapPin
+                                className="h-4 w-4 text-wagreen"
+                                strokeWidth={2.4}
+                              />
+                              <span className="font-bold text-navy">
+                                {m.district}通渠
+                              </span>
+                              <span className="text-xs text-muted-foreground">
+                                {m.region}
+                              </span>
                             </span>
-                            <span className="text-xs text-muted-foreground">
-                              {m.region}
+                            <span className="inline-flex items-center gap-1 text-xs font-bold text-wagreen-dark">
+                              {slug ? "專屬地區頁" : "查看覆蓋詳情"}
+                              <ArrowRight className="h-3.5 w-3.5" />
                             </span>
-                          </span>
-                          <span className="inline-flex items-center gap-1 text-xs font-bold text-wagreen-dark">
-                            {slug ? "專屬地區頁" : "查看覆蓋詳情"}
-                            <ArrowRight className="h-3.5 w-3.5" />
-                          </span>
-                        </>
-                      );
-                      return (
-                        <button
-                          key={m.district}
-                          id={optionId}
-                          type="button"
-                          role="option"
-                          aria-selected={activeIdx === idx}
-                          tabIndex={-1}
-                          onClick={() => goToDistrict(m)}
-                          onMouseEnter={() => setActiveIdx(idx)}
-                          className={`flex min-h-14 w-full items-center justify-between gap-3 px-4 py-3 text-left transition-colors ${
-                            activeIdx === idx ? "bg-mist" : "hover:bg-mist"
-                          }`}
-                        >
-                          {inner}
-                        </button>
-                      );
-                    })
-                  ) : (
-                    <div
-                      className="px-4 py-4 text-sm text-muted-foreground"
-                      role="status"
-                      aria-live="polite"
-                    >
-                      未找到「{query}」？請直接致電 {phoneDisplay} 確認。
-                    </div>
-                  )}
-                </div>
-              )}
+                          </>
+                        );
+                        return (
+                          <button
+                            key={m.district}
+                            id={optionId}
+                            type="button"
+                            role="option"
+                            aria-selected={activeIdx === idx}
+                            tabIndex={-1}
+                            onClick={() => goToDistrict(m)}
+                            onMouseEnter={() => setActiveIdx(idx)}
+                            className={`flex min-h-14 w-full items-center justify-between gap-3 px-4 py-3 text-left transition-colors ${
+                              activeIdx === idx ? "bg-mist" : "hover:bg-mist"
+                            }`}
+                          >
+                            {inner}
+                          </button>
+                        );
+                      })
+                    ) : (
+                      <div
+                        className="px-4 py-4 text-sm text-muted-foreground"
+                        role="status"
+                        aria-live="polite"
+                      >
+                        未找到「{query}」？請直接致電 {phoneDisplay} 確認。
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
             </div>
+
+            <figure className="areas-editorial__hero-media">
+              <img
+                src={AREAS_HERO_IMAGE}
+                alt="通渠師傅在香港住宅現場檢查排水問題"
+                width="1280"
+                height="960"
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+              />
+              <figcaption>服務示意圖・上門時間及所需設備按地點確認</figcaption>
+            </figure>
           </div>
 
           {/* 覆蓋統計帶 */}

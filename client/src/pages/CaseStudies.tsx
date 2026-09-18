@@ -27,21 +27,27 @@ export default function CaseStudies() {
       about: { "@id": BUSINESS_ID },
     },
     ...(studies.length
-      ? [{
-          "@context": "https://schema.org",
-          "@type": "ItemList",
-          itemListElement: studies.map((study, index) => ({
-            "@type": "ListItem",
-            position: index + 1,
-            url: `${SITE_URL}/cases/${study.slug}`,
-            name: study.title,
-          })),
-        }]
+      ? [
+          {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            itemListElement: studies.map((study, index) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              url: `${SITE_URL}/cases/${study.slug}`,
+              name: study.title,
+            })),
+          },
+        ]
       : []),
   ];
 
   return (
-    <div className="bg-[var(--db-paper)]" data-cms-loading={isLoading} data-cms-error={Boolean(error)}>
+    <div
+      className="bg-[var(--db-paper)]"
+      data-cms-loading={isLoading}
+      data-cms-error={Boolean(error)}
+    >
       <SEO
         title="通渠工程案例｜現場問題、處理方法與完成結果｜通渠熊"
         description="查看通渠熊已核實並由 CMS 發佈的渠務工程紀錄，包括地區、現場問題、使用設備、處理步驟及完成測試。"
@@ -54,7 +60,7 @@ export default function CaseStudies() {
       <Breadcrumbs items={CRUMBS} />
 
       <header className="case-studies-hero border-b border-[var(--db-rule)]">
-        <div className="db-container grid gap-8 py-14 md:py-20 lg:grid-cols-[minmax(0,0.95fr)_minmax(18rem,0.85fr)] lg:items-end lg:gap-16">
+        <div className="db-container case-studies-hero__grid">
           <div>
             <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--db-safety)]">
               Field records / 工程紀錄
@@ -63,21 +69,41 @@ export default function CaseStudies() {
               現場問題、做法與結果，逐項記錄。
             </h1>
           </div>
-          <p className="max-w-xl text-base leading-8 text-[var(--db-copy)] lg:justify-self-end">
-            此頁只顯示已在內容系統正式發佈的工程紀錄。個案會隱去客戶完整地址，並列出工程日期、地區、設備及完成測試；不同現場不能視為固定報價或時間保證。
-          </p>
+          <div className="case-studies-hero__support">
+            <p className="max-w-xl text-base leading-8 text-[var(--db-copy)] lg:justify-self-end">
+              此頁只顯示已在內容系統正式發佈的工程紀錄。個案會隱去客戶完整地址，並列出工程日期、地區、設備及完成測試；不同現場不能視為固定報價或時間保證。
+            </p>
+            <figure className="case-studies-hero__media">
+              <img
+                src="/images/home-drain-technician.jpg"
+                alt="通渠師傅在現場進行排水工程檢查"
+                width="960"
+                height="1280"
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+              />
+              <figcaption>已發佈工程紀錄・實際安排按現場確認</figcaption>
+            </figure>
+          </div>
         </div>
       </header>
 
       <main className="db-container py-12 md:py-16">
         {isLoading ? (
-          <p role="status" className="border-y border-[var(--db-rule)] py-10 text-[var(--db-copy)]">
+          <p
+            role="status"
+            className="border-y border-[var(--db-rule)] py-10 text-[var(--db-copy)]"
+          >
             正在讀取已發佈工程紀錄…
           </p>
         ) : studies.length ? (
           <div className="border-b border-[var(--db-rule)]">
             {studies.map((study, index) => (
-              <article key={study._id} className="case-studies-row border-t border-[var(--db-rule)] py-10 md:py-14">
+              <article
+                key={study._id}
+                className="case-studies-row border-t border-[var(--db-rule)] py-10 md:py-14"
+              >
                 <Link
                   href={`/cases/${study.slug}`}
                   className="group grid gap-7 lg:grid-cols-[3rem_minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-10"
@@ -87,8 +113,14 @@ export default function CaseStudies() {
                   </span>
                   <div>
                     <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm font-bold text-[var(--db-copy)]">
-                      <span className="inline-flex items-center gap-2"><MapPin className="h-4 w-4" />{study.district}</span>
-                      <span className="inline-flex items-center gap-2"><CalendarDays className="h-4 w-4" />{formatCaseDate(study.projectDate)}</span>
+                      <span className="inline-flex items-center gap-2">
+                        <MapPin className="h-4 w-4" />
+                        {study.district}
+                      </span>
+                      <span className="inline-flex items-center gap-2">
+                        <CalendarDays className="h-4 w-4" />
+                        {formatCaseDate(study.projectDate)}
+                      </span>
                     </div>
                     <p className="mt-4 text-xs font-black uppercase tracking-[0.12em] text-[var(--db-safety)]">
                       {study.serviceLabel}
@@ -98,7 +130,9 @@ export default function CaseStudies() {
                     </h2>
                   </div>
                   <div>
-                    <p className="text-base leading-8 text-[var(--db-copy)]">{study.summary}</p>
+                    <p className="text-base leading-8 text-[var(--db-copy)]">
+                      {study.summary}
+                    </p>
                     <span className="mt-6 inline-flex min-h-11 items-center gap-2 font-black text-[var(--db-ink)] group-hover:text-[var(--db-safety)]">
                       查看工程紀錄 <ArrowRight className="h-4 w-4" />
                     </span>
@@ -110,12 +144,18 @@ export default function CaseStudies() {
         ) : (
           <section className="grid gap-8 border-y border-[var(--db-rule)] py-10 md:grid-cols-2 md:items-center">
             <div>
-              <h2 className="text-2xl font-black text-[var(--db-ink)]">工程資料正在整理</h2>
+              <h2 className="text-2xl font-black text-[var(--db-ink)]">
+                工程資料正在整理
+              </h2>
               <p className="mt-3 leading-7 text-[var(--db-copy)]">
                 暫未有已完成核對並公開的案例。我們不會以示例內容冒充真實工程；您仍可傳送現場資料，由團隊按實際情況提供初步方向。
               </p>
             </div>
-            <WhatsAppButton className="w-full md:w-fit md:justify-self-end" label="WhatsApp 傳送現場資料" trackLocation="cases_empty" />
+            <WhatsAppButton
+              className="w-full md:w-fit md:justify-self-end"
+              label="WhatsApp 傳送現場資料"
+              trackLocation="cases_empty"
+            />
           </section>
         )}
 
@@ -139,10 +179,18 @@ export default function CaseStudies() {
       <section className="bg-[var(--db-ink)] text-white">
         <div className="db-container grid gap-8 py-12 md:grid-cols-[1fr_auto] md:items-center">
           <div>
-            <h2 className="text-3xl font-black">您的情況未必與案例完全相同。</h2>
-            <p className="mt-3 max-w-2xl leading-7 text-white/70">傳送地點、淤塞位置及相片或短片，團隊會先了解情況，再確認方案與收費。</p>
+            <h2 className="text-3xl font-black">
+              您的情況未必與案例完全相同。
+            </h2>
+            <p className="mt-3 max-w-2xl leading-7 text-white/70">
+              傳送地點、淤塞位置及相片或短片，團隊會先了解情況，再確認方案與收費。
+            </p>
           </div>
-          <WhatsAppButton label="WhatsApp 即時查詢" trackLocation="cases_footer" className="w-full md:w-auto" />
+          <WhatsAppButton
+            label="WhatsApp 即時查詢"
+            trackLocation="cases_footer"
+            className="w-full md:w-auto"
+          />
         </div>
       </section>
     </div>

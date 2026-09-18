@@ -5,6 +5,11 @@ interface EditorialPageHeroProps {
   title: ReactNode;
   description: ReactNode;
   actions?: ReactNode;
+  media?: {
+    src: string;
+    alt: string;
+    caption?: ReactNode;
+  };
   className?: string;
 }
 
@@ -13,11 +18,12 @@ export function EditorialPageHero({
   title,
   description,
   actions,
+  media,
   className = "",
 }: EditorialPageHeroProps) {
   return (
     <section
-      className={`site-page-hero ${className}`.trim()}
+      className={`site-page-hero ${media ? "site-page-hero--with-media" : ""} ${className}`.trim()}
       data-site-editorial="page-hero"
     >
       <div className="site-page-hero__inner">
@@ -34,6 +40,21 @@ export function EditorialPageHero({
           <p className="site-page-hero__description">{description}</p>
           {actions ? (
             <div className="site-page-hero__actions">{actions}</div>
+          ) : null}
+
+          {media ? (
+            <figure className="site-page-hero__media">
+              <img
+                src={media.src}
+                alt={media.alt}
+                width="1280"
+                height="960"
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+              />
+              {media.caption ? <figcaption>{media.caption}</figcaption> : null}
+            </figure>
           ) : null}
         </div>
       </div>
