@@ -510,88 +510,90 @@ function FooterAreaAccordion({
   );
 }
 
-function Footer() {
+function Footer({ compact = false }: { compact?: boolean }) {
   const { phoneDisplay, phoneHref, whatsappDefaultHref } = useContactSettings();
 
   return (
     <footer data-site-footer="true" className="db-site-footer text-white">
-      <section
-        className="db-site-footer__action"
-        aria-labelledby="footer-action-heading"
-      >
-        <div className="db-container">
-          <div className="db-site-footer__brandline">
-            <div className="db-site-footer__brand">
-              <img
-                src={LOGO}
-                alt="通渠熊 DrainBear"
-                width="96"
-                height="96"
-                loading="lazy"
-              />
-              <span>通渠熊 DrainBear</span>
-            </div>
-            <span className="db-site-footer__brand-context">
-              香港住宅及商業渠務
-            </span>
-          </div>
-
-          <div className="db-site-footer__action-grid">
-            <div>
-              <p className="db-site-footer__eyebrow">現場資料先行</p>
-              <h2 id="footer-action-heading">
-                先說明問題，
-                <br />
-                再安排合適處理。
-              </h2>
-              <p className="db-site-footer__action-copy">
-                提供所在地區、受影響位置及相片或短片，團隊先了解情況，再確認可安排的服務時間及後續方案。
-              </p>
-            </div>
-
-            <div className="db-site-footer__action-controls">
-              <a
-                href={whatsappDefaultHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => {
-                  trackCTA("whatsapp", "footer_action");
-                  goThanksAfterWhatsApp("footer_action");
-                }}
-                className="db-site-footer__primary-action"
-              >
-                <MessageCircle aria-hidden="true" />
-                <span>WhatsApp 查詢報價</span>
-                <ArrowUpRight aria-hidden="true" />
-              </a>
-              <a
-                href={phoneHref}
-                onClick={() => trackCTA("phone", "footer_action")}
-                className="db-site-footer__secondary-action"
-              >
-                <Phone aria-hidden="true" />
-                <span>24 小時查詢：{phoneDisplay}</span>
-              </a>
-              <p className="db-site-footer__action-note">
-                <ShieldCheck aria-hidden="true" />
-                動工前確認處理方法及收費
-              </p>
-            </div>
-          </div>
-
-          <div className="db-site-footer__signals" aria-label="服務安排原則">
-            {FOOTER_STATS.map(s => (
-              <div key={s.label} className="db-site-footer__signal">
-                <s.icon aria-hidden="true" />
-                <span>
-                  <strong>{s.value}</strong>
-                  <small>{s.label}</small>
-                </span>
+      {!compact ? (
+        <section
+          className="db-site-footer__action"
+          aria-labelledby="footer-action-heading"
+        >
+          <div className="db-container">
+            <div className="db-site-footer__brandline">
+              <div className="db-site-footer__brand">
+                <img
+                  src={LOGO}
+                  alt="通渠熊 DrainBear"
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                />
+                <span>通渠熊 DrainBear</span>
               </div>
-            ))}
+              <span className="db-site-footer__brand-context">
+                香港住宅及商業渠務
+              </span>
+            </div>
+
+            <div className="db-site-footer__action-grid">
+              <div>
+                <p className="db-site-footer__eyebrow">現場資料先行</p>
+                <h2 id="footer-action-heading">
+                  先說明問題，
+                  <br />
+                  再安排合適處理。
+                </h2>
+                <p className="db-site-footer__action-copy">
+                  提供所在地區、受影響位置及相片或短片，團隊先了解情況，再確認可安排的服務時間及後續方案。
+                </p>
+              </div>
+
+              <div className="db-site-footer__action-controls">
+                <a
+                  href={whatsappDefaultHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => {
+                    trackCTA("whatsapp", "footer_action");
+                    goThanksAfterWhatsApp("footer_action");
+                  }}
+                  className="db-site-footer__primary-action"
+                >
+                  <MessageCircle aria-hidden="true" />
+                  <span>WhatsApp 查詢報價</span>
+                  <ArrowUpRight aria-hidden="true" />
+                </a>
+                <a
+                  href={phoneHref}
+                  onClick={() => trackCTA("phone", "footer_action")}
+                  className="db-site-footer__secondary-action"
+                >
+                  <Phone aria-hidden="true" />
+                  <span>24 小時查詢：{phoneDisplay}</span>
+                </a>
+                <p className="db-site-footer__action-note">
+                  <ShieldCheck aria-hidden="true" />
+                  動工前確認處理方法及收費
+                </p>
+              </div>
+            </div>
+
+            <div className="db-site-footer__signals" aria-label="服務安排原則">
+              {FOOTER_STATS.map(s => (
+                <div key={s.label} className="db-site-footer__signal">
+                  <s.icon aria-hidden="true" />
+                  <span>
+                    <strong>{s.value}</strong>
+                    <small>{s.label}</small>
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ) : null}
 
       <section className="db-site-footer__directory" aria-label="網站導覽">
         <div className="db-container db-site-footer__directory-grid">
@@ -647,67 +649,75 @@ function Footer() {
         </div>
       </section>
 
-      <section
-        className="db-site-footer__areas"
-        aria-labelledby="footer-areas-heading"
-      >
-        <div className="db-container">
-          <div className="db-site-footer__areas-heading">
-            <div>
-              <p className="db-site-footer__eyebrow">服務地區</p>
-              <h2 id="footer-areas-heading">
-                港九新界及離島，按位置確認安排。
-              </h2>
+      {!compact ? (
+        <section
+          className="db-site-footer__areas"
+          aria-labelledby="footer-areas-heading"
+        >
+          <div className="db-container">
+            <div className="db-site-footer__areas-heading">
+              <div>
+                <p className="db-site-footer__eyebrow">服務地區</p>
+                <h2 id="footer-areas-heading">
+                  港九新界及離島，按位置確認安排。
+                </h2>
+              </div>
+              <Link href="/areas" className="db-site-footer__text-link">
+                查看完整地區資料
+                <ArrowRight aria-hidden="true" />
+              </Link>
             </div>
-            <Link href="/areas" className="db-site-footer__text-link">
-              查看完整地區資料
-              <ArrowRight aria-hidden="true" />
-            </Link>
-          </div>
 
-          <div className="db-site-footer__area-grid">
-            {FOOTER_AREAS.map((area, index) => (
-              <FooterAreaAccordion key={area.name} area={area} index={index} />
-            ))}
+            <div className="db-site-footer__area-grid">
+              {FOOTER_AREAS.map((area, index) => (
+                <FooterAreaAccordion
+                  key={area.name}
+                  area={area}
+                  index={index}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ) : null}
 
-      <section
-        className="db-site-footer__popular"
-        aria-labelledby="footer-popular-heading"
-      >
-        <div className="db-container">
-          <div className="db-site-footer__popular-heading">
-            <p id="footer-popular-heading">熱門地區</p>
-            <nav aria-label="熱門通渠服務地區">
-              {DISTRICTS.map(district => {
-                const item = {
-                  label: `${district.name}通渠`,
-                  href: `/areas/${district.slug}`,
-                };
+      {!compact ? (
+        <section
+          className="db-site-footer__popular"
+          aria-labelledby="footer-popular-heading"
+        >
+          <div className="db-container">
+            <div className="db-site-footer__popular-heading">
+              <p id="footer-popular-heading">熱門地區</p>
+              <nav aria-label="熱門通渠服務地區">
+                {DISTRICTS.map(district => {
+                  const item = {
+                    label: `${district.name}通渠`,
+                    href: `/areas/${district.slug}`,
+                  };
 
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() =>
-                      trackNavClick("area", {
-                        cta_location: "footer_popular_areas",
-                        cta_label: item.label,
-                        area_name: item.label.replace("通渠", ""),
-                        destination_url: item.href,
-                      })
-                    }
-                  >
-                    {item.label}
-                  </Link>
-                );
-              })}
-            </nav>
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() =>
+                        trackNavClick("area", {
+                          cta_location: "footer_popular_areas",
+                          cta_label: item.label,
+                          area_name: item.label.replace("通渠", ""),
+                          destination_url: item.href,
+                        })
+                      }
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                })}
+              </nav>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ) : null}
 
       <section className="db-site-footer__legal">
         <div className="db-container">
@@ -768,7 +778,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       >
         {children}
       </main>
-      <Footer />
+      <Footer compact={isHome} />
       {!suppressConversionChrome ? (
         <>
           {/* 避免內容及 Footer 被固定 CTA 列遮蓋（含 safe-area） */}

@@ -5,18 +5,10 @@ import { describe, expect, it, vi } from "vitest";
 import { SiteSettingsProvider } from "@/contexts/SiteSettingsContext";
 import Home from "@/pages/Home";
 
-// The network-backed hooks are the boundary: keep the real page, contact
-// settings, routing and image URL handling. Fixtures are not real case claims.
+// The network-backed article hook is the boundary: keep the real page,
+// contact settings, routing and image URL handling.
 const content = vi.hoisted(() => ({
-  studies: [] as any[],
   posts: [] as any[],
-}));
-vi.mock("@/lib/useCases", () => ({
-  useFeaturedCaseStudies: () => ({
-    studies: content.studies,
-    isLoading: false,
-    error: null,
-  }),
 }));
 vi.mock("@/lib/useBlog", () => ({
   useLatestBlogPosts: () => ({
@@ -38,52 +30,31 @@ function renderHome() {
 }
 
 describe("homepage content and discovery", () => {
-  it("makes all seven service destinations crawlable without depending on a click handler", () => {
+  it("keeps the focused conversion sections and removes the former information-heavy bands", () => {
     const html = renderHome();
-    for (const slug of [
-      "toilet-unblocking",
-      "bathroom-drain-unblocking",
-      "kitchen-sink-unblocking",
-      "sewage-backflow",
-      "main-drain-manhole",
-      "high-pressure-jetting",
-      "cctv-drain-inspection",
-    ]) {
-      expect(html).toContain(`href="/services/${slug}"`);
-    }
     expect(html.match(/<h1\b/g)).toHaveLength(1);
     expect(html).toContain('href="https://wa.me/85295588260?');
     expect(html).toContain('href="tel:+85295588260"');
-  });
-
-  it("shows available case evidence with its own image, date and destination", () => {
-    content.studies = [
-      {
-        _id: "test-case",
-        title: "測試用案例",
-        slug: "test-case",
-        district: "觀塘",
-        serviceType: "commercial",
-        serviceLabel: "商業通渠",
-        projectDate: "2026-09-01",
-        summary: "測試摘要",
-        problem: "測試問題",
-        workPerformed: "測試工序",
-        result: "測試結果",
-        coverImage: {
-          url: "https://cdn.sanity.io/images/test/production/case.jpg",
-          alt: "測試案例相片",
-          width: 1200,
-          height: 800,
-        },
-      },
-    ];
-    const html = renderHome();
-    expect(html).toContain('href="/cases/test-case"');
-    expect(html).toContain('alt="測試案例相片"');
-    expect(html).toContain("2026年9月");
-    expect(html).toContain("/case.jpg?auto=format");
-    content.studies = [];
+    for (const section of [
+      "promise",
+      "photo-quote",
+      "process",
+      "journal",
+      "faq",
+      "final-cta",
+    ]) {
+      expect(html).toContain(`data-pr20-section="${section}"`);
+    }
+    for (const removedSection of [
+      "quick-service",
+      "diagnosis-story",
+      "cases",
+      "method-comparison",
+      "field-evidence",
+      "capability",
+    ]) {
+      expect(html).not.toContain(`data-pr20-section="${removedSection}"`);
+    }
   });
 
   it("uses available CMS article covers at responsive sizes and leaves static posts usable without an image", () => {
