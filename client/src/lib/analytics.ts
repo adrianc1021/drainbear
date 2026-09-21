@@ -12,7 +12,8 @@
  * - VITE_GA4_MEASUREMENT_ID(建議)或 VITE_GA4_ID(舊名兼容)或 window.__GA4_ID__
  * - Measurement ID 必須符合 G-XXXXXXXXXX 格式;格式不正確時 GA4 不會初始化、
  *   錯誤值不會傳給 gtag config,網站照常運作(開發環境顯示警告)
- * - 預設採用目前正式資料串流;有效 env 或 window 設定可覆寫它。無效的非空
+ * - 正式網域固定採用目前正式資料串流；Preview／開發環境才允許有效 env 或
+ *   window 設定覆寫它。無效的非空
  *   覆寫值不會初始化 GA4；網站仍正常運作，事件只會推入當前頁面的 dataLayer
  *   作除錯/相容用途 —— 該佇列不會永久儲存,重新整理即消失,
  *   亦不能補回 GA4 安裝前的歷史數據
@@ -67,18 +68,22 @@ export function isValidGa4Id(value: unknown): value is string {
 
 let invalidIdWarned = false;
 
+export const LIVE_GA4_MEASUREMENT_ID = "G-05DW80HCTS";
+
 /** 取得原始設定值(未驗證) */
 function rawGa4Id(): string | undefined {
+  if (isProductionTrackingHost()) return LIVE_GA4_MEASUREMENT_ID;
+
   const fromWindow =
     typeof window !== "undefined" ? window.__GA4_ID__ : undefined;
   const fromEnv =
     (import.meta.env.VITE_GA4_MEASUREMENT_ID as string | undefined) ||
     (import.meta.env.VITE_GA4_ID as string | undefined);
-  // This is the live production property. Keep a deterministic fallback so a
-  // missing Render build variable cannot silently send events to the retired
-  // property that Google Ads still lists as a destination.
-  const id = fromWindow || fromEnv || "G-05DW80HCTS";
-  return id && id.trim() ? id.trim() : undefined;
+  const candidate = fromWindow || fromEnv;
+  // Keep a deterministic fallback for SSR and local builds. Production is
+  // handled above so a stale Render variable cannot change the live stream.
+  const id = candidate?.trim() || LIVE_GA4_MEASUREMENT_ID;
+  return id || undefined;
 }
 
 /**
@@ -117,9 +122,7 @@ function resolveGoogleAdsConversionLabel(
 ): string | undefined {
   const configured =
     kind === "whatsapp"
-      ? (import.meta.env.VITE_GOOGLE_ADS_WHATSAPP_LABEL as
-          | string
-          | undefined)
+      ? (import.meta.env.VITE_GOOGLE_ADS_WHATSAPP_LABEL as string | undefined)
       : kind === "phone"
         ? (import.meta.env.VITE_GOOGLE_ADS_PHONE_LABEL as string | undefined)
         : (import.meta.env.VITE_GOOGLE_ADS_FORM_LABEL as string | undefined);
@@ -502,7 +505,7 @@ export function trackContactFormSubmit(formName: string, location?: string) {
 export function trackContactFormError(
   formName: string,
   errorType: string,
-  location?: string,
+  location?: string
 ) {
   sendEvent("contact_form_error", {
     form_name: formName,

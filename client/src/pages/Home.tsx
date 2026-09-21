@@ -8,6 +8,7 @@ import {
 import { Link } from "wouter";
 import CmsPageSEO from "@/components/CmsPageSEO";
 import DrainHomeFaq from "@/components/DrainHomeFaq";
+import PriceCalculator from "@/components/PriceCalculator";
 import { EditorialPromise } from "@/components/editorial/HomeEditorialCore";
 import { EditorialKicker } from "@/components/editorial/EditorialPrimitives";
 import { BUSINESS_ID, SITE_URL, WEBSITE_ID } from "@/config/site";
@@ -366,6 +367,26 @@ export default function Home() {
 
       <CompactHero />
       <EditorialPromise />
+      <section
+        id="calculator"
+        className="home-compact-calculator"
+        aria-labelledby="home-calculator-heading"
+        data-pr20-section="calculator"
+      >
+        <div className="db-container">
+          <EditorialKicker>即時估價</EditorialKicker>
+          <h2
+            id="home-calculator-heading"
+            className="db-editorial-heading mt-6"
+          >
+            即時估價計算機
+          </h2>
+          <p className="home-compact-calculator__intro">
+            選擇淤塞位置、樓宇類型及上門時段，即可查看通渠初步估價範圍。
+          </p>
+          <PriceCalculator />
+        </div>
+      </section>
       <EditorialPhotoQuoteCTA />
       <EditorialProcess />
       <EditorialJournal />

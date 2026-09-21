@@ -145,6 +145,52 @@
   background: #fffaf0;
 }
 
+.home-compact-calculator {
+  overflow: hidden;
+  padding-block: var(--db-editorial-section);
+  background: #f5f8f6;
+  border-block: 1px solid var(--db-rule);
+}
+
+.home-compact-calculator__intro {
+  max-width: 42rem;
+  margin-top: 1.25rem;
+  color: var(--db-copy);
+  font-size: 1rem;
+  line-height: 1.85;
+}
+
+.home-compact-calculator .calculator-shell {
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+  border-color: rgba(11, 19, 43, 0.14);
+  box-shadow: 0 18px 48px rgba(11, 19, 43, 0.1);
+}
+
+.home-compact-calculator .calculator-inputs {
+  min-width: 0;
+}
+
+.home-compact-calculator .calculator-result {
+  min-width: 0;
+  min-height: 100%;
+}
+
+.home-compact-calculator .calculator-result-cta {
+  width: 100%;
+}
+
+.home-compact-calculator .calculator-options {
+  min-width: 0;
+}
+
+.home-compact-calculator .calculator-option {
+  min-width: 0;
+}
+
+.home-compact-calculator .calculator-option > span:nth-child(2) {
+  overflow-wrap: anywhere;
+}
+
 .home-editorial--compact [data-pr20-section="process"] {
   background: #e7eeeb;
   color: var(--db-ink);
@@ -209,5 +255,77 @@
   .home-compact-hero__proofs {
     display: grid;
     gap: 0.65rem;
+  }
+
+  .home-compact-calculator {
+    padding-block: 3.75rem;
+  }
+
+  .home-compact-calculator .calculator-shell {
+    margin-top: 2rem;
+  }
+
+  .home-compact-calculator .calculator-inputs,
+  .home-compact-calculator .calculator-result {
+    padding: 1.25rem;
+  }
+
+  .home-compact-calculator .calculator-intro {
+    margin-bottom: 1.5rem;
+  }
+
+  .home-compact-calculator .calculator-intro > div {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .home-compact-calculator .calculator-intro h2 {
+    font-size: 1.55rem;
+    line-height: 1.3;
+  }
+
+  .home-compact-calculator .calculator-intro > div > span {
+    align-self: flex-start;
+  }
+
+  .home-compact-calculator .calculator-step-title {
+    align-items: flex-start;
+  }
+
+  .home-compact-calculator .calculator-step-value {
+    max-width: 45%;
+    text-align: right;
+    line-height: 1.35;
+  }
+
+  .home-compact-calculator .calculator-result {
+    min-height: 18rem;
+  }
+
+  .home-compact-calculator .calculator-price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.2rem;
+    line-height: 1.1;
+  }
+
+  .home-compact-calculator .calculator-price-amount {
+    font-size: clamp(2rem, 12vw, 3.25rem);
+  }
+}
+
+@media (max-width: 359px) {
+  .home-compact-calculator .calculator-step-title {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.35rem;
+  }
+
+  .home-compact-calculator .calculator-step-value {
+    max-width: none;
+    padding-left: 2.35rem;
+    text-align: left;
   }
 }

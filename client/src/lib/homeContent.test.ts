@@ -37,6 +37,7 @@ describe("homepage content and discovery", () => {
     expect(html).toContain('href="tel:+85295588260"');
     for (const section of [
       "promise",
+      "calculator",
       "photo-quote",
       "process",
       "journal",
