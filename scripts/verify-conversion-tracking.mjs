@@ -5,7 +5,10 @@ const tracking = fs.readFileSync("client/src/lib/trackingSession.ts", "utf8");
 const thanks = fs.readFileSync("client/src/pages/Thanks.tsx", "utf8");
 const app = fs.readFileSync("client/src/App.tsx", "utf8");
 const html = fs.readFileSync("client/index.html", "utf8");
-const googleLoader = fs.readFileSync("client/src/lib/googleTagLoader.ts", "utf8");
+const googleLoader = fs.readFileSync(
+  "client/src/lib/googleTagLoader.ts",
+  "utf8"
+);
 const dockerfile = fs.readFileSync("Dockerfile", "utf8");
 const trackingDocs = fs.readFileSync("docs/tracking-rollout-pr19.md", "utf8");
 
@@ -31,7 +34,6 @@ const required = [
   [html, "productionTrackingHosts.has(window.location.hostname)"],
   [googleLoader, "loadGoogleTag"],
   [googleLoader, "scheduleGoogleTag(destinationId: string)"],
-  [dockerfile, "ARG VITE_GA4_MEASUREMENT_ID"],
   [dockerfile, "ARG VITE_GOOGLE_ADS_WHATSAPP_LABEL"],
   [dockerfile, "ARG VITE_GOOGLE_ADS_PHONE_LABEL"],
   [dockerfile, "ARG VITE_GOOGLE_ADS_FORM_LABEL"],
@@ -67,7 +69,9 @@ if (
     googleLoader
   )
 ) {
-  throw new Error("Google tag must load immediately; delayed interaction loading is not allowed");
+  throw new Error(
+    "Google tag must load immediately; delayed interaction loading is not allowed"
+  );
 }
 
 if (thanks.includes("trackWhatsAppOpen(from)")) {

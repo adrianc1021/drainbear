@@ -31,7 +31,7 @@ function getQueue(): QueueEntry[] {
 
 function eventsNamed(name: string): QueueEntry[] {
   return getQueue().filter(
-    (e) => typeof e === "object" && e !== null && e.event === name,
+    e => typeof e === "object" && e !== null && e.event === name
   );
 }
 
@@ -91,7 +91,7 @@ describe("initAnalytics — 格式錯誤 ID 防護", () => {
     expect(() => initAnalytics()).not.toThrow();
     // gtag stub 已建立(dataLayer 佇列可用),但沒有任何 config 呼叫入佇列
     const configCalls = getQueue().filter(
-      (e) => Array.isArray(e) && (e as unknown as unknown[])[0] === "config",
+      e => Array.isArray(e) && (e as unknown as unknown[])[0] === "config"
     );
     expect(configCalls).toHaveLength(0);
     // 事件仍可正常發送(不報錯)

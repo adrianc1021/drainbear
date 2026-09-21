@@ -11,21 +11,19 @@
 
 ## 配置
 
-| 變數 | 位置 | 說明 |
-|---|---|---|
-| `VITE_GA4_MEASUREMENT_ID` | 前端 env(建議) | GA4 Measurement ID(`G-XXXXXXXXXX`) |
-| `VITE_GA4_ID` | 前端 env(舊名兼容) | 同上,`VITE_GA4_MEASUREMENT_ID` 優先 |
-| `window.__GA4_ID__` | index.html(覆寫) | 不經 build 注入 ID 的方式；優先於 env 與內建正式 ID |
-| `VITE_GA4_DEBUG` | 前端 env | `"true"` 時開發環境亦上報(帶 `debug_mode`,事件入 GA4 DebugView) |
+| 變數                | 位置                 | 說明                                                            |
+| ------------------- | -------------------- | --------------------------------------------------------------- |
+| `window.__GA4_ID__` | 開發環境 window 設定 | 僅供本地除錯時暫時覆寫，不參與正式建置                          |
+| `VITE_GA4_DEBUG`    | 前端 env             | `"true"` 時開發環境亦上報(帶 `debug_mode`,事件入 GA4 DebugView) |
 
 行為:
+
 - **正式預設資料串流**:網站內建 `G-05DW80HCTS`，首次頁面瀏覽會立即開始載入
-  Google tag。有效的 env 或 `window.__GA4_ID__` 可覆寫它；格式錯誤的非空覆寫值會
+  Google tag。正式網域固定使用此 Property；任何 Render build environment 都不會覆寫它。
+  開發環境使用 `window.__GA4_ID__` 時，格式錯誤的非空覆寫值會
   停止 GA4 初始化，網站仍正常運作。此情況下事件只推入當前頁面的 `dataLayer`，
   **僅作除錯/相容用途**——`dataLayer` 只存在於當前頁面的記憶體，**不會永久儲存**，
-  亦**不能補回 GA4 安裝前的歷史數據**。
-  若 Render 沒有注入 `VITE_GA4_MEASUREMENT_ID`，會使用目前正式 Property 作為
-  fallback，避免靜默回到已停用的舊 Property；Preview／開發環境仍預設不上報。
+  亦**不能補回 GA4 安裝前的歷史數據**。Preview／開發環境仍預設不上報。
 - **ID 格式驗證**:只接受合法 `G-` 格式(`isValidGa4Id()`)。值存在但格式錯誤時
   不初始化 GA4、不呼叫 `gtag('config', …)`,開發環境顯示不含該值的警告,網站照常運作。
 - **開發環境(`import.meta.env.DEV`)**:預設不上報 GA4,避免污染正式數據。
@@ -57,29 +55,29 @@
 
 ### 聯絡及轉換事件
 
-| 事件 | 觸發時機 | 參數 | 狀態 |
-|---|---|---|---|
-| `phone_click` | 電話 CTA 點擊 | cta_location, page_path, page_title | ✅ 已接(全站 8+ 位置) |
-| `whatsapp_click` | WhatsApp CTA 點擊 | cta_location, page_path, page_title, topic | ✅ 已接(全站 15+ 位置) |
-| `whatsapp_open` | /thanks 頁載入(對話開啟代理轉換) | cta_location(來源位置), page_path | ✅ 已接 |
-| `contact_form_start` | 表格開始填寫(每表格一次) | form_name, cta_location | ✅ 已接(首頁、指南、服務及案例頁) |
-| `contact_form_submit` | 伺服器確認提交成功後 | form_name, cta_location | ✅ 已接 |
-| `contact_form_error` | 表格提交失敗 | form_name, error_type(不含錯誤內文), cta_location | ✅ 已接 |
-| `quote_calculator_start` | 估價計算機首次互動(每次頁面瀏覽一次,Component 去重) | cta_location | ✅ 已接 |
-| `quote_calculator_complete` | 估價完成(每次頁面瀏覽同組合一次,Component 去重) | cta_location, topic(選項摘要) | ✅ 已接 |
+| 事件                        | 觸發時機                                            | 參數                                              | 狀態                              |
+| --------------------------- | --------------------------------------------------- | ------------------------------------------------- | --------------------------------- |
+| `phone_click`               | 電話 CTA 點擊                                       | cta_location, page_path, page_title               | ✅ 已接(全站 8+ 位置)             |
+| `whatsapp_click`            | WhatsApp CTA 點擊                                   | cta_location, page_path, page_title, topic        | ✅ 已接(全站 15+ 位置)            |
+| `whatsapp_open`             | /thanks 頁載入(對話開啟代理轉換)                    | cta_location(來源位置), page_path                 | ✅ 已接                           |
+| `contact_form_start`        | 表格開始填寫(每表格一次)                            | form_name, cta_location                           | ✅ 已接(首頁、指南、服務及案例頁) |
+| `contact_form_submit`       | 伺服器確認提交成功後                                | form_name, cta_location                           | ✅ 已接                           |
+| `contact_form_error`        | 表格提交失敗                                        | form_name, error_type(不含錯誤內文), cta_location | ✅ 已接                           |
+| `quote_calculator_start`    | 估價計算機首次互動(每次頁面瀏覽一次,Component 去重) | cta_location                                      | ✅ 已接                           |
+| `quote_calculator_complete` | 估價完成(每次頁面瀏覽同組合一次,Component 去重)     | cta_location, topic(選項摘要)                     | ✅ 已接                           |
 
 ### 導航及內容事件
 
-| 事件 | 觸發時機 | 參數 | 狀態 |
-|---|---|---|---|
-| `navigation_click` | 主導航連結點擊 | cta_location, cta_label, destination_url | ✅ 已接(header / mobile_menu) |
-| `blog_post_click` | Blog 文章卡片點擊 | article_slug, cta_location, destination_url | ✅ 已接(blog_featured / blog_grid / blogpost_related) |
-| `blog_read` | 捲動 60% 或停留 45 秒且分頁可見(每次文章瀏覽一次,Component 去重) | article_slug, read_percent | ✅ 已接 |
-| `area_click` | 地區互動(地圖/搜尋)(原 `map_district_click` 統一命名) | cta_location, area_name | ✅ 已接(areas_map / areas_search) |
-| `cta_click` | 一般 CTA 點擊 | cta_location, cta_label, destination_url | 🟡 `trackNavClick("cta", …)` 可用 |
-| `service_click` | 服務項目點擊 | service_name, cta_location, destination_url | 🟡 `trackNavClick("service", …)` 可用 |
-| `pricing_click` | 收費相關連結點擊 | cta_location, cta_label, destination_url | 🟡 `trackNavClick("pricing", …)` 可用 |
-| `page_view` | 首次載入及 SPA 路由變更（由 App.tsx PageViewTracker 手動發送） | page_path, page_title, page_location | ✅ 已接(App.tsx PageViewTracker) |
+| 事件               | 觸發時機                                                         | 參數                                        | 狀態                                                  |
+| ------------------ | ---------------------------------------------------------------- | ------------------------------------------- | ----------------------------------------------------- |
+| `navigation_click` | 主導航連結點擊                                                   | cta_location, cta_label, destination_url    | ✅ 已接(header / mobile_menu)                         |
+| `blog_post_click`  | Blog 文章卡片點擊                                                | article_slug, cta_location, destination_url | ✅ 已接(blog_featured / blog_grid / blogpost_related) |
+| `blog_read`        | 捲動 60% 或停留 45 秒且分頁可見(每次文章瀏覽一次,Component 去重) | article_slug, read_percent                  | ✅ 已接                                               |
+| `area_click`       | 地區互動(地圖/搜尋)(原 `map_district_click` 統一命名)            | cta_location, area_name                     | ✅ 已接(areas_map / areas_search)                     |
+| `cta_click`        | 一般 CTA 點擊                                                    | cta_location, cta_label, destination_url    | 🟡 `trackNavClick("cta", …)` 可用                     |
+| `service_click`    | 服務項目點擊                                                     | service_name, cta_location, destination_url | 🟡 `trackNavClick("service", …)` 可用                 |
+| `pricing_click`    | 收費相關連結點擊                                                 | cta_location, cta_label, destination_url    | 🟡 `trackNavClick("pricing", …)` 可用                 |
+| `page_view`        | 首次載入及 SPA 路由變更（由 App.tsx PageViewTracker 手動發送）   | page_path, page_title, page_location        | ✅ 已接(App.tsx PageViewTracker)                      |
 
 ## 通用參數(白名單)
 
@@ -100,32 +98,32 @@ read_percent    閱讀捲動百分比
 
 ## cta_location 位置標籤(現有,沿用)
 
-| 標籤 | 位置 |
-|---|---|
-| `header` | 桌面 Header WhatsApp 按鈕/導航 |
-| `mobile_menu` | 手機選單 |
-| `mobile_bar` | 手機底部固定 CTA 列 |
-| `floating_widget` | 右下懸浮 WhatsApp 對話框 |
-| `footer` | Footer 電話連結 |
-| `home_hero` / `home_service_card` / `home_footer_cta` | 首頁 |
-| `guide_hero` / `guide_howto` / `guide_footer_cta` | 收費指南 |
-| `district_hero` / `district_footer_cta` | 地區專頁 |
-| `areas_map` / `areas_map_card` / `areas_search` / `areas_footer_cta` | 服務地區 |
-| `services_section` | 服務頁 |
-| `faq_cta` / `blog_cta` / `blogpost_cta` | FAQ / Blog CTA |
-| `price_calculator` | 估價計算機 |
-| `thanks_retry` / `thanks_fallback` | 感謝頁 |
-| `blog_featured` / `blog_grid` / `blogpost_related` | Blog 文章卡片 |
-| `shared_button` | 共用 WhatsApp 按鈕預設值 |
+| 標籤                                                                 | 位置                           |
+| -------------------------------------------------------------------- | ------------------------------ |
+| `header`                                                             | 桌面 Header WhatsApp 按鈕/導航 |
+| `mobile_menu`                                                        | 手機選單                       |
+| `mobile_bar`                                                         | 手機底部固定 CTA 列            |
+| `floating_widget`                                                    | 右下懸浮 WhatsApp 對話框       |
+| `footer`                                                             | Footer 電話連結                |
+| `home_hero` / `home_service_card` / `home_footer_cta`                | 首頁                           |
+| `guide_hero` / `guide_howto` / `guide_footer_cta`                    | 收費指南                       |
+| `district_hero` / `district_footer_cta`                              | 地區專頁                       |
+| `areas_map` / `areas_map_card` / `areas_search` / `areas_footer_cta` | 服務地區                       |
+| `services_section`                                                   | 服務頁                         |
+| `faq_cta` / `blog_cta` / `blogpost_cta`                              | FAQ / Blog CTA                 |
+| `price_calculator`                                                   | 估價計算機                     |
+| `thanks_retry` / `thanks_fallback`                                   | 感謝頁                         |
+| `blog_featured` / `blog_grid` / `blogpost_related`                   | Blog 文章卡片                  |
+| `shared_button`                                                      | 共用 WhatsApp 按鈕預設值       |
 
 ## 事件命名對照(舊 → 新)
 
-| 舊(第五輪實作) | 新(本 Taxonomy) | 備註 |
-|---|---|---|
-| `whatsapp_click` | `whatsapp_click` | 不變 |
-| `phone_click` | `phone_click` | 不變 |
-| `whatsapp_open` | `whatsapp_open` | 不變 |
-| `map_district_click` | `area_click` | 統一命名;GA4 未接駁,無歷史數據斷層 |
-| — | `page_view`(SPA)、`quote_calculator_*`、`blog_post_click`、`blog_read`、`navigation_click`、`contact_form_*` | 新增 |
+| 舊(第五輪實作)       | 新(本 Taxonomy)                                                                                              | 備註                               |
+| -------------------- | ------------------------------------------------------------------------------------------------------------ | ---------------------------------- |
+| `whatsapp_click`     | `whatsapp_click`                                                                                             | 不變                               |
+| `phone_click`        | `phone_click`                                                                                                | 不變                               |
+| `whatsapp_open`      | `whatsapp_open`                                                                                              | 不變                               |
+| `map_district_click` | `area_click`                                                                                                 | 統一命名;GA4 未接駁,無歷史數據斷層 |
+| —                    | `page_view`(SPA)、`quote_calculator_*`、`blog_post_click`、`blog_read`、`navigation_click`、`contact_form_*` | 新增                               |
 
 計劃書 `button_location` / `button_text` → 沿用現有 `cta_location` / 新增 `cta_label`(已確認決策 4)。
