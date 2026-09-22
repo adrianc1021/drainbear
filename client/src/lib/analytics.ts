@@ -32,8 +32,11 @@
  */
 
 import {
+  captureGa4AttributionSnapshot,
   captureInitialAttribution,
   createWhatsAppHandoff,
+  getSessionAttribution,
+  type Ga4AttributionSnapshot,
   type SessionAttribution,
 } from "./trackingSession";
 import {
@@ -199,6 +202,7 @@ function isGa4Active(): boolean {
 }
 
 let initialized = false;
+let initialGa4Attribution: Ga4AttributionSnapshot | null = null;
 
 /**
  * 初始化 Analytics。
@@ -214,6 +218,7 @@ export function initAnalytics() {
   // 歸因保存不等於外送 Analytics：所有 hostname 都應先保存，
   // GA4／Google Ads 外送仍由下方 production-host gate 控制。
   captureInitialAttribution();
+  initialGa4Attribution = captureGa4AttributionSnapshot();
 
   window.dataLayer = window.dataLayer || [];
   window.gtag =
@@ -313,9 +318,18 @@ export function sendEvent(
   if (typeof window === "undefined") return;
   window.dataLayer = window.dataLayer || [];
 
+  const attribution = getSessionAttribution();
+  const withAttribution: AnalyticsEventParams = {
+    traffic_source: attribution.traffic_source,
+    traffic_medium: attribution.traffic_medium,
+    campaign_name: attribution.campaign_name,
+    landing_page: attribution.landing_page,
+    click_id_type: attribution.click_id_type,
+    ...params,
+  };
   const clean: Record<string, string | number> = {};
   for (const key of ALLOWED_PARAM_KEYS) {
-    const value = params[key];
+    const value = withAttribution[key];
     if (value === undefined || value === null || value === "") continue;
     if (typeof value === "string" && looksLikePII(value)) {
       console.warn(
@@ -365,17 +379,20 @@ let lastTrackedPath: string | null = null;
 export function trackPageView(path: string) {
   if (typeof window === "undefined") return;
   if (path === lastTrackedPath) return;
+  const isFirstPageView = lastTrackedPath === null;
   lastTrackedPath = path;
 
   const ga4Id = resolveGa4Id();
   if (window.gtag && ga4Id && isGa4Active()) {
+    const snapshot =
+      isFirstPageView && initialGa4Attribution
+        ? initialGa4Attribution
+        : captureGa4AttributionSnapshot();
     window.gtag("event", "page_view", {
       page_path: path,
       page_title: typeof document !== "undefined" ? document.title : undefined,
-      page_location:
-        typeof location !== "undefined"
-          ? `${location.origin}${path}`
-          : undefined,
+      page_location: snapshot.page_location,
+      ...(isFirstPageView ? snapshot.campaign : {}),
       send_to: ga4Id,
     });
   }
@@ -589,5 +606,6 @@ export function __resetAnalyticsStateForTests() {
   lastTrackedPath = null;
   invalidIdWarned = false;
   sentGoogleAdsConversions.clear();
+  initialGa4Attribution = null;
   __resetGoogleTagLoaderForTests();
 }

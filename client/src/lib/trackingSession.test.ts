@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
   __clearTrackingSessionForTests,
+  captureGa4AttributionSnapshot,
   captureInitialAttribution,
   consumeWhatsAppHandoff,
   createWhatsAppHandoff,
@@ -82,6 +83,43 @@ describe("session attribution", () => {
 
     expect(second).toEqual(first);
     expect(second.traffic_source).toBe("google");
+  });
+
+  it("將常見 UTM 別名正規化，並從 GA4 page_location 移除未知查詢參數", () => {
+    window.location.href =
+      "https://drainbearhk.com/?utm_source=meta_ads&utm_medium=paid-social&utm_campaign=Drain%20Emergency&utm_content=Hero&customer_email=chan@example.com";
+
+    const snapshot = captureGa4AttributionSnapshot();
+
+    expect(snapshot).toEqual({
+      page_location:
+        "https://drainbearhk.com/?utm_source=facebook&utm_medium=paid_social&utm_campaign=drain+emergency&utm_content=hero",
+      campaign: {
+        campaign_id: undefined,
+        campaign_source: "facebook",
+        campaign_medium: "paid_social",
+        campaign_name: "drain emergency",
+        campaign_term: undefined,
+        campaign_content: "hero",
+      },
+    });
+    expect(snapshot.page_location).not.toContain("customer_email");
+  });
+
+  it("Google Ads click ID 優先於手動 UTM，且 click ID 不寫入 sessionStorage", () => {
+    window.location.href =
+      "https://drainbearhk.com/?utm_source=unknown&utm_medium=home_banner&gclid=TEST-CLICK-ID";
+
+    const snapshot = captureGa4AttributionSnapshot();
+    const attribution = captureInitialAttribution();
+
+    expect(snapshot).toEqual({
+      page_location: "https://drainbearhk.com/?gclid=TEST-CLICK-ID",
+      campaign: {},
+    });
+    expect(attribution.traffic_source).toBe("google");
+    expect(attribution.traffic_medium).toBe("cpc");
+    expect(JSON.stringify(attribution)).not.toContain("TEST-CLICK-ID");
   });
 });
 

@@ -53,6 +53,10 @@ Ads conversion 會在 WhatsApp CTA 點擊當下送出，`/thanks` handoff 只作
 
 ## Google Ads
 
+Google Ads 帳戶必須保持 Auto-tagging 開啟。網站首次 `page_view` 會完整保留
+`gclid`／`dclid`／`gbraid`／`wbraid`（不保存其原值至 sessionStorage），並讓
+click ID 優先於手動 UTM，避免 Google Ads 流量落入 GA4 `Unassigned`。
+
 `quote_calculator_start` 會在正式網域直接送往 Google Ads Destination
 `AW-18128738982`，並另外送往 GA4；兩個目的地明確分開，避免 GA4 重複事件。
 
@@ -80,6 +84,10 @@ Render 會把 Docker 服務的環境變數轉為 build argument；專案的 `Doc
 `contact_form_submit`，但不會虛構 Google Ads conversion。
 
 建議初期設為 Secondary；有真實 qualified lead 後再改用 Offline Conversion 作 Primary。
+
+其他渠道的 UTM 應使用 GA4 可識別的 medium：付費搜尋 `cpc`、付費社交
+`paid_social`、電郵 `email`、自然社交 `social`、合作網站 `referral`、展示廣告
+`display`。版位名稱只放 `utm_content`，不可放 `utm_medium`。
 
 ## Privacy
 

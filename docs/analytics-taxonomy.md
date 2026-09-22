@@ -29,6 +29,13 @@
 - **開發環境(`import.meta.env.DEV`)**:預設不上報 GA4,避免污染正式數據。
 - **事件目的地隔離**:GA4 啟用時,`sendEvent()` 及 `trackPageView()` 均帶
   `send_to: <GA4 Measurement ID>`,自訂事件只送 GA4,不會流向 Google Ads Destination。
+- **避免 `Unassigned`**:首次手動 `page_view` 保留經安全過濾的 UTM／Google Ads
+  click ID，並以 GA4 標準 `campaign_source`、`campaign_medium`、`campaign_name`
+  欄位送出。`gclid`、`dclid`、`gbraid`、`wbraid` 存在時以 Google Ads 自動標記
+  優先，不讓錯誤 UTM 覆寫付費流量歸因。未知網址參數不會進入 `page_location`。
+- **工作階段來源**:所有自訂互動及轉化事件自動附帶首次著陸的
+  `traffic_source`、`traffic_medium`、`campaign_name`、`landing_page`、
+  `click_id_type`，方便以自訂維度核對內建管道群組。
 - **Google Ads Tag `AW-18128738982`**:由 `client/index.html` 先排入 dataLayer;
   外部 `gtag.js` 於首次頁面瀏覽立即載入；GA4 與 Ads 重用同一 gtag.js 及
   dataLayer，不會重複載入腳本。
@@ -68,16 +75,16 @@
 
 ### 導航及內容事件
 
-| 事件               | 觸發時機                                                         | 參數                                        | 狀態                                                  |
-| ------------------ | ---------------------------------------------------------------- | ------------------------------------------- | ----------------------------------------------------- |
-| `navigation_click` | 主導航連結點擊                                                   | cta_location, cta_label, destination_url    | ✅ 已接(header / mobile_menu)                         |
-| `blog_post_click`  | Blog 文章卡片點擊                                                | article_slug, cta_location, destination_url | ✅ 已接(blog_featured / blog_grid / blogpost_related) |
-| `blog_read`        | 捲動 60% 或停留 45 秒且分頁可見(每次文章瀏覽一次,Component 去重) | article_slug, read_percent                  | ✅ 已接                                               |
-| `area_click`       | 地區互動(地圖/搜尋)(原 `map_district_click` 統一命名)            | cta_location, area_name                     | ✅ 已接(areas_map / areas_search)                     |
-| `cta_click`        | 一般 CTA 點擊                                                    | cta_location, cta_label, destination_url    | 🟡 `trackNavClick("cta", …)` 可用                     |
-| `service_click`    | 服務項目點擊                                                     | service_name, cta_location, destination_url | 🟡 `trackNavClick("service", …)` 可用                 |
-| `pricing_click`    | 收費相關連結點擊                                                 | cta_location, cta_label, destination_url    | 🟡 `trackNavClick("pricing", …)` 可用                 |
-| `page_view`        | 首次載入及 SPA 路由變更（由 App.tsx PageViewTracker 手動發送）   | page_path, page_title, page_location        | ✅ 已接(App.tsx PageViewTracker)                      |
+| 事件               | 觸發時機                                                         | 參數                                                                                  | 狀態                                                  |
+| ------------------ | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| `navigation_click` | 主導航連結點擊                                                   | cta_location, cta_label, destination_url                                              | ✅ 已接(header / mobile_menu)                         |
+| `blog_post_click`  | Blog 文章卡片點擊                                                | article_slug, cta_location, destination_url                                           | ✅ 已接(blog_featured / blog_grid / blogpost_related) |
+| `blog_read`        | 捲動 60% 或停留 45 秒且分頁可見(每次文章瀏覽一次,Component 去重) | article_slug, read_percent                                                            | ✅ 已接                                               |
+| `area_click`       | 地區互動(地圖/搜尋)(原 `map_district_click` 統一命名)            | cta_location, area_name                                                               | ✅ 已接(areas_map / areas_search)                     |
+| `cta_click`        | 一般 CTA 點擊                                                    | cta_location, cta_label, destination_url                                              | 🟡 `trackNavClick("cta", …)` 可用                     |
+| `service_click`    | 服務項目點擊                                                     | service_name, cta_location, destination_url                                           | 🟡 `trackNavClick("service", …)` 可用                 |
+| `pricing_click`    | 收費相關連結點擊                                                 | cta_location, cta_label, destination_url                                              | 🟡 `trackNavClick("pricing", …)` 可用                 |
+| `page_view`        | 首次載入及 SPA 路由變更（由 App.tsx PageViewTracker 手動發送）   | page_path, page_title, page_location, campaign_source, campaign_medium, campaign_name | ✅ 已接(App.tsx PageViewTracker)                      |
 
 ## 通用參數(白名單)
 
@@ -95,6 +102,34 @@ form_name       表格識別名
 error_type      錯誤類型(不含錯誤內文)
 read_percent    閱讀捲動百分比
 ```
+
+## UTM 命名規則
+
+`utm_medium` 必須描述**渠道類型**，版位、按鈕或素材名稱應放在 `utm_content`。
+以下格式符合 GA4 預設管道群組，並可減少 `Unassigned`：
+
+| 渠道           | `utm_source`             | `utm_medium`  | 範例                                          |
+| -------------- | ------------------------ | ------------- | --------------------------------------------- |
+| Google Ads     | 不需手動 UTM             | 不需手動 UTM  | 保持 Google Ads Auto-tagging，使用 `gclid`    |
+| 手動付費搜尋   | `google` / `bing`        | `cpc`         | `utm_source=google&utm_medium=cpc`            |
+| Facebook 廣告  | `facebook`               | `paid_social` | `utm_source=facebook&utm_medium=paid_social`  |
+| Instagram 廣告 | `instagram`              | `paid_social` | `utm_source=instagram&utm_medium=paid_social` |
+| 電郵           | `newsletter`             | `email`       | `utm_source=newsletter&utm_medium=email`      |
+| 自然社交帖文   | `facebook` / `instagram` | `social`      | `utm_source=facebook&utm_medium=social`       |
+| 合作網站       | 合作方網域或名稱         | `referral`    | `utm_source=partner&utm_medium=referral`      |
+| 展示廣告       | 平台名稱                 | `display`     | `utm_source=google&utm_medium=display`        |
+
+禁止把 `home_banner`、`article`、`button`、`hero` 或代理商名稱放入
+`utm_medium`。這些值應放在 `utm_content`，例如：
+
+```text
+?utm_source=facebook&utm_medium=paid_social&utm_campaign=emergency_drain&utm_content=home_banner
+```
+
+網站會把常見舊別名（例如 `meta_ads`、`paid-social`、`newsletter`）正規化，
+但廣告平台上的最終網址仍應按以上規則設定。歷史 `Unassigned` 不會被網站程式
+改寫；如需重新整理歷史數據，須在 GA4 Admin 建立 Custom channel group，按現有
+Source／Medium 值加入相應渠道。
 
 ## cta_location 位置標籤(現有,沿用)
 

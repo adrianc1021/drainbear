@@ -12,8 +12,9 @@ describe("GA4 production measurement", () => {
           hostname: "drainbearhk.com",
           pathname: "/",
           origin: "https://drainbearhk.com",
-          href: "https://drainbearhk.com/",
-          search: "",
+          href: "https://drainbearhk.com/?utm_source=meta_ads&utm_medium=paid-social&utm_campaign=emergency",
+          search:
+            "?utm_source=meta_ads&utm_medium=paid-social&utm_campaign=emergency",
         },
         sessionStorage: { getItem: () => null, setItem: () => undefined },
       },
@@ -42,17 +43,22 @@ describe("GA4 production measurement", () => {
     initAnalytics();
     trackPageView("/");
 
-    expect((window.dataLayer as unknown[][])).toContainEqual([
+    expect(window.dataLayer as unknown[][]).toContainEqual([
       "config",
       "G-05DW80HCTS",
       { send_page_view: false, debug_mode: true },
     ]);
-    expect((window.dataLayer as unknown[][])).toContainEqual([
+    expect(window.dataLayer as unknown[][]).toContainEqual([
       "event",
       "page_view",
       expect.objectContaining({
         page_path: "/",
         page_title: "香港通渠服務｜通渠熊",
+        page_location:
+          "https://drainbearhk.com/?utm_source=facebook&utm_medium=paid_social&utm_campaign=emergency",
+        campaign_source: "facebook",
+        campaign_medium: "paid_social",
+        campaign_name: "emergency",
         send_to: "G-05DW80HCTS",
       }),
     ]);
