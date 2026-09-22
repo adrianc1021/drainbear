@@ -208,7 +208,8 @@ export default function SEO({
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": "Organization",
+          "@type": "LocalBusiness",
+          additionalType: "https://schema.org/HomeAndConstructionBusiness",
           "@id": `${siteUrl}/#organization`,
           name: settings.businessName,
           alternateName: ["通渠熊", "DrainBear"],
@@ -223,6 +224,7 @@ export default function SEO({
             settings.defaultOgImage?.url || "/favicon-512x512.png"
           ),
           description: settings.businessDescription,
+          serviceType: "住宅及商業通渠服務",
           telephone: settings.phoneE164,
           contactPoint: {
             "@type": "ContactPoint",

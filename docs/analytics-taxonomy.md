@@ -66,6 +66,7 @@
 | --------------------------- | --------------------------------------------------- | ------------------------------------------------- | --------------------------------- |
 | `phone_click`               | 電話 CTA 點擊                                       | cta_location, page_path, page_title               | ✅ 已接(全站 8+ 位置)             |
 | `whatsapp_click`            | WhatsApp CTA 點擊                                   | cta_location, page_path, page_title, topic        | ✅ 已接(全站 15+ 位置)            |
+| `whatsapp_handoff`          | 點擊後成功建立一次性 WhatsApp handoff               | cta_location, page_path, 首次來源摘要              | ✅ 已接(`/thanks` 一次性消耗)     |
 | `whatsapp_open`             | /thanks 頁載入(對話開啟代理轉換)                    | cta_location(來源位置), page_path                 | ✅ 已接                           |
 | `contact_form_start`        | 表格開始填寫(每表格一次)                            | form_name, cta_location                           | ✅ 已接(首頁、指南、服務及案例頁) |
 | `contact_form_submit`       | 伺服器確認提交成功後                                | form_name, cta_location                           | ✅ 已接                           |
@@ -85,6 +86,26 @@
 | `service_click`    | 服務項目點擊                                                     | service_name, cta_location, destination_url                                           | 🟡 `trackNavClick("service", …)` 可用                 |
 | `pricing_click`    | 收費相關連結點擊                                                 | cta_location, cta_label, destination_url                                              | 🟡 `trackNavClick("pricing", …)` 可用                 |
 | `page_view`        | 首次載入及 SPA 路由變更（由 App.tsx PageViewTracker 手動發送）   | page_path, page_title, page_location, campaign_source, campaign_medium, campaign_name | ✅ 已接(App.tsx PageViewTracker)                      |
+
+### GA4 Admin 對應設定
+
+網站程式已送出事件及來源摘要；GA4 後台仍須完成以下設定，否則資料雖然已到達，報表未必能按來源及漏斗閱讀：
+
+1. 在 **管理 → 資料顯示 → 自訂定義** 建立事件範圍自訂維度：
+   `traffic_source`、`traffic_medium`、`campaign_name`、`landing_page`、
+   `click_id_type`、`cta_location` 及 `topic`。
+2. 將以下事件標記為 Key event：
+   `whatsapp_handoff`、`contact_form_submit`；如電話接通資料未有外部回傳，
+   可先將 `phone_click` 作為輔助 Key event，但不要將它當作已接通的證明。
+3. `whatsapp_click`、`quote_calculator_start` 及
+   `quote_calculator_complete` 用作漏斗分析，不應全部標記為主要轉化，
+   以免把尚未產生查詢的互動計入業績轉化。
+4. 建立自訂渠道群組時，優先使用 GA4 內建 Google Ads 歸因；手動渠道按
+   `utm_medium=cpc`、`paid_social`、`email`、`social`、`referral` 及 `display`
+   分類。不要以 `button`、`hero` 或 `article` 作渠道媒介。
+
+這些設定不能改寫歷史 `Unassigned`，但可確保新資料具備可用的渠道、CTA 及
+轉化漏斗欄位。
 
 ## 通用參數(白名單)
 

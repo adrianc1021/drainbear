@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 import CmsPageSEO from "@/components/CmsPageSEO";
-import DrainHomeFaq from "@/components/DrainHomeFaq";
+import DrainHomeFaq, { FAQ_ITEMS } from "@/components/DrainHomeFaq";
 import PriceCalculator from "@/components/PriceCalculator";
 import { EditorialPromise } from "@/components/editorial/HomeEditorialCore";
 import { EditorialKicker } from "@/components/editorial/EditorialPrimitives";
@@ -62,6 +62,20 @@ const HOME_JSONLD = {
     "@type": "ImageObject",
     url: `${SITE_URL}${HERO_IMAGE}`,
   },
+};
+
+const HOME_FAQ_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": `${SITE_URL}/#home-faq`,
+  mainEntity: FAQ_ITEMS.map(item => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
 };
 
 function CompactHero() {
@@ -121,6 +135,21 @@ function CompactHero() {
             <span>{phoneDisplay}</span>
           </a>
         </div>
+
+        <Link
+          href="#calculator"
+          onClick={() =>
+            trackNavClick("pricing", {
+              cta_location: "home_hero",
+              cta_label: "先查看初步估價",
+              destination_url: "/#calculator",
+            })
+          }
+          className="home-compact-hero__estimate-link"
+        >
+          先查看初步估價
+          <ArrowRight aria-hidden="true" />
+        </Link>
 
         <ul className="home-compact-hero__proofs" aria-label="服務原則">
           <li>
@@ -348,6 +377,51 @@ function EditorialFinalCTA() {
             </a>
           </div>
         </div>
+        <nav
+          className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-[var(--db-rule)] pt-5 text-sm"
+          aria-label="首頁延伸入口"
+        >
+          <span className="font-bold text-[var(--db-copy)]">快速查看</span>
+          <Link
+            href="/services"
+            onClick={() =>
+              trackNavClick("service", {
+                cta_location: "home_footer_cta",
+                cta_label: "服務範圍",
+                destination_url: "/services",
+              })
+            }
+            className="underline decoration-[var(--db-safety)] underline-offset-4"
+          >
+            服務範圍
+          </Link>
+          <Link
+            href="/areas"
+            onClick={() =>
+              trackNavClick("area", {
+                cta_location: "home_footer_cta",
+                cta_label: "服務地區",
+                destination_url: "/areas",
+              })
+            }
+            className="underline decoration-[var(--db-safety)] underline-offset-4"
+          >
+            服務地區
+          </Link>
+          <Link
+            href="/guide"
+            onClick={() =>
+              trackNavClick("pricing", {
+                cta_location: "home_footer_cta",
+                cta_label: "收費原則",
+                destination_url: "/guide",
+              })
+            }
+            className="underline decoration-[var(--db-safety)] underline-offset-4"
+          >
+            收費原則
+          </Link>
+        </nav>
       </div>
     </section>
   );
@@ -362,7 +436,7 @@ export default function Home() {
         description="通渠熊提供香港住宅及商業通渠服務。可透過 WhatsApp 提供所在地區及現場相片或短片作初步評估，現場確認收費後才動工。"
         path="/"
         keywords="香港通渠, 24小時通渠, 塞廁所, 企缸塞, 浴室去水慢, 廚房鋅盤塞, 污水渠倒灌, 通渠收費"
-        jsonLd={HOME_JSONLD}
+        jsonLd={[HOME_JSONLD, HOME_FAQ_JSONLD]}
       />
 
       <CompactHero />

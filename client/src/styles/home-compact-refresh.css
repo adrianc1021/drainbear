@@ -120,6 +120,40 @@
   background: rgba(255, 255, 255, 0.18);
 }
 
+.home-compact-hero__estimate-link {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+  padding-bottom: 0.22rem;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 0.84rem;
+  font-weight: 800;
+  line-height: 1.4;
+  transition:
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+.home-compact-hero__estimate-link svg {
+  width: 0.95rem;
+  height: 0.95rem;
+  transition: transform 160ms ease;
+}
+
+.home-compact-hero__estimate-link:hover,
+.home-compact-hero__estimate-link:focus-visible {
+  border-color: #fff;
+  color: #fff;
+}
+
+.home-compact-hero__estimate-link:hover svg,
+.home-compact-hero__estimate-link:focus-visible svg {
+  transform: translateX(0.18rem);
+}
+
 .home-compact-hero__proofs {
   display: flex;
   flex-wrap: wrap;
