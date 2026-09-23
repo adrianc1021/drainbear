@@ -57,28 +57,3 @@ export const inquiries = mysqlTable("inquiries", {
 
 export type Inquiry = typeof inquiries.$inferSelect;
 export type InsertInquiry = typeof inquiries.$inferInsert;
-
-/**
- * 估價計算機記錄表
- * 訪客在估價計算機完成估價時匿名寫入，用於分析需求分佈
- */
-export const estimateLeads = mysqlTable("estimate_leads", {
-  id: int("id").autoincrement().primaryKey(),
-  /** 堵塞位置（如：坐廁 / 馬桶） */
-  location: varchar("location", { length: 50 }).notNull(),
-  /** 樓宇類型（如：私樓 / 屋苑） */
-  building: varchar("building", { length: 50 }).notNull(),
-  /** 時段（day / night） */
-  timeSlot: varchar("timeSlot", { length: 20 }).notNull(),
-  /** 估價下限 HK$ */
-  priceLow: int("priceLow").notNull(),
-  /** 估價上限 HK$ */
-  priceHigh: int("priceHigh").notNull(),
-  /** 來源頁面路徑 */
-  sourcePage: varchar("sourcePage", { length: 200 }),
-  /** 建立時間 */
-  createdAt: timestamp("createdAt").defaultNow().notNull(),
-});
-
-export type EstimateLead = typeof estimateLeads.$inferSelect;
-export type InsertEstimateLead = typeof estimateLeads.$inferInsert;

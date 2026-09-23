@@ -6,7 +6,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import Layout from "./components/Layout";
 import TrpcProvider from "./components/TrpcProvider";
 import Home from "./pages/Home";
-import { EstimateProvider } from "./contexts/EstimateContext";
+import { ContactHandoffProvider } from "./contexts/ContactHandoffContext";
 import { SiteSettingsProvider } from "./contexts/SiteSettingsContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { initAnalytics, trackPageView } from "./lib/analytics";
@@ -103,13 +103,13 @@ function App() {
       <SiteSettingsProvider>
         <ThemeProvider defaultTheme="light">
           <TrpcProvider>
-            <EstimateProvider>
+            <ContactHandoffProvider>
               <TooltipProvider>
                 <Toaster />
                 <PageViewTracker />
                 <Router />
               </TooltipProvider>
-            </EstimateProvider>
+            </ContactHandoffProvider>
           </TrpcProvider>
         </ThemeProvider>
       </SiteSettingsProvider>

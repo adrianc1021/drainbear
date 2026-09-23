@@ -14,7 +14,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import DistrictAutocomplete from "@/components/DistrictAutocomplete";
 import SEO from "@/components/SEO";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
-import { useEstimate } from "@/contexts/EstimateContext";
+import { useContactHandoff } from "@/contexts/ContactHandoffContext";
 import {
   buildDiagnosisResult,
   DIAGNOSIS_LOCATIONS,
@@ -100,7 +100,7 @@ function ChoiceGrid<T extends string>({
 
 export default function DrainDiagnosis() {
   const { whatsappHref } = useContactSettings();
-  const { setDiagnosis } = useEstimate();
+  const { setDiagnosis } = useContactHandoff();
   const [step, setStep] = useState(0);
   const [location, setLocation] = useState<DiagnosisLocation>();
   const [symptom, setSymptom] = useState<DiagnosisSymptom>();

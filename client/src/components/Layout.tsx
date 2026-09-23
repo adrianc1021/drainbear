@@ -24,7 +24,7 @@ import {
   goThanksAfterWhatsApp,
   trackNavClick,
 } from "@/lib/analytics";
-import { useEstimate } from "@/contexts/EstimateContext";
+import { useContactHandoff } from "@/contexts/ContactHandoffContext";
 import { useReveal } from "@/hooks/useReveal";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import { prefetchRoute } from "@/lib/routePrefetch";
@@ -91,25 +91,17 @@ export function WhatsAppButton({
  * - 全程固定顯示，讓緊急服務 CTA 在任何閱讀位置都可見
  */
 function MobileCTABar() {
-  const { estimate, diagnosis } = useEstimate();
+  const { diagnosis } = useContactHandoff();
   const { phoneDisplay, phoneHref, whatsappDefaultHref, whatsappHref } =
     useContactSettings();
 
-  const waHref = estimate
-    ? whatsappHref(estimate.waMessage)
-    : diagnosis
-      ? whatsappHref(diagnosis.waMessage)
-      : whatsappDefaultHref;
-  const waTitle = estimate
-    ? "發送估價詳情"
-    : diagnosis
-      ? "發送判斷結果"
-      : "WhatsApp 報價";
-  const waSub = estimate
-    ? `初步 HK$${estimate.low.toLocaleString()}–${estimate.high.toLocaleString()}・到場確認`
-    : diagnosis
-      ? diagnosis.summary
-      : "傳送位置及相片・加快初步判斷";
+  const waHref = diagnosis
+    ? whatsappHref(diagnosis.waMessage)
+    : whatsappDefaultHref;
+  const waTitle = diagnosis ? "發送判斷結果" : "WhatsApp 報價";
+  const waSub = diagnosis
+    ? diagnosis.summary
+    : "傳送位置及相片・加快初步判斷";
 
   return (
     <>
@@ -137,9 +129,7 @@ function MobileCTABar() {
               trackCTA(
                 "whatsapp",
                 "mobile_bar",
-                estimate
-                  ? `estimate_${estimate.low}-${estimate.high}`
-                  : diagnosis?.topic
+                diagnosis?.topic
               );
               goThanksAfterWhatsApp("mobile_bar");
             }}
@@ -748,7 +738,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   useReveal();
 
   useEffect(() => {
-    // 支援 hash 錨點（如 /guide#calculator）：有錨點時捲至該區塊，否則回頁頂
+    // 支援頁面 hash 錨點：有錨點時捲至該區塊，否則回頁頂
     const hash = window.location.hash;
     if (hash) {
       // 等待目標頁面渲染完成後再捲動

@@ -125,9 +125,9 @@ for (const engine of engines) {
         hasTouch: width < 768,
         reducedMotion: "reduce",
       });
-      // Never send conversions or estimate records while exercising production UI.
+      // Never send conversion events while exercising production UI.
       await context.route(
-        /google-analytics|googletagmanager|googleadservices|\/api\/trpc\/estimate\.record/,
+        /google-analytics|googletagmanager|googleadservices/,
         route => route.abort()
       );
       if (isLocalPreview) {
@@ -197,45 +197,6 @@ for (const engine of engines) {
                 `${engine} ${width} ${route} ${state}: ${issues.join(" | ")}`
               );
           };
-          if (route === "/guide") {
-            const calculator = page.locator("#calculator");
-            await calculator
-              .getByRole("button", { name: "大廈主渠 / 沙井", exact: true })
-              .click();
-            await calculator
-              .getByRole("button", { name: "村屋 / 獨立屋", exact: true })
-              .click();
-            await calculator
-              .getByRole("button", { name: "深夜（23:00–07:00）", exact: true })
-              .click();
-            await calculator
-              .getByRole("link", { name: "WhatsApp 確認實際報價", exact: true })
-              .waitFor();
-            const href = await calculator
-              .locator(".calculator-result-cta")
-              .getAttribute("href");
-            const url = new URL(href);
-            const message = url.searchParams.get("text") || "";
-            if (
-              url.hostname !== "wa.me" ||
-              !message.includes("HK$2950–5700") ||
-              !message.includes("村屋 / 獨立屋")
-            ) {
-              failures.push(
-                `${engine} ${width}: calculator price/message incorrect: ${message}`
-              );
-            }
-            await checkState("calculator result");
-            await calculator.screenshot({
-              path: `${directory}/${engine}-${width}-calculator-${textScale}x.png`,
-            });
-            await calculator
-              .getByRole("button", { name: "重新選擇", exact: true })
-              .click();
-            if (await calculator.locator('[aria-pressed="true"]').count())
-              failures.push(`${engine} ${width}: calculator reset failed`);
-            await checkState("calculator reset");
-          }
           if (route === "/areas") {
             const search = page.getByRole("combobox", { name: "搜尋服務地區" });
             await search.fill("觀塘");

@@ -1,7 +1,6 @@
 import { ArrowRight, Bath, CookingPot, Droplets, Waves } from "lucide-react";
 import { Link } from "wouter";
 import { trackNavClick } from "@/lib/analytics";
-import { prefetchRoute } from "@/lib/routePrefetch";
 
 const QUICK_SERVICES = [
   {
@@ -91,33 +90,9 @@ export default function ServiceQuickSelect() {
           ))}
         </div>
 
-        <div className="mt-7 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-          <p className="text-sm leading-6 text-[var(--db-copy)]">
-            如需初步了解服務預算，可使用估價計算機；最終收費以現場報價為準。
-          </p>
-
-          <Link
-            href="/guide#calculator"
-            onMouseEnter={() => prefetchRoute("/guide#calculator")}
-            onFocus={() => prefetchRoute("/guide#calculator")}
-            onTouchStart={() => prefetchRoute("/guide#calculator")}
-            onClick={() =>
-              trackNavClick("pricing", {
-                cta_location: "home_quick_select",
-                cta_label: "使用即時估價計算機",
-                destination_url: "/guide#calculator",
-              })
-            }
-            className="group inline-flex min-h-11 items-center gap-2 border-b border-[var(--db-ink)] text-sm font-black text-[var(--db-ink)]"
-          >
-            使用即時估價計算機
-            <ArrowRight
-              className="h-4 w-4 transition-transform group-hover:translate-x-1"
-              strokeWidth={2}
-              aria-hidden="true"
-            />
-          </Link>
-        </div>
+        <p className="mt-7 max-w-2xl text-sm leading-6 text-[var(--db-copy)]">
+          提供地區、受影響位置及現場相片後，團隊會按實際情況回覆可安排的服務及報價；最終收費於動工前確認。
+        </p>
       </div>
     </section>
   );

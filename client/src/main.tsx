@@ -12,7 +12,6 @@ import "./styles/home-mobile-optimization.css";
 import "./styles/motionsites-reference-refresh.css";
 import "./styles/motionsites-inner-pages.css";
 import "./styles/home-compact-refresh.css";
-import "./styles/price-calculator-refresh.css";
 
 const root = document.getElementById("root");
 

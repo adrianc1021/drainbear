@@ -72,12 +72,16 @@ try {
     ["backflow", "/services/sewage-backflow"],
   ];
   for (const [id, destination] of serviceDestinations) {
-    const link = page.locator(`[data-service-id="${id}"]`);
+    const link = page.locator(
+      `[data-pr20-section="common-problems"] a[href="${destination}"]`
+    );
     await link.waitFor({ state: "visible" });
     if ((await link.getAttribute("href")) !== destination)
       throw new Error(`${id} 服務入口錯誤`);
   }
-  const contact = page.locator('.brand-hero__actions a[href*="wa.me"]');
+  const contact = page.locator(
+    '.home-compact-hero__actions a[href*="wa.me"]'
+  );
   const contactUrl = new URL(await contact.getAttribute("href"));
   if (
     contactUrl.hostname !== "wa.me" ||
@@ -85,39 +89,6 @@ try {
   )
     throw new Error("首頁 WhatsApp 查詢訊息錯誤");
   console.log("PASS：四個服務快捷入口及 WhatsApp 查詢訊息正確");
-
-  const calculatorLink = page.getByRole("link", {
-    name: /使用即時估價計算機/,
-  });
-
-  const calculatorHref = await calculatorLink.getAttribute("href");
-
-  if (calculatorHref !== "/guide#calculator") {
-    throw new Error(`計算機連結錯誤：${calculatorHref}`);
-  }
-
-  console.log("PASS：估價計算機捷徑正確");
-
-  await calculatorLink.click();
-  await page.waitForURL(`${BASE_URL}/guide#calculator`, {
-    timeout: 10_000,
-  });
-  await page.getByRole("heading", { name: "即時估價計算機" }).waitFor({
-    state: "visible",
-    timeout: 15_000,
-  });
-  await page.waitForFunction(
-    () => {
-      const element = document.querySelector("#calculator");
-      if (!element) return false;
-      const top = element.getBoundingClientRect().top;
-      return top >= -8 && top <= 220;
-    },
-    undefined,
-    { timeout: 5_000 }
-  );
-
-  console.log("PASS：估價計算機捷徑會捲動到正確位置");
 
   await page.goto(`${BASE_URL}/`, {
     waitUntil: "domcontentloaded",
@@ -138,6 +109,12 @@ try {
   }
 
   console.log("PASS：檢查費文案已統一");
+
+  // 首頁為保持首屏簡潔使用 compact footer；在完整內容頁驗證熱門地區導覽。
+  await page.goto(`${BASE_URL}/services`, {
+    waitUntil: "domcontentloaded",
+    timeout: 30_000,
+  });
 
   const footerAreas = page.getByRole("navigation", {
     name: "熱門通渠服務地區",
@@ -173,6 +150,15 @@ try {
     });
 
   console.log("PASS：收費指南初步估價／最終報價文案一致");
+
+  if (
+    (await page.getByText("即時估價計算機", { exact: true }).count()) !== 0 ||
+    (await page.locator("#calculator").count()) !== 0
+  ) {
+    throw new Error("網站仍包含已移除的估價計算機 UI");
+  }
+
+  console.log("PASS：估價計算機 UI 已移除，聯絡流程仍可用");
 
   if (pageErrors.length > 0) {
     throw new Error(`測試期間出現 ${pageErrors.length} 個 browser page error`);

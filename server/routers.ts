@@ -5,9 +5,7 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { protectedProcedure, publicProcedure, router } from "./_core/trpc";
 import {
-  createEstimateLead,
   createInquiry,
-  listEstimateLeads,
   listInquiries,
   updateInquiryStatus,
 } from "./db";
@@ -70,24 +68,6 @@ export const appRouter = router({
       .mutation(({ input }) => updateInquiryStatus(input.id, input.status)),
   }),
 
-  estimate: router({
-    /** 公開：估價計算機完成估價時匿名記錄 */
-    record: publicProcedure
-      .input(
-        z.object({
-          location: z.string().trim().min(1).max(50),
-          building: z.string().trim().min(1).max(50),
-          timeSlot: z.string().trim().min(1).max(20),
-          priceLow: z.number().int().min(0).max(1_000_000),
-          priceHigh: z.number().int().min(0).max(1_000_000),
-          sourcePage: z.string().trim().max(200).optional(),
-        }),
-      )
-      .mutation(({ input }) => createEstimateLead(input)),
-
-    /** 管理員：查看估價記錄 */
-    list: adminProcedure.query(() => listEstimateLeads()),
-  }),
 });
 
 export type AppRouter = typeof appRouter;

@@ -4,24 +4,24 @@
  * No fixed-height text panels, text masks or decorative offset shadows.
  */
 :root {
-  --brand-paper: #eaf4f8;
-  --brand-ink: #173f52;
-  --brand-copy: #4e6571;
-  --brand-rule: #cfdee6;
+  --brand-paper: #f0ebd8;
+  --brand-ink: #003566;
+  --brand-copy: #29465b;
+  --brand-rule: rgba(0, 53, 102, 0.18);
   --brand-gutter: clamp(1.25rem, 4vw, 3.5rem);
   --navy: var(--brand-ink);
-  --navy-light: #283e43;
-  --safety: #236684;
+  --navy-light: #174c75;
+  --safety: #003566;
   --text-secondary: var(--brand-copy);
   --site-paper: var(--brand-paper);
   --site-paper-soft: #f5f9fb;
   --site-ink: var(--brand-ink);
   --site-copy: var(--brand-copy);
-  --site-safety: #236684;
+  --site-safety: #003566;
   --db-ink: var(--brand-ink);
   --db-paper: var(--brand-paper);
   --db-copy: var(--brand-copy);
-  --db-safety: #236684;
+  --db-safety: #003566;
   --db-editorial-max: 84rem;
   --db-editorial-gutter: var(--brand-gutter);
 }
@@ -33,12 +33,12 @@
   --db-ink: var(--brand-ink);
   --db-ink-deep: #12262a;
   --db-copy: var(--brand-copy);
-  --db-safety: #236684;
+  --db-safety: #003566;
   --phase4-paper: var(--brand-paper);
   --phase4-paper-soft: #f5f9fb;
   --phase4-ink: var(--brand-ink);
   --phase4-copy: var(--brand-copy);
-  --phase4-safety: #236684;
+  --phase4-safety: #003566;
 }
 html {
   scroll-padding-top: 6rem;
@@ -567,7 +567,7 @@ a svg {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .home-editorial [data-pr20-section="process"] {
-  background: #f5f9fb;
+  background: var(--brand-paper);
   color: var(--brand-ink);
 }
 .home-editorial [data-pr20-section="process"] :is(h2, h3, p) {
@@ -602,8 +602,9 @@ a svg {
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 3/2;
-  object-fit: cover;
+  aspect-ratio: auto;
+  object-fit: contain;
+  background: #fff;
   border-radius: 8px;
 }
 .home-reading__meta {
@@ -676,7 +677,7 @@ a svg {
   border-radius: 6px;
 }
 .home-photo-quote {
-  background: #eaf4f8;
+  background: var(--brand-paper);
   border-block: 1px solid var(--brand-rule);
 }
 .home-photo-quote__inner {
@@ -843,19 +844,6 @@ a svg {
 }
 .phase4-guide .guide-price-table th {
   font-weight: 600;
-}
-.phase4-guide #calculator .calculator-shell {
-  box-shadow: none;
-}
-.phase4-guide #calculator .calculator-inputs {
-  background: white;
-}
-.phase4-guide #calculator .calculator-option {
-  box-shadow: none;
-}
-.phase4-guide #calculator .calculator-option:hover {
-  transform: none;
-  box-shadow: none;
 }
 .areas-editorial [data-visual-section="areas-hero"],
 .district-editorial > section:first-of-type {

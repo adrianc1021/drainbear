@@ -453,11 +453,18 @@
 
 .db-site-footer__areas-heading h2 {
   max-width: 27rem;
+  min-width: 0;
+  overflow-wrap: anywhere;
   margin-top: 0.7rem;
   color: #fff;
   font-size: clamp(1.4rem, 2.6vw, 2.5rem);
   font-weight: 800;
   line-height: 1.25;
+}
+
+.db-site-footer__areas-heading > div {
+  min-width: 0;
+  max-width: 100%;
 }
 
 .db-site-footer__text-link {

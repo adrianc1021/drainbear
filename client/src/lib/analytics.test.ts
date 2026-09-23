@@ -16,8 +16,6 @@ import {
   trackContactFormError,
   trackContactFormStart,
   trackContactFormSubmit,
-  trackQuoteCalculatorComplete,
-  trackQuoteCalculatorStart,
   trackWhatsAppHandoff,
   trackWhatsAppOpen,
 } from "./analytics";
@@ -171,32 +169,14 @@ describe("PII 防護", () => {
     expect(events[0].cta_location).toBe("footer");
   });
 
-  it("正常選項摘要(價格範圍)不會被誤殺", () => {
-    trackCTA("whatsapp", "price_calculator", "坐廁_私樓_day");
+  it("正常查詢摘要不會被誤殺", () => {
+    trackCTA("whatsapp", "guide_hero", "坐廁_私樓_day");
     const events = eventsNamed("whatsapp_click");
     expect(events[0].topic).toBe("坐廁_私樓_day");
   });
 });
 
-// ---------------------------------------------------------------------------
-// 純 Helper:每次呼叫發送一次(去重責任在 Component,見 perViewDedup 測試)
-// ---------------------------------------------------------------------------
-
 describe("純事件 Helper(不持有跨頁面去重狀態)", () => {
-  it("trackQuoteCalculatorStart 每次呼叫各發一筆(去重由 Component 負責)", () => {
-    trackQuoteCalculatorStart();
-    trackQuoteCalculatorStart();
-    expect(eventsNamed("quote_calculator_start")).toHaveLength(2);
-  });
-
-  it("trackQuoteCalculatorComplete 帶 topic 摘要", () => {
-    trackQuoteCalculatorComplete("坐廁_私樓_day");
-    const events = eventsNamed("quote_calculator_complete");
-    expect(events).toHaveLength(1);
-    expect(events[0].topic).toBe("坐廁_私樓_day");
-    expect(events[0].cta_location).toBe("price_calculator");
-  });
-
   it("trackBlogRead 每次呼叫各發一筆(去重由 blogReadTracker 負責)", () => {
     trackBlogRead("prevent-kitchen-sink-clog", 62);
     trackBlogRead("prevent-kitchen-sink-clog", 80);
@@ -234,28 +214,6 @@ describe("Google Ads 事件路由", () => {
     currentWindow.gtag = gtag;
     return gtag;
   }
-
-  it("quote_calculator_start 只明確送往 Ads destination", () => {
-    const gtag = useProductionHost();
-
-    trackQuoteCalculatorStart();
-
-    expect(gtag).toHaveBeenCalledTimes(1);
-    expect(gtag).toHaveBeenCalledWith("event", "quote_calculator_start", {
-      send_to: "AW-18128738982",
-    });
-  });
-
-  it("非正式網域不會外送 Google Ads 事件", () => {
-    const gtag = vi.fn();
-    const currentWindow = (globalThis as Record<string, any>).window;
-    currentWindow.location.hostname = "localhost";
-    currentWindow.gtag = gtag;
-
-    trackQuoteCalculatorStart();
-
-    expect(gtag).not.toHaveBeenCalled();
-  });
 
   it("有效 WhatsApp label 會送出一次 Ads conversion", () => {
     vi.stubEnv("VITE_GOOGLE_ADS_WHATSAPP_LABEL", "test_Label-123");

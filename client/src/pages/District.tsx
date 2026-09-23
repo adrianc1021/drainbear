@@ -280,12 +280,6 @@ export default function District() {
               查看通渠收費指南 <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
-              href="/guide#calculator"
-              className="btn-smooth inline-flex min-h-[44px] items-center gap-1.5 font-bold text-navy/70 hover:gap-2.5 hover:text-navy"
-            >
-              試用估價計算機 <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link
               href="/drain-diagnosis"
               className="btn-smooth inline-flex min-h-[44px] items-center gap-1.5 font-bold text-navy/70 hover:gap-2.5 hover:text-navy"
             >

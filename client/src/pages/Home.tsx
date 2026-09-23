@@ -8,7 +8,6 @@ import {
 import { Link } from "wouter";
 import CmsPageSEO from "@/components/CmsPageSEO";
 import DrainHomeFaq, { FAQ_ITEMS } from "@/components/DrainHomeFaq";
-import PriceCalculator from "@/components/PriceCalculator";
 import { EditorialPromise } from "@/components/editorial/HomeEditorialCore";
 import { EditorialKicker } from "@/components/editorial/EditorialPrimitives";
 import { BUSINESS_ID, SITE_URL, WEBSITE_ID } from "@/config/site";
@@ -44,6 +43,29 @@ const PROCESS = [
     number: "04",
     title: "施工、測試及整理",
     description: "完成已確認工序後測試去水情況，並整理受工程影響的位置。",
+  },
+] as const;
+
+const COMMON_PROBLEMS = [
+  {
+    href: "/services/toilet-unblocking",
+    label: "塞廁所／坐廁倒灌",
+    detail: "先了解堵塞位置及處理方法",
+  },
+  {
+    href: "/services/kitchen-sink-unblocking",
+    label: "鋅盤去水慢",
+    detail: "常見油垢及食物殘渣問題",
+  },
+  {
+    href: "/services/bathroom-drain-unblocking",
+    label: "浴室地台去水慢",
+    detail: "毛髮、番梘垢及隔氣問題",
+  },
+  {
+    href: "/services/sewage-backflow",
+    label: "污水倒灌",
+    detail: "先處理受影響位置，再確認安排",
   },
 ] as const;
 
@@ -136,21 +158,6 @@ function CompactHero() {
           </a>
         </div>
 
-        <Link
-          href="#calculator"
-          onClick={() =>
-            trackNavClick("pricing", {
-              cta_location: "home_hero",
-              cta_label: "先查看初步估價",
-              destination_url: "/#calculator",
-            })
-          }
-          className="home-compact-hero__estimate-link"
-        >
-          先查看初步估價
-          <ArrowRight aria-hidden="true" />
-        </Link>
-
         <ul className="home-compact-hero__proofs" aria-label="服務原則">
           <li>
             <Check aria-hidden="true" /> 動工前確認收費
@@ -162,6 +169,52 @@ function CompactHero() {
             <Check aria-hidden="true" /> 完工後測試去水
           </li>
         </ul>
+      </div>
+    </section>
+  );
+}
+
+function CommonProblemsNav() {
+  return (
+    <section
+      className="home-common-problems"
+      aria-labelledby="home-common-problems-heading"
+      data-pr20-section="common-problems"
+    >
+      <div className="db-container home-common-problems__inner">
+        <div className="home-common-problems__heading">
+          <EditorialKicker>快速找到相關服務</EditorialKicker>
+          <h2 id="home-common-problems-heading">
+            你遇到邊種渠務問題？
+          </h2>
+          <p>
+            可以直接查看處理方法，亦可以跳過閱讀，立即 WhatsApp 傳送現場相片。
+          </p>
+        </div>
+        <div className="home-common-problems__grid">
+          {COMMON_PROBLEMS.map(problem => (
+            <Link
+              key={problem.href}
+              href={problem.href}
+              className="home-common-problem"
+              onClick={() =>
+                trackNavClick("service", {
+                  cta_location: "home_common_problems",
+                  cta_label: problem.label,
+                  destination_url: problem.href,
+                })
+              }
+            >
+              <span className="home-common-problem__label">
+                {problem.label}
+                <ArrowRight aria-hidden="true" />
+              </span>
+              <span className="home-common-problem__detail">
+                {problem.detail}
+              </span>
+            </Link>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -440,27 +493,8 @@ export default function Home() {
       />
 
       <CompactHero />
+      <CommonProblemsNav />
       <EditorialPromise />
-      <section
-        id="calculator"
-        className="home-compact-calculator"
-        aria-labelledby="home-calculator-heading"
-        data-pr20-section="calculator"
-      >
-        <div className="db-container">
-          <EditorialKicker>即時估價</EditorialKicker>
-          <h2
-            id="home-calculator-heading"
-            className="db-editorial-heading mt-6"
-          >
-            即時估價計算機
-          </h2>
-          <p className="home-compact-calculator__intro">
-            選擇淤塞位置、樓宇類型及上門時段，即可查看通渠初步估價範圍。
-          </p>
-          <PriceCalculator />
-        </div>
-      </section>
       <EditorialPhotoQuoteCTA />
       <EditorialProcess />
       <EditorialJournal />
