@@ -1,5 +1,7 @@
 # 專案關鍵上下文（防壓縮遺失）
 
+> 歷史備註：本文件保留過往迭代紀錄。互動式估價計算機、EstimateContext、估價同步及相關追蹤已於 2026-09-23 移除；不要按本文件舊待辦重新加入。現行聯絡流程以 WhatsApp、電話、表格及渠務問題快速判斷為準。
+
 ## 聯絡資訊（真實號碼，已更新）
 - 電話顯示：+852 9558 8260｜tel:+85295588260｜WhatsApp: 85295588260
 - 統一由 client/src/lib/contact.ts 管理（PHONE_DISPLAY, PHONE_TEL, WHATSAPP_NUMBER, waLink(), WA_DEFAULT）

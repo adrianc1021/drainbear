@@ -1,8 +1,6 @@
 import { desc, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
 import {
-  estimateLeads,
-  InsertEstimateLead,
   InsertInquiry,
   inquiries,
   InsertUser,
@@ -127,30 +125,4 @@ export async function updateInquiryStatus(
   }
   await db.update(inquiries).set({ status }).where(eq(inquiries.id, id));
   return { success: true } as const;
-}
-
-/** 記錄一筆估價計算結果（匿名） */
-export async function createEstimateLead(lead: InsertEstimateLead) {
-  const db = await getDb();
-  if (!db) {
-    // 估價記錄屬非關鍵操作，資料庫不可用時靜默略過，不影響前端體驗
-    console.warn("[Database] Cannot record estimate lead: database not available");
-    return { id: 0 };
-  }
-  const result = await db.insert(estimateLeads).values(lead);
-  return { id: result[0].insertId };
-}
-
-/** 列出估價記錄（最新在前，最多 200 筆） */
-export async function listEstimateLeads() {
-  const db = await getDb();
-  if (!db) {
-    console.warn("[Database] Cannot list estimate leads: database not available");
-    return [];
-  }
-  return db
-    .select()
-    .from(estimateLeads)
-    .orderBy(desc(estimateLeads.createdAt))
-    .limit(200);
 }

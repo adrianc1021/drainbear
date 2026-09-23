@@ -32,14 +32,6 @@ import {
 } from "@/lib/cloudinary";
 import NotFound from "@/pages/NotFound";
 
-const CALCULATOR_LOCATION_BY_SLUG: Record<string, string> = {
-  "toilet-unblocking": "toilet",
-  "bathroom-drain-unblocking": "shower",
-  "kitchen-sink-unblocking": "sink",
-  "sewage-backflow": "mainpipe",
-  "grease-trap-cleaning": "grease",
-};
-
 const INQUIRY_TYPE_BY_SLUG: Record<string, InquiryServiceType> = {
   "toilet-unblocking": "residential",
   "kitchen-sink-unblocking": "residential",
@@ -60,10 +52,6 @@ export default function ServiceDetail() {
   if (!service) return <NotFound />;
 
   const path = `/services/${service.slug}`;
-  const calculatorLocation = CALCULATOR_LOCATION_BY_SLUG[service.slug];
-  const calculatorHref = calculatorLocation
-    ? `/guide?location=${encodeURIComponent(calculatorLocation)}#calculator`
-    : "/guide#calculator";
   const whatsappUrl = whatsappHref(service.whatsappMessage);
   const serviceImage = cloudinaryImageUrl(service.image, 960);
   const serviceImageSrcSet = cloudinaryImageSrcSet(service.image);
@@ -388,24 +376,6 @@ export default function ServiceDetail() {
                   </li>
                 ))}
               </ul>
-              <Link
-                href={calculatorHref}
-                onMouseEnter={() => prefetchRoute(calculatorHref)}
-                onFocus={() => prefetchRoute(calculatorHref)}
-                onTouchStart={() => prefetchRoute(calculatorHref)}
-                onClick={() =>
-                  trackNavClick("pricing", {
-                    cta_location: "service_detail_price_factors",
-                    cta_label: "使用估價計算機",
-                    destination_url: calculatorHref,
-                    service_name: service.slug,
-                  })
-                }
-                className="mt-7 inline-flex min-h-[44px] items-center gap-2 font-bold text-wagreen hover:text-white"
-              >
-                使用估價計算機
-                <ArrowRight className="h-4 w-4" />
-              </Link>
             </article>
           </div>
         </section>

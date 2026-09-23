@@ -8,7 +8,7 @@ import {
 import { Link } from "wouter";
 import CmsPageSEO from "@/components/CmsPageSEO";
 import DrainHomeFaq, { FAQ_ITEMS } from "@/components/DrainHomeFaq";
-import PriceCalculator from "@/components/PriceCalculator";
+import GhostFibers from "@/components/GhostFibers/GhostFibers";
 import { EditorialPromise } from "@/components/editorial/HomeEditorialCore";
 import { EditorialKicker } from "@/components/editorial/EditorialPrimitives";
 import { BUSINESS_ID, SITE_URL, WEBSITE_ID } from "@/config/site";
@@ -44,6 +44,29 @@ const PROCESS = [
     number: "04",
     title: "施工、測試及整理",
     description: "完成已確認工序後測試去水情況，並整理受工程影響的位置。",
+  },
+] as const;
+
+const COMMON_PROBLEMS = [
+  {
+    href: "/services/toilet-unblocking",
+    label: "塞廁所／坐廁倒灌",
+    detail: "先了解堵塞位置及處理方法",
+  },
+  {
+    href: "/services/kitchen-sink-unblocking",
+    label: "鋅盤去水慢",
+    detail: "常見油垢及食物殘渣問題",
+  },
+  {
+    href: "/services/bathroom-drain-unblocking",
+    label: "浴室地台去水慢",
+    detail: "毛髮、番梘垢及隔氣問題",
+  },
+  {
+    href: "/services/sewage-backflow",
+    label: "污水倒灌",
+    detail: "先處理受影響位置，再確認安排",
   },
 ] as const;
 
@@ -87,81 +110,131 @@ function CompactHero() {
       aria-labelledby="home-editorial-heading"
       data-pr20-section="hero"
     >
-      <img
-        className="home-compact-hero__image"
-        src={HERO_IMAGE}
-        alt=""
-        width="1600"
-        height="1000"
-        fetchPriority="high"
-        decoding="async"
-        aria-hidden="true"
+      <GhostFibers
+        className="home-compact-hero__fibers"
+        lineColor="#a2ddf5"
+        glowColor="#269ed1"
+        backgroundColor="#003566"
+        speed={0.14}
+        scale={2.2}
+        rotationSpeed={0.1}
+        layers={4}
+        glowIntensity={1.1}
+        brightness={1.25}
+        grain={0.02}
+        fps={30}
       />
-      <div className="home-compact-hero__wash" aria-hidden="true" />
+      <div className="db-container home-compact-hero__layout">
+        <div className="home-compact-hero__content">
+          <p className="home-compact-hero__eyebrow">香港住宅及商業渠務</p>
+          <h1 id="home-editorial-heading">
+            香港通渠，
+            <br />
+            先報價後動工。
+          </h1>
+          <p className="home-compact-hero__intro">
+            塞廁所、鋅盤去水慢，定係污水倒灌？傳相片及地區，先了解處理方法同報價安排。
+          </p>
 
-      <div className="db-container home-compact-hero__content">
-        <p className="home-compact-hero__eyebrow">
-          香港住宅及商業渠務・24 小時接受查詢
-        </p>
-        <h1 id="home-editorial-heading">
-          香港通渠，
-          <br />
-          先報價後動工。
-        </h1>
-        <p className="home-compact-hero__intro">
-          座廁、鋅盤、企缸、主渠或污水倒灌問題，可先提供所在地區及現場相片，讓團隊了解情況及安排上門。
-        </p>
+          <div className="home-compact-hero__actions">
+            <a
+              href={whatsappDefaultHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => {
+                trackCTA("whatsapp", "home_hero");
+                goThanksAfterWhatsApp("home_hero");
+              }}
+              className="home-compact-hero__primary"
+            >
+              <MessageCircle aria-hidden="true" />
+              <span>WhatsApp 傳相片問價</span>
+            </a>
+            <a
+              href={phoneHref}
+              onClick={() => trackCTA("phone", "home_hero")}
+              className="home-compact-hero__secondary"
+            >
+              <Phone aria-hidden="true" />
+              <span>{phoneDisplay}</span>
+            </a>
+          </div>
 
-        <div className="home-compact-hero__actions">
-          <a
-            href={whatsappDefaultHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => {
-              trackCTA("whatsapp", "home_hero");
-              goThanksAfterWhatsApp("home_hero");
-            }}
-            className="home-compact-hero__primary"
-          >
-            <MessageCircle aria-hidden="true" />
-            <span>WhatsApp 傳送相片查詢</span>
-          </a>
-          <a
-            href={phoneHref}
-            onClick={() => trackCTA("phone", "home_hero")}
-            className="home-compact-hero__secondary"
-          >
-            <Phone aria-hidden="true" />
-            <span>{phoneDisplay}</span>
-          </a>
+          <p className="home-compact-hero__availability">
+            24 小時接受查詢；上門時間按地區、人手及設備確認。
+          </p>
+
+          <ul className="home-compact-hero__proofs" aria-label="服務原則">
+            <li>
+              <Check aria-hidden="true" /> 動工前確認收費
+            </li>
+            <li>
+              <ShieldCheck aria-hidden="true" /> 新增工序事前說明
+            </li>
+            <li>
+              <Check aria-hidden="true" /> 完工後測試去水
+            </li>
+          </ul>
         </div>
+        <figure className="home-compact-hero__figure">
+          <img
+            className="home-compact-hero__image"
+            src={HERO_IMAGE}
+            alt="通渠工具與室內去水位的服務示意"
+            width="1600"
+            height="1000"
+            fetchPriority="high"
+            decoding="async"
+          />
+          <figcaption>服務示意圖，非客戶工程紀錄。</figcaption>
+        </figure>
+      </div>
+    </section>
+  );
+}
 
-        <Link
-          href="#calculator"
-          onClick={() =>
-            trackNavClick("pricing", {
-              cta_location: "home_hero",
-              cta_label: "先查看初步估價",
-              destination_url: "/#calculator",
-            })
-          }
-          className="home-compact-hero__estimate-link"
+function CommonProblemsNav() {
+  return (
+    <section
+      className="home-common-problems"
+      aria-labelledby="home-common-problems-heading"
+      data-pr20-section="common-problems"
+    >
+      <div className="db-container home-common-problems__inner">
+        <div className="home-common-problems__heading">
+          <EditorialKicker>快速找到相關服務</EditorialKicker>
+          <h2 id="home-common-problems-heading">你遇到邊種渠務問題？</h2>
+          <p>
+            可以直接查看處理方法，亦可以跳過閱讀，立即 WhatsApp 傳送現場相片。
+          </p>
+        </div>
+        <nav
+          className="home-common-problems__grid"
+          aria-label="按渠務問題查看服務"
         >
-          先查看初步估價
-          <ArrowRight aria-hidden="true" />
-        </Link>
-
-        <ul className="home-compact-hero__proofs" aria-label="服務原則">
-          <li>
-            <Check aria-hidden="true" /> 動工前確認收費
-          </li>
-          <li>
-            <ShieldCheck aria-hidden="true" /> 新增工序事前說明
-          </li>
-          <li>
-            <Check aria-hidden="true" /> 完工後測試去水
-          </li>
-        </ul>
+          {COMMON_PROBLEMS.map(problem => (
+            <Link
+              key={problem.href}
+              href={problem.href}
+              className="home-common-problem"
+              onClick={() =>
+                trackNavClick("service", {
+                  cta_location: "home_common_problems",
+                  cta_label: problem.label,
+                  destination_url: problem.href,
+                })
+              }
+            >
+              <span className="home-common-problem__label">
+                {problem.label}
+                <ArrowRight aria-hidden="true" />
+              </span>
+              <span className="home-common-problem__detail">
+                {problem.detail}
+              </span>
+            </Link>
+          ))}
+        </nav>
       </div>
     </section>
   );
@@ -440,27 +513,8 @@ export default function Home() {
       />
 
       <CompactHero />
+      <CommonProblemsNav />
       <EditorialPromise />
-      <section
-        id="calculator"
-        className="home-compact-calculator"
-        aria-labelledby="home-calculator-heading"
-        data-pr20-section="calculator"
-      >
-        <div className="db-container">
-          <EditorialKicker>即時估價</EditorialKicker>
-          <h2
-            id="home-calculator-heading"
-            className="db-editorial-heading mt-6"
-          >
-            即時估價計算機
-          </h2>
-          <p className="home-compact-calculator__intro">
-            選擇淤塞位置、樓宇類型及上門時段，即可查看通渠初步估價範圍。
-          </p>
-          <PriceCalculator />
-        </div>
-      </section>
       <EditorialPhotoQuoteCTA />
       <EditorialProcess />
       <EditorialJournal />

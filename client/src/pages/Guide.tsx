@@ -19,7 +19,6 @@ import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import QuoteRequestForm from "@/components/QuoteRequestForm";
 import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
-import PriceCalculator from "@/components/PriceCalculator";
 import { WhatsAppButton } from "@/components/Layout";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
@@ -395,27 +394,6 @@ export default function Guide() {
         </div>
       </section>
 
-      {/* 互動式估價計算機 */}
-      <section id="calculator" className="scroll-mt-24 pb-14 md:pb-20">
-        <div className="container">
-          <div className="reveal mb-8 max-w-xl">
-            <div className="mb-2 text-xs font-bold tracking-[0.2em] text-safety">
-              初步估價
-            </div>
-            <h2 className="font-display text-2xl font-black text-navy md:text-3xl">
-              即時估價計算機
-            </h2>
-            <p className="mt-3 text-sm text-muted-foreground md:text-base">
-              選擇淤塞位置、樓宇類型及上門時段，即可查看初步估價範圍，並可透過
-              WhatsApp 確認實際報價。
-            </p>
-          </div>
-          <div className="reveal">
-            <PriceCalculator />
-          </div>
-        </div>
-      </section>
-
       <section className="border-y border-border bg-white py-14 md:py-20">
         <div className="container">
           <QuoteRequestForm
@@ -502,18 +480,18 @@ export default function Guide() {
           <div className="mt-10 flex justify-center">
             <a
               href={whatsappHref(
-                "您好，我想透過相片查詢通渠初步估價，請協助說明需要提供的資料。"
+                "您好，我想透過相片查詢通渠服務，請協助了解需要提供的資料。"
               )}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => {
-                trackCTA("whatsapp", "guide_howto", "影相估價");
+                trackCTA("whatsapp", "guide_howto", "影相查詢");
                 goThanksAfterWhatsApp("guide_howto");
               }}
               className="btn-smooth inline-flex items-center gap-2 rounded-lg bg-wagreen px-7 py-3.5 text-sm font-bold text-white shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark"
             >
               <MessageCircle className="h-4 w-4" strokeWidth={2.5} />
-              傳送相片，取得初步估價
+              WhatsApp 傳送相片查詢
             </a>
           </div>
         </div>
@@ -595,7 +573,7 @@ export default function Guide() {
                     className="mt-0.5 h-5 w-5 shrink-0 text-wagreen"
                     strokeWidth={2.2}
                   />
-                  {f.q}
+                  <span className="min-w-0 break-words">{f.q}</span>
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                   {f.a}

@@ -1,0 +1,25 @@
+.ghost-fibers-container {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--brand-ink, #003566);
+}
+
+.ghost-fibers-container[data-webgl-fallback="true"] {
+  background:
+    radial-gradient(circle at 72% 20%, rgba(31, 158, 209, 0.18), transparent 42%),
+    var(--brand-ink, #003566);
+}
+
+.ghost-fibers-container canvas {
+  opacity: 0.42;
+  mix-blend-mode: screen;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ghost-fibers-container canvas {
+    opacity: 0.3;
+  }
+}

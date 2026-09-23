@@ -5,19 +5,6 @@ import type { TrpcContext } from "./_core/context";
 // Mock db helpers so tests run without a live database
 vi.mock("./db", () => ({
   createInquiry: vi.fn(async () => ({ id: 1 })),
-  createEstimateLead: vi.fn(async () => ({ id: 1 })),
-  listEstimateLeads: vi.fn(async () => [
-    {
-      id: 1,
-      location: "坐廁 / 馬桶",
-      building: "私樓 / 屋苑",
-      timeSlot: "day",
-      priceLow: 600,
-      priceHigh: 1200,
-      sourcePage: "/guide",
-      createdAt: new Date(),
-    },
-  ]),
   listInquiries: vi.fn(async () => [
     {
       id: 1,
@@ -35,7 +22,7 @@ vi.mock("./db", () => ({
   upsertUser: vi.fn(),
 }));
 
-import { createEstimateLead, createInquiry, updateInquiryStatus } from "./db";
+import { createInquiry, updateInquiryStatus } from "./db";
 
 function makeCtx(user: TrpcContext["user"]): TrpcContext {
   return {
@@ -126,49 +113,5 @@ describe("inquiry.list / updateStatus access control", () => {
     const result = await caller.inquiry.updateStatus({ id: 1, status: "contacted" });
     expect(result).toEqual({ success: true });
     expect(updateInquiryStatus).toHaveBeenCalledWith(1, "contacted");
-  });
-});
-
-describe("estimate.record / estimate.list", () => {
-  beforeEach(() => vi.clearAllMocks());
-
-  it("allows guests to record an estimate anonymously", async () => {
-    const caller = appRouter.createCaller(guestCtx);
-    const result = await caller.estimate.record({
-      location: "坐廁 / 馬桶",
-      building: "私樓 / 屋苑",
-      timeSlot: "day",
-      priceLow: 600,
-      priceHigh: 1200,
-      sourcePage: "/guide",
-    });
-    expect(result).toEqual({ id: 1 });
-    expect(createEstimateLead).toHaveBeenCalledOnce();
-  });
-
-  it("rejects negative prices", async () => {
-    const caller = appRouter.createCaller(guestCtx);
-    await expect(
-      caller.estimate.record({
-        location: "坐廁 / 馬桶",
-        building: "私樓 / 屋苑",
-        timeSlot: "day",
-        priceLow: -100,
-        priceHigh: 1200,
-      }),
-    ).rejects.toThrow();
-    expect(createEstimateLead).not.toHaveBeenCalled();
-  });
-
-  it("allows admin to list estimate leads", async () => {
-    const caller = appRouter.createCaller(makeCtx(adminUser));
-    const rows = await caller.estimate.list();
-    expect(rows).toHaveLength(1);
-    expect(rows[0].priceLow).toBe(600);
-  });
-
-  it("blocks non-admin users from listing estimate leads", async () => {
-    const caller = appRouter.createCaller(makeCtx(normalUser));
-    await expect(caller.estimate.list()).rejects.toThrow();
   });
 });

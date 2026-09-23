@@ -172,8 +172,8 @@ export function EditorialHero({ imageSrc }: { imageSrc?: string }) {
             <Link href="/services">
               通渠服務 <ArrowRight aria-hidden="true" />
             </Link>
-            <Link href="/guide#calculator">
-              估價計算機 <ArrowRight aria-hidden="true" />
+            <Link href="/guide">
+              收費原則 <ArrowRight aria-hidden="true" />
             </Link>
             <Link href="/areas">
               查看服務地區 <ArrowRight aria-hidden="true" />

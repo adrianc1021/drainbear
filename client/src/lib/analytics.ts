@@ -6,7 +6,7 @@
  * 設計原則:
  * - 本模組只提供「純事件發送 Helper」,不持有跨頁面瀏覽的去重狀態。
  *   「每次頁面/文章瀏覽一次」的去重由各 Component 以 useRef 於 Mount
- *   生命週期內管理(見 perViewDedup.ts、blogReadTracker.ts)。
+ *   生命週期內管理(見 blogReadTracker.ts)。
  *
  * 配置:
  * - 正式資料串流固定於程式內；開發除錯時可用 window.__GA4_ID__ 暫時覆寫
@@ -407,7 +407,7 @@ export type CtaChannel = "whatsapp" | "phone" | "map";
 /**
  * 追蹤聯絡 CTA 點擊(現有呼叫點沿用,不需改動)。
  * @param channel  whatsapp | phone | map
- * @param location CTA 位置標籤,如 header / mobile_bar / floating_widget / price_calculator
+ * @param location CTA 位置標籤,如 header / mobile_bar / floating_widget
  * @param topic    可選:查詢主題摘要(channel="map" 時視為地區名 area_name)
  *
  * 事件對應:whatsapp → whatsapp_click;phone → phone_click;
@@ -495,7 +495,7 @@ export function trackWhatsAppHandoff(
 
 // ---------------------------------------------------------------------------
 // 聯絡表格(純 Helper;「每次瀏覽一次」的去重由呼叫端 Component 以
-// useRef + perViewDedup 管理,見 perViewDedup.ts)
+// useRef 管理)
 // ---------------------------------------------------------------------------
 
 /** 表格開始填寫(去重由呼叫端保證:每個表格每次頁面瀏覽只呼叫一次) */
@@ -525,25 +525,6 @@ export function trackContactFormError(
     form_name: formName,
     error_type: errorType,
     ...(location ? { cta_location: location } : {}),
-  });
-}
-
-// ---------------------------------------------------------------------------
-// 估價計算機(純 Helper;每次頁面瀏覽/組合的去重由 PriceCalculator
-// Component 以 useRef + perViewDedup 管理)
-// ---------------------------------------------------------------------------
-
-/** 估價計算機開始互動(去重由呼叫端保證:每次頁面瀏覽只呼叫一次) */
-export function trackQuoteCalculatorStart() {
-  sendEvent("quote_calculator_start", { cta_location: "price_calculator" });
-  sendGoogleAdsEvent("quote_calculator_start");
-}
-
-/** 估價計算機完成估價(去重由呼叫端保證:同一次頁面瀏覽同一組合只呼叫一次;topic 為選項摘要,不含個人資料) */
-export function trackQuoteCalculatorComplete(topic?: string) {
-  sendEvent("quote_calculator_complete", {
-    cta_location: "price_calculator",
-    ...(topic ? { topic } : {}),
   });
 }
 

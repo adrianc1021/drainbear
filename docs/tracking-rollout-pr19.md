@@ -10,8 +10,8 @@
 ## Event funnel
 
 1. `page_view`
-2. `quote_calculator_start`
-3. `quote_calculator_complete`
+2. `drain_diagnosis_start`
+3. `drain_diagnosis_complete`
 4. `whatsapp_click` / `phone_click`
 5. `whatsapp_handoff`
 6. `generate_lead`（日後後台確認）
@@ -32,8 +32,8 @@ Ads conversion 會在 WhatsApp CTA 點擊當下送出，`/thanks` handoff 只作
 以下暫時保持普通事件：
 
 - `whatsapp_click`
-- `quote_calculator_start`
-- `quote_calculator_complete`
+- `drain_diagnosis_start`
+- `drain_diagnosis_complete`
 - `area_click`
 - `service_click`
 - `blog_read`
@@ -57,8 +57,7 @@ Google Ads 帳戶必須保持 Auto-tagging 開啟。網站首次 `page_view` 會
 `gclid`／`dclid`／`gbraid`／`wbraid`（不保存其原值至 sessionStorage），並讓
 click ID 優先於手動 UTM，避免 Google Ads 流量落入 GA4 `Unassigned`。
 
-`quote_calculator_start` 會在正式網域直接送往 Google Ads Destination
-`AW-18128738982`，並另外送往 GA4；兩個目的地明確分開，避免 GA4 重複事件。
+診斷流程事件只作行為分析，不代表已收到 WhatsApp 查詢或已成交。
 
 WhatsApp CTA 使用 Website Conversion Action 的完整目的地：
 `AW-18128738982/CSxUCPrKmOQcEKa1usRD`。點擊當下送出一次，並以記憶體去重

@@ -35,11 +35,10 @@ describe("homepage content and discovery", () => {
     expect(html.match(/<h1\b/g)).toHaveLength(1);
     expect(html).toContain('href="https://wa.me/85295588260?');
     expect(html).toContain('href="tel:+85295588260"');
-    expect(html).toContain('href="#calculator"');
     expect(html).toContain("首頁延伸入口");
     for (const section of [
       "promise",
-      "calculator",
+      "common-problems",
       "photo-quote",
       "process",
       "journal",
@@ -55,6 +54,7 @@ describe("homepage content and discovery", () => {
       "method-comparison",
       "field-evidence",
       "capability",
+      "calculator",
     ]) {
       expect(html).not.toContain(`data-pr20-section="${removedSection}"`);
     }

@@ -20,7 +20,6 @@ const required = [
   [analytics, "VITE_GOOGLE_ADS_PHONE_LABEL"],
   [analytics, "VITE_GOOGLE_ADS_FORM_LABEL"],
   [analytics, "sendGoogleAdsConversion"],
-  [analytics, 'sendGoogleAdsEvent("quote_calculator_start")'],
   [analytics, 'const GOOGLE_ADS_DESTINATION_ID = "AW-18128738982"'],
   [analytics, "send_page_view: false"],
   [analytics, "captureGa4AttributionSnapshot"],
@@ -101,5 +100,4 @@ console.log("PASS：PII 防護仍然存在");
 console.log("PASS：Google Ads Conversion Label 採可選配置");
 console.log("PASS：正式 GA4 property 已切換至 G-05DW80HCTS");
 console.log("PASS：Render Docker build 可取得 Google Ads Conversion Label");
-console.log("PASS：quote_calculator_start 明確送往 Google Ads Destination");
 console.log("PASS：Google tag 於首次頁面瀏覽立即載入");

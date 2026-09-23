@@ -48,11 +48,7 @@
 `analytics.ts` 為**純事件發送 Helper**,不保存「每次瀏覽一次」的去重狀態。
 每頁/每篇一次的去重由 Component 生命週期管理:
 
-- **估價計算機**(`PriceCalculator.tsx`):以 `useRef` 持有 `createPerViewDedup()`
-  (`client/src/lib/perViewDedup.ts`)實例——每次 Mount 一個新實例。
-  同一次頁面瀏覽中 `quote_calculator_start` 只記一次、同一組合的
-  `quote_calculator_complete` 只記一次(A→B→A 時 A 不再記錄);
-  離開頁面再返回(重新 Mount)可重新記錄。
+- **估價計算機（歷史記錄）**：此互動元件及其事件已於 2026-09-23 移除；現行網站只追蹤聯絡、問題判斷及內容互動。
 - **Blog 閱讀**(`BlogPost.tsx`):以 `createBlogReadTracker()`
   (`client/src/lib/blogReadTracker.ts`)管理,每次文章瀏覽一個實例,
   unmount 時 `dispose()`;成功記錄後立即清除 Timer 及 Scroll Listener,
@@ -71,8 +67,8 @@
 | `contact_form_start`        | 表格開始填寫(每表格一次)                            | form_name, cta_location                           | ✅ 已接(首頁、指南、服務及案例頁) |
 | `contact_form_submit`       | 伺服器確認提交成功後                                | form_name, cta_location                           | ✅ 已接                           |
 | `contact_form_error`        | 表格提交失敗                                        | form_name, error_type(不含錯誤內文), cta_location | ✅ 已接                           |
-| `quote_calculator_start`    | 估價計算機首次互動(每次頁面瀏覽一次,Component 去重) | cta_location                                      | ✅ 已接                           |
-| `quote_calculator_complete` | 估價完成(每次頁面瀏覽同組合一次,Component 去重)     | cta_location, topic(選項摘要)                     | ✅ 已接                           |
+| `quote_calculator_start`    | 歷史事件；估價計算機已移除 | — | 已停用 |
+| `quote_calculator_complete` | 歷史事件；估價計算機已移除 | — | 已停用 |
 
 ### 導航及內容事件
 
@@ -97,8 +93,7 @@
 2. 將以下事件標記為 Key event：
    `whatsapp_handoff`、`contact_form_submit`；如電話接通資料未有外部回傳，
    可先將 `phone_click` 作為輔助 Key event，但不要將它當作已接通的證明。
-3. `whatsapp_click`、`quote_calculator_start` 及
-   `quote_calculator_complete` 用作漏斗分析，不應全部標記為主要轉化，
+3. `whatsapp_click` 用作聯絡漏斗分析；不要把按鈕點擊直接當成已收到的查詢，
    以免把尚未產生查詢的互動計入業績轉化。
 4. 建立自訂渠道群組時，優先使用 GA4 內建 Google Ads 歸因；手動渠道按
    `utm_medium=cpc`、`paid_social`、`email`、`social`、`referral` 及 `display`
@@ -167,7 +162,7 @@ Source／Medium 值加入相應渠道。
 | `areas_map` / `areas_map_card` / `areas_search` / `areas_footer_cta` | 服務地區                       |
 | `services_section`                                                   | 服務頁                         |
 | `faq_cta` / `blog_cta` / `blogpost_cta`                              | FAQ / Blog CTA                 |
-| `price_calculator`                                                   | 估價計算機                     |
+| `price_calculator`                                                   | 歷史位置標籤；估價計算機已移除 |
 | `thanks_retry` / `thanks_fallback`                                   | 感謝頁                         |
 | `blog_featured` / `blog_grid` / `blogpost_related`                   | Blog 文章卡片                  |
 | `shared_button`                                                      | 共用 WhatsApp 按鈕預設值       |
@@ -180,6 +175,6 @@ Source／Medium 值加入相應渠道。
 | `phone_click`        | `phone_click`                                                                                                | 不變                               |
 | `whatsapp_open`      | `whatsapp_open`                                                                                              | 不變                               |
 | `map_district_click` | `area_click`                                                                                                 | 統一命名;GA4 未接駁,無歷史數據斷層 |
-| —                    | `page_view`(SPA)、`quote_calculator_*`、`blog_post_click`、`blog_read`、`navigation_click`、`contact_form_*` | 新增                               |
+| —                    | `page_view`(SPA)、`blog_post_click`、`blog_read`、`navigation_click`、`contact_form_*` | 新增                               |
 
 計劃書 `button_location` / `button_text` → 沿用現有 `cta_location` / 新增 `cta_label`(已確認決策 4)。
