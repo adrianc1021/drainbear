@@ -109,66 +109,70 @@ function CompactHero() {
       aria-labelledby="home-editorial-heading"
       data-pr20-section="hero"
     >
-      <img
-        className="home-compact-hero__image"
-        src={HERO_IMAGE}
-        alt=""
-        width="1600"
-        height="1000"
-        fetchPriority="high"
-        decoding="async"
-        aria-hidden="true"
-      />
-      <div className="home-compact-hero__wash" aria-hidden="true" />
+      <div className="db-container home-compact-hero__layout">
+        <div className="home-compact-hero__content">
+          <p className="home-compact-hero__eyebrow">香港住宅及商業渠務</p>
+          <h1 id="home-editorial-heading">
+            香港通渠，
+            <br />
+            先報價後動工。
+          </h1>
+          <p className="home-compact-hero__intro">
+            塞廁所、鋅盤去水慢，定係污水倒灌？傳相片及地區，先了解處理方法同報價安排。
+          </p>
 
-      <div className="db-container home-compact-hero__content">
-        <p className="home-compact-hero__eyebrow">
-          香港住宅及商業渠務・24 小時接受查詢
-        </p>
-        <h1 id="home-editorial-heading">
-          香港通渠，
-          <br />
-          先報價後動工。
-        </h1>
-        <p className="home-compact-hero__intro">
-          座廁、鋅盤、企缸、主渠或污水倒灌問題，可先提供所在地區及現場相片，讓團隊了解情況及安排上門。
-        </p>
+          <div className="home-compact-hero__actions">
+            <a
+              href={whatsappDefaultHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => {
+                trackCTA("whatsapp", "home_hero");
+                goThanksAfterWhatsApp("home_hero");
+              }}
+              className="home-compact-hero__primary"
+            >
+              <MessageCircle aria-hidden="true" />
+              <span>WhatsApp 傳相片問價</span>
+            </a>
+            <a
+              href={phoneHref}
+              onClick={() => trackCTA("phone", "home_hero")}
+              className="home-compact-hero__secondary"
+            >
+              <Phone aria-hidden="true" />
+              <span>{phoneDisplay}</span>
+            </a>
+          </div>
 
-        <div className="home-compact-hero__actions">
-          <a
-            href={whatsappDefaultHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => {
-              trackCTA("whatsapp", "home_hero");
-              goThanksAfterWhatsApp("home_hero");
-            }}
-            className="home-compact-hero__primary"
-          >
-            <MessageCircle aria-hidden="true" />
-            <span>WhatsApp 傳送相片查詢</span>
-          </a>
-          <a
-            href={phoneHref}
-            onClick={() => trackCTA("phone", "home_hero")}
-            className="home-compact-hero__secondary"
-          >
-            <Phone aria-hidden="true" />
-            <span>{phoneDisplay}</span>
-          </a>
+          <p className="home-compact-hero__availability">
+            24 小時接受查詢；上門時間按地區、人手及設備確認。
+          </p>
+
+          <ul className="home-compact-hero__proofs" aria-label="服務原則">
+            <li>
+              <Check aria-hidden="true" /> 動工前確認收費
+            </li>
+            <li>
+              <ShieldCheck aria-hidden="true" /> 新增工序事前說明
+            </li>
+            <li>
+              <Check aria-hidden="true" /> 完工後測試去水
+            </li>
+          </ul>
         </div>
-
-        <ul className="home-compact-hero__proofs" aria-label="服務原則">
-          <li>
-            <Check aria-hidden="true" /> 動工前確認收費
-          </li>
-          <li>
-            <ShieldCheck aria-hidden="true" /> 新增工序事前說明
-          </li>
-          <li>
-            <Check aria-hidden="true" /> 完工後測試去水
-          </li>
-        </ul>
+        <figure className="home-compact-hero__figure">
+          <img
+            className="home-compact-hero__image"
+            src={HERO_IMAGE}
+            alt="通渠工具與室內去水位的服務示意"
+            width="1600"
+            height="1000"
+            fetchPriority="high"
+            decoding="async"
+          />
+          <figcaption>服務示意圖，非客戶工程紀錄。</figcaption>
+        </figure>
       </div>
     </section>
   );
@@ -184,14 +188,15 @@ function CommonProblemsNav() {
       <div className="db-container home-common-problems__inner">
         <div className="home-common-problems__heading">
           <EditorialKicker>快速找到相關服務</EditorialKicker>
-          <h2 id="home-common-problems-heading">
-            你遇到邊種渠務問題？
-          </h2>
+          <h2 id="home-common-problems-heading">你遇到邊種渠務問題？</h2>
           <p>
             可以直接查看處理方法，亦可以跳過閱讀，立即 WhatsApp 傳送現場相片。
           </p>
         </div>
-        <div className="home-common-problems__grid">
+        <nav
+          className="home-common-problems__grid"
+          aria-label="按渠務問題查看服務"
+        >
           {COMMON_PROBLEMS.map(problem => (
             <Link
               key={problem.href}
@@ -214,7 +219,7 @@ function CommonProblemsNav() {
               </span>
             </Link>
           ))}
-        </div>
+        </nav>
       </div>
     </section>
   );
