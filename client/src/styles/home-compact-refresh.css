@@ -37,12 +37,21 @@
 }
 
 .home-compact-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   background: var(--brand-ink);
   color: #fff;
   padding-block: 7.5rem 3.5rem;
 }
 
+.home-compact-hero__fibers {
+  opacity: 0.9;
+}
+
 .home-compact-hero__layout {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
   align-items: center;

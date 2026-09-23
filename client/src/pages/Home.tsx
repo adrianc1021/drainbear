@@ -8,6 +8,7 @@ import {
 import { Link } from "wouter";
 import CmsPageSEO from "@/components/CmsPageSEO";
 import DrainHomeFaq, { FAQ_ITEMS } from "@/components/DrainHomeFaq";
+import GhostFibers from "@/components/GhostFibers/GhostFibers";
 import { EditorialPromise } from "@/components/editorial/HomeEditorialCore";
 import { EditorialKicker } from "@/components/editorial/EditorialPrimitives";
 import { BUSINESS_ID, SITE_URL, WEBSITE_ID } from "@/config/site";
@@ -109,6 +110,20 @@ function CompactHero() {
       aria-labelledby="home-editorial-heading"
       data-pr20-section="hero"
     >
+      <GhostFibers
+        className="home-compact-hero__fibers"
+        lineColor="#a2ddf5"
+        glowColor="#269ed1"
+        backgroundColor="#003566"
+        speed={0.14}
+        scale={2.2}
+        rotationSpeed={0.1}
+        layers={4}
+        glowIntensity={1.1}
+        brightness={1.25}
+        grain={0.02}
+        fps={30}
+      />
       <div className="db-container home-compact-hero__layout">
         <div className="home-compact-hero__content">
           <p className="home-compact-hero__eyebrow">香港住宅及商業渠務</p>
