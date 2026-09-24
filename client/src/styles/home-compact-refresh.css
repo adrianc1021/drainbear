@@ -88,6 +88,7 @@ a[href*="wa.me"]::after {
   background: linear-gradient(105deg, transparent 42%, rgba(255, 255, 255, 0.48) 50%, transparent 58%);
   transform: translateX(-75%) rotate(12deg);
   transition: transform 0.7s ease;
+  animation: whatsapp-sheen 3.4s ease-in-out infinite;
 }
 
 a[href*="wa.me"] > * {
@@ -111,12 +112,19 @@ a[href*="wa.me"]:focus-visible {
   82% { box-shadow: 0 0 0 7px rgba(37, 211, 102, 0.16); }
 }
 
+@keyframes whatsapp-sheen {
+  0%, 18% { opacity: 0; transform: translateX(-85%) rotate(12deg); }
+  42% { opacity: 1; }
+  68%, 100% { opacity: 0; transform: translateX(85%) rotate(12deg); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   a[href*="wa.me"] {
     animation: none;
   }
 
   a[href*="wa.me"]::after {
+    animation: none;
     transition: none;
   }
 }
