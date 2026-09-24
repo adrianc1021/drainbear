@@ -19,6 +19,24 @@ declare global {
   }
 }
 
+async function requestRecaptchaToken(siteKey: string): Promise<string | undefined> {
+  const startedAt = Date.now();
+  while (Date.now() - startedAt < 6000) {
+    if (window.grecaptcha) {
+      return new Promise(resolve => {
+        window.grecaptcha?.ready(() => {
+          window.grecaptcha
+            ?.execute(siteKey, { action: "inquiry_submit" })
+            .then(resolve)
+            .catch(() => resolve(undefined));
+        });
+      });
+    }
+    await new Promise(resolve => window.setTimeout(resolve, 100));
+  }
+  return undefined;
+}
+
 export type InquiryServiceType =
   | "residential"
   | "commercial"
@@ -124,12 +142,13 @@ function QuoteRequestFormContent({
     setClientError("");
 
     let recaptchaToken: string | undefined;
-    if (recaptchaSiteKey && window.grecaptcha) {
-      recaptchaToken = await new Promise<string | undefined>(resolve => {
-        window.grecaptcha?.ready(() => {
-          window.grecaptcha?.execute(recaptchaSiteKey, { action: "inquiry_submit" }).then(resolve).catch(() => resolve(undefined));
-        });
-      });
+    if (recaptchaSiteKey) {
+      recaptchaToken = await requestRecaptchaToken(recaptchaSiteKey);
+      if (!recaptchaToken) {
+        setClientError("安全驗證尚未完成，請稍候再按一次提交。\n如持續出現此訊息，請重新整理頁面。");
+        trackContactFormError("inquiry_form", "recaptcha", location);
+        return;
+      }
     }
 
     mutation.mutate({
