@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import {
   ArrowRight,
   Check,
@@ -186,12 +187,44 @@ export function EditorialHero({ imageSrc }: { imageSrc?: string }) {
 }
 
 export function EditorialPromise() {
+  const bannerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const banner = bannerRef.current;
+    banner?.removeAttribute("data-entered");
+    if (
+      !banner ||
+      typeof IntersectionObserver === "undefined" ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) return;
+
+    const observer = new IntersectionObserver(entries => {
+      if (!entries.some(entry => entry.isIntersecting)) return;
+      banner.dataset.entered = "true";
+      observer.disconnect();
+    }, { threshold: 0.2 });
+    observer.observe(banner);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
       aria-labelledby="editorial-promise-heading"
-      className="db-section db-section--paper"
+      className="db-section db-section--paper home-promise-section"
       data-pr20-section="promise"
     >
+      <div ref={bannerRef} className="home-promise-banner">
+        <img
+          src="/images/pricing-assurance-banner.jpg"
+          srcSet="/images/pricing-assurance-banner-1170.jpg 1170w, /images/pricing-assurance-banner.jpg 2336w"
+          sizes="100vw"
+          width={2336}
+          height={992}
+          loading="lazy"
+          decoding="async"
+          alt="報價清楚，施工安心。檢查、報價、確認、施工。"
+        />
+      </div>
       <div className="home-promise-grid db-container grid gap-12 lg:grid-cols-[0.76fr_1.24fr] lg:gap-20">
         <div>
           <EditorialKicker>收費原則</EditorialKicker>
@@ -201,11 +234,6 @@ export function EditorialPromise() {
           >
             先問清楚，才安心。
           </h2>
-          <p className="home-pricing-summary">
-            一般鋅盤、企缸疏通 HK$500 起；座廁 HK$600
-            起。先報價，確認後才動工。
-          </p>
-
           <div className="mt-8 flex flex-wrap gap-5">
             <Link
               href="/guide"

@@ -276,6 +276,34 @@
   color: var(--brand-ink);
 }
 
+.home-editorial--compact .home-promise-section {
+  padding-top: 0;
+}
+
+.home-promise-banner {
+  overflow: hidden;
+  margin-bottom: clamp(2.5rem, 5vw, 5rem);
+  background: #102d50;
+}
+
+.home-promise-banner img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2336 / 992;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .home-promise-banner[data-entered="true"] img {
+    animation: promise-banner-settle 1.4s cubic-bezier(0.2, 0.65, 0.3, 1) both;
+  }
+}
+
+@keyframes promise-banner-settle {
+  from { transform: scale(1.025); }
+  to { transform: scale(1); }
+}
+
 .home-editorial--compact .home-photo-quote {
   background: var(--brand-ink);
 }
