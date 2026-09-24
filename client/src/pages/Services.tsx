@@ -23,6 +23,7 @@ import { Link } from "wouter";
 import { WhatsAppButton } from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import GhostFibers from "@/components/GhostFibers/GhostFibers";
 import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
 import { BUSINESS_ID, SITE_URL } from "@/config/site";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
@@ -192,32 +193,48 @@ export default function Services() {
         jsonLd={SERVICES_JSONLD}
         breadcrumbs={SERVICES_CRUMBS}
       />
-      <Breadcrumbs items={SERVICES_CRUMBS} />
       {/* 頁首 */}
-      <EditorialPageHero
-        kicker="專業服務"
-        title={
-          <>
-            全方位通渠服務，
-            <br />
-            因應現場選擇方案
-          </>
-        }
-        description="由一般住宅淤塞到商業主渠工程，團隊會先了解管道結構、淤塞程度及現場環境，再建議合適設備與處理方向。"
-        media={{
-          src: "/images/home-drain-technician-wide.jpg",
-          alt: "通渠師傅在現場檢查排水管道",
-          caption: "服務示意圖・實際處理方法按現場確認",
-        }}
-        actions={
-          <WhatsAppButton
-            className="phase4-primary-action"
-            label="WhatsApp 查詢報價"
-            trackLocation="services_hero"
-          />
-        }
-        className="phase4-services__hero"
-      />
+      <div className="phase4-services__hero-shell">
+        <GhostFibers
+          className="phase4-services__fibers"
+          lineColor="#8ed8f4"
+          glowColor="#176da5"
+          backgroundColor="#003566"
+          speed={0.055}
+          scale={2.8}
+          rotationSpeed={0.035}
+          layers={3}
+          glowIntensity={0.45}
+          brightness={0.72}
+          grain={0.008}
+          fps={18}
+        />
+        <Breadcrumbs items={SERVICES_CRUMBS} tone="dark" />
+        <EditorialPageHero
+          kicker="專業服務"
+          title={
+            <>
+              全方位通渠服務，
+              <br />
+              因應現場選擇方案
+            </>
+          }
+          description="由一般住宅淤塞到商業主渠工程，團隊會先了解管道結構、淤塞程度及現場環境，再建議合適設備與處理方向。"
+          media={{
+            src: "/images/home-drain-technician-wide.jpg",
+            alt: "通渠師傅在現場檢查排水管道",
+            caption: "服務示意圖・實際處理方法按現場確認",
+          }}
+          actions={
+            <WhatsAppButton
+              className="phase4-primary-action"
+              label="WhatsApp 查詢報價"
+              trackLocation="services_hero"
+            />
+          }
+          className="phase4-services__hero"
+        />
+      </div>
 
       <section className="services-tools border-y border-border bg-mist py-8">
         <div className="container grid gap-4 md:grid-cols-2">
