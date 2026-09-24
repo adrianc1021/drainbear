@@ -43,6 +43,20 @@
   z-index: var(--site-header-z);
 }
 
+/* A short shared transition keeps inner pages connected to the dark brand header
+   while leaving their breadcrumb, title and content sections readable. */
+.site-inner-atmosphere {
+  position: relative;
+  height: clamp(3.5rem, 8vw, 6rem);
+  overflow: hidden;
+  isolation: isolate;
+  background: #073b70;
+}
+
+.site-inner-atmosphere__fibers {
+  opacity: 0.42;
+}
+
 .site-header__row {
   gap: 0.75rem;
 }

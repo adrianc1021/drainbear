@@ -808,7 +808,7 @@ a svg {
   min-height: 0;
 }
 .phase4-service-detail__hero {
-  background: var(--brand-paper);
+  background: #003566;
 }
 .phase4-service-detail__hero h1 {
   font-size: clamp(2rem, 3.4vw, 3.4rem);
