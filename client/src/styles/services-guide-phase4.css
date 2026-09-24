@@ -308,9 +308,7 @@
 
 .phase4-service-detail__hero {
   border-bottom: 1px solid var(--phase4-rule);
-  background:
-    linear-gradient(90deg, rgba(255, 107, 0, 0.035), transparent 40%),
-    var(--phase4-paper);
+  color: #fff;
 }
 
 .phase4-service-detail__hero > .container {
@@ -326,11 +324,20 @@
   font-size: clamp(2.75rem, 5vw, 5rem);
   line-height: 1.1;
   letter-spacing: -0.025em;
+  color: #fff;
 }
 
 .phase4-service-detail__hero p {
-  color: var(--phase4-copy);
+  color: rgba(255, 255, 255, 0.8);
   line-height: 1.85;
+}
+
+.phase4-service-detail__fibers {
+  opacity: 0.58;
+}
+
+.phase4-service-detail__hero .phase4-service-detail__fibers canvas {
+  opacity: 0.62;
 }
 
 .phase4-service-detail__hero > .container > div:last-child {

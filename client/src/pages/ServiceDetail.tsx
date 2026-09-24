@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { Link, useParams } from "wouter";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import GhostFibers from "@/components/GhostFibers/GhostFibers";
 import QuoteRequestForm, {
   type InquiryServiceType,
 } from "@/components/QuoteRequestForm";
@@ -99,19 +100,32 @@ export default function ServiceDetail() {
         breadcrumbs={crumbs}
       />
 
-      <Breadcrumbs items={crumbs} />
-
       <main>
-        <section className="phase4-service-detail__hero bg-gradient-to-b from-mist to-white py-14 md:py-20">
-          <div className="container grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+        <section className="phase4-service-detail__hero relative isolate overflow-hidden bg-[#003566] py-14 md:py-20">
+          <GhostFibers
+            className="phase4-service-detail__fibers"
+            lineColor="#8ed8f4"
+            glowColor="#176da5"
+            backgroundColor="#003566"
+            speed={0.06}
+            scale={2.8}
+            rotationSpeed={0.035}
+            layers={3}
+            glowIntensity={0.5}
+            brightness={0.78}
+            grain={0.008}
+            fps={20}
+          />
+          <Breadcrumbs items={crumbs} tone="dark" />
+          <div className="container relative z-10 grid items-center gap-10 pt-8 lg:grid-cols-[1.05fr_0.95fr] md:pt-10">
             <div>
-              <p className="text-xs font-bold tracking-[0.2em] text-safety">
+              <p className="text-xs font-bold tracking-[0.2em] text-[#9ee7ff]">
                 {service.eyebrow}
               </p>
-              <h1 className="mt-3 text-balance font-display text-4xl font-black text-navy md:text-5xl">
+              <h1 className="mt-3 text-balance font-display text-4xl font-black text-white md:text-5xl">
                 {service.heroTitle}
               </h1>
-              <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+              <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/80 md:text-lg">
                 {service.heroDescription}
               </p>
 
@@ -137,14 +151,14 @@ export default function ServiceDetail() {
                   onClick={() =>
                     trackCTA("phone", "service_detail_hero", service.slug)
                   }
-                  className="btn-smooth inline-flex min-h-[48px] items-center justify-center gap-2 rounded-lg bg-navy px-7 py-3.5 font-bold text-white hover:bg-navy-light"
+                  className="btn-smooth inline-flex min-h-[48px] items-center justify-center gap-2 rounded-lg border border-white/70 bg-white/10 px-7 py-3.5 font-bold text-white hover:bg-white/20"
                 >
                   <Phone className="h-5 w-5" />
                   {phoneDisplay}
                 </a>
               </div>
 
-              <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
+              <p className="mt-4 text-xs leading-relaxed text-white/65">
                 WhatsApp
                 可先提供初步估價；師傅現場檢查後、動工前確認最終總收費。
               </p>
