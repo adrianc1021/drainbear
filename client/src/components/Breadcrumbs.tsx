@@ -12,7 +12,7 @@ export interface Crumb {
 
 export default function Breadcrumbs({
   items,
-  tone = "default",
+  tone = "dark",
 }: {
   items: Crumb[];
   tone?: "default" | "dark";
@@ -21,7 +21,7 @@ export default function Breadcrumbs({
   return (
     <nav
       aria-label="麵包屑導航"
-      className={`container relative z-10 pt-5 md:pt-6 ${dark ? "text-white/75" : ""}`}
+      className={`site-breadcrumbs container relative z-10 pt-5 md:pt-6 ${dark ? "site-breadcrumbs--dark text-white/75" : ""}`}
     >
       <ol className="flex flex-wrap items-center gap-1.5 text-xs md:text-sm">
         {items.map((c, i) => {

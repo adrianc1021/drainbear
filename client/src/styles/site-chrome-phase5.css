@@ -57,6 +57,20 @@
   opacity: 0.42;
 }
 
+.site-breadcrumbs {
+  width: 100%;
+  max-width: 80rem;
+}
+
+.site-breadcrumbs--dark {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: max(1rem, calc((100vw - 80rem) / 2 + 1rem));
+  background: #003566;
+  color: rgba(255, 255, 255, 0.75);
+}
+
 .site-header__row {
   gap: 0.75rem;
 }

@@ -99,9 +99,34 @@
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid var(--site-rule);
-  background:
-    linear-gradient(90deg, rgba(255, 122, 0, 0.035), transparent 35%),
-    var(--site-paper);
+  isolation: isolate;
+  background: #003566;
+  color: #fff;
+}
+
+.site-page-hero__fibers {
+  opacity: 0.5;
+}
+
+.site-custom-hero__fibers {
+  opacity: 0.5;
+}
+
+.case-studies-hero .case-studies-hero__title,
+.case-studies-hero .case-studies-hero__support,
+.case-studies-hero .case-studies-hero__support p,
+.case-studies-hero .case-studies-hero__media figcaption,
+.case-study-detail__title {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.case-studies-hero .case-studies-hero__title {
+  color: #fff;
+}
+
+.site-page-hero__inner {
+  position: relative;
+  z-index: 1;
 }
 
 .site-page-hero::after {
@@ -131,7 +156,7 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  color: var(--site-ink);
+  color: #fff;
   font-size: 0.75rem;
   font-weight: 800;
   line-height: 1.5;
@@ -144,13 +169,13 @@
   width: 2.25rem;
   height: 2px;
   flex: none;
-  background: var(--site-safety);
+  background: #9ee7ff;
 }
 
 .site-page-hero__title {
   max-width: 12em;
   margin-top: 1.25rem;
-  color: var(--site-ink);
+  color: #fff;
   font-size: clamp(2.75rem, 5vw, 5.25rem);
   font-weight: 900;
   line-height: 1.1;
@@ -165,7 +190,7 @@
 
 .site-page-hero__description {
   max-width: 38rem;
-  color: var(--site-copy);
+  color: rgba(255, 255, 255, 0.8);
   font-size: clamp(1rem, 1.4vw, 1.125rem);
   line-height: 1.85;
 }

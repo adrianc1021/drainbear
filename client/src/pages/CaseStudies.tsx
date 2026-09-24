@@ -1,6 +1,7 @@
 import { ArrowRight, CalendarDays, MapPin } from "lucide-react";
 import { Link } from "wouter";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import GhostFibers from "@/components/GhostFibers/GhostFibers";
 import QuoteRequestForm from "@/components/QuoteRequestForm";
 import SEO from "@/components/SEO";
 import { WhatsAppButton } from "@/components/Layout";
@@ -59,8 +60,22 @@ export default function CaseStudies() {
       />
       <Breadcrumbs items={CRUMBS} />
 
-      <header className="case-studies-hero border-b border-[var(--db-rule)]">
-        <div className="db-container case-studies-hero__grid">
+      <header className="case-studies-hero relative isolate overflow-hidden border-b border-white/15 bg-[#003566] text-white">
+        <GhostFibers
+          className="site-custom-hero__fibers"
+          lineColor="#8ed8f4"
+          glowColor="#176da5"
+          backgroundColor="#003566"
+          speed={0.055}
+          scale={2.8}
+          rotationSpeed={0.035}
+          layers={3}
+          glowIntensity={0.45}
+          brightness={0.72}
+          grain={0.008}
+          fps={18}
+        />
+        <div className="relative z-10 db-container case-studies-hero__grid">
           <div>
             <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--db-safety)]">
               Field records / 工程紀錄
@@ -89,7 +104,7 @@ export default function CaseStudies() {
         </div>
       </header>
 
-      <main className="db-container py-12 md:py-16">
+      <div className="db-container py-12 md:py-16">
         {isLoading ? (
           <p
             role="status"
@@ -164,7 +179,7 @@ export default function CaseStudies() {
             案例資料暫時未能更新，請稍後再試。
           </p>
         ) : null}
-      </main>
+      </div>
 
       <section className="border-y border-[var(--db-rule)] bg-white">
         <div className="db-container py-12 md:py-16">

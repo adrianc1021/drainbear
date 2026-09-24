@@ -104,6 +104,43 @@
   color: rgba(255, 255, 255, 0.72);
 }
 
+/* Every editorial service-facing Hero shares the dark brand surface. The
+   sections below are page-specific layouts; their following content keeps its
+   existing light surfaces. */
+.phase4-guide__hero,
+.phase4-services__hero,
+.areas-editorial > [data-visual-section="areas-hero"],
+.district-editorial > section:first-of-type {
+  background: #003566;
+  color: #fff;
+}
+
+.phase4-guide__hero h1,
+.phase4-guide__hero p,
+.areas-editorial > [data-visual-section="areas-hero"] h1,
+.areas-editorial > [data-visual-section="areas-hero"] p,
+.district-editorial > section:first-of-type h1,
+.district-editorial > section:first-of-type p {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.phase4-guide__hero h1,
+.areas-editorial > [data-visual-section="areas-hero"] h1,
+.district-editorial > section:first-of-type h1 {
+  color: #fff;
+}
+
+.phase4-guide__hero .phase4-secondary-action {
+  border-color: rgba(255, 255, 255, 0.65);
+  color: #fff;
+}
+
+.phase4-guide__hero .phase4-secondary-action:hover,
+.phase4-guide__hero .phase4-secondary-action:focus-visible {
+  color: #fff;
+  border-color: #fff;
+}
+
 .phase4-services__hero .site-page-hero__title {
   /* Keep the two-line Chinese headline inside its grid track. */
   max-width: 100%;

@@ -100,7 +100,7 @@ export default function ServiceDetail() {
         breadcrumbs={crumbs}
       />
 
-      <main>
+      <div>
         <section className="phase4-service-detail__hero relative isolate overflow-hidden bg-[#003566] py-14 md:py-20">
           <GhostFibers
             className="phase4-service-detail__fibers"
@@ -493,7 +493,7 @@ export default function ServiceDetail() {
             </div>
           </div>
         </section>
-      </main>
+      </div>
     </div>
   );
 }

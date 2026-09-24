@@ -1,6 +1,7 @@
 import { CalendarDays, Clock, MapPin, Wrench } from "lucide-react";
 import { useParams } from "wouter";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import GhostFibers from "@/components/GhostFibers/GhostFibers";
 import QuoteRequestForm from "@/components/QuoteRequestForm";
 import SEO from "@/components/SEO";
 import { WhatsAppButton } from "@/components/Layout";
@@ -64,8 +65,22 @@ export default function CaseStudyDetail() {
       ) : study ? (
         <>
           <article>
-            <header className="border-b border-[var(--db-rule)]">
-              <div className="db-container grid gap-10 py-12 md:py-18 lg:grid-cols-[minmax(0,1.05fr)_minmax(18rem,0.75fr)] lg:items-end lg:gap-16">
+            <header className="case-study-detail__hero relative isolate overflow-hidden border-b border-white/15 bg-[#003566] text-white">
+              <GhostFibers
+                className="site-custom-hero__fibers"
+                lineColor="#8ed8f4"
+                glowColor="#176da5"
+                backgroundColor="#003566"
+                speed={0.055}
+                scale={2.8}
+                rotationSpeed={0.035}
+                layers={3}
+                glowIntensity={0.45}
+                brightness={0.72}
+                grain={0.008}
+                fps={18}
+              />
+              <div className="relative z-10 db-container grid gap-10 py-12 md:py-18 lg:grid-cols-[minmax(0,1.05fr)_minmax(18rem,0.75fr)] lg:items-end lg:gap-16">
                 <div>
                   <p className="text-xs font-black uppercase tracking-[0.15em] text-[var(--db-safety)]">{study.serviceLabel}</p>
                   <h1 className="case-study-detail__title mt-5 max-w-3xl font-display font-black leading-[1.1] text-[var(--db-ink)]">{study.title}</h1>

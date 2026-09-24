@@ -849,6 +849,41 @@ a svg {
 .district-editorial > section:first-of-type {
   background: var(--brand-paper);
 }
+
+/* Dark brand mastheads override the older editorial paper defaults. */
+.site-page-hero,
+.phase4-guide .phase4-guide__hero,
+.case-studies-hero,
+.areas-editorial [data-visual-section="areas-hero"],
+.district-editorial > section:first-of-type,
+.case-study-detail__hero {
+  background: #003566;
+  color: #fff;
+}
+
+.phase4-guide .phase4-guide__hero h1,
+.phase4-guide .phase4-guide__hero p,
+.site-page-hero .site-page-hero__title,
+.site-page-hero .site-page-hero__description,
+.areas-editorial [data-visual-section="areas-hero"] h1,
+.areas-editorial [data-visual-section="areas-hero"] p,
+.district-editorial > section:first-of-type h1,
+.district-editorial > section:first-of-type p,
+.case-studies-hero h1,
+.case-studies-hero p,
+.case-study-detail__hero h1,
+.case-study-detail__hero p {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.phase4-guide .phase4-guide__hero h1,
+.site-page-hero .site-page-hero__title,
+.areas-editorial [data-visual-section="areas-hero"] h1,
+.district-editorial > section:first-of-type h1,
+.case-studies-hero h1,
+.case-study-detail__hero h1 {
+  color: #fff;
+}
 .areas-editorial h1,
 .district-editorial h1 {
   font-size: clamp(2rem, 3.4vw, 3.5rem);

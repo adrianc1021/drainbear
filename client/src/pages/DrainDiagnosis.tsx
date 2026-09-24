@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import GhostFibers from "@/components/GhostFibers/GhostFibers";
 import DistrictAutocomplete from "@/components/DistrictAutocomplete";
 import SEO from "@/components/SEO";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
@@ -189,17 +190,31 @@ export default function DrainDiagnosis() {
       />
       <Breadcrumbs items={CRUMBS} />
 
-      <main>
-        <section className="border-b border-border bg-mist py-12 md:py-16">
-          <div className="container grid items-end gap-8 lg:grid-cols-[1fr_0.7fr]">
+      <div>
+        <section className="relative isolate overflow-hidden border-b border-white/15 bg-[#003566] py-12 text-white md:py-16">
+          <GhostFibers
+            className="site-custom-hero__fibers"
+            lineColor="#8ed8f4"
+            glowColor="#176da5"
+            backgroundColor="#003566"
+            speed={0.055}
+            scale={2.8}
+            rotationSpeed={0.035}
+            layers={3}
+            glowIntensity={0.45}
+            brightness={0.72}
+            grain={0.008}
+            fps={18}
+          />
+          <div className="container relative z-10 grid items-end gap-8 lg:grid-cols-[1fr_0.7fr]">
             <div className="max-w-3xl">
-              <p className="text-xs font-bold tracking-[0.18em] text-safety">
+              <p className="text-xs font-bold tracking-[0.18em] text-[#9ee7ff]">
                 現場問題判斷
               </p>
-              <h1 className="mt-3 text-balance font-display text-4xl font-black text-navy md:text-5xl">
+              <h1 className="mt-3 text-balance font-display text-4xl font-black text-white md:text-5xl">
                 先看症狀，再決定下一步
               </h1>
-              <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
+              <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/80 md:text-lg">
                 選擇現場情況後，取得安全措施、可能涉及的範圍及相關服務方向。網上結果不能取代現場檢查。
               </p>
             </div>
@@ -448,7 +463,7 @@ export default function DrainDiagnosis() {
             </div>
           </div>
         </section>
-      </main>
+      </div>
     </div>
   );
 }

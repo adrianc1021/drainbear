@@ -126,6 +126,9 @@ export default function FAQ() {
           alt: "通渠師傅在住宅現場處理排水問題",
           caption: "如有污水外溢或水位上升，請先停止用水並提供現場資料",
         }}
+        actions={
+          <WhatsAppButton label="WhatsApp 查詢" trackLocation="faq_hero" />
+        }
       />
 
       <section className="border-b border-border bg-mist/55 py-10">

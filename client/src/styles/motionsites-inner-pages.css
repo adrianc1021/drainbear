@@ -45,7 +45,7 @@
 }
 
 .areas-editorial [data-visual-section="areas-hero"] {
-  background: var(--site-paper);
+  background: #003566;
   border-bottom: 1px solid var(--site-rule);
 }
 

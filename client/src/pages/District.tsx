@@ -17,6 +17,7 @@ import {
 import { WhatsAppButton } from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import GhostFibers from "@/components/GhostFibers/GhostFibers";
 import {
   useContactSettings,
   useSiteSettings,
@@ -100,8 +101,22 @@ export default function District() {
       <Breadcrumbs items={crumbs} />
 
       {/* Hero */}
-      <section className="bg-gradient-to-b from-mist to-white py-14 md:py-20">
-        <div className="container">
+      <section className="relative isolate overflow-hidden bg-[#003566] py-14 text-white md:py-20">
+        <GhostFibers
+          className="site-custom-hero__fibers"
+          lineColor="#8ed8f4"
+          glowColor="#176da5"
+          backgroundColor="#003566"
+          speed={0.055}
+          scale={2.8}
+          rotationSpeed={0.035}
+          layers={3}
+          glowIntensity={0.45}
+          brightness={0.72}
+          grain={0.008}
+          fps={18}
+        />
+        <div className="container relative z-10">
           <div className="max-w-2xl">
             <div className="mb-3 flex items-center gap-2 text-xs font-bold tracking-[0.2em] text-safety">
               <MapPin className="h-4 w-4" strokeWidth={2.5} />

@@ -80,6 +80,9 @@ export default function Blog() {
           alt: "排水管道檢查設備示意圖",
           caption: "由日常防塞到工程判斷，按需要查閱相關資料",
         }}
+        actions={
+          <WhatsAppButton label="WhatsApp 查詢" trackLocation="blog_hero" />
+        }
       />
 
       <section className="site-content-section bg-white">

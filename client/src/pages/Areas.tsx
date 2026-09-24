@@ -24,6 +24,7 @@ import { WhatsAppButton } from "@/components/Layout";
 import HongKongMap from "@/components/HongKongMap";
 import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import GhostFibers from "@/components/GhostFibers/GhostFibers";
 import {
   useContactSettings,
   useSiteSettings,
@@ -550,11 +551,25 @@ export default function Areas() {
 
       {/* Hero + 地區速查 */}
       <section
-        className="bg-gradient-to-b from-mist to-white py-14 md:py-20"
+        className="relative isolate overflow-hidden bg-[#003566] py-14 text-white md:py-20"
         data-visual-section="areas-hero"
       >
+        <GhostFibers
+          className="site-custom-hero__fibers"
+          lineColor="#8ed8f4"
+          glowColor="#176da5"
+          backgroundColor="#003566"
+          speed={0.055}
+          scale={2.8}
+          rotationSpeed={0.035}
+          layers={3}
+          glowIntensity={0.45}
+          brightness={0.72}
+          grain={0.008}
+          fps={18}
+        />
         <div className="container">
-          <div className="areas-editorial__hero-grid">
+          <div className="relative z-10 areas-editorial__hero-grid">
             <div className="mx-auto max-w-2xl text-center">
               <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">
                 服務地區

@@ -23,6 +23,8 @@ import {
 import { useBlogPost, useBlogPosts } from "@/lib/useBlog";
 import type { SanityArticleImage, SanityExpertTip } from "@/lib/sanity/types";
 import { WhatsAppButton } from "@/components/Layout";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import GhostFibers from "@/components/GhostFibers/GhostFibers";
 import SEO from "@/components/SEO";
 import { useSiteSettings } from "@/contexts/SiteSettingsContext";
 import { createImageSrcSet, optimizedImageUrl } from "@/lib/imageOptimization";
@@ -337,11 +339,33 @@ export default function BlogPost() {
         ]}
       />
 
-      <section className="bg-gradient-to-b from-mist to-white py-14 md:py-16">
-        <div className="mx-auto max-w-3xl px-4">
+      <section className="relative isolate overflow-hidden bg-[#003566] py-14 text-white md:py-16">
+        <GhostFibers
+          className="site-custom-hero__fibers"
+          lineColor="#8ed8f4"
+          glowColor="#176da5"
+          backgroundColor="#003566"
+          speed={0.055}
+          scale={2.8}
+          rotationSpeed={0.035}
+          layers={3}
+          glowIntensity={0.45}
+          brightness={0.72}
+          grain={0.008}
+          fps={18}
+        />
+        <Breadcrumbs
+          tone="dark"
+          items={[
+            { name: "首頁", path: "/" },
+            { name: "通渠小知識", path: "/blog" },
+            { name: post.title, path: `/blog/${post.slug}` },
+          ]}
+        />
+        <div className="relative z-10 mx-auto max-w-3xl px-4">
           <Link
             href="/blog"
-            className="btn-smooth inline-flex min-h-[44px] items-center gap-1.5 text-sm font-bold text-navy/60 hover:gap-2.5 hover:text-navy"
+            className="btn-smooth inline-flex min-h-[44px] items-center gap-1.5 text-sm font-bold text-white/75 hover:gap-2.5 hover:text-white"
           >
             <ArrowLeft className="h-4 w-4" />
             返回通渠小知識
@@ -351,11 +375,11 @@ export default function BlogPost() {
             {post.category}
           </div>
 
-          <h1 className="mt-4 text-balance font-display text-3xl font-black leading-tight text-navy md:text-4xl">
+          <h1 className="mt-4 text-balance font-display text-3xl font-black leading-tight text-white md:text-4xl">
             {post.title}
           </h1>
 
-          <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
+          <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-white/70">
             <span className="inline-flex items-center gap-1.5">
               <CalendarDays className="h-4 w-4" />
               發布 {formatDate(post.date)}
@@ -377,7 +401,7 @@ export default function BlogPost() {
           </div>
 
           <aside
-            className="mt-7 border-y border-border py-5"
+            className="mt-7 border-y border-white/20 py-5"
             aria-labelledby="article-content-details"
           >
             <h2 id="article-content-details" className="sr-only">
