@@ -753,7 +753,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     typeof window === "undefined" ? routerPathname : window.location.pathname;
   const pathname = browserPathname.replace(/\/+$/, "") || "/";
   const isHome = pathname === "/";
-  const isServiceDetail = pathname.startsWith("/services/");
+  const isServicesRoute = pathname === "/services" || pathname.startsWith("/services/");
   const suppressConversionChrome = pathname === "/thanks";
 
   useReveal();
@@ -787,7 +787,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         tabIndex={-1}
         className={`flex-1 outline-none ${isHome ? "home-main" : "pt-16 md:pt-[72px]"}`}
       >
-        {!isHome && !isServiceDetail ? <InnerPageAtmosphere /> : null}
+        {!isHome && !isServicesRoute ? <InnerPageAtmosphere /> : null}
         {children}
       </main>
       <Footer />
