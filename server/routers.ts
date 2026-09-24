@@ -88,12 +88,18 @@ export const appRouter = router({
             body: new URLSearchParams({ secret: process.env.RECAPTCHA_SECRET_KEY, response: recaptchaToken }),
           });
           const result = (await response.json()) as { success?: boolean; score?: number; action?: string };
+          console.info("[Inquiry] reCAPTCHA check", { success: result.success, score: result.score, action: result.action });
           if (!result.success || (result.score ?? 0) < 0.35 || result.action !== "inquiry_submit") {
             throw new TRPCError({ code: "BAD_REQUEST", message: "安全驗證未通過。" });
           }
         }
         const userAgent = typeof ctx.req.get === "function" ? ctx.req.get("user-agent")?.slice(0, 500) : undefined;
-        return createInquiry({ ...storedInput, sourceIp: ip, userAgent });
+        try {
+          return await createInquiry({ ...storedInput, sourceIp: ip, userAgent });
+        } catch (error) {
+          console.error("[Inquiry] database insert failed", error instanceof Error ? error.message : "unknown error");
+          throw error;
+        }
       }),
 
     /** 管理員：查看所有查詢紀錄 */
