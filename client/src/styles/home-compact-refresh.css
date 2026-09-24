@@ -20,7 +20,7 @@
 }
 
 [data-site-header="true"].site-header--home:not(.site-header--home-scrolled) {
-  background: rgba(8, 47, 88, 0.54) !important;
+  background: rgba(8, 47, 88, 0.28) !important;
   border-bottom-color: rgba(255, 255, 255, 0.28);
   -webkit-backdrop-filter: blur(24px) saturate(175%);
   backdrop-filter: blur(24px) saturate(175%);
@@ -55,7 +55,7 @@
 }
 
 [data-site-header="true"].site-header--home-scrolled {
-  background: rgba(255, 255, 255, 0.58) !important;
+  background: rgba(255, 255, 255, 0.32) !important;
   -webkit-backdrop-filter: blur(24px) saturate(175%);
   backdrop-filter: blur(24px) saturate(175%);
 }
