@@ -64,6 +64,9 @@ const SERVICE_OPTIONS: Array<{ value: InquiryServiceType; label: string }> = [
 const INPUT_CLASS_NAME =
   "mt-2 min-h-12 w-full rounded-md border border-[var(--db-rule)] bg-white px-3.5 py-3 text-sm text-[var(--db-ink)] outline-none transition focus:border-[var(--db-ink)] focus:ring-2 focus:ring-[var(--db-safety)]/25";
 
+// 暫停線上表格，待資料庫及 reCAPTCHA 驗證流程完成後再重新開啟。
+const INQUIRY_FORM_ENABLED = false;
+
 function getErrorType(error: unknown) {
   const code =
     typeof error === "object" && error !== null && "data" in error
@@ -103,7 +106,7 @@ function QuoteRequestFormContent({
     document.head.appendChild(script);
   }, [recaptchaSiteKey]);
   const startedRef = useRef(false);
-  const { phoneDisplay, phoneHref } = useContactSettings();
+  const { phoneDisplay, phoneHref, whatsappHref } = useContactSettings();
   const mutation = trpc.inquiry.submit.useMutation({
     onSuccess: () => {
       setSubmitted(true);
@@ -188,7 +191,22 @@ function QuoteRequestFormContent({
         </p>
       </div>
 
-      {submitted ? (
+      {!INQUIRY_FORM_ENABLED ? (
+        <div className="mt-7 border border-[var(--db-rule)] bg-[var(--db-mist)] p-5 md:p-6">
+          <h3 className="font-black text-[var(--db-ink)]">線上表格暫時維護中</h3>
+          <p className="mt-2 text-sm leading-7 text-[var(--db-copy)]">
+            為確保資料能正確送達，線上查詢暫時停止。請直接致電或 WhatsApp 聯絡團隊，我們會盡快回覆。
+          </p>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <a href={phoneHref} className="inline-flex min-h-11 items-center rounded-md bg-[var(--db-ink)] px-4 py-2 text-sm font-black text-white">
+              致電 {phoneDisplay}
+            </a>
+            <a href={whatsappHref("網站查詢")} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center rounded-md border border-[var(--db-ink)] px-4 py-2 text-sm font-black text-[var(--db-ink)]">
+              WhatsApp 查詢
+            </a>
+          </div>
+        </div>
+      ) : submitted ? (
         <div
           role="status"
           data-form-status="success"
