@@ -29,6 +29,7 @@ import { useReveal } from "@/hooks/useReveal";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import { prefetchRoute } from "@/lib/routePrefetch";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
+import GhostFibers from "@/components/GhostFibers/GhostFibers";
 import { DISTRICTS } from "@/lib/districtData";
 import { SERVICE_PAGES } from "@/lib/serviceData";
 
@@ -200,7 +201,6 @@ function Header({
   hideConversionCTA?: boolean;
 }) {
   const [location] = useLocation();
-  const isHome = location === "/";
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
@@ -290,8 +290,7 @@ function Header({
       data-site-header="true"
       className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-200 ${
         "site-header--shared"
-      } ${isHome && scrolled ? "site-header--home-scrolled" : ""} ${
-        scrolled
+      } ${scrolled
           ? "border-navy/15 bg-white/96 shadow-[0_8px_30px_rgba(11,19,43,0.06)] backdrop-blur-xl"
           : "border-navy/10 bg-white/90 backdrop-blur-lg"
       }`}
@@ -418,6 +417,27 @@ function Header({
         </div>
       )}
     </header>
+  );
+}
+
+function InnerPageAtmosphere() {
+  return (
+    <div className="site-inner-atmosphere" aria-hidden="true">
+      <GhostFibers
+        className="site-inner-atmosphere__fibers"
+        lineColor="#8ed8f4"
+        glowColor="#176da5"
+        backgroundColor="#073b70"
+        speed={0.055}
+        scale={2.8}
+        rotationSpeed={0.035}
+        layers={3}
+        glowIntensity={0.45}
+        brightness={0.72}
+        grain={0.008}
+        fps={18}
+      />
+    </div>
   );
 }
 
@@ -766,9 +786,10 @@ export default function Layout({ children }: { children: ReactNode }) {
         tabIndex={-1}
         className={`flex-1 outline-none ${isHome ? "home-main" : "pt-16 md:pt-[72px]"}`}
       >
+        {!isHome ? <InnerPageAtmosphere /> : null}
         {children}
       </main>
-      <Footer compact={isHome} />
+      <Footer />
       {!suppressConversionChrome ? (
         <>
           {/* 避免內容及 Footer 被固定 CTA 列遮蓋（含 safe-area） */}
