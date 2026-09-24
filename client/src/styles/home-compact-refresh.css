@@ -71,6 +71,56 @@
   }
 }
 
+/* Give every WhatsApp CTA the same gentle, attention-friendly motion. */
+a[href*="wa.me"] {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  animation: whatsapp-breathe 3.8s ease-in-out infinite;
+}
+
+a[href*="wa.me"]::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: -80% -35%;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 42%, rgba(255, 255, 255, 0.48) 50%, transparent 58%);
+  transform: translateX(-75%) rotate(12deg);
+  transition: transform 0.7s ease;
+}
+
+a[href*="wa.me"] > * {
+  position: relative;
+  z-index: 1;
+}
+
+a[href*="wa.me"]:hover::after,
+a[href*="wa.me"]:focus-visible::after {
+  transform: translateX(75%) rotate(12deg);
+}
+
+a[href*="wa.me"]:hover,
+a[href*="wa.me"]:focus-visible {
+  animation-play-state: paused;
+  transform: translateY(-2px);
+}
+
+@keyframes whatsapp-breathe {
+  0%, 72%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+  82% { box-shadow: 0 0 0 7px rgba(37, 211, 102, 0.16); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a[href*="wa.me"] {
+    animation: none;
+  }
+
+  a[href*="wa.me"]::after {
+    transition: none;
+  }
+}
+
 [data-site-header="true"].site-header--home:not(.site-header--home-scrolled)
   #mobile-navigation {
   background: var(--brand-ink);
