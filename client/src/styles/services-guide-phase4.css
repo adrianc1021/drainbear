@@ -63,6 +63,47 @@
 /* Services                                           */
 /* ================================================== */
 
+.phase4-services__hero-shell {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #003566;
+}
+
+.phase4-services__hero-shell > .container,
+.phase4-services__hero-shell > .site-page-hero {
+  position: relative;
+  z-index: 1;
+}
+
+.phase4-services__fibers {
+  opacity: 0.5;
+}
+
+.phase4-services__hero-shell .site-page-hero {
+  border-bottom: 0;
+  background: transparent;
+  color: #fff;
+}
+
+.phase4-services__hero-shell .site-page-hero__title,
+.phase4-services__hero-shell .site-editorial-kicker,
+.phase4-services__hero-shell .site-page-hero__description {
+  color: #fff;
+}
+
+.phase4-services__hero-shell .site-editorial-kicker > span {
+  background: #9ee7ff;
+}
+
+.phase4-services__hero-shell .site-page-hero__description {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.phase4-services__hero-shell .site-page-hero__media figcaption {
+  color: rgba(255, 255, 255, 0.72);
+}
+
 .phase4-services__hero .site-page-hero__title {
   /* Keep the two-line Chinese headline inside its grid track. */
   max-width: 100%;
