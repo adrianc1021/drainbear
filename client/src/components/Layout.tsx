@@ -289,7 +289,7 @@ function Header({
     <header
       data-site-header="true"
       className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-200 ${
-        isHome ? "site-header--home" : ""
+        "site-header--shared"
       } ${isHome && scrolled ? "site-header--home-scrolled" : ""} ${
         scrolled
           ? "border-navy/15 bg-white/96 shadow-[0_8px_30px_rgba(11,19,43,0.06)] backdrop-blur-xl"

@@ -12,6 +12,50 @@
 /* Homepage header floating over the immersive scene     */
 /* ------------------------------------------------------ */
 
+/* Keep the same branded header treatment on every route. */
+[data-site-header="true"].site-header--shared {
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  background: linear-gradient(105deg, #07518e 0%, #0b3f78 48%, #082d5e 100%) !important;
+  box-shadow: 0 8px 24px rgba(4, 29, 64, 0.18);
+  color: #fff;
+  backdrop-filter: blur(18px) saturate(135%);
+}
+
+[data-site-header="true"].site-header--shared .site-header__brand-text,
+[data-site-header="true"].site-header--shared .site-header__brand-en,
+[data-site-header="true"].site-header--shared .site-header__nav-link,
+[data-site-header="true"].site-header--shared [data-mobile-menu-trigger="true"] {
+  color: #fff;
+}
+
+[data-site-header="true"].site-header--shared .site-header__brand img {
+  filter: brightness(0) invert(1);
+}
+
+[data-site-header="true"].site-header--shared .site-header__nav-link::after {
+  background: #fff;
+}
+
+[data-site-header="true"].site-header--shared .site-header__whatsapp a {
+  border-color: #25d366;
+  background: #25d366;
+  color: #003566;
+}
+
+[data-site-header="true"].site-header--shared #mobile-navigation {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: #082d5e;
+}
+
+[data-site-header="true"].site-header--shared #mobile-navigation a {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+[data-site-header="true"].site-header--shared #mobile-navigation a[aria-current="page"] {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
 [data-site-header="true"].site-header--home:not(.site-header--home-scrolled) {
   border-color: transparent;
   background: transparent;
