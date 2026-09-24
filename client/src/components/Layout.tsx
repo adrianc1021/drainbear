@@ -712,7 +712,7 @@ function Footer({ compact = false }: { compact?: boolean }) {
       <section className="db-site-footer__legal">
         <div className="db-container">
           <p>
-            服務說明：優先安排為目標安排，實際時間受地區、交通、人員及設備供應影響；「不成功不收費」適用於事前確認的合資格疏通項目，檢測、拆裝、維修、特殊設備或已完成的獨立工序可另行報價。所有新增費用均應在動工前確認。
+            服務說明：優先安排為目標安排，實際時間受地區、交通、人員及設備供應影響；「不成功不收費」適用於事前確認的合資格疏通項目，適用範圍及條款會在安排服務前說明。
           </p>
           <div>
             <span>

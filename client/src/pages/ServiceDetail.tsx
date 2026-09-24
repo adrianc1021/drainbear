@@ -212,7 +212,7 @@ export default function ServiceDetail() {
               <ShieldCheck className="h-6 w-6 shrink-0 text-safety" />
               <span>
                 <span className="block font-display font-black text-navy">
-                  先了解報價與追加工序界線
+                  了解報價及施工流程
                 </span>
                 <span className="mt-1 block text-sm text-muted-foreground">
                   查看現場檢查及動工前確認原則
@@ -362,7 +362,7 @@ export default function ServiceDetail() {
               <div className="flex items-center gap-3">
                 <ShieldCheck className="h-6 w-6 text-wagreen" />
                 <h2 className="font-display text-2xl font-black">
-                  哪些因素影響收費？
+                  施工前會了解哪些資料？
                 </h2>
               </div>
               <ul className="mt-6 space-y-4">

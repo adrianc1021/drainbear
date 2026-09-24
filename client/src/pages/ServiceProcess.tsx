@@ -36,7 +36,7 @@ const PROCESS = [
     icon: FileCheck2,
     title: "現場檢查及確認總價",
     description:
-      "師傅檢查堵塞位置、管道入口及施工條件；如實際情況不同，會先解釋方案及最終總收費，由客戶確認後才動工。",
+      "師傅檢查堵塞位置、管道入口及施工條件，說明處理方案及報價，由客戶確認後才動工。",
   },
   {
     icon: Wrench,
@@ -49,15 +49,15 @@ const PROCESS = [
 const QUOTE_INCLUDES = [
   "建議處理方法及已確認工序",
   "上門檢查或基本施工費是否包括在內",
-  "夜間、拆裝、特殊設備或額外清理會否另收費",
+  "施工時段、所需設備及清理安排",
   "完成標準、測試方式及不成功不收費的適用條件",
 ] as const;
 
-const REQUOTE_CASES = [
-  "現場發現問題不在原先描述的位置或涉及共用主渠",
-  "需要拆裝潔具、清理危險物、使用特殊設備或增加施工範圍",
-  "發現喉管破損、變形、錯位或其他需要維修的結構問題",
-  "原先工序完成後，客戶另行要求影像檢測、維修或其他獨立工作",
+const BEFORE_VISIT = [
+  "提供受影響去水位置的相片或短片",
+  "說明問題開始時間及有否出現倒灌",
+  "告知是否曾使用通渠水或自行拆喉",
+  "確認現場聯絡人、進場方式及方便上門的時段",
 ] as const;
 
 const METHOD_COMPARISON = [
@@ -97,10 +97,10 @@ export default function ServiceProcess() {
   return (
     <div className="bg-white">
       <SEO
-        title="上門通渠服務流程｜報價、追加工序及收費原則｜通渠熊"
-        description="了解通渠熊上門服務的聯絡、初步估價、現場檢查、動工前確認總價、追加工序及完工測試原則。通渠熊為上門服務商家，不設門市接待。"
+        title="上門通渠服務流程｜報價、施工及完工流程｜通渠熊"
+        description="了解通渠熊上門服務的聯絡、初步估價、現場檢查、動工前確認報價、施工及完工測試流程。通渠熊為上門服務商家，不設門市接待。"
         path="/service-process"
-        keywords="上門通渠流程, 通渠報價, 通渠收費原則, 通渠追加收費, 通渠檢查"
+        keywords="上門通渠流程, 通渠報價, 通渠收費原則, 通渠施工流程, 通渠檢查"
         breadcrumbs={CRUMBS}
         jsonLd={PAGE_JSON_LD}
       />
@@ -186,11 +186,11 @@ export default function ServiceProcess() {
               <div className="flex items-center gap-3">
                 <ShieldCheck className="h-6 w-6 text-safety" />
                 <h2 className="font-display text-2xl font-black text-navy md:text-3xl">
-                  哪些情況需要重新確認？
+                  上門前可以準備甚麼？
                 </h2>
               </div>
               <ul className="mt-7 space-y-4">
-                {REQUOTE_CASES.map(item => (
+                {BEFORE_VISIT.map(item => (
                   <li
                     key={item}
                     className="flex gap-3 leading-relaxed text-muted-foreground"
@@ -329,7 +329,7 @@ export default function ServiceProcess() {
                 「優先安排」及「不成功不收費」如何理解
               </h2>
               <p className="mt-5 leading-relaxed text-white/70">
-                「優先安排」只是目標安排，實際時間受地區、交通、人員及設備供應影響。「不成功不收費」只適用於事前確認的合資格疏通項目；檢測、拆裝、維修、特殊設備或已完成的獨立工序可另行報價。任何新增費用均應在相關工序開始前確認。
+                「優先安排」只是目標安排，實際時間受地區、交通、人員及設備供應影響。「不成功不收費」只適用於事前確認的合資格疏通項目，適用範圍及條款會在安排服務前說明。
               </p>
               <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                 <Link

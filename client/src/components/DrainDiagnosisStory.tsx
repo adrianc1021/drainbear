@@ -78,7 +78,7 @@ const STEPS: DiagnosisStep[] = [
     number: "04",
     title: "確認收費後才動工",
     description:
-      "到場檢查後說明處理方法及收費，雙方確認後才施工。新增工序或特殊設備亦會事前交代。",
+      "到場檢查後說明處理方法及收費，雙方確認後才施工。",
     signal: "確認方案 + 價錢",
     facts: [
       { label: "方案", value: "處理方法及工序", status: "事前說明" },

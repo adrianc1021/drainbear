@@ -49,7 +49,7 @@ export default function ServiceQuickSelect() {
           </div>
 
           <p className="max-w-xl text-base leading-7 text-[var(--db-copy)] lg:justify-self-end lg:text-lg">
-            選擇最接近的情況，查看處理方法、收費因素與應注意的事項。
+            選擇最接近的情況，查看處理方法、服務安排與應注意的事項。
           </p>
         </div>
 

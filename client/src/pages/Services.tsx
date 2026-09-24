@@ -268,10 +268,10 @@ export default function Services() {
             </span>
             <span className="min-w-0">
               <span className="block font-display text-lg font-black text-navy">
-                報價與追加工序如何確認？
+                報價及施工如何確認？
               </span>
               <span className="mt-1 block text-sm leading-relaxed text-muted-foreground">
-                查看上門檢查、動工及收費界線
+                查看上門檢查、報價及施工流程
               </span>
             </span>
             <ArrowRight className="ml-auto h-5 w-5 shrink-0 text-navy/35 transition-transform group-hover:translate-x-1" />
@@ -354,7 +354,7 @@ export default function Services() {
               按問題查看處理方法
             </h2>
             <p className="mt-4 text-muted-foreground">
-              了解常見症狀、處理流程及影響收費的因素，再決定下一步。
+              了解常見症狀、處理流程及施工前的準備事項，再決定下一步。
             </p>
           </div>
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">

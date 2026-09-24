@@ -926,7 +926,7 @@ export default function Areas() {
               <ShieldCheck className="h-6 w-6 text-wagreen" strokeWidth={2} />
             </div>
             <h2 className="text-balance font-display text-2xl font-black text-white md:text-3xl">
-              按地區及工程情況確認收費
+              先報價，確認後才動工
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-white/60">
               先透過 WhatsApp

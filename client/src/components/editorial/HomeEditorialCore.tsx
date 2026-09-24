@@ -30,8 +30,8 @@ const PROMISES = [
     description: "現場了解實際情況，雙方確認最終收費後才開始施工。",
   },
   {
-    title: "額外費用事前說明",
-    description: "深夜及特殊工具等安排會在動工前說明，確保收費安排清晰透明。",
+    title: "施工安排清晰交代",
+    description: "施工前說明處理方法及工程範圍，讓您清楚了解每一步。",
   },
 ] as const;
 
@@ -203,7 +203,7 @@ export function EditorialPromise() {
           </h2>
           <p className="home-pricing-summary">
             一般鋅盤、企缸疏通 HK$500 起；座廁 HK$600
-            起。起步價並非所有情況的總價，實際收費需先檢查。
+            起。先報價，確認後才動工。
           </p>
 
           <div className="mt-8 flex flex-wrap gap-5">
