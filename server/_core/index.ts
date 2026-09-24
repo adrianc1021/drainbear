@@ -30,6 +30,8 @@ async function findAvailablePort(startPort: number = 3000): Promise<number> {
 
 async function startServer() {
   const app = express();
+  // Render／Cloudflare 代理後仍保留訪客來源 IP，供防刷限流及調查使用。
+  app.set("trust proxy", true);
   const server = createServer(app);
 
   // 統一正式網站 Host，避免 www 與 non-www 重複收錄。

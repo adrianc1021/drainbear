@@ -47,6 +47,12 @@ export const inquiries = mysqlTable("inquiries", {
   district: varchar("district", { length: 50 }),
   /** 問題描述 */
   message: text("message"),
+  /** 廣告歸因及防刷調查資料；不送往 GA4 */
+  landingPage: varchar("landingPage", { length: 500 }),
+  gclid: varchar("gclid", { length: 300 }),
+  clickIdType: varchar("clickIdType", { length: 20 }),
+  sourceIp: varchar("sourceIp", { length: 45 }),
+  userAgent: varchar("userAgent", { length: 500 }),
   /** 處理狀態 */
   status: mysqlEnum("status", ["new", "contacted", "completed", "cancelled"])
     .default("new")

@@ -1,4 +1,4 @@
-import { useId, useRef, useState, type FormEvent } from "react";
+import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import { CheckCircle2, LoaderCircle, Send } from "lucide-react";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import TrpcProvider, {
@@ -11,6 +11,13 @@ import {
 } from "@/lib/analytics";
 import { DISTRICTS } from "@/lib/districtData";
 import { trpc } from "@/lib/trpc";
+import { getSessionAttribution, getSessionClickId } from "@/lib/trackingSession";
+
+declare global {
+  interface Window {
+    grecaptcha?: { ready: (callback: () => void) => void; execute: (siteKey: string, options: { action: string }) => Promise<string> };
+  }
+}
 
 export type InquiryServiceType =
   | "residential"
@@ -67,6 +74,16 @@ function QuoteRequestFormContent({
   const [privacyAccepted, setPrivacyAccepted] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [clientError, setClientError] = useState("");
+  const [website, setWebsite] = useState("");
+  const recaptchaSiteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY as string | undefined;
+
+  useEffect(() => {
+    if (!recaptchaSiteKey || document.querySelector('script[src^="https://www.google.com/recaptcha/api.js"]')) return;
+    const script = document.createElement("script");
+    script.src = `https://www.google.com/recaptcha/api.js?render=${encodeURIComponent(recaptchaSiteKey)}`;
+    script.async = true;
+    document.head.appendChild(script);
+  }, [recaptchaSiteKey]);
   const startedRef = useRef(false);
   const { phoneDisplay, phoneHref } = useContactSettings();
   const mutation = trpc.inquiry.submit.useMutation({
@@ -94,7 +111,7 @@ function QuoteRequestFormContent({
     }
   };
 
-  const submit = (event: FormEvent<HTMLFormElement>) => {
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     markStarted();
 
@@ -106,12 +123,26 @@ function QuoteRequestFormContent({
 
     setClientError("");
 
+    let recaptchaToken: string | undefined;
+    if (recaptchaSiteKey && window.grecaptcha) {
+      recaptchaToken = await new Promise<string | undefined>(resolve => {
+        window.grecaptcha?.ready(() => {
+          window.grecaptcha?.execute(recaptchaSiteKey, { action: "inquiry_submit" }).then(resolve).catch(() => resolve(undefined));
+        });
+      });
+    }
+
     mutation.mutate({
       name: name.trim(),
       phone: phone.trim(),
       serviceType,
       district: district || undefined,
       message: message.trim() || undefined,
+      landingPage: typeof window !== "undefined" ? window.location.href.slice(0, 500) : undefined,
+      clickIdType: getSessionAttribution().click_id_type,
+      gclid: getSessionClickId(),
+      website,
+      recaptchaToken,
     });
   };
 
@@ -167,6 +198,10 @@ function QuoteRequestFormContent({
           onFocus={markStarted}
           noValidate
         >
+          <label aria-hidden="true" className="absolute -left-[10000px] h-px w-px overflow-hidden">
+            網站（請留空）
+            <input tabIndex={-1} autoComplete="off" value={website} onChange={event => setWebsite(event.target.value)} />
+          </label>
           <div className="grid gap-5 md:grid-cols-2">
             <label htmlFor={`${formId}-name`} className="text-sm font-bold text-[var(--db-ink)]">
               稱呼<span className="ml-1 text-[var(--db-safety)]">*</span>

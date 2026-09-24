@@ -35,6 +35,7 @@ export interface WhatsAppHandoff {
 }
 
 const ATTRIBUTION_KEY = "drainbear_session_attribution_v1";
+const CLICK_ID_KEY = "drainbear_session_click_id_v1";
 const HANDOFF_KEY = "drainbear_whatsapp_handoff_v1";
 const HANDOFF_MAX_AGE_MS = 5 * 60 * 1000;
 
@@ -308,6 +309,8 @@ export function captureInitialAttribution(): SessionAttribution {
   if (storage) {
     try {
       storage.setItem(ATTRIBUTION_KEY, JSON.stringify(attribution));
+      const clickId = safeClickId(gclid || dclid || gbraid || wbraid);
+      if (clickId) storage.setItem(CLICK_ID_KEY, clickId);
     } catch {
       // Storage blocked：追蹤功能降級，不影響網站。
     }
@@ -318,6 +321,16 @@ export function captureInitialAttribution(): SessionAttribution {
 
 export function getSessionAttribution(): SessionAttribution {
   return captureInitialAttribution();
+}
+
+/** 回傳暫存的 Ads click ID，只供後端查詢歸因，不送往 GA4。 */
+export function getSessionClickId(): string | undefined {
+  const storage = safeStorage();
+  try {
+    return storage?.getItem(CLICK_ID_KEY) || undefined;
+  } catch {
+    return undefined;
+  }
 }
 
 export function createWhatsAppHandoff(
@@ -391,6 +404,7 @@ export function __clearTrackingSessionForTests() {
   try {
     storage?.removeItem(ATTRIBUTION_KEY);
     storage?.removeItem(HANDOFF_KEY);
+    storage?.removeItem(CLICK_ID_KEY);
   } catch {
     // Test/reset helper。
   }
