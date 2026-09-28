@@ -6,15 +6,10 @@
 .phase4-services,
 .phase4-service-detail,
 .phase4-guide {
-  --phase4-paper: #f3f0e8;
-  --phase4-paper-soft: #f8f6f0;
-  --phase4-ink: #091226;
-  --phase4-copy: #445064;
-  --phase4-muted: #667187;
+  /* hex token vars now resolved via tokens.css compat layer (§5.1 v2.1).
+   * Local rgba rules stay as contextual overrides. */
   --phase4-rule: rgba(9, 18, 38, 0.16);
   --phase4-rule-strong: rgba(9, 18, 38, 0.3);
-  --phase4-safety: #ff6b00;
-  --phase4-ease: cubic-bezier(0.23, 1, 0.32, 1);
   overflow: clip;
   background: var(--phase4-paper-soft);
   color: var(--phase4-ink);
@@ -41,10 +36,10 @@
 
 .phase4-primary-action {
   min-height: 3.25rem;
-  border-radius: 0.375rem !important;
+  border-radius: var(--radius-sm) !important;
   padding-inline: 1.4rem !important;
   font-weight: 900 !important;
-  box-shadow: 0 14px 30px rgba(37, 211, 102, 0.18);
+  box-shadow: var(--shadow-raised);
 }
 
 .phase4-secondary-action {
@@ -67,7 +62,7 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background: #003566;
+  background: var(--brand-navy);
 }
 
 .phase4-services__hero-shell > .container,
@@ -83,17 +78,17 @@
 .phase4-services__hero-shell .site-page-hero {
   border-bottom: 0;
   background: transparent;
-  color: #fff;
+  color: white;
 }
 
 .phase4-services__hero-shell .site-page-hero__title,
 .phase4-services__hero-shell .site-editorial-kicker,
 .phase4-services__hero-shell .site-page-hero__description {
-  color: #fff;
+  color: white;
 }
 
 .phase4-services__hero-shell .site-editorial-kicker > span {
-  background: #9ee7ff;
+  background: var(--brand-sky);
 }
 
 .phase4-services__hero-shell .site-page-hero__description {
@@ -125,7 +120,7 @@
 }
 
 .phase4-services > .services-stories {
-  background: #fff;
+  background: white;
 }
 
 .phase4-services > .services-stories > .container {
@@ -160,7 +155,7 @@
 
 .phase4-services > .services-stories img {
   aspect-ratio: 3 / 2;
-  border-radius: 0.25rem;
+  border-radius: var(--radius-sm);
   box-shadow: none;
   transition: transform 650ms var(--phase4-ease);
 }
@@ -269,7 +264,7 @@
 }
 
 .phase4-services > .services-scope {
-  background: #fff;
+  background: white;
 }
 
 .phase4-services > .services-scope > .container > div:nth-child(2) {
@@ -344,12 +339,12 @@
 /* ================================================== */
 
 .phase4-service-detail {
-  background: #fff;
+  background: white;
 }
 
 .phase4-service-detail__hero {
   border-bottom: 1px solid var(--phase4-rule);
-  color: #fff;
+  color: white;
 }
 
 .phase4-service-detail__hero > .container {
@@ -365,7 +360,7 @@
   font-size: clamp(2.75rem, 5vw, 5rem);
   line-height: 1.1;
   letter-spacing: -0.025em;
-  color: #fff;
+  color: white;
 }
 
 .phase4-service-detail__hero p {
@@ -382,14 +377,14 @@
 }
 
 .phase4-service-detail__hero > .container > div:last-child {
-  border-radius: 0.25rem;
-  box-shadow: 0 24px 60px rgba(9, 18, 38, 0.17);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-raised);
 }
 
 .phase4-service-detail main > .service-symptoms,
 .phase4-service-detail main > .service-costs,
 .phase4-service-detail main > .service-related {
-  background: #fff;
+  background: white;
 }
 
 .phase4-service-detail main > .service-steps,
@@ -518,7 +513,7 @@
 .phase4-guide > section:nth-of-type(4),
 .phase4-guide > section:nth-of-type(6),
 .phase4-guide > section:nth-of-type(8) {
-  background: #fff;
+  background: white;
 }
 
 .phase4-guide > section:nth-of-type(3),
@@ -533,8 +528,8 @@
 }
 
 .phase4-guide .card-float {
-  border-radius: 0.25rem;
-  box-shadow: 0 1px 2px rgba(9, 18, 38, 0.04);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-soft);
 }
 
 .phase4-guide > section:nth-of-type(2) .card-float {
@@ -582,7 +577,7 @@
 }
 
 .phase4-guide > section:nth-of-type(6) > .container > div:nth-child(2) > div {
-  border-radius: 0.25rem;
+  border-radius: var(--radius-sm);
   background: rgba(255, 255, 255, 0.045);
 }
 
@@ -818,7 +813,7 @@
 }
 
 .phase4-service-detail main > .service-symptoms article:last-child::before {
-  background: #46c878;
+  background: var(--indicator-success);
 }
 
 .phase4-service-detail main > .service-steps ol {
