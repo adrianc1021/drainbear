@@ -20,14 +20,14 @@
   min-height: 44px;
   align-items: center;
   justify-content: center;
-  border: 2px solid white;
-  border-radius: var(--radius-sm);
+  border: 2px solid #ffffff;
+  border-radius: 8px;
   background: var(--navy);
   padding: 0.65rem 1rem;
-  color: white;
+  color: #ffffff;
   font-size: 0.875rem;
   font-weight: 800;
-  box-shadow: var(--shadow-raised);
+  box-shadow: 0 8px 30px rgba(11, 19, 43, 0.24);
   transform: translateY(calc(-100% - 1.5rem));
   transition: transform 180ms ease;
 }
@@ -50,7 +50,7 @@
   height: clamp(3.5rem, 8vw, 6rem);
   overflow: hidden;
   isolation: isolate;
-  background: var(--site-atmosphere);
+  background: #073b70;
 }
 
 .site-inner-atmosphere__fibers {

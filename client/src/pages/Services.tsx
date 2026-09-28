@@ -23,6 +23,7 @@ import { Link } from "wouter";
 import { WhatsAppButton } from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import GhostFibers from "@/components/GhostFibers/GhostFibers";
 import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
 import { BUSINESS_ID, SITE_URL } from "@/config/site";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
@@ -194,6 +195,20 @@ export default function Services() {
       />
       {/* 頁首 */}
       <div className="phase4-services__hero-shell">
+        <GhostFibers
+          className="phase4-services__fibers"
+          lineColor="#8ed8f4"
+          glowColor="#176da5"
+          backgroundColor="#003566"
+          speed={0.055}
+          scale={2.8}
+          rotationSpeed={0.035}
+          layers={3}
+          glowIntensity={0.45}
+          brightness={0.72}
+          grain={0.008}
+          fps={18}
+        />
         <Breadcrumbs items={SERVICES_CRUMBS} tone="dark" />
         <EditorialPageHero
           kicker="專業服務"
