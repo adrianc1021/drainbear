@@ -4,41 +4,8 @@
  * No fixed-height text panels, text masks or decorative offset shadows.
  */
 :root {
-  --brand-paper: #f0ebd8;
-  --brand-ink: #003566;
-  --brand-copy: #29465b;
-  --brand-rule: rgba(0, 53, 102, 0.18);
+  /* Layout structural token only — all colour tokens live in tokens.css */
   --brand-gutter: clamp(1.25rem, 4vw, 3.5rem);
-  --navy: var(--brand-ink);
-  --navy-light: #174c75;
-  --safety: #003566;
-  --text-secondary: var(--brand-copy);
-  --site-paper: var(--brand-paper);
-  --site-paper-soft: #f5f9fb;
-  --site-ink: var(--brand-ink);
-  --site-copy: var(--brand-copy);
-  --site-safety: #003566;
-  --db-ink: var(--brand-ink);
-  --db-paper: var(--brand-paper);
-  --db-copy: var(--brand-copy);
-  --db-safety: #003566;
-  --db-editorial-max: 84rem;
-  --db-editorial-gutter: var(--brand-gutter);
-}
-.home-editorial,
-.phase4-services,
-.phase4-service-detail,
-.phase4-guide {
-  --db-paper: var(--brand-paper);
-  --db-ink: var(--brand-ink);
-  --db-ink-deep: #12262a;
-  --db-copy: var(--brand-copy);
-  --db-safety: #003566;
-  --phase4-paper: var(--brand-paper);
-  --phase4-paper-soft: #f5f9fb;
-  --phase4-ink: var(--brand-ink);
-  --phase4-copy: var(--brand-copy);
-  --phase4-safety: #003566;
 }
 html {
   scroll-padding-top: 6rem;
@@ -158,7 +125,7 @@ a svg {
 /* Homepage lead: a confident service promise paired with a real field image. */
 .brand-hero {
   position: relative;
-  background: #f7fafb;
+  background: var(--surface-1);
   border-bottom: 1px solid var(--brand-rule);
 }
 .brand-hero__grid {
@@ -187,7 +154,7 @@ a svg {
   width: 2rem;
   height: 2px;
   flex: none;
-  background: #f08a24;
+  background: var(--brand-orange);
 }
 .brand-hero h1 {
   max-width: 12em;
@@ -232,7 +199,7 @@ a svg {
   min-height: 3.5rem;
   padding: 0.9rem 1.35rem;
   border: 1px solid transparent;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   font-size: 1rem;
   font-weight: 850;
   box-shadow: none;
@@ -240,10 +207,10 @@ a svg {
   line-height: 1.5;
 }
 .home-editorial .brand-hero__actions .db-primary-action {
-  background: #25d366;
-  border-color: #25d366;
-  color: #102b1c;
-  box-shadow: 0 6px 0 rgba(16, 43, 28, 0.16);
+  background: var(--brand-wa);
+  border-color: var(--brand-wa);
+  color: var(--brand-wa-ink);
+  box-shadow: var(--shadow-soft);
 }
 .home-editorial .brand-hero__actions .db-secondary-action {
   border-color: var(--brand-ink);
@@ -263,8 +230,8 @@ a svg {
   aspect-ratio: 4/3;
   object-fit: cover;
   object-position: 70% 54%;
-  border-radius: 4px;
-  box-shadow: 14px 14px 0 #d8e7eb;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-raised);
 }
 .brand-hero__media figcaption {
   display: flex;
@@ -303,7 +270,7 @@ a svg {
   width: 1.1rem;
   height: 1.1rem;
   flex: none;
-  color: #27803e;
+  color: var(--brand-wa-dark);
 }
 .brand-hero__directory {
   background: white;
@@ -387,7 +354,7 @@ a svg {
     gap: 0.5rem 1.25rem;
   }
   .brand-hero__media img {
-    box-shadow: 7px 7px 0 #d8e7eb;
+    box-shadow: var(--shadow-soft);
   }
 }
 
@@ -446,7 +413,7 @@ a svg {
 .home-choice-icon {
   width: 1.75rem;
   height: 1.75rem;
-  color: #236684;
+  color: var(--accent-teal);
 }
 .home-editorial .home-choice-card > :nth-child(2) > :first-child {
   font-size: clamp(1.05rem, 1.8vw, 1.5rem);
@@ -484,7 +451,7 @@ a svg {
   width: 1.25rem;
   height: 1.25rem;
   margin-top: 0.3rem;
-  color: #236684;
+  color: var(--accent-teal);
 }
 .home-promise-item p {
   margin-top: 0.35rem;
@@ -497,13 +464,13 @@ a svg {
   width: 100%;
   aspect-ratio: 4/3;
   min-height: 0;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
 }
 .home-editorial [data-pr20-section="capability"] .db-editorial-heading {
-  color: #fff;
+  color: white;
 }
 .home-editorial [data-pr20-section="capability"] {
-  background: #173f52;
+  background: var(--scene-bg-base);
 }
 .home-editorial [data-pr20-section="capability"]::before {
   display: none;
@@ -511,7 +478,7 @@ a svg {
 .home-editorial .home-capability-layout .home-capability-item {
   display: block;
   padding-block: 1.25rem;
-  border-top: 1px solid #ffffff30;
+  border-top: 1px solid rgba(255, 255, 255, 0.19);
 }
 .home-capability-item p {
   margin-top: 0.5rem;
@@ -604,8 +571,8 @@ a svg {
   height: auto;
   aspect-ratio: auto;
   object-fit: contain;
-  background: #fff;
-  border-radius: 8px;
+  background: white;
+  border-radius: var(--radius-sm);
 }
 .home-reading__meta {
   color: var(--brand-copy);
@@ -639,7 +606,7 @@ a svg {
   overflow-wrap: anywhere;
 }
 .home-editorial a:focus-visible {
-  outline: 3px solid #236684;
+  outline: 3px solid var(--accent-teal);
   outline-offset: 4px;
 }
 .home-editorial .home-case-row h3 {
@@ -659,7 +626,7 @@ a svg {
   padding-block: 1.75rem;
 }
 .home-editorial [data-pr20-section="final-cta"] {
-  background: #eaf4f8 !important;
+  background: color-mix(in srgb, var(--brand-wa) 8%, var(--surface-1)) !important;
 }
 .home-editorial .db-final-cta-heading {
   font-size: clamp(2.25rem, 4vw, 4rem);
@@ -667,14 +634,14 @@ a svg {
   font-weight: 750;
 }
 .home-editorial .home-final-grid a:first-child {
-  background: #25d366;
-  color: #102b1c;
+  background: var(--brand-wa);
+  color: var(--brand-wa-ink);
   box-shadow: none !important;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
 }
 .home-editorial .home-final-grid a:last-child {
   border-width: 1px;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
 }
 .home-photo-quote {
   background: var(--brand-paper);
@@ -690,10 +657,10 @@ a svg {
   font-weight: 750;
 }
 .home-photo-quote a {
-  background: #25d366;
+  background: var(--brand-wa);
   border: 0;
-  border-radius: 6px;
-  color: #102b1c;
+  border-radius: var(--radius-sm);
+  color: var(--brand-wa-ink);
   box-shadow: none;
   min-height: 3.25rem;
 }
@@ -773,7 +740,7 @@ a svg {
 .services-tools a,
 .service-support a {
   box-shadow: none;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
 }
 .phase4-services > .services-stories > .container {
   gap: 4rem;
@@ -786,7 +753,7 @@ a svg {
   padding-top: 0;
 }
 .phase4-services > .services-stories img {
-  border-radius: 6px !important;
+  border-radius: var(--radius-sm) !important;
   box-shadow: none !important;
   aspect-ratio: 4/3;
 }
@@ -797,10 +764,10 @@ a svg {
 }
 .phase4-services > .services-stories a {
   display: inline-flex;
-  background: #25d366;
-  color: #102b1c;
+  background: var(--brand-wa);
+  color: var(--brand-wa-ink);
   padding: 0.8rem 1.1rem;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   min-height: 48px;
 }
 .phase4-services > .services-directory a {
@@ -808,7 +775,7 @@ a svg {
   min-height: 0;
 }
 .phase4-service-detail__hero {
-  background: #003566;
+  background: var(--brand-navy);
 }
 .phase4-service-detail__hero h1 {
   font-size: clamp(2rem, 3.4vw, 3.4rem);
@@ -817,14 +784,14 @@ a svg {
 }
 .phase4-service-detail__hero > .container > div:last-child {
   border: 0;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   box-shadow: none;
   background: transparent;
   align-self: center;
 }
 .phase4-service-detail main > .service-answer {
   padding-block: 2.5rem;
-  background: #edf3ef;
+  background: color-mix(in srgb, var(--brand-wa) 6%, var(--surface-1));
 }
 .phase4-service-detail main > .service-symptoms article,
 .phase4-service-detail main > .service-costs article {
@@ -870,27 +837,27 @@ a svg {
 }
 .district-editorial .card-float {
   box-shadow: none;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
 }
 
 /* Contact controls keep their green identity and readable dark text. */
 a.bg-wagreen,
 .phase4-primary-action,
 [data-mobile-cta="true"] a.bg-wagreen {
-  color: #102b1c;
+  color: var(--brand-wa-ink);
 }
 a.bg-wagreen:hover,
 a.bg-wagreen:focus-visible,
 .phase4-primary-action:hover,
 .phase4-primary-action:focus-visible {
-  background-color: #17262b;
-  color: #fff;
+  background-color: var(--brand-wa-dark);
+  color: white;
 }
 [data-header-whatsapp="true"] a,
 [data-mobile-menu-whatsapp="true"] a,
 .phase4-primary-action,
 [data-mobile-cta="true"] a {
-  border-radius: 6px !important;
+  border-radius: var(--radius-sm) !important;
   box-shadow: none !important;
 }
 [data-mobile-cta="true"] {
@@ -906,7 +873,7 @@ a.bg-wagreen:focus-visible,
   border: 0;
 }
 [data-site-footer="true"] {
-  background: #14262a;
+  background: var(--legacy-scene-dark);
 }
 [data-site-footer="true"] .dot-grid {
   background-image: none;

@@ -6,7 +6,7 @@
 
 .home-editorial {
   --home-section-space: clamp(4.75rem, 8vw, 7.5rem);
-  --home-row-hover: #f8f6f0;
+  --home-row-hover: var(--editorial-paper-soft);
   background: var(--db-paper);
 }
 
@@ -653,13 +653,8 @@
 /* ------------------------------------------------------ */
 
 .home-editorial {
-  --db-paper: #f5f6f3;
-  --db-paper-deep: #e5e9e4;
-  --db-ink: #11161a;
-  --db-ink-deep: #0d1518;
-  --db-copy: #485159;
-  --db-copy-strong: #252d32;
-  --db-safety: #eb5b19;
+  /* --db-paper/ink/copy/safety vars now resolved via tokens.css compat layer.
+   * Scoped rgba rules stay here: they contextually override the root fallbacks. */
   --db-rule: rgba(17, 22, 26, 0.16);
   --db-rule-strong: rgba(17, 22, 26, 0.3);
 }
@@ -704,7 +699,7 @@
   border: 2px solid var(--db-ink-deep);
   border-radius: 0.25rem;
   background: var(--db-ink-deep);
-  color: #fff;
+  color: white;
   font-weight: 900;
 }
 

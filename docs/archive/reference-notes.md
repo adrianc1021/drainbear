@@ -1,3 +1,10 @@
+<!--
+  ARCHIVED — Phase 1 clean-up (2026-09-28)
+  此檔已歸檔。內容為早期競品分析筆記，含舊電話號碼 6531 8580（競品，非本站）。
+  本站聯絡資料唯一來源：client/src/lib/contact.ts
+  請勿從此檔抄取任何電話號碼或文案至 codebase。
+-->
+
 # 參考網站分析筆記（https://info800969.wixsite.com/my-site-2）
 
 ## 聯絡資訊

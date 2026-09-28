@@ -10,7 +10,6 @@ import {
 } from "lucide-react";
 import { Link, useParams } from "wouter";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import GhostFibers from "@/components/GhostFibers/GhostFibers";
 import QuoteRequestForm, {
   type InquiryServiceType,
 } from "@/components/QuoteRequestForm";
@@ -101,25 +100,11 @@ export default function ServiceDetail() {
       />
 
       <main>
-        <section className="phase4-service-detail__hero relative isolate overflow-hidden bg-[#003566] py-14 md:py-20">
-          <GhostFibers
-            className="phase4-service-detail__fibers"
-            lineColor="#8ed8f4"
-            glowColor="#176da5"
-            backgroundColor="#003566"
-            speed={0.06}
-            scale={2.8}
-            rotationSpeed={0.035}
-            layers={3}
-            glowIntensity={0.5}
-            brightness={0.78}
-            grain={0.008}
-            fps={20}
-          />
+        <section className="phase4-service-detail__hero relative isolate overflow-hidden bg-[var(--ref-service-hero-bg)] py-14 md:py-20">
           <Breadcrumbs items={crumbs} tone="dark" />
           <div className="container relative z-10 grid items-center gap-10 pt-8 lg:grid-cols-[1.05fr_0.95fr] md:pt-10">
             <div>
-              <p className="text-xs font-bold tracking-[0.2em] text-[#9ee7ff]">
+              <p className="text-xs font-bold tracking-[0.2em] text-[var(--ref-service-hero-eyebrow)]">
                 {service.eyebrow}
               </p>
               <h1 className="mt-3 text-balance font-display text-4xl font-black text-white md:text-5xl">
