@@ -296,3 +296,47 @@
   --db-copy-editorial:  var(--editorial-ink-copy);
   --db-copy-strong:     var(--editorial-ink-copy-strong);
 }
+
+/* ─────────────────────────────────────────────────────────────
+   §7 PawLoader — 熊掌載入動畫（palm → digit pairs 1→5）
+   ──────────────────────────────────────────────────────────── */
+
+@keyframes paw-claw-pop {
+  0%   { opacity: 0; transform: scale(.55); }
+  12%  { opacity: 1; transform: scale(1.08); }
+  20%  { opacity: 1; transform: scale(1); }
+  70%  { opacity: 1; transform: scale(1); }
+  86%  { opacity: 0; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1); }
+}
+
+.paw-loader {
+  --paw-loader-size: 48px;
+  display: inline-flex;
+  width:  var(--paw-loader-size);
+  height: var(--paw-loader-size);
+  flex-shrink: 0;
+}
+
+.paw-loader svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  color: var(--brand-orange);
+  overflow: visible;
+}
+
+.paw-loader__path {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: paw-claw-pop 2.8s var(--ease-out-brand) infinite;
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paw-loader__path {
+    animation: none;
+    opacity: 1;
+    transform: scale(1);
+  }
+}
