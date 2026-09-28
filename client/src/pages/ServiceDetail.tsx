@@ -100,7 +100,7 @@ export default function ServiceDetail() {
       />
 
       <main>
-        <section className="phase4-service-detail__hero relative isolate overflow-hidden bg-[var(--ref-service-hero-bg)] py-14 md:py-20">
+        <section className="phase4-service-detail__hero relative isolate overflow-hidden bg-[var(--brand-navy)] py-14 md:py-20">
           <Breadcrumbs items={crumbs} tone="dark" />
           <div className="container relative z-10 grid items-center gap-10 pt-8 lg:grid-cols-[1.05fr_0.95fr] md:pt-10">
             <div>

@@ -7,7 +7,7 @@
 
 :root {
   --db-art-rule: rgba(11, 19, 43, 0.18);
-  --db-art-paper: var(--editorial-paper);
+  --db-art-paper: var(--surface-0);
 }
 
 /* Shared editorial stories use image, type and rules for hierarchy. */

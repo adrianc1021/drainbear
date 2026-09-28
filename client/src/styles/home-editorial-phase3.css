@@ -6,7 +6,7 @@
 
 .home-editorial {
   --home-section-space: clamp(4.75rem, 8vw, 7.5rem);
-  --home-row-hover: var(--editorial-paper-soft);
+  --home-row-hover: var(--surface-1);
   background: var(--db-paper);
 }
 
