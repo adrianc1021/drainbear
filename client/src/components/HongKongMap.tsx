@@ -49,9 +49,9 @@ const PAGE_HINT: Record<string, string> = {
 };
 
 const REGION_FILL: Record<MapDistrict["region"], string> = {
-  hki: "fill-[#16264f]",
-  kln: "fill-[#149e4c]",
-  nt: "fill-[#4a76ad]",
+  hki: "fill-[var(--map-hki)]",
+  kln: "fill-[var(--map-kln)]",
+  nt: "fill-[var(--map-nt)]",
 };
 
 export default function HongKongMap() {
@@ -94,7 +94,7 @@ export default function HongKongMap() {
       {/* 地圖本體 */}
       <div
         ref={wrapRef}
-        className="relative overflow-hidden rounded-lg border border-border bg-gradient-to-b from-[#eaf2f9] to-[#f4f8fc] p-3 md:p-5"
+        className="relative overflow-hidden rounded-lg border border-border bg-gradient-to-b from-[var(--ref-field-surface)] to-[var(--surface-1)] p-3 md:p-5"
         onMouseMove={handleMove}
         onMouseLeave={() => {
           setHovered(null);
@@ -169,13 +169,13 @@ export default function HongKongMap() {
         {/* 圖例 */}
         <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1.5 px-1 text-[11px] font-semibold text-navy/70 md:text-xs">
           <span className="inline-flex items-center gap-1.5">
-            <span className="h-2.5 w-2.5 rounded-sm bg-[#16264f]" /> 港島
+            <span className="h-2.5 w-2.5 rounded-sm bg-[var(--map-hki)]" /> 港島
           </span>
           <span className="inline-flex items-center gap-1.5">
-            <span className="h-2.5 w-2.5 rounded-sm bg-[#149e4c]" /> 九龍
+            <span className="h-2.5 w-2.5 rounded-sm bg-[var(--map-kln)]" /> 九龍
           </span>
           <span className="inline-flex items-center gap-1.5">
-            <span className="h-2.5 w-2.5 rounded-sm bg-[#4a76ad]" /> 新界及離島
+            <span className="h-2.5 w-2.5 rounded-sm bg-[var(--map-nt)]" /> 新界及離島
           </span>
           <span className="inline-flex items-center gap-1.5">
             <span className="relative flex h-2.5 w-2.5 items-center justify-center rounded-full bg-white ring-1 ring-border">

@@ -162,7 +162,7 @@ export default function Blog() {
                   </span>
                 </div>
 
-                <div className="relative min-h-64 overflow-hidden bg-gradient-to-br from-navy via-navy to-[#16224d] md:col-span-2">
+                <div className="relative min-h-64 overflow-hidden bg-gradient-to-br from-navy via-navy to-[var(--brand-navy-2)] md:col-span-2">
                   <img
                     src={optimizedImageUrl(
                       featured.coverImage?.url ?? FALLBACK_FEATURED_IMAGE,

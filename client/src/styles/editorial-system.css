@@ -4,15 +4,10 @@
  */
 
 :root {
-  --site-paper: #f3f0e8;
-  --site-paper-soft: #f8f6f0;
-  --site-ink: #0b132b;
-  --site-copy: #3d495d;
-  --site-muted: #667187;
+  /* --site-paper, --site-ink, --site-copy, --site-muted, --site-safety, --site-ease
+   * are now defined in tokens.css compat layer. Only local rgba rules stay here. */
   --site-rule: rgba(11, 19, 43, 0.16);
   --site-rule-strong: rgba(11, 19, 43, 0.3);
-  --site-safety: #ff7a00;
-  --site-ease: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 /* ------------------------------------------------------ */
@@ -293,7 +288,7 @@
 
 .site-feature-story {
   position: relative;
-  box-shadow: 0 24px 60px rgba(11, 19, 43, 0.16);
+  box-shadow: var(--shadow-raised);
   transition:
     transform 280ms var(--site-ease),
     box-shadow 280ms var(--site-ease);
@@ -332,7 +327,7 @@
   position: relative;
   border: 1px solid var(--site-rule);
   background: white;
-  box-shadow: 0 1px 2px rgba(11, 19, 43, 0.04);
+  box-shadow: var(--shadow-soft);
   transition:
     transform 260ms var(--site-ease),
     box-shadow 260ms var(--site-ease),

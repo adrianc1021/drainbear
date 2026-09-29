@@ -1,6 +1,6 @@
 /**
  * 通渠熊 DrainBear — 右下角常駐 WhatsApp 懸浮對話框
- * 設計語言：Premium SaaS Minimalism（navy #0B132B、WhatsApp 綠、8px 圓角、懸浮陰影、平滑過渡）
+ * 設計語言：Premium SaaS Minimalism（var(--brand-navy)、WhatsApp 綠、var(--radius-sm) 圓角、懸浮陰影、平滑過渡）
  * 桌面：右下角固定；手機：升高避開底部固定 CTA 列
  */
 import { useEffect, useState } from "react";
