@@ -3,14 +3,15 @@ import { cn } from "@/lib/utils";
 interface PawLoaderProps extends React.ComponentProps<"div"> {
   /** Override size; maps to --paw-loader-size. Defaults to 48px. */
   size?: number | string;
-  /** Override fill colour; maps to color on the SVG. Defaults to --brand-orange. */
+  /** Override fill colour; maps to color on the SVG. Defaults to --safety. */
   color?: string;
   /** Aria label for screen readers. */
   label?: string;
 }
 
 /*
- * Palm stamps first (0 ms), then digit pairs 1→5 at 150 ms intervals.
+ * Palm stamps first (0 ms), then digit pairs 1→5 starting at 220 ms,
+ * spaced 150 ms apart (220 / 370 / 520 / 670 / 820 ms).
  * Animation keyframe + .paw-loader__path base rule live in index.css
  * under the "PawLoader" section.
  */
