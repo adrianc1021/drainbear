@@ -1,6 +1,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { lazy, Suspense, useEffect } from "react";
+import { PawLoader } from "@/components/ui/paw-loader";
 import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Layout from "./components/Layout";
@@ -60,12 +61,8 @@ function PageViewTracker() {
 
 function RouteLoadingFallback() {
   return (
-    <div
-      role="status"
-      aria-live="polite"
-      className="flex min-h-[55vh] items-center justify-center bg-white"
-    >
-      <span className="text-sm font-medium text-navy/60">載入中…</span>
+    <div className="flex min-h-[55vh] items-center justify-center bg-white">
+      <PawLoader size={48} />
     </div>
   );
 }
