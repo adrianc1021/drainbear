@@ -11,8 +11,19 @@
   padding-top: 0.85rem;
 }
 
-.site-page-hero--with-media .site-page-hero__support {
+/* Copy (kicker + h1 + description + actions) is one flow in column 1; the
+   media is the other column. Previously all of it shared a single `__support`
+   cell, so column 1 held only the 108px kicker/h1 against a 420px column 2,
+   and `align-items: center` floated them into the middle of the hero — ~228px
+   of empty navy above the title. */
+.site-page-hero__copy {
+  min-width: 0;
   align-self: center;
+}
+
+.site-page-hero--with-media .site-page-hero__support {
+  margin-top: clamp(1.25rem, 2.5vw, 1.75rem);
+  align-self: auto;
 }
 
 .site-page-hero__media img {
@@ -120,8 +131,19 @@
 }
 
 @media (min-width: 900px) {
+  /* Two tracks: the copy stack in column 1, the media alone in column 2. Both
+     tracks hold real content, so hero height is content-driven and the two
+     columns centre against each other with no empty band above the title. */
   .site-page-hero--with-media .site-page-hero__inner {
     align-items: center;
+    padding-block: clamp(2.75rem, 4.5vw, 4.5rem);
+    column-gap: clamp(2.5rem, 4vw, 4rem);
+    row-gap: 1.5rem;
+  }
+
+  .site-page-hero--with-media .site-page-hero__media {
+    grid-column: 2;
+    margin-top: 0;
   }
 
   .areas-editorial__hero-grid,
