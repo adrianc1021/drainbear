@@ -17,6 +17,7 @@ import {
 import { WhatsAppButton } from "@/components/Layout";
 import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import GhostFibers from "@/components/GhostFibers/GhostFibers";
 import {
   useContactSettings,
   useSiteSettings,
@@ -97,22 +98,33 @@ export default function District() {
         jsonLd={jsonLd}
         breadcrumbs={crumbs}
       />
-      <Breadcrumbs items={crumbs} />
-
       {/* Hero */}
-      <section className="bg-gradient-to-b from-mist to-white py-14 md:py-20">
-        <div className="container">
+      <section className="relative isolate overflow-hidden bg-[#003566] py-14 text-white md:py-20">
+        <GhostFibers
+          className="site-page-hero__fibers"
+          lineColor="#8ed8f4"
+          glowColor="#176da5"
+          backgroundColor="#003566"
+          speed={0.055}
+          scale={2.8}
+          rotationSpeed={0.035}
+          layers={3}
+          glowIntensity={0.45}
+          brightness={0.72}
+          grain={0.008}
+          fps={18}
+        />
+        <Breadcrumbs items={crumbs} tone="dark" />
+        <div className="container relative z-10">
           <div className="max-w-2xl">
-            <div className="mb-3 flex items-center gap-2 text-xs font-bold tracking-[0.2em] text-safety">
+            <div className="mb-3 flex items-center gap-2 text-xs font-bold tracking-[0.2em] text-[#9ee7ff]">
               <MapPin className="h-4 w-4" strokeWidth={2.5} />
               {d.en} · {d.region}
             </div>
-            <h1 className="text-balance font-display text-4xl font-black text-navy md:text-5xl">
+            <h1 className="text-balance font-display text-4xl font-black text-white md:text-5xl">
               {d.heroTitle}
             </h1>
-            <p className="mt-4 text-muted-foreground md:text-lg">
-              {d.heroDesc}
-            </p>
+            <p className="mt-4 text-white/75 md:text-lg">{d.heroDesc}</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <a
                 href={waDistrict}
@@ -130,13 +142,13 @@ export default function District() {
               <a
                 href={phoneHref}
                 onClick={() => trackCTA("phone", "district_hero", d.name)}
-                className="btn-smooth inline-flex items-center justify-center gap-2 rounded-lg bg-navy px-7 py-3.5 text-base font-bold text-white hover:bg-navy-light"
+                className="btn-smooth inline-flex items-center justify-center gap-2 rounded-lg bg-white/10 px-7 py-3.5 text-base font-bold text-white ring-1 ring-inset ring-white/25 hover:bg-white/18"
               >
                 <Phone className="h-5 w-5" strokeWidth={2.2} />
                 {phoneDisplay}
               </a>
             </div>
-            <p className="mt-4 text-xs text-muted-foreground">
+            <p className="mt-4 text-xs text-white/60">
               現場檢查後確認總價才動工・接納工程可免檢查費
             </p>
           </div>

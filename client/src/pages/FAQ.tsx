@@ -115,18 +115,20 @@ export default function FAQ() {
         breadcrumbs={FAQ_CRUMBS}
       />
 
-      <Breadcrumbs items={FAQ_CRUMBS} />
-
-      <EditorialPageHero
-        kicker="常見問題"
-        title="常見問題"
-        description="以直接答案整理收費、緊急處理、上門安排、施工及管道保養問題，方便您快速判斷下一步。"
-        media={{
-          src: "/images/home-drain-technician.jpg",
-          alt: "通渠師傅在住宅現場處理排水問題",
-          caption: "如有污水外溢或水位上升，請先停止用水並提供現場資料",
-        }}
-      />
+      <div className="site-hero-shell">
+        <Breadcrumbs items={FAQ_CRUMBS} tone="dark" />
+        <EditorialPageHero
+          kicker="常見問題"
+          title="常見問題"
+          description="以直接答案整理收費、緊急處理、上門安排、施工及管道保養問題，方便您快速判斷下一步。"
+          media={{
+            src: "/images/home-drain-technician.jpg",
+            alt: "通渠師傅在住宅現場處理排水問題",
+            caption: "如有污水外溢或水位上升，請先停止用水並提供現場資料",
+          }}
+          fibers={false}
+        />
+      </div>
 
       <section className="border-b border-border bg-mist/55 py-10">
         <div className="site-editorial-narrow">

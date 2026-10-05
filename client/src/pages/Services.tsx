@@ -233,6 +233,7 @@ export default function Services() {
             />
           }
           className="phase4-services__hero"
+          fibers={false}
         />
       </div>
 

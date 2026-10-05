@@ -43,18 +43,38 @@
   z-index: var(--site-header-z);
 }
 
-/* A short shared transition keeps inner pages connected to the dark brand header
-   while leaving their breadcrumb, title and content sections readable. */
-.site-inner-atmosphere {
-  position: relative;
-  height: clamp(3.5rem, 8vw, 6rem);
-  overflow: hidden;
-  isolation: isolate;
-  background: #073b70;
+/* Inner-page hero fibers canvas */
+.site-page-hero__fibers {
+  opacity: 0.55;
 }
 
-.site-inner-atmosphere__fibers {
-  opacity: 0.42;
+/* Wraps a breadcrumb + EditorialPageHero on one continuous dark surface.
+   The hero's own fibers are disabled (fibers={false}); the shell paints the
+   single #003566 field so the breadcrumb doesn't sit on a separate band. */
+.site-hero-shell {
+  position: relative;
+  isolation: isolate;
+  background: #003566;
+  color: #fff;
+}
+
+.site-hero-shell > .site-page-hero {
+  background: transparent;
+}
+
+/* Breadcrumbs dark variant — used when physically inside a dark (#003566) hero */
+.site-breadcrumbs--dark,
+.site-breadcrumbs--dark a {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.site-breadcrumbs--dark a:hover,
+.site-breadcrumbs--dark a:focus-visible {
+  color: #fff;
+}
+
+.site-breadcrumbs--dark [aria-current="page"] {
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .site-header__row {

@@ -715,7 +715,8 @@ a svg {
 
 /* Inner pages share an aligned, compact masthead rather than giant headlines. */
 .site-page-hero {
-  background: var(--brand-paper);
+  background: #003566;
+  color: #fff;
 }
 .site-page-hero::after,
 .case-studies-hero::after {
@@ -747,7 +748,11 @@ a svg {
   line-height: 1.85;
 }
 .case-studies-hero {
-  background: var(--brand-paper);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #003566;
+  color: #fff;
 }
 .case-studies-row {
   transition: background-color 180ms;
@@ -845,10 +850,10 @@ a svg {
 .phase4-guide .guide-price-table th {
   font-weight: 600;
 }
-.areas-editorial [data-visual-section="areas-hero"],
-.district-editorial > section:first-of-type {
-  background: var(--brand-paper);
-}
+/* 內頁 hero 統一為深藍（#003566）。這條規則原先把 paper 底色壓在 areas/district
+   的 hero 上，令原本已改成深藍的 hero 被覆寫；.areas-editorial 有
+   motionsites-inner-pages.css 較後載入的 #003566 救回，district 則無，故移除。
+   兩個 hero 的深藍現由各自的 section class 提供。 */
 .areas-editorial h1,
 .district-editorial h1 {
   font-size: clamp(2rem, 3.4vw, 3.5rem);

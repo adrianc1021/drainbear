@@ -12,7 +12,7 @@ export default function NotFound() {
         noindex
       />
 
-      <main className="stage6a-not-found">
+      <div className="stage6a-not-found">
         <section className="stage6a-not-found__hero">
           <div className="stage6a-not-found__inner">
             <div className="stage6a-not-found__marker" aria-hidden="true">
@@ -47,7 +47,7 @@ export default function NotFound() {
             </nav>
           </div>
         </section>
-      </main>
+      </div>
     </>
   );
 }

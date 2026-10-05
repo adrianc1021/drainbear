@@ -267,42 +267,44 @@ export default function Guide() {
         ]}
         breadcrumbs={CRUMBS}
       />
-      <Breadcrumbs items={CRUMBS} />
-
       {/* 頁首 */}
-      <EditorialPageHero
-        kicker="收費指南"
-        title={
-          <>
-            香港通渠價錢及收費，
-            <br />
-            動工前確認報價
-          </>
-        }
-        description="整理常見通渠價格、費用及起始收費，並說明報價及施工流程。可先按淤塞位置查看參考，再提供現場資料作初步估價。"
-        media={{
-          src: "/images/home-cctv-inspection.jpg",
-          alt: "通渠師傅使用設備檢查排水管道",
-          caption: "收費參考以常見工序整理，動工前確認報價",
-        }}
-        actions={
-          <>
-            <WhatsAppButton
-              label="WhatsApp 免費報價"
-              className="phase4-primary-action"
-              trackLocation="guide_hero"
-            />
-            <a
-              href={phoneHref}
-              onClick={() => trackCTA("phone", "guide_hero")}
-              className="phase4-secondary-action"
-            >
-              致電 {phoneDisplay}
-            </a>
-          </>
-        }
-        className="phase4-guide__hero"
-      />
+      <div className="site-hero-shell">
+        <Breadcrumbs items={CRUMBS} tone="dark" />
+        <EditorialPageHero
+          kicker="收費指南"
+          title={
+            <>
+              香港通渠價錢及收費，
+              <br />
+              動工前確認報價
+            </>
+          }
+          description="整理常見通渠價格、費用及起始收費，並說明報價及施工流程。可先按淤塞位置查看參考，再提供現場資料作初步估價。"
+          media={{
+            src: "/images/home-cctv-inspection.jpg",
+            alt: "通渠師傅使用設備檢查排水管道",
+            caption: "收費參考以常見工序整理，動工前確認報價",
+          }}
+          actions={
+            <>
+              <WhatsAppButton
+                label="WhatsApp 免費報價"
+                className="phase4-primary-action"
+                trackLocation="guide_hero"
+              />
+              <a
+                href={phoneHref}
+                onClick={() => trackCTA("phone", "guide_hero")}
+                className="phase4-secondary-action"
+              >
+                致電 {phoneDisplay}
+              </a>
+            </>
+          }
+          className="phase4-guide__hero"
+          fibers={false}
+        />
+      </div>
 
       {/* 收費參考表 */}
       <section className="py-14 md:py-20">

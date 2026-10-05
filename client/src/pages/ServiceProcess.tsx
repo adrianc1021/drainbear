@@ -13,6 +13,7 @@ import { Link } from "wouter";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { WhatsAppButton } from "@/components/Layout";
 import SEO from "@/components/SEO";
+import GhostFibers from "@/components/GhostFibers/GhostFibers";
 
 const CRUMBS = [
   { name: "首頁", path: "/" },
@@ -104,11 +105,24 @@ export default function ServiceProcess() {
         breadcrumbs={CRUMBS}
         jsonLd={PAGE_JSON_LD}
       />
-      <Breadcrumbs items={CRUMBS} />
-
-      <main>
-        <section className="border-b border-border bg-navy py-14 text-white md:py-20">
-          <div className="container grid gap-10 lg:grid-cols-[1fr_0.55fr] lg:items-end">
+      <div>
+        <section className="relative isolate overflow-hidden border-b border-border bg-navy py-14 text-white md:py-20">
+          <GhostFibers
+            className="site-page-hero__fibers"
+            lineColor="#8ed8f4"
+            glowColor="#176da5"
+            backgroundColor="#003566"
+            speed={0.055}
+            scale={2.8}
+            rotationSpeed={0.035}
+            layers={3}
+            glowIntensity={0.45}
+            brightness={0.72}
+            grain={0.008}
+            fps={18}
+          />
+          <Breadcrumbs items={CRUMBS} tone="dark" />
+          <div className="container relative z-10 grid gap-10 pt-6 lg:grid-cols-[1fr_0.55fr] lg:items-end">
             <div>
               <p className="text-xs font-bold tracking-[0.18em] text-wagreen">
                 服務標準
@@ -348,7 +362,7 @@ export default function ServiceProcess() {
             </div>
           </div>
         </section>
-      </main>
+      </div>
     </div>
   );
 }

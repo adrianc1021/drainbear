@@ -45,8 +45,8 @@
 }
 
 .areas-editorial [data-visual-section="areas-hero"] {
-  background: var(--site-paper);
-  border-bottom: 1px solid var(--site-rule);
+  background: #003566;
+  color: #fff;
 }
 
 .areas-editorial__hero-grid {
@@ -94,10 +94,12 @@
   min-width: 0;
 }
 
+/* Case-studies masthead is now a dark (#003566) hero — swap the light-scheme
+   rules above for on-dark equivalents. */
 .case-studies-hero__media {
   min-width: 0;
   margin: 2rem 0 0;
-  border-top: 1px solid var(--db-rule);
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
   padding-top: 0.85rem;
 }
 
@@ -105,8 +107,16 @@
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
-  border: 1px solid var(--db-rule);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   object-fit: cover;
+}
+
+.case-studies-hero__media figcaption {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.case-studies-hero__media figcaption::before {
+  background: #9ee7ff;
 }
 
 @media (min-width: 900px) {

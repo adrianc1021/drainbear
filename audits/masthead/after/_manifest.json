@@ -1,0 +1,93 @@
+{
+  "phase": "after",
+  "generatedBy": "scripts/audit-masthead-shots.mjs",
+  "capturedAt": "2026-10-05T05:48:53.221Z",
+  "baseUrl": "http://127.0.0.1:4941",
+  "source": "spawned dist/index.js (production build)",
+  "rows": [
+    {
+      "label": "home",
+      "route": "/",
+      "status": 200,
+      "desktop": "#main-content > div > section",
+      "mobile": "#main-content > div > section"
+    },
+    {
+      "label": "services",
+      "route": "/services",
+      "status": 200,
+      "desktop": ".site-page-hero",
+      "mobile": ".site-page-hero"
+    },
+    {
+      "label": "areas",
+      "route": "/areas",
+      "status": 200,
+      "desktop": "#main-content > div > section",
+      "mobile": "#main-content > div > section"
+    },
+    {
+      "label": "district",
+      "route": "/areas/kwun-tong",
+      "status": 200,
+      "desktop": ".district-editorial > section",
+      "mobile": ".district-editorial > section"
+    },
+    {
+      "label": "service-detail",
+      "route": "/services/high-pressure-jetting",
+      "status": 200,
+      "desktop": "#main-content > div > div > section",
+      "mobile": "#main-content > div > div > section"
+    },
+    {
+      "label": "drain-diagnosis",
+      "route": "/drain-diagnosis",
+      "status": 200,
+      "desktop": "#main-content > div > div > section",
+      "mobile": "#main-content > div > div > section"
+    },
+    {
+      "label": "service-process",
+      "route": "/service-process",
+      "status": 200,
+      "desktop": "#main-content > div > div > section",
+      "mobile": "#main-content > div > div > section"
+    },
+    {
+      "label": "blog",
+      "route": "/blog",
+      "status": 200,
+      "desktop": ".site-hero-shell",
+      "mobile": ".site-hero-shell"
+    },
+    {
+      "label": "faq",
+      "route": "/faq",
+      "status": 200,
+      "desktop": ".site-hero-shell",
+      "mobile": ".site-hero-shell"
+    },
+    {
+      "label": "guide",
+      "route": "/guide",
+      "status": 200,
+      "desktop": ".site-hero-shell",
+      "mobile": ".site-hero-shell"
+    },
+    {
+      "label": "cases",
+      "route": "/cases",
+      "status": 200,
+      "desktop": ".case-studies-hero",
+      "mobile": ".case-studies-hero"
+    },
+    {
+      "label": "case-detail",
+      "route": "/cases/home-basin-grease-buildup-cleaning",
+      "status": 200,
+      "desktop": "(viewport fallback)",
+      "mobile": "(viewport fallback)"
+    }
+  ]
+}
