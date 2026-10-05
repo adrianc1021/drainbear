@@ -24,6 +24,8 @@ import { useBlogPost, useBlogPosts } from "@/lib/useBlog";
 import type { SanityArticleImage, SanityExpertTip } from "@/lib/sanity/types";
 import { WhatsAppButton } from "@/components/Layout";
 import SEO from "@/components/SEO";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import GhostFibers from "@/components/GhostFibers/GhostFibers";
 import { useSiteSettings } from "@/contexts/SiteSettingsContext";
 import { createImageSrcSet, optimizedImageUrl } from "@/lib/imageOptimization";
 
@@ -171,7 +173,11 @@ export default function BlogPost() {
 
   const { post, isLoading, isNotFound, error } = useBlogPost(slug);
 
-  const { posts, isLoading: isRelatedLoading, error: relatedError } = useBlogPosts();
+  const {
+    posts,
+    isLoading: isRelatedLoading,
+    error: relatedError,
+  } = useBlogPosts();
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
@@ -312,7 +318,10 @@ export default function BlogPost() {
   };
 
   return (
-    <div data-cms-loading={isLoading || isRelatedLoading} data-cms-error={Boolean(error || relatedError)}>
+    <div
+      data-cms-loading={isLoading || isRelatedLoading}
+      data-cms-error={Boolean(error || relatedError)}
+    >
       <SEO
         title={seoTitle}
         description={seoDescription}
@@ -337,25 +346,39 @@ export default function BlogPost() {
         ]}
       />
 
-      <section className="bg-gradient-to-b from-mist to-white py-14 md:py-16">
-        <div className="mx-auto max-w-3xl px-4">
+      <section className="relative isolate overflow-hidden bg-[#003566] py-14 text-white md:py-16">
+        <GhostFibers
+          className="site-page-hero__fibers"
+          lineColor="#8ed8f4"
+          glowColor="#176da5"
+          backgroundColor="#003566"
+          speed={0.055}
+          scale={2.8}
+          rotationSpeed={0.035}
+          layers={3}
+          glowIntensity={0.45}
+          brightness={0.72}
+          grain={0.008}
+          fps={18}
+        />
+        <div className="relative z-10 mx-auto max-w-3xl px-4">
           <Link
             href="/blog"
-            className="btn-smooth inline-flex min-h-[44px] items-center gap-1.5 text-sm font-bold text-navy/60 hover:gap-2.5 hover:text-navy"
+            className="btn-smooth inline-flex min-h-[44px] items-center gap-1.5 text-sm font-bold text-white/70 hover:gap-2.5 hover:text-white"
           >
             <ArrowLeft className="h-4 w-4" />
             返回通渠小知識
           </Link>
 
-          <div className="mt-6 inline-flex items-center rounded-full bg-navy px-3.5 py-1 text-xs font-bold text-wagreen">
+          <div className="mt-6 inline-flex items-center rounded-full bg-white/12 px-3.5 py-1 text-xs font-bold text-[#9ee7ff]">
             {post.category}
           </div>
 
-          <h1 className="mt-4 text-balance font-display text-3xl font-black leading-tight text-navy md:text-4xl">
+          <h1 className="mt-4 text-balance font-display text-3xl font-black leading-tight text-white md:text-4xl">
             {post.title}
           </h1>
 
-          <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
+          <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-white/70">
             <span className="inline-flex items-center gap-1.5">
               <CalendarDays className="h-4 w-4" />
               發布 {formatDate(post.date)}
@@ -377,7 +400,7 @@ export default function BlogPost() {
           </div>
 
           <aside
-            className="mt-7 border-y border-border py-5"
+            className="mt-7 border-y border-white/20 py-5"
             aria-labelledby="article-content-details"
           >
             <h2 id="article-content-details" className="sr-only">
@@ -385,25 +408,23 @@ export default function BlogPost() {
             </h2>
             <dl className="grid gap-5 text-sm sm:grid-cols-3">
               <div>
-                <dt className="font-bold text-navy">資料整理與撰寫</dt>
-                <dd className="mt-1 text-muted-foreground">
-                  {post.authorName}
-                </dd>
+                <dt className="font-bold text-white">資料整理與撰寫</dt>
+                <dd className="mt-1 text-white/70">{post.authorName}</dd>
               </div>
               <div>
-                <dt className="font-bold text-navy">服務流程及安全資訊審閱</dt>
-                <dd className="mt-1 text-muted-foreground">
+                <dt className="font-bold text-white">服務流程及安全資訊審閱</dt>
+                <dd className="mt-1 text-white/70">
                   {post.reviewerName || "通渠熊渠務團隊"}
                 </dd>
               </div>
               <div>
-                <dt className="font-bold text-navy">最後更新</dt>
-                <dd className="mt-1 text-muted-foreground">
+                <dt className="font-bold text-white">最後更新</dt>
+                <dd className="mt-1 text-white/70">
                   {formatDate(post.updatedAt || post.date)}
                 </dd>
               </div>
             </dl>
-            <p className="mt-5 text-xs leading-relaxed text-muted-foreground">
+            <p className="mt-5 text-xs leading-relaxed text-white/60">
               內容根據服務流程、設備用途及一般渠務安全原則整理。網上資料不能取代現場檢查；實際管道狀況、工具、到場時間及收費須按現場與服務安排確認。
             </p>
           </aside>

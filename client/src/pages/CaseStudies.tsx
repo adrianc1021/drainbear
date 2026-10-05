@@ -1,6 +1,7 @@
 import { ArrowRight, CalendarDays, MapPin } from "lucide-react";
 import { Link } from "wouter";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import GhostFibers from "@/components/GhostFibers/GhostFibers";
 import QuoteRequestForm from "@/components/QuoteRequestForm";
 import SEO from "@/components/SEO";
 import { WhatsAppButton } from "@/components/Layout";
@@ -57,20 +58,33 @@ export default function CaseStudies() {
         breadcrumbs={CRUMBS}
         contentReady={!isLoading}
       />
-      <Breadcrumbs items={CRUMBS} />
-
-      <header className="case-studies-hero border-b border-[var(--db-rule)]">
-        <div className="db-container case-studies-hero__grid">
+      <header className="case-studies-hero relative isolate overflow-hidden bg-[#003566] text-white">
+        <GhostFibers
+          className="site-page-hero__fibers"
+          lineColor="#8ed8f4"
+          glowColor="#176da5"
+          backgroundColor="#003566"
+          speed={0.055}
+          scale={2.8}
+          rotationSpeed={0.035}
+          layers={3}
+          glowIntensity={0.45}
+          brightness={0.72}
+          grain={0.008}
+          fps={18}
+        />
+        <Breadcrumbs items={CRUMBS} tone="dark" />
+        <div className="db-container case-studies-hero__grid relative z-10">
           <div>
-            <p className="text-xs font-black uppercase tracking-[0.16em] text-[var(--db-safety)]">
+            <p className="text-xs font-black uppercase tracking-[0.16em] text-[#9ee7ff]">
               Field records / 工程紀錄
             </p>
-            <h1 className="case-studies-hero__title mt-5 max-w-2xl font-display font-black text-[var(--db-ink)]">
+            <h1 className="case-studies-hero__title mt-5 max-w-2xl font-display font-black text-white">
               現場問題、做法與結果，逐項記錄。
             </h1>
           </div>
           <div className="case-studies-hero__support">
-            <p className="max-w-xl text-base leading-8 text-[var(--db-copy)] lg:justify-self-end">
+            <p className="max-w-xl text-base leading-8 text-white/75 lg:justify-self-end">
               此頁只顯示已在內容系統正式發佈的工程紀錄。個案會隱去客戶完整地址，並列出工程日期、地區、設備及完成測試；不同現場不能視為固定報價或時間保證。
             </p>
             <figure className="case-studies-hero__media">
@@ -89,7 +103,7 @@ export default function CaseStudies() {
         </div>
       </header>
 
-      <main className="db-container py-12 md:py-16">
+      <div className="db-container py-12 md:py-16">
         {isLoading ? (
           <p
             role="status"
@@ -164,7 +178,7 @@ export default function CaseStudies() {
             案例資料暫時未能更新，請稍後再試。
           </p>
         ) : null}
-      </main>
+      </div>
 
       <section className="border-y border-[var(--db-rule)] bg-white">
         <div className="db-container py-12 md:py-16">

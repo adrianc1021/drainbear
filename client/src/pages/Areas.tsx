@@ -24,6 +24,7 @@ import { WhatsAppButton } from "@/components/Layout";
 import HongKongMap from "@/components/HongKongMap";
 import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import GhostFibers from "@/components/GhostFibers/GhostFibers";
 import {
   useContactSettings,
   useSiteSettings,
@@ -546,23 +547,36 @@ export default function Areas() {
         jsonLd={areasJsonLd}
         breadcrumbs={AREAS_CRUMBS}
       />
-      <Breadcrumbs items={AREAS_CRUMBS} />
-
       {/* Hero + 地區速查 */}
       <section
-        className="bg-gradient-to-b from-mist to-white py-14 md:py-20"
+        className="relative isolate overflow-hidden bg-[#003566] py-14 text-white md:py-20"
         data-visual-section="areas-hero"
       >
-        <div className="container">
+        <GhostFibers
+          className="site-page-hero__fibers"
+          lineColor="#8ed8f4"
+          glowColor="#176da5"
+          backgroundColor="#003566"
+          speed={0.055}
+          scale={2.8}
+          rotationSpeed={0.035}
+          layers={3}
+          glowIntensity={0.45}
+          brightness={0.72}
+          grain={0.008}
+          fps={18}
+        />
+        <Breadcrumbs items={AREAS_CRUMBS} tone="dark" />
+        <div className="container relative z-10">
           <div className="areas-editorial__hero-grid">
             <div className="mx-auto max-w-2xl text-center">
-              <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">
+              <div className="mb-3 text-xs font-bold tracking-[0.2em] text-[#9ee7ff]">
                 服務地區
               </div>
-              <h1 className="text-balance font-display text-4xl font-black text-navy md:text-5xl">
+              <h1 className="text-balance font-display text-4xl font-black text-white md:text-5xl">
                 港九新界及離島通渠服務
               </h1>
-              <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
+              <p className="mx-auto mt-4 max-w-xl text-white/75">
                 無論您身處港島、九龍、新界或離島，可先提供所在地點及渠務情況，
                 我們會按交通、工具運送及工作安排確認服務方式與上門時間。
               </p>
@@ -698,9 +712,13 @@ export default function Areas() {
               <figcaption>服務示意圖・上門時間及所需設備按地點確認</figcaption>
             </figure>
           </div>
+        </div>
+      </section>
 
-          {/* 覆蓋統計帶 */}
-          <div className="reveal mx-auto mt-12 grid max-w-3xl grid-cols-3 gap-4">
+      {/* 覆蓋統計帶 */}
+      <section className="bg-white py-12 md:py-14">
+        <div className="container">
+          <div className="reveal mx-auto grid max-w-3xl grid-cols-3 gap-4">
             {STATS.map(s => (
               <div
                 key={s.label}

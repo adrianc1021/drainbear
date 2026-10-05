@@ -4,8 +4,30 @@ import path from "node:path";
 import { chromium, type Page } from "playwright";
 import { assessPrerenderSnapshot } from "./prerender-readiness";
 
-const PORT = 4173;
-const BASE_URL = `http://127.0.0.1:${PORT}`;
+// Preferred port only. server/_core/index.ts falls back to the next free port
+// when this one is taken, so the real URL is read back from the child's stdout
+// rather than assumed — see waitForServer().
+const PREFERRED_PORT = 4173;
+const SERVER_READY_PATTERN = /Server running on (http:\/\/localhost:\d+\/?)/;
+
+/**
+ * 本機專用逃生門。Sanity 專案只把 https://drainbearhk.com 列入 CORS 允許清單，
+ * 任何 localhost origin 都會 403，令 CMS 區塊載入失敗；正常情況下
+ * assessPrerenderSnapshot() 會（正確地）拒絕發佈 fallback HTML。
+ *
+ * 加 --allow-stale 可略過該關卡，只為本機視覺驗收而產生 HTML。這類輸出會帶
+ * <meta name="x-prerender-stale"> 標記，且嚴禁在 CI 使用。
+ */
+const ALLOW_STALE_CMS = process.argv.includes("--allow-stale");
+
+if (ALLOW_STALE_CMS && process.env.CI) {
+  throw new Error(
+    "拒絕在 CI 環境使用 --allow-stale：會產生不完整的 CMS 內容。"
+  );
+}
+
+/** 由 child 自己報出嘅 URL，spawn 之後才會有值。 */
+let baseUrl = "";
 const SITE_URL = "https://drainbearhk.com";
 const OUTPUT_ROOT = path.resolve("dist/public");
 const PRERENDER_META_ROOT = path.resolve("dist/prerender");
@@ -261,22 +283,18 @@ function getOutputPath(route: string) {
   return path.join(OUTPUT_ROOT, `${route.slice(1)}.html`);
 }
 
-async function waitForServer() {
-  for (let attempt = 1; attempt <= 60; attempt += 1) {
-    try {
-      const response = await fetch(BASE_URL);
-
-      if (response.ok) {
-        return;
-      }
-    } catch {
-      // Server may still be starting.
-    }
-
-    await new Promise(resolve => setTimeout(resolve, 500));
-  }
-
-  throw new Error(`Server did not start at ${BASE_URL}`);
+/**
+ * 等到「我哋自己 spawn 嘅」server 報出佢真正 listening 嘅 URL。
+ *
+ * 唔可以盲 fetch 4173：舊 dev server（甚至另一個 checkout 嘅 vite）可能霸住
+ * 該埠，令我哋爬錯站、產出錯誤 HTML。所以只認 child stdout 嘅
+ * "Server running on http://localhost:PORT/" 一行，並同時監察 child 有否提早死亡。
+ */
+async function waitForServer(
+  readyUrl: Promise<string>,
+  exited: Promise<never>
+): Promise<string> {
+  return Promise.race([readyUrl, exited]);
 }
 
 function escapeXml(value: string) {
@@ -497,30 +515,73 @@ async function prerender() {
     env: {
       ...process.env,
       NODE_ENV: "production",
-      PORT: String(PORT),
+      PORT: String(PREFERRED_PORT),
     },
     stdio: ["ignore", "pipe", "pipe"],
   });
 
+  // child 一旦報出 listening URL 就 resolve；提早死亡則 reject，
+  // 唔會再由 60 次 fetch 輪詢（嗰個輪詢正正係爬錯站嘅成因）。
+  let settleReady: (url: string) => void = () => {};
+  let settleExit: (err: Error) => void = () => {};
+  const serverReady = new Promise<string>(resolve => {
+    settleReady = resolve;
+  });
+  const serverExited = new Promise<never>((_, reject) => {
+    settleExit = reject;
+  });
+  let sawReadyLine = false;
+
   server.stdout.on("data", data => {
-    process.stdout.write(`[server] ${data}`);
+    const text = data.toString();
+    process.stdout.write(`[server] ${text}`);
+
+    const match = text.match(SERVER_READY_PATTERN);
+    if (match && !sawReadyLine) {
+      sawReadyLine = true;
+      // 只認 child 自己報嘅埠；若佢因埠被佔而另揀埠，我哋照跟。
+      settleReady(match[1].replace(/\/$/, ""));
+    }
   });
 
   server.stderr.on("data", data => {
     process.stderr.write(`[server] ${data}`);
   });
 
+  server.on("error", err => {
+    settleExit(new Error(`無法啟動 prerender server：${err.message}`));
+  });
+
+  server.on("exit", code => {
+    if (!sawReadyLine) {
+      settleExit(
+        new Error(
+          `prerender server 未及 listening 就結束（exit ${code}）。` +
+            `最常見成因：埠 ${PREFERRED_PORT} 被佔用。`
+        )
+      );
+    }
+  });
+
+  if (ALLOW_STALE_CMS) {
+    console.warn(
+      "\n⚠️  --allow-stale：已略過 CMS 完整性關卡。\n" +
+        "    產出的 HTML 含 fallback CMS 區塊，只可用作本機視覺驗收，\n" +
+        "    絕不可部署。（已加 <meta name=\"x-prerender-stale\"> 標記）\n"
+    );
+  }
+
   let browser: Awaited<ReturnType<typeof chromium.launch>> | undefined;
 
   try {
-    await waitForServer();
+    baseUrl = await waitForServer(serverReady, serverExited);
 
     browser = await chromium.launch(await getChromiumLaunchOptions());
 
     const page = await browser.newPage();
 
     for (const route of routes) {
-      const response = await page.goto(`${BASE_URL}${route}`, {
+      const response = await page.goto(`${baseUrl}${route}`, {
         waitUntil: "domcontentloaded",
         timeout: 30_000,
       });
@@ -536,12 +597,49 @@ async function prerender() {
         timeout: 30_000,
       });
 
-      await waitForRouteSeo(page, route);
+      if (ALLOW_STALE_CMS) {
+        // 只作本機視覺驗收：Sanity CORS 未開放 localhost 時，CMS 區塊會是
+        // fallback 狀態，唔可以當成 production 內容出街。
+        await page.waitForTimeout(3000);
+      } else {
+        await waitForRouteSeo(page, route);
+      }
 
       await page.waitForTimeout(50);
 
-      const html = await page.content();
+      let html = await page.content();
       const outputPath = getOutputPath(route);
+
+      // 護欄：產品建置的 HTML 只會有 hashed bundle，絕不會出現 dev server 痕跡。
+      // 若出現，代表我哋爬錯站（例如埠被另一個 dev server 佔用），必須即刻中止，
+      // 否則會靜靜地寫入錯誤 HTML。
+      const devServerArtifacts = [
+        "/@vite/client",
+        "/src/main.tsx",
+        "/__manus__/debug-collector.js",
+      ].filter(marker => html.includes(marker));
+
+      if (devServerArtifacts.length) {
+        throw new Error(
+          `Prerender 產出含 dev server 痕跡（${devServerArtifacts.join(", ")}）於 ${route}。` +
+            `表示 ${baseUrl} 並非本次建置的 production server。`
+        );
+      }
+
+      if (ALLOW_STALE_CMS) {
+        // 明確標記，令 stale 輸出永遠呃唔到人。
+        // server 係由 dist/public 讀返上一次嘅 HTML 出嚟，所以呢個標記必須
+        // 先清後加：否則每重跑一次 prerender 就會多疊一個，永遠清唔走。
+        html = html
+          .replace(
+            /^[ \t]*<meta name="x-prerender-stale"[^>]*>[ \t]*\r?\n?/gm,
+            ""
+          )
+          .replace(
+            "<head>",
+            '<head>\n    <meta name="x-prerender-stale" content="cms-unavailable-local-verification-only">'
+          );
+      }
 
       await fs.mkdir(path.dirname(outputPath), {
         recursive: true,

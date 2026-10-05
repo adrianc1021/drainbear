@@ -29,7 +29,6 @@ import { useReveal } from "@/hooks/useReveal";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import { prefetchRoute } from "@/lib/routePrefetch";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
-import GhostFibers from "@/components/GhostFibers/GhostFibers";
 import { DISTRICTS } from "@/lib/districtData";
 import { SERVICE_PAGES } from "@/lib/serviceData";
 
@@ -420,26 +419,6 @@ function Header({
   );
 }
 
-function InnerPageAtmosphere() {
-  return (
-    <div className="site-inner-atmosphere" aria-hidden="true">
-      <GhostFibers
-        className="site-inner-atmosphere__fibers"
-        lineColor="#8ed8f4"
-        glowColor="#176da5"
-        backgroundColor="#073b70"
-        speed={0.055}
-        scale={2.8}
-        rotationSpeed={0.035}
-        layers={3}
-        glowIntensity={0.45}
-        brightness={0.72}
-        grain={0.008}
-        fps={18}
-      />
-    </div>
-  );
-}
 
 const FOOTER_STATS = [
   { icon: Award, value: "先報價", label: "動工前確認收費" },
@@ -753,7 +732,6 @@ export default function Layout({ children }: { children: ReactNode }) {
     typeof window === "undefined" ? routerPathname : window.location.pathname;
   const pathname = browserPathname.replace(/\/+$/, "") || "/";
   const isHome = pathname === "/";
-  const isServicesRoute = pathname === "/services" || pathname.startsWith("/services/");
   const suppressConversionChrome = pathname === "/thanks";
 
   useReveal();
@@ -787,7 +765,6 @@ export default function Layout({ children }: { children: ReactNode }) {
         tabIndex={-1}
         className={`flex-1 outline-none ${isHome ? "home-main" : "pt-16 md:pt-[72px]"}`}
       >
-        {!isHome && !isServicesRoute ? <InnerPageAtmosphere /> : null}
         {children}
       </main>
       <Footer />
