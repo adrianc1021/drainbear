@@ -273,7 +273,7 @@ export default function District() {
       {/* 鄰近地區 + CTA */}
       <section className="bg-white pb-16 md:pb-20">
         <div className="container">
-          <div className="dot-grid rounded-lg bg-navy px-8 py-12 text-center md:px-16">
+          <div className="brand-contact-panel px-8 py-12 text-center md:px-16">
             <h2 className="text-balance font-display text-2xl font-black text-white md:text-3xl">
               {d.name}塞渠？先提供位置及渠況。
             </h2>

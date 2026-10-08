@@ -314,7 +314,7 @@ export default function ServiceProcess() {
               </Link>
             </div>
 
-            <div className="bg-navy px-7 py-9 text-white md:px-10">
+            <div className="brand-contact-panel px-7 py-9 text-white md:px-10">
               <h2 className="font-display text-2xl font-black md:text-3xl">
                 「優先安排」及「不成功不收費」如何理解
               </h2>

@@ -71,10 +71,10 @@ export default function CaseStudyDetail() {
       ) : study ? (
         <>
           <article>
-            <header className="relative isolate overflow-hidden bg-navy text-white">
+            <header className="case-detail-hero text-white">
               <Breadcrumbs items={crumbs} tone="dark" />
-              <div className="db-container relative z-10 grid gap-10 pt-6 pb-12 md:pb-18 lg:grid-cols-[minmax(0,1.05fr)_minmax(18rem,0.75fr)] lg:items-end lg:gap-16">
-                <div>
+              <div className="db-container case-detail-hero__inner">
+                <div className="case-detail-hero__copy">
                   <p className="text-xs font-black uppercase tracking-[0.15em] text-wagreen">
                     {study.serviceLabel}
                   </p>
@@ -86,7 +86,7 @@ export default function CaseStudyDetail() {
                     {study.summary}
                   </p>
                 </div>
-                <dl className="grid grid-cols-2 border-y border-white/22 text-sm">
+                <dl className="case-detail-hero__facts grid grid-cols-2 border-y border-white/22 text-sm">
                   <div className="py-5 pr-4">
                     <dt className="flex items-center gap-2 text-white/70">
                       <MapPin className="h-4 w-4" />

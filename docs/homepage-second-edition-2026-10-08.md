@@ -16,11 +16,14 @@
 
 - 首屏採用藍天背景、白色紙藝通渠熊、渠務工具和香港天際線；透明導覽與主視覺連成一體。捲動後導覽回復白底；手機展開選單時維持清晰對比及鍵盤焦點。
 - 主視覺為原創生成的品牌插畫，保留「服務示意圖，非客戶工程紀錄」標示。WebP有1536、960、640px三個版本，大小約117、60、34KB，瀏覽器按尺寸選擇；無需外部圖片請求。
-- 左側保留大標題「香港通渠，先搵通渠熊。」、大型熱線及WhatsApp。手機先看到聯絡，再看到完整比例的紙藝圖像。
+- 大標題「香港通渠，先搵通渠熊。」以兩行置中呈現，桌面最高112px；紙藝圖像全寬延伸作背景，覆上藍色漸層保持文字對比。熱線與WhatsApp在標題下方置中，手機兩個入口仍在首屏。
+- 標題分行淡入及向上入場，背景做一次輕微入場；沒有無限循環動畫。prefers-reduced-motion會取消動畫，文字及圖片仍完整可見。
 - 首屏下方的白色面板可選住宅、食肆／商舖及物業渠務，再選實際服務和地區。WhatsApp帶入所選資料；沒有提交資料庫表單，也沒有新增收費、保證或車隊承諾。
 - 三個服務原則用立體圖示和簡短文字呈現。下方保留精簡深藍服務索引、客群入口、收費與四步流程、FAQ及文章／案例連結。
 
-樣式仍位於單一brand-system.css；ServiceDirectory與CustomerPaths使用可選compact模式。新增HomeServiceFinder，使用同一服務、地區及聯絡資料來源，保留既有trackCTA及WhatsApp轉交。修正鍵盤skip link的顯示與focus樣式，以及首頁透明頁首被一般白底樣式覆蓋的問題。其他頁面的導覽維持原本模式。SEO title、description、canonical、可見FAQ及schema保持一致。
+服務索引、服務詳情、地區、指南、流程、問題判斷、FAQ、文章及工程案例共用藍色紙藝首屏、置中標題和聯絡入口。文章與案例正文保留適合閱讀的寬度及真實資料；收費表、服務內容及安全說明維持原有語意。全站使用藍色強調色、淺藍紙色及統一卡片圓角，下方聯絡面板及精選文章同步採用藍色漸層。感謝及404頁使用淺藍背景和一致的按鈕樣式。
+
+樣式仍位於單一brand-system.css；ServiceDirectory與CustomerPaths使用可選compact模式。HomeServiceFinder使用同一服務、地區及聯絡資料來源，保留既有trackCTA及WhatsApp轉交。首頁頂端為透明頁首，捲動後與內頁使用相同白底導覽。SEO title、description、canonical、可見FAQ及schema保持一致。
 
 ## 驗證
 
@@ -28,7 +31,7 @@
 
 全站品質檢查涵蓋52條路由、15種版型×5尺寸（320、390、768、1024、1440px）、FAQ/schema關係及鍵盤操作；包括31次axe審查。另實測手機及桌面的服務／地區WhatsApp內容、切換客群重置服務，以及透明／固定頁首切換。原有鍵盤測試曾在React尚未完成掛載時按Tab，現改為等候可見H1再操作，避免誤判。
 
-截圖及結果位於 `/workspace/drainbear-review/paper-hero-final/`，首屏截圖為 `home-hero-390.png` 和 `home-hero-1440.png`。新首頁尚未合併到main；正式站維持已驗證的上一版。
+截圖及結果位於 `/workspace/drainbear-review/centered-sky-final/`。動態與置中量度位於 `/workspace/drainbear-review/centered-sky/motion-verification.json`：390及1440px標題中線與視窗中線誤差0px，正常動態結束後opacity為1，減少動態時animation及transform為none。截圖流程會回到頁頂並等候圖片解碼，避免誤存捲動或動畫中途的畫面。新設計更新於PR #46的Vercel Preview，尚未合併到main；正式站維持已驗證的上一版。
 
 ## 下一步優化次序
 

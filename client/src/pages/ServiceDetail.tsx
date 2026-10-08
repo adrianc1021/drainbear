@@ -315,7 +315,7 @@ export default function ServiceDetail() {
               </ul>
             </article>
 
-            <article className="rounded-xl bg-navy p-7 text-white md:p-8">
+            <article className="brand-contact-panel p-7 text-white md:p-8">
               <div className="flex items-center gap-3">
                 <ShieldCheck className="h-6 w-6 text-wagreen" />
                 <h2 className="font-display text-2xl font-black">
@@ -411,7 +411,7 @@ export default function ServiceDetail() {
               })}
             </div>
 
-            <div className="mt-12 rounded-2xl bg-navy px-7 py-10 text-center md:px-12">
+            <div className="brand-contact-panel mt-12 px-7 py-10 text-center md:px-12">
               <h2 className="font-display text-2xl font-black text-white md:text-3xl">
                 未確定應該用哪種處理方法？
               </h2>

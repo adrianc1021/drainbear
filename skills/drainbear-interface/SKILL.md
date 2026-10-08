@@ -12,6 +12,7 @@ description: 使用語意化React元件與Flexbox/Grid統一通渠熊介面，�
 - Grid欄位使用minmax(0,1fr)，Flex子項需min-width:0。中文標題自然換行，不能以overflow:hidden掩蓋文字溢出。
 - 320px至1440px驗證，包括手機首屏兩個聯絡按鈕、表格可捲動、固定CTA不遮擋內容、平板導覽不擠壓。
 - 提供hover、active、focus-visible；尊重prefers-reduced-motion。裝飾不應持續佔用GPU，或阻擋點擊。
+- 主標題入場動態使用CSS有限次播放；減少動態時仍須完整可見。改動首屏後，量度標題中線、兩個聯絡按鈕的位置，截圖前等候圖片解碼及動畫結束；不能把動畫中途的畫面當成完成版。
 - 透明頁首要核對實際背景、文字對比、捲動及選單開啟狀態；不能只看class名稱。skip link平時移出畫面，focus時置於頁首前方，不佔據版面。漸層／圖像背景仍須人工檢視，axe不能代替畫面核查。
 - 重現缺陷後修正；檢查資料生命週期、事件移除、計時器和記憶體上限。率限制不可為清理記憶體而任意驅逐仍生效的限制。
 - Vite設定可能是函式或Promise，必須解析後才傳入createServer。新增服務／地區時同步shared/publicRoutes.ts並驗證真實HTTP狀態。

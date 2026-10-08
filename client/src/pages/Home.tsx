@@ -51,29 +51,30 @@ export default function Home() {
         aria-labelledby="home-heading"
         data-pr20-section="hero"
       >
-        <div className="container home-hero__grid">
-          <div className="home-hero__copy">
-            <p className="brand-eyebrow">香港通渠服務 · 24 小時接受查詢</p>
-            <h1 id="home-heading">
-              香港通渠，
-              <br />
-              先搵通渠熊。
-            </h1>
-            <p className="home-hero__intro">
-              塞廁所、鋅盤去水慢，定係污水倒灌？
-              <br />
-              傳相片同地區，先了解處理方法及報價。
-            </p>
-            <ContactActions location="home_hero" prominent />
-            <p className="contact-note">
-              24 小時接受查詢；上門時間按地區、人手及設備確認。
-            </p>
+        <div className="home-hero__stage">
+          <div className="container home-hero__grid">
+            <div className="home-hero__copy">
+              <p className="brand-eyebrow">香港通渠服務 · 24 小時接受查詢</p>
+              <h1 id="home-heading">
+                <span className="home-hero__headline-line">香港通渠，</span>
+                <span className="home-hero__headline-line">先搵通渠熊。</span>
+              </h1>
+              <p className="home-hero__intro">
+                塞廁所、鋅盤去水慢，定係污水倒灌？
+                <br />
+                傳相片同地區，先了解處理方法及報價。
+              </p>
+              <ContactActions location="home_hero" prominent />
+              <p className="contact-note">
+                24 小時接受查詢；上門時間按地區、人手及設備確認。
+              </p>
+            </div>
           </div>
           <figure className="home-hero__media">
             <img
               src="/images/drainbear-paper-hero.webp"
               srcSet="/images/drainbear-paper-hero-640.webp 640w, /images/drainbear-paper-hero-960.webp 960w, /images/drainbear-paper-hero.webp 1536w"
-              sizes="(max-width: 899px) calc(100vw - 40px), 900px"
+              sizes="100vw"
               alt="白色紙藝通渠熊、香港天際線及渠務工具的品牌示意"
               width="1536"
               height="1024"

@@ -356,6 +356,8 @@ try {
     await page.getByLabel("服務地區", { exact: true }).inputValue(),
     "kwun-tong"
   );
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.locator(".home-hero__media img").evaluate(img => img.decode());
   await page.screenshot({ path: `${output}/home-hero-390.png` });
   await page.goto(`${serverUrl}/areas`);
   await page.getByLabel("輸入地區或屋苑附近地點").fill("觀塘");
@@ -383,10 +385,12 @@ try {
   await page.close();
   const desktop = await browser.newPage({
     viewport: { width: 1440, height: 900 },
+    reducedMotion: "reduce",
   });
   await enableCmsRelay(desktop.context(), serverUrl);
   await desktop.goto(`${serverUrl}/`);
   await desktop.locator("main h1").waitFor({ state: "visible" });
+  await desktop.locator(".home-hero__media img").evaluate(img => img.decode());
   await desktop.screenshot({ path: `${output}/home-hero-1440.png` });
   await desktop.getByRole("button", { name: "開啟 WhatsApp 對話框" }).click();
   await desktop

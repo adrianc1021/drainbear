@@ -130,7 +130,7 @@ export default function Blog() {
                     destination_url: `/blog/${featured.slug}`,
                   })
                 }
-                className="site-feature-story group grid overflow-hidden border border-border bg-navy md:grid-cols-5"
+                className="site-feature-story brand-contact-panel group grid overflow-hidden md:grid-cols-5"
               >
                 <div className="flex flex-col justify-center p-8 md:col-span-3 md:p-12">
                   <div className="site-label site-label--dark mb-4">
