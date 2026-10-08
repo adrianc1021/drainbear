@@ -13,6 +13,7 @@ import {
   useSiteSettings,
 } from "@/contexts/SiteSettingsContext";
 import { goThanksAfterWhatsApp, trackCTA } from "@/lib/analytics";
+import DistrictCaseRecords from "@/components/DistrictCaseRecords";
 import { getDistrict } from "@/lib/districtData";
 import NotFound from "@/pages/NotFound";
 import {
@@ -157,11 +158,11 @@ export default function District() {
                   { icon: Clock, text: "按位置、交通及設備供應確認到場時間" },
                   {
                     icon: BadgeCheck,
-                    text: "先提供初步估算，現場確認總價才動工",
+                    text: "先提供現場相片，了解所需工具與安排",
                   },
                   {
                     icon: ShieldCheck,
-                    text: "接納工程可免檢查費，查詢時說明條件",
+                    text: "說明現場聯絡人、進場方式及受影響範圍",
                   },
                   {
                     icon: Wrench,
@@ -191,6 +192,7 @@ export default function District() {
         </div>
       </section>
 
+      <DistrictCaseRecords district={d.name} />
       {/* 當區常見問題場景 */}
       <section className="bg-mist py-14 md:py-16">
         <div className="container">
@@ -247,12 +249,12 @@ export default function District() {
             ))}
           </div>
           <div className="reveal mt-8 flex flex-wrap items-center gap-3 text-sm">
-            <span className="text-muted-foreground">想了解更多收費詳情？</span>
+            <span className="text-muted-foreground">想整理現場資料？</span>
             <Link
               href="/guide"
               className="btn-smooth inline-flex min-h-[44px] items-center gap-1.5 font-bold text-wagreen-dark hover:gap-2.5"
             >
-              查看通渠收費指南 <ArrowRight className="h-4 w-4" />
+              如何了解處理及報價 <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               href="/drain-diagnosis"

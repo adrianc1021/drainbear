@@ -3,7 +3,7 @@ import path from "node:path";
 
 const root = process.cwd();
 const robotsPath = path.join(root, "client", "public", "robots.txt");
-const llmsPath = path.join(root, "client", "public", "llms.txt");
+const llmsPath = path.join(root, "dist", "public", "llms.txt");
 const vercelPath = path.join(root, "vercel.json");
 
 function read(filePath) {
@@ -66,8 +66,8 @@ assert(
   "llms.txt is missing the public contact number"
 );
 assert(
-  llms.includes("以確認的現場報價為準"),
-  "llms.txt is missing its pricing qualification"
+  llms.includes("報價按實際現場"),
+  "generated llms.txt is missing its on-site context"
 );
 assert(
   llms.includes("不代表任何排名、推薦或引用保證"),

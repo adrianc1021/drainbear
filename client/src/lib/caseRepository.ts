@@ -54,8 +54,10 @@ export function combineCaseStudies(cmsStudies: SanityCaseStudy[]) {
 }
 
 export function mapCaseStudy(study: SanityCaseStudy): CaseStudyView {
+  const district = study.district?.trim();
   return {
     ...study,
+    district: district && !/^[-—－–]+$/.test(district) ? district : undefined,
     serviceLabel: SERVICE_LABELS[study.serviceType] ?? "渠務工程",
   };
 }

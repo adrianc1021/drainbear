@@ -57,6 +57,47 @@ const faq: AeoSnapshot = {
 };
 
 describe("public AEO artifacts", () => {
+  it("requires visible company facts and groups repeated questions without dropping their sources", () => {
+    const company = {
+      ...home,
+      route: "/about",
+      url: origin + "/about",
+      text: "通渠熊 +852 9558 8260",
+      ids: ["company-facts"],
+    };
+    const extraFaq = {
+      ...faq,
+      route: "/guide",
+      url: origin + "/guide",
+      structuredData: [
+        {
+          "@type": "FAQPage",
+          mainEntity: [
+            {
+              "@type": "Question",
+              name: "可以先報價嗎？",
+              acceptedAnswer: { text: "現場確認總收費後才動工。" },
+            },
+          ],
+        },
+      ],
+    };
+    const result = buildAeoArtifacts([home, company, faq, extraFaq], origin);
+    expect(result.knowledge.companyFacts?.source).toBe(
+      origin + "/about#company-facts"
+    );
+    expect(result.knowledge.coverage.answers).toBe(2);
+    expect(result.knowledge.coverage.uniqueQuestions).toBe(1);
+    expect(
+      result.knowledge.answerCatalog[0].variants.map(item => item.source)
+    ).toEqual([origin + "/faq#pricing", origin + "/guide"]);
+    expect(() =>
+      buildAeoArtifacts(
+        [home, { ...company, text: "另一公司 +852 0000 0000" }],
+        origin
+      )
+    ).toThrow("company facts differ");
+  });
   it("excludes noindex and noncanonical content without assigning generated dates to pages", () => {
     const result = buildAeoArtifacts(
       [

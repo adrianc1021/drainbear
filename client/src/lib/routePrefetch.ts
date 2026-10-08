@@ -88,6 +88,14 @@ export function loadGuide() {
   return import("@/pages/GuideRoute");
 }
 
+export function loadCustomerJourney() {
+  return import("@/pages/CustomerJourney");
+}
+
+export function loadAbout() {
+  return import("@/pages/About");
+}
+
 export function loadThanks() {
   return import("@/pages/Thanks");
 }

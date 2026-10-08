@@ -1,19 +1,13 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
-import QuoteRequestForm, {
+import InquiryContactPanel, {
   type InquiryServiceType,
-} from "@/components/QuoteRequestForm";
+} from "@/components/InquiryContactPanel";
 import SEO from "@/components/SEO";
+import RelatedCaseRecords from "@/components/RelatedCaseRecords";
 import { BUSINESS_ID, SITE_URL } from "@/config/site";
-import {
-  useContactSettings,
-  useSiteSettings,
-} from "@/contexts/SiteSettingsContext";
-import {
-  goThanksAfterWhatsApp,
-  trackCTA,
-  trackNavClick,
-} from "@/lib/analytics";
+import { useSiteSettings } from "@/contexts/SiteSettingsContext";
+import { trackNavClick } from "@/lib/analytics";
 import { cloudinaryImageUrl } from "@/lib/cloudinary";
 import { prefetchRoute } from "@/lib/routePrefetch";
 import { getServicePage } from "@/lib/serviceData";
@@ -22,7 +16,6 @@ import {
   ArrowRight,
   CheckCircle2,
   CircleAlert,
-  MessageCircle,
   Search,
   ShieldCheck,
   Wrench,
@@ -43,13 +36,11 @@ const INQUIRY_TYPE_BY_SLUG: Record<string, InquiryServiceType> = {
 export default function ServiceDetail() {
   const { slug } = useParams<{ slug: string }>();
   const service = getServicePage(slug || "");
-  const { phoneDisplay, phoneHref, whatsappHref } = useContactSettings();
   const { settings } = useSiteSettings();
 
   if (!service) return <NotFound />;
 
   const path = `/services/${service.slug}`;
-  const whatsappUrl = whatsappHref(service.whatsappMessage);
   const serviceSocialImage = cloudinaryImageUrl(service.image, 1200);
   const crumbs = [
     { name: "首頁", path: "/" },
@@ -71,7 +62,7 @@ export default function ServiceDetail() {
       name: settings.businessName,
     },
     mainEntityOfPage: { "@id": `${SITE_URL}${path}#webpage` },
-    termsOfService: `${service.answerSummary.confirmBeforeWork} ${service.answerSummary.limitation}`,
+    subjectOf: { "@id": `${SITE_URL}${path}#webpage` },
     areaServed: {
       "@type": "Country",
       name: "Hong Kong",
@@ -103,7 +94,9 @@ export default function ServiceDetail() {
             "@context": "https://schema.org",
             "@type": "FAQPage",
             "@id": `${SITE_URL}${path}#faq`,
-            mainEntity: service.faqs.map(faq => ({
+            mainEntity: service.faqs.map((faq, index) => ({
+              "@id": `${SITE_URL}${path}#service-answer-${index + 1}`,
+              url: `${SITE_URL}${path}#service-answer-${index + 1}`,
               "@type": "Question",
               name: faq.question,
               acceptedAnswer: { "@type": "Answer", text: faq.answer },
@@ -126,6 +119,13 @@ export default function ServiceDetail() {
           />
         </div>
 
+        <nav className="container page-section-nav" aria-label="本頁內容">
+          <a href="#service-answer-summary">適用情況</a>
+          <a href="#service-cases">施工紀錄</a>
+          <a href="#service-method">處理流程</a>
+          <a href="#service-questions">常見問題</a>
+          <a href="#service-contact">現場查詢</a>
+        </nav>
         <section className="service-support border-b border-border bg-white py-8">
           <div className="container grid gap-4 md:grid-cols-2">
             <Link
@@ -217,6 +217,11 @@ export default function ServiceDetail() {
           </div>
         </section>
 
+        <RelatedCaseRecords
+          serviceSlugs={[service.slug]}
+          location={`service_${service.slug}_cases`}
+          id="service-cases"
+        />
         <section className="service-symptoms bg-white py-14 md:py-20">
           <div className="container grid gap-10 lg:grid-cols-2">
             <article>
@@ -261,7 +266,10 @@ export default function ServiceDetail() {
           </div>
         </section>
 
-        <section className="service-steps bg-mist py-14 md:py-20">
+        <section
+          id="service-method"
+          className="service-steps bg-mist py-14 md:py-20"
+        >
           <div className="container">
             <div className="mx-auto max-w-2xl text-center">
               <p className="text-xs font-bold tracking-[0.2em] text-safety">
@@ -340,15 +348,19 @@ export default function ServiceDetail() {
           </div>
         </section>
 
-        <section className="service-faq bg-mist py-14 md:py-20">
+        <section
+          id="service-questions"
+          className="service-faq bg-mist py-14 md:py-20"
+        >
           <div className="container max-w-3xl">
             <h2 className="font-display text-3xl font-black text-navy">
               {service.shortName}常見問題
             </h2>
             <div className="mt-8 space-y-4">
-              {service.faqs.map(faq => (
+              {service.faqs.map((faq, index) => (
                 <article
                   key={faq.question}
+                  id={`service-answer-${index + 1}`}
                   className="rounded-xl border border-border bg-white p-6"
                 >
                   <h3 className="font-display text-lg font-black text-navy">
@@ -363,13 +375,21 @@ export default function ServiceDetail() {
           </div>
         </section>
 
-        <section className="service-quote border-y border-border bg-white py-14 md:py-20">
+        <section
+          id="service-contact"
+          className="service-quote border-y border-border bg-white py-14 md:py-20"
+        >
           <div className="container">
-            <QuoteRequestForm
+            <InquiryContactPanel
               location={`service_${service.slug}`}
               title={`想查詢${service.shortName}？`}
-              description="留下基本資料和現場情況，團隊會先了解問題，再按實際條件確認安排與報價。"
+              description="傳送現場相片與問題位置，團隊會按實際情況了解處理方向及安排。"
               defaultServiceType={INQUIRY_TYPE_BY_SLUG[service.slug]}
+              customer={
+                ["main-drain-manhole", "sewage-backflow"].includes(service.slug)
+                  ? "property-management"
+                  : undefined
+              }
               defaultMessage={`我想查詢${service.name}，請按我的情況提供初步方向。`}
             />
           </div>
@@ -412,30 +432,6 @@ export default function ServiceDetail() {
                   </Link>
                 );
               })}
-            </div>
-
-            <div className="brand-contact-panel mt-12 px-7 py-10 text-center md:px-12">
-              <h2 className="font-display text-2xl font-black text-white md:text-3xl">
-                未確定應該用哪種處理方法？
-              </h2>
-              <p className="mx-auto mt-4 max-w-xl text-white/65">
-                傳送問題位置、去水情況及影片，師傅可先了解情況並提供初步估價。
-              </p>
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => {
-                  trackCTA("whatsapp", "service_detail_footer", service.slug);
-                  goThanksAfterWhatsApp(
-                    `service_detail_footer_${service.slug}`
-                  );
-                }}
-                className="btn-smooth mt-7 inline-flex min-h-[48px] max-w-full items-center justify-center gap-2 rounded-lg bg-wagreen px-8 py-3.5 font-bold text-white hover:bg-wagreen-dark"
-              >
-                <MessageCircle className="h-5 w-5" />
-                WhatsApp 查詢
-              </a>
             </div>
           </div>
         </section>

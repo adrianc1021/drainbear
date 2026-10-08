@@ -1,4 +1,13 @@
-/** Source of truth for static service and district route discovery. */
+/** Source of truth for static service, customer and district route discovery. */
+export const CUSTOMER_SLUGS = [
+  "residential",
+  "restaurants",
+  "property-management",
+] as const;
+export const COMPANY_ROUTES = [
+  "/about",
+  ...CUSTOMER_SLUGS.map(slug => `/customers/${slug}`),
+] as const;
 export const SERVICE_SLUGS = [
   "toilet-unblocking",
   "kitchen-sink-unblocking",

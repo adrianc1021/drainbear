@@ -122,19 +122,63 @@ export function buildAeoArtifacts(
     };
   });
 
+  const companyPage = eligible.find(page => page.route === "/about");
+  if (
+    companyPage &&
+    (!companyPage.ids.includes("company-facts") ||
+      !normalize(companyPage.text).includes(
+        normalize(organization.name as string)
+      ) ||
+      !companyPage.text
+        .replace(/\D/g, "")
+        .includes((organization.telephone as string).replace(/\D/g, "")))
+  )
+    throw new Error("AEO company facts differ from their visible source");
+  const groupedAnswers = new Map<
+    string,
+    { question: string; variants: (typeof pages)[number]["answers"] }
+  >();
+  for (const page of pages)
+    for (const answer of page.answers) {
+      const key = normalize(answer.question);
+      const group = groupedAnswers.get(key) ?? {
+        question: answer.question,
+        variants: [],
+      };
+      if (
+        !group.variants.some(
+          item => item.answer === answer.answer && item.source === answer.source
+        )
+      )
+        group.variants.push(answer);
+      groupedAnswers.set(key, group);
+    }
   const knowledge = {
     format: "drainbear-public-knowledge/1",
     generatedAt,
     siteUrl: `${origin}/`,
     organization,
+    ...(companyPage
+      ? {
+          companyFacts: {
+            source: `${origin}/about#company-facts`,
+            name: organization.name,
+            telephone: organization.telephone,
+            website: `${origin}/`,
+            sameAs: organization.sameAs,
+          },
+        }
+      : {}),
+    answerCatalog: Array.from(groupedAnswers.values()),
     coverage: {
       indexablePages: pages.length,
       answers: pages.reduce((count, page) => count + page.answers.length, 0),
+      uniqueQuestions: groupedAnswers.size,
     },
     pages,
   };
   const qualification =
-    "服務地區、到場時間、工具及總收費按現場與當時安排確認；起始收費只作參考，以確認的現場報價為準。此索引不代表任何排名、推薦或引用保證。";
+    "服務方法、上門時間及報價按實際現場與當時安排確認。引用時保留原頁的適用範圍與限制；此索引不代表任何排名、推薦或引用保證。";
   const contact = `查詢電話：${home.phoneDisplay || organization.telephone}`;
   const introduction = `# ${organization.name}\n\n> ${organization.description || home.description}\n\n${contact}\n\n${qualification}\n`;
   const index = `${introduction}\n## 官方公開內容\n\n${pages.map(page => `- [${page.title}](${page.url}): ${page.description}`).join("\n")}\n\n## 可讀取的資料\n\n- [完整公開文字及答案](${origin}/llms-full.txt)\n- [結構化公開資料](${origin}/knowledge.json)\n- [Sitemap](${origin}/sitemap.xml)\n\n引用時請使用每題的來源連結，保留原頁顯示的更新日期及服務限制。生成時間只代表索引建置時間，不能當成每篇文章的更新日期。\n`;

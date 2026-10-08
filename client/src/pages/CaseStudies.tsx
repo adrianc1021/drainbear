@@ -1,8 +1,8 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CaseStudyCard from "@/components/CaseStudyCard";
 import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
+import InquiryContactPanel from "@/components/InquiryContactPanel";
 import { WhatsAppButton } from "@/components/Layout";
-import QuoteRequestForm from "@/components/QuoteRequestForm";
 import SEO from "@/components/SEO";
 import { BUSINESS_ID, SITE_URL, WEBSITE_ID } from "@/config/site";
 import { formatCaseDate } from "@/lib/caseRepository";
@@ -175,28 +175,10 @@ export default function CaseStudies() {
 
       <section className="border-y border-[var(--db-rule)] bg-white">
         <div className="db-container py-12 md:py-16">
-          <QuoteRequestForm
+          <InquiryContactPanel
             location="cases_quote_form"
             title="您的現場情況，未必與公開案例完全相同"
             description="提供地區、問題位置及大概情況，團隊會按您提供的資料作初步跟進；不同管道仍需按現場確認。"
-          />
-        </div>
-      </section>
-
-      <section className="bg-[var(--db-ink)] text-white">
-        <div className="db-container grid gap-8 py-12 md:grid-cols-[1fr_auto] md:items-center">
-          <div>
-            <h2 className="text-3xl font-black">
-              您的情況未必與案例完全相同。
-            </h2>
-            <p className="mt-3 max-w-2xl leading-7 text-white/70">
-              傳送地點、淤塞位置及相片或短片，團隊會先了解情況，再確認方案與收費。
-            </p>
-          </div>
-          <WhatsAppButton
-            label="WhatsApp 即時查詢"
-            trackLocation="cases_footer"
-            className="w-full md:w-auto"
           />
         </div>
       </section>

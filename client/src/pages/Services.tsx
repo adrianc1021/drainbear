@@ -90,7 +90,7 @@ export default function Services() {
             <nav className="related-inline" aria-label="進一步檢查及報價">
               <Link href="/services/cctv-drain-inspection">CCTV 照喉</Link>
               <Link href="/services/high-pressure-jetting">高壓水槍</Link>
-              <Link href="/guide">收費參考</Link>
+              <Link href="/guide">查詢指南</Link>
               <Link href="/service-process">上門流程</Link>
             </nav>
           </div>

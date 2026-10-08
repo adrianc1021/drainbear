@@ -7,10 +7,13 @@ description: 審查通渠熊SEO、AEO與WCAG，連接商家及內容實體並驗
 
 - 每頁獨立title、description、canonical，使用zh-Hant-HK；保留真實HTTP404、noindex轉換頁及有效麵包屑。
 - 商家、網站及頁面用穩定@id連接：/#organization、/#website、頁面#webpage。商家型別為Plumber；電話使用同一CMS設定。不要編造地址、評論、認證及固定上門時段。
+- 公司事實的公開來源為/about#company-facts；knowledge.json必須核對該頁的名稱及電話。新增客群／公司頁同步shared/publicRoutes.ts、server、prerender路由與生成sitemap；不能只驗證舊source llms檔。
+- 服務↔案例關聯由shared/caseServiceRelations.ts維護，寫清同類施工或相關操作的差別。地區工程只按案例明確記錄的位置匹配，不由附近地點、檔名或猜測生成。
 - 服務頁用Service、FAQPage及BreadcrumbList；ServiceChannel.servicePhone使用ContactPoint。文章和案例保留正式內容及已有日期／作者資料。
 - 真實影片案例以畫面與客戶提供資料為準；WhatsApp檔名日期不能代替工程日期，施工鏡頭不能代替完工測試。影片發布日期與工程日期分開記錄。VideoObject的媒體連結、封面、長度及文字紀錄須與實際播放器相符；驗證原生播放、字幕、跳轉時間和HTTP Range 206，再納入影片sitemap及AEO索引。
 - FAQ schema與可見答案使用同一資料來源，包含服務範圍、限制、報價及安全處理的具體答案。不以FAQ schema或llms.txt承諾Google富摘要或AI引用。
 - 可引用的答案需有實際存在的固定題目連結及可見相關資料。由完成CMS載入的公開預渲染HTML產生llms.txt、llms-full.txt與knowledge.json；排除noindex及非canonical內容。索引生成時間不能冒充文章更新日期。pnpm verify:aeo核對sitemap覆蓋、商家電話、可見答案及來源；不一致須阻止建置。
+- 排除video內非顯示後備文字、hidden客群面板及data-aeo-exclude內容，保留影片外可見文字紀錄。FAQ按相同題目整理來源，條目數、字面獨立題數與語義問題數要分開；不能以數量承諾推薦。
 - 商家sameAs只使用CMS已提供的正式檔案連結；不捏造Google Business Profile或評論。AI檢索爬蟲、訓練爬蟲與使用者觸發抓取用途不同；robots放行只代表存取偏好，不代表推薦。正式域名與部署別名的索引政策應分開驗證。
 - 首頁→客群／服務→地區／收費／流程→FAQ／文章形成有用途的內部連結。避免重複關鍵字牆及沒有當區資料的門頁。
 - pnpm build完成CMS路由發現及HTML預渲染，不能因本機網路失敗使用--allow-stale發布。sitemap在dist/public生成並與manifest／HTML canonical和robots驗證；建置不得改寫source sitemap。

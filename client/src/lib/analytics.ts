@@ -253,6 +253,8 @@ export function initAnalytics() {
 
 /** 允許的事件參數鍵(統一 Taxonomy,白名單以外的鍵不會被傳送) */
 export interface AnalyticsEventParams {
+  case_slug?: string;
+  video_percent?: number;
   cta_location?: string;
   cta_label?: string;
   page_path?: string;
@@ -273,6 +275,8 @@ export interface AnalyticsEventParams {
 }
 
 const ALLOWED_PARAM_KEYS: ReadonlyArray<keyof AnalyticsEventParams> = [
+  "case_slug",
+  "video_percent",
   "cta_location",
   "cta_label",
   "page_path",
@@ -440,7 +444,7 @@ export function trackCTA(
  * WhatsApp 點擊後跳轉感謝頁(/thanks):
  * - WhatsApp 於新分頁/App 開啟(原 <a target="_blank"> 行為不變,不阻擋開啟)
  * - 原分頁立即導向 /thanks?from=<cta_location>
- * - /thanks 頁面觸發 whatsapp_open 事件,作為「真實對話開啟率」的代理轉化指標
+ * - /thanks 只消耗一次性 handoff；無法確認應用程式開啟、訊息傳送或實際收件
  */
 export function goThanksAfterWhatsApp(location: string) {
   if (typeof window === "undefined") return;
