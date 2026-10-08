@@ -1,11 +1,5 @@
-import {
-  ArrowLeft,
-  ArrowRight,
-  Check,
-  ChevronDown,
-  MessageCircle,
-  Phone,
-} from "lucide-react";
+import WhatsAppIcon from "@/components/WhatsAppIcon";
+import { ArrowLeft, ArrowRight, Check, ChevronDown, Phone } from "lucide-react";
 import type { KeyboardEvent as ReactKeyboardEvent } from "react";
 import { useState } from "react";
 import { Link } from "wouter";
@@ -273,7 +267,7 @@ export default function DrainHeroScenes({ imageSrc }: { imageSrc?: string }) {
                   }}
                   className="db-primary-action"
                 >
-                  <MessageCircle
+                  <WhatsAppIcon
                     className="h-5 w-5 shrink-0"
                     aria-hidden="true"
                   />

@@ -1,10 +1,11 @@
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 import AnimatedDisclosure from "@/components/AnimatedDisclosure";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
 import SEO from "@/components/SEO";
 import { BUSINESS_ID, SITE_URL } from "@/config/site";
 import { DISTRICTS, DISTRICT_SLUGS } from "@/lib/districtData";
-import { ArrowRight, MessageCircle, Search, X } from "lucide-react";
+import { ArrowRight, Search, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "wouter";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
@@ -292,7 +293,7 @@ export default function Areas() {
       className="area-locality-link area-locality-link--inquiry"
     >
       <span>{name}</span>
-      <MessageCircle aria-hidden="true" />
+      <WhatsAppIcon aria-hidden="true" />
       <span className="sr-only">（WhatsApp 查詢，另開視窗）</span>
     </a>
   );

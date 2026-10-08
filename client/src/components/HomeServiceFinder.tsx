@@ -1,3 +1,4 @@
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import {
   goThanksAfterWhatsApp,
@@ -135,6 +136,7 @@ export default function HomeServiceFinder() {
                 goThanksAfterWhatsApp("home_service_finder");
               }}
             >
+              <WhatsAppIcon aria-hidden="true" />
               傳送現場資料 <ArrowUpRight aria-hidden="true" />
               <span className="sr-only">（另開視窗）</span>
             </a>
