@@ -300,6 +300,7 @@ try {
     reducedMotion: "reduce",
   });
   await page.goto(`${serverUrl}/`);
+  await page.locator("main h1").waitFor({ state: "visible" });
   await page.keyboard.press("Tab");
   assert.match(
     await page.evaluate(() => document.activeElement.textContent),

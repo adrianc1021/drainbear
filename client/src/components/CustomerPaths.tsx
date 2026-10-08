@@ -25,9 +25,15 @@ const CUSTOMERS = [
   },
 ] as const;
 
-export default function CustomerPaths() {
+export default function CustomerPaths({
+  compact = false,
+}: {
+  compact?: boolean;
+}) {
   return (
-    <div className="customer-paths">
+    <div
+      className={`customer-paths${compact ? " customer-paths--compact" : ""}`}
+    >
       {CUSTOMERS.map(item => (
         <article className="customer-path" key={item.title}>
           <item.icon aria-hidden="true" />
