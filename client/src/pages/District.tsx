@@ -1,3 +1,4 @@
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 /**
  * 通渠熊 DrainBear — 地區專屬著陸頁（觀塘/沙田等）
  * 風格：Premium SaaS Minimalism，大量留白、8px 圓角、懸浮陰影卡片、無 Emoji
@@ -21,7 +22,6 @@ import {
   BadgeCheck,
   Clock,
   MapPin,
-  MessageCircle,
   Phone,
   ShieldCheck,
   Wrench,
@@ -294,7 +294,7 @@ export default function District() {
                 }}
                 className="btn-smooth inline-flex items-center gap-2 rounded-lg bg-wagreen px-8 py-4 text-base font-bold text-white shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark"
               >
-                <MessageCircle className="h-5 w-5" strokeWidth={2.4} />
+                <WhatsAppIcon className="h-5 w-5" />
                 WhatsApp 查詢初步估價
               </a>
               <a

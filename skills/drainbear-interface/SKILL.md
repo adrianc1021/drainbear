@@ -7,6 +7,7 @@ description: 使用語意化React元件與Flexbox/Grid統一通渠熊介面，�
 
 - 技術：React、TypeScript、Tailwind、Vite、Express、wouter；先使用現有元件和鎖定依賴。
 - 主要樣式來源為 client/src/styles/brand-system.css；全站單一字級、間距、色彩、邊界及圓角規範。不要重新疊加一套改版專用CSS。
+- WhatsApp相關按鈕一律使用共用WhatsAppIcon的真實品牌輪廓，包括浮動面板的主題、地區及頁腳。不要以一般MessageCircle代替，也不要在手機隱藏WhatsApp標誌。純電話或一般對話步驟圖示保持各自用途。
 - 使用ContactActions、InquiryContactPanel、EditorialPageHero及CustomerPaths。首頁由HomeServiceFinder整合場所與問題入口，避免再疊加相同分類。聯絡資料來自SiteSettingsContext；保留trackCTA及WhatsApp handoff，不能重複送出轉換。
 - 公開查詢區必須可用；未驗證接收的表格不顯示為可提交，也不長期展示維護提示。WhatsApp跳轉只能引導傳送，不能聲稱已開啟應用程式、已發訊息或已收到查詢。
 - 用main、section、nav、article、figure、ol、table、details等合適語意。互動用button或有有效href的a。

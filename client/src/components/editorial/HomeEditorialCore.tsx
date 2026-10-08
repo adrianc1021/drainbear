@@ -1,10 +1,10 @@
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { useEffect, useRef } from "react";
 import {
   ArrowRight,
   Check,
   Camera,
   Droplets,
-  MessageCircle,
   Phone,
   ShieldCheck,
   Timer,
@@ -125,7 +125,7 @@ export function EditorialHero({ imageSrc }: { imageSrc?: string }) {
               }}
               className="db-primary-action"
             >
-              <MessageCircle className="h-5 w-5 shrink-0" aria-hidden="true" />
+              <WhatsAppIcon className="h-5 w-5 shrink-0" aria-hidden="true" />
               <span>WhatsApp 查詢報價</span>
             </a>
             <a

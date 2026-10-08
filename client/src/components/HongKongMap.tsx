@@ -1,3 +1,4 @@
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 /**
  * 通渠熊 DrainBear — 互動式香港十八區地圖
  * 桌面：hover 高亮 + tooltip；點擊區域 → 右側資訊卡（有專頁 → 直接入口；無專頁 → 覆蓋確認 + CTA）
@@ -6,7 +7,7 @@
  */
 import { useMemo, useRef, useState } from "react";
 import { useLocation } from "wouter";
-import { ArrowRight, Clock, MapPin, MessageCircle, X } from "lucide-react";
+import { ArrowRight, Clock, MapPin, X } from "lucide-react";
 import {
   MAP_DISTRICTS,
   MAP_VIEWBOX,
@@ -218,7 +219,9 @@ export default function HongKongMap() {
             <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
               {selected.slug ? (
                 <>
-                  {PAGE_HINT[selected.id] ?? COVERAGE_HINT[selected.id] ?? selected.name}
+                  {PAGE_HINT[selected.id] ??
+                    COVERAGE_HINT[selected.id] ??
+                    selected.name}
                   可查詢服務。此區設有專屬服務頁，可了解當區常見渠務問題及服務安排。
                 </>
               ) : (
@@ -255,7 +258,7 @@ export default function HongKongMap() {
                 }}
                 className="btn-smooth mt-5 inline-flex min-h-[48px] items-center justify-center gap-2 rounded-lg bg-wagreen px-6 py-3 text-sm font-bold text-white hover:bg-wagreen-dark"
               >
-                <MessageCircle className="h-4 w-4" strokeWidth={2.4} />
+                <WhatsAppIcon className="h-4 w-4" />
                 WhatsApp 查詢{selected.name}服務
               </a>
             )}

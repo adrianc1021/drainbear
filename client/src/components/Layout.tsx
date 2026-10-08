@@ -1,3 +1,4 @@
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 /**
  * 通渠熊 DrainBear — Hong Kong Industrial Editorial
  * Header：清晰品牌導覽 + 克制的 WhatsApp 行動入口
@@ -17,7 +18,7 @@ import {
 import { DISTRICTS } from "@/lib/districtData";
 import { prefetchRoute } from "@/lib/routePrefetch";
 import { SERVICE_PAGES } from "@/lib/serviceData";
-import { ArrowUp, Menu, MessageCircle, Phone, X } from "lucide-react";
+import { ArrowUp, Menu, Phone, X } from "lucide-react";
 import { ReactNode, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "wouter";
 
@@ -75,7 +76,7 @@ export function WhatsAppButton({
       }}
       className={`btn-smooth inline-flex min-h-12 items-center justify-center gap-2 border border-navy bg-wagreen px-5 py-2.5 text-sm font-black tracking-[-0.01em] text-navy transition-colors hover:bg-navy hover:text-white ${className}`}
     >
-      <MessageCircle className="h-4 w-4" strokeWidth={2.5} />
+      <WhatsAppIcon className="h-4 w-4" />
       <span>{label}</span>
     </a>
   );
@@ -127,7 +128,7 @@ function MobileCTABar() {
             }}
             className="btn-smooth flex min-h-[56px] min-w-0 flex-[3] items-center justify-center gap-2.5 border border-navy bg-wagreen px-3 py-2 text-navy active:scale-[0.98]"
           >
-            <MessageCircle className="h-5 w-5 shrink-0" strokeWidth={2.4} />
+            <WhatsAppIcon className="h-5 w-5 shrink-0" />
             <span className="min-w-0 flex flex-col items-start leading-tight">
               <span className="text-[15px] font-bold">{waTitle}</span>
               <span className="max-w-full truncate text-[10.5px] font-medium text-navy/75">

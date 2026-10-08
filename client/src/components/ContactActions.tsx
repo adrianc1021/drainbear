@@ -1,6 +1,7 @@
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import { goThanksAfterWhatsApp, trackCTA } from "@/lib/analytics";
-import { ArrowUpRight, MessageCircle, Phone } from "lucide-react";
+import { ArrowUpRight, Phone } from "lucide-react";
 
 /** Shared contact details and attribution for every service entrance. */
 export default function ContactActions({
@@ -45,7 +46,7 @@ export default function ContactActions({
         }}
       >
         <span className="contact-action__icon" aria-hidden="true">
-          <MessageCircle />
+          <WhatsAppIcon />
         </span>
         <span className="contact-action__copy">
           <span className="contact-action__label">WhatsApp 查詢報價</span>

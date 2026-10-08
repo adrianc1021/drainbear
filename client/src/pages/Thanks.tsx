@@ -1,7 +1,8 @@
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 /** WhatsApp navigation guidance; an external handoff is not a received message. */
 import { useEffect } from "react";
 import { Link } from "wouter";
-import { MessageCircle, Phone, ArrowRight } from "lucide-react";
+import { Phone, ArrowRight } from "lucide-react";
 import SEO from "@/components/SEO";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import { trackCTA, trackWhatsAppHandoff } from "@/lib/analytics";
@@ -26,7 +27,7 @@ export default function Thanks() {
       <section className="brand-section brand-status-page">
         <div className="container brand-narrow handoff-card">
           <span className="handoff-card__icon">
-            <MessageCircle aria-hidden="true" />
+            <WhatsAppIcon aria-hidden="true" />
           </span>
           <p className="brand-eyebrow">完成查詢的下一步</p>
           <h1>
@@ -47,7 +48,7 @@ export default function Thanks() {
               rel="noopener noreferrer"
               onClick={() => trackCTA("whatsapp", "thanks_retry")}
             >
-              <MessageCircle aria-hidden="true" />
+              <WhatsAppIcon aria-hidden="true" />
               再次開啟 WhatsApp<span className="sr-only">（另開視窗）</span>
             </a>
             <a

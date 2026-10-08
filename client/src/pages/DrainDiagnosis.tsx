@@ -1,3 +1,4 @@
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import DistrictAutocomplete from "@/components/DistrictAutocomplete";
 import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
@@ -27,7 +28,6 @@ import {
   ArrowRight,
   Check,
   CircleAlert,
-  MessageCircle,
   RotateCcw,
   SearchCheck,
   ShieldAlert,
@@ -423,7 +423,7 @@ export default function DrainDiagnosis() {
                       }}
                       className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-navy bg-wagreen px-6 py-3 font-black text-navy hover:bg-wagreen-dark hover:text-white"
                     >
-                      <MessageCircle className="h-5 w-5" />
+                      <WhatsAppIcon className="h-5 w-5" />
                       將判斷結果傳給師傅
                     </a>
                     <button

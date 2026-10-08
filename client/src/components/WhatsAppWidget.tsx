@@ -1,3 +1,4 @@
+import WhatsAppIcon from "@/components/WhatsAppIcon";
 /**
  * 通渠熊 DrainBear — 右下角常駐 WhatsApp 懸浮對話框
  * 設計語言：Premium SaaS Minimalism（navy #0B132B、WhatsApp 綠、8px 圓角、懸浮陰影、平滑過渡）
@@ -5,7 +6,7 @@
  */
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import { goThanksAfterWhatsApp, trackCTA } from "@/lib/analytics";
-import { ArrowRight, MessageCircle, X } from "lucide-react";
+import { ArrowRight, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 const LOGO = "/favicon-192x192.png";
@@ -113,7 +114,10 @@ export default function WhatsAppWidget() {
               }}
               className="btn-smooth group flex items-center justify-between rounded-lg border border-border bg-white px-4 py-2.5 text-sm font-medium text-navy hover:border-wagreen/50 hover:bg-wagreen/5"
             >
-              {t.label}
+              <span className="inline-flex items-center gap-2">
+                <WhatsAppIcon className="h-4 w-4 text-wagreen" />
+                {t.label}
+              </span>
               <ArrowRight
                 className="h-3.5 w-3.5 text-wagreen opacity-0 transition-opacity duration-150 group-hover:opacity-100"
                 strokeWidth={2.5}
@@ -130,7 +134,7 @@ export default function WhatsAppWidget() {
             }}
             className="btn-smooth mt-1 flex items-center justify-center gap-2 border border-navy bg-wagreen px-4 py-3 text-sm font-black text-navy hover:bg-navy hover:text-white"
           >
-            <MessageCircle className="h-4 w-4" strokeWidth={2.5} />
+            <WhatsAppIcon className="h-4 w-4" />
             開始 WhatsApp 查詢
           </a>
           <p className="pt-1 text-center text-[11px] text-muted-foreground">
@@ -158,10 +162,7 @@ export default function WhatsAppWidget() {
           {open ? (
             <X className="h-5 w-5 md:h-6 md:w-6" strokeWidth={2.5} />
           ) : (
-            <MessageCircle
-              className="h-5 w-5 text-wagreen md:h-6 md:w-6 md:text-navy"
-              strokeWidth={2.4}
-            />
+            <WhatsAppIcon className="h-5 w-5 text-wagreen md:h-6 md:w-6 md:text-navy" />
           )}
         </span>
       </button>
