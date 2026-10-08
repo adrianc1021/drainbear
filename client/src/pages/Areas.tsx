@@ -360,7 +360,7 @@ export default function Areas() {
           </p>
           <nav className="related-inline" aria-label="地區服務相關資料">
             <Link href="/services">選擇通渠服務</Link>
-            <Link href="/guide">查看收費參考</Link>
+            <Link href="/guide">了解查詢資料</Link>
             <Link href="/service-process">上門安排流程</Link>
           </nav>
         </div>

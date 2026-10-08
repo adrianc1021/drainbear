@@ -1,25 +1,40 @@
 import { existsSync } from "node:fs";
 import { spawn } from "node:child_process";
 import { chromium } from "playwright";
+import { enableCmsRelay } from "./browser-cms-relay.ts";
 
 const PORT = Number(process.env.ROUTE_CONSISTENCY_PORT || 4281);
 const BASE_URL = `http://127.0.0.1:${PORT}`;
 const routes = [
-  ["/", "香港通渠服務", "香港通渠，先搵通渠熊。", "首頁"],
+  ["/", "香港通渠服務", "香港通渠，先搵通渠熊。", null],
   ["/services", "通渠服務｜住宅通渠", "通渠服務", "通渠服務"],
   ["/services/toilet-unblocking", "坐廁通渠", "坐廁及馬桶通渠", "通渠服務"],
   [
     "/drain-diagnosis",
     "渠務問題快速判斷",
     "先看症狀，再決定下一步",
-    "問題判斷",
+    "通渠服務",
   ],
-  ["/guide", "香港通渠價錢", "香港通渠價錢及收費", "收費指南"],
+  ["/guide", "香港通渠報價", "講清現場情況，先了解點處理。", "查詢指南"],
   ["/areas", "服務地區覆蓋", "港九新界及離島通渠服務", "服務地區"],
   ["/areas/kwun-tong", "觀塘通渠", "觀塘通渠", "服務地區"],
   ["/areas/tai-po", "大埔通渠", "大埔通渠服務", "服務地區"],
-  ["/cases", "通渠工程案例", "通渠工程案例", "工程案例"],
-  ["/faq", "常見問題", "通渠常見問題與直接答案", "常見問題"],
+  ["/cases", "通渠工程案例", "通渠工程案例", "施工案例"],
+  ["/faq", "常見問題", "通渠常見問題與直接答案", "查詢指南"],
+  ["/about", "關於通渠熊", "香港通渠，先搵通渠熊。", "關於通渠熊"],
+  [
+    "/customers/residential",
+    "住宅住戶通渠",
+    "家居塞渠，先睇受影響位置。",
+    "通渠服務",
+  ],
+  ["/customers/restaurants", "食肆及商舖通渠", "食肆去水唔順", "通渠服務"],
+  [
+    "/customers/property-management",
+    "業主及物業管理通渠",
+    "主渠、沙井出問題",
+    "通渠服務",
+  ],
 ];
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 async function waitForServer() {
@@ -54,6 +69,7 @@ try {
       viewport: { width: 1280, height: 900 },
     });
     const page = await context.newPage();
+    await enableCmsRelay(context, BASE_URL);
     const response = await page.goto(`${BASE_URL}${path}`, {
       waitUntil: "domcontentloaded",
       timeout: 30_000,
@@ -61,7 +77,12 @@ try {
     if (!response?.ok())
       throw new Error(`${path} returned ${response?.status()}`);
     await page.getByRole("main").waitFor({ state: "visible" });
-    await page.waitForTimeout(1_000);
+    await page.waitForFunction(
+      () =>
+        document.querySelector("main h1") &&
+        document.documentElement.dataset.seoReady === "true" &&
+        !document.querySelector('[data-cms-loading="true"]')
+    );
     const metadata = await page.evaluate(() => ({
       url: location.pathname,
       title: document.title,
@@ -81,7 +102,11 @@ try {
       throw new Error(`${path} H1 mismatch: ${metadata.h1}`);
     if (metadata.canonical !== `https://drainbearhk.com${path}`)
       throw new Error(`${path} canonical mismatch: ${metadata.canonical}`);
-    if (metadata.active.length !== 1 || metadata.active[0] !== nav)
+    if (
+      nav
+        ? metadata.active.length !== 1 || metadata.active[0] !== nav
+        : metadata.active.length !== 0
+    )
       throw new Error(
         `${path} active nav mismatch: ${metadata.active.join(", ")}`
       );

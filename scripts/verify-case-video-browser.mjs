@@ -174,6 +174,25 @@ try {
         const v = document.querySelector("video");
         return v.readyState >= 2 && v.currentTime > v.duration - 1.1;
       });
+      await video.evaluate(v => v.play());
+      await page.waitForFunction(() => document.querySelector("video").ended);
+      const contentEvents = await page.evaluate(() =>
+        (window.dataLayer || []).filter(item =>
+          item.event?.startsWith("case_video_")
+        )
+      );
+      for (const event of [
+        "case_video_start",
+        "case_video_progress",
+        "case_video_complete",
+      ]) {
+        assert.equal(
+          contentEvents.filter(item => item.event === event).length,
+          1,
+          `${event} must be recorded once per video visit`
+        );
+      }
+      assert(contentEvents.every(item => item.case_slug === study.slug));
       const range = await fetch(origin + study.video.src, {
         headers: { Range: "bytes=0-1023" },
       });
@@ -199,6 +218,7 @@ try {
         seeking: true,
         captions: true,
         byteRange: 206,
+        analyticsMilestonesDeduplicated: true,
       });
       console.log(
         `PASS ${width}px ${path}: playback, seek, captions, range 206`

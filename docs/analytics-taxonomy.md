@@ -58,17 +58,17 @@
 
 ### 聯絡及轉換事件
 
-| 事件                        | 觸發時機                                            | 參數                                              | 狀態                              |
-| --------------------------- | --------------------------------------------------- | ------------------------------------------------- | --------------------------------- |
-| `phone_click`               | 電話 CTA 點擊                                       | cta_location, page_path, page_title               | ✅ 已接(全站 8+ 位置)             |
-| `whatsapp_click`            | WhatsApp CTA 點擊                                   | cta_location, page_path, page_title, topic        | ✅ 已接(全站 15+ 位置)            |
-| `whatsapp_handoff`          | 點擊後成功建立一次性 WhatsApp handoff               | cta_location, page_path, 首次來源摘要              | ✅ 已接(`/thanks` 一次性消耗)     |
-| `whatsapp_open`             | /thanks 頁載入(對話開啟代理轉換)                    | cta_location(來源位置), page_path                 | ✅ 已接                           |
-| `contact_form_start`        | 表格開始填寫(每表格一次)                            | form_name, cta_location                           | ✅ 已接(首頁、指南、服務及案例頁) |
-| `contact_form_submit`       | 伺服器確認提交成功後                                | form_name, cta_location                           | ✅ 已接                           |
-| `contact_form_error`        | 表格提交失敗                                        | form_name, error_type(不含錯誤內文), cta_location | ✅ 已接                           |
-| `quote_calculator_start`    | 歷史事件；估價計算機已移除 | — | 已停用 |
-| `quote_calculator_complete` | 歷史事件；估價計算機已移除 | — | 已停用 |
+| 事件                        | 觸發時機                                     | 參數                                              | 狀態                          |
+| --------------------------- | -------------------------------------------- | ------------------------------------------------- | ----------------------------- |
+| `phone_click`               | 電話 CTA 點擊                                | cta_location, page_path, page_title               | ✅ 已接(全站 8+ 位置)         |
+| `whatsapp_click`            | WhatsApp CTA 點擊                            | cta_location, page_path, page_title, topic        | ✅ 已接(全站 15+ 位置)        |
+| `whatsapp_handoff`          | 點擊後成功建立一次性 WhatsApp handoff        | cta_location, page_path, 首次來源摘要             | ✅ 已接(`/thanks` 一次性消耗) |
+| `whatsapp_open`             | /thanks 頁載入(歷史兼容事件；新公開頁不觸發) | cta_location(來源位置), page_path                 | ✅ 已接                       |
+| `contact_form_start`        | 表格開始填寫(每表格一次)                     | form_name, cta_location                           | Helper 保留；公開表格未啟用   |
+| `contact_form_submit`       | 伺服器確認提交成功後                         | form_name, cta_location                           | ✅ 已接                       |
+| `contact_form_error`        | 表格提交失敗                                 | form_name, error_type(不含錯誤內文), cta_location | ✅ 已接                       |
+| `quote_calculator_start`    | 歷史事件；估價計算機已移除                   | —                                                 | 已停用                        |
+| `quote_calculator_complete` | 歷史事件；估價計算機已移除                   | —                                                 | 已停用                        |
 
 ### 導航及內容事件
 
@@ -91,8 +91,8 @@
    `traffic_source`、`traffic_medium`、`campaign_name`、`landing_page`、
    `click_id_type`、`cta_location` 及 `topic`。
 2. 將以下事件標記為 Key event：
-   `whatsapp_handoff`、`contact_form_submit`；如電話接通資料未有外部回傳，
-   可先將 `phone_click` 作為輔助 Key event，但不要將它當作已接通的證明。
+   真實接收系統確認的查詢或成交事件；目前未有外部回傳，`whatsapp_handoff` 只作外跳品質指標。
+   `phone_click` 可作輔助觀察，但不要將它當作已接通的證明。
 3. `whatsapp_click` 用作聯絡漏斗分析；不要把按鈕點擊直接當成已收到的查詢，
    以免把尚未產生查詢的互動計入業績轉化。
 4. 建立自訂渠道群組時，優先使用 GA4 內建 Google Ads 歸因；手動渠道按
@@ -169,12 +169,26 @@ Source／Medium 值加入相應渠道。
 
 ## 事件命名對照(舊 → 新)
 
-| 舊(第五輪實作)       | 新(本 Taxonomy)                                                                                              | 備註                               |
-| -------------------- | ------------------------------------------------------------------------------------------------------------ | ---------------------------------- |
-| `whatsapp_click`     | `whatsapp_click`                                                                                             | 不變                               |
-| `phone_click`        | `phone_click`                                                                                                | 不變                               |
-| `whatsapp_open`      | `whatsapp_open`                                                                                              | 不變                               |
-| `map_district_click` | `area_click`                                                                                                 | 統一命名;GA4 未接駁,無歷史數據斷層 |
+| 舊(第五輪實作)       | 新(本 Taxonomy)                                                                        | 備註                               |
+| -------------------- | -------------------------------------------------------------------------------------- | ---------------------------------- |
+| `whatsapp_click`     | `whatsapp_click`                                                                       | 不變                               |
+| `phone_click`        | `phone_click`                                                                          | 不變                               |
+| `whatsapp_open`      | `whatsapp_open`                                                                        | 不變                               |
+| `map_district_click` | `area_click`                                                                           | 統一命名;GA4 未接駁,無歷史數據斷層 |
 | —                    | `page_view`(SPA)、`blog_post_click`、`blog_read`、`navigation_click`、`contact_form_*` | 新增                               |
 
 計劃書 `button_location` / `button_text` → 沿用現有 `cta_location` / 新增 `cta_label`(已確認決策 4)。
+
+## 客群與真實案例重整（2026-10-08）
+
+公開表格已改為可用的共用聯絡區，沒有新的contact*form*\*提交來源。`whatsapp_open`只留歷史Helper，/thanks不使用；whatsapp_handoff無法確認外部應用程式或收件狀態。
+
+| 新事件              | 意義                                         | 參數                                     |
+| ------------------- | -------------------------------------------- | ---------------------------------------- |
+| case_click          | 案例卡連結點擊                               | case_slug、cta_location、destination_url |
+| case_video_start    | 同一影片頁首次播放                           | case_slug、video_percent=0               |
+| case_video_progress | 播放位置跨過中點，每次頁面一次；可受跳播影響 | case_slug、video_percent=50              |
+| case_video_complete | 播放結束，每次頁面一次                       | case_slug、video_percent=100             |
+| case_video_error    | 播放器錯誤，不含錯誤正文                     | case_slug、error_type=media              |
+
+以上內容互動不送Ads轉換。實際收到查詢、有效查詢、報價、接納及完工尚無外部回傳；先用docs/lead-register-template.csv按匿名查詢ID記錄，不能由點擊自動推算。Ads主要／次要目標需由帳戶負責人按有效查詢資料確認，網站改版不代表已改帳戶設定。

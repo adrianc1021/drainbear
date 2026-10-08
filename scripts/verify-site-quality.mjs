@@ -4,7 +4,11 @@ import { spawn } from "node:child_process";
 import fs from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { chromium } from "playwright";
-import { SERVICE_SLUGS, DISTRICT_SLUGS } from "../shared/publicRoutes.ts";
+import {
+  SERVICE_SLUGS,
+  DISTRICT_SLUGS,
+  COMPANY_ROUTES,
+} from "../shared/publicRoutes.ts";
 import { enableCmsRelay } from "./browser-cms-relay.ts";
 import { RECORDED_VIDEO_CASES } from "../shared/recordedVideoCases.ts";
 
@@ -17,6 +21,7 @@ if (!layoutOnly && (!axePath || !existsSync(axePath)))
   );
 await fs.mkdir(output, { recursive: true });
 const routes = [
+  ...COMPANY_ROUTES,
   "/",
   "/services",
   "/guide",
@@ -31,6 +36,7 @@ const routes = [
   ...RECORDED_VIDEO_CASES.map(study => `/cases/${study.slug}`),
 ];
 const visualRoutes = [
+  ...COMPANY_ROUTES,
   "/",
   "/services",
   "/guide",
@@ -123,6 +129,7 @@ try {
   }
   for (const route of [
     "/services/not-a-service",
+    "/customers/not-a-customer",
     "/areas/not-a-district",
     "/missing-page",
   ]) {
@@ -298,6 +305,16 @@ try {
         ["/", "/services", "/guide", "/areas"].includes(route) &&
         [390, 1440].includes(width)
       ) {
+        // Decode lazy images for a faithful full-page review screenshot only;
+        // production pages retain lazy loading and do not preload video media.
+        await page.evaluate(async () => {
+          await Promise.all(
+            Array.from(document.querySelectorAll("main img")).map(img => {
+              img.loading = "eager";
+              return img.decode().catch(() => {});
+            })
+          );
+        });
         await page.screenshot({
           path: `${output}/${route === "/" ? "home" : route.slice(1)}-${width}.png`,
           fullPage: true,
@@ -314,6 +331,7 @@ try {
     viewport: { width: 390, height: 844 },
     reducedMotion: "reduce",
   });
+  await enableCmsRelay(page.context(), serverUrl);
   await page.goto(`${serverUrl}/`);
   await page.locator("main h1").waitFor({ state: "visible" });
   await page.keyboard.press("Tab");
@@ -341,22 +359,36 @@ try {
     "false"
   );
   await page.getByRole("button", { name: "食肆及商舖", exact: true }).click();
+  assert(
+    await page
+      .locator(
+        '#home-finder-restaurants a[href="/services/grease-trap-cleaning"]'
+      )
+      .isVisible()
+  );
+  assert(
+    !(await page
+      .locator('#home-finder-residential a[href="/services/toilet-unblocking"]')
+      .isVisible())
+  );
   await page
-    .getByLabel("需要的服務", { exact: true })
-    .selectOption("grease-trap-cleaning");
-  await page.getByLabel("服務地區", { exact: true }).selectOption("kwun-tong");
+    .getByLabel("所在地區（可稍後提供）", { exact: true })
+    .selectOption("kwun-tong");
   const finderHref = await page
     .locator(".home-service-finder__send")
     .getAttribute("href");
   assert(decodeURIComponent(finderHref).includes("隔油池"));
   assert(decodeURIComponent(finderHref).includes("觀塘"));
-  await page.getByRole("button", { name: "住宅通渠", exact: true }).click();
-  assert.equal(
-    await page.getByLabel("需要的服務", { exact: true }).inputValue(),
-    "toilet-unblocking"
+  await page.getByRole("button", { name: "住宅住戶", exact: true }).click();
+  assert(
+    await page
+      .locator('#home-finder-residential a[href="/services/toilet-unblocking"]')
+      .isVisible()
   );
   assert.equal(
-    await page.getByLabel("服務地區", { exact: true }).inputValue(),
+    await page
+      .getByLabel("所在地區（可稍後提供）", { exact: true })
+      .inputValue(),
     "kwun-tong"
   );
   await page.evaluate(() => window.scrollTo(0, 0));

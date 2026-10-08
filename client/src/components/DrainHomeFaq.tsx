@@ -5,7 +5,7 @@ const FAQ_ITEMS = [
   {
     question: "可以先知道大概收費嗎？",
     answer:
-      "可以先參考收費指南，再透過 WhatsApp 提供位置及現場相片了解方向。師傅會先說明處理方法及報價，確認後才動工。",
+      "可以透過 WhatsApp 提供地區、堵塞位置及現場相片，先了解處理方向。每宗工程的管道及施工條件不同，團隊會按實際情況說明報價。",
   },
   {
     question: "要提供甚麼資料，才可以初步判斷？",
@@ -44,7 +44,7 @@ export default function DrainHomeFaq() {
               常見問題
             </p>
             <h2 id="home-faq-heading">報價前，你可能想問</h2>
-            <p>收費、上門安排及反覆塞渠，這裏直接解答。</p>
+            <p>現場資料、上門安排及反覆塞渠，這裏直接解答。</p>
             <Link href="/faq" className="db-home-faq__all-link">
               查看全部常見問題
               <ArrowRight aria-hidden="true" />

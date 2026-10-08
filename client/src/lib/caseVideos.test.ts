@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from "vitest";
 import {
   combineCaseStudies,
   fetchCaseStudyBySlug,
+  mapCaseStudy,
   recordedCaseStudies,
 } from "./caseRepository";
 import { caseVideoSchema } from "./caseVideoSeo";
@@ -10,6 +11,22 @@ import type { SanityCaseStudy } from "./sanity/types";
 vi.mock("./sanity/queries", () => ({ getPublishedCaseStudyBySlug: vi.fn() }));
 
 describe("reviewed construction video records", () => {
+  it("does not turn a CMS district placeholder into a claimed project location", () => {
+    for (const district of ["－", "—", "", " - "]) {
+      expect(
+        mapCaseStudy({
+          district,
+          serviceType: "residential",
+        } as SanityCaseStudy).district
+      ).toBeUndefined();
+    }
+    expect(
+      mapCaseStudy({
+        district: "觀塘",
+        serviceType: "residential",
+      } as SanityCaseStudy).district
+    ).toBe("觀塘");
+  });
   it("resolves an uploaded video record without a CMS request or invented project facts", async () => {
     const study = await fetchCaseStudyBySlug(
       ` ${recordedCaseStudies[0].slug} `

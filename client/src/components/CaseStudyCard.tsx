@@ -1,11 +1,22 @@
 import { formatVideoDuration, type CaseStudyView } from "@/lib/caseRepository";
+import { sendEvent } from "@/lib/analytics";
 import { ArrowUpRight, Play } from "lucide-react";
 import { Link } from "wouter";
 
 export default function CaseStudyCard({ study }: { study: CaseStudyView }) {
   return (
     <article className="recorded-case-card">
-      <Link href={`/cases/${study.slug}`} className="recorded-case-card__link">
+      <Link
+        href={`/cases/${study.slug}`}
+        className="recorded-case-card__link"
+        onClick={() =>
+          sendEvent("case_click", {
+            case_slug: study.slug,
+            cta_location: "case_card",
+            destination_url: `/cases/${study.slug}`,
+          })
+        }
+      >
         {study.coverImage?.url ? (
           <div className="recorded-case-card__media">
             <img

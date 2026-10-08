@@ -2,7 +2,11 @@ import { spawn } from "node:child_process";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { chromium, type Page } from "playwright";
-import { DISTRICT_SLUGS, SERVICE_SLUGS } from "../shared/publicRoutes";
+import {
+  DISTRICT_SLUGS,
+  SERVICE_SLUGS,
+  COMPANY_ROUTES,
+} from "../shared/publicRoutes";
 import { RECORDED_VIDEO_CASES } from "../shared/recordedVideoCases";
 import { writeVideoSitemap } from "./video-artifacts";
 import { enableCmsRelay, isLocalOrigin } from "./browser-cms-relay";
@@ -56,6 +60,7 @@ const STATIC_ROUTES = [
   "/cases",
   "/thanks",
   "/404",
+  ...COMPANY_ROUTES,
 ];
 
 const STATIC_BLOG_SLUGS = [
@@ -284,6 +289,11 @@ function getSitemapEntries(
   caseEntries: PublishedCaseEntry[]
 ): SitemapEntry[] {
   const entries: SitemapEntry[] = [
+    ...COMPANY_ROUTES.map(route => ({
+      route,
+      changefreq: "monthly" as const,
+      priority: "0.8",
+    })),
     { route: "/", changefreq: "weekly", priority: "1.0" },
     { route: "/services", changefreq: "monthly", priority: "0.9" },
     { route: "/drain-diagnosis", changefreq: "monthly", priority: "0.9" },
@@ -606,7 +616,7 @@ async function prerender() {
               | undefined;
             main
               ?.querySelectorAll(
-                "script, style, [aria-hidden='true'], .contact-actions"
+                "script, style, video, [hidden], [aria-hidden='true'], [data-aeo-exclude], .contact-actions"
               )
               .forEach(node => node.remove());
             return {

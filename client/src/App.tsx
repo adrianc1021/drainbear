@@ -13,6 +13,8 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { initAnalytics, trackPageView } from "./lib/analytics";
 import {
   loadAreas,
+  loadAbout,
+  loadCustomerJourney,
   loadBlog,
   loadBlogPost,
   loadCaseStudies,
@@ -28,6 +30,8 @@ import {
   loadThanks,
 } from "./lib/routePrefetch";
 
+const About = lazy(loadAbout);
+const CustomerJourney = lazy(loadCustomerJourney);
 const Services = lazy(loadServices);
 const ServiceDetail = lazy(loadServiceDetail);
 const DrainDiagnosis = lazy(loadDrainDiagnosis);
@@ -78,6 +82,8 @@ function Router() {
       <Suspense fallback={<RouteLoadingFallback />}>
         <Switch>
           <Route path="/" component={Home} />
+          <Route path="/about" component={About} />
+          <Route path="/customers/:slug" component={CustomerJourney} />
           <Route path="/services" component={Services} />
           <Route path="/services/:slug" component={ServiceDetail} />
           <Route path="/drain-diagnosis" component={DrainDiagnosis} />

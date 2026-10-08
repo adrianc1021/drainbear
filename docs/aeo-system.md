@@ -55,3 +55,13 @@
 - Perplexity：[Bots](https://docs.perplexity.ai/guides/bots)
 
 本輪雲端網絡代理未允許讀取上述文档，沒有將它們描述為已即時核實。爬蟲名稱與技術文件若有更新，應以平台最新說明再核對；公開預渲染HTML、預設公開爬蟲規則和來源驗證仍可獨立運作。
+
+## 客群與證據重整（2026-10-08，後續版本）
+
+新增公司與三類客戶來源，服務↔案例↔問題及已確認地區形成上下文連結。/guide保留但改為按現場資料了解報價，主要頁不再使用統一價格表或突出收費條款。
+
+知識檔新增companyFacts及answerCatalog；companyFacts來源為/about#company-facts，名稱／電話須與可見頁面及商家schema一致。coverage.uniqueQuestions僅按相同題目整理，仍保留所有不同來源答案，不聲稱完成語義去重。
+
+抽取排除video後備文字、hidden面板及data-aeo-exclude內容；保留影片文字紀錄。發布使用dist生成的llms.txt進行SEO核對。新路由必須同時進入生成sitemap。
+
+本節取代上方舊版本的數量與收費條款方向，最新驗證數量見docs/customer-journey-validation.md。公司維護表見business-facts-register.md；AI固定問題與未執行狀態見ai-citation-review-template.csv。

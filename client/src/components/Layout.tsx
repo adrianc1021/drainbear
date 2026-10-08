@@ -23,23 +23,33 @@ import { Link, useLocation } from "wouter";
 const LOGO = "/favicon-192x192.png";
 
 const NAV_ITEMS = [
-  { label: "首頁", href: "/" },
   { label: "通渠服務", href: "/services" },
-  { label: "問題判斷", href: "/drain-diagnosis" },
-  { label: "收費指南", href: "/guide" },
+  { label: "施工案例", href: "/cases" },
+  { label: "查詢指南", href: "/guide" },
   { label: "服務地區", href: "/areas" },
-  { label: "工程案例", href: "/cases" },
-  { label: "通渠小知識", href: "/blog" },
-  { label: "常見問題", href: "/faq" },
+  { label: "關於通渠熊", href: "/about" },
 ];
 
 function isNavItemActive(location: string, href: string) {
+  if (
+    href === "/services" &&
+    (location.startsWith("/customers/") || location === "/drain-diagnosis")
+  )
+    return true;
+  if (href === "/guide" && ["/faq", "/service-process"].includes(location))
+    return true;
   return location === href || (href !== "/" && location.startsWith(`${href}/`));
 }
 
 const FOOTER_NAV_ITEMS = [
   ...NAV_ITEMS,
+  { label: "問題判斷", href: "/drain-diagnosis" },
   { label: "服務流程", href: "/service-process" },
+  { label: "常見問題", href: "/faq" },
+  { label: "通渠小知識", href: "/blog" },
+  { label: "住宅通渠", href: "/customers/residential" },
+  { label: "食肆及商舖", href: "/customers/restaurants" },
+  { label: "物業渠務", href: "/customers/property-management" },
 ];
 
 export function WhatsAppButton({
@@ -426,7 +436,7 @@ function Footer({ compact = false }: { compact?: boolean }) {
           <p>
             香港住宅、食肆及物業渠務。
             <br />
-            先報價，後動工。
+            按現場情況，安排合適處理。
           </p>
         </div>
         <nav aria-label="頁尾服務資料">
@@ -458,7 +468,7 @@ function Footer({ compact = false }: { compact?: boolean }) {
         </nav>
       </div>
       <div className="container brand-footer__legal">
-        <p>24 小時接受查詢；實際上門時間、工具及收費，在安排服務前確認。</p>
+        <p>24 小時接受查詢；上門時間按地區、人手及設備確認。</p>
         <p>© {new Date().getFullYear()} 通渠熊 DrainBear. 版權所有。</p>
       </div>
     </footer>

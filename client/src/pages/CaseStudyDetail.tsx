@@ -1,8 +1,10 @@
+import { CASE_SERVICE_RELATIONS } from "@shared/caseServiceRelations";
+import { getServicePage } from "@/lib/serviceData";
+import { DISTRICTS } from "@/lib/districtData";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CaseVideoPlayer from "@/components/CaseVideoPlayer";
 import ContactActions from "@/components/ContactActions";
-import { WhatsAppButton } from "@/components/Layout";
-import QuoteRequestForm from "@/components/QuoteRequestForm";
+import InquiryContactPanel from "@/components/InquiryContactPanel";
 import SEO from "@/components/SEO";
 import { BUSINESS_ID, SITE_URL, WEBSITE_ID } from "@/config/site";
 import {
@@ -109,7 +111,17 @@ export default function CaseStudyDetail() {
                         地區
                       </dt>
                       <dd className="mt-2 font-black text-white">
-                        {study.district}
+                        {DISTRICTS.some(
+                          district => district.name === study.district
+                        ) ? (
+                          <Link
+                            href={`/areas/${DISTRICTS.find(district => district.name === study.district)!.slug}`}
+                          >
+                            {study.district}通渠
+                          </Link>
+                        ) : (
+                          study.district
+                        )}
                       </dd>
                     </div>
                   ) : null}
@@ -303,28 +315,36 @@ export default function CaseStudyDetail() {
             ) : null}
           </article>
 
-          <section className="border-y border-[var(--db-rule)] bg-white">
-            <div className="db-container py-12 md:py-16">
-              <QuoteRequestForm
-                location={`case_detail_${study.slug}`}
-                title="遇到相似問題？先留下現場資料"
-                description="公開案例只代表一次工程；留下您的地區和問題描述，團隊會按實際情況再跟進。"
-              />
+          <section className="brand-section brand-section--soft">
+            <div className="container">
+              <h2>相關服務與常見問題</h2>
+              <div className="case-related-services">
+                {CASE_SERVICE_RELATIONS.filter(
+                  item => item.caseSlug === study.slug
+                ).map(relation => (
+                  <article key={relation.serviceSlug}>
+                    <h3>
+                      <Link href={`/services/${relation.serviceSlug}`}>
+                        {getServicePage(relation.serviceSlug)!.shortName}
+                      </Link>
+                    </h3>
+                    <p>{relation.note}</p>
+                    <Link
+                      href={`/services/${relation.serviceSlug}#service-questions`}
+                    >
+                      查看相關常見問題
+                    </Link>
+                  </article>
+                ))}
+              </div>
             </div>
           </section>
-
-          <section className="bg-[var(--db-ink)] text-white">
-            <div className="db-container grid gap-7 py-12 md:grid-cols-[1fr_auto] md:items-center">
-              <div>
-                <h2 className="text-3xl font-black">遇到相似渠務問題？</h2>
-                <p className="mt-3 text-white/70">
-                  先傳送位置與現場相片，團隊會按您的實際情況判斷。
-                </p>
-              </div>
-              <WhatsAppButton
-                label="WhatsApp 傳送資料"
-                trackLocation="case_detail_footer"
-                className="w-full md:w-auto"
+          <section className="border-y border-[var(--db-rule)] bg-white">
+            <div className="db-container py-12 md:py-16">
+              <InquiryContactPanel
+                location={`case_detail_${study.slug}`}
+                title="遇到相似問題？傳送現場資料"
+                description="說明您的地區、問題位置和現場情況，團隊會按實際資料跟進。"
               />
             </div>
           </section>

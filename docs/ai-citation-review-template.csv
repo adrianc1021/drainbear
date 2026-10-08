@@ -1,0 +1,13 @@
+prompt_id,prompt,language_region,test_date_hkt,platform,model_version,search_enabled,brand_mentioned,cited_urls,fact_errors,run_status
+R01,香港坐廁塞了應怎樣找人處理？,zh-HK,,,,,,,,not_run
+R02,香港鋅盤去水慢應先提供甚麼資料給通渠公司？,zh-HK,,,,,,,,not_run
+R03,香港浴室積水可以用甚麼方法檢查？,zh-HK,,,,,,,,not_run
+R04,多個去水位同時污水倒灌應先做甚麼？,zh-HK,,,,,,,,not_run
+R05,香港通渠報價要了解哪些現場條件？,zh-HK,,,,,,,,not_run
+R06,晚上發現塞渠怎樣查詢上門安排？,zh-HK,,,,,,,,not_run
+R07,食肆隔油池清理前要準備甚麼資料？,zh-HK,,,,,,,,not_run
+R08,香港食肆反覆油垢塞渠應如何安排保養？,zh-HK,,,,,,,,not_run
+R09,物業主渠反覆淤塞應怎樣協調檢查？,zh-HK,,,,,,,,not_run
+R10,大廈沙井淤塞需要先確認哪些進場條件？,zh-HK,,,,,,,,not_run
+R11,高壓洗渠與機械通渠有甚麼分別？,zh-HK,,,,,,,,not_run
+R12,CCTV照喉適用於甚麼喉管問題？,zh-HK,,,,,,,,not_run

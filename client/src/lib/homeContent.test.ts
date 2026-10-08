@@ -23,7 +23,7 @@ describe("homepage contact and discovery", () => {
     expect(html).toContain('href="tel:+85295588260"');
     expect(html).toContain('href="https://wa.me/85295588260?');
     expect(html.indexOf("24小時特快通渠熱線")).toBeLessThan(
-      html.indexOf('aria-label="按問題選擇通渠服務"')
+      html.indexOf('id="home-services-heading"')
     );
     expect(html).toContain("上門時間按地區、人手及設備確認");
   });
@@ -55,7 +55,13 @@ describe("homepage contact and discovery", () => {
     expect(html).toContain('width="1536" height="1024"');
     expect(html).toContain("drainbear-paper-hero-640.webp 640w");
     expect(html).toContain("可以先知道大概收費嗎？");
-    expect(html).toContain("師傅會先說明處理方法及報價");
+    expect(html).toContain("團隊會按實際情況說明報價");
+    expect(html).not.toContain("線上表格暫時維護中");
+    expect(html).not.toContain("HK$");
+    expect(html.indexOf('id="home-recorded-cases-heading"')).toBeGreaterThan(0);
+    expect(html.indexOf('id="home-recorded-cases-heading"')).toBeLessThan(
+      html.indexOf('id="home-process-heading"')
+    );
     expect(html).not.toContain('src="undefined"');
   });
 });

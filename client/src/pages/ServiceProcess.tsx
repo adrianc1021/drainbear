@@ -17,7 +17,7 @@ import { Link } from "wouter";
 
 const CRUMBS = [
   { name: "首頁", path: "/" },
-  { name: "上門服務流程與報價原則", path: "/service-process" },
+  { name: "上門服務流程", path: "/service-process" },
 ];
 
 const PROCESS = [
@@ -35,7 +35,7 @@ const PROCESS = [
   },
   {
     icon: FileCheck2,
-    title: "現場檢查及確認總價",
+    title: "現場檢查及確認方案",
     description:
       "師傅檢查堵塞位置、管道入口及施工條件，說明處理方案及報價，由客戶確認後才動工。",
   },
@@ -49,9 +49,9 @@ const PROCESS = [
 
 const QUOTE_INCLUDES = [
   "建議處理方法及已確認工序",
-  "上門檢查或基本施工費是否包括在內",
+  "受影響管段與施工入口",
   "施工時段、所需設備及清理安排",
-  "完成標準、測試方式及不成功不收費的適用條件",
+  "去水測試、完成後交代及後續建議",
 ] as const;
 
 const BEFORE_VISIT = [
@@ -88,7 +88,7 @@ const METHOD_COMPARISON = [
 const PAGE_JSON_LD = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  name: "通渠熊上門服務流程與報價原則",
+  name: "通渠熊上門服務流程",
   description:
     "說明通渠熊作為上門服務商家的聯絡、檢查、報價、施工及完工交代流程。",
   url: "https://drainbearhk.com/service-process",
@@ -101,7 +101,7 @@ export default function ServiceProcess() {
         title="上門通渠服務流程｜報價、施工及完工流程｜通渠熊"
         description="了解通渠熊上門服務的聯絡、初步估價、現場檢查、動工前確認報價、施工及完工測試流程。通渠熊為上門服務商家，不設門市接待。"
         path="/service-process"
-        keywords="上門通渠流程, 通渠報價, 通渠收費原則, 通渠施工流程, 通渠檢查"
+        keywords="上門通渠流程, 通渠報價, 通渠現場資料, 通渠施工流程, 通渠檢查"
         breadcrumbs={CRUMBS}
         jsonLd={PAGE_JSON_LD}
       />
