@@ -1,4 +1,5 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
+import CaseStudyCard from "@/components/CaseStudyCard";
 import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
 import { WhatsAppButton } from "@/components/Layout";
 import QuoteRequestForm from "@/components/QuoteRequestForm";
@@ -16,6 +17,8 @@ const CRUMBS = [
 
 export default function CaseStudies() {
   const { studies, isLoading, error } = useCaseStudies();
+  const videoStudies = studies.filter(study => study.video);
+  const otherStudies = studies.filter(study => !study.video);
   const jsonLd = [
     {
       "@context": "https://schema.org",
@@ -51,7 +54,7 @@ export default function CaseStudies() {
     >
       <SEO
         title="通渠工程案例｜現場問題、處理方法與完成結果｜通渠熊"
-        description="查看通渠熊已核實並由 CMS 發佈的渠務工程紀錄，包括地區、現場問題、使用設備、處理步驟及完成測試。"
+        description="觀看通渠熊真實施工短片，了解坐廁通渠、櫃內去水位、喉口檢查與戶外渠口處理。每段影片附現場情況、施工說明及文字紀錄。"
         path="/cases"
         keywords="通渠案例, 通渠工程, 高壓水槍案例, CCTV照喉案例, 香港渠務工程"
         jsonLd={jsonLd}
@@ -63,7 +66,7 @@ export default function CaseStudies() {
         <EditorialPageHero
           kicker="工程紀錄"
           title="通渠工程案例"
-          description="查看已正式發佈的工程日期、地區、處理方法及結果。個案隱去完整地址；每個現場的收費和工序，須另外確認。"
+          description="睇真實現場，了解師傅點樣處理。施工短片附文字說明；相似問題的處理方法和收費，仍按現場情況確認。"
           contactLocation="cases_hero"
         />
       </div>
@@ -77,8 +80,29 @@ export default function CaseStudies() {
             正在讀取已發佈工程紀錄…
           </p>
         ) : studies.length ? (
-          <div className="border-b border-[var(--db-rule)]">
-            {studies.map((study, index) => (
+          <div>
+            {videoStudies.length ? (
+              <section
+                aria-labelledby="recorded-videos-heading"
+                className="mb-12"
+              >
+                <div className="section-heading">
+                  <div>
+                    <p className="brand-eyebrow">真實現場 · 施工短片</p>
+                    <h2 id="recorded-videos-heading">由畫面了解施工過程</h2>
+                  </div>
+                </div>
+                <div className="recorded-case-grid">
+                  {videoStudies.map(study => (
+                    <CaseStudyCard key={study._id} study={study} />
+                  ))}
+                </div>
+              </section>
+            ) : null}
+            {otherStudies.length ? (
+              <h2 className="mb-6 text-3xl font-black">更多工程紀錄</h2>
+            ) : null}
+            {otherStudies.map((study, index) => (
               <article
                 key={study._id}
                 className="case-studies-row border-t border-[var(--db-rule)] py-10 md:py-14"
@@ -92,14 +116,18 @@ export default function CaseStudies() {
                   </span>
                   <div>
                     <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm font-bold text-[var(--db-copy)]">
-                      <span className="inline-flex items-center gap-2">
-                        <MapPin className="h-4 w-4" />
-                        {study.district}
-                      </span>
-                      <span className="inline-flex items-center gap-2">
-                        <CalendarDays className="h-4 w-4" />
-                        {formatCaseDate(study.projectDate)}
-                      </span>
+                      {study.district ? (
+                        <span className="inline-flex items-center gap-2">
+                          <MapPin className="h-4 w-4" />
+                          {study.district}
+                        </span>
+                      ) : null}
+                      {study.projectDate ? (
+                        <span className="inline-flex items-center gap-2">
+                          <CalendarDays className="h-4 w-4" />
+                          {formatCaseDate(study.projectDate)}
+                        </span>
+                      ) : null}
                     </div>
                     <p className="mt-4 text-xs font-black uppercase tracking-[0.12em] text-[var(--db-safety)]">
                       {study.serviceLabel}

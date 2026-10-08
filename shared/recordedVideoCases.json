@@ -1,0 +1,172 @@
+[
+  {
+    "slug": "toilet-drain-tool-operation",
+    "title": "坐廁積水，現場疏通操作",
+    "serviceType": "residential",
+    "serviceLabel": "坐廁通渠",
+    "servicePath": "/services/toilet-unblocking",
+    "summary": "坐廁內可見積水，師傅將疏通工具送入去水位置。這段現場短片記錄了工具操作，讓你先了解坐廁通渠的施工過程。",
+    "problem": "畫面中的坐廁有混濁積水，師傅在坐廁旁進行處理。",
+    "workPerformed": "師傅戴上手套，將疏通工具送入坐廁去水位置，並在操作期間調整工具。剪輯保留了積水狀況和疏通動作。",
+    "result": "影片可見師傅持續操作疏通工具；這段紀錄未包含完整沖水測試。",
+    "publishedAt": "2026-10-08T15:10:00+08:00",
+    "video": {
+      "src": "/videos/cases/toilet-drain-tool-operation-v1.mp4",
+      "poster": "/videos/cases/toilet-drain-tool-operation-v1.webp",
+      "captions": "/videos/cases/toilet-drain-tool-operation-v1.vtt",
+      "durationSeconds": 15.5,
+      "width": 540,
+      "height": 960,
+      "bytes": 2111151,
+      "sha256": "813e34cab02c0fb2c938202eecde5ff5ca01b8d187faba45ff574953bda4e596",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 4.5,
+          "text": "坐廁內可見混濁積水"
+        },
+        {
+          "start": 4.5,
+          "end": 15.5,
+          "text": "師傅操作工具，處理去水位置"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "under-sink-drain-line-operation",
+    "title": "櫃底去水位，工具處理紀錄",
+    "serviceType": "residential",
+    "serviceLabel": "去水位處理",
+    "servicePath": "/services/kitchen-sink-unblocking",
+    "summary": "師傅在櫃底去水位置操作線材，並以容器承接污水。短片保留近鏡，讓你看清楚狹窄位置的現場處理。",
+    "problem": "櫃底的去水位置正在施工，容器內可見深色污水。",
+    "workPerformed": "師傅戴上手套，在櫃底去水位置操作工具線材。下方放置容器，承接施工期間流出的水。",
+    "result": "畫面記錄了去水位置的工具操作和承接污水的安排，未顯示完整放水測試。",
+    "publishedAt": "2026-10-08T15:10:00+08:00",
+    "video": {
+      "src": "/videos/cases/under-sink-drain-line-operation-v1.mp4",
+      "poster": "/videos/cases/under-sink-drain-line-operation-v1.webp",
+      "captions": "/videos/cases/under-sink-drain-line-operation-v1.vtt",
+      "durationSeconds": 7.0,
+      "width": 540,
+      "height": 960,
+      "bytes": 471348,
+      "sha256": "d7560d0a1a764db6c89e684b2763da0237e9f464442cf62599b690160c7d3bb9",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 3.5,
+          "text": "櫃底去水位置，放置容器接水"
+        },
+        {
+          "start": 3.5,
+          "end": 7.0,
+          "text": "近鏡記錄工具操作"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "drain-inspection-line-feed",
+    "title": "喉口檢查，送入線材的過程",
+    "serviceType": "cctv",
+    "serviceLabel": "喉管檢查",
+    "servicePath": "/services/cctv-drain-inspection",
+    "summary": "現場放置檢查設備和黃色線盤，師傅將線材送入低位喉口。這段影片記錄檢查時的操作，方便了解照喉前端的工作。",
+    "problem": "師傅在低位喉口進行檢查，旁邊放置線盤與帶螢幕的設備。",
+    "workPerformed": "影片可見師傅從黃色線盤取出線材，並將線材送入喉口。剪輯集中在手部與入口位置，保留實際操作。",
+    "result": "影片顯示線材送入喉口的過程，未提供可判讀的喉內影像或檢查報告。",
+    "publishedAt": "2026-10-08T15:10:00+08:00",
+    "video": {
+      "src": "/videos/cases/drain-inspection-line-feed-v1.mp4",
+      "poster": "/videos/cases/drain-inspection-line-feed-v1.webp",
+      "captions": "/videos/cases/drain-inspection-line-feed-v1.vtt",
+      "durationSeconds": 12.0,
+      "width": 540,
+      "height": 960,
+      "bytes": 1183730,
+      "sha256": "25065f7a341958c2aaf7231cc08ce3e5996c401733a70a04abdc29752b7540e3",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 6,
+          "text": "現場線盤與喉口檢查"
+        },
+        {
+          "start": 6,
+          "end": 12,
+          "text": "師傅將檢查線材送入喉口"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "cabinet-drain-access-operation",
+    "title": "櫃內喉口，近鏡施工紀錄",
+    "serviceType": "residential",
+    "serviceLabel": "櫃內去水位處理",
+    "servicePath": "/services/kitchen-sink-unblocking",
+    "summary": "打開櫃門後，師傅在喉口位置操作工具；旁邊可見接水容器與拆開的喉件。影片呈現櫃內施工空間和處理方式。",
+    "problem": "櫃內去水喉口正在處理，旁邊可見拆開的喉件及接水容器。",
+    "workPerformed": "師傅在櫃內喉口操作線材，接水容器放在入口下方。剪輯刪去了轉身及移動鏡頭，保留施工近鏡。",
+    "result": "影片可見喉口、容器和操作位置；這段素材未包括喉件接回後的完整試水。",
+    "publishedAt": "2026-10-08T15:10:00+08:00",
+    "video": {
+      "src": "/videos/cases/cabinet-drain-access-operation-v1.mp4",
+      "poster": "/videos/cases/cabinet-drain-access-operation-v1.webp",
+      "captions": "/videos/cases/cabinet-drain-access-operation-v1.vtt",
+      "durationSeconds": 5.625,
+      "width": 540,
+      "height": 960,
+      "bytes": 659765,
+      "sha256": "f35727df0e279f98055c9a14f38e82df01a72c4d882c4a5bf60aba7b3fae5fa0",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 2,
+          "text": "櫃內喉口與接水安排"
+        },
+        {
+          "start": 2,
+          "end": 5.6,
+          "text": "保留施工近鏡，看清操作位置"
+        }
+      ]
+    }
+  },
+  {
+    "slug": "outdoor-drain-chamber-operation",
+    "title": "戶外渠口，開蓋施工紀錄",
+    "serviceType": "manhole",
+    "serviceLabel": "戶外渠口處理",
+    "servicePath": "/services/main-drain-manhole",
+    "summary": "戶外渠蓋打開後，可見渠口、水流和放入渠內的工具線材。短片保留渠口近鏡，呈現戶外渠務施工的位置。",
+    "problem": "戶外兩個渠口已打開，其中一個渠口可見水流，渠壁有附着物。",
+    "workPerformed": "影片可見線材伸入渠口，旁邊的渠蓋已移開。剪輯保留渠口和水流畫面，刪去了較長的轉鏡。",
+    "result": "短片記錄渠口內的水流和施工位置；未顯示清理前後對照或完整完工檢查。",
+    "publishedAt": "2026-10-08T15:10:00+08:00",
+    "video": {
+      "src": "/videos/cases/outdoor-drain-chamber-operation-v1.mp4",
+      "poster": "/videos/cases/outdoor-drain-chamber-operation-v1.webp",
+      "captions": "/videos/cases/outdoor-drain-chamber-operation-v1.vtt",
+      "durationSeconds": 9.0,
+      "width": 540,
+      "height": 960,
+      "bytes": 1923744,
+      "sha256": "83422e746e9bcdb0a89a7ed5aab0e4f54ab86da511aa102d43721406bb521ea2",
+      "chapters": [
+        {
+          "start": 0,
+          "end": 4.0,
+          "text": "戶外渠口開蓋，查看水流"
+        },
+        {
+          "start": 4.0,
+          "end": 9.0,
+          "text": "渠口近鏡與現場施工位置"
+        }
+      ]
+    }
+  }
+]

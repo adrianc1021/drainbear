@@ -4,6 +4,7 @@ import CustomerPaths from "@/components/CustomerPaths";
 import DrainHomeFaq, { FAQ_ITEMS } from "@/components/DrainHomeFaq";
 import HomeServiceFinder from "@/components/HomeServiceFinder";
 import ServiceDirectory from "@/components/ServiceDirectory";
+import RecordedCaseGallery from "@/components/RecordedCaseGallery";
 import { BUSINESS_ID, SITE_URL, WEBSITE_ID } from "@/config/site";
 import {
   ArrowRight,
@@ -235,6 +236,7 @@ export default function Home() {
           </p>
         </div>
       </section>
+      <RecordedCaseGallery />
       <DrainHomeFaq />
       <nav className="container home-resource-links" aria-label="延伸渠務資料">
         <Link href="/cases">
