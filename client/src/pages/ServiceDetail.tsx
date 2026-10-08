@@ -70,6 +70,8 @@ export default function ServiceDetail() {
       "@id": BUSINESS_ID,
       name: settings.businessName,
     },
+    mainEntityOfPage: { "@id": `${SITE_URL}${path}#webpage` },
+    termsOfService: `${service.answerSummary.confirmBeforeWork} ${service.answerSummary.limitation}`,
     areaServed: {
       "@type": "Country",
       name: "Hong Kong",
@@ -79,6 +81,7 @@ export default function ServiceDetail() {
       serviceUrl: `${SITE_URL}${path}`,
       servicePhone: {
         "@type": "ContactPoint",
+        "@id": `${SITE_URL}/#contact`,
         telephone: settings.phoneE164,
         contactType: "customer service",
       },

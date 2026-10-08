@@ -5,6 +5,7 @@ import { chromium, type Page } from "playwright";
 import { DISTRICT_SLUGS, SERVICE_SLUGS } from "../shared/publicRoutes";
 import { enableCmsRelay, isLocalOrigin } from "./browser-cms-relay";
 import { assessPrerenderSnapshot } from "./prerender-readiness";
+import { writeAeoArtifacts, type AeoSnapshot } from "./aeo-artifacts";
 
 // Preferred port only. server/_core/index.ts falls back to the next free port
 // when this one is taken, so the real URL is read back from the child's stdout
@@ -556,6 +557,7 @@ async function prerender() {
     }
 
     const page = await context.newPage();
+    const aeoSnapshots: AeoSnapshot[] = [];
 
     for (const route of routes) {
       const response = await page.goto(`${baseUrl}${route}`, {
@@ -584,6 +586,54 @@ async function prerender() {
       }
 
       await page.waitForTimeout(50);
+
+      // Build AI indexes from the same resolved, public HTML as search engines.
+      aeoSnapshots.push(
+        await page.evaluate(
+          ({ route, siteUrl }) => {
+            const main = document.querySelector("main")?.cloneNode(true) as
+              | HTMLElement
+              | undefined;
+            main
+              ?.querySelectorAll(
+                "script, style, [aria-hidden='true'], .contact-actions"
+              )
+              .forEach(node => node.remove());
+            return {
+              route,
+              url:
+                document.querySelector<HTMLLinkElement>('link[rel="canonical"]')
+                  ?.href || "",
+              title: document.title,
+              description:
+                document.querySelector<HTMLMetaElement>(
+                  'meta[name="description"]'
+                )?.content || "",
+              language: document.documentElement.lang,
+              robots:
+                document.querySelector<HTMLMetaElement>('meta[name="robots"]')
+                  ?.content || "",
+              text: main?.textContent?.replace(/\s+/g, " ").trim() || "",
+              ids: Array.from(document.querySelectorAll("main [id]")).map(
+                node => node.id
+              ),
+              links: Array.from(
+                document.querySelectorAll<HTMLAnchorElement>("main a[href]")
+              ).map(
+                link =>
+                  new URL(link.getAttribute("href")!, siteUrl + route).href
+              ),
+              structuredData: Array.from(
+                document.querySelectorAll('script[type="application/ld+json"]')
+              ).map(node => JSON.parse(node.textContent || "null")),
+              phoneDisplay:
+                document.querySelector("main .contact-action--phone strong")
+                  ?.textContent || undefined,
+            };
+          },
+          { route, siteUrl: SITE_URL }
+        )
+      );
 
       let html = await page.content();
       const outputPath = getOutputPath(route);
@@ -631,6 +681,8 @@ async function prerender() {
 
     await context.close();
     await updateSitemap(blogEntries, caseEntries);
+    if (!ALLOW_STALE_CMS)
+      await writeAeoArtifacts(aeoSnapshots, SITE_URL, OUTPUT_ROOT);
 
     console.log(`Successfully prerendered ${routes.length} routes.`);
   } finally {

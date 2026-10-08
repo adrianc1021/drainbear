@@ -333,7 +333,6 @@ export default function DrainHeroScenes({ imageSrc }: { imageSrc?: string }) {
               ) : null}
               {activeImage ? (
                 <div className="db-scene-hero__visual-caption">
-                  <span>服務示意圖片</span>
                   <span>{scene.number} / 05</span>
                 </div>
               ) : null}

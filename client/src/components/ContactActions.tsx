@@ -1,6 +1,6 @@
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import { goThanksAfterWhatsApp, trackCTA } from "@/lib/analytics";
-import { MessageCircle, Phone } from "lucide-react";
+import { ArrowUpRight, MessageCircle, Phone } from "lucide-react";
 
 /** Shared contact details and attribution for every service entrance. */
 export default function ContactActions({
@@ -25,11 +25,14 @@ export default function ContactActions({
         href={phoneHref}
         onClick={() => trackCTA("phone", location, topic)}
       >
-        <Phone aria-hidden="true" />
-        <span>
+        <span className="contact-action__icon" aria-hidden="true">
+          <Phone />
+        </span>
+        <span className="contact-action__copy">
           <span className="contact-action__label">24小時特快通渠熱線</span>
           <strong>{phoneDisplay}</strong>
         </span>
+        <ArrowUpRight className="contact-action__arrow" aria-hidden="true" />
       </a>
       <a
         className="contact-action contact-action--whatsapp"
@@ -41,11 +44,14 @@ export default function ContactActions({
           goThanksAfterWhatsApp(location);
         }}
       >
-        <MessageCircle aria-hidden="true" />
-        <span>
-          <span className="contact-action__label">WhatsApp 查詢報價</span>
-          <strong>傳相片，先了解點處理</strong>
+        <span className="contact-action__icon" aria-hidden="true">
+          <MessageCircle />
         </span>
+        <span className="contact-action__copy">
+          <span className="contact-action__label">WhatsApp 查詢報價</span>
+          <strong>傳相片，問報價</strong>
+        </span>
+        <ArrowUpRight className="contact-action__arrow" aria-hidden="true" />
         <span className="sr-only">（另開視窗）</span>
       </a>
     </div>

@@ -5,7 +5,15 @@ import DrainHomeFaq, { FAQ_ITEMS } from "@/components/DrainHomeFaq";
 import HomeServiceFinder from "@/components/HomeServiceFinder";
 import ServiceDirectory from "@/components/ServiceDirectory";
 import { BUSINESS_ID, SITE_URL, WEBSITE_ID } from "@/config/site";
-import { ArrowRight, Droplets, FileCheck2, ShieldCheck } from "lucide-react";
+import {
+  ArrowRight,
+  CalendarClock,
+  ClipboardCheck,
+  Droplets,
+  FileCheck2,
+  MessageSquareText,
+  ShieldCheck,
+} from "lucide-react";
 import { Link } from "wouter";
 
 const HOME_JSONLD = {
@@ -30,10 +38,26 @@ const HOME_FAQ_JSONLD = {
   })),
 };
 const PROCESS = [
-  ["提供現場資料", "傳送地區、堵塞位置及相片；有倒灌或用過通渠水，也請說明。"],
-  ["確認上門安排", "按現場情況確認人手、工具及可安排時間。"],
-  ["檢查後確認收費", "師傅說明處理方法及總收費，雙方確認後才動工。"],
-  ["疏通及測試去水", "完成已確認工序，測試去水，整理施工位置。"],
+  {
+    icon: MessageSquareText,
+    title: "提供現場資料",
+    description: "傳地區、堵塞位置同相片；有倒灌或用過通渠水，也請說明。",
+  },
+  {
+    icon: CalendarClock,
+    title: "確認上門安排",
+    description: "按現場情況確認人手、工具及可安排時間。",
+  },
+  {
+    icon: ClipboardCheck,
+    title: "檢查後確認收費",
+    description: "師傅說明處理方法及總收費，雙方確認後才動工。",
+  },
+  {
+    icon: Droplets,
+    title: "疏通及測試去水",
+    description: "完成已確認工序，測試去水，再整理施工位置。",
+  },
 ] as const;
 
 export default function Home() {
@@ -81,7 +105,6 @@ export default function Home() {
               fetchPriority="high"
               decoding="async"
             />
-            <figcaption>服務示意圖，非客戶工程紀錄。</figcaption>
           </figure>
         </div>
         <HomeServiceFinder />
@@ -190,12 +213,18 @@ export default function Home() {
             </Link>
           </div>
           <ol className="home-arrangement__steps">
-            {PROCESS.map(([title, description], index) => (
-              <li key={title}>
-                <span aria-hidden="true">0{index + 1}</span>
+            {PROCESS.map((step, index) => (
+              <li key={step.title}>
+                <span
+                  className="home-arrangement__step-marker"
+                  aria-hidden="true"
+                >
+                  <step.icon />
+                  <span>0{index + 1}</span>
+                </span>
                 <div>
-                  <h3>{title}</h3>
-                  <p>{description}</p>
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
                 </div>
               </li>
             ))}

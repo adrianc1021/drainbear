@@ -8,6 +8,7 @@ import { WhatsAppButton } from "@/components/Layout";
 import SEO from "@/components/SEO";
 import { BUSINESS_ID, SITE_URL, WEBSITE_ID } from "@/config/site";
 import { ArrowRight, HelpCircle } from "lucide-react";
+import { useEffect } from "react";
 import { Link } from "wouter";
 
 const FAQ_CRUMBS = [
@@ -17,52 +18,109 @@ const FAQ_CRUMBS = [
 
 const FAQS = [
   {
+    id: "inspection-fee",
+    source: "/service-process",
+    sourceLabel: "上門與報價流程",
     q: "請問上門檢查需要收費嗎？",
     a: "如接納報價並進行已確認的工程，上門檢查費將全免。",
   },
   {
     q: "通渠一般需要多少費用？",
+    id: "pricing",
+    source: "/guide",
+    sourceLabel: "收費參考及限制",
     a: "一般鋅盤、企缸疏通 HK$500 起；座廁 HK$600 起。師傅會先說明處理方法及報價，確認後才動工。",
   },
   {
     q: "師傅最快多久可以到達？",
+    id: "arrival",
+    source: "/areas",
+    sourceLabel: "服務地區與安排",
     a: "到達時間受地區、交通、當時師傅及設備安排影響，因此不會作未核實的保證。提供地點和現場情況後，團隊會回覆當刻可安排的時段。",
   },
   {
     q: "聯絡通渠公司前要準備甚麼資料？",
+    id: "quote-photos",
+    source: "/blog/whatsapp-drain-quote-checklist",
+    sourceLabel: "傳相報價清單",
     a: "建議提供服務地區、堵塞位置、受影響範圍、開始時間，以及現場相片或短片。如曾使用通渠水、拆喉或出現污水倒灌，亦應先說明。",
   },
   {
     q: "甚麼情況下應立即停止用水？",
+    id: "backflow-safety",
+    source: "/services/sewage-backflow",
+    sourceLabel: "污水倒灌處理",
     a: "如多個去水位同時倒灌、污水由地台或座廁湧出，或水位持續上升，應先停止使用相關水源，避免繼續沖廁或排水，並盡快安排檢查。",
   },
   {
     q: "通渠過程會弄髒我的家居嗎？",
+    id: "work-area",
+    source: "/service-process",
+    sourceLabel: "施工及完工流程",
     a: "施工會按現場情況採取保護措施，完工後整理受影響的工作位置。若涉及污水倒灌或大型設備，團隊會先說明所需工作範圍。",
   },
   {
     q: "倒了「通渠水」依然堵塞怎麼辦？",
+    id: "drain-chemicals",
+    source: "/blog/why-not-drain-cleaner",
+    sourceLabel: "通渠水安全指引",
     a: "請勿繼續混合或添加其他化學清潔劑，並先告知師傅所用產品和時間。化學劑可能殘留在喉管內，需由師傅評估後以合適方式處理。",
   },
   {
     q: "「不成功不收費」適用於哪些情況？",
+    id: "fee-conditions",
+    source: "/service-process",
+    sourceLabel: "收費條件說明",
     a: "適用於事前確認的合資格疏通項目，團隊會在安排服務前說明適用範圍及條款。",
   },
   {
     q: "深夜緊急堵塞可以聯絡你們嗎？",
+    id: "night-enquiries",
+    source: "/service-process",
+    sourceLabel: "查詢及上門安排",
     a: "可以，24 小時接受查詢。請提供所在地區及堵塞情況，團隊會確認可安排的上門時段；先報價，確認後才動工。",
   },
   {
     q: "甚麼情況需要 CCTV 照喉？",
+    id: "cctv",
+    source: "/services/cctv-drain-inspection",
+    sourceLabel: "CCTV 照喉條件",
     a: "如同一位置反覆淤塞、懷疑喉管破損或需要確認管內狀況，可考慮 CCTV 照喉。是否適用仍要視乎管徑、入口位置和現場條件。",
   },
   {
     q: "會無故要求客人更換喉管嗎？",
+    id: "pipe-repair",
+    source: "/blog/read-cctv-drain-inspection-report",
+    sourceLabel: "管道檢測報告",
     a: "處理方向應以現場情況和可核實資料為基礎。是堵塞便先評估疏通方式；如懷疑破損，會說明檢測結果及維修原因後再報價。",
   },
   {
     q: "通渠後如何減少再次淤塞？",
+    id: "prevention",
+    source: "/blog",
+    sourceLabel: "渠務保養文章",
     a: "避免把油脂、食物殘渣、濕紙巾、頭髮或大型異物排入去水位，並按使用量定期清理隔氣和隔油設施。如短期內再次去水緩慢，應先檢查原因。",
+  },
+  {
+    id: "service-scope",
+    q: "通渠熊適合處理哪些通渠問題？",
+    a: "通渠熊提供香港住宅、食肆、商舖及物業渠務查詢，包括坐廁、鋅盤、浴室去水、污水倒灌、隔油池、主渠及沙井。高壓洗渠或 CCTV 照喉要按管道及現場條件評估。",
+    source: "/services",
+    sourceLabel: "八項通渠服務",
+  },
+  {
+    id: "service-areas",
+    q: "通渠熊服務香港哪些地區？",
+    a: "可查詢港島、九龍、新界及離島的上門安排。請提供具體地點、樓宇或場所類型及堵塞情況；實際上門時間、交通及設備安排由團隊確認。",
+    source: "/areas",
+    sourceLabel: "按地區查看安排",
+  },
+  {
+    id: "restaurant-property",
+    q: "食肆或物業管理查詢，要補充甚麼資料？",
+    a: "除地點與相片外，請說明營業或施工時段、受影響去水位、隔油池或沙井位置，以及能否接近檢查入口。涉及共用管道時，也要了解管理處的安排，再確認施工範圍。",
+    source: "/services/main-drain-manhole",
+    sourceLabel: "主渠與物業渠務",
   },
 ];
 
@@ -75,13 +133,20 @@ const FAQ_JSONLD = {
   description:
     "香港通渠收費、緊急處理、通渠水、CCTV 照喉及上門安排的直接解答。",
   inLanguage: "zh-Hant-HK",
-  dateModified: "2026-09-06",
+  dateModified: "2026-10-08",
   isPartOf: { "@id": WEBSITE_ID },
   about: { "@id": BUSINESS_ID },
   mainEntity: FAQS.map(f => ({
     "@type": "Question",
+    "@id": `${SITE_URL}/faq#${f.id}`,
+    url: `${SITE_URL}/faq#${f.id}`,
     name: f.q,
-    acceptedAnswer: { "@type": "Answer", text: f.a },
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: f.a,
+      url: `${SITE_URL}/faq#${f.id}`,
+      citation: `${SITE_URL}${f.source}`,
+    },
   })),
 };
 
@@ -104,6 +169,16 @@ const RELATED_GUIDES = [
 ];
 
 export default function FAQ() {
+  useEffect(() => {
+    const revealAnswer = () => {
+      const id = window.location.hash.slice(1);
+      const answer = document.getElementById(id);
+      if (answer instanceof HTMLDetailsElement) answer.open = true;
+    };
+    revealAnswer();
+    window.addEventListener("hashchange", revealAnswer);
+    return () => window.removeEventListener("hashchange", revealAnswer);
+  }, []);
   return (
     <div>
       <SEO
@@ -119,8 +194,8 @@ export default function FAQ() {
         <Breadcrumbs items={FAQ_CRUMBS} tone="dark" />
         <EditorialPageHero
           contactLocation="faq_hero"
-          kicker="常見問題"
-          title="常見問題"
+          kicker="香港住宅 · 食肆 · 物業渠務"
+          title="通渠常見問題與直接答案"
           description="以直接答案整理收費、緊急處理、上門安排、施工及管道保養問題，方便您快速判斷下一步。"
           media={{
             src: "/images/home-drain-technician.jpg",
@@ -159,9 +234,29 @@ export default function FAQ() {
 
       <section className="site-content-section bg-white">
         <div className="site-editorial-narrow">
+          <div className="faq-answer-guide">
+            <p className="brand-eyebrow">搵到你需要嘅答案</p>
+            <h2>收費、緊急處理，定係上門安排？</h2>
+            <nav aria-label="答案快速連結" className="related-inline">
+              <a href="#pricing">通渠收費</a>
+              <a href="#backflow-safety">污水倒灌</a>
+              <a href="#night-enquiries">夜間查詢</a>
+              <a href="#service-scope">服務範圍</a>
+              <a href="#service-areas">服務地區</a>
+              <a href="#restaurant-property">食肆及物業</a>
+            </nav>
+            <p className="section-footnote">
+              內容整理：通渠熊渠務團隊 · 本頁更新：
+              <time dateTime="2026-10-08">2026 年 10 月 8 日</time>
+            </p>
+          </div>
           <div className="site-editorial-accordion">
             {FAQS.map(faq => (
-              <details key={faq.q} className="site-editorial-accordion__item">
+              <details
+                id={faq.id}
+                key={faq.q}
+                className="site-editorial-accordion__item"
+              >
                 <summary className="site-editorial-accordion__trigger list-none text-left">
                   <span className="flex items-center gap-3">
                     <HelpCircle
@@ -174,6 +269,18 @@ export default function FAQ() {
                 </summary>
 
                 <p className="site-editorial-accordion__answer">{faq.a}</p>
+                <nav
+                  className="faq-answer-sources"
+                  aria-label={`${faq.q}的相關資料`}
+                >
+                  <Link href={faq.source}>
+                    {faq.sourceLabel}
+                    <ArrowRight aria-hidden="true" />
+                  </Link>
+                  <a href={`#${faq.id}`} aria-label={`${faq.q}的固定連結`}>
+                    本題連結
+                  </a>
+                </nav>
               </details>
             ))}
           </div>

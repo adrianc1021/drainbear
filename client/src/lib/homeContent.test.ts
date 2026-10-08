@@ -48,9 +48,10 @@ describe("homepage contact and discovery", () => {
     expect(html).not.toContain('data-pr20-section="photo-quote"');
   });
 
-  it("keeps an explicitly labelled hero illustration and text FAQ answers in the HTML", () => {
+  it("keeps accurate image alt text and FAQ answers without visible illustration badges", () => {
     const html = renderHome();
-    expect(html).toContain("服務示意圖，非客戶工程紀錄。");
+    expect(html).not.toContain("服務示意圖，非客戶工程紀錄。");
+    expect(html).toContain("白色紙藝通渠熊、香港天際線及渠務工具的品牌示意");
     expect(html).toContain('width="1536" height="1024"');
     expect(html).toContain("drainbear-paper-hero-640.webp 640w");
     expect(html).toContain("可以先知道大概收費嗎？");

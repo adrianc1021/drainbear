@@ -287,6 +287,10 @@ export default function BlogPost() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
+    "@id": `${settings.siteUrl.replace(/\/+$/, "")}/blog/${post.slug}#article`,
+    url: `${settings.siteUrl.replace(/\/+$/, "")}/blog/${post.slug}`,
+    inLanguage: "zh-Hant-HK",
+    isPartOf: { "@id": `${settings.siteUrl.replace(/\/+$/, "")}/#website` },
     headline: post.title,
     description: seoDescription,
     image: seoImage ? [seoImage] : undefined,
@@ -307,12 +311,13 @@ export default function BlogPost() {
       : undefined,
     publisher: {
       "@type": "Organization",
+      "@id": `${settings.siteUrl.replace(/\/+$/, "")}/#organization`,
       name: settings.businessName,
       url: settings.siteUrl,
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `${settings.siteUrl.replace(/\/+$/, "")}/blog/${post.slug}`,
+      "@id": `${settings.siteUrl.replace(/\/+$/, "")}/blog/${post.slug}#webpage`,
     },
   };
 
