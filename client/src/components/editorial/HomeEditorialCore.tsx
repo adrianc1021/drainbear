@@ -110,9 +110,7 @@ export function EditorialHero({ imageSrc }: { imageSrc?: string }) {
             <br />
             緊急服務
           </h1>
-          <p className="brand-hero__intro">
-            先了解情況及報價，確認後才動工。
-          </p>
+          <p className="brand-hero__intro">先了解情況及報價，確認後才動工。</p>
           <p className="brand-hero__description">
             座廁、企缸去水緩慢、廚房鋅盤淤塞或污水倒灌？提供所在地區及現場相片，讓團隊作初步評估。
           </p>
@@ -153,7 +151,6 @@ export function EditorialHero({ imageSrc }: { imageSrc?: string }) {
             />
             <figcaption>
               <span>由家居去水，到大廈主渠。</span>
-              <span>服務示意圖片</span>
             </figcaption>
             <p className="brand-hero__note">
               服務時間按地區、交通及所需設備確認。
@@ -162,9 +159,18 @@ export function EditorialHero({ imageSrc }: { imageSrc?: string }) {
         ) : null}
       </div>
       <ul className="brand-hero__proofs db-container" aria-label="服務承諾">
-        <li><ShieldCheck aria-hidden="true" /><span>確認收費後才動工</span></li>
-        <li><Timer aria-hidden="true" /><span>24 小時接受查詢</span></li>
-        <li><Check aria-hidden="true" /><span>完工後測試去水</span></li>
+        <li>
+          <ShieldCheck aria-hidden="true" />
+          <span>確認收費後才動工</span>
+        </li>
+        <li>
+          <Timer aria-hidden="true" />
+          <span>24 小時接受查詢</span>
+        </li>
+        <li>
+          <Check aria-hidden="true" />
+          <span>完工後測試去水</span>
+        </li>
       </ul>
       <div className="brand-hero__directory">
         <div className="db-container">
@@ -196,13 +202,17 @@ export function EditorialPromise() {
       !banner ||
       typeof IntersectionObserver === "undefined" ||
       window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) return;
+    )
+      return;
 
-    const observer = new IntersectionObserver(entries => {
-      if (!entries.some(entry => entry.isIntersecting)) return;
-      banner.dataset.entered = "true";
-      observer.disconnect();
-    }, { threshold: 0.2 });
+    const observer = new IntersectionObserver(
+      entries => {
+        if (!entries.some(entry => entry.isIntersecting)) return;
+        banner.dataset.entered = "true";
+        observer.disconnect();
+      },
+      { threshold: 0.2 }
+    );
     observer.observe(banner);
     return () => observer.disconnect();
   }, []);
@@ -317,7 +327,6 @@ export function EditorialCapability({ imageSrc }: { imageSrc?: string }) {
             ) : (
               <div className="db-operational-grid h-full min-h-[360px] opacity-30 lg:min-h-[560px]" />
             )}
-            <span className="db-image-label">設備應用示意</span>
           </div>
 
           <div className="border-b border-white/20">

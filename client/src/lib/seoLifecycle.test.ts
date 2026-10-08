@@ -15,6 +15,7 @@ const lifecycle = vi.hoisted(() => ({
       businessName: "通渠熊 DrainBear",
       businessDescription: "香港通渠服務",
       phoneE164: "+85295588260",
+      whatsappNumber: "85295588260",
     },
   },
 }));

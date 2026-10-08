@@ -4,6 +4,9 @@
 
 ## 官方入口
 
+- [完整公開文字及答案](https://drainbearhk.com/llms-full.txt): 每次正式建置從公開頁面產生，保留來源與原頁更新日期
+- [結構化公開資料](https://drainbearhk.com/knowledge.json): 同一批可索引頁面、商家實體與可見答案的 JSON 索引
+
 - [首頁](https://drainbearhk.com/): 香港通渠服務總覽、查詢入口及服務流程
 - [專業服務](https://drainbearhk.com/services): 住宅、商業、高壓水槍及 CCTV 照喉服務
 - [渠務問題快速判斷](https://drainbearhk.com/drain-diagnosis): 按位置、症狀、影響範圍及現場風險整理初步處理方向

@@ -3,6 +3,7 @@
  * 每頁獨立 title / description / canonical / Open Graph / JSON-LD
  */
 import { useSiteSettings } from "@/contexts/SiteSettingsContext";
+import { SERVICE_PAGES } from "@/lib/serviceData";
 import { useEffect } from "react";
 
 function setMeta(attr: "name" | "property", key: string, content: string) {
@@ -225,10 +226,32 @@ export default function SEO({
           telephone: settings.phoneE164,
           contactPoint: {
             "@type": "ContactPoint",
+            "@id": `${siteUrl}/#contact`,
             telephone: settings.phoneE164,
+            url: `https://wa.me/${settings.whatsappNumber.replace(/\D/g, "")}`,
             contactType: "customer service",
             areaServed: "HK",
             availableLanguage: ["zh-Hant", "zh-HK", "en"],
+          },
+          sameAs: [settings.instagramUrl, settings.googleBusinessUrl].filter(
+            (url): url is string =>
+              typeof url === "string" && /^https:\/\//i.test(url)
+          ),
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            "@id": `${siteUrl}/services#catalog`,
+            name: "通渠熊通渠服務",
+            url: `${siteUrl}/services`,
+            itemListElement: SERVICE_PAGES.map(service => ({
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                "@id": `${siteUrl}/services/${service.slug}#service`,
+                name: service.name,
+                url: `${siteUrl}/services/${service.slug}`,
+                provider: { "@id": `${siteUrl}/#organization` },
+              },
+            })),
           },
           areaServed: {
             "@type": "Country",
@@ -252,6 +275,17 @@ export default function SEO({
           publisher: {
             "@id": `${siteUrl}/#organization`,
           },
+          hasPart: [
+            "/services",
+            "/areas",
+            "/guide",
+            "/service-process",
+            "/faq",
+            "/cases",
+            "/blog",
+          ].map(route => ({
+            "@id": `${siteUrl}${route}#webpage`,
+          })),
         },
       ],
     });
@@ -266,6 +300,17 @@ export default function SEO({
       inLanguage: "zh-Hant-HK",
       isPartOf: { "@id": `${siteUrl}/#website` },
       about: { "@id": `${siteUrl}/#organization` },
+      mainEntity: (Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [])
+        .filter(
+          (node): node is Record<string, unknown> =>
+            typeof node === "object" && node !== null
+        )
+        .filter(
+          node =>
+            typeof node["@id"] === "string" &&
+            node["@id"] !== `${pageUrl}#webpage`
+        )
+        .map(node => ({ "@id": node["@id"] })),
     });
 
     if (jsonLd) {

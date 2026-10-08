@@ -19,7 +19,7 @@ const routes = [
   ["/areas/kwun-tong", "觀塘通渠", "觀塘通渠", "服務地區"],
   ["/areas/tai-po", "大埔通渠", "大埔通渠服務", "服務地區"],
   ["/cases", "通渠工程案例", "通渠工程案例", "工程案例"],
-  ["/faq", "常見問題", "常見問題", "常見問題"],
+  ["/faq", "常見問題", "通渠常見問題與直接答案", "常見問題"],
 ];
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 async function waitForServer() {

@@ -5,11 +5,12 @@
   "license": "MIT",
   "scripts": {
     "dev": "NODE_ENV=development tsx watch server/_core/index.ts",
-    "build": "pnpm build:app && pnpm prerender",
+    "build": "pnpm build:app && pnpm prerender && pnpm verify:aeo && pnpm verify:sitemap && pnpm verify:seo",
     "build:app": "vite build && esbuild server/_core/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
     "prerender": "tsx scripts/prerender.ts",
     "verify:sitemap": "node scripts/verify-sitemap-consistency.mjs",
     "verify:seo": "node scripts/verify-seo-discoverability.mjs",
+    "verify:aeo": "tsx scripts/verify-aeo.ts",
     "verify:conversion": "node scripts/verify-conversion-tracking.mjs",
     "verify:diagnosis": "node scripts/verify-diagnosis-flow.mjs",
     "verify:routes": "node scripts/verify-route-consistency.mjs",

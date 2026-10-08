@@ -42,6 +42,13 @@ async function startServer() {
       return res.redirect(301, `https://drainbearhk.com${req.originalUrl}`);
     }
 
+    if (
+      hostname?.endsWith(".onrender.com") ||
+      hostname?.endsWith(".vercel.app")
+    ) {
+      res.set("X-Robots-Tag", "noindex, nofollow");
+    }
+
     return next();
   });
 
