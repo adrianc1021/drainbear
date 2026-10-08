@@ -2,9 +2,10 @@ import CmsPageSEO from "@/components/CmsPageSEO";
 import ContactActions from "@/components/ContactActions";
 import CustomerPaths from "@/components/CustomerPaths";
 import DrainHomeFaq, { FAQ_ITEMS } from "@/components/DrainHomeFaq";
+import HomeServiceFinder from "@/components/HomeServiceFinder";
 import ServiceDirectory from "@/components/ServiceDirectory";
 import { BUSINESS_ID, SITE_URL, WEBSITE_ID } from "@/config/site";
-import { ArrowRight, Check, ShieldCheck } from "lucide-react";
+import { ArrowRight, Droplets, FileCheck2, ShieldCheck } from "lucide-react";
 import { Link } from "wouter";
 
 const HOME_JSONLD = {
@@ -67,29 +68,51 @@ export default function Home() {
             <p className="contact-note">
               24 小時接受查詢；上門時間按地區、人手及設備確認。
             </p>
-            <ul className="home-hero__proofs" aria-label="服務原則">
-              {["動工前確認收費", "新增工序先說明", "完工後測試去水"].map(
-                text => (
-                  <li key={text}>
-                    <Check aria-hidden="true" />
-                    {text}
-                  </li>
-                )
-              )}
-            </ul>
           </div>
           <figure className="home-hero__media">
             <img
-              src="/images/home-drain-technician-wide.jpg"
-              alt="通渠工具與室內去水位的服務示意"
-              width="1600"
-              height="1000"
+              src="/images/drainbear-paper-hero.webp"
+              srcSet="/images/drainbear-paper-hero-640.webp 640w, /images/drainbear-paper-hero-960.webp 960w, /images/drainbear-paper-hero.webp 1536w"
+              sizes="(max-width: 899px) calc(100vw - 40px), 900px"
+              alt="白色紙藝通渠熊、香港天際線及渠務工具的品牌示意"
+              width="1536"
+              height="1024"
               fetchPriority="high"
               decoding="async"
             />
             <figcaption>服務示意圖，非客戶工程紀錄。</figcaption>
           </figure>
         </div>
+        <HomeServiceFinder />
+        <ul className="container home-hero__proofs" aria-label="服務原則">
+          {[
+            {
+              icon: ShieldCheck,
+              title: "動工前確認收費",
+              description: "現場檢查後，先講清楚總收費。",
+            },
+            {
+              icon: FileCheck2,
+              title: "新增工序先說明",
+              description: "有額外處理需要，先同你確認。",
+            },
+            {
+              icon: Droplets,
+              title: "完工後測試去水",
+              description: "完成工序，再檢查去水情況。",
+            },
+          ].map(item => (
+            <li key={item.title}>
+              <span className="home-hero__proof-icon">
+                <item.icon aria-hidden="true" />
+              </span>
+              <div>
+                <strong>{item.title}</strong>
+                <p>{item.description}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
       </section>
       <section
         className="brand-section home-problems"

@@ -12,6 +12,7 @@ description: 使用語意化React元件與Flexbox/Grid統一通渠熊介面，�
 - Grid欄位使用minmax(0,1fr)，Flex子項需min-width:0。中文標題自然換行，不能以overflow:hidden掩蓋文字溢出。
 - 320px至1440px驗證，包括手機首屏兩個聯絡按鈕、表格可捲動、固定CTA不遮擋內容、平板導覽不擠壓。
 - 提供hover、active、focus-visible；尊重prefers-reduced-motion。裝飾不應持續佔用GPU，或阻擋點擊。
+- 透明頁首要核對實際背景、文字對比、捲動及選單開啟狀態；不能只看class名稱。skip link平時移出畫面，focus時置於頁首前方，不佔據版面。漸層／圖像背景仍須人工檢視，axe不能代替畫面核查。
 - 重現缺陷後修正；檢查資料生命週期、事件移除、計時器和記憶體上限。率限制不可為清理記憶體而任意驅逐仍生效的限制。
 - Vite設定可能是函式或Promise，必須解析後才傳入createServer。新增服務／地區時同步shared/publicRoutes.ts並驗證真實HTTP狀態。
 - 只對已修改檔案格式化。執行pnpm check、相關測試、pnpm build:app及實際瀏覽器操作；不要把單純HTTP200或空白頁當成通過。

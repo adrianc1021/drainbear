@@ -51,7 +51,8 @@ describe("homepage contact and discovery", () => {
   it("keeps an explicitly labelled hero illustration and text FAQ answers in the HTML", () => {
     const html = renderHome();
     expect(html).toContain("服務示意圖，非客戶工程紀錄。");
-    expect(html).toContain('width="1600" height="1000"');
+    expect(html).toContain('width="1536" height="1024"');
+    expect(html).toContain("drainbear-paper-hero-640.webp 640w");
     expect(html).toContain("可以先知道大概收費嗎？");
     expect(html).toContain("師傅會先說明處理方法及報價");
     expect(html).not.toContain('src="undefined"');
