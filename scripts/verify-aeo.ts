@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { graphNodes } from "./aeo-artifacts";
+import { verifyVideoArtifacts } from "./video-artifacts";
 
 async function verifyAeo() {
   const root = path.resolve("dist/public");
@@ -70,6 +71,7 @@ async function verifyAeo() {
   }
   assert.equal(knowledge.coverage.answers, answers);
   assert(answers >= 15, "public answers exist");
+  await verifyVideoArtifacts(root, knowledge.pages);
   console.log(
     `PASS: AEO coverage, ${sitemapUrls.length} canonical pages, ${answers} visible answers, sources and stable entity relationships`
   );

@@ -1,14 +1,20 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
+import CaseVideoPlayer from "@/components/CaseVideoPlayer";
 import ContactActions from "@/components/ContactActions";
 import { WhatsAppButton } from "@/components/Layout";
 import QuoteRequestForm from "@/components/QuoteRequestForm";
 import SEO from "@/components/SEO";
 import { BUSINESS_ID, SITE_URL, WEBSITE_ID } from "@/config/site";
-import { formatCaseDate, formatMinutes } from "@/lib/caseRepository";
+import {
+  formatCaseDate,
+  formatMinutes,
+  formatVideoDuration,
+} from "@/lib/caseRepository";
+import { caseVideoSchema } from "@/lib/caseVideoSeo";
 import { useCaseStudy } from "@/lib/useCases";
 import NotFound from "@/pages/NotFound";
 import { CalendarDays, Clock, MapPin, Wrench } from "lucide-react";
-import { useParams } from "wouter";
+import { Link, useParams } from "wouter";
 
 export default function CaseStudyDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -31,14 +37,18 @@ export default function CaseStudyDetail() {
         url: `${SITE_URL}${path}`,
         headline: study.title,
         description: study.summary,
-        image: image ? [image] : undefined,
-        datePublished: study.projectDate,
-        dateModified: study.updatedAt ?? study.projectDate,
+        image: image ? [new URL(image, SITE_URL).href] : undefined,
+        datePublished: study.publishedAt ?? study.projectDate,
+        dateModified: study.updatedAt ?? study.publishedAt ?? study.projectDate,
         inLanguage: "zh-Hant-HK",
         author: { "@id": BUSINESS_ID },
         publisher: { "@id": BUSINESS_ID },
         isPartOf: { "@id": WEBSITE_ID },
-        spatialCoverage: { "@type": "Place", name: study.district },
+        mainEntityOfPage: { "@id": `${SITE_URL}${path}#webpage` },
+        spatialCoverage: study.district
+          ? { "@type": "Place", name: study.district }
+          : undefined,
+        video: study.video ? { "@id": `${SITE_URL}${path}#video` } : undefined,
         about: {
           "@type": "Service",
           name: study.serviceLabel,
@@ -60,7 +70,9 @@ export default function CaseStudyDetail() {
         image={image}
         imageAlt={study?.coverImage?.alt}
         type="article"
-        jsonLd={jsonLd}
+        jsonLd={
+          study?.video && jsonLd ? [jsonLd, caseVideoSchema(study)!] : jsonLd
+        }
         breadcrumbs={crumbs}
         contentReady={!isLoading}
       />
@@ -71,7 +83,9 @@ export default function CaseStudyDetail() {
       ) : study ? (
         <>
           <article>
-            <header className="case-detail-hero text-white">
+            <header
+              className={`case-detail-hero text-white${study.video ? " case-detail-hero--video" : ""}`}
+            >
               <Breadcrumbs items={crumbs} tone="dark" />
               <div className="db-container case-detail-hero__inner">
                 <div className="case-detail-hero__copy">
@@ -86,25 +100,43 @@ export default function CaseStudyDetail() {
                     {study.summary}
                   </p>
                 </div>
+                {study.video ? <CaseVideoPlayer study={study} /> : null}
                 <dl className="case-detail-hero__facts grid grid-cols-2 border-y border-white/22 text-sm">
-                  <div className="py-5 pr-4">
-                    <dt className="flex items-center gap-2 text-white/70">
-                      <MapPin className="h-4 w-4" />
-                      地區
-                    </dt>
-                    <dd className="mt-2 font-black text-white">
-                      {study.district}
-                    </dd>
-                  </div>
-                  <div className="border-l border-white/22 py-5 pl-5">
-                    <dt className="flex items-center gap-2 text-white/70">
-                      <CalendarDays className="h-4 w-4" />
-                      工程日期
-                    </dt>
-                    <dd className="mt-2 font-black text-white">
-                      {formatCaseDate(study.projectDate)}
-                    </dd>
-                  </div>
+                  {study.district ? (
+                    <div className="py-5 pr-4">
+                      <dt className="flex items-center gap-2 text-white/70">
+                        <MapPin className="h-4 w-4" />
+                        地區
+                      </dt>
+                      <dd className="mt-2 font-black text-white">
+                        {study.district}
+                      </dd>
+                    </div>
+                  ) : null}
+                  {study.projectDate ? (
+                    <div className="border-l border-white/22 py-5 pl-5">
+                      <dt className="flex items-center gap-2 text-white/70">
+                        <CalendarDays className="h-4 w-4" />
+                        工程日期
+                      </dt>
+                      <dd className="mt-2 font-black text-white">
+                        {formatCaseDate(study.projectDate)}
+                      </dd>
+                    </div>
+                  ) : null}
+                  {study.publishedAt ? (
+                    <div className="py-5 pr-4">
+                      <dt className="flex items-center gap-2 text-white/70">
+                        <CalendarDays className="h-4 w-4" aria-hidden="true" />
+                        紀錄發布
+                      </dt>
+                      <dd className="mt-2 font-black text-white">
+                        <time dateTime={study.publishedAt}>
+                          {formatCaseDate(study.publishedAt.slice(0, 10))}
+                        </time>
+                      </dd>
+                    </div>
+                  ) : null}
                   {study.arrivalMinutes ? (
                     <div className="border-t border-white/22 py-5 pr-4">
                       <dt className="flex items-center gap-2 text-white/70">
@@ -131,7 +163,7 @@ export default function CaseStudyDetail() {
               </div>
             </header>
 
-            {study.coverImage?.url ? (
+            {!study.video && study.coverImage?.url ? (
               <figure className="db-container py-10">
                 <img
                   src={study.coverImage.url}
@@ -152,10 +184,31 @@ export default function CaseStudyDetail() {
 
             <div className="db-container grid gap-12 py-10 md:py-16 lg:grid-cols-[minmax(0,1fr)_18rem]">
               <div className="space-y-12">
+                {study.video ? (
+                  <section
+                    className="case-video-transcript"
+                    aria-labelledby="case-video-transcript-heading"
+                  >
+                    <h2
+                      id="case-video-transcript-heading"
+                      className="text-2xl font-black text-[var(--db-ink)]"
+                    >
+                      影片文字紀錄
+                    </h2>
+                    <ol>
+                      {study.video.chapters.map(chapter => (
+                        <li key={chapter.start}>
+                          <span>{formatVideoDuration(chapter.start)}</span>
+                          <p>{chapter.text}</p>
+                        </li>
+                      ))}
+                    </ol>
+                  </section>
+                ) : null}
                 {[
-                  ["現場問題", study.problem],
+                  [study.video ? "現場情況" : "現場問題", study.problem],
                   ["施工內容", study.workPerformed],
-                  ["完成結果", study.result],
+                  [study.video ? "影片所見" : "完成結果", study.result],
                 ].map(([heading, text]) => (
                   <section
                     key={heading}
@@ -195,6 +248,11 @@ export default function CaseStudyDetail() {
                     </div>
                   ) : null}
                 </dl>
+                {study.servicePath ? (
+                  <Link href={study.servicePath} className="db-arrow-link mt-5">
+                    了解{study.serviceLabel}
+                  </Link>
+                ) : null}
                 <p className="mt-7 text-xs leading-6 text-[var(--db-copy)]">
                   此紀錄只代表該次工程。到達時間、施工方法及結果受現場條件影響，不構成其他個案的保證。
                 </p>

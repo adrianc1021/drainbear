@@ -6,6 +6,7 @@ import { existsSync } from "node:fs";
 import { chromium } from "playwright";
 import { SERVICE_SLUGS, DISTRICT_SLUGS } from "../shared/publicRoutes.ts";
 import { enableCmsRelay } from "./browser-cms-relay.ts";
+import { RECORDED_VIDEO_CASES } from "../shared/recordedVideoCases.ts";
 
 const output = process.env.SITE_QUALITY_OUTPUT || "/tmp/drainbear-site-quality";
 const axePath = process.env.AXE_CORE_PATH;
@@ -27,6 +28,7 @@ const routes = [
   "/cases",
   ...SERVICE_SLUGS.map(slug => `/services/${slug}`),
   ...DISTRICT_SLUGS.map(slug => `/areas/${slug}`),
+  ...RECORDED_VIDEO_CASES.map(study => `/cases/${study.slug}`),
 ];
 const visualRoutes = [
   "/",
@@ -42,6 +44,7 @@ const visualRoutes = [
   "/services/cctv-drain-inspection",
   "/areas/kwun-tong",
   "/areas/tai-po",
+  `/cases/${RECORDED_VIDEO_CASES[0].slug}`,
 ];
 // Read current public records; exercise article and case templates without fixtures.
 const endpoint = new URL(

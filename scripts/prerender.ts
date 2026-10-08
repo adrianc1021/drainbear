@@ -3,6 +3,8 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { chromium, type Page } from "playwright";
 import { DISTRICT_SLUGS, SERVICE_SLUGS } from "../shared/publicRoutes";
+import { RECORDED_VIDEO_CASES } from "../shared/recordedVideoCases";
+import { writeVideoSitemap } from "./video-artifacts";
 import { enableCmsRelay, isLocalOrigin } from "./browser-cms-relay";
 import { assessPrerenderSnapshot } from "./prerender-readiness";
 import { writeAeoArtifacts, type AeoSnapshot } from "./aeo-artifacts";
@@ -91,7 +93,7 @@ interface SanityBlogEntry {
 interface PublishedCaseEntry {
   slug: string;
   lastmod?: string;
-  source: "sanity";
+  source: "sanity" | "recorded-video";
 }
 
 interface SanityCaseEntry {
@@ -429,10 +431,18 @@ async function prerender() {
 
   // A stale sitemap cannot prove that newly published URLs are accounted for.
   // Both CMS queries must succeed before modifying artifacts or rendering.
-  const [publishedBlogEntries, caseEntries] = await Promise.all([
+  const [publishedBlogEntries, sanityCaseEntries] = await Promise.all([
     loadPublishedSanityBlogs(),
     loadPublishedSanityCases(),
   ]);
+  const caseEntries: PublishedCaseEntry[] = [
+    ...RECORDED_VIDEO_CASES.map(study => ({
+      slug: study.slug,
+      lastmod: normalizeDate(study.publishedAt),
+      source: "recorded-video" as const,
+    })),
+    ...sanityCaseEntries,
+  ];
   const blogEntries = mergeBlogEntries(publishedBlogEntries);
 
   // Vite has just created dist/public. Do not remove it here,
@@ -480,7 +490,7 @@ async function prerender() {
     `Found ${publishedBlogEntries.length} published blog article(s) via Sanity.`
   );
   console.log(
-    `Found ${caseEntries.length} published case study/studies via Sanity.`
+    `Found ${sanityCaseEntries.length} CMS cases and ${RECORDED_VIDEO_CASES.length} reviewed video records.`
   );
 
   const server = spawn(process.execPath, ["dist/index.js"], {
@@ -681,6 +691,7 @@ async function prerender() {
 
     await context.close();
     await updateSitemap(blogEntries, caseEntries);
+    await writeVideoSitemap(OUTPUT_ROOT);
     if (!ALLOW_STALE_CMS)
       await writeAeoArtifacts(aeoSnapshots, SITE_URL, OUTPUT_ROOT);
 
