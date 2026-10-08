@@ -1,504 +1,98 @@
-/**
- * 通渠熊 DrainBear — 專業服務
- * 區塊 1：Z-Pattern 交替圖文（四大服務）
- * 區塊 2：細分服務範疇（SEO 關鍵字覆蓋）｜區塊 3：4 步解除危機（橫向流程圖）
- */
-import {
-  Home as HomeIcon,
-  Building2,
-  Waves,
-  Video,
-  MessageCircle,
-  Search,
-  Wrench,
-  Sparkles,
-  ArrowRight,
-  Droplets,
-  Bath,
-  UtensilsCrossed,
-  CircleAlert,
-  ClipboardCheck,
-} from "lucide-react";
-import { Link } from "wouter";
-import { WhatsAppButton } from "@/components/Layout";
-import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import GhostFibers from "@/components/GhostFibers/GhostFibers";
+import CustomerPaths from "@/components/CustomerPaths";
+import SEO from "@/components/SEO";
+import ServiceDirectory from "@/components/ServiceDirectory";
 import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
 import { BUSINESS_ID, SITE_URL } from "@/config/site";
-import { useContactSettings } from "@/contexts/SiteSettingsContext";
-import {
-  trackCTA,
-  goThanksAfterWhatsApp,
-  trackNavClick,
-} from "@/lib/analytics";
 import { SERVICE_PAGES } from "@/lib/serviceData";
-import { prefetchRoute } from "@/lib/routePrefetch";
-import { cloudinaryImageSrcSet, cloudinaryImageUrl } from "@/lib/cloudinary";
+import { ArrowRight } from "lucide-react";
+import { Link } from "wouter";
 
-const SERVICES_CRUMBS = [
+const CRUMBS = [
   { name: "首頁", path: "/" },
   { name: "通渠服務", path: "/services" },
 ];
-
-const SERVICES = [
-  {
-    icon: HomeIcon,
-    tag: "RESIDENTIAL",
-    title: "住宅通渠急救",
-    desc: "針對一般家庭的廚房星盆、浴室去水位及座廁淤塞，專業手搖泵極速打通，過程注重家居保護，完工包清理，還原企理現場。",
-    img: "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A1_vyqcil.png",
-    wa: "您好，我想查詢住宅通渠服務報價。",
-  },
-  {
-    icon: Building2,
-    tag: "COMMERCIAL",
-    title: "商業重型通渠",
-    desc: "專治食肆隔油池爆滿、大廈主渠倒灌等重型工程。配備工業級設備及大型吸車，將營業損失減至最低，深夜施工亦可安排。",
-    img: "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A2_onju5z.png",
-    wa: "您好，我想查詢商業重型通渠服務報價。",
-  },
-  {
-    icon: Waves,
-    tag: "高壓水槍洗渠",
-    title: "高壓水槍洗渠",
-    desc: "按喉管物料、入口及沉積物狀況評估高壓水槍，處理油垢、沉積物及部分硬化物，工程後測試排水情況。",
-    img: "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A3_fyozug.png",
-    wa: "您好，我想查詢高壓水槍洗渠服務報價。",
-  },
-  {
-    icon: Video,
-    tag: "CCTV 照喉檢測",
-    title: "CCTV 照喉檢測",
-    desc: "高清防水鏡頭深入喉管探測，精準定位淤塞物及破損位置，科學斷症、有片有真相，杜絕盲猜式維修及不必要的換喉工程。",
-    img: "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A4_hiufrh.png",
-    wa: "您好，我想查詢 CCTV 照喉檢測服務報價。",
-  },
-];
-
-const DETAIL_GROUPS = [
-  {
-    heading: "住宅特急通渠",
-    intro:
-      "廁所水倒灌？企缸去水慢？我們深知家居塞渠的煩惱，專注各類住宅通渠及屋苑水管維修，承諾絕不弄髒您的家居。",
-    items: [
-      {
-        icon: CircleAlert,
-        title: "坐廁及馬桶淤塞",
-        desc: "針對硬物掉入或紙巾淤塞，按現場情況評估高壓氣泵等工具，盡量減少拆裝。",
-      },
-      {
-        icon: UtensilsCrossed,
-        title: "廚房鋅盤去水慢",
-        desc: "針對 U 型喉管內積聚的豬油膏及廚餘殘渣，按範圍選擇合適方法清理。",
-      },
-      {
-        icon: Bath,
-        title: "企缸及浴缸通渠",
-        desc: "解決頭髮及番梘垢導致的水浸問題，回復爽快去水速度。",
-      },
-      {
-        icon: Droplets,
-        title: "隔氣及喉管漏水",
-        desc: "精準檢查隔氣老化或接駁位滴水，提供即時防漏維修。",
-      },
-    ],
-  },
-  {
-    heading: "商業重型通渠",
-    intro:
-      "營業場所塞渠等同停業！專為食肆、商場及物業提供高強度商業通渠，配備工業級設備，將對營業的影響減至最低。",
-    items: [
-      {
-        icon: UtensilsCrossed,
-        title: "食肆隔油池清理",
-        desc: "應付大量高濃度油污，提供定期抽油及清洗服務。",
-      },
-      {
-        icon: Waves,
-        title: "德國高壓洗渠車",
-        desc: "按喉管狀況評估高壓水力，處理管壁油垢、沉積物及部分硬化物。",
-      },
-      {
-        icon: Building2,
-        title: "大廈沙井及主渠",
-        desc: "重型設備應對沙井滿瀉、樹根纏繞及主渠倒灌。",
-      },
-      {
-        icon: Video,
-        title: "CCTV 管道探測報告",
-        desc: "微型鏡頭深入探測暗漏及破損，提供影像分析作工程依據。",
-      },
-    ],
-  },
-];
-
-const SERVICE_SCHEMA_IDS = [
-  "residential-drain-unblocking",
-  "commercial-drain-cleaning",
-  "high-pressure-water-jetting",
-  "cctv-drain-inspection",
-];
-
-const SERVICES_JSONLD = SERVICES.map((service, index) => ({
+const SERVICES_JSONLD = {
   "@context": "https://schema.org",
-  "@type": "Service",
-  "@id": `${SITE_URL}/services#${SERVICE_SCHEMA_IDS[index]}`,
-  name: service.title,
-  serviceType: service.title,
-  description: service.desc,
-  url: `${SITE_URL}/services`,
-  provider: {
-    "@id": BUSINESS_ID,
-  },
-  areaServed: ["香港島", "九龍", "新界", "離島"],
-}));
-
-const STEPS = [
-  {
-    icon: MessageCircle,
-    step: "01",
-    title: "WhatsApp 報價",
-    desc: "透過相片或短片描述情況，取得初步估價",
-  },
-  {
-    icon: Search,
-    step: "02",
-    title: "到場檢查及確認",
-    desc: "師傅到場了解實際情況，評估處理方法並確認最終收費",
-  },
-  {
-    icon: Wrench,
-    step: "03",
-    title: "專業施工",
-    desc: "確認報價後開始工程；合資格項目按已確認條款處理",
-  },
-  {
-    icon: Sparkles,
-    step: "04",
-    title: "清理現場",
-    desc: "完工後測試去水，整理受工程影響的施工位置",
-  },
-];
-
+  "@type": "ItemList",
+  name: "通渠熊通渠服務",
+  itemListElement: SERVICE_PAGES.map((service, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type": "Service",
+      "@id": `${SITE_URL}/services/${service.slug}#service`,
+      name: service.name,
+      url: `${SITE_URL}/services/${service.slug}`,
+      provider: { "@id": BUSINESS_ID },
+    },
+  })),
+};
 export default function Services() {
-  const { whatsappHref } = useContactSettings();
   return (
-    <div className="phase4-services" data-phase4-page="services">
+    <div className="services-page">
       <SEO
         title="通渠服務｜住宅通渠・食肆隔油池・高壓水槍洗渠・CCTV 照喉｜通渠熊 DrainBear"
-        description="通渠熊提供住宅及商業通渠服務，涵蓋座廁、企缸、廚房鋅盤、食肆隔油池、大廈主渠、高壓水槍洗渠及 CCTV 照喉檢測。24 小時接受查詢，先確認收費後開始工程；合資格項目按已確認條款處理。"
+        description="坐廁、鋅盤、浴室去水慢，或食肆隔油池、大廈主渠淤塞？按問題查看通渠方法、收費因素及注意事項。通渠熊24小時接受查詢，現場確認報價後才動工。"
         path="/services"
-        keywords="通渠服務, 塞廁所, 企缸塞, 廚房去水慢, 隔油池清理, 高壓水槍洗渠, CCTV照喉, 沙井疏通, 24小時通渠"
+        breadcrumbs={CRUMBS}
         jsonLd={SERVICES_JSONLD}
-        breadcrumbs={SERVICES_CRUMBS}
       />
-      {/* 頁首 */}
-      <div className="phase4-services__hero-shell">
-        <GhostFibers
-          className="phase4-services__fibers"
-          lineColor="#8ed8f4"
-          glowColor="#176da5"
-          backgroundColor="#003566"
-          speed={0.055}
-          scale={2.8}
-          rotationSpeed={0.035}
-          layers={3}
-          glowIntensity={0.45}
-          brightness={0.72}
-          grain={0.008}
-          fps={18}
-        />
-        <Breadcrumbs items={SERVICES_CRUMBS} tone="dark" />
+      <div className="site-hero-shell">
+        <Breadcrumbs items={CRUMBS} tone="dark" />
         <EditorialPageHero
-          kicker="專業服務"
-          title={
-            <>
-              全方位通渠服務，
-              <br />
-              因應現場選擇方案
-            </>
-          }
-          description="由一般住宅淤塞到商業主渠工程，團隊會先了解管道結構、淤塞程度及現場環境，再建議合適設備與處理方向。"
-          media={{
-            src: "/images/home-drain-technician-wide.jpg",
-            alt: "通渠師傅在現場檢查排水管道",
-            caption: "服務示意圖・實際處理方法按現場確認",
-          }}
-          actions={
-            <WhatsAppButton
-              className="phase4-primary-action"
-              label="WhatsApp 查詢報價"
-              trackLocation="services_hero"
-            />
-          }
-          className="phase4-services__hero"
-          fibers={false}
+          kicker="住宅 · 食肆 · 物業渠務"
+          title="通渠服務，按問題選擇"
+          description="塞廁所同主渠倒灌，處理方法並不一樣。先看受影響位置，再了解合適工具、報價因素及施工安排。"
+          contactLocation="services_hero"
         />
       </div>
-
-      <section className="services-tools border-y border-border bg-mist py-8">
-        <div className="container grid gap-4 md:grid-cols-2">
-          <Link
-            href="/drain-diagnosis"
-            onMouseEnter={() => prefetchRoute("/drain-diagnosis")}
-            onFocus={() => prefetchRoute("/drain-diagnosis")}
-            onTouchStart={() => prefetchRoute("/drain-diagnosis")}
-            onClick={() =>
-              trackNavClick("cta", {
-                cta_location: "services_decision_tools",
-                cta_label: "渠務問題快速判斷",
-                destination_url: "/drain-diagnosis",
-              })
-            }
-            className="group flex min-h-[112px] items-center gap-5 rounded-lg border border-border bg-white px-6 py-5 transition hover:border-navy/35 hover:shadow-md"
-          >
-            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-wagreen/15 text-wagreen-dark">
-              <Search className="h-5 w-5" />
-            </span>
-            <span className="min-w-0">
-              <span className="block font-display text-lg font-black text-navy">
-                不確定問題在哪裏？
-              </span>
-              <span className="mt-1 block text-sm leading-relaxed text-muted-foreground">
-                按位置及症狀取得初步處理方向
-              </span>
-            </span>
-            <ArrowRight className="ml-auto h-5 w-5 shrink-0 text-navy/35 transition-transform group-hover:translate-x-1" />
-          </Link>
-
-          <Link
-            href="/service-process"
-            onMouseEnter={() => prefetchRoute("/service-process")}
-            onFocus={() => prefetchRoute("/service-process")}
-            onTouchStart={() => prefetchRoute("/service-process")}
-            onClick={() =>
-              trackNavClick("navigation", {
-                cta_location: "services_decision_tools",
-                cta_label: "上門服務與報價原則",
-                destination_url: "/service-process",
-              })
-            }
-            className="group flex min-h-[112px] items-center gap-5 rounded-lg border border-border bg-white px-6 py-5 transition hover:border-navy/35 hover:shadow-md"
-          >
-            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-safety/10 text-safety">
-              <ClipboardCheck className="h-5 w-5" />
-            </span>
-            <span className="min-w-0">
-              <span className="block font-display text-lg font-black text-navy">
-                報價及施工如何確認？
-              </span>
-              <span className="mt-1 block text-sm leading-relaxed text-muted-foreground">
-                查看上門檢查、報價及施工流程
-              </span>
-            </span>
-            <ArrowRight className="ml-auto h-5 w-5 shrink-0 text-navy/35 transition-transform group-hover:translate-x-1" />
-          </Link>
-        </div>
-      </section>
-
-      {/* 區塊 1：Z-Pattern 交替圖文 */}
-      <section className="services-stories bg-white pb-8">
-        <div className="container flex flex-col gap-20 py-10 md:gap-28">
-          {SERVICES.map((s, i) => (
-            <div
-              key={s.title}
-              className={`grid items-center gap-10 lg:grid-cols-2 lg:gap-16 ${
-                i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""
-              }`}
-            >
-              {/* 圖 */}
-              <div className="relative">
-                <div
-                  className={`pointer-events-none absolute -inset-4 rounded-[20px] blur-xl ${
-                    i % 2 === 0
-                      ? "bg-gradient-to-br from-navy/8 to-wagreen/10"
-                      : "bg-gradient-to-bl from-wagreen/10 to-navy/8"
-                  }`}
-                />
-                <img
-                  src={cloudinaryImageUrl(s.img, 960)}
-                  srcSet={cloudinaryImageSrcSet(s.img)}
-                  alt={s.title}
-                  width="1200"
-                  height="800"
-                  sizes="(min-width: 1024px) 50vw, (min-width: 640px) 90vw, 100vw"
-                  loading="lazy"
-                  decoding="async"
-                  className="relative w-full rounded-2xl object-cover shadow-[0_16px_48px_rgba(11,19,43,0.16)]"
-                />
-              </div>
-              {/* 文 */}
-              <div className={i % 2 === 1 ? "lg:pr-8" : "lg:pl-8"}>
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-mist px-4 py-1.5 text-xs font-bold tracking-[0.15em] text-navy/60">
-                  <s.icon
-                    className="h-3.5 w-3.5 text-wagreen"
-                    strokeWidth={2.5}
-                  />
-                  {s.tag}
-                </div>
-                <h2 className="font-display text-2xl font-black text-navy md:text-3xl">
-                  {s.title}
-                </h2>
-                <p className="mt-4 leading-relaxed text-muted-foreground">
-                  {s.desc}
-                </p>
-                <a
-                  href={whatsappHref(s.wa)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => {
-                    trackCTA("whatsapp", "services_section", s.title);
-                    goThanksAfterWhatsApp("services_section");
-                  }}
-                  className="btn-smooth mt-6 inline-flex items-center gap-1.5 text-sm font-bold text-wagreen-dark hover:gap-2.5"
-                >
-                  WhatsApp 查詢報價
-                  <ArrowRight className="h-4 w-4" />
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="services-directory border-y border-border bg-white py-16 md:py-20">
+      <section className="brand-section" aria-labelledby="services-heading">
         <div className="container">
-          <div className="mx-auto max-w-2xl text-center">
-            <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">
-              服務指南
+          <div className="section-heading">
+            <div>
+              <p className="brand-eyebrow">八項服務</p>
+              <h2 id="services-heading">找到相應的處理方法</h2>
             </div>
-            <h2 className="font-display text-3xl font-black text-navy md:text-4xl">
-              按問題查看處理方法
-            </h2>
-            <p className="mt-4 text-muted-foreground">
-              了解常見症狀、處理流程及施工前的準備事項，再決定下一步。
-            </p>
+            <Link href="/drain-diagnosis">
+              未確定問題在哪裏？
+              <ArrowRight aria-hidden="true" />
+            </Link>
           </div>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-            {SERVICE_PAGES.map(service => (
-              <Link
-                key={service.slug}
-                href={`/services/${service.slug}`}
-                onClick={() =>
-                  trackNavClick("service", {
-                    cta_location: "services_guides",
-                    cta_label: service.shortName,
-                    service_name: service.slug,
-                    destination_url: `/services/${service.slug}`,
-                  })
-                }
-                className="group rounded-xl border border-border bg-mist/45 p-5 transition hover:-translate-y-1 hover:border-wagreen/50 hover:bg-white hover:shadow-lg"
-              >
-                <span className="text-[10px] font-bold tracking-[0.13em] text-safety">
-                  {service.eyebrow}
-                </span>
-                <h3 className="mt-2 font-display text-base font-black text-navy">
-                  {service.name}
-                </h3>
-                <span className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-wagreen-dark">
-                  查看詳情
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </span>
-              </Link>
-            ))}
-          </div>
+          <ServiceDirectory location="services_directory" />
         </div>
       </section>
-
-      {/* 區塊 2：細分服務範疇 */}
-      <section className="services-scope bg-mist py-20 md:py-24">
+      <section
+        className="brand-section brand-section--soft"
+        aria-labelledby="services-customers"
+      >
         <div className="container">
-          <div className="text-center">
-            <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">
-              服務範圍
+          <div className="section-heading">
+            <div>
+              <p className="brand-eyebrow">按場所查詢</p>
+              <h2 id="services-customers">你的場所，需要甚麼安排？</h2>
             </div>
-            <h2 className="text-balance font-display text-3xl font-black text-navy md:text-4xl">
-              服務範疇一覽
-            </h2>
-            <p className="mx-auto mt-4 max-w-lg text-muted-foreground">
-              專業排水工程與物業維護，由家居小問題到大廈主渠工程，一一涵蓋。
-            </p>
           </div>
-          <div className="mt-12 grid gap-8 lg:grid-cols-2">
-            {DETAIL_GROUPS.map(g => (
-              <div
-                key={g.heading}
-                className="card-float rounded-lg bg-white p-8"
-              >
-                <h3 className="font-display text-xl font-black text-navy">
-                  {g.heading}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {g.intro}
-                </p>
-                <div className="mt-6 grid gap-5 sm:grid-cols-2">
-                  {g.items.map(it => (
-                    <div key={it.title} className="flex items-start gap-3">
-                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-wagreen/10 text-wagreen-dark">
-                        <it.icon
-                          className="h-4.5 w-4.5 h-[18px] w-[18px]"
-                          strokeWidth={2.2}
-                        />
-                      </div>
-                      <div>
-                        <h4 className="text-sm font-bold text-navy">
-                          {it.title}
-                        </h4>
-                        <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                          {it.desc}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
+          <CustomerPaths />
         </div>
       </section>
-
-      {/* 區塊 3：4 步解除危機 */}
-      <section className="services-process bg-navy py-20 md:py-24">
-        <div className="container">
-          <div className="text-center">
-            <div className="mb-3 text-xs font-bold tracking-[0.2em] text-wagreen">
-              服務流程
-            </div>
-            <h2 className="text-balance font-display text-3xl font-black text-white md:text-4xl">
-              由查詢至完成的四個步驟
-            </h2>
-            <p className="mx-auto mt-4 max-w-lg text-white/55">
-              流程簡單透明，由報價到完工清潔，每一步都清晰明確。
+      <section className="brand-section" aria-labelledby="services-tools">
+        <div className="container answer-panel">
+          <div>
+            <p className="brand-eyebrow">工具與檢查</p>
+            <h2 id="services-tools">反覆塞渠，要再查原因</h2>
+          </div>
+          <div>
+            <p>
+              短暫疏通後很快再塞，可能涉及較長管段積垢或管道問題。CCTV
+              照喉可協助查看管內狀況；高壓水槍是否合適，要按管道物料、入口及現場條件判斷。
             </p>
-          </div>
-          <div className="relative mt-14 grid gap-10 md:grid-cols-4 md:gap-6">
-            {/* 連接線 */}
-            <div className="absolute left-[12%] right-[12%] top-8 hidden h-px bg-gradient-to-r from-wagreen/60 via-white/25 to-wagreen/60 md:block" />
-            {STEPS.map(st => (
-              <div
-                key={st.step}
-                className="relative flex flex-col items-center text-center"
-              >
-                <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-lg bg-white/8 ring-1 ring-white/20 backdrop-blur">
-                  <st.icon className="h-7 w-7 text-wagreen" strokeWidth={2} />
-                </div>
-                <div className="mt-4 font-display text-xs font-extrabold tracking-[0.25em] text-safety">
-                  步驟 {st.step}
-                </div>
-                <h3 className="mt-2 font-display text-lg font-bold text-white">
-                  {st.title}
-                </h3>
-                <p className="mt-1.5 text-sm text-white/55">{st.desc}</p>
-              </div>
-            ))}
-          </div>
-          <div className="mt-14 flex justify-center">
-            <WhatsAppButton
-              className="px-8 py-4 text-base"
-              label="開始服務查詢"
-              trackLocation="services_footer_cta"
-            />
+            <nav className="related-inline" aria-label="進一步檢查及報價">
+              <Link href="/services/cctv-drain-inspection">CCTV 照喉</Link>
+              <Link href="/services/high-pressure-jetting">高壓水槍</Link>
+              <Link href="/guide">收費參考</Link>
+              <Link href="/service-process">上門流程</Link>
+            </nav>
           </div>
         </div>
       </section>

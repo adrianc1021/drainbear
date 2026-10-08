@@ -4,6 +4,10 @@ import { type Server } from "http";
 import { nanoid } from "nanoid";
 import path from "path";
 import { createServer as createViteServer } from "vite";
+import {
+  DISTRICT_SLUGS as DISTRICT_ROUTE_SLUGS,
+  SERVICE_SLUGS,
+} from "../../shared/publicRoutes";
 import viteConfig from "../../vite.config";
 
 const STATIC_PUBLIC_ROUTES = new Set([
@@ -20,26 +24,8 @@ const STATIC_PUBLIC_ROUTES = new Set([
   "/404",
 ]);
 
-const DISTRICT_SLUGS = new Set([
-  "kwun-tong",
-  "sha-tin",
-  "mong-kok",
-  "sham-shui-po",
-  "causeway-bay",
-  "north-point",
-  "tsuen-wan",
-  "yuen-long",
-  "tuen-mun",
-  "tseung-kwan-o",
-  "central-western",
-  "southern",
-  "kowloon-city",
-  "kwai-tsing",
-  "wong-tai-sin",
-  "islands",
-  "north-district",
-  "tai-po",
-]);
+const DISTRICT_SLUGS = new Set<string>(DISTRICT_ROUTE_SLUGS);
+const SERVICE_ROUTE_SLUGS = new Set<string>(SERVICE_SLUGS);
 
 interface RouteManifest {
   routes?: string[];
@@ -60,7 +46,7 @@ function getTrailingSlashRedirect(url: string, pathname: string) {
   return `${pathname}${url.slice(rawPathname.length)}`;
 }
 
-function isStaticPublicRoute(urlPath: string) {
+export function isStaticPublicRoute(urlPath: string) {
   const pathname = normalizePath(urlPath);
 
   if (STATIC_PUBLIC_ROUTES.has(pathname)) {
@@ -68,6 +54,9 @@ function isStaticPublicRoute(urlPath: string) {
   }
 
   const districtMatch = pathname.match(/^\/areas\/([a-z0-9-]+)$/);
+  const serviceMatch = pathname.match(/^\/services\/([a-z0-9-]+)$/);
+
+  if (serviceMatch) return SERVICE_ROUTE_SLUGS.has(serviceMatch[1]);
 
   return districtMatch ? DISTRICT_SLUGS.has(districtMatch[1]) : false;
 }
@@ -130,8 +119,12 @@ export async function setupVite(app: Express, server: Server) {
     allowedHosts: true as const,
   };
 
+  const projectConfig =
+    typeof viteConfig === "function"
+      ? await viteConfig({ command: "serve", mode: "development" })
+      : await viteConfig;
   const vite = await createViteServer({
-    ...viteConfig,
+    ...projectConfig,
     configFile: false,
     server: serverOptions,
     appType: "custom",
@@ -202,16 +195,22 @@ export function serveStatic(app: Express) {
       index: false,
       redirect: false,
       setHeaders(res, filePath) {
-        const relativeFile = path.relative(distPath, filePath).split(path.sep).join("/");
+        const relativeFile = path
+          .relative(distPath, filePath)
+          .split(path.sep)
+          .join("/");
         // Vite changes this URL whenever content changes, so returning visitors
         // can reuse bundles without revalidation. Never apply this to HTML or
         // replaceable public images, which must pick up the next deployment.
-        const fingerprintedAsset = /^assets\/.+-[\w-]{8,}\.(?:js|css|woff2?|ttf|otf|png|jpe?g|webp|avif|svg)$/i.test(relativeFile);
+        const fingerprintedAsset =
+          /^assets\/.+-[\w-]{8,}\.(?:js|css|woff2?|ttf|otf|png|jpe?g|webp|avif|svg)$/i.test(
+            relativeFile
+          );
         res.setHeader(
           "Cache-Control",
           fingerprintedAsset
             ? "public, max-age=31536000, immutable"
-            : "public, max-age=0, must-revalidate",
+            : "public, max-age=0, must-revalidate"
         );
       },
     })

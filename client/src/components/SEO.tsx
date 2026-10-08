@@ -2,8 +2,8 @@
  * 通渠熊 DrainBear — SEO 元件
  * 每頁獨立 title / description / canonical / Open Graph / JSON-LD
  */
-import { useEffect } from "react";
 import { useSiteSettings } from "@/contexts/SiteSettingsContext";
+import { useEffect } from "react";
 
 function setMeta(attr: "name" | "property", key: string, content: string) {
   let element = document.head.querySelector<HTMLMetaElement>(
@@ -121,7 +121,6 @@ export default function SEO({
     );
     if (!contentReady) {
       document.documentElement.dataset.seoReady = "false";
-      return;
     }
 
     const cleanPath = path.split(/[?#]/)[0] || "/";
@@ -208,8 +207,7 @@ export default function SEO({
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": "LocalBusiness",
-          additionalType: "https://schema.org/HomeAndConstructionBusiness",
+          "@type": "Plumber",
           "@id": `${siteUrl}/#organization`,
           name: settings.businessName,
           alternateName: ["通渠熊", "DrainBear"],
@@ -224,7 +222,6 @@ export default function SEO({
             settings.defaultOgImage?.url || "/favicon-512x512.png"
           ),
           description: settings.businessDescription,
-          serviceType: "住宅及商業通渠服務",
           telephone: settings.phoneE164,
           contactPoint: {
             "@type": "ContactPoint",
@@ -259,6 +256,18 @@ export default function SEO({
       ],
     });
 
+    setJsonLd("jsonld-webpage", {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": `${pageUrl}#webpage`,
+      url: pageUrl,
+      name: title,
+      description,
+      inLanguage: "zh-Hant-HK",
+      isPartOf: { "@id": `${siteUrl}/#website` },
+      about: { "@id": `${siteUrl}/#organization` },
+    });
+
     if (jsonLd) {
       setJsonLd("jsonld-page", jsonLd);
     } else {
@@ -283,7 +292,7 @@ export default function SEO({
     // Visitors get complete fallback metadata immediately. Prerender must wait
     // until the CMS has resolved so canonical/noindex overrides are not lost.
     document.documentElement.dataset.seoReady = String(
-      metadataReady && !isSiteSettingsLoading
+      contentReady && metadataReady && !isSiteSettingsLoading
     );
   }, [
     title,
@@ -304,6 +313,7 @@ export default function SEO({
     type,
     breadcrumbs,
     noindex,
+    nofollow,
     settings,
   ]);
 

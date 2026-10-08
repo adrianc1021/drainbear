@@ -1,3 +1,7 @@
+import Breadcrumbs from "@/components/Breadcrumbs";
+import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
+import { WhatsAppButton } from "@/components/Layout";
+import SEO from "@/components/SEO";
 import {
   ArrowRight,
   BadgeCheck,
@@ -10,10 +14,6 @@ import {
   Wrench,
 } from "lucide-react";
 import { Link } from "wouter";
-import Breadcrumbs from "@/components/Breadcrumbs";
-import { WhatsAppButton } from "@/components/Layout";
-import SEO from "@/components/SEO";
-import GhostFibers from "@/components/GhostFibers/GhostFibers";
 
 const CRUMBS = [
   { name: "首頁", path: "/" },
@@ -106,39 +106,15 @@ export default function ServiceProcess() {
         jsonLd={PAGE_JSON_LD}
       />
       <div>
-        <section className="relative isolate overflow-hidden border-b border-border bg-navy py-14 text-white md:py-20">
-          <GhostFibers
-            className="site-page-hero__fibers"
-            lineColor="#8ed8f4"
-            glowColor="#176da5"
-            backgroundColor="#003566"
-            speed={0.055}
-            scale={2.8}
-            rotationSpeed={0.035}
-            layers={3}
-            glowIntensity={0.45}
-            brightness={0.72}
-            grain={0.008}
-            fps={18}
-          />
+        <div className="site-hero-shell">
           <Breadcrumbs items={CRUMBS} tone="dark" />
-          <div className="container relative z-10 grid gap-10 pt-6 lg:grid-cols-[1fr_0.55fr] lg:items-end">
-            <div>
-              <p className="text-xs font-bold tracking-[0.18em] text-wagreen">
-                服務標準
-              </p>
-              <h1 className="mt-3 max-w-4xl text-balance font-display text-4xl font-black md:text-5xl">
-                上門服務如何安排，報價如何確認
-              </h1>
-              <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/70 md:text-lg">
-                通渠熊是上門服務商家，不設門市接待。由初步了解、現場檢查到動工前確認總價，每一步都應有清楚界線。
-              </p>
-            </div>
-            <div className="border-l-4 border-safety bg-white/8 px-5 py-4 text-sm leading-relaxed text-white/75">
-              相片或短片只能協助初步判斷。管內堵塞位置、喉管狀況及實際施工條件，仍要在現場確認。
-            </div>
-          </div>
-        </section>
+          <EditorialPageHero
+            kicker="上門服務流程"
+            title="上門流程與報價安排"
+            description="提供地區與現場相片，確認上門時間。師傅到場檢查後說明處理方法及總價，雙方確認才動工。"
+            contactLocation="serviceprocess_hero"
+          />
+        </div>
 
         <section className="py-16 md:py-20">
           <div className="container">
@@ -158,7 +134,7 @@ export default function ServiceProcess() {
                 >
                   <div className="flex items-center justify-between">
                     <item.icon className="h-6 w-6 text-wagreen-dark" />
-                    <span className="font-display text-xs font-black tracking-[0.16em] text-navy/35">
+                    <span className="font-display text-xs font-black tracking-[0.16em] text-muted-foreground">
                       0{index + 1}
                     </span>
                   </div>
@@ -286,7 +262,7 @@ export default function ServiceProcess() {
                   </Link>
                   <dl className="mt-5 grid gap-4">
                     <div>
-                      <dt className="text-xs font-bold tracking-[0.12em] text-navy/55">
+                      <dt className="text-xs font-bold tracking-[0.12em] text-muted-foreground">
                         主要目的
                       </dt>
                       <dd className="mt-1 leading-relaxed text-navy">
@@ -294,7 +270,7 @@ export default function ServiceProcess() {
                       </dd>
                     </div>
                     <div>
-                      <dt className="text-xs font-bold tracking-[0.12em] text-navy/55">
+                      <dt className="text-xs font-bold tracking-[0.12em] text-muted-foreground">
                         常見適用情況
                       </dt>
                       <dd className="mt-1 leading-relaxed text-muted-foreground">
@@ -302,7 +278,7 @@ export default function ServiceProcess() {
                       </dd>
                     </div>
                     <div>
-                      <dt className="text-xs font-bold tracking-[0.12em] text-navy/55">
+                      <dt className="text-xs font-bold tracking-[0.12em] text-muted-foreground">
                         需要留意
                       </dt>
                       <dd className="mt-1 leading-relaxed text-muted-foreground">

@@ -1,3 +1,4 @@
+import { existsSync } from "node:fs";
 import { spawn } from "node:child_process";
 import { chromium } from "playwright";
 
@@ -6,23 +7,18 @@ const BASE_URL = `http://127.0.0.1:${PORT}`;
 const routes = [
   ["/", "香港通渠服務", "香港通渠，先報價後動工。", "首頁"],
   ["/services", "通渠服務｜住宅通渠", "通渠服務", "通渠服務"],
-  [
-    "/services/toilet-unblocking",
-    "坐廁通渠",
-    "坐廁淤塞、去水慢或倒灌",
-    "通渠服務",
-  ],
+  ["/services/toilet-unblocking", "坐廁通渠", "坐廁及馬桶通渠", "通渠服務"],
   [
     "/drain-diagnosis",
     "渠務問題快速判斷",
     "先看症狀，再決定下一步",
     "問題判斷",
   ],
-  ["/guide", "香港通渠價錢", "香港通渠價錢及收費，動工前確認報價", "收費指南"],
+  ["/guide", "香港通渠價錢", "香港通渠價錢及收費", "收費指南"],
   ["/areas", "服務地區覆蓋", "港九新界及離島通渠服務", "服務地區"],
   ["/areas/kwun-tong", "觀塘通渠", "觀塘通渠", "服務地區"],
-  ["/areas/tai-po", "大埔通渠", "大埔通渠｜村屋、屋苑及食肆渠務", "服務地區"],
-  ["/cases", "通渠工程案例", "現場問題、做法與結果", "工程案例"],
+  ["/areas/tai-po", "大埔通渠", "大埔通渠服務", "服務地區"],
+  ["/cases", "通渠工程案例", "通渠工程案例", "工程案例"],
   ["/faq", "常見問題", "常見問題", "常見問題"],
 ];
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -45,7 +41,14 @@ server.stderr.on("data", data => process.stderr.write(`[server] ${data}`));
 let browser;
 try {
   await waitForServer();
-  browser = await chromium.launch({ headless: true });
+  browser = await chromium.launch({
+    headless: true,
+    ...(process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH
+      ? { executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH }
+      : existsSync("/usr/bin/chromium")
+        ? { executablePath: "/usr/bin/chromium" }
+        : {}),
+  });
   for (const [path, title, h1, nav] of routes) {
     const context = await browser.newContext({
       viewport: { width: 1280, height: 900 },

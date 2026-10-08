@@ -1,17 +1,7 @@
 import { createRoot } from "react-dom/client";
 import App from "./App";
 import "./index.css";
-import "./styles/home-editorial-phase3.css";
-import "./styles/services-guide-phase4.css";
-import "./styles/site-chrome-phase5.css";
-import "./styles/secondary-pages-stage6a.css";
-import "./styles/editorial-art-direction.css";
-import "./styles/visual-upgrade.css";
-import "./styles/home-reference-inspired.css";
-import "./styles/home-mobile-optimization.css";
-import "./styles/motionsites-reference-refresh.css";
-import "./styles/motionsites-inner-pages.css";
-import "./styles/home-compact-refresh.css";
+import "./styles/brand-system.css";
 
 const root = document.getElementById("root");
 

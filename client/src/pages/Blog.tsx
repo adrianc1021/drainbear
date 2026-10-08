@@ -2,22 +2,22 @@
  * 通渠熊 DrainBear — 通渠小知識（網誌列表頁）
  * Sanity已發布文章優先，原有靜態文章作後備。
  */
-import { Link } from "wouter";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
+import { WhatsAppButton } from "@/components/Layout";
+import SEO from "@/components/SEO";
+import { trackNavClick } from "@/lib/analytics";
+import { createImageSrcSet, optimizedImageUrl } from "@/lib/imageOptimization";
+import { useBlogPosts } from "@/lib/useBlog";
 import {
-  CalendarDays,
-  Clock,
   ArrowRight,
   BookOpen,
+  CalendarDays,
+  Clock,
   LoaderCircle,
   TriangleAlert,
 } from "lucide-react";
-import { trackNavClick } from "@/lib/analytics";
-import { useBlogPosts } from "@/lib/useBlog";
-import { WhatsAppButton } from "@/components/Layout";
-import SEO from "@/components/SEO";
-import Breadcrumbs from "@/components/Breadcrumbs";
-import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
-import { createImageSrcSet, optimizedImageUrl } from "@/lib/imageOptimization";
+import { Link } from "wouter";
 
 const BLOG_CRUMBS = [
   { name: "首頁", path: "/" },
@@ -72,6 +72,7 @@ export default function Blog() {
       <div className="site-hero-shell">
         <Breadcrumbs items={BLOG_CRUMBS} tone="dark" />
         <EditorialPageHero
+          contactLocation="blog_hero"
           kicker="實用文章"
           title="通渠小知識"
           description="整理香港家居及商業渠務的日常保養、常見問題及處理資訊，方便在需要時快速查閱。"
@@ -80,7 +81,6 @@ export default function Blog() {
             alt: "排水管道檢查設備示意圖",
             caption: "由日常防塞到工程判斷，按需要查閱相關資料",
           }}
-          fibers={false}
         />
       </div>
 
@@ -109,7 +109,7 @@ export default function Blog() {
 
           {!featured && !isLoading && (
             <div className="rounded-lg border border-border bg-mist p-10 text-center">
-              <BookOpen className="mx-auto h-8 w-8 text-navy/40" />
+              <BookOpen className="mx-auto h-8 w-8 text-muted-foreground" />
               <h2 className="mt-4 font-display text-xl font-black text-navy">
                 暫時未有文章
               </h2>

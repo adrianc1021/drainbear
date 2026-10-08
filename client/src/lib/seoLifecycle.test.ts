@@ -1,5 +1,5 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
 import SEO from "@/components/SEO";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const lifecycle = vi.hoisted(() => ({
   effects: [] as {
@@ -143,17 +143,35 @@ describe("SEO metadata lifecycle", () => {
     expect(window.scrollTo).not.toHaveBeenCalled();
   });
 
+  it("exposes the correct fallback canonical while CMS-backed content is loading", () => {
+    renderSeo({ path: "/blog", contentReady: false });
+    expect(
+      document.head.querySelector('link[rel="canonical"]')?.getAttribute("href")
+    ).toBe("https://drainbearhk.com/blog");
+    expect(document.documentElement.dataset.seoReady).toBe("false");
+  });
+
   it("supports an explicit nofollow directive for non-indexed conversion routes", () => {
     renderSeo({ noindex: true, nofollow: true });
     expect(
       document.head
         .querySelector('meta[name="robots"]')
-        ?.getAttribute("content"),
+        ?.getAttribute("content")
     ).toBe("noindex, nofollow");
     expect(
       document.head
         .querySelector('meta[name="googlebot"]')
-        ?.getAttribute("content"),
+        ?.getAttribute("content")
+    ).toBe("noindex, nofollow");
+  });
+
+  it("refreshes robots when only the nofollow setting changes", () => {
+    renderSeo({ noindex: true, nofollow: false });
+    renderSeo({ noindex: true, nofollow: true });
+    expect(
+      document.head
+        .querySelector('meta[name="robots"]')
+        ?.getAttribute("content")
     ).toBe("noindex, nofollow");
   });
 });

@@ -29,13 +29,13 @@ const DISTRICTS_BATCH1: DistrictInfo[] = [
     heroDesc:
       "觀塘工廈、食肆及舊樓通渠，24 小時接受查詢。提供地址、樓層及淤塞情況，先確認設備與到場時間；現場確認總價才動工。",
     intro: [
-      "觀塘是九龍東的商貿及工業核心，區內大量活化工廈、樓上食肆及樓齡逾 50 年的舊式住宅大廈。工廈單位由工場改建為食堂、健身室及辦公室後，原有排水設計往往負荷不足，油脂及雜物長年積聚，令去水位淤塞成為觀塘區最常見的渠務求助。",
-      "另一方面，觀塘市中心（裕民坊一帶）重建前後的舊樓群，主渠老化嚴重，低層單位廁所倒灌時有發生。apm 商場周邊食肆的隔油池，與翠屏邨、順利邨等屋邨單位的座廁淤塞，需要不同處理方法。通渠熊會先了解受影響範圍，再按渠況安排通渠工具、高壓水槍或 CCTV 照喉檢查。",
+      "觀塘的住宅、工廈與食肆需要不同的渠務安排。工廈食堂或樓上商舖查詢時，請說明樓層、排水用途及其他去水位是否受影響，方便先了解所需工具和施工入口。",
+      "裕民坊、觀塘工業區及翠屏邨等位置，可能涉及室內支喉或大廈公共渠管。若有多個單位或去水位同時倒灌，請一併告知，並先聯絡物業管理了解公共渠管情況。師傅會在檢查後確認處理方法。",
     ],
     painPoints: [
       {
         title: "工廈食堂去水位淤塞",
-        desc: "改建工廈排水管徑不足，油脂積聚快。高壓水槍徹底沖走管壁油垢，回復排水暢通。",
+        desc: "食堂去水慢或有油脂積聚，先檢查堵塞範圍及入口，再評估通渠機或高壓水槍是否合適。",
       },
       {
         title: "舊樓廁所倒灌",
@@ -50,7 +50,16 @@ const DISTRICTS_BATCH1: DistrictInfo[] = [
         desc: "翠屏、順利、秀茂坪等屋邨單位座廁淤塞，先提供水位及其他去水位情況，再確認上門安排。",
       },
     ],
-    landmarks: ["apm", "裕民坊", "觀塘工業區", "翠屏邨", "順利邨", "秀茂坪", "藍田", "油塘"],
+    landmarks: [
+      "apm",
+      "裕民坊",
+      "觀塘工業區",
+      "翠屏邨",
+      "順利邨",
+      "秀茂坪",
+      "藍田",
+      "油塘",
+    ],
     nearby: ["九龍灣", "牛頭角", "藍田", "油塘", "秀茂坪"],
     faqs: [
       {
@@ -86,7 +95,7 @@ const DISTRICTS_BATCH1: DistrictInfo[] = [
     painPoints: [
       {
         title: "屋苑浴室去水慢",
-        desc: "第一城、沙田中心等屋苑樓齡漸高，頭髮油垢積聚令去水慢。專用工具徹底清除，即場測試。",
+        desc: "第一城、沙田中心等屋苑的去水位如有頭髮或油垢積聚，師傅會按位置選用工具，完成後測試去水。",
       },
       {
         title: "村屋沙井滿瀉",
@@ -101,7 +110,16 @@ const DISTRICTS_BATCH1: DistrictInfo[] = [
         desc: "新城市廣場、石門商廈食肆隔油池保養及緊急抽吸，避免臭味投訴影響營業。",
       },
     ],
-    landmarks: ["新城市廣場", "沙田第一城", "禾輋邨", "瀝源邨", "火炭", "石門", "大圍", "馬鞍山"],
+    landmarks: [
+      "新城市廣場",
+      "沙田第一城",
+      "禾輋邨",
+      "瀝源邨",
+      "火炭",
+      "石門",
+      "大圍",
+      "馬鞍山",
+    ],
     nearby: ["大圍", "火炭", "石門", "馬鞍山", "大埔"],
     faqs: [
       {
@@ -136,17 +154,17 @@ export const DISTRICTS: DistrictInfo[] = [
 
 /** 地區名 → slug 對照（供 pill 連結使用） */
 export const DISTRICT_SLUGS: Record<string, string> = Object.fromEntries(
-  DISTRICTS.map((d) => [d.name, d.slug]),
+  DISTRICTS.map(d => [d.name, d.slug])
 );
 
 // 四個既有熱門地區頁同時承接所屬行政區的地圖入口，避免重複薄內容頁。
 Object.assign(DISTRICT_SLUGS, {
-  "油尖旺": "mong-kok",
-  "灣仔": "causeway-bay",
-  "東區": "north-point",
-  "西貢": "tseung-kwan-o",
+  油尖旺: "mong-kok",
+  灣仔: "causeway-bay",
+  東區: "north-point",
+  西貢: "tseung-kwan-o",
 });
 
 export function getDistrict(slug: string) {
-  return DISTRICTS.find((d) => d.slug === slug);
+  return DISTRICTS.find(d => d.slug === slug);
 }

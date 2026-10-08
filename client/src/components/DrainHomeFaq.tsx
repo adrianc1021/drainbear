@@ -43,14 +43,8 @@ export default function DrainHomeFaq() {
               <span className="db-kicker__rule" aria-hidden="true" />
               常見問題
             </p>
-            <h2 id="home-faq-heading">
-              常見疑問，
-              <br />
-              先一次了解。
-            </h2>
-            <p>
-              以下整理收費、上門安排及處理方法的常見問題。
-            </p>
+            <h2 id="home-faq-heading">報價前，你可能想問</h2>
+            <p>收費、上門安排及反覆塞渠，這裏直接解答。</p>
             <Link href="/faq" className="db-home-faq__all-link">
               查看全部常見問題
               <ArrowRight aria-hidden="true" />

@@ -1,14 +1,14 @@
-import { CalendarDays, Clock, MapPin, Wrench } from "lucide-react";
-import { useParams } from "wouter";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import GhostFibers from "@/components/GhostFibers/GhostFibers";
+import ContactActions from "@/components/ContactActions";
+import { WhatsAppButton } from "@/components/Layout";
 import QuoteRequestForm from "@/components/QuoteRequestForm";
 import SEO from "@/components/SEO";
-import { WhatsAppButton } from "@/components/Layout";
 import { BUSINESS_ID, SITE_URL, WEBSITE_ID } from "@/config/site";
 import { formatCaseDate, formatMinutes } from "@/lib/caseRepository";
 import { useCaseStudy } from "@/lib/useCases";
 import NotFound from "@/pages/NotFound";
+import { CalendarDays, Clock, MapPin, Wrench } from "lucide-react";
+import { useParams } from "wouter";
 
 export default function CaseStudyDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -71,30 +71,17 @@ export default function CaseStudyDetail() {
       ) : study ? (
         <>
           <article>
-            <header className="relative isolate overflow-hidden bg-[#003566] text-white">
-              <GhostFibers
-                className="site-page-hero__fibers"
-                lineColor="#8ed8f4"
-                glowColor="#176da5"
-                backgroundColor="#003566"
-                speed={0.055}
-                scale={2.8}
-                rotationSpeed={0.035}
-                layers={3}
-                glowIntensity={0.45}
-                brightness={0.72}
-                grain={0.008}
-                fps={18}
-              />
+            <header className="relative isolate overflow-hidden bg-navy text-white">
               <Breadcrumbs items={crumbs} tone="dark" />
               <div className="db-container relative z-10 grid gap-10 pt-6 pb-12 md:pb-18 lg:grid-cols-[minmax(0,1.05fr)_minmax(18rem,0.75fr)] lg:items-end lg:gap-16">
                 <div>
-                  <p className="text-xs font-black uppercase tracking-[0.15em] text-[#9ee7ff]">
+                  <p className="text-xs font-black uppercase tracking-[0.15em] text-wagreen">
                     {study.serviceLabel}
                   </p>
                   <h1 className="case-study-detail__title mt-5 max-w-3xl font-display font-black leading-[1.1] text-white">
                     {study.title}
                   </h1>
+                  <ContactActions location="case_detail_hero" />
                   <p className="mt-6 max-w-3xl text-lg leading-8 text-white/75">
                     {study.summary}
                   </p>

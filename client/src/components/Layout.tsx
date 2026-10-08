@@ -3,37 +3,24 @@
  * Header：清晰品牌導覽 + 克制的 WhatsApp 行動入口
  * Footer：服務資訊、主要地區與公司資料
  */
-import { ReactNode, useEffect, useRef, useState } from "react";
-import { Link, useLocation } from "wouter";
+import ContactActions from "@/components/ContactActions";
+import WhatsAppWidget from "@/components/WhatsAppWidget";
+import { useContactHandoff } from "@/contexts/ContactHandoffContext";
+import { useContactSettings } from "@/contexts/SiteSettingsContext";
+import { useReveal } from "@/hooks/useReveal";
 import {
-  Menu,
-  X,
-  MessageCircle,
-  Phone,
-  Clock,
-  Star,
-  Award,
-  ShieldCheck,
-  ArrowUp,
-  ArrowRight,
-  ArrowUpRight,
-  ChevronDown,
-} from "lucide-react";
-import {
-  trackCTA,
   goThanksAfterWhatsApp,
+  trackCTA,
   trackNavClick,
 } from "@/lib/analytics";
-import { useContactHandoff } from "@/contexts/ContactHandoffContext";
-import { useReveal } from "@/hooks/useReveal";
-import { useContactSettings } from "@/contexts/SiteSettingsContext";
-import { prefetchRoute } from "@/lib/routePrefetch";
-import WhatsAppWidget from "@/components/WhatsAppWidget";
 import { DISTRICTS } from "@/lib/districtData";
+import { prefetchRoute } from "@/lib/routePrefetch";
 import { SERVICE_PAGES } from "@/lib/serviceData";
+import { ArrowUp, Menu, MessageCircle, Phone, X } from "lucide-react";
+import { ReactNode, useEffect, useRef, useState } from "react";
+import { Link, useLocation } from "wouter";
 
-const LOGO =
-  "https://res.cloudinary.com/pgjztf2p/image/upload/f_auto,q_auto:eco,c_fill,w_96,h_96/v1785147037/LOGO_dmyalo.png";
+const LOGO = "/favicon-192x192.png";
 
 const NAV_ITEMS = [
   { label: "首頁", href: "/" },
@@ -99,9 +86,7 @@ function MobileCTABar() {
     ? whatsappHref(diagnosis.waMessage)
     : whatsappDefaultHref;
   const waTitle = diagnosis ? "發送判斷結果" : "WhatsApp 報價";
-  const waSub = diagnosis
-    ? diagnosis.summary
-    : "傳送位置及相片・加快初步判斷";
+  const waSub = diagnosis ? diagnosis.summary : "傳送位置及相片・加快初步判斷";
 
   return (
     <>
@@ -126,11 +111,7 @@ function MobileCTABar() {
             rel="noopener noreferrer"
             aria-label={`${waTitle}：${waSub}`}
             onClick={() => {
-              trackCTA(
-                "whatsapp",
-                "mobile_bar",
-                diagnosis?.topic
-              );
+              trackCTA("whatsapp", "mobile_bar", diagnosis?.topic);
               goThanksAfterWhatsApp("mobile_bar");
             }}
             className="btn-smooth flex min-h-[56px] min-w-0 flex-[3] items-center justify-center gap-2.5 border border-navy bg-wagreen px-3 py-2 text-navy active:scale-[0.98]"
@@ -178,6 +159,8 @@ function BackToTop() {
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       aria-label="回到頂部"
+      tabIndex={visible ? 0 : -1}
+      aria-hidden={!visible}
       className={`btn-smooth fixed right-4 z-40 flex h-11 w-11 items-center justify-center rounded-lg border border-border bg-white/95 text-navy shadow-[0_4px_14px_rgba(11,19,43,0.11)] backdrop-blur transition-all duration-300 hover:bg-mist active:scale-[0.94] md:right-6 ${
         visible
           ? "translate-y-0 opacity-100"
@@ -287,9 +270,8 @@ function Header({
   return (
     <header
       data-site-header="true"
-      className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-200 ${
-        "site-header--shared"
-      } ${scrolled
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-200 ${"site-header--shared"} ${
+        scrolled
           ? "border-navy/15 bg-white/96 shadow-[0_8px_30px_rgba(11,19,43,0.06)] backdrop-blur-xl"
           : "border-navy/10 bg-white/90 backdrop-blur-lg"
       }`}
@@ -310,7 +292,7 @@ function Header({
           />
           <span className="site-header__brand-text font-display text-lg font-black tracking-[-0.025em] text-navy md:text-xl">
             通渠熊{" "}
-            <span className="site-header__brand-en text-navy/55">
+            <span className="site-header__brand-en text-muted-foreground">
               DrainBear
             </span>
           </span>
@@ -419,308 +401,63 @@ function Header({
   );
 }
 
-
-const FOOTER_STATS = [
-  { icon: Award, value: "先報價", label: "動工前確認收費" },
-  { icon: Clock, value: "按安排", label: "確認上門時間" },
-  { icon: Star, value: "專業設備", label: "按實際情況選用" },
-  { icon: Phone, value: "24 小時", label: "接受渠務查詢" },
-];
-
-const FOOTER_AREAS = [
-  {
-    name: "港島主要服務地區",
-    districts:
-      "中環・上環・西營盤・石塘咀・堅尼地城・半山・山頂・金鐘・灣仔・銅鑼灣・天后・大坑・跑馬地・北角・炮台山・鰂魚涌・太古城・西灣河・筲箕灣・柴灣・小西灣・香港仔・田灣・華富・鴨脷洲・黃竹坑・薄扶林・赤柱・淺水灣",
-  },
-  {
-    name: "九龍主要服務地區",
-    districts:
-      "尖沙咀・佐敦・油麻地・旺角・太子・大角咀・深水埗・長沙灣・荔枝角・美孚・石硤尾・九龍塘・何文田・紅磡・黃埔・土瓜灣・九龍城・啟德・新蒲崗・黃大仙・樂富・鑽石山・慈雲山・彩虹・牛頭角・九龍灣・觀塘・秀茂坪・藍田・油塘",
-  },
-  {
-    name: "新界及離島主要服務地區",
-    districts:
-      "沙田・大圍・火炭・石門・馬鞍山・大埔・太和・粉嶺・上水・荃灣・葵涌・葵芳・青衣・深井・馬灣・屯門・掃管笏・元朗・天水圍・錦田・洪水橋・將軍澳・寶琳・坑口・調景嶺・日出康城・西貢・清水灣・東涌・愉景灣・梅窩・長洲・南丫島・坪洲",
-  },
-];
-
-function FooterAreaAccordion({
-  area,
-  index,
-}: {
-  area: (typeof FOOTER_AREAS)[number];
-  index: number;
-}) {
-  const [open, setOpen] = useState(false);
-  const panelId = `footer-area-panel-${index}`;
-
-  return (
-    <section className="border-b border-white/10 py-1 last:border-b-0 md:border-0 md:py-0">
-      <button
-        type="button"
-        className="flex min-h-[52px] w-full items-center justify-between gap-4 py-2 text-left font-display text-sm font-bold text-white md:hidden"
-        aria-expanded={open}
-        aria-controls={panelId}
-        onClick={() => setOpen(current => !current)}
-      >
-        <span>{area.name}</span>
-        <ChevronDown
-          aria-hidden="true"
-          className={`h-4 w-4 shrink-0 text-wagreen transition-transform duration-200 ${
-            open ? "rotate-180" : ""
-          }`}
-        />
-      </button>
-
-      <Link
-        href="/areas"
-        className="btn-smooth hidden min-h-[44px] items-center font-display text-sm font-bold text-white hover:text-wagreen md:inline-flex"
-      >
-        {area.name}
-      </Link>
-
-      <div
-        id={panelId}
-        className={`${open ? "block" : "hidden"} pb-4 md:block md:pb-0`}
-      >
-        <p className="text-xs leading-relaxed text-white/70 md:mt-2">
-          {area.districts}
-        </p>
-
-        <Link
-          href="/areas"
-          className="mt-3 inline-flex min-h-[44px] items-center text-xs font-bold text-wagreen hover:text-white md:hidden"
-        >
-          查看完整服務地區
-        </Link>
-      </div>
-    </section>
-  );
-}
-
 function Footer({ compact = false }: { compact?: boolean }) {
-  const { phoneDisplay, phoneHref, whatsappDefaultHref } = useContactSettings();
-
   return (
-    <footer data-site-footer="true" className="db-site-footer text-white">
+    <footer className="brand-footer" data-site-footer="true">
       {!compact ? (
-        <section
-          className="db-site-footer__action"
-          aria-labelledby="footer-action-heading"
-        >
-          <div className="db-container">
-            <div className="db-site-footer__brandline">
-              <div className="db-site-footer__brand">
-                <img
-                  src={LOGO}
-                  alt="通渠熊 DrainBear"
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                />
-                <span>通渠熊 DrainBear</span>
-              </div>
-              <span className="db-site-footer__brand-context">
-                香港住宅及商業渠務
-              </span>
-            </div>
-
-            <div className="db-site-footer__action-grid">
-              <div>
-                <p className="db-site-footer__eyebrow">現場資料先行</p>
-                <h2 id="footer-action-heading">
-                  先說明問題，
-                  <br />
-                  再安排合適處理。
-                </h2>
-                <p className="db-site-footer__action-copy">
-                  提供所在地區、受影響位置及相片或短片，團隊先了解情況，再確認可安排的服務時間及後續方案。
-                </p>
-              </div>
-
-              <div className="db-site-footer__action-controls">
-                <a
-                  href={whatsappDefaultHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => {
-                    trackCTA("whatsapp", "footer_action");
-                    goThanksAfterWhatsApp("footer_action");
-                  }}
-                  className="db-site-footer__primary-action"
-                >
-                  <MessageCircle aria-hidden="true" />
-                  <span>WhatsApp 查詢報價</span>
-                  <ArrowUpRight aria-hidden="true" />
-                </a>
-                <a
-                  href={phoneHref}
-                  onClick={() => trackCTA("phone", "footer_action")}
-                  className="db-site-footer__secondary-action"
-                >
-                  <Phone aria-hidden="true" />
-                  <span>24 小時查詢：{phoneDisplay}</span>
-                </a>
-                <p className="db-site-footer__action-note">
-                  <ShieldCheck aria-hidden="true" />
-                  動工前確認處理方法及收費
-                </p>
-              </div>
-            </div>
-
-            <div className="db-site-footer__signals" aria-label="服務安排原則">
-              {FOOTER_STATS.map(s => (
-                <div key={s.label} className="db-site-footer__signal">
-                  <s.icon aria-hidden="true" />
-                  <span>
-                    <strong>{s.value}</strong>
-                    <small>{s.label}</small>
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      ) : null}
-
-      <section className="db-site-footer__directory" aria-label="網站導覽">
-        <div className="db-container db-site-footer__directory-grid">
-          <div className="db-site-footer__directory-intro">
-            <p className="db-site-footer__eyebrow">DrainBear / 服務目錄</p>
-            <h2>
-              由問題判斷，
-              <br />
-              到現場安排。
-            </h2>
-            <p>
-              探索通渠服務、收費指南、問題判斷及各區服務資料，先整理需要，再提出查詢。
-            </p>
-          </div>
-
-          <div className="db-site-footer__nav-group">
-            <p className="db-site-footer__nav-label">服務及工具</p>
-            <nav aria-label="服務及查詢工具">
-              <Link href="/services">
-                全部通渠服務
-                <ArrowUpRight aria-hidden="true" />
-              </Link>
-              {SERVICE_PAGES.map(service => (
-                <Link key={service.slug} href={`/services/${service.slug}`}>
-                  {service.shortName}
-                  <ArrowUpRight aria-hidden="true" />
-                </Link>
-              ))}
-              {FOOTER_NAV_ITEMS.slice(2, 4).map(item => (
-                <Link key={item.href} href={item.href}>
-                  {item.label}
-                  <ArrowUpRight aria-hidden="true" />
-                </Link>
-              ))}
-            </nav>
-          </div>
-
-          <div className="db-site-footer__nav-group">
-            <p className="db-site-footer__nav-label">網站及資料</p>
-            <nav aria-label="網站內容及資料">
-              {FOOTER_NAV_ITEMS.slice(4).map(item => (
-                <Link key={item.href} href={item.href}>
-                  {item.label}
-                  <ArrowUpRight aria-hidden="true" />
-                </Link>
-              ))}
-              <Link href="/drain-diagnosis">
-                問題判斷工具
-                <ArrowUpRight aria-hidden="true" />
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </section>
-
-      {!compact ? (
-        <section
-          className="db-site-footer__areas"
-          aria-labelledby="footer-areas-heading"
-        >
-          <div className="db-container">
-            <div className="db-site-footer__areas-heading">
-              <div>
-                <p className="db-site-footer__eyebrow">服務地區</p>
-                <h2 id="footer-areas-heading">
-                  港九新界及離島，按位置確認安排。
-                </h2>
-              </div>
-              <Link href="/areas" className="db-site-footer__text-link">
-                查看完整地區資料
-                <ArrowRight aria-hidden="true" />
-              </Link>
-            </div>
-
-            <div className="db-site-footer__area-grid">
-              {FOOTER_AREAS.map((area, index) => (
-                <FooterAreaAccordion
-                  key={area.name}
-                  area={area}
-                  index={index}
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-      ) : null}
-
-      {!compact ? (
-        <section
-          className="db-site-footer__popular"
-          aria-labelledby="footer-popular-heading"
-        >
-          <div className="db-container">
-            <div className="db-site-footer__popular-heading">
-              <p id="footer-popular-heading">熱門地區</p>
-              <nav aria-label="熱門通渠服務地區">
-                {DISTRICTS.map(district => {
-                  const item = {
-                    label: `${district.name}通渠`,
-                    href: `/areas/${district.slug}`,
-                  };
-
-                  return (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      onClick={() =>
-                        trackNavClick("area", {
-                          cta_location: "footer_popular_areas",
-                          cta_label: item.label,
-                          area_name: item.label.replace("通渠", ""),
-                          destination_url: item.href,
-                        })
-                      }
-                    >
-                      {item.label}
-                    </Link>
-                  );
-                })}
-              </nav>
-            </div>
-          </div>
-        </section>
-      ) : null}
-
-      <section className="db-site-footer__legal">
-        <div className="db-container">
-          <p>
-            服務說明：優先安排為目標安排，實際時間受地區、交通、人員及設備供應影響；「不成功不收費」適用於事前確認的合資格疏通項目，適用範圍及條款會在安排服務前說明。
-          </p>
+        <div className="container brand-footer__contact">
           <div>
-            <span>
-              © {new Date().getFullYear()} 通渠熊 DrainBear Limited. 版權所有。
-            </span>
-            <span>提供港島、九龍、新界及離島渠務查詢。</span>
+            <p className="brand-eyebrow">通渠熊 DrainBear</p>
+            <h2>有問題，先講現場情況</h2>
+            <p>傳送地區、受影響位置及相片，我們再確認上門安排。</p>
           </div>
+          <ContactActions location="footer" />
         </div>
-      </section>
+      ) : null}
+      <div className="container brand-footer__directory">
+        <div>
+          <Link href="/" className="brand-footer__brand">
+            <img src={LOGO} width="48" height="48" alt="" loading="lazy" />
+            通渠熊 DrainBear
+          </Link>
+          <p>
+            香港住宅、食肆及物業渠務。
+            <br />
+            先報價，後動工。
+          </p>
+        </div>
+        <nav aria-label="頁尾服務資料">
+          <h2>服務與資料</h2>
+          {FOOTER_NAV_ITEMS.filter(item => item.href !== "/").map(item => (
+            <Link key={item.href} href={item.href}>
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+        <nav aria-label="頁尾通渠服務">
+          <h2>按問題找服務</h2>
+          {SERVICE_PAGES.map(service => (
+            <Link key={service.slug} href={`/services/${service.slug}`}>
+              {service.shortName}
+            </Link>
+          ))}
+        </nav>
+        <nav aria-label="頁尾服務地區">
+          <h2>服務地區</h2>
+          <div className="brand-footer__regions">
+            {DISTRICTS.map(district => (
+              <Link key={district.slug} href={`/areas/${district.slug}`}>
+                {district.name}通渠
+              </Link>
+            ))}
+          </div>
+          <Link href="/areas">查看完整服務地區</Link>
+        </nav>
+      </div>
+      <div className="container brand-footer__legal">
+        <p>24 小時接受查詢；實際上門時間、工具及收費，在安排服務前確認。</p>
+        <p>© {new Date().getFullYear()} 通渠熊 DrainBear. 版權所有。</p>
+      </div>
     </footer>
   );
 }
@@ -731,7 +468,6 @@ export default function Layout({ children }: { children: ReactNode }) {
   const browserPathname =
     typeof window === "undefined" ? routerPathname : window.location.pathname;
   const pathname = browserPathname.replace(/\/+$/, "") || "/";
-  const isHome = pathname === "/";
   const suppressConversionChrome = pathname === "/thanks";
 
   useReveal();
@@ -742,7 +478,11 @@ export default function Layout({ children }: { children: ReactNode }) {
     if (hash) {
       // 等待目標頁面渲染完成後再捲動
       requestAnimationFrame(() => {
-        const el = document.querySelector(hash);
+        let targetId = hash.slice(1);
+        try {
+          targetId = decodeURIComponent(targetId);
+        } catch {}
+        const el = document.getElementById(targetId);
         if (el) {
           el.scrollIntoView({ behavior: "smooth", block: "start" });
           return;
@@ -755,7 +495,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   }, [location]);
 
   return (
-    <div className="flex min-h-screen flex-col bg-white">
+    <div className="site-shell flex min-h-screen flex-col bg-white">
       <a href="#main-content" className="site-skip-link">
         跳到主要內容
       </a>
@@ -763,11 +503,11 @@ export default function Layout({ children }: { children: ReactNode }) {
       <main
         id="main-content"
         tabIndex={-1}
-        className={`flex-1 outline-none ${isHome ? "home-main" : "pt-16 md:pt-[72px]"}`}
+        className="site-main flex-1 outline-none"
       >
         {children}
       </main>
-      <Footer />
+      <Footer compact={suppressConversionChrome} />
       {!suppressConversionChrome ? (
         <>
           {/* 避免內容及 Footer 被固定 CTA 列遮蓋（含 safe-area） */}

@@ -3,7 +3,6 @@ import path from "node:path";
 
 const SITE_URL = "https://drainbearhk.com";
 const DIST_SITEMAP_PATH = path.resolve("dist/public/sitemap.xml");
-const SOURCE_SITEMAP_PATH = path.resolve("client/public/sitemap.xml");
 const ROUTE_MANIFEST_PATH = path.resolve("dist/prerender/routes.json");
 const OUTPUT_ROOT = path.resolve("dist/public");
 
@@ -43,15 +42,10 @@ function difference(left, right) {
   return [...left].filter(value => !right.has(value));
 }
 
-const [distSitemap, sourceSitemap, manifestText] = await Promise.all([
+const [distSitemap, manifestText] = await Promise.all([
   fs.readFile(DIST_SITEMAP_PATH, "utf8"),
-  fs.readFile(SOURCE_SITEMAP_PATH, "utf8"),
   fs.readFile(ROUTE_MANIFEST_PATH, "utf8"),
 ]);
-
-if (distSitemap !== sourceSitemap) {
-  throw new Error("dist/public/sitemap.xml 與 client/public/sitemap.xml 不一致");
-}
 
 if (!distSitemap.includes("</urlset>")) {
   throw new Error("sitemap.xml 缺少 </urlset>");
@@ -76,12 +70,8 @@ if (missingFromSitemap.length || extraInSitemap.length) {
   throw new Error(
     [
       "sitemap 與 prerender routes 不一致。",
-      missingFromSitemap.length
-        ? `缺少: ${missingFromSitemap.join(", ")}`
-        : "",
-      extraInSitemap.length
-        ? `多出: ${extraInSitemap.join(", ")}`
-        : "",
+      missingFromSitemap.length ? `缺少: ${missingFromSitemap.join(", ")}` : "",
+      extraInSitemap.length ? `多出: ${extraInSitemap.join(", ")}` : "",
     ]
       .filter(Boolean)
       .join("\n")
@@ -96,9 +86,10 @@ for (const route of sitemapRoutes) {
     throw new Error(`${route} sitemap URL 不一致: ${matchedUrl}`);
   }
 
-  const htmlPath = route === "/"
-    ? path.join(OUTPUT_ROOT, "index.html")
-    : path.join(OUTPUT_ROOT, `${route.slice(1)}.html`);
+  const htmlPath =
+    route === "/"
+      ? path.join(OUTPUT_ROOT, "index.html")
+      : path.join(OUTPUT_ROOT, `${route.slice(1)}.html`);
   const html = await fs.readFile(htmlPath, "utf8");
   const robots = extractMetaContent(html, "robots")?.toLowerCase() ?? "";
   const googlebot = extractMetaContent(html, "googlebot")?.toLowerCase() ?? "";

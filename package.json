@@ -13,6 +13,7 @@
     "verify:conversion": "node scripts/verify-conversion-tracking.mjs",
     "verify:diagnosis": "node scripts/verify-diagnosis-flow.mjs",
     "verify:routes": "node scripts/verify-route-consistency.mjs",
+    "verify:quality": "node scripts/verify-site-quality.mjs",
     "start": "NODE_ENV=production node dist/index.js",
     "check": "tsc --noEmit",
     "format": "prettier --write .",

@@ -1,37 +1,33 @@
-import {
-  ArrowRight,
-  CheckCircle2,
-  CircleAlert,
-  MessageCircle,
-  Phone,
-  Search,
-  ShieldCheck,
-  Wrench,
-} from "lucide-react";
-import { Link, useParams } from "wouter";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import GhostFibers from "@/components/GhostFibers/GhostFibers";
+import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
 import QuoteRequestForm, {
   type InquiryServiceType,
 } from "@/components/QuoteRequestForm";
 import SEO from "@/components/SEO";
+import { BUSINESS_ID, SITE_URL } from "@/config/site";
 import {
   useContactSettings,
   useSiteSettings,
 } from "@/contexts/SiteSettingsContext";
-import { BUSINESS_ID, SITE_URL } from "@/config/site";
 import {
   goThanksAfterWhatsApp,
   trackCTA,
   trackNavClick,
 } from "@/lib/analytics";
-import { getServicePage } from "@/lib/serviceData";
+import { cloudinaryImageUrl } from "@/lib/cloudinary";
 import { prefetchRoute } from "@/lib/routePrefetch";
-import {
-  cloudinaryImageSrcSet,
-  cloudinaryImageUrl,
-} from "@/lib/cloudinary";
+import { getServicePage } from "@/lib/serviceData";
 import NotFound from "@/pages/NotFound";
+import {
+  ArrowRight,
+  CheckCircle2,
+  CircleAlert,
+  MessageCircle,
+  Search,
+  ShieldCheck,
+  Wrench,
+} from "lucide-react";
+import { Link, useParams } from "wouter";
 
 const INQUIRY_TYPE_BY_SLUG: Record<string, InquiryServiceType> = {
   "toilet-unblocking": "residential",
@@ -54,8 +50,6 @@ export default function ServiceDetail() {
 
   const path = `/services/${service.slug}`;
   const whatsappUrl = whatsappHref(service.whatsappMessage);
-  const serviceImage = cloudinaryImageUrl(service.image, 960);
-  const serviceImageSrcSet = cloudinaryImageSrcSet(service.image);
   const serviceSocialImage = cloudinaryImageUrl(service.image, 1200);
   const crumbs = [
     { name: "首頁", path: "/" },
@@ -83,7 +77,11 @@ export default function ServiceDetail() {
     availableChannel: {
       "@type": "ServiceChannel",
       serviceUrl: `${SITE_URL}${path}`,
-      servicePhone: settings.phoneE164,
+      servicePhone: {
+        "@type": "ContactPoint",
+        telephone: settings.phoneE164,
+        contactType: "customer service",
+      },
       availableLanguage: ["zh-Hant", "zh-HK"],
     },
   };
@@ -96,89 +94,34 @@ export default function ServiceDetail() {
         path={path}
         image={serviceSocialImage}
         imageAlt={service.imageAlt}
-        jsonLd={serviceJsonLd}
+        jsonLd={[
+          serviceJsonLd,
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "@id": `${SITE_URL}${path}#faq`,
+            mainEntity: service.faqs.map(faq => ({
+              "@type": "Question",
+              name: faq.question,
+              acceptedAnswer: { "@type": "Answer", text: faq.answer },
+            })),
+          },
+        ]}
         breadcrumbs={crumbs}
       />
 
       <div>
-        <section className="phase4-service-detail__hero relative isolate overflow-hidden bg-[#003566] py-14 md:py-20">
-          <GhostFibers
-            className="phase4-service-detail__fibers"
-            lineColor="#8ed8f4"
-            glowColor="#176da5"
-            backgroundColor="#003566"
-            speed={0.06}
-            scale={2.8}
-            rotationSpeed={0.035}
-            layers={3}
-            glowIntensity={0.5}
-            brightness={0.78}
-            grain={0.008}
-            fps={20}
-          />
+        <div className="site-hero-shell">
           <Breadcrumbs items={crumbs} tone="dark" />
-          <div className="container relative z-10 grid items-center gap-10 pt-8 lg:grid-cols-[1.05fr_0.95fr] md:pt-10">
-            <div>
-              <p className="text-xs font-bold tracking-[0.2em] text-[#9ee7ff]">
-                {service.eyebrow}
-              </p>
-              <h1 className="mt-3 text-balance font-display text-4xl font-black text-white md:text-5xl">
-                {service.heroTitle}
-              </h1>
-              <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/80 md:text-lg">
-                {service.heroDescription}
-              </p>
-
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => {
-                    trackCTA("whatsapp", "service_detail_hero", service.slug);
-                    goThanksAfterWhatsApp(
-                      `service_detail_hero_${service.slug}`
-                    );
-                  }}
-                  className="btn-smooth inline-flex min-h-[48px] items-center justify-center gap-2 rounded-lg bg-wagreen px-7 py-3.5 font-bold text-white shadow-[0_4px_16px_rgba(37,211,102,0.3)] hover:bg-wagreen-dark"
-                >
-                  <MessageCircle className="h-5 w-5" />
-                  WhatsApp 索取初步估價
-                </a>
-
-                <a
-                  href={phoneHref}
-                  onClick={() =>
-                    trackCTA("phone", "service_detail_hero", service.slug)
-                  }
-                  className="btn-smooth inline-flex min-h-[48px] items-center justify-center gap-2 rounded-lg border border-white/70 bg-white/10 px-7 py-3.5 font-bold text-white hover:bg-white/20"
-                >
-                  <Phone className="h-5 w-5" />
-                  {phoneDisplay}
-                </a>
-              </div>
-
-              <p className="mt-4 text-xs leading-relaxed text-white/65">
-                WhatsApp
-                可先提供初步估價；師傅現場檢查後、動工前確認最終總收費。
-              </p>
-            </div>
-
-            <div className="relative overflow-hidden rounded-2xl bg-navy shadow-[0_20px_60px_rgba(11,19,43,0.18)]">
-              <img
-                src={serviceImage}
-                srcSet={serviceImageSrcSet}
-                alt={service.imageAlt}
-                width="1200"
-                height="800"
-                sizes="(min-width: 1024px) 46vw, 100vw"
-                fetchPriority="high"
-                decoding="async"
-                className="aspect-[3/2] w-full object-cover"
-              />
-            </div>
-          </div>
-        </section>
+          <EditorialPageHero
+            kicker={service.shortName}
+            title={service.name}
+            description={service.answerSummary.handles}
+            contactLocation="service_detail_hero"
+            topic={service.slug}
+            message={service.whatsappMessage}
+          />
+        </div>
 
         <section className="service-support border-b border-border bg-white py-8">
           <div className="container grid gap-4 md:grid-cols-2">
@@ -206,7 +149,7 @@ export default function ServiceDetail() {
                   使用快速判斷工具整理影響範圍
                 </span>
               </span>
-              <ArrowRight className="ml-auto h-4 w-4 shrink-0 text-navy/35 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="ml-auto h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1" />
             </Link>
             <Link
               href="/service-process"
@@ -232,7 +175,7 @@ export default function ServiceDetail() {
                   查看現場檢查及動工前確認原則
                 </span>
               </span>
-              <ArrowRight className="ml-auto h-4 w-4 shrink-0 text-navy/35 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="ml-auto h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
         </section>

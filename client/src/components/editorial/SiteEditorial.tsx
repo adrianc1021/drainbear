@@ -1,71 +1,46 @@
+import ContactActions from "@/components/ContactActions";
 import type { ReactNode } from "react";
-import GhostFibers from "@/components/GhostFibers/GhostFibers";
 
 interface EditorialPageHeroProps {
   kicker: string;
   title: ReactNode;
   description: ReactNode;
-  actions?: ReactNode;
-  media?: {
-    src: string;
-    alt: string;
-    caption?: ReactNode;
-  };
+  contactLocation?: string;
+  message?: string;
+  topic?: string;
+  media?: { src: string; alt: string; caption?: ReactNode };
   className?: string;
-  /** Render GhostFibers canvas inside the hero. Default true.
-   *  Pass false when the parent already owns a canvas (e.g. Services hero-shell). */
-  fibers?: boolean;
 }
 
 export function EditorialPageHero({
   kicker,
   title,
   description,
-  actions,
+  contactLocation = "page_hero",
+  message,
+  topic,
   media,
   className = "",
-  fibers = true,
 }: EditorialPageHeroProps) {
   return (
     <section
       className={`site-page-hero ${media ? "site-page-hero--with-media" : ""} ${className}`.trim()}
       data-site-editorial="page-hero"
     >
-      {fibers ? (
-        <GhostFibers
-          className="site-page-hero__fibers"
-          lineColor="#8ed8f4"
-          glowColor="#176da5"
-          backgroundColor="#003566"
-          speed={0.055}
-          scale={2.8}
-          rotationSpeed={0.035}
-          layers={3}
-          glowIntensity={0.45}
-          brightness={0.72}
-          grain={0.008}
-          fps={18}
-        />
-      ) : null}
       <div className="site-page-hero__inner">
         <div className="site-page-hero__copy">
-          <div className="site-page-hero__heading">
-            <p className="site-editorial-kicker">
-              <span aria-hidden="true" />
-              {kicker}
-            </p>
-
-            <h1 className="site-page-hero__title">{title}</h1>
-          </div>
-
-          <div className="site-page-hero__support">
-            <p className="site-page-hero__description">{description}</p>
-            {actions ? (
-              <div className="site-page-hero__actions">{actions}</div>
-            ) : null}
-          </div>
+          <p className="brand-eyebrow">{kicker}</p>
+          <h1 className="site-page-hero__title">{title}</h1>
+          <p className="site-page-hero__description">{description}</p>
+          <ContactActions
+            location={contactLocation}
+            message={message}
+            topic={topic}
+          />
+          <p className="contact-note">
+            24 小時接受查詢；上門時間及收費按現場情況確認。
+          </p>
         </div>
-
         {media ? (
           <figure className="site-page-hero__media">
             <img

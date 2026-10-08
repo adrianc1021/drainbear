@@ -1,60 +1,21 @@
-/**
- * 通渠熊 DrainBear — 服務地區（SEO 導向，第六輪全面優化版）
- * 風格：Premium SaaS Minimalism，大量留白、8px 圓角、懸浮陰影卡片、無 Emoji
- * 結構：Hero + 地區速查 + 動態統計帶 → 互動香港地圖 → 專屬著陸頁精選卡 → 三大分區（分頁籤式）→ 收費流程 CTA
- * 第十輪：新增互動式十八區地圖（HongKongMap）；三大分區改為分頁籤 + 分組排版，減少 pill 牆壓迫感
- * 第十一輪：搜尋列即時篩選 + 鍵盤導航 + 直接跳轉（有專頁 → 專頁；無專頁 → 捲至分區籤並高亮該地區）
- */
-import { useEffect, useMemo, useRef, useState } from "react";
-import {
-  ArrowRight,
-  Building,
-  Clock,
-  Landmark,
-  MapPin,
-  Phone,
-  Search,
-  ShieldCheck,
-  Trees,
-  X,
-} from "lucide-react";
-import { Link } from "wouter";
-import { useLocation } from "wouter";
-import { WhatsAppButton } from "@/components/Layout";
-import HongKongMap from "@/components/HongKongMap";
-import SEO from "@/components/SEO";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import GhostFibers from "@/components/GhostFibers/GhostFibers";
-import {
-  useContactSettings,
-  useSiteSettings,
-} from "@/contexts/SiteSettingsContext";
-import { trackCTA } from "@/lib/analytics";
-import { DISTRICTS, DISTRICT_SLUGS } from "@/lib/districtData";
+import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
+import SEO from "@/components/SEO";
 import { BUSINESS_ID, SITE_URL } from "@/config/site";
-
-const AREAS_CRUMBS = [
+import { DISTRICTS, DISTRICT_SLUGS } from "@/lib/districtData";
+import { ArrowRight, Search } from "lucide-react";
+import { useMemo, useState } from "react";
+import { Link } from "wouter";
+const CRUMBS = [
   { name: "首頁", path: "/" },
   { name: "服務地區", path: "/areas" },
 ];
-
-const AREAS_HERO_IMAGE = "/images/home-drain-technician-wide.jpg";
-
-/** 已有專屬著陸頁的地區 → slug 對照（自動由 districtData 生成） */
-const DISTRICT_PAGES: Record<string, string> = DISTRICT_SLUGS;
-
-const SEARCH_LISTBOX_ID = "areas-search-listbox";
-const SEARCH_STATUS_ID = "areas-search-status";
-
 const REGIONS = [
   {
-    icon: Landmark,
     name: "港島區",
     en: "HONG KONG ISLAND",
     eta: "上門時間按安排確認",
     desc: "熟悉商廈、住宅及樓齡較高樓宇的常見渠務情況。",
-    seoText:
-      "港島區商廈林立，亦有不少樓齡較高的半山豪宅及唐樓，容易出現主渠老化及隔油池滿瀉問題。我們熟悉港島區喉管結構，我們會按現場環境安排合適的處理方式，並盡量減少對鄰居及商戶運作的影響。",
     groups: [
       {
         label: "中西區",
@@ -105,13 +66,10 @@ const REGIONS = [
     ],
   },
   {
-    icon: Building,
     name: "九龍區",
     en: "KOWLOON",
     eta: "上門時間按安排確認",
     desc: "處理舊式大廈、住宅及食肆常見渠務問題。",
-    seoText:
-      "九龍區人口密集、食肆林立，旺角及深水埗等地的舊式大廈較常出現喉管倒灌及座廁淤塞。師傅會先了解現場情況，再按需要安排合適工具及處理方式。",
     groups: [
       {
         label: "油尖旺區",
@@ -154,13 +112,10 @@ const REGIONS = [
     ],
   },
   {
-    icon: Trees,
     name: "新界及離島",
     en: "NEW TERRITORIES & ISLANDS",
     eta: "按交通及工具運送安排確認",
     desc: "村屋、屋苑及離島服務按地點與所需設備確認安排。",
-    seoText:
-      "新界及離島涵蓋大型屋苑、村屋及交通安排各異的地點。遇到化糞池、沙井淤塞或戶外渠管問題，可先提供位置及現場資料，再確認所需設備與服務安排。",
     groups: [
       {
         label: "沙田區",
@@ -241,731 +196,173 @@ const REGIONS = [
   },
 ];
 
-const ALL_DISTRICTS = REGIONS.flatMap(r =>
-  r.groups.flatMap(g =>
-    g.items.map(d => ({
-      district: d,
-      region: r.name,
-      regionIdx: REGIONS.indexOf(r),
-    }))
+const LOCALITIES = REGIONS.flatMap(region =>
+  region.groups.flatMap(group =>
+    group.items.map(name => ({ name, region: region.name }))
   )
 );
-
-const getSearchOptionId = (district: (typeof ALL_DISTRICTS)[number]) =>
-  `areas-search-option-${ALL_DISTRICTS.indexOf(district)}`;
-
-const COVERAGE_COUNT = new Set(ALL_DISTRICTS.map(item => item.district)).size;
-
-const AREAS_JSONLD = {
+const JSONLD = {
   "@context": "https://schema.org",
   "@type": "Service",
   "@id": `${SITE_URL}/areas#service`,
+  name: "香港通渠服務地區",
   url: `${SITE_URL}/areas`,
-  serviceType: "24 小時通渠服務",
-  areaServed: ALL_DISTRICTS.map(d => ({ "@type": "Place", name: d.district })),
+  provider: { "@id": BUSINESS_ID },
+  areaServed: REGIONS.map(region => ({ "@type": "Place", name: region.name })),
 };
-
-const STATS = [
-  {
-    icon: MapPin,
-    numericValue: COVERAGE_COUNT,
-    label: "主要服務地點",
-  },
-  {
-    icon: Building,
-    numericValue: DISTRICTS.length,
-    label: "專屬地區頁",
-  },
-  {
-    icon: ShieldCheck,
-    textValue: "先報價",
-    label: "動工前確認收費",
-  },
-];
-
-function CountUpNumber({
-  value,
-  label,
-  duration = 1000,
-}: {
-  value: number;
-  label: string;
-  duration?: number;
-}) {
-  const [displayValue, setDisplayValue] = useState(value);
-  const elementRef = useRef<HTMLSpanElement>(null);
-  const hasAnimatedRef = useRef(false);
-
-  useEffect(() => {
-    const element = elementRef.current;
-
-    if (!element || hasAnimatedRef.current) return;
-
-    const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-    if (reducedMotion || typeof IntersectionObserver === "undefined") {
-      setDisplayValue(value);
-      hasAnimatedRef.current = true;
-      return;
-    }
-
-    let frameId = 0;
-
-    const observer = new IntersectionObserver(
-      entries => {
-        const entry = entries[0];
-
-        if (!entry?.isIntersecting || hasAnimatedRef.current) return;
-
-        hasAnimatedRef.current = true;
-        observer.disconnect();
-        setDisplayValue(0);
-
-        const startedAt = performance.now();
-
-        const update = (now: number) => {
-          const progress = Math.min((now - startedAt) / duration, 1);
-          const easedProgress = 1 - Math.pow(1 - progress, 3);
-
-          setDisplayValue(Math.round(value * easedProgress));
-
-          if (progress < 1) {
-            frameId = requestAnimationFrame(update);
-          } else {
-            setDisplayValue(value);
-          }
-        };
-
-        frameId = requestAnimationFrame(update);
-      },
-      { threshold: 0.35 }
-    );
-
-    observer.observe(element);
-
-    return () => {
-      observer.disconnect();
-      cancelAnimationFrame(frameId);
-    };
-  }, [duration, value]);
-
-  return (
-    <>
-      <span
-        ref={elementRef}
-        data-count-up-value={value}
-        data-count-up-current={displayValue}
-        aria-hidden="true"
-        className="tabular-nums"
-      >
-        {displayValue.toLocaleString("zh-HK")}
-      </span>
-      <span className="sr-only">
-        {value.toLocaleString("zh-HK")} 個{label}
-      </span>
-    </>
-  );
-}
-
-function DistrictPill({
-  name,
-  highlighted,
-}: {
-  name: string;
-  highlighted?: boolean;
-}) {
-  const slug = DISTRICT_PAGES[name];
-  const hl = highlighted
-    ? " ring-2 ring-safety ring-offset-2 animate-[pulse_1.2s_ease-in-out_2]"
-    : "";
-  return slug ? (
-    <Link
-      href={`/areas/${slug}`}
-      data-district={name}
-      className={`btn-smooth inline-flex min-h-[44px] items-center gap-1 rounded-full border border-wagreen/40 bg-wagreen/10 min-h-11 px-4 py-2 text-sm font-bold text-wagreen-dark hover:bg-wagreen hover:text-white${hl}`}
-    >
-      <MapPin className="h-3 w-3" strokeWidth={2.5} />
-      {name}通渠
-      <ArrowRight className="h-3 w-3" strokeWidth={2.5} />
-    </Link>
-  ) : (
-    <span
-      data-district={name}
-      className={`inline-flex min-h-[44px] items-center gap-1 rounded-full border border-border bg-mist min-h-11 px-4 py-2 text-sm font-medium text-navy${hl}`}
-    >
-      <MapPin className="h-3 w-3 text-wagreen" strokeWidth={2.5} />
-      {name}通渠
-    </span>
-  );
-}
-
 export default function Areas() {
-  const { phoneDisplay, phoneHref } = useContactSettings();
-  const { settings } = useSiteSettings();
-
-  const areasJsonLd = {
-    ...AREAS_JSONLD,
-    provider: {
-      "@id": BUSINESS_ID,
-    },
-    availableChannel: {
-      "@type": "ServiceChannel",
-      serviceUrl: `${SITE_URL}/areas`,
-      servicePhone: settings.phoneE164,
-      availableLanguage: ["zh-Hant", "zh-HK"],
-    },
-  };
   const [query, setQuery] = useState("");
-  const [activeRegion, setActiveRegion] = useState(0);
-  const [activeIdx, setActiveIdx] = useState(-1);
-  const [open, setOpen] = useState(false);
-  const [highlightedDistrict, setHighlightedDistrict] = useState<string | null>(
-    null
-  );
-  const searchRef = useRef<HTMLDivElement>(null);
-  const coverageRef = useRef<HTMLElement>(null);
-  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
-  const [, navigate] = useLocation();
-  const matches = useMemo(() => {
-    const q = query.trim();
-    if (!q) return null;
-    return ALL_DISTRICTS.filter(d => d.district.includes(q));
+  const results = useMemo(() => {
+    const value = query.trim().toLocaleLowerCase();
+    return LOCALITIES.filter(
+      item => !value || item.name.includes(value) || item.region.includes(value)
+    );
   }, [query]);
-  const visible = useMemo(
-    () => (matches ? matches.slice(0, 6) : []),
-    [matches]
-  );
-  useEffect(() => {
-    setActiveIdx(current => (current >= visible.length ? -1 : current));
-  }, [visible.length]);
-
-  // 點擊搜尋框以外區域時關閉建議
-  useEffect(() => {
-    const onDown = (e: PointerEvent) => {
-      if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
-        setOpen(false);
-        setActiveIdx(-1);
-      }
-    };
-    document.addEventListener("pointerdown", onDown);
-    return () => document.removeEventListener("pointerdown", onDown);
-  }, []);
-
-  /** 選定一個建議：有專頁 → 跳轉專頁；無專頁 → 切換分區籤、捲動至覆蓋清單並高亮該地區 pill */
-  const goToDistrict = (m: (typeof ALL_DISTRICTS)[number]) => {
-    trackCTA("map", "areas_search", m.district);
-    setOpen(false);
-    setActiveIdx(-1);
-    const slug = DISTRICT_PAGES[m.district];
-    if (slug) {
-      navigate(`/areas/${slug}`);
-      return;
-    }
-    setActiveRegion(m.regionIdx);
-    setQuery("");
-    setHighlightedDistrict(m.district);
-    // 待分區籤內容切換後再捲動至該地區 pill
-    requestAnimationFrame(() => {
-      setTimeout(() => {
-        const el = coverageRef.current?.querySelector(
-          `[data-district="${m.district}"]`
-        );
-        (el ?? coverageRef.current)?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
-      }, 60);
-    });
-    window.setTimeout(() => setHighlightedDistrict(null), 3200);
-  };
-
-  const selectRegion = (index: number, shouldFocus = false) => {
-    setActiveRegion(index);
-
-    if (shouldFocus) {
-      // Tabs stay mounted while panels toggle, so the target ref is available
-      // immediately. Synchronous focus keeps rapid arrow-key presses in sync
-      // with the selected tab instead of waiting for the next animation frame.
-      tabRefs.current[index]?.focus();
-    }
-  };
-
-  const onSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Escape") {
-      setOpen(false);
-      setActiveIdx(-1);
-      return;
-    }
-
-    if (visible.length === 0) return;
-
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-      setOpen(true);
-      setActiveIdx(i => (i + 1) % visible.length);
-    } else if (e.key === "ArrowUp") {
-      e.preventDefault();
-      setOpen(true);
-      setActiveIdx(i => (i <= 0 ? visible.length - 1 : i - 1));
-    } else if (e.key === "Enter" && open) {
-      e.preventDefault();
-      goToDistrict(visible[activeIdx >= 0 ? activeIdx : 0]);
-    }
-  };
-
-  const onTabKeyDown = (
-    e: React.KeyboardEvent<HTMLButtonElement>,
-    index: number
-  ) => {
-    let nextIndex: number | null = null;
-
-    if (e.key === "ArrowRight") {
-      nextIndex = (index + 1) % REGIONS.length;
-    } else if (e.key === "ArrowLeft") {
-      nextIndex = (index - 1 + REGIONS.length) % REGIONS.length;
-    } else if (e.key === "Home") {
-      nextIndex = 0;
-    } else if (e.key === "End") {
-      nextIndex = REGIONS.length - 1;
-    }
-
-    if (nextIndex !== null) {
-      e.preventDefault();
-      selectRegion(nextIndex, true);
-    }
-  };
-
   return (
-    <div className="areas-editorial" data-phase4-page="areas">
+    <div className="areas-page">
       <SEO
         title="服務地區覆蓋｜港九新界及離島通渠查詢｜通渠熊 DrainBear"
-        description="通渠熊 DrainBear 提供港島、九龍、新界及離島主要地區渠務查詢。可按地區搜尋服務資料，並透過 WhatsApp 提供位置及問題詳情，確認上門安排與初步估價。"
+        description="按地區搜尋香港通渠服務資料。港島、九龍、新界及離島可先提供位置及現場情況，確認上門時間、所需設備及報價安排。"
         path="/areas"
-        keywords="通渠服務地區, 港島通渠, 九龍通渠, 新界通渠, 中環通渠, 旺角通渠, 深水埗通渠, 銅鑼灣通渠, 北角通渠, 荃灣通渠, 元朗通渠, 屯門通渠, 將軍澳通渠, 沙田通渠, 觀塘通渠, 24小時通渠"
-        jsonLd={areasJsonLd}
-        breadcrumbs={AREAS_CRUMBS}
+        breadcrumbs={CRUMBS}
+        jsonLd={JSONLD}
       />
-      {/* Hero + 地區速查 */}
-      <section
-        className="relative isolate overflow-hidden bg-[#003566] py-14 text-white md:py-20"
-        data-visual-section="areas-hero"
-      >
-        <GhostFibers
-          className="site-page-hero__fibers"
-          lineColor="#8ed8f4"
-          glowColor="#176da5"
-          backgroundColor="#003566"
-          speed={0.055}
-          scale={2.8}
-          rotationSpeed={0.035}
-          layers={3}
-          glowIntensity={0.45}
-          brightness={0.72}
-          grain={0.008}
-          fps={18}
+      <div className="site-hero-shell">
+        <Breadcrumbs items={CRUMBS} tone="dark" />
+        <EditorialPageHero
+          kicker="服務地區"
+          title="港九新界及離島通渠服務"
+          description="提供地區、樓層及現場相片，先確認上門安排。村屋及離島請說明入口和交通情況。"
+          contactLocation="areas_hero"
         />
-        <Breadcrumbs items={AREAS_CRUMBS} tone="dark" />
-        <div className="container relative z-10">
-          <div className="areas-editorial__hero-grid">
-            <div className="mx-auto max-w-2xl text-center">
-              <div className="mb-3 text-xs font-bold tracking-[0.2em] text-[#9ee7ff]">
-                服務地區
-              </div>
-              <h1 className="text-balance font-display text-4xl font-black text-white md:text-5xl">
-                港九新界及離島通渠服務
-              </h1>
-              <p className="mx-auto mt-4 max-w-xl text-white/75">
-                無論您身處港島、九龍、新界或離島，可先提供所在地點及渠務情況，
-                我們會按交通、工具運送及工作安排確認服務方式與上門時間。
-              </p>
-              {/* 地區速查 */}
-              <div ref={searchRef} className="relative mx-auto mt-8 max-w-md">
-                <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
-                <input
-                  type="search"
-                  value={query}
-                  onChange={e => {
-                    setQuery(e.target.value);
-                    setOpen(true);
-                    setActiveIdx(-1);
-                  }}
-                  onFocus={() => setOpen(true)}
-                  onKeyDown={onSearchKeyDown}
-                  placeholder="輸入您的地區，例如：旺角、沙田…"
-                  className="h-13 w-full rounded-lg border border-border bg-white py-3.5 pl-12 pr-12 text-base text-navy shadow-sm outline-none transition-shadow placeholder:text-muted-foreground/70 focus:border-wagreen focus:ring-2 focus:ring-wagreen/25"
-                  aria-label="搜尋服務地區"
-                  role="combobox"
-                  aria-expanded={open && matches !== null}
-                  aria-autocomplete="list"
-                  aria-controls={SEARCH_LISTBOX_ID}
-                  aria-describedby={SEARCH_STATUS_ID}
-                  aria-activedescendant={
-                    activeIdx >= 0 && visible[activeIdx]
-                      ? getSearchOptionId(visible[activeIdx])
-                      : undefined
-                  }
-                />
-                {query ? (
-                  <button
-                    type="button"
-                    aria-label="清除地區搜尋"
-                    onClick={() => {
-                      setQuery("");
-                      setOpen(false);
-                      setActiveIdx(-1);
-                    }}
-                    className="absolute right-1.5 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-md text-muted-foreground hover:bg-mist hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wagreen"
-                  >
-                    <X className="h-4 w-4" strokeWidth={2.4} />
-                  </button>
-                ) : null}
-                <span
-                  id={SEARCH_STATUS_ID}
-                  className="sr-only"
-                  aria-live="polite"
-                >
-                  {matches === null
-                    ? "輸入地區名稱搜尋"
-                    : matches.length > 0
-                      ? `找到 ${matches.length} 個地區，顯示首 ${visible.length} 個結果`
-                      : `未找到 ${query} 的地區結果`}
-                </span>
-                {open && matches && (
-                  <div
-                    id={SEARCH_LISTBOX_ID}
-                    role="listbox"
-                    className="absolute left-0 right-0 top-full z-30 mt-2 max-h-[min(22rem,52dvh)] overflow-y-auto overscroll-contain rounded-lg border border-border bg-white text-left shadow-xl"
-                  >
-                    {matches.length > 0 ? (
-                      <div className="sticky top-0 z-10 border-b border-border bg-mist px-4 py-2 text-xs font-semibold text-muted-foreground">
-                        找到 {matches.length} 個地區
-                      </div>
-                    ) : null}
-                    {matches.length > 0 ? (
-                      visible.map((m, idx) => {
-                        const slug = DISTRICT_PAGES[m.district];
-                        const optionId = getSearchOptionId(m);
-                        const inner = (
-                          <>
-                            <span className="flex items-center gap-2.5">
-                              <MapPin
-                                className="h-4 w-4 text-wagreen"
-                                strokeWidth={2.4}
-                              />
-                              <span className="font-bold text-navy">
-                                {m.district}通渠
-                              </span>
-                              <span className="text-xs text-muted-foreground">
-                                {m.region}
-                              </span>
-                            </span>
-                            <span className="inline-flex items-center gap-1 text-xs font-bold text-wagreen-dark">
-                              {slug ? "專屬地區頁" : "查看覆蓋詳情"}
-                              <ArrowRight className="h-3.5 w-3.5" />
-                            </span>
-                          </>
-                        );
-                        return (
-                          <button
-                            key={m.district}
-                            id={optionId}
-                            type="button"
-                            role="option"
-                            aria-selected={activeIdx === idx}
-                            tabIndex={-1}
-                            onClick={() => goToDistrict(m)}
-                            onMouseEnter={() => setActiveIdx(idx)}
-                            className={`flex min-h-14 w-full items-center justify-between gap-3 px-4 py-3 text-left transition-colors ${
-                              activeIdx === idx ? "bg-mist" : "hover:bg-mist"
-                            }`}
-                          >
-                            {inner}
-                          </button>
-                        );
-                      })
-                    ) : (
-                      <div
-                        className="px-4 py-4 text-sm text-muted-foreground"
-                        role="status"
-                        aria-live="polite"
-                      >
-                        未找到「{query}」？請直接致電 {phoneDisplay} 確認。
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            <figure className="areas-editorial__hero-media">
-              <img
-                src={AREAS_HERO_IMAGE}
-                alt="通渠師傅在香港住宅現場檢查排水問題"
-                width="1280"
-                height="960"
-                loading="eager"
-                fetchPriority="high"
-                decoding="async"
-              />
-              <figcaption>服務示意圖・上門時間及所需設備按地點確認</figcaption>
-            </figure>
-          </div>
-        </div>
-      </section>
-
-      {/* 覆蓋統計帶 */}
-      <section className="bg-white py-12 md:py-14">
+      </div>
+      <section className="brand-section" aria-labelledby="area-search-heading">
         <div className="container">
-          <div className="reveal mx-auto grid max-w-3xl grid-cols-3 gap-4">
-            {STATS.map(s => (
-              <div
-                key={s.label}
-                className="card-float rounded-lg border border-border bg-white px-4 py-5 text-center"
-              >
-                <s.icon
-                  className="mx-auto h-5 w-5 text-wagreen"
-                  strokeWidth={2.2}
-                />
-                <div className="mt-2 font-display text-xl font-black text-navy md:text-2xl">
-                  {typeof s.numericValue === "number" ? (
-                    <CountUpNumber value={s.numericValue} label={s.label} />
-                  ) : (
-                    s.textValue
-                  )}
-                </div>
-                <div className="mt-1 text-xs text-muted-foreground md:text-sm">
-                  {s.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 專屬地區著陸頁精選卡 */}
-      <section className="bg-white py-4 md:py-6">
-        <div className="container">
-          {/* 互動式香港地圖 */}
-          <div className="reveal mb-12 md:mb-16">
-            <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
-              <div>
-                <div className="mb-2 text-xs font-bold tracking-[0.2em] text-safety">
-                  互動地圖
-                </div>
-                <h2 className="font-display text-2xl font-black text-navy md:text-3xl">
-                  點擊地圖，查看您的地區
-                </h2>
-              </div>
-              <p className="max-w-md text-sm text-muted-foreground">
-                港九新界及離島主要地區均可查詢。點擊所在地區，即可查看服務資料及專屬服務頁入口。
-              </p>
-            </div>
-            <HongKongMap />
-          </div>
-
-          <div className="reveal mb-6 flex flex-wrap items-end justify-between gap-3">
+          <div className="section-heading">
             <div>
-              <div className="mb-2 text-xs font-bold tracking-[0.2em] text-safety">
-                專屬服務地區
-              </div>
-              <h2 className="font-display text-2xl font-black text-navy md:text-3xl">
-                {DISTRICTS.length} 個熱門地區專屬服務頁
-              </h2>
+              <p className="brand-eyebrow">按位置查詢</p>
+              <h2 id="area-search-heading">搵你所在的地區</h2>
             </div>
-            <p className="max-w-md text-sm text-muted-foreground">
-              現有專屬頁涵蓋港九新界多個熱門地區，可查看當區常見渠務情況、服務流程及查詢方式。
-            </p>
           </div>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {DISTRICTS.map((d, i) => (
-              <Link
-                key={d.slug}
-                href={`/areas/${d.slug}`}
-                className="card-float card-accent reveal group flex flex-col justify-between rounded-lg border border-border bg-gradient-to-br from-mist/70 to-white p-6"
-                data-reveal-delay={(i % 3) * 70}
-              >
-                <div>
-                  <div className="flex items-center justify-between">
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-navy px-3 py-1 text-xs font-bold text-wagreen">
-                      <MapPin className="h-3 w-3" strokeWidth={2.5} />
-                      {d.region}
-                    </span>
-                    <span className="text-[11px] font-bold tracking-[0.18em] text-muted-foreground">
-                      {d.en.toUpperCase()}
-                    </span>
-                  </div>
-                  <h3 className="mt-4 font-display text-xl font-black text-navy md:text-2xl">
-                    {d.name}通渠專頁
-                  </h3>
-                  <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
-                    查看{d.name}常見渠務情況、服務流程、附近服務範圍及查詢方式。
-                  </p>
-                  <div className="mt-4 flex flex-wrap gap-1.5">
-                    {d.landmarks.slice(0, 3).map(l => (
-                      <span
-                        key={l}
-                        className="rounded-full border border-border bg-white px-2.5 py-1 text-xs text-navy/70"
-                      >
-                        {l}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <span className="btn-smooth mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-wagreen-dark group-hover:gap-2.5">
-                  查看{d.name}通渠詳情 <ArrowRight className="h-4 w-4" />
-                </span>
-              </Link>
-            ))}
+          <div className="area-search">
+            <label htmlFor="area-search">輸入地區或屋苑附近地點</label>
+            <div>
+              <Search aria-hidden="true" />
+              <input
+                id="area-search"
+                type="search"
+                value={query}
+                onChange={event => setQuery(event.target.value)}
+                placeholder="例如：觀塘、荃灣、東涌"
+                aria-controls="area-search-results"
+              />
+            </div>
           </div>
+          <p role="status" className="section-footnote">
+            {query
+              ? `找到 ${results.length} 個相關地點。`
+              : "以下為地區入口；實際安排按具體地址及當時人手確認。"}
+          </p>
+          {query ? (
+            <ul id="area-search-results" className="area-results">
+              {results.map(item => (
+                <li key={item.name}>
+                  {DISTRICT_SLUGS[item.name] ? (
+                    <Link href={`/areas/${DISTRICT_SLUGS[item.name]}`}>
+                      {item.name}通渠
+                      <ArrowRight aria-hidden="true" />
+                    </Link>
+                  ) : (
+                    <Link
+                      href={`/areas#coverage-${REGIONS.findIndex(r => r.name === item.region)}`}
+                    >
+                      {item.name}
+                      <span>{item.region}安排</span>
+                      <ArrowRight aria-hidden="true" />
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div id="area-search-results" className="area-directory">
+              {DISTRICTS.map(d => (
+                <Link
+                  className="area-card"
+                  href={`/areas/${d.slug}`}
+                  key={d.slug}
+                >
+                  <span className="brand-eyebrow">{d.region}</span>
+                  <h3>{d.name}通渠</h3>
+                  <p>{d.painPoints[0]?.title || "按現場情況確認處理方法"}</p>
+                  <span>
+                    查看當區服務
+                    <ArrowRight aria-hidden="true" />
+                  </span>
+                </Link>
+              ))}
+            </div>
+          )}
+          {query && results.length === 0 ? (
+            <p>未找到地點？可直接 WhatsApp 提供地址，我們再確認服務安排。</p>
+          ) : null}
         </div>
       </section>
-
-      {/* 港九新界及離島服務範圍（分頁籤式） */}
       <section
-        ref={coverageRef}
         id="coverage"
-        className="scroll-mt-24 bg-white py-12 md:py-16"
+        className="brand-section brand-section--soft"
+        aria-labelledby="coverage-heading"
       >
         <div className="container">
-          <div className="reveal mb-8 flex flex-wrap items-end justify-between gap-3">
+          <div className="section-heading">
             <div>
-              <div className="mb-2 text-xs font-bold tracking-[0.2em] text-safety">
-                完整服務範圍
-              </div>
-              <h2 className="font-display text-2xl font-black text-navy md:text-3xl">
-                三大分區完整覆蓋
-              </h2>
+              <p className="brand-eyebrow">地區與鄰近位置</p>
+              <h2 id="coverage-heading">完整地點資料</h2>
             </div>
-            <p className="max-w-md text-sm text-muted-foreground">
-              按行政區及主要地點分組排列。綠色地區設有專屬服務頁，其他地區可先提供位置查詢安排。
-            </p>
           </div>
-
-          {/* 分區切換籤 */}
-          <div
-            className="reveal grid grid-cols-3 gap-2 rounded-lg border border-border bg-mist p-1.5 md:gap-2.5"
-            role="tablist"
-            aria-label="選擇分區"
-          >
-            {REGIONS.map((r, i) => (
-              <button
-                key={r.name}
-                id={`areas-region-tab-${i}`}
-                ref={element => {
-                  tabRefs.current[i] = element;
-                }}
-                type="button"
-                role="tab"
-                aria-selected={activeRegion === i}
-                aria-controls={`areas-region-panel-${i}`}
-                tabIndex={activeRegion === i ? 0 : -1}
-                onClick={() => selectRegion(i)}
-                onKeyDown={e => onTabKeyDown(e, i)}
-                className={`btn-smooth flex min-h-[52px] flex-col items-center justify-center gap-0.5 rounded-md px-2 py-2.5 text-sm font-bold transition-colors md:flex-row md:gap-2.5 md:text-base ${
-                  activeRegion === i
-                    ? "bg-navy text-white shadow-[0_4px_16px_rgba(11,19,43,0.25)]"
-                    : "text-navy/60 hover:bg-white hover:text-navy"
-                }`}
+          <div className="coverage-groups">
+            {REGIONS.map((region, index) => (
+              <details
+                key={region.name}
+                id={`coverage-${index}`}
+                open={
+                  query && results.some(item => item.region === region.name)
+                    ? true
+                    : undefined
+                }
               >
-                <r.icon
-                  className={`h-4 w-4 md:h-5 md:w-5 ${activeRegion === i ? "text-wagreen" : ""}`}
-                  strokeWidth={2.2}
-                />
-                {r.name}
-              </button>
-            ))}
-          </div>
-
-          {/* 分區內容保留在 DOM，讓每個 tab 的 aria-controls 都指向有效 panel。 */}
-          {REGIONS.map((region, regionIndex) => (
-            <div
-              key={region.name}
-              id={`areas-region-panel-${regionIndex}`}
-              role="tabpanel"
-              aria-labelledby={`areas-region-tab-${regionIndex}`}
-              hidden={activeRegion !== regionIndex}
-              className="fade-up mt-6 rounded-lg border border-border bg-white p-6 md:p-8"
-            >
-              <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-                <div className="max-w-2xl">
-                  <div className="text-[11px] font-bold tracking-[0.2em] text-muted-foreground">
-                    {region.en}
-                  </div>
-                  <h3 className="mt-1 font-display text-2xl font-black text-navy">
-                    {region.name}通渠服務
-                  </h3>
-                  <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">
-                    {region.seoText}
-                  </p>
-                </div>
-                <span className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full bg-wagreen/10 min-h-11 px-4 py-2 text-sm font-bold text-wagreen-dark">
-                  <Clock className="h-4 w-4" strokeWidth={2.5} />
-                  {region.eta}
-                </span>
-              </div>
-
-              <div className="mt-7 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
-                {region.groups.map(g => (
-                  <div key={g.label}>
-                    <div className="flex items-center gap-2 border-b border-border pb-2">
-                      <MapPin
-                        className="h-3.5 w-3.5 text-wagreen"
-                        strokeWidth={2.5}
-                      />
-                      <span className="text-sm font-black text-navy">
-                        {g.label}
-                      </span>
-                      <span className="text-[11px] font-semibold text-muted-foreground">
-                        {g.items.length} 區
-                      </span>
-                    </div>
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      {g.items.map(d => (
-                        <DistrictPill
-                          key={d}
-                          name={d}
-                          highlighted={highlightedDistrict === d}
-                        />
-                      ))}
-                    </div>
+                <summary>{region.name}</summary>
+                <p>{region.desc}</p>
+                {region.groups.map(group => (
+                  <div key={group.label}>
+                    <h3>{group.label}</h3>
+                    <nav aria-label={`${group.label}服務地點`}>
+                      {group.items.map(name =>
+                        DISTRICT_SLUGS[name] ? (
+                          <Link
+                            key={name}
+                            href={`/areas/${DISTRICT_SLUGS[name]}`}
+                          >
+                            {name}通渠
+                          </Link>
+                        ) : (
+                          <span key={name}>{name}</span>
+                        )
+                      )}
+                    </nav>
                   </div>
                 ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* 估價及收費流程 */}
-        <div className="container mt-16">
-          <div className="dot-grid rounded-lg bg-navy px-8 py-12 text-center md:px-16">
-            <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-white/10 ring-1 ring-white/20">
-              <ShieldCheck className="h-6 w-6 text-wagreen" strokeWidth={2} />
-            </div>
-            <h2 className="text-balance font-display text-2xl font-black text-white md:text-3xl">
-              先報價，確認後才動工
-            </h2>
-            <p className="mx-auto mt-4 max-w-xl text-white/60">
-              先透過 WhatsApp
-              提供位置、渠務問題及現場資料，我們會說明初步估價；師傅現場檢查後，動工前確認處理方式及總價。
-            </p>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-              <WhatsAppButton
-                className="px-8 py-4 text-base"
-                label="查詢我的地區"
-                trackLocation="areas_footer_cta"
-              />
-              <a
-                href={phoneHref}
-                onClick={() => trackCTA("phone", "areas_footer_cta")}
-                className="btn-smooth inline-flex items-center gap-2 rounded-lg border border-white/25 bg-white/5 px-7 py-4 text-base font-bold text-white hover:bg-white hover:text-navy"
-              >
-                <Phone className="h-[18px] w-[18px]" strokeWidth={2.2} />
-                {phoneDisplay}
-              </a>
-            </div>
+              </details>
+            ))}
           </div>
+          <p className="section-footnote">
+            離島及偏遠地點的上門安排，須先確認交通、入口及工具運送條件。
+          </p>
+          <nav className="related-inline" aria-label="地區服務相關資料">
+            <Link href="/services">選擇通渠服務</Link>
+            <Link href="/guide">查看收費參考</Link>
+            <Link href="/service-process">上門安排流程</Link>
+          </nav>
         </div>
       </section>
     </div>

@@ -3,7 +3,18 @@
  * 風格：Premium SaaS Minimalism，大量留白、8px 圓角、懸浮陰影卡片、無 Emoji
  * SEO：Service JSON-LD + FAQPage + 麵包屑 + 長內容當區關鍵字
  */
-import { Link, useParams } from "wouter";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
+import { WhatsAppButton } from "@/components/Layout";
+import SEO from "@/components/SEO";
+import { BUSINESS_ID, SITE_URL, WEBSITE_ID } from "@/config/site";
+import {
+  useContactSettings,
+  useSiteSettings,
+} from "@/contexts/SiteSettingsContext";
+import { goThanksAfterWhatsApp, trackCTA } from "@/lib/analytics";
+import { getDistrict } from "@/lib/districtData";
+import NotFound from "@/pages/NotFound";
 import {
   ArrowRight,
   BadgeCheck,
@@ -14,18 +25,7 @@ import {
   ShieldCheck,
   Wrench,
 } from "lucide-react";
-import { WhatsAppButton } from "@/components/Layout";
-import SEO from "@/components/SEO";
-import Breadcrumbs from "@/components/Breadcrumbs";
-import GhostFibers from "@/components/GhostFibers/GhostFibers";
-import {
-  useContactSettings,
-  useSiteSettings,
-} from "@/contexts/SiteSettingsContext";
-import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
-import { getDistrict } from "@/lib/districtData";
-import NotFound from "@/pages/NotFound";
-import { BUSINESS_ID, SITE_URL, WEBSITE_ID } from "@/config/site";
+import { Link, useParams } from "wouter";
 
 export default function District() {
   const { slug } = useParams<{ slug: string }>();
@@ -69,7 +69,11 @@ export default function District() {
       availableChannel: {
         "@type": "ServiceChannel",
         serviceUrl: `${SITE_URL}/areas/${d.slug}`,
-        servicePhone: settings.phoneE164,
+        servicePhone: {
+          "@type": "ContactPoint",
+          telephone: settings.phoneE164,
+          contactType: "customer service",
+        },
         availableLanguage: ["zh-Hant", "zh-HK"],
       },
     },
@@ -99,61 +103,20 @@ export default function District() {
         breadcrumbs={crumbs}
       />
       {/* Hero */}
-      <section className="relative isolate overflow-hidden bg-[#003566] py-14 text-white md:py-20">
-        <GhostFibers
-          className="site-page-hero__fibers"
-          lineColor="#8ed8f4"
-          glowColor="#176da5"
-          backgroundColor="#003566"
-          speed={0.055}
-          scale={2.8}
-          rotationSpeed={0.035}
-          layers={3}
-          glowIntensity={0.45}
-          brightness={0.72}
-          grain={0.008}
-          fps={18}
-        />
+      <div className="site-hero-shell">
         <Breadcrumbs items={crumbs} tone="dark" />
-        <div className="container relative z-10">
-          <div className="max-w-2xl">
-            <div className="mb-3 flex items-center gap-2 text-xs font-bold tracking-[0.2em] text-[#9ee7ff]">
-              <MapPin className="h-4 w-4" strokeWidth={2.5} />
-              {d.en} · {d.region}
-            </div>
-            <h1 className="text-balance font-display text-4xl font-black text-white md:text-5xl">
-              {d.heroTitle}
-            </h1>
-            <p className="mt-4 text-white/75 md:text-lg">{d.heroDesc}</p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <a
-                href={waDistrict}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => {
-                  trackCTA("whatsapp", "district_hero", d.name);
-                  goThanksAfterWhatsApp("district_hero");
-                }}
-                className="btn-smooth inline-flex items-center justify-center gap-2 rounded-lg bg-wagreen px-7 py-3.5 text-base font-bold text-white shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark"
-              >
-                <MessageCircle className="h-5 w-5" strokeWidth={2.4} />
-                WhatsApp {d.name}師傅
-              </a>
-              <a
-                href={phoneHref}
-                onClick={() => trackCTA("phone", "district_hero", d.name)}
-                className="btn-smooth inline-flex items-center justify-center gap-2 rounded-lg bg-white/10 px-7 py-3.5 text-base font-bold text-white ring-1 ring-inset ring-white/25 hover:bg-white/18"
-              >
-                <Phone className="h-5 w-5" strokeWidth={2.2} />
-                {phoneDisplay}
-              </a>
-            </div>
-            <p className="mt-4 text-xs text-white/60">
-              現場檢查後確認總價才動工・接納工程可免檢查費
-            </p>
-          </div>
-        </div>
-      </section>
+        <EditorialPageHero
+          kicker={`${d.region} · ${d.name}通渠`}
+          title={`${d.name}通渠服務`}
+          description={`處理${d.painPoints
+            .slice(0, 2)
+            .map(item => item.title)
+            .join("、")}。提供地區及現場相片，先確認上門時間與報價。`}
+          contactLocation="district_hero"
+          topic={d.name}
+          message={`您好，我位於${d.name}，想查詢通渠服務報價。`}
+        />
+      </div>
 
       {/* 當區介紹（SEO 長內容） */}
       <section className="bg-white py-14 md:py-16">
@@ -236,7 +199,7 @@ export default function District() {
               常見情況
             </div>
             <h2 className="font-display text-2xl font-black text-navy md:text-3xl">
-              {d.name}最常見的 4 大渠務求助
+              {d.name}常見渠務情況
             </h2>
           </div>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">

@@ -3,13 +3,12 @@
  * 設計語言：Premium SaaS Minimalism（navy #0B132B、WhatsApp 綠、8px 圓角、懸浮陰影、平滑過渡）
  * 桌面：右下角固定；手機：升高避開底部固定 CTA 列
  */
-import { useEffect, useState } from "react";
-import { MessageCircle, X, ArrowRight } from "lucide-react";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
-import { trackCTA, goThanksAfterWhatsApp } from "@/lib/analytics";
+import { goThanksAfterWhatsApp, trackCTA } from "@/lib/analytics";
+import { ArrowRight, MessageCircle, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
-const LOGO =
-  "https://res.cloudinary.com/pgjztf2p/image/upload/f_auto,q_auto:eco,c_fill,w_96,h_96/v1785314740/A_pure_black_and_white_vector_mascot_logo_of_a_con-1785146902762_k8ruvx.jpg";
+const LOGO = "/favicon-192x192.png";
 
 const QUICK_TOPICS = [
   { label: "坐廁／馬桶淤塞", msg: "您好，我想查詢坐廁／馬桶淤塞的通渠報價。" },
@@ -26,12 +25,14 @@ const QUICK_TOPICS = [
 
 export default function WhatsAppWidget() {
   const [open, setOpen] = useState(false);
-  const [pulse, setPulse] = useState(true);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
   const { whatsappHref } = useContactSettings();
 
-  // 開啟後停止呼吸提示動畫
+  // 開啟面板後，將鍵盤焦點移至關閉按鈕。
   useEffect(() => {
-    if (open) setPulse(false);
+    if (open)
+      panelRef.current?.querySelector<HTMLButtonElement>("button")?.focus();
   }, [open]);
 
   return (
@@ -48,6 +49,14 @@ export default function WhatsAppWidget() {
             : "pointer-events-none translate-y-2 scale-95 opacity-0"
         }`}
         style={{ transitionTimingFunction: "cubic-bezier(0.23, 1, 0.32, 1)" }}
+        id="whatsapp-panel"
+        ref={panelRef}
+        onKeyDown={event => {
+          if (event.key === "Escape") {
+            setOpen(false);
+            triggerRef.current?.focus();
+          }
+        }}
         role="dialog"
         aria-label="WhatsApp 即時查詢"
         aria-hidden={!open}
@@ -72,8 +81,11 @@ export default function WhatsAppWidget() {
             <div className="text-xs text-wagreen">24 小時接受渠務查詢</div>
           </div>
           <button
-            onClick={() => setOpen(false)}
-            className="btn-smooth rounded-lg p-1.5 text-white/60 hover:bg-white/10 hover:text-white"
+            onClick={() => {
+              setOpen(false);
+              triggerRef.current?.focus();
+            }}
+            className="btn-smooth inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg p-1.5 text-white/60 hover:bg-white/10 hover:text-white"
             aria-label="關閉對話框"
           >
             <X className="h-4 w-4" strokeWidth={2.5} />
@@ -129,14 +141,13 @@ export default function WhatsAppWidget() {
 
       {/* 懸浮按鈕 */}
       <button
+        ref={triggerRef}
+        aria-controls="whatsapp-panel"
         onClick={() => setOpen(!open)}
         className="btn-smooth pointer-events-auto relative flex h-12 w-12 items-center justify-center rounded-full bg-navy text-white shadow-[0_8px_24px_rgba(11,19,43,0.4)] hover:bg-navy-light active:scale-95 md:h-14 md:w-14 md:bg-wagreen md:shadow-[0_8px_24px_rgba(37,211,102,0.45)] md:hover:bg-wagreen-dark md:hover:shadow-[0_10px_32px_rgba(37,211,102,0.55)]"
         aria-label={open ? "關閉 WhatsApp 對話框" : "開啟 WhatsApp 對話框"}
         aria-expanded={open}
       >
-        {pulse && !open && (
-          <span className="absolute inset-0 hidden animate-ping rounded-full bg-wagreen/50 [animation-duration:2s] md:block" />
-        )}
         <span
           className="relative flex items-center justify-center transition-transform duration-200"
           style={{
@@ -148,7 +159,7 @@ export default function WhatsAppWidget() {
             <X className="h-5 w-5 md:h-6 md:w-6" strokeWidth={2.5} />
           ) : (
             <MessageCircle
-              className="h-5 w-5 text-wagreen md:h-6 md:w-6 md:text-white"
+              className="h-5 w-5 text-wagreen md:h-6 md:w-6 md:text-navy"
               strokeWidth={2.4}
             />
           )}

@@ -2,7 +2,9 @@
 
 ## Status
 
-PR #20 design contract.
+Historical PR #20 design contract. The user's subsequent full-site refresh
+supersedes this homepage-only scope and acceptance criteria; see
+[the 2026-10-08 refresh report](site-quality-refresh-2026-10-08.md).
 
 This document freezes the scope and acceptance criteria for the homepage
 editorial redesign. It does not change analytics taxonomy, attribution,

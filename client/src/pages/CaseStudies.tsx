@@ -1,13 +1,13 @@
-import { ArrowRight, CalendarDays, MapPin } from "lucide-react";
-import { Link } from "wouter";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import GhostFibers from "@/components/GhostFibers/GhostFibers";
+import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
+import { WhatsAppButton } from "@/components/Layout";
 import QuoteRequestForm from "@/components/QuoteRequestForm";
 import SEO from "@/components/SEO";
-import { WhatsAppButton } from "@/components/Layout";
 import { BUSINESS_ID, SITE_URL, WEBSITE_ID } from "@/config/site";
 import { formatCaseDate } from "@/lib/caseRepository";
 import { useCaseStudies } from "@/lib/useCases";
+import { ArrowRight, CalendarDays, MapPin } from "lucide-react";
+import { Link } from "wouter";
 
 const CRUMBS = [
   { name: "首頁", path: "/" },
@@ -58,50 +58,15 @@ export default function CaseStudies() {
         breadcrumbs={CRUMBS}
         contentReady={!isLoading}
       />
-      <header className="case-studies-hero relative isolate overflow-hidden bg-[#003566] text-white">
-        <GhostFibers
-          className="site-page-hero__fibers"
-          lineColor="#8ed8f4"
-          glowColor="#176da5"
-          backgroundColor="#003566"
-          speed={0.055}
-          scale={2.8}
-          rotationSpeed={0.035}
-          layers={3}
-          glowIntensity={0.45}
-          brightness={0.72}
-          grain={0.008}
-          fps={18}
-        />
+      <div className="site-hero-shell">
         <Breadcrumbs items={CRUMBS} tone="dark" />
-        <div className="db-container case-studies-hero__grid relative z-10">
-          <div>
-            <p className="text-xs font-black uppercase tracking-[0.16em] text-[#9ee7ff]">
-              Field records / 工程紀錄
-            </p>
-            <h1 className="case-studies-hero__title mt-5 max-w-2xl font-display font-black text-white">
-              現場問題、做法與結果，逐項記錄。
-            </h1>
-          </div>
-          <div className="case-studies-hero__support">
-            <p className="max-w-xl text-base leading-8 text-white/75 lg:justify-self-end">
-              此頁只顯示已在內容系統正式發佈的工程紀錄。個案會隱去客戶完整地址，並列出工程日期、地區、設備及完成測試；不同現場不能視為固定報價或時間保證。
-            </p>
-            <figure className="case-studies-hero__media">
-              <img
-                src="/images/home-drain-technician.jpg"
-                alt="通渠師傅在現場進行排水工程檢查"
-                width="960"
-                height="1280"
-                loading="eager"
-                fetchPriority="high"
-                decoding="async"
-              />
-              <figcaption>已發佈工程紀錄・實際安排按現場確認</figcaption>
-            </figure>
-          </div>
-        </div>
-      </header>
+        <EditorialPageHero
+          kicker="工程紀錄"
+          title="通渠工程案例"
+          description="查看已正式發佈的工程日期、地區、處理方法及結果。個案隱去完整地址；每個現場的收費和工序，須另外確認。"
+          contactLocation="cases_hero"
+        />
+      </div>
 
       <div className="db-container py-12 md:py-16">
         {isLoading ? (

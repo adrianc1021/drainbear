@@ -2,13 +2,13 @@
  * 通渠熊 DrainBear — 常見問題
  * Native details elements keep every answer present in prerendered HTML.
  */
+import Breadcrumbs from "@/components/Breadcrumbs";
+import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
+import { WhatsAppButton } from "@/components/Layout";
+import SEO from "@/components/SEO";
+import { BUSINESS_ID, SITE_URL, WEBSITE_ID } from "@/config/site";
 import { ArrowRight, HelpCircle } from "lucide-react";
 import { Link } from "wouter";
-import { WhatsAppButton } from "@/components/Layout";
-import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
-import SEO from "@/components/SEO";
-import Breadcrumbs from "@/components/Breadcrumbs";
-import { BUSINESS_ID, SITE_URL, WEBSITE_ID } from "@/config/site";
 
 const FAQ_CRUMBS = [
   { name: "首頁", path: "/" },
@@ -118,6 +118,7 @@ export default function FAQ() {
       <div className="site-hero-shell">
         <Breadcrumbs items={FAQ_CRUMBS} tone="dark" />
         <EditorialPageHero
+          contactLocation="faq_hero"
           kicker="常見問題"
           title="常見問題"
           description="以直接答案整理收費、緊急處理、上門安排、施工及管道保養問題，方便您快速判斷下一步。"
@@ -126,7 +127,6 @@ export default function FAQ() {
             alt: "通渠師傅在住宅現場處理排水問題",
             caption: "如有污水外溢或水位上升，請先停止用水並提供現場資料",
           }}
-          fibers={false}
         />
       </div>
 

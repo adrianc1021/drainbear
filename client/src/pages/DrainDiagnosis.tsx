@@ -1,21 +1,15 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import {
-  ArrowLeft,
-  ArrowRight,
-  Check,
-  CircleAlert,
-  MessageCircle,
-  RotateCcw,
-  SearchCheck,
-  ShieldAlert,
-} from "lucide-react";
-import { Link } from "wouter";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import GhostFibers from "@/components/GhostFibers/GhostFibers";
 import DistrictAutocomplete from "@/components/DistrictAutocomplete";
+import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
 import SEO from "@/components/SEO";
-import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import { useContactHandoff } from "@/contexts/ContactHandoffContext";
+import { useContactSettings } from "@/contexts/SiteSettingsContext";
+import {
+  goThanksAfterWhatsApp,
+  sendEvent,
+  trackCTA,
+  trackNavClick,
+} from "@/lib/analytics";
 import {
   buildDiagnosisResult,
   DIAGNOSIS_LOCATIONS,
@@ -27,13 +21,19 @@ import {
   type DiagnosisScope,
   type DiagnosisSymptom,
 } from "@/lib/drainDiagnosis";
-import {
-  goThanksAfterWhatsApp,
-  sendEvent,
-  trackCTA,
-  trackNavClick,
-} from "@/lib/analytics";
 import type { MapDistrict } from "@/lib/hkDistrictPaths";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Check,
+  CircleAlert,
+  MessageCircle,
+  RotateCcw,
+  SearchCheck,
+  ShieldAlert,
+} from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Link } from "wouter";
 
 const CRUMBS = [
   { name: "首頁", path: "/" },
@@ -189,39 +189,15 @@ export default function DrainDiagnosis() {
         }}
       />
       <div>
-        <section className="relative isolate overflow-hidden bg-[#003566] py-12 text-white md:py-16">
-          <GhostFibers
-            className="site-page-hero__fibers"
-            lineColor="#8ed8f4"
-            glowColor="#176da5"
-            backgroundColor="#003566"
-            speed={0.055}
-            scale={2.8}
-            rotationSpeed={0.035}
-            layers={3}
-            glowIntensity={0.45}
-            brightness={0.72}
-            grain={0.008}
-            fps={18}
-          />
+        <div className="site-hero-shell">
           <Breadcrumbs items={CRUMBS} tone="dark" />
-          <div className="container relative z-10 grid items-end gap-8 pt-6 lg:grid-cols-[1fr_0.7fr]">
-            <div className="max-w-3xl">
-              <p className="text-xs font-bold tracking-[0.18em] text-[#9ee7ff]">
-                現場問題判斷
-              </p>
-              <h1 className="mt-3 text-balance font-display text-4xl font-black text-white md:text-5xl">
-                先看症狀，再決定下一步
-              </h1>
-              <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/75 md:text-lg">
-                選擇現場情況後，取得安全措施、可能涉及的範圍及相關服務方向。網上結果不能取代現場檢查。
-              </p>
-            </div>
-            <div className="border-l-4 border-safety bg-white px-5 py-4 text-sm leading-relaxed text-navy">
-              如有污水外溢、水位持續上升或附近滲漏，先停止用水並避免直接接觸污水。
-            </div>
-          </div>
-        </section>
+          <EditorialPageHero
+            kicker="渠務問題判斷"
+            title="先看症狀，再決定下一步"
+            description="選擇現場情況，整理安全措施及可能涉及的範圍。結果只供初步參考，不能取代現場檢查。"
+            contactLocation="draindiagnosis_hero"
+          />
+        </div>
 
         <section className="py-12 md:py-16">
           <div className="container grid gap-10 lg:grid-cols-[0.28fr_0.72fr] lg:gap-16">
@@ -240,7 +216,9 @@ export default function DrainDiagnosis() {
                   <li
                     key={item.label}
                     className={`flex min-h-11 items-center gap-3 text-xs font-bold lg:text-sm ${
-                      index <= step || result ? "text-navy" : "text-navy/40"
+                      index <= step || result
+                        ? "text-navy"
+                        : "text-muted-foreground"
                     }`}
                   >
                     <span
@@ -339,7 +317,7 @@ export default function DrainDiagnosis() {
                         <SearchCheck className="mt-1 h-6 w-6 shrink-0 text-wagreen-dark" />
                       )}
                       <div>
-                        <p className="text-xs font-bold tracking-[0.15em] text-navy/55">
+                        <p className="text-xs font-bold tracking-[0.15em] text-muted-foreground">
                           初步方向
                         </p>
                         <h2
@@ -377,7 +355,7 @@ export default function DrainDiagnosis() {
                     </div>
 
                     <div className="border border-border bg-mist/55 p-6">
-                      <p className="text-xs font-bold tracking-[0.14em] text-navy/50">
+                      <p className="text-xs font-bold tracking-[0.14em] text-muted-foreground">
                         相關服務方向
                       </p>
                       <Link

@@ -1,23 +1,10 @@
+import { SiteSettingsProvider } from "@/contexts/SiteSettingsContext";
+import { SERVICE_PAGES } from "@/lib/serviceData";
+import Home from "@/pages/Home";
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
+import { describe, expect, it } from "vitest";
 import { Router } from "wouter";
-import { describe, expect, it, vi } from "vitest";
-import { SiteSettingsProvider } from "@/contexts/SiteSettingsContext";
-import Home from "@/pages/Home";
-
-// The network-backed article hook is the boundary: keep the real page,
-// contact settings, routing and image URL handling.
-const content = vi.hoisted(() => ({
-  posts: [] as any[],
-}));
-vi.mock("@/lib/useBlog", () => ({
-  useLatestBlogPosts: () => ({
-    posts: content.posts,
-    isLoading: false,
-    isFallback: false,
-    error: null,
-  }),
-}));
 
 function renderHome() {
   return renderToStaticMarkup(
@@ -29,79 +16,44 @@ function renderHome() {
   );
 }
 
-describe("homepage content and discovery", () => {
-  it("keeps the focused conversion sections and removes the former information-heavy bands", () => {
+describe("homepage contact and discovery", () => {
+  it("provides the requested hotline and WhatsApp destinations before the service directory", () => {
     const html = renderHome();
     expect(html.match(/<h1\b/g)).toHaveLength(1);
-    expect(html).toContain('href="https://wa.me/85295588260?');
     expect(html).toContain('href="tel:+85295588260"');
-    expect(html).toContain("首頁延伸入口");
-    for (const section of [
-      "promise",
-      "common-problems",
-      "photo-quote",
-      "process",
-      "journal",
-      "faq",
-      "final-cta",
-    ]) {
-      expect(html).toContain(`data-pr20-section="${section}"`);
-    }
-    for (const removedSection of [
-      "quick-service",
-      "diagnosis-story",
-      "cases",
-      "method-comparison",
-      "field-evidence",
-      "capability",
-      "calculator",
-    ]) {
-      expect(html).not.toContain(`data-pr20-section="${removedSection}"`);
-    }
+    expect(html).toContain('href="https://wa.me/85295588260?');
+    expect(html.indexOf("24小時特快通渠熱線")).toBeLessThan(
+      html.indexOf('aria-label="按問題選擇通渠服務"')
+    );
+    expect(html).toContain("上門時間按地區、人手及設備確認");
   });
 
-  it("uses available CMS article covers at responsive sizes and leaves static posts usable without an image", () => {
-    content.posts = [
-      {
-        source: "sanity",
-        id: "test-post",
-        slug: "test-post",
-        title: "測試文章",
-        category: "家居防塞",
-        date: "2026-09-02",
-        authorName: "測試作者",
-        readMins: 4,
-        excerpt: "測試摘要",
-        featured: false,
-        keywords: [],
-        coverImage: {
-          url: "https://cdn.sanity.io/images/test/production/blog.jpg",
-          alt: "測試文章封面",
-          width: 1200,
-          height: 800,
-        },
-      },
-      {
-        source: "static",
-        id: "test-static",
-        slug: "test-static",
-        title: "沒有圖片的文章",
-        category: "家居防塞",
-        date: "2026-09-01",
-        authorName: "測試作者",
-        readMins: 3,
-        excerpt: "測試摘要",
-        featured: false,
-        keywords: [],
-      },
-    ];
+  it("keeps service, customer and content paths discoverable without a homepage CMS article feed", () => {
     const html = renderHome();
-    expect(html).toContain('href="/blog/test-post"');
-    expect(html).toContain('href="/blog/test-static"');
-    expect(html).toContain('alt="測試文章封面"');
-    expect(html).toContain("srcSet=");
+    for (const service of SERVICE_PAGES)
+      expect(html).toContain(`href="/services/${service.slug}"`);
+    for (const path of [
+      "/areas",
+      "/guide",
+      "/service-process",
+      "/faq",
+      "/cases",
+      "/blog",
+      "/drain-diagnosis",
+    ])
+      expect(html).toContain(`href="${path}"`);
+    for (const customer of ["住宅住戶", "食肆及商舖", "業主及物業管理"])
+      expect(html).toContain(customer);
+    expect(html).not.toContain('data-cms-loading="true"');
+    expect(html).not.toContain('data-pr20-section="photo-quote"');
+  });
+
+  it("keeps an explicitly labelled hero illustration and text FAQ answers in the HTML", () => {
+    const html = renderHome();
+    expect(html).toContain("服務示意圖，非客戶工程紀錄。");
+    expect(html).toContain('width="1600" height="1000"');
+    expect(html).toContain("可以先知道大概收費嗎？");
+    expect(html).toContain("師傅會先說明處理方法及報價");
     expect(html).not.toContain('src="undefined"');
-    expect(html).not.toContain('src=""');
-    content.posts = [];
   });
 });
