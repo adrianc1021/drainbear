@@ -92,7 +92,7 @@ export default function Thanks() {
         noindex
         nofollow
       />
-      <section className="bg-gradient-to-b from-mist to-white py-16 md:py-24">
+      <section className="brand-status-page py-16 md:py-24">
         <div className="container max-w-2xl text-center">
           <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-wagreen/10 ring-8 ring-wagreen/5">
             <CheckCircle2 className="h-8 w-8 text-wagreen" strokeWidth={2.2} />

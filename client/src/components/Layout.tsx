@@ -185,6 +185,7 @@ function Header({
   const [location] = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const overHero = location === "/" && !scrolled && !open;
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const mobileNavigationRef = useRef<HTMLDivElement>(null);
   const firstMobileLinkRef = useRef<HTMLAnchorElement>(null);
@@ -270,10 +271,12 @@ function Header({
   return (
     <header
       data-site-header="true"
-      className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-200 ${"site-header--shared"} ${
-        scrolled
-          ? "border-navy/15 bg-white/96 shadow-[0_8px_30px_rgba(11,19,43,0.06)] backdrop-blur-xl"
-          : "border-navy/10 bg-white/90 backdrop-blur-lg"
+      className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-200 site-header--shared ${
+        overHero
+          ? "site-header--over-hero border-transparent bg-transparent"
+          : scrolled
+            ? "border-navy/15 bg-white/96 shadow-[0_8px_30px_rgba(11,19,43,0.06)] backdrop-blur-xl"
+            : "border-navy/10 bg-white/90 backdrop-blur-lg"
       }`}
     >
       <div className="site-header__row container flex h-16 items-center justify-between md:h-[72px]">
@@ -495,7 +498,9 @@ export default function Layout({ children }: { children: ReactNode }) {
   }, [location]);
 
   return (
-    <div className="site-shell flex min-h-screen flex-col bg-white">
+    <div
+      className={`site-shell ${location === "/" ? "site-shell--home" : ""} flex min-h-screen flex-col bg-white`}
+    >
       <a href="#main-content" className="site-skip-link">
         跳到主要內容
       </a>

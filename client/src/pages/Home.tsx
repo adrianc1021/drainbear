@@ -2,9 +2,10 @@ import CmsPageSEO from "@/components/CmsPageSEO";
 import ContactActions from "@/components/ContactActions";
 import CustomerPaths from "@/components/CustomerPaths";
 import DrainHomeFaq, { FAQ_ITEMS } from "@/components/DrainHomeFaq";
+import HomeServiceFinder from "@/components/HomeServiceFinder";
 import ServiceDirectory from "@/components/ServiceDirectory";
 import { BUSINESS_ID, SITE_URL, WEBSITE_ID } from "@/config/site";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Droplets, FileCheck2, ShieldCheck } from "lucide-react";
 import { Link } from "wouter";
 
 const HOME_JSONLD = {
@@ -50,130 +51,159 @@ export default function Home() {
         aria-labelledby="home-heading"
         data-pr20-section="hero"
       >
-        <div className="container home-hero__grid">
-          <div className="home-hero__copy">
-            <p className="brand-eyebrow">
-              通渠熊 DrainBear · 香港住宅及商業渠務
-            </p>
-            <h1 id="home-heading">
-              香港通渠，
-              <br />
-              先報價後動工。
-            </h1>
-            <p className="home-hero__intro">
-              塞廁所、鋅盤去水慢，定係污水倒灌？
-              <br />
-              傳相片同地區，先了解處理方法及報價。
-            </p>
-            <ContactActions location="home_hero" prominent />
-            <p className="contact-note">
-              24 小時接受查詢；上門時間按地區、人手及設備確認。
-            </p>
-            <ul className="home-hero__proofs" aria-label="服務原則">
-              {["動工前確認收費", "新增工序先說明", "完工後測試去水"].map(
-                text => (
-                  <li key={text}>
-                    <Check aria-hidden="true" />
-                    {text}
-                  </li>
-                )
-              )}
-            </ul>
+        <div className="home-hero__stage">
+          <div className="container home-hero__grid">
+            <div className="home-hero__copy">
+              <p className="brand-eyebrow">香港通渠服務 · 24 小時接受查詢</p>
+              <h1 id="home-heading">
+                <span className="home-hero__headline-line">香港通渠，</span>
+                <span className="home-hero__headline-line">先搵通渠熊。</span>
+              </h1>
+              <p className="home-hero__intro">
+                塞廁所、鋅盤去水慢，定係污水倒灌？
+                <br />
+                傳相片同地區，先了解處理方法及報價。
+              </p>
+              <ContactActions location="home_hero" prominent />
+              <p className="contact-note">
+                24 小時接受查詢；上門時間按地區、人手及設備確認。
+              </p>
+            </div>
           </div>
           <figure className="home-hero__media">
             <img
-              src="/images/home-drain-technician-wide.jpg"
-              alt="通渠工具與室內去水位的服務示意"
-              width="1600"
-              height="1000"
+              src="/images/drainbear-paper-hero.webp"
+              srcSet="/images/drainbear-paper-hero-640.webp 640w, /images/drainbear-paper-hero-960.webp 960w, /images/drainbear-paper-hero.webp 1536w"
+              sizes="100vw"
+              alt="白色紙藝通渠熊、香港天際線及渠務工具的品牌示意"
+              width="1536"
+              height="1024"
               fetchPriority="high"
               decoding="async"
             />
             <figcaption>服務示意圖，非客戶工程紀錄。</figcaption>
           </figure>
         </div>
+        <HomeServiceFinder />
+        <ul className="container home-hero__proofs" aria-label="服務原則">
+          {[
+            {
+              icon: ShieldCheck,
+              title: "動工前確認收費",
+              description: "現場檢查後，先講清楚總收費。",
+            },
+            {
+              icon: FileCheck2,
+              title: "新增工序先說明",
+              description: "有額外處理需要，先同你確認。",
+            },
+            {
+              icon: Droplets,
+              title: "完工後測試去水",
+              description: "完成工序，再檢查去水情況。",
+            },
+          ].map(item => (
+            <li key={item.title}>
+              <span className="home-hero__proof-icon">
+                <item.icon aria-hidden="true" />
+              </span>
+              <div>
+                <strong>{item.title}</strong>
+                <p>{item.description}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
       </section>
       <section
-        className="brand-section"
+        className="brand-section home-problems"
         aria-labelledby="home-services-heading"
       >
         <div className="container">
           <div className="section-heading">
             <div>
-              <p className="brand-eyebrow">按問題找服務</p>
-              <h2 id="home-services-heading">邊個位置塞咗？</h2>
+              <p className="brand-eyebrow">由眼前嘅問題開始</p>
+              <h2 id="home-services-heading">塞邊度？搵啱處理方法。</h2>
             </div>
             <Link href="/drain-diagnosis">
               未確定？先做問題判斷
               <ArrowRight aria-hidden="true" />
             </Link>
           </div>
-          <ServiceDirectory location="home_common_problems" />
+          <ServiceDirectory location="home_common_problems" compact />
+          <aside
+            className="home-safety-note"
+            aria-labelledby="home-safety-heading"
+          >
+            <ShieldCheck aria-hidden="true" />
+            <div>
+              <h3 id="home-safety-heading">污水倒灌？先停用相關水源。</h3>
+              <p>
+                停止沖廁，避免直接接觸污水；不要加入或混合通渠水。拍下受影響位置，並說明其他去水位有沒有同時倒灌。
+              </p>
+            </div>
+            <Link href="/services/sewage-backflow">
+              查看處理建議
+              <ArrowRight aria-hidden="true" />
+            </Link>
+          </aside>
         </div>
       </section>
       <section
-        className="brand-section brand-section--soft"
+        className="brand-section home-customers"
         aria-labelledby="home-customers-heading"
       >
         <div className="container">
           <div className="section-heading">
             <div>
-              <p className="brand-eyebrow">不同場所，不同處理</p>
-              <h2 id="home-customers-heading">搵到適合你嘅服務</h2>
+              <p className="brand-eyebrow">住宅、商舖同物業都照顧到</p>
+              <h2 id="home-customers-heading">你嘅場所，點樣處理？</h2>
             </div>
             <Link href="/areas">
               查看服務地區
               <ArrowRight aria-hidden="true" />
             </Link>
           </div>
-          <CustomerPaths />
+          <CustomerPaths compact />
         </div>
       </section>
-      <section className="brand-section" aria-labelledby="home-process-heading">
-        <div className="container">
-          <div className="section-heading">
+      <section
+        className="brand-section brand-section--soft home-arrangement"
+        aria-labelledby="home-process-heading"
+      >
+        <div className="container home-arrangement__grid">
+          <div className="home-arrangement__intro">
             <div>
               <p className="brand-eyebrow">收費與安排</p>
-              <h2 id="home-process-heading">先講清楚，再開始工程</h2>
+              <h2 id="home-process-heading">
+                先講清楚收費，
+                <br />
+                再開始工程。
+              </h2>
+              <p className="home-arrangement__description">
+                同樣係塞渠，堵塞位置、工具同施工範圍都會影響報價。先提供資料，再由師傅現場確認總收費。
+              </p>
             </div>
             <Link href="/guide">
               查看收費參考
               <ArrowRight aria-hidden="true" />
             </Link>
           </div>
-          <ol className="service-process-grid">
+          <ol className="home-arrangement__steps">
             {PROCESS.map(([title, description], index) => (
               <li key={title}>
                 <span aria-hidden="true">0{index + 1}</span>
-                <h3>{title}</h3>
-                <p>{description}</p>
+                <div>
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                </div>
               </li>
             ))}
           </ol>
-          <p className="section-footnote">
+          <p className="section-footnote home-arrangement__footnote">
             相片只供初步評估；實際管道狀況及總收費，在現場檢查後確認。
             <Link href="/service-process">了解完整流程</Link>
           </p>
-        </div>
-      </section>
-      <section
-        className="brand-section brand-section--soft"
-        aria-labelledby="home-emergency-heading"
-      >
-        <div className="container answer-panel">
-          <div>
-            <p className="brand-eyebrow">污水倒灌快速答案</p>
-            <h2 id="home-emergency-heading">水位一直升，現在點做？</h2>
-          </div>
-          <div>
-            <p>
-              先停止沖廁及使用相關水源，移開附近物品，避免直接接觸污水。不要再加入或混合通渠水；拍下受影響位置，聯絡師傅並說明有沒有其他去水位同時倒灌。
-            </p>
-            <Link href="/services/sewage-backflow">
-              查看倒灌處理與注意事項
-              <ArrowRight aria-hidden="true" />
-            </Link>
-          </div>
         </div>
       </section>
       <DrainHomeFaq />

@@ -345,8 +345,8 @@ export default function BlogPost() {
         ]}
       />
 
-      <section className="article-hero relative isolate overflow-hidden bg-navy py-6 text-white md:py-12">
-        <div className="relative z-10 mx-auto max-w-3xl px-4">
+      <section className="article-hero text-white">
+        <div className="article-hero__inner relative z-10 mx-auto max-w-3xl px-4">
           <Link
             href="/blog"
             className="btn-smooth inline-flex min-h-[44px] items-center gap-1.5 text-sm font-bold text-white/70 hover:gap-2.5 hover:text-white"
@@ -364,7 +364,7 @@ export default function BlogPost() {
           </h1>
           <ContactActions location="blog_post_hero" />
 
-          <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-white/70">
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-white/70">
             <span className="inline-flex items-center gap-1.5">
               <CalendarDays className="h-4 w-4" />
               發布 {formatDate(post.date)}

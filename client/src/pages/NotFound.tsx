@@ -12,35 +12,29 @@ export default function NotFound() {
         noindex
       />
 
-      <div className="stage6a-not-found">
-        <section className="stage6a-not-found__hero">
-          <div className="stage6a-not-found__inner">
-            <div className="stage6a-not-found__marker" aria-hidden="true">
+      <div className="brand-status-page">
+        <section className="brand-status-page__inner">
+          <div className="brand-status-page__card">
+            <div className="brand-status-page__marker" aria-hidden="true">
               <FileQuestion />
             </div>
-            <p className="site-editorial-kicker">
-              <span aria-hidden="true" />
-              ERROR 404
-            </p>
+            <p className="brand-eyebrow">ERROR 404</p>
             <h1>找不到頁面</h1>
-            <p className="stage6a-not-found__copy">
+            <p className="brand-status-page__copy">
               您瀏覽的頁面不存在、已經移除，或網址輸入錯誤。
             </p>
             <nav
-              className="stage6a-not-found__actions"
+              className="brand-status-page__actions"
               aria-label="找不到頁面選項"
             >
               <Link
                 href="/"
-                className="stage6a-not-found__action stage6a-not-found__action--primary"
+                className="brand-status-page__action brand-status-page__action--primary"
               >
                 <Home aria-hidden="true" />
                 返回首頁
               </Link>
-              <Link
-                href="/services"
-                className="stage6a-not-found__action stage6a-not-found__action--secondary"
-              >
+              <Link href="/services" className="brand-status-page__action">
                 <Wrench aria-hidden="true" />
                 查看主要服務
               </Link>

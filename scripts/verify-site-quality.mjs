@@ -161,6 +161,18 @@ try {
       await page.waitForTimeout(150);
       const state = await page.evaluate(() => {
         const problems = [];
+        const header = document.querySelector('[data-site-header="true"]');
+        if (
+          location.pathname === "/" &&
+          header?.classList.contains("site-header--over-hero") &&
+          getComputedStyle(header).backgroundColor !== "rgba(0, 0, 0, 0)"
+        )
+          problems.push("homepage header does not merge with the hero");
+        if (
+          getComputedStyle(document.querySelector(".site-skip-link"))
+            .position !== "fixed"
+        )
+          problems.push("skip link occupies visible page layout");
         if (document.documentElement.scrollWidth > innerWidth + 2)
           problems.push("document has horizontal overflow");
         for (const element of document.querySelectorAll(
@@ -300,6 +312,7 @@ try {
     reducedMotion: "reduce",
   });
   await page.goto(`${serverUrl}/`);
+  await page.locator("main h1").waitFor({ state: "visible" });
   await page.keyboard.press("Tab");
   assert.match(
     await page.evaluate(() => document.activeElement.textContent),
@@ -324,6 +337,28 @@ try {
       .getAttribute("aria-expanded"),
     "false"
   );
+  await page.getByRole("button", { name: "食肆及商舖", exact: true }).click();
+  await page
+    .getByLabel("需要的服務", { exact: true })
+    .selectOption("grease-trap-cleaning");
+  await page.getByLabel("服務地區", { exact: true }).selectOption("kwun-tong");
+  const finderHref = await page
+    .locator(".home-service-finder__send")
+    .getAttribute("href");
+  assert(decodeURIComponent(finderHref).includes("隔油池"));
+  assert(decodeURIComponent(finderHref).includes("觀塘"));
+  await page.getByRole("button", { name: "住宅通渠", exact: true }).click();
+  assert.equal(
+    await page.getByLabel("需要的服務", { exact: true }).inputValue(),
+    "toilet-unblocking"
+  );
+  assert.equal(
+    await page.getByLabel("服務地區", { exact: true }).inputValue(),
+    "kwun-tong"
+  );
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.locator(".home-hero__media img").evaluate(img => img.decode());
+  await page.screenshot({ path: `${output}/home-hero-390.png` });
   await page.goto(`${serverUrl}/areas`);
   await page.getByLabel("輸入地區或屋苑附近地點").fill("觀塘");
   assert(
@@ -350,9 +385,13 @@ try {
   await page.close();
   const desktop = await browser.newPage({
     viewport: { width: 1440, height: 900 },
+    reducedMotion: "reduce",
   });
   await enableCmsRelay(desktop.context(), serverUrl);
   await desktop.goto(`${serverUrl}/`);
+  await desktop.locator("main h1").waitFor({ state: "visible" });
+  await desktop.locator(".home-hero__media img").evaluate(img => img.decode());
+  await desktop.screenshot({ path: `${output}/home-hero-1440.png` });
   await desktop.getByRole("button", { name: "開啟 WhatsApp 對話框" }).click();
   await desktop
     .getByRole("button", { name: "關閉對話框", exact: true })
