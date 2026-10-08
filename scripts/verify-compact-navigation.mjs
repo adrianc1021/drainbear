@@ -261,6 +261,23 @@ try {
     closingHeight,
   };
   await page.locator("#coverage-0 a").first().waitFor({ state: "hidden" });
+  await page.locator("#footer-information summary").focus();
+  await page.keyboard.press("Enter");
+  await page.waitForFunction(
+    () =>
+      document
+        .getElementById("footer-information")
+        .getAnimations({ subtree: true }).length === 0
+  );
+  await page.locator("#footer-information summary").focus();
+  await page.keyboard.press("Enter");
+  await page.keyboard.press("Tab");
+  assert.equal(
+    await page.evaluate(() => document.activeElement.closest("details")?.id),
+    "footer-services",
+    "footer links immediately leave keyboard navigation during closing"
+  );
+  interactions.immediateFooterFocus = "passed";
   await page.getByLabel("輸入地區或屋苑附近地點").fill("東涌");
   const popupPromise = page.waitForEvent("popup");
   await page.locator("#area-search-results a").click();
@@ -286,7 +303,7 @@ try {
   const noJs = await browser.newContext({
     javaScriptEnabled: false,
     viewport: { width: 390, height: 667 },
-    reducedMotion: "reduce",
+    reducedMotion: "no-preference",
   });
   const native = await noJs.newPage();
   await native.goto(origin + "/areas");
@@ -299,7 +316,16 @@ try {
   await native
     .locator('#footer-services a[href="/services/toilet-unblocking"]')
     .waitFor({ state: "visible" });
+  await native.locator("#footer-services summary").focus();
+  await native.keyboard.press("Enter");
+  await native.keyboard.press("Tab");
+  assert.equal(
+    await native.evaluate(() => document.activeElement.closest("details")?.id),
+    "footer-areas",
+    "native no-JavaScript closing also skips links immediately"
+  );
   interactions.nativeWithoutJavaScript = "passed";
+  interactions.nativeClosingFocusWithoutJavaScript = "passed";
   await noJs.close();
   await fs.writeFile(
     `${output}/checks.json`,

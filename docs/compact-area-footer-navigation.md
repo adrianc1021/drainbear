@@ -9,7 +9,7 @@
 - 搜尋支援中文地點、區域、分組及已有專頁的英文名；包含先前未在鄰近清單內的行政區入口。每次顯示 12 筆，可繼續載入；清除後返回收合目錄，焦點回到搜尋欄。
 - 原有 `/areas#coverage-0`、`#coverage-1`、`#coverage-2` 書籤仍會開啟並捲至對應區域。
 - 共用頁腳縮為品牌與緊湊聯絡入口，三個預設收合的導航群組，及版權資料；手機直排、桌面三欄。導覽到另一頁時重設收合，`/thanks` 保留精簡無重複聯絡版本。
-- 共用 `AnimatedDisclosure` 使用原生 details／summary。開合與箭頭動畫按 CSS 支援漸進增強；減少動態時即時切換。收起時立即以 inert 停用內容互動，開啟時恢復；原生開合、焦點與收合後的鍵盤順序已核對，關閉 JavaScript 仍可展開連結。
+- 共用 `AnimatedDisclosure` 使用原生 details／summary。開合與箭頭動畫按 CSS 支援漸進增強；減少動態時即時切換。收合按下時立即以 inert 停用內容互動，另以原生 toggle 同步程式開合，避免延後事件導致快速 Tab 進入內容；CSS interactivity 支援的瀏覽器在無 JavaScript 下亦即時停用收合內容。開啟時恢復；原生開合、焦點與收合後的鍵盤順序已核對，關閉 JavaScript 仍可展開連結。
 - 內容及連結保留於預渲染 HTML，不依賴點擊後才下載；聯絡資料及一次性 handoff 沿用現有共用設定。
 
 ## 實際長度比較
@@ -39,3 +39,5 @@ NODE_USE_ENV_PROXY=1 PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=/usr/bin/chromium AXE_C
 ```
 
 套件命令沿用 Corepack／pnpm 10.4.1、workspace XDG 目錄及 cloud start_skill 的設定。正式部署另以正式網域核對；本機 axe 不代表完整 WCAG 認證，亦未證明搜尋收錄或真機 WhatsApp 收件。
+
+正式站補充檢查：加入頁腳完全展開後收起並立即按 Tab，以及無 JavaScript、正常動畫模式下的相同行為，驗證即時停用而非依賴 toggle 事件稍後執行。

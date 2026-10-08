@@ -1780,6 +1780,10 @@
 .brand-disclosure__body {
   padding: 0 1.25rem 1.25rem;
 }
+.brand-disclosure:not([open]) > .brand-disclosure__body {
+  /* Keeps closing content painted but non-interactive, including without JS. */
+  interactivity: inert;
+}
 @supports (interpolate-size: allow-keywords) and
   (transition-behavior: allow-discrete) {
   .brand-disclosure {
