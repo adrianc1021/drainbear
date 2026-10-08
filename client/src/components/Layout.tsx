@@ -3,6 +3,7 @@
  * Header：清晰品牌導覽 + 克制的 WhatsApp 行動入口
  * Footer：服務資訊、主要地區與公司資料
  */
+import AnimatedDisclosure from "@/components/AnimatedDisclosure";
 import ContactActions from "@/components/ContactActions";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
 import { useContactHandoff } from "@/contexts/ContactHandoffContext";
@@ -417,55 +418,45 @@ function Header({
 function Footer({ compact = false }: { compact?: boolean }) {
   return (
     <footer className="brand-footer" data-site-footer="true">
-      {!compact ? (
-        <div className="container brand-footer__contact">
-          <div>
-            <p className="brand-eyebrow">通渠熊 DrainBear</p>
-            <h2>有問題，先講現場情況</h2>
-            <p>傳送地區、受影響位置及相片，我們再確認上門安排。</p>
-          </div>
-          <ContactActions location="footer" />
-        </div>
-      ) : null}
-      <div className="container brand-footer__directory">
+      <div className="container brand-footer__top">
         <div>
           <Link href="/" className="brand-footer__brand">
             <img src={LOGO} width="48" height="48" alt="" loading="lazy" />
             通渠熊 DrainBear
           </Link>
-          <p>
-            香港住宅、食肆及物業渠務。
-            <br />
-            按現場情況，安排合適處理。
-          </p>
+          <p>香港住宅、食肆及物業渠務。</p>
         </div>
-        <nav aria-label="頁尾服務資料">
-          <h2>服務與資料</h2>
-          {FOOTER_NAV_ITEMS.filter(item => item.href !== "/").map(item => (
-            <Link key={item.href} href={item.href}>
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-        <nav aria-label="頁尾通渠服務">
-          <h2>按問題找服務</h2>
-          {SERVICE_PAGES.map(service => (
-            <Link key={service.slug} href={`/services/${service.slug}`}>
-              {service.shortName}
-            </Link>
-          ))}
-        </nav>
-        <nav aria-label="頁尾服務地區">
-          <h2>服務地區</h2>
-          <div className="brand-footer__regions">
+        {!compact ? <ContactActions location="footer" /> : null}
+      </div>
+      <div className="container brand-footer__directory">
+        <AnimatedDisclosure id="footer-information" title="服務與資料">
+          <nav aria-label="頁尾服務資料" className="brand-footer__links">
+            {FOOTER_NAV_ITEMS.map(item => (
+              <Link key={item.href} href={item.href}>
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        </AnimatedDisclosure>
+        <AnimatedDisclosure id="footer-services" title="按問題找服務">
+          <nav aria-label="頁尾通渠服務" className="brand-footer__links">
+            {SERVICE_PAGES.map(service => (
+              <Link key={service.slug} href={`/services/${service.slug}`}>
+                {service.shortName}
+              </Link>
+            ))}
+          </nav>
+        </AnimatedDisclosure>
+        <AnimatedDisclosure id="footer-areas" title="服務地區">
+          <nav aria-label="頁尾服務地區" className="brand-footer__links">
             {DISTRICTS.map(district => (
               <Link key={district.slug} href={`/areas/${district.slug}`}>
                 {district.name}通渠
               </Link>
             ))}
-          </div>
-          <Link href="/areas">查看完整服務地區</Link>
-        </nav>
+            <Link href="/areas">查看完整服務地區</Link>
+          </nav>
+        </AnimatedDisclosure>
       </div>
       <div className="container brand-footer__legal">
         <p>24 小時接受查詢；上門時間按地區、人手及設備確認。</p>
@@ -522,7 +513,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       >
         {children}
       </main>
-      <Footer compact={suppressConversionChrome} />
+      <Footer key={pathname} compact={suppressConversionChrome} />
       {!suppressConversionChrome ? (
         <>
           {/* 避免內容及 Footer 被固定 CTA 列遮蓋（含 safe-area） */}
