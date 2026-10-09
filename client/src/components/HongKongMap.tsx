@@ -252,9 +252,12 @@ export default function HongKongMap() {
                 )}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => {
+                onClick={event => {
                   trackCTA("whatsapp", "areas_map_card", selected.name);
-                  goThanksAfterWhatsApp("areas_map_card");
+                  goThanksAfterWhatsApp(
+                    "areas_map_card",
+                    event.currentTarget.href
+                  );
                 }}
                 className="btn-smooth mt-5 inline-flex min-h-[48px] items-center justify-center gap-2 rounded-lg bg-wagreen px-6 py-3 text-sm font-bold text-white hover:bg-wagreen-dark"
               >

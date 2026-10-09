@@ -1,15 +1,20 @@
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 /** WhatsApp navigation guidance; an external handoff is not a received message. */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "wouter";
 import { Phone, ArrowRight } from "lucide-react";
 import SEO from "@/components/SEO";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import { trackCTA, trackWhatsAppHandoff } from "@/lib/analytics";
 import { consumeWhatsAppHandoff } from "@/lib/trackingSession";
+import { getWhatsAppRetryHref } from "@/lib/whatsappRetry";
 
 export default function Thanks() {
   const { phoneDisplay, phoneHref, whatsappDefaultHref } = useContactSettings();
+  const [retryHref, setRetryHref] = useState(whatsappDefaultHref);
+  useEffect(() => {
+    setRetryHref(getWhatsAppRetryHref(whatsappDefaultHref));
+  }, [whatsappDefaultHref]);
   useEffect(() => {
     const handoff = consumeWhatsAppHandoff();
     if (handoff)
@@ -43,10 +48,14 @@ export default function Thanks() {
           </p>
           <div className="handoff-card__actions">
             <a
-              href={whatsappDefaultHref}
+              href={retryHref}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => trackCTA("whatsapp", "thanks_retry")}
+              onClick={event => {
+                event.currentTarget.href =
+                  getWhatsAppRetryHref(whatsappDefaultHref);
+                trackCTA("whatsapp", "thanks_retry");
+              }}
             >
               <WhatsAppIcon aria-hidden="true" />
               再次開啟 WhatsApp<span className="sr-only">（另開視窗）</span>

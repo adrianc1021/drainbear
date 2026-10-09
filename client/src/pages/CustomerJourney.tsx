@@ -1,4 +1,5 @@
-import ServicePhoto from "@/components/ServicePhoto";
+import { BRAND_SOCIAL_IMAGE, BRAND_SOCIAL_ALT } from "@/lib/brandVisuals";
+import ServiceIllustration from "@/components/ServiceIllustration";
 import { getServiceVisual } from "@/lib/serviceVisuals";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
@@ -24,6 +25,8 @@ export default function CustomerJourney() {
   return (
     <div className="customer-journey-page">
       <SEO
+        image={BRAND_SOCIAL_IMAGE}
+        imageAlt={BRAND_SOCIAL_ALT}
         title={`${customer.name}通渠｜處理方法與上門安排｜通渠熊`}
         description={customer.description}
         path={path}
@@ -84,7 +87,7 @@ export default function CustomerJourney() {
               const service = getServicePage(slug)!;
               return (
                 <Link href={`/services/${slug}`} key={slug}>
-                  <ServicePhoto slug={slug} />
+                  <ServiceIllustration slug={slug} />
                   <h3>{service.shortName}</h3>
                   <p>{getServiceVisual(slug).summary}</p>
                   <span>

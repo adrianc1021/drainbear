@@ -10,7 +10,7 @@ import RelatedCaseRecords from "@/components/RelatedCaseRecords";
 import { BUSINESS_ID, SITE_URL } from "@/config/site";
 import { useSiteSettings } from "@/contexts/SiteSettingsContext";
 import { trackNavClick } from "@/lib/analytics";
-import { cloudinaryImageUrl } from "@/lib/cloudinary";
+import { BRAND_SOCIAL_IMAGE, BRAND_SOCIAL_ALT } from "@/lib/brandVisuals";
 import { getServicePage } from "@/lib/serviceData";
 import NotFound from "@/pages/NotFound";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
@@ -35,7 +35,7 @@ export default function ServiceDetail() {
   if (!service) return <NotFound />;
 
   const path = `/services/${service.slug}`;
-  const serviceSocialImage = cloudinaryImageUrl(service.image, 1200);
+  const serviceSocialImage = `${SITE_URL}${BRAND_SOCIAL_IMAGE}`;
   const crumbs = [
     { name: "首頁", path: "/" },
     { name: "通渠服務", path: "/services" },
@@ -81,7 +81,7 @@ export default function ServiceDetail() {
         description={service.description}
         path={path}
         image={serviceSocialImage}
-        imageAlt={service.imageAlt}
+        imageAlt={BRAND_SOCIAL_ALT}
         jsonLd={[
           serviceJsonLd,
           {

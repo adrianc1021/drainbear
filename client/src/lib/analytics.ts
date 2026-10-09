@@ -44,6 +44,7 @@ import {
   loadGoogleTag,
   scheduleGoogleTag,
 } from "./googleTagLoader";
+import { rememberWhatsAppRetry } from "./whatsappRetry";
 
 declare global {
   interface Window {
@@ -446,10 +447,11 @@ export function trackCTA(
  * - 原分頁立即導向 /thanks?from=<cta_location>
  * - /thanks 只消耗一次性 handoff；無法確認應用程式開啟、訊息傳送或實際收件
  */
-export function goThanksAfterWhatsApp(location: string) {
+export function goThanksAfterWhatsApp(location: string, destination?: string) {
   if (typeof window === "undefined") return;
 
   captureInitialAttribution();
+  rememberWhatsAppRetry(destination);
   createWhatsAppHandoff(location);
 
   // 使用 wouter 以外的原生導向,確保任何組件情境都可用。先完成 SPA

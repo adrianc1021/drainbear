@@ -286,9 +286,9 @@ export default function Areas() {
       )}
       target="_blank"
       rel="noopener noreferrer"
-      onClick={() => {
+      onClick={event => {
         trackCTA("whatsapp", location);
-        goThanksAfterWhatsApp(location);
+        goThanksAfterWhatsApp(location, event.currentTarget.href);
       }}
       className="area-locality-link area-locality-link--inquiry"
     >

@@ -1,271 +1,244 @@
-/**
- * 通渠熊 DrainBear — 通渠小知識（網誌列表頁）
- * Sanity已發布文章優先，原有靜態文章作後備。
- */
+import { BRAND_SOCIAL_IMAGE, BRAND_SOCIAL_ALT } from "@/lib/brandVisuals";
+import AnimatedDisclosure from "@/components/AnimatedDisclosure";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
 import { WhatsAppButton } from "@/components/Layout";
 import SEO from "@/components/SEO";
+import ServiceIllustration from "@/components/ServiceIllustration";
 import { trackNavClick } from "@/lib/analytics";
-import { createImageSrcSet, optimizedImageUrl } from "@/lib/imageOptimization";
 import { useBlogPosts } from "@/lib/useBlog";
-import {
-  ArrowRight,
-  BookOpen,
-  CalendarDays,
-  Clock,
-  LoaderCircle,
-  TriangleAlert,
-} from "lucide-react";
-import { Link } from "wouter";
+import { ArrowRight, Search } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Link, useLocation, useSearch } from "wouter";
 
-const BLOG_CRUMBS = [
+const CRUMBS = [
   { name: "首頁", path: "/" },
   { name: "通渠小知識", path: "/blog" },
 ];
-
-const BLOG_JSONLD = {
-  "@context": "https://schema.org",
-  "@type": "Blog",
-  name: "通渠小知識",
-  description:
-    "通渠熊 DrainBear 專業渠務知識庫：日常防塞喉管實用建議、通渠迷思拆解及緊急應對指南。",
-  url: "https://drainbearhk.com/blog",
-  publisher: {
-    "@type": "Organization",
-    name: "通渠熊 DrainBear",
-  },
+const PAGE_SIZE = 6;
+const CATEGORY_ART: Record<string, string> = {
+  家居防塞: "kitchen-sink-unblocking",
+  緊急應對: "sewage-backflow",
+  通渠迷思: "toilet-unblocking",
+  商業渠務: "grease-trap-cleaning",
+  村屋渠務: "main-drain-manhole",
+  大廈渠務: "main-drain-manhole",
+  渠務科技: "cctv-drain-inspection",
 };
-
-const FALLBACK_FEATURED_IMAGE =
-  "https://res.cloudinary.com/pgjztf2p/image/upload/v1785147037/LOGO_dmyalo.png";
-
-function formatDate(iso: string) {
-  const date = new Date(iso);
-
-  if (Number.isNaN(date.getTime())) {
-    return "";
-  }
-
-  return `${date.getFullYear()} 年 ${
-    date.getMonth() + 1
-  } 月 ${date.getDate()} 日`;
+function articleArt(title: string, category: string) {
+  const matches: [RegExp, string][] = [
+    [/隔油|食肆/, "grease-trap-cleaning"],
+    [/CCTV|照喉|內窺/i, "cctv-drain-inspection"],
+    [/高壓/, "high-pressure-jetting"],
+    [/沙井|主渠|大廈|渠口/, "main-drain-manhole"],
+    [/倒灌|污水/, "sewage-backflow"],
+    [/浴室|企缸|漏水|滲漏/, "bathroom-drain-unblocking"],
+    [/坐廁|廁所/, "toilet-unblocking"],
+    [/鋅盤|洗手盆|廚房/, "kitchen-sink-unblocking"],
+  ];
+  return (
+    matches.find(([pattern]) => pattern.test(title))?.[1] ||
+    CATEGORY_ART[category] ||
+    "cctv-drain-inspection"
+  );
 }
-
+function excerpt(text: string) {
+  const first = text.split(/[。！？]/)[0];
+  return first.length > 58 ? first.slice(0, 58) + "…" : first + "。";
+}
 export default function Blog() {
   const { posts, isLoading, isFallback, error } = useBlogPosts();
-
-  const [featured, ...rest] = posts;
-
+  const search = useSearch(),
+    [, navigate] = useLocation();
+  const params = new URLSearchParams(search),
+    q = params.get("q")?.trim() || "",
+    category = params.get("category") || "";
+  const [draft, setDraft] = useState(q),
+    heading = useRef<HTMLHeadingElement>(null),
+    previousSearch = useRef(search);
+  useEffect(() => {
+    setDraft(q);
+    if (previousSearch.current !== search) {
+      previousSearch.current = search;
+      const frame = requestAnimationFrame(() => {
+        heading.current?.focus({ preventScroll: true });
+        heading.current?.scrollIntoView({
+          behavior: "instant",
+          block: "start",
+        });
+      });
+      return () => cancelAnimationFrame(frame);
+    }
+  }, [q, search]);
+  const categories = Array.from(new Set(posts.map(p => p.category)));
+  const filtered = posts.filter(
+    p =>
+      (!category || p.category === category) &&
+      (!q ||
+        `${p.title} ${p.excerpt} ${p.category} ${p.keywords.join(" ")}`
+          .toLocaleLowerCase()
+          .includes(q.toLocaleLowerCase()))
+  );
+  const pages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const raw = Number(params.get("page") || 1),
+    page = Math.min(pages, Number.isSafeInteger(raw) && raw > 0 ? raw : 1);
+  const shown = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+  function href(nextPage: number, nextCategory = category, nextQuery = q) {
+    const next = new URLSearchParams();
+    if (nextQuery) next.set("q", nextQuery);
+    if (nextCategory) next.set("category", nextCategory);
+    if (nextPage > 1) next.set("page", String(nextPage));
+    return "/blog" + (next.size ? "?" + next.toString() : "");
+  }
   return (
-    <div data-cms-loading={isLoading} data-cms-error={Boolean(error)}>
+    <div
+      className="blog-page"
+      data-cms-loading={isLoading}
+      data-cms-error={Boolean(error)}
+    >
       <SEO
+        image={BRAND_SOCIAL_IMAGE}
+        imageAlt={BRAND_SOCIAL_ALT}
         title="通渠小知識｜防塞喉管實用建議・通渠迷思拆解｜通渠熊 DrainBear"
-        description="白熊師傅分享香港家居及商業渠務知識：防塞喉管、通渠收費、緊急處理、CCTV照渠及日常保養實用指南。"
+        description="按家居防塞、緊急處理、食肆及物業需要，搜尋通渠熊的實用渠務文章與檢查指南。"
         path="/blog"
-        keywords="通渠小知識, 通渠收費, 防塞喉管, 坐廁塞, 高壓通渠, CCTV照渠, 渠務保養"
-        jsonLd={BLOG_JSONLD}
-        breadcrumbs={BLOG_CRUMBS}
+        breadcrumbs={CRUMBS}
         contentReady={!isLoading}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Blog",
+          name: "通渠小知識",
+          url: "https://drainbearhk.com/blog",
+          publisher: { "@id": "https://drainbearhk.com/#organization" },
+        }}
       />
-
       <div className="site-hero-shell">
-        <Breadcrumbs items={BLOG_CRUMBS} tone="dark" />
+        <Breadcrumbs items={CRUMBS} tone="dark" />
         <EditorialPageHero
-          contactLocation="blog_hero"
           kicker="實用文章"
           title="通渠小知識"
-          description="整理香港家居及商業渠務的日常保養、常見問題及處理資訊，方便在需要時快速查閱。"
-          media={{
-            src: "/images/home-cctv-inspection.jpg",
-            alt: "排水管道檢查設備示意圖",
-            caption: "由日常防塞到工程判斷，按需要查閱相關資料",
-          }}
+          description="搵你遇到嘅問題，睇需要嘅處理方法。"
+          contactLocation="blog_hero"
         />
       </div>
-
-      <section className="site-content-section bg-white">
+      <section className="brand-section" aria-labelledby="blog-results-heading">
         <div className="container">
-          {isLoading && (
-            <div
-              className="mb-6 flex items-center justify-center gap-2 rounded-lg border border-border bg-mist p-4 text-sm text-navy/65"
-              role="status"
-              aria-live="polite"
-            >
-              <LoaderCircle className="h-4 w-4 animate-spin" />
-              正在載入最新文章……
+          <form
+            className="blog-search"
+            role="search"
+            onSubmit={event => {
+              event.preventDefault();
+              navigate(href(1, category, draft.trim()));
+            }}
+          >
+            <label htmlFor="blog-query">搜尋渠務問題</label>
+            <div>
+              <input
+                id="blog-query"
+                type="search"
+                value={draft}
+                onChange={event => setDraft(event.target.value)}
+                placeholder="例如：鋅盤、倒灌、隔油池"
+              />
+              <button type="submit">
+                <Search aria-hidden="true" />
+                搜尋
+              </button>
             </div>
-          )}
-
-          {!isLoading && isFallback && error && (
-            <div
-              className="mb-6 flex items-start gap-3 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900"
-              role="status"
-            >
-              <TriangleAlert className="mt-0.5 h-4 w-4 shrink-0" />
-              <p>最新文章暫時未能載入，目前顯示既有精選文章。請稍後再試。</p>
-            </div>
-          )}
-
-          {!featured && !isLoading && (
-            <div className="rounded-lg border border-border bg-mist p-10 text-center">
-              <BookOpen className="mx-auto h-8 w-8 text-muted-foreground" />
-              <h2 className="mt-4 font-display text-xl font-black text-navy">
-                暫時未有文章
-              </h2>
-              <p className="mt-2 text-sm text-muted-foreground">
-                新文章正在準備中，請稍後再來。
-              </p>
-            </div>
-          )}
-
-          {featured && (
-            <>
-              <Link
-                href={`/blog/${featured.slug}`}
-                onClick={() =>
-                  trackNavClick("blog_post", {
-                    article_slug: featured.slug,
-                    cta_location: "blog_featured",
-                    destination_url: `/blog/${featured.slug}`,
-                  })
-                }
-                className="site-feature-story brand-contact-panel group grid overflow-hidden md:grid-cols-5"
+          </form>
+          <div className="blog-categories" role="group" aria-label="文章分類">
+            {["", ...categories].map(item => (
+              <button
+                key={item}
+                type="button"
+                aria-pressed={category === item}
+                onClick={() => navigate(href(1, item))}
               >
-                <div className="flex flex-col justify-center p-8 md:col-span-3 md:p-12">
-                  <div className="site-label site-label--dark mb-4">
-                    <BookOpen className="h-3.5 w-3.5" strokeWidth={2.5} />
-                    最新文章・{featured.category}
-                  </div>
-
-                  <h2 className="text-balance font-display text-2xl font-black text-white transition-colors duration-200 group-hover:text-wagreen md:text-3xl">
-                    {featured.title}
-                  </h2>
-
-                  <p className="mt-4 leading-8 text-white/75">
-                    {featured.excerpt}
-                  </p>
-
-                  <div className="mt-6 flex flex-wrap items-center gap-5 text-xs text-white/65">
-                    <span className="inline-flex items-center gap-1.5">
-                      <CalendarDays className="h-3.5 w-3.5" />
-                      {formatDate(featured.date)}
-                    </span>
-
-                    <span className="inline-flex items-center gap-1.5">
-                      <Clock className="h-3.5 w-3.5" />
-                      {featured.readMins} 分鐘閱讀
-                    </span>
-                  </div>
-
-                  <span className="btn-smooth mt-6 inline-flex items-center gap-1.5 text-sm font-bold text-wagreen group-hover:gap-2.5">
-                    閱讀全文
-                    <ArrowRight className="h-4 w-4" />
-                  </span>
-                </div>
-
-                <div className="relative min-h-64 overflow-hidden bg-gradient-to-br from-navy via-navy to-[#16224d] md:col-span-2">
-                  <img
-                    src={optimizedImageUrl(
-                      featured.coverImage?.url ?? FALLBACK_FEATURED_IMAGE,
-                      960
-                    )}
-                    srcSet={createImageSrcSet(
-                      featured.coverImage?.url ?? FALLBACK_FEATURED_IMAGE,
-                      [480, 768, 960]
-                    )}
-                    sizes="(min-width: 768px) 40vw, 100vw"
-                    alt={featured.coverImage?.alt ?? "通渠熊 DrainBear"}
-                    className={
-                      featured.coverImage?.url
-                        ? "h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                        : "absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 object-contain opacity-90 drop-shadow-[0_12px_36px_rgba(37,211,102,0.25)] transition-transform duration-300 group-hover:scale-[1.02]"
-                    }
-                    loading="eager"
-                    fetchPriority="high"
-                    decoding="async"
-                  />
-
-                  {featured.coverImage?.url && (
-                    <div className="absolute inset-0 bg-gradient-to-t from-navy/35 to-transparent" />
-                  )}
-                </div>
-              </Link>
-
-              <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {rest.map((post, index) => (
-                  <Link
-                    key={post.id}
-                    href={`/blog/${post.slug}`}
-                    onClick={() =>
-                      trackNavClick("blog_post", {
-                        article_slug: post.slug,
-                        cta_location: "blog_grid",
-                        destination_url: `/blog/${post.slug}`,
-                      })
-                    }
-                    className="site-article-card reveal group flex flex-col overflow-hidden bg-white"
-                    data-reveal-delay={index * 60}
-                  >
-                    {post.coverImage?.url && (
-                      <div className="aspect-[1.91/1] overflow-hidden bg-mist">
-                        <img
-                          src={optimizedImageUrl(post.coverImage.url, 768)}
-                          srcSet={createImageSrcSet(
-                            post.coverImage.url,
-                            [360, 480, 640, 768]
-                          )}
-                          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                          alt={post.coverImage.alt ?? post.title}
-                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      </div>
-                    )}
-
-                    <div className="flex flex-1 flex-col p-7">
-                      <div className="site-label mb-4">{post.category}</div>
-
-                      <h3 className="text-balance font-display text-lg font-black leading-snug text-navy transition-colors duration-200 group-hover:text-wagreen-dark">
-                        {post.title}
-                      </h3>
-
-                      <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
-                        {post.excerpt}
-                      </p>
-
-                      <div className="mt-5 flex items-center justify-between border-t border-border pt-4 text-xs text-muted-foreground">
-                        <span className="inline-flex items-center gap-1.5">
-                          <CalendarDays className="h-3.5 w-3.5" />
-                          {formatDate(post.date)}
-                        </span>
-
-                        <span className="inline-flex items-center gap-1.5">
-                          <Clock className="h-3.5 w-3.5" />
-                          {post.readMins} 分鐘
-                        </span>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </>
-          )}
-
-          <div className="site-editorial-callout">
-            <h2 className="font-display text-xl font-black text-navy md:text-2xl">
-              渠務問題持續出現？
+                {item || "全部文章"}
+              </button>
+            ))}
+          </div>
+          <div className="blog-results-heading">
+            <h2 id="blog-results-heading" ref={heading} tabIndex={-1}>
+              找到 {filtered.length} 篇文章
             </h2>
-
-            <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground md:text-base">
-              如管道反覆淤塞，可透過 WhatsApp
-              提供現場相片或影片，讓團隊先了解實際情況。
+            <p role="status">
+              第 {page}／{pages} 頁
             </p>
-
-            <div className="mt-6 flex justify-center">
-              <WhatsAppButton label="WhatsApp 查詢" trackLocation="blog_cta" />
+          </div>
+          {isLoading ? <p role="status">正在載入文章…</p> : null}
+          {isFallback && error ? (
+            <p role="status">最新文章暫時未能載入，先顯示既有文章。</p>
+          ) : null}
+          {shown.length ? (
+            <div className="blog-reading-grid">
+              {shown.map(post => (
+                <Link
+                  key={post.id}
+                  href={`/blog/${post.slug}`}
+                  className="blog-reading-card"
+                  onClick={() =>
+                    trackNavClick("blog_post", {
+                      article_slug: post.slug,
+                      cta_location: "blog_grid",
+                      destination_url: `/blog/${post.slug}`,
+                    })
+                  }
+                >
+                  <ServiceIllustration
+                    slug={articleArt(post.title, post.category)}
+                  />
+                  <div>
+                    <p className="brand-eyebrow">{post.category}</p>
+                    <h3>{post.title}</h3>
+                    <p className="blog-reading-card__summary">
+                      {excerpt(post.excerpt)}
+                    </p>
+                    <span className="blog-reading-card__meta">
+                      {post.readMins} 分鐘閱讀 <ArrowRight aria-hidden="true" />
+                    </span>
+                  </div>
+                </Link>
+              ))}
             </div>
+          ) : (
+            <div className="blog-empty">
+              <p>暫時找不到相關文章，試試「去水慢」或其他位置。</p>
+              <Link href="/blog">查看全部文章</Link>
+            </div>
+          )}
+          {pages > 1 ? (
+            <nav className="blog-pagination" aria-label="文章分頁">
+              {Array.from({ length: pages }, (_, i) => (
+                <Link
+                  key={i}
+                  href={href(i + 1)}
+                  aria-label={`第 ${i + 1} 頁`}
+                  aria-current={page === i + 1 ? "page" : undefined}
+                >
+                  {i + 1}
+                </Link>
+              ))}
+            </nav>
+          ) : null}
+          <AnimatedDisclosure
+            id="blog-article-directory"
+            title={`全部文章目錄（${posts.length} 篇）`}
+            className="blog-article-directory"
+          >
+            <nav aria-label="全部渠務文章">
+              {posts.map(post => (
+                <Link key={post.id} href={`/blog/${post.slug}`}>
+                  {post.title}
+                  <ArrowRight aria-hidden="true" />
+                </Link>
+              ))}
+            </nav>
+          </AnimatedDisclosure>
+          <div className="site-editorial-callout">
+            <h2>問題仍未解決？</h2>
+            <p>傳現場相片及地區，先了解點處理。</p>
+            <WhatsAppButton label="WhatsApp 查詢" trackLocation="blog_cta" />
           </div>
         </div>
       </section>

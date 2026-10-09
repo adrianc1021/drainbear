@@ -25,7 +25,7 @@ describe("homepage contact and discovery", () => {
     expect(html.indexOf("24小時特快通渠熱線")).toBeLessThan(
       html.indexOf('id="home-services-heading"')
     );
-    expect(html).toContain("上門時間按地區、人手及設備確認");
+    expect(html).toContain("實際上門時間會按地區、交通、人手及設備供應確認");
   });
 
   it("keeps service, customer and content paths discoverable without a homepage CMS article feed", () => {

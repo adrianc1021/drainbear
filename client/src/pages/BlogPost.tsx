@@ -504,7 +504,7 @@ export default function BlogPost() {
 
             <div className="mt-6 flex justify-center">
               <WhatsAppButton
-                label="WhatsApp 免費報價"
+                label="WhatsApp 查詢"
                 trackLocation="blogpost_cta"
               />
             </div>

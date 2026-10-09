@@ -70,9 +70,9 @@ export function WhatsAppButton({
       href={whatsappDefaultHref}
       target="_blank"
       rel="noopener noreferrer"
-      onClick={() => {
+      onClick={event => {
         trackCTA("whatsapp", trackLocation);
-        goThanksAfterWhatsApp(trackLocation);
+        goThanksAfterWhatsApp(trackLocation, event.currentTarget.href);
       }}
       className={`btn-smooth inline-flex min-h-12 items-center justify-center gap-2 border border-navy bg-wagreen px-5 py-2.5 text-sm font-black tracking-[-0.01em] text-navy transition-colors hover:bg-navy hover:text-white ${className}`}
     >
@@ -122,9 +122,9 @@ function MobileCTABar() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${waTitle}：${waSub}`}
-            onClick={() => {
+            onClick={event => {
               trackCTA("whatsapp", "mobile_bar", diagnosis?.topic);
-              goThanksAfterWhatsApp("mobile_bar");
+              goThanksAfterWhatsApp("mobile_bar", event.currentTarget.href);
             }}
             className="btn-smooth flex min-h-[56px] min-w-0 flex-[3] items-center justify-center gap-2.5 border border-navy bg-wagreen px-3 py-2 text-navy active:scale-[0.98]"
           >

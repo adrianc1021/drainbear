@@ -1,3 +1,4 @@
+import { BRAND_SOCIAL_IMAGE, BRAND_SOCIAL_ALT } from "@/lib/brandVisuals";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
 import InquiryContactPanel from "@/components/InquiryContactPanel";
@@ -35,6 +36,8 @@ export default function Guide() {
   return (
     <div className="guide-page">
       <SEO
+        image={BRAND_SOCIAL_IMAGE}
+        imageAlt={BRAND_SOCIAL_ALT}
         title="香港通渠報價｜現場資料與查詢指南｜通渠熊"
         description="通渠報價要按堵塞位置、管道及施工條件了解。整理地區、現場相片和受影響範圍，查詢住宅、食肆及物業渠務安排。"
         path="/guide"
@@ -77,7 +80,7 @@ export default function Guide() {
               <h2>查詢要提供甚麼？</h2>
             </div>
           </div>
-          <CustomerPaths illustrated />
+          <CustomerPaths illustrated compact />
         </div>
       </section>
       <section className="brand-section brand-section--soft">
@@ -103,6 +106,7 @@ export default function Guide() {
           <InquiryContactPanel
             location="guide_intake"
             title="傳相片，先了解處理方向"
+            chooseCustomer
           />
         </div>
       </section>
