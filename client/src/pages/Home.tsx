@@ -38,18 +38,22 @@ const PROCESS = [
   {
     icon: MessageSquareText,
     title: "提供現場資料",
+    imageAlt: "AI 流程插圖：白熊透過手機提供位置及現場相片",
   },
   {
     icon: CalendarClock,
     title: "確認上門安排",
+    imageAlt: "AI 流程插圖：白熊師傅攜帶工具箱上門",
   },
   {
     icon: ClipboardCheck,
     title: "現場檢查及確認",
+    imageAlt: "AI 流程插圖：白熊戴手套檢查喉口並記錄情況",
   },
   {
     icon: Droplets,
     title: "疏通及測試去水",
+    imageAlt: "AI 流程插圖：白熊操作通渠工具並測試去水",
   },
 ] as const;
 
@@ -95,8 +99,8 @@ export default function Home() {
           </figure>
         </div>
       </section>
-      <RecordedCaseGallery />
       <HomeServiceFinder />
+      <RecordedCaseGallery />
       <section
         className="brand-section brand-section--soft home-arrangement"
         aria-labelledby="home-process-heading"
@@ -120,14 +124,31 @@ export default function Home() {
             {PROCESS.map((step, index) => (
               <li key={step.title}>
                 <span
-                  className="home-arrangement__step-marker"
-                  aria-hidden="true"
+                  className={`home-arrangement__illustration home-arrangement__illustration--${index}`}
+                  role="img"
+                  aria-label={step.imageAlt}
                 >
-                  <step.icon />
-                  <span>0{index + 1}</span>
+                  <img
+                    src="/images/drainbear-process-ai.webp"
+                    alt=""
+                    aria-hidden="true"
+                    width="1024"
+                    height="1024"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </span>
-                <div>
-                  <h3>{step.title}</h3>
+                <div className="home-arrangement__step-copy">
+                  <span
+                    className="home-arrangement__step-marker"
+                    aria-hidden="true"
+                  >
+                    <step.icon />
+                    <span>0{index + 1}</span>
+                  </span>
+                  <div>
+                    <h3>{step.title}</h3>
+                  </div>
                 </div>
               </li>
             ))}

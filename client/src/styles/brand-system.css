@@ -841,7 +841,7 @@
 }
 .home-arrangement__grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: 1.5rem;
   align-items: stretch;
 }
@@ -850,7 +850,9 @@
 }
 .home-arrangement__intro {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.5rem;
   justify-content: space-between;
   padding: clamp(1.5rem, 3vw, 2rem);
   border-radius: 24px;
@@ -863,7 +865,7 @@
   color: #e0f4ff;
 }
 .home-arrangement__intro > a {
-  align-self: start;
+  align-self: center;
   padding: 0.5rem 1rem;
   border: 1px solid #b8ddf4;
   border-radius: 999px;
@@ -886,14 +888,45 @@
 }
 .home-arrangement__steps {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1rem;
 }
 .home-arrangement__steps > li {
-  padding: 1.5rem;
+  min-width: 0;
+  padding: 0;
   border: 1px solid var(--brand-line);
   border-radius: 20px;
   background: white;
+}
+.home-arrangement__illustration {
+  position: relative;
+  display: block;
+  aspect-ratio: 1;
+  overflow: clip;
+  border-radius: 20px 20px 0 0;
+  background: #e7f4fd;
+}
+.home-arrangement__illustration img {
+  position: absolute;
+  display: block;
+  max-width: none;
+  width: 200%;
+  height: 200%;
+  left: 0;
+  top: 0;
+}
+.home-arrangement__illustration--1 img {
+  left: -100%;
+}
+.home-arrangement__illustration--2 img {
+  top: -100%;
+}
+.home-arrangement__illustration--3 img {
+  left: -100%;
+  top: -100%;
+}
+.home-arrangement__step-copy {
+  padding: 1.25rem;
 }
 .home-arrangement__step-marker {
   display: flex;
@@ -2663,7 +2696,21 @@
     gap: 2rem;
   }
   .home-arrangement__steps {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+  .home-arrangement__intro {
+    flex-direction: column;
+    align-items: start;
+  }
+  .home-arrangement__intro > a {
+    align-self: start;
+  }
+  .home-arrangement__step-copy {
+    padding: 0.85rem;
+  }
+  .home-arrangement__steps h3 {
+    font-size: 1rem;
   }
   .service-directory--compact .service-directory__item {
     padding: 1rem;
