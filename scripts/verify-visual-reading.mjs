@@ -110,6 +110,14 @@ try {
       assert.deepEqual(state.brokenImages, [], path + " real images decode");
       assert.deepEqual(state.missingIcons, [], path + " WhatsApp icons");
       if (path === "/") {
+        assert.equal(
+          await page
+            .locator(".home-page > section")
+            .nth(1)
+            .getAttribute("data-home-section"),
+          "quick-inquiry",
+          "quick inquiry is the second homepage section"
+        );
         const caseTop = await page
           .locator(".home-recorded-cases")
           .evaluate(el => el.getBoundingClientRect().top + scrollY);
@@ -145,6 +153,52 @@ try {
             .click();
           const panel = page.locator(`#home-finder-${customer.slug}`);
           await panel.waitFor({ state: "visible" });
+          const serviceSelect = page.locator("#home-service");
+          assert.deepEqual(
+            await serviceSelect
+              .locator("option")
+              .evaluateAll(options => options.map(option => option.value)),
+            [...customer.serviceSlugs, "unsure"]
+          );
+          await page.locator("#home-district").selectOption("kwun-tong");
+          for (const slug of [...customer.serviceSlugs, "unsure"]) {
+            await serviceSelect.selectOption(slug);
+            const expectedService = await serviceSelect
+              .locator("option:checked")
+              .textContent();
+            const destination = new URL(
+              await page
+                .locator(".home-service-finder__send")
+                .getAttribute("href")
+            );
+            const message = destination.searchParams.get("text");
+            assert(message.includes("觀塘"));
+            assert(
+              message.includes(slug === "unsure" ? "未確定" : expectedService)
+            );
+            assert.equal(
+              await page
+                .locator(
+                  `.home-finder-query__preview [data-service-illustration="${slug}"]`
+                )
+                .count(),
+              slug === "unsure" ? 0 : 1
+            );
+          }
+          await serviceSelect.selectOption(customer.serviceSlugs[0]);
+          await page.locator("#home-district").selectOption("");
+          const optionalDistrictMessage = new URL(
+            await page
+              .locator(".home-service-finder__send")
+              .getAttribute("href")
+          ).searchParams.get("text");
+          assert(!optionalDistrictMessage.includes("觀塘"));
+          const disclosure = panel.locator("details");
+          assert.equal(await disclosure.getAttribute("open"), null);
+          await page.locator(".home-problems").screenshot({
+            path: output + "/query-" + customer.slug + "-" + width + ".png",
+          });
+          await disclosure.locator("summary").click();
           assert.equal(
             await panel.locator("img").count(),
             customer.serviceSlugs.length
@@ -172,15 +226,29 @@ try {
               () => document.documentElement.scrollWidth <= innerWidth + 1
             )
           );
-          await page
-            .locator(".home-problems")
-            .screenshot({
-              path: output + "/finder-" + customer.slug + "-" + width + ".png",
-            });
+          await page.locator(".home-problems").screenshot({
+            path: output + "/finder-" + customer.slug + "-" + width + ".png",
+          });
+          await disclosure.locator("summary").click();
+          await disclosure.locator("summary").focus();
+          await page.keyboard.press("Tab");
+          assert.notEqual(
+            await page.evaluate(
+              () => document.activeElement.closest("details")?.id
+            ),
+            `home-finder-options-${customer.slug}`,
+            "closed service links leave the keyboard order"
+          );
+          await serviceSelect.selectOption(customer.serviceSlugs.at(-1));
         }
         await page
           .getByRole("button", { name: CUSTOMER_JOURNEYS[0].name, exact: true })
           .click();
+        assert.equal(
+          await page.locator("#home-service").inputValue(),
+          CUSTOMER_JOURNEYS[0].serviceSlugs.at(-1),
+          "service selection survives category switches"
+        );
       }
       if (path === "/services/toilet-unblocking") {
         assert.equal(
@@ -231,6 +299,25 @@ try {
   });
   await relay(context);
   const page = await context.newPage();
+  await page.goto(origin + "/");
+  await ready(page);
+  await page
+    .getByRole("button", { name: CUSTOMER_JOURNEYS[1].name, exact: true })
+    .click();
+  await page.locator("#home-service").selectOption("grease-trap-cleaning");
+  await page.locator("#home-district").selectOption("kwun-tong");
+  const inquiryPopupPromise = page.waitForEvent("popup");
+  await page.locator(".home-service-finder__send").click();
+  const inquiryPopup = await inquiryPopupPromise;
+  await inquiryPopup.waitForLoadState();
+  const inquiryText = new URL(inquiryPopup.url()).searchParams.get("text");
+  assert(
+    inquiryText.includes("隔油池") &&
+      inquiryText.includes("觀塘") &&
+      inquiryText.includes("食肆")
+  );
+  await page.waitForURL("**/thanks?from=home_service_finder*");
+  await page.locator(".handoff-card").waitFor();
   await page.goto(origin + "/services/toilet-unblocking#service-answer-1");
   await ready(page);
   await page.waitForFunction(
@@ -264,6 +351,14 @@ try {
   });
   await relay(native);
   const n = await native.newPage();
+  await n.goto(origin + "/");
+  await n.locator("#home-finder-options-residential summary").focus();
+  await n.keyboard.press("Enter");
+  await n
+    .locator(
+      "#home-finder-options-residential a[href='/services/toilet-unblocking']"
+    )
+    .waitFor({ state: "visible" });
   await n.goto(origin + "/services/toilet-unblocking");
   await n.locator("#service-answer-1 summary").focus();
   await n.keyboard.press("Enter");
@@ -282,6 +377,14 @@ try {
         closingFocus: true,
         nativeWithoutJavaScript: true,
         whatsappHandoff: true,
+        quickInquiry: {
+          section: 2,
+          categoryWidths: 15,
+          optionalDistrict: true,
+          unsureService: true,
+          preservesChoices: true,
+          selectedMessageHandoff: true,
+        },
       },
       null,
       2
