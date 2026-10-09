@@ -555,7 +555,69 @@
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: end;
   gap: 1.5rem;
+  padding: 0;
+}
+.home-finder-query {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 112px;
+  align-items: center;
+  gap: 1rem 1.5rem;
   padding: 1.5rem;
+}
+.home-finder-query__preview {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  overflow: clip;
+  background: #e7f4fd;
+  border: 1px solid var(--brand-line);
+  border-radius: 16px;
+}
+.home-finder-query__preview .service-illustration {
+  aspect-ratio: 1;
+}
+.home-finder-query__preview > svg {
+  width: 44px;
+  height: 44px;
+  color: var(--brand-accent);
+}
+.home-finder-query > .home-service-finder__send,
+.home-finder-query__hint {
+  grid-column: 1 / -1;
+}
+.home-finder-query__hint {
+  margin: 0;
+  text-align: center;
+  color: var(--brand-copy);
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+.home-finder-options.brand-disclosure {
+  border-radius: 12px;
+  background: #f4f9ff;
+}
+.home-finder-options.brand-disclosure > summary {
+  min-height: 48px;
+  padding: 0.75rem 1rem;
+}
+.home-finder-options .brand-disclosure__title {
+  font-size: 0.9rem;
+}
+.home-finder-options .brand-disclosure__body {
+  padding: 0 1rem 1rem;
+}
+.home-service-finder__types button,
+.home-service-finder select,
+.home-service-finder__send {
+  transition:
+    background 160ms ease,
+    border-color 160ms ease;
+}
+.home-service-finder select:hover {
+  border-color: var(--brand-accent);
+}
+.home-service-finder__send:active {
+  background: #16b855;
 }
 .home-service-finder__fields > div {
   min-width: 0;
@@ -598,7 +660,7 @@
   height: 19px;
 }
 .home-finder-content {
-  padding: 1.5rem 1.5rem 0;
+  padding: 0 1.5rem 1.5rem;
 }
 .home-finder-content__intro {
   display: flex;
@@ -2624,7 +2686,7 @@
 }
 @media (max-width: 639px) {
   .home-finder-content {
-    padding: 1rem 1rem 0;
+    padding: 0 1rem 1rem;
   }
   .home-finder-content__intro {
     display: block;
@@ -2693,10 +2755,20 @@
   }
   .home-service-finder__fields {
     grid-template-columns: minmax(0, 1fr);
+    padding: 0;
+  }
+  .home-finder-query {
+    grid-template-columns: minmax(0, 1fr) 72px;
+    align-items: start;
+    gap: 1rem;
     padding: 1rem;
   }
+  .home-finder-query__preview {
+    margin-top: 1.5rem;
+    border-radius: 12px;
+  }
   .home-service-finder__send {
-    grid-column: auto;
+    grid-column: 1 / -1;
   }
   .site-page-hero__inner {
     padding-top: 1rem;

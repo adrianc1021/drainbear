@@ -9,6 +9,7 @@ description: 使用語意化React元件與Flexbox/Grid統一通渠熊介面，�
 - 主要樣式來源為 client/src/styles/brand-system.css；全站單一字級、間距、色彩、邊界及圓角規範。不要重新疊加一套改版專用CSS。
 - WhatsApp相關按鈕一律使用共用WhatsAppIcon的真實品牌輪廓，包括浮動面板的主題、地區及頁腳。不要以一般MessageCircle代替，也不要在手機隱藏WhatsApp標誌。純電話或一般對話步驟圖示保持各自用途。
 - 使用ContactActions、InquiryContactPanel、EditorialPageHero及CustomerPaths。首頁由HomeServiceFinder整合場所與問題入口，避免再疊加相同分類。聯絡資料來自SiteSettingsContext；保留trackCTA及WhatsApp handoff，不能重複送出轉換。
+- 首頁第二段是同一個HomeServiceFinder快速查詢，先選場所、相關服務及可選地區，再帶入WhatsApp；未知問題須可選「未確定」。AI服務圖示隨選項更新，完整圖片入口可原生收合。三類場所各自保留選取，地區跨分類保留；不得在另一段重複整套查詢。核對全部服務、未確定、空白地區及分類切換的預填內容。
 - 公開查詢區必須可用；未驗證接收的表格不顯示為可提交，也不長期展示維護提示。WhatsApp跳轉只能引導傳送，不能聲稱已開啟應用程式、已發訊息或已收到查詢。
 - 用main、section、nav、article、figure、ol、table、details等合適語意。互動用button或有有效href的a。
 - 圖片優先的服務入口使用ServicePhoto與serviceVisuals，一張圖片、一個短標題及一句症狀摘要。首頁服務選擇區使用ServiceIllustration的乾淨AI紙藝插圖，住宅、食肆及物業所有選項都不能混入施工照片或污水近鏡；核對三個分類切換及八款服務對應場景。首頁按「首屏→服務選擇→真實案例→上門安排」引導；上門安排使用AI紙藝白熊流程插圖，圖片描述清楚說明示意用途；縮略圖可按版型裁切，案例完整影片和證據說明仍可開啟。不可用圖片或固定高度裁掉重要文字。
