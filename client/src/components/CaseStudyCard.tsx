@@ -3,7 +3,13 @@ import { sendEvent } from "@/lib/analytics";
 import { ArrowUpRight, Play } from "lucide-react";
 import { Link } from "wouter";
 
-export default function CaseStudyCard({ study }: { study: CaseStudyView }) {
+export default function CaseStudyCard({
+  study,
+  concise = true,
+}: {
+  study: CaseStudyView;
+  concise?: boolean;
+}) {
   return (
     <article className="recorded-case-card">
       <Link
@@ -38,7 +44,7 @@ export default function CaseStudyCard({ study }: { study: CaseStudyView }) {
         <div className="recorded-case-card__copy">
           <p className="recorded-case-card__category">{study.serviceLabel}</p>
           <h3>{study.title}</h3>
-          <p>{study.summary}</p>
+          {!concise ? <p>{study.summary}</p> : null}
           <span className="recorded-case-card__action">
             {study.video ? "觀看施工短片" : "查看工程紀錄"}
             <ArrowUpRight aria-hidden="true" />

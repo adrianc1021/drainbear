@@ -1,5 +1,5 @@
 import { ChevronDown } from "lucide-react";
-import type { ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 
 function setContentInert(details: HTMLDetailsElement, inert: boolean) {
   const body = details.lastElementChild;
@@ -20,8 +20,31 @@ export default function AnimatedDisclosure({
   className?: string;
   children: ReactNode;
 }) {
+  const ref = useRef<HTMLDetailsElement>(null);
+  useEffect(() => {
+    const revealAnchor = () => {
+      let anchor: string;
+      try {
+        anchor = decodeURIComponent(window.location.hash.slice(1));
+      } catch {
+        return;
+      }
+      const details = ref.current;
+      const target = anchor ? document.getElementById(anchor) : null;
+      if (!details || !target || !details.contains(target)) return;
+      details.open = true;
+      setContentInert(details, false);
+      requestAnimationFrame(() =>
+        target.scrollIntoView({ behavior: "instant", block: "start" })
+      );
+    };
+    revealAnchor();
+    window.addEventListener("hashchange", revealAnchor);
+    return () => window.removeEventListener("hashchange", revealAnchor);
+  }, [id]);
   return (
     <details
+      ref={ref}
       id={id}
       className={`brand-disclosure ${className}`}
       onToggle={event => {

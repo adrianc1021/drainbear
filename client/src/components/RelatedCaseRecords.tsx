@@ -1,5 +1,6 @@
 import { CASE_SERVICE_RELATIONS } from "@shared/caseServiceRelations";
 import { recordedCaseStudies } from "@/lib/caseRepository";
+import { useCaseStudies } from "@/lib/useCases";
 import { trackNavClick } from "@/lib/analytics";
 import { ArrowUpRight, Play } from "lucide-react";
 import { Link } from "wouter";
@@ -18,6 +19,7 @@ export default function RelatedCaseRecords({
   location: string;
   id?: string;
 }) {
+  const { studies, isLoading, error } = useCaseStudies();
   const relations = CASE_SERVICE_RELATIONS.filter(item =>
     serviceSlugs.includes(item.serviceSlug)
   );
@@ -27,11 +29,17 @@ export default function RelatedCaseRecords({
         relations.findIndex(other => other.caseSlug === item.caseSlug) === index
     )
     .slice(0, 3);
+  const needsCms = unique.some(
+    relation =>
+      !recordedCaseStudies.some(study => study.slug === relation.caseSlug)
+  );
   return (
     <section
       className="brand-section related-case-records"
       id={id}
       aria-labelledby={`${id}-heading`}
+      data-cms-loading={needsCms && isLoading}
+      data-cms-error={needsCms && Boolean(error)}
     >
       <div className="container">
         <div className="section-heading">
@@ -45,9 +53,10 @@ export default function RelatedCaseRecords({
         </div>
         <div className="related-case-records__grid">
           {unique.map(relation => {
-            const study = recordedCaseStudies.find(
-              item => item.slug === relation.caseSlug
-            );
+            const study =
+              recordedCaseStudies.find(
+                item => item.slug === relation.caseSlug
+              ) ?? studies.find(item => item.slug === relation.caseSlug);
             const title = study?.title ?? CMS_TITLES[relation.caseSlug];
             return (
               <article key={relation.caseSlug}>

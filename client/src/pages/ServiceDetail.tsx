@@ -1,3 +1,5 @@
+import AnimatedDisclosure from "@/components/AnimatedDisclosure";
+import { getServiceVisual } from "@/lib/serviceVisuals";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
 import InquiryContactPanel, {
@@ -9,17 +11,9 @@ import { BUSINESS_ID, SITE_URL } from "@/config/site";
 import { useSiteSettings } from "@/contexts/SiteSettingsContext";
 import { trackNavClick } from "@/lib/analytics";
 import { cloudinaryImageUrl } from "@/lib/cloudinary";
-import { prefetchRoute } from "@/lib/routePrefetch";
 import { getServicePage } from "@/lib/serviceData";
 import NotFound from "@/pages/NotFound";
-import {
-  ArrowRight,
-  CheckCircle2,
-  CircleAlert,
-  Search,
-  ShieldCheck,
-  Wrench,
-} from "lucide-react";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Link, useParams } from "wouter";
 
 const INQUIRY_TYPE_BY_SLUG: Record<string, InquiryServiceType> = {
@@ -106,336 +100,188 @@ export default function ServiceDetail() {
         breadcrumbs={crumbs}
       />
 
-      <div>
-        <div className="site-hero-shell">
-          <Breadcrumbs items={crumbs} tone="dark" />
-          <EditorialPageHero
-            kicker={service.shortName}
-            title={service.name}
-            description={service.answerSummary.handles}
-            contactLocation="service_detail_hero"
-            topic={service.slug}
-            message={service.whatsappMessage}
-          />
-        </div>
-
-        <nav className="container page-section-nav" aria-label="本頁內容">
-          <a href="#service-answer-summary">適用情況</a>
-          <a href="#service-cases">施工紀錄</a>
-          <a href="#service-method">處理流程</a>
-          <a href="#service-questions">常見問題</a>
-          <a href="#service-contact">現場查詢</a>
-        </nav>
-        <section className="service-support border-b border-border bg-white py-8">
-          <div className="container grid gap-4 md:grid-cols-2">
-            <Link
-              href="/drain-diagnosis"
-              onMouseEnter={() => prefetchRoute("/drain-diagnosis")}
-              onFocus={() => prefetchRoute("/drain-diagnosis")}
-              onTouchStart={() => prefetchRoute("/drain-diagnosis")}
-              onClick={() =>
-                trackNavClick("cta", {
-                  cta_location: "service_detail_support_links",
-                  cta_label: "重新判斷症狀",
-                  destination_url: "/drain-diagnosis",
-                  service_name: service.slug,
-                })
-              }
-              className="group flex min-h-[92px] items-center gap-4 rounded-lg border border-border bg-mist/45 px-5 py-4 hover:border-navy/35 hover:bg-white"
-            >
-              <Search className="h-6 w-6 shrink-0 text-wagreen-dark" />
-              <span>
-                <span className="block font-display font-black text-navy">
-                  症狀與這項服務不完全相符？
-                </span>
-                <span className="mt-1 block text-sm text-muted-foreground">
-                  使用快速判斷工具整理影響範圍
-                </span>
-              </span>
-              <ArrowRight className="ml-auto h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1" />
-            </Link>
-            <Link
-              href="/service-process"
-              onMouseEnter={() => prefetchRoute("/service-process")}
-              onFocus={() => prefetchRoute("/service-process")}
-              onTouchStart={() => prefetchRoute("/service-process")}
-              onClick={() =>
-                trackNavClick("navigation", {
-                  cta_location: "service_detail_support_links",
-                  cta_label: "服務及報價原則",
-                  destination_url: "/service-process",
-                  service_name: service.slug,
-                })
-              }
-              className="group flex min-h-[92px] items-center gap-4 rounded-lg border border-border bg-mist/45 px-5 py-4 hover:border-navy/35 hover:bg-white"
-            >
-              <ShieldCheck className="h-6 w-6 shrink-0 text-safety" />
-              <span>
-                <span className="block font-display font-black text-navy">
-                  了解報價及施工流程
-                </span>
-                <span className="mt-1 block text-sm text-muted-foreground">
-                  查看現場檢查及動工前確認原則
-                </span>
-              </span>
-              <ArrowRight className="ml-auto h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1" />
+      <div className="site-hero-shell">
+        <Breadcrumbs items={crumbs} tone="dark" />
+        <EditorialPageHero
+          kicker={service.shortName}
+          title={service.name}
+          description={getServiceVisual(service.slug).summary}
+          contactLocation="service_detail_hero"
+          topic={service.slug}
+          message={service.whatsappMessage}
+        />
+      </div>
+      <nav className="container page-section-nav" aria-label="本頁內容">
+        <a href="#service-cases">施工紀錄</a>
+        <a href="#service-answer-summary">適用情況</a>
+        <a href="#service-method">處理流程</a>
+        <a href="#service-questions">常見問題</a>
+        <a href="#service-contact">現場查詢</a>
+      </nav>
+      <RelatedCaseRecords
+        serviceSlugs={[service.slug]}
+        location={`service_${service.slug}_cases`}
+        id="service-cases"
+      />
+      <section
+        className="brand-section brand-section--soft"
+        aria-labelledby="service-answer-summary"
+      >
+        <div className="container service-reading">
+          <div className="section-heading">
+            <div>
+              <p className="brand-eyebrow">先睇重點</p>
+              <h2 id="service-answer-summary">係咪你遇到嘅情況？</h2>
+            </div>
+            <Link href="/drain-diagnosis">
+              幫我判斷 <ArrowRight aria-hidden="true" />
             </Link>
           </div>
-        </section>
-
-        <section
-          className="service-answer border-b border-border bg-mist/55 py-10"
-          aria-labelledby="service-answer-summary"
-        >
-          <div className="container">
-            <p className="text-xs font-bold tracking-[0.18em] text-safety">
-              服務適用情況
-            </p>
-            <h2
-              id="service-answer-summary"
-              className="mt-2 font-display text-2xl font-black text-navy"
-            >
-              這項服務如何判斷是否適用
-            </h2>
-            <dl className="mt-7 grid gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="service-situation-chips">
+            {service.suitableFor.map(item => (
+              <li key={item}>
+                <CheckCircle2 aria-hidden="true" />
+                {item}
+              </li>
+            ))}
+          </ul>
+          <AnimatedDisclosure
+            id="service-symptoms"
+            title="症狀、成因與適用範圍"
+            className="reading-disclosure"
+          >
+            <div className="service-reading__columns">
+              <div>
+                <h3>常見症狀</h3>
+                <ul>
+                  {service.symptoms.map(item => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h3>常見成因</h3>
+                <ul>
+                  {service.causes.map(item => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <dl className="service-reading__facts">
               {[
                 ["處理甚麼", service.answerSummary.handles],
                 ["何時適用", service.answerSummary.suitableWhen],
                 ["主要限制", service.answerSummary.limitation],
                 ["動工前確認", service.answerSummary.confirmBeforeWork],
               ].map(([term, description]) => (
-                <div key={term} className="border-l-2 border-wagreen pl-4">
-                  <dt className="font-display text-sm font-black text-navy">
-                    {term}
-                  </dt>
-                  <dd className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    {description}
-                  </dd>
+                <div key={term}>
+                  <dt>{term}</dt>
+                  <dd>{description}</dd>
                 </div>
               ))}
             </dl>
-          </div>
-        </section>
-
-        <RelatedCaseRecords
-          serviceSlugs={[service.slug]}
-          location={`service_${service.slug}_cases`}
-          id="service-cases"
-        />
-        <section className="service-symptoms bg-white py-14 md:py-20">
-          <div className="container grid gap-10 lg:grid-cols-2">
-            <article>
-              <div className="flex items-center gap-3">
-                <CircleAlert className="h-6 w-6 text-safety" />
-                <h2 className="font-display text-2xl font-black text-navy md:text-3xl">
-                  常見症狀
-                </h2>
-              </div>
-              <ul className="mt-6 space-y-4">
-                {service.symptoms.map(item => (
-                  <li
-                    key={item}
-                    className="flex items-start gap-3 leading-relaxed text-muted-foreground"
-                  >
-                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-wagreen-dark" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </article>
-
-            <article className="rounded-xl border border-border bg-mist/55 p-7 md:p-8">
-              <div className="flex items-center gap-3">
-                <Search className="h-6 w-6 text-wagreen-dark" />
-                <h2 className="font-display text-2xl font-black text-navy">
-                  常見成因
-                </h2>
-              </div>
-              <ul className="mt-6 space-y-4">
-                {service.causes.map(item => (
-                  <li
-                    key={item}
-                    className="flex items-start gap-3 leading-relaxed text-muted-foreground"
-                  >
-                    <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-safety" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </article>
-          </div>
-        </section>
-
-        <section
-          id="service-method"
-          className="service-steps bg-mist py-14 md:py-20"
-        >
-          <div className="container">
-            <div className="mx-auto max-w-2xl text-center">
-              <p className="text-xs font-bold tracking-[0.2em] text-safety">
-                服務流程
-              </p>
-              <h2 className="mt-3 font-display text-3xl font-black text-navy md:text-4xl">
-                處理流程
-              </h2>
-              <p className="mt-4 text-muted-foreground">
-                先理解問題，再按現場狀況選擇方法；不是一到場就盲目開工。
-              </p>
+          </AnimatedDisclosure>
+        </div>
+      </section>
+      <section id="service-method" className="brand-section">
+        <div className="container service-reading">
+          <div className="section-heading">
+            <div>
+              <p className="brand-eyebrow">四個步驟</p>
+              <h2>點樣處理？</h2>
             </div>
-
-            <ol className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-              {service.process.map((step, index) => (
-                <li
-                  key={step.title}
-                  className="rounded-xl border border-border bg-white p-6"
-                >
-                  <span className="font-display text-xs font-black tracking-[0.18em] text-safety">
-                    步驟 {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="mt-3 font-display text-lg font-black text-navy">
-                    {step.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                    {step.description}
-                  </p>
+          </div>
+          <ol className="service-step-overview">
+            {service.process.map((step, index) => (
+              <li key={step.title}>
+                <span aria-hidden="true">0{index + 1}</span>
+                <h3>{step.title}</h3>
+              </li>
+            ))}
+          </ol>
+          <AnimatedDisclosure
+            id="service-method-details"
+            title="了解各步驟與施工準備"
+            className="reading-disclosure"
+          >
+            <ol className="service-reading__process">
+              {service.process.map(step => (
+                <li key={step.title}>
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
                 </li>
               ))}
             </ol>
-          </div>
-        </section>
-
-        <section className="service-costs bg-white py-14 md:py-20">
-          <div className="container grid gap-8 lg:grid-cols-2">
-            <article className="rounded-xl border border-border p-7 md:p-8">
-              <div className="flex items-center gap-3">
-                <Wrench className="h-6 w-6 text-wagreen-dark" />
-                <h2 className="font-display text-2xl font-black text-navy">
-                  適合處理的情況
-                </h2>
-              </div>
-              <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-                {service.suitableFor.map(item => (
-                  <li
-                    key={item}
-                    className="flex items-start gap-2 rounded-lg bg-mist px-4 py-3 text-sm font-medium text-navy"
-                  >
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-wagreen-dark" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </article>
-
-            <article className="brand-contact-panel p-7 text-white md:p-8">
-              <div className="flex items-center gap-3">
-                <ShieldCheck className="h-6 w-6 text-wagreen" />
-                <h2 className="font-display text-2xl font-black">
-                  施工前會了解哪些資料？
-                </h2>
-              </div>
-              <ul className="mt-6 space-y-4">
-                {service.priceFactors.map(item => (
-                  <li
-                    key={item}
-                    className="flex items-start gap-3 text-sm leading-relaxed text-white/70"
-                  >
-                    <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-wagreen" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </article>
-          </div>
-        </section>
-
-        <section
-          id="service-questions"
-          className="service-faq bg-mist py-14 md:py-20"
-        >
-          <div className="container max-w-3xl">
-            <h2 className="font-display text-3xl font-black text-navy">
-              {service.shortName}常見問題
-            </h2>
-            <div className="mt-8 space-y-4">
-              {service.faqs.map((faq, index) => (
-                <article
-                  key={faq.question}
-                  id={`service-answer-${index + 1}`}
-                  className="rounded-xl border border-border bg-white p-6"
-                >
-                  <h3 className="font-display text-lg font-black text-navy">
-                    {faq.question}
-                  </h3>
-                  <p className="mt-3 leading-relaxed text-muted-foreground">
-                    {faq.answer}
-                  </p>
-                </article>
+            <h3>施工前需要了解</h3>
+            <ul>
+              {service.priceFactors.map(item => (
+                <li key={item}>{item}</li>
               ))}
-            </div>
+            </ul>
+            <Link href="/service-process">
+              查看完整上門流程 <ArrowRight aria-hidden="true" />
+            </Link>
+          </AnimatedDisclosure>
+        </div>
+      </section>
+      <section
+        id="service-questions"
+        className="brand-section brand-section--soft"
+      >
+        <div className="container brand-narrow">
+          <h2>{service.shortName}常見問題</h2>
+          <div className="reading-faq">
+            {service.faqs.map((faq, index) => (
+              <AnimatedDisclosure
+                key={faq.question}
+                id={`service-answer-${index + 1}`}
+                title={faq.question}
+              >
+                <p>{faq.answer}</p>
+              </AnimatedDisclosure>
+            ))}
           </div>
-        </section>
-
-        <section
-          id="service-contact"
-          className="service-quote border-y border-border bg-white py-14 md:py-20"
-        >
-          <div className="container">
-            <InquiryContactPanel
-              location={`service_${service.slug}`}
-              title={`想查詢${service.shortName}？`}
-              description="傳送現場相片與問題位置，團隊會按實際情況了解處理方向及安排。"
-              defaultServiceType={INQUIRY_TYPE_BY_SLUG[service.slug]}
-              customer={
-                ["main-drain-manhole", "sewage-backflow"].includes(service.slug)
-                  ? "property-management"
-                  : undefined
-              }
-              defaultMessage={`我想查詢${service.name}，請按我的情況提供初步方向。`}
-            />
-          </div>
-        </section>
-
-        <section className="service-related bg-white py-14 md:py-20">
-          <div className="container">
-            <h2 className="font-display text-2xl font-black text-navy">
-              相關通渠服務
-            </h2>
-            <div className="mt-6 grid gap-4 md:grid-cols-3">
-              {service.relatedSlugs.map(relatedSlug => {
-                const related = getServicePage(relatedSlug);
-                if (!related) return null;
-
-                return (
-                  <Link
-                    key={related.slug}
-                    href={`/services/${related.slug}`}
-                    onClick={() =>
-                      trackNavClick("service", {
-                        cta_location: "service_detail_related",
-                        cta_label: related.shortName,
-                        service_name: related.slug,
-                        destination_url: `/services/${related.slug}`,
-                      })
-                    }
-                    className="group rounded-xl border border-border p-6 transition hover:-translate-y-1 hover:border-wagreen/50 hover:shadow-lg"
-                  >
-                    <span className="text-xs font-bold tracking-[0.15em] text-safety">
-                      {related.eyebrow}
-                    </span>
-                    <h3 className="mt-2 font-display text-lg font-black text-navy">
-                      {related.name}
-                    </h3>
-                    <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-wagreen-dark">
-                      查看服務詳情
-                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </span>
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-      </div>
+        </div>
+      </section>
+      <section id="service-contact" className="brand-section">
+        <div className="container">
+          <InquiryContactPanel
+            location={`service_${service.slug}`}
+            title={`想查詢${service.shortName}？`}
+            description="傳相片同地區，先了解點處理。"
+            defaultServiceType={INQUIRY_TYPE_BY_SLUG[service.slug]}
+            customer={
+              ["main-drain-manhole", "sewage-backflow"].includes(service.slug)
+                ? "property-management"
+                : undefined
+            }
+            defaultMessage={`我想查詢${service.name}，請按我的情況提供初步方向。`}
+          />
+          <nav className="service-related-links" aria-label="相關通渠服務">
+            {service.relatedSlugs.map(slug => {
+              const related = getServicePage(slug);
+              return related ? (
+                <Link
+                  href={`/services/${slug}`}
+                  key={slug}
+                  onClick={() =>
+                    trackNavClick("service", {
+                      cta_location: "service_detail_related",
+                      cta_label: related.shortName,
+                      service_name: slug,
+                      destination_url: `/services/${slug}`,
+                    })
+                  }
+                >
+                  {related.shortName}
+                  <ArrowRight aria-hidden="true" />
+                </Link>
+              ) : null;
+            })}
+          </nav>
+        </div>
+      </section>
     </div>
   );
 }

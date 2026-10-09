@@ -1,3 +1,5 @@
+import ServicePhoto from "@/components/ServicePhoto";
+import { getServiceVisual } from "@/lib/serviceVisuals";
 import { trackNavClick } from "@/lib/analytics";
 import { SERVICE_PAGES } from "@/lib/serviceData";
 import {
@@ -35,7 +37,7 @@ export default function ServiceDirectory({
 }) {
   return (
     <nav
-      className={`service-directory${compact ? " service-directory--compact" : ""}`}
+      className={`service-directory${compact ? " service-directory--compact" : " service-directory--visual"}`}
       aria-label="按問題選擇通渠服務"
     >
       {SERVICE_PAGES.map(service => {
@@ -60,12 +62,13 @@ export default function ServiceDirectory({
                 <Icon />
               </span>
             )}
+            {!compact ? <ServicePhoto slug={service.slug} /> : null}
             <span className="service-directory__copy">
               <strong>{service.shortName}</strong>
               <span>
                 {compact
                   ? visual?.summary || service.answerSummary.handles
-                  : service.answerSummary.handles}
+                  : getServiceVisual(service.slug).summary}
               </span>
             </span>
             <ArrowRight aria-hidden="true" />

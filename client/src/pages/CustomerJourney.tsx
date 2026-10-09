@@ -1,3 +1,5 @@
+import ServicePhoto from "@/components/ServicePhoto";
+import { getServiceVisual } from "@/lib/serviceVisuals";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
 import InquiryContactPanel from "@/components/InquiryContactPanel";
@@ -64,6 +66,11 @@ export default function CustomerJourney() {
         <a href="#customer-preparation">查詢資料</a>
         <a href="#customer-faq">常見問題</a>
       </nav>
+      <RelatedCaseRecords
+        serviceSlugs={customer.serviceSlugs}
+        location={`customer_${customer.slug}_cases`}
+        id="customer-cases"
+      />
       <section className="brand-section" id="customer-services">
         <div className="container">
           <div className="section-heading">
@@ -77,8 +84,9 @@ export default function CustomerJourney() {
               const service = getServicePage(slug)!;
               return (
                 <Link href={`/services/${slug}`} key={slug}>
+                  <ServicePhoto slug={slug} />
                   <h3>{service.shortName}</h3>
-                  <p>{service.answerSummary.handles}</p>
+                  <p>{getServiceVisual(slug).summary}</p>
                   <span>
                     了解處理方法 <ArrowRight aria-hidden="true" />
                   </span>
@@ -88,11 +96,6 @@ export default function CustomerJourney() {
           </div>
         </div>
       </section>
-      <RelatedCaseRecords
-        serviceSlugs={customer.serviceSlugs}
-        location={`customer_${customer.slug}_cases`}
-        id="customer-cases"
-      />
       <section className="brand-section" id="customer-preparation">
         <div className="container">
           <InquiryContactPanel
