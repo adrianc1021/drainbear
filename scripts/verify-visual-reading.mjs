@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { chromium } from "playwright";
+import { CUSTOMER_JOURNEYS } from "../shared/customerJourneys.ts";
 const origin =
   process.argv[2] || process.env.SITE_QA_ORIGIN || "http://localhost:4580";
 const output = process.env.READING_QA_OUTPUT || "/tmp/drainbear-reading-qa";
@@ -138,6 +139,48 @@ try {
         await page
           .locator(".home-recorded-cases")
           .screenshot({ path: output + "/cases-" + width + ".png" });
+        for (const customer of CUSTOMER_JOURNEYS) {
+          await page
+            .getByRole("button", { name: customer.name, exact: true })
+            .click();
+          const panel = page.locator(`#home-finder-${customer.slug}`);
+          await panel.waitFor({ state: "visible" });
+          assert.equal(
+            await panel.locator("img").count(),
+            customer.serviceSlugs.length
+          );
+          for (const slug of customer.serviceSlugs) {
+            const link = panel.locator(`a[href="/services/${slug}"]`);
+            assert.equal(
+              await link
+                .locator(`[data-service-illustration="${slug}"]`)
+                .count(),
+              1
+            );
+            assert.equal(
+              await link.locator("img").getAttribute("src"),
+              "/images/drainbear-services-ai.webp"
+            );
+            assert(
+              await link
+                .locator("img")
+                .evaluate(img => img.complete && img.naturalWidth > 0)
+            );
+          }
+          assert(
+            await page.evaluate(
+              () => document.documentElement.scrollWidth <= innerWidth + 1
+            )
+          );
+          await page
+            .locator(".home-problems")
+            .screenshot({
+              path: output + "/finder-" + customer.slug + "-" + width + ".png",
+            });
+        }
+        await page
+          .getByRole("button", { name: CUSTOMER_JOURNEYS[0].name, exact: true })
+          .click();
       }
       if (path === "/services/toilet-unblocking") {
         assert.equal(

@@ -655,7 +655,23 @@
   border-radius: 12px;
   background: var(--brand-paper);
 }
-.home-finder-services .service-photo {
+.service-illustration {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  overflow: clip;
+  background: #e7f4fd;
+}
+.service-illustration img {
+  position: absolute;
+  display: block;
+  width: 400%;
+  max-width: none;
+  height: auto;
+  top: 50%;
+}
+.home-finder-services :is(.service-photo, .service-illustration) {
   height: 100%;
   border-radius: 12px 0 0 12px;
 }
@@ -1987,7 +2003,7 @@
   .home-finder-services a {
     grid-template-columns: minmax(0, 1fr);
   }
-  .home-finder-services .service-photo {
+  .home-finder-services :is(.service-photo, .service-illustration) {
     height: auto;
     border-radius: 12px 12px 0 0;
   }

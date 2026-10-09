@@ -1,0 +1,38 @@
+const SCENES: Record<string, { column: number; row: number; label: string }> = {
+  "toilet-unblocking": { column: 0, row: 0, label: "坐廁通渠" },
+  "kitchen-sink-unblocking": { column: 1, row: 0, label: "廚房鋅盤" },
+  "bathroom-drain-unblocking": { column: 2, row: 0, label: "浴室去水" },
+  "sewage-backflow": { column: 3, row: 0, label: "倒灌管道示意" },
+  "grease-trap-cleaning": { column: 0, row: 1, label: "隔油池檢查" },
+  "high-pressure-jetting": { column: 1, row: 1, label: "高壓水槍洗渠" },
+  "cctv-drain-inspection": { column: 2, row: 1, label: "照喉設備" },
+  "main-drain-manhole": { column: 3, row: 1, label: "主渠及沙井檢視" },
+};
+
+/** Homepage choice illustrations are distinct from the real case evidence. */
+export default function ServiceIllustration({ slug }: { slug: string }) {
+  const scene = SCENES[slug];
+  if (!scene) throw new Error(`Missing service illustration: ${slug}`);
+  return (
+    <span
+      className="service-illustration"
+      role="img"
+      aria-label={`AI 紙藝白熊服務插圖：${scene.label}`}
+      data-service-illustration={slug}
+    >
+      <img
+        src="/images/drainbear-services-ai.webp"
+        alt=""
+        aria-hidden="true"
+        width="1536"
+        height="768"
+        loading="lazy"
+        decoding="async"
+        style={{
+          left: `${-100 * scene.column}%`,
+          transform: `translateY(-${scene.row ? 75 : 25}%)`,
+        }}
+      />
+    </span>
+  );
+}

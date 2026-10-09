@@ -1,4 +1,4 @@
-import ServicePhoto from "@/components/ServicePhoto";
+import ServiceIllustration from "@/components/ServiceIllustration";
 import { getServiceVisual } from "@/lib/serviceVisuals";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
@@ -101,7 +101,7 @@ export default function HomeServiceFinder() {
                         })
                       }
                     >
-                      <ServicePhoto slug={slug} />
+                      <ServiceIllustration slug={slug} />
                       <span className="home-finder-services__copy">
                         <strong>{service.shortName}</strong>
                         <span>{getServiceVisual(slug).summary}</span>
