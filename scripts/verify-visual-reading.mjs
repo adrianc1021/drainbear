@@ -115,7 +115,21 @@ try {
         const finderTop = await page
           .locator(".home-problems")
           .evaluate(el => el.getBoundingClientRect().top + scrollY);
-        assert(caseTop < finderTop);
+        assert(
+          finderTop < caseTop,
+          "service selection guides visitors before real cases"
+        );
+        const arrangementTop = await page
+          .locator(".home-arrangement")
+          .evaluate(el => el.getBoundingClientRect().top + scrollY);
+        assert(caseTop < arrangementTop);
+        assert.equal(
+          await page.locator(".home-arrangement__illustration img").count(),
+          4
+        );
+        await page
+          .locator(".home-arrangement")
+          .screenshot({ path: output + "/arrangement-" + width + ".png" });
         assert.equal(await page.locator(".home-recorded-cases img").count(), 3);
         await page.screenshot({
           path: output + "/home-" + width + ".png",
