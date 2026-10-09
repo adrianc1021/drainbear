@@ -14,7 +14,7 @@ const CRUMBS = [
 const ANSWERS = [
   {
     id: "quote-context",
-    question: "通渠可以用統一價格報價嗎？",
+    question: "通渠價錢點計？可以用統一價格報價嗎？",
     answer:
       "每宗工程的堵塞位置、管道狀況、工具及進場條件不同，沒有適用所有情況的統一價格。提供現場資料後，團隊會按實際情況了解處理方向及報價。",
   },
@@ -38,8 +38,8 @@ export default function Guide() {
       <SEO
         image={BRAND_SOCIAL_IMAGE}
         imageAlt={BRAND_SOCIAL_ALT}
-        title="香港通渠報價｜現場資料與查詢指南｜通渠熊"
-        description="通渠報價要按堵塞位置、管道及施工條件了解。整理地區、現場相片和受影響範圍，查詢住宅、食肆及物業渠務安排。"
+        title="通渠價錢點估？現場資料與報價指南｜通渠熊"
+        description="通渠費用要按堵塞位置、管道及施工條件評估，沒有適用所有情況的統一價格。先整理地區與相片，了解住宅、食肆及物業的處理方向和報價安排。"
         path="/guide"
         breadcrumbs={CRUMBS}
         jsonLd={[

@@ -1,3 +1,5 @@
+import { SEO_ARTICLES } from "./seoArticles";
+import type { SanityImageData } from "./sanity/types";
 /**
  * 通渠熊 DrainBear — 通渠小知識網誌資料
  * SEO 導向：每篇文章覆蓋不同長尾關鍵字（防塞、通渠水、隔氣、隔油池、村屋沙井、雨季防浸）
@@ -13,11 +15,21 @@ export interface BlogPost {
   readMins: number;
   excerpt: string;
   keywords: string[];
-  /** 正文段落：h2 為小標題、p 為段落、tip 為白熊師傅貼士 */
-  sections: { type: "h2" | "p" | "tip"; text: string }[];
+  featured?: boolean;
+  coverImage?: SanityImageData;
+  serviceSlugs?: string[];
+  relatedSlugs?: string[];
+  resourceLinks?: { label: string; href: string; note?: string }[];
+  faqs?: { question: string; answer: string }[];
+  /** Short paragraphs and practical lists remain readable without JavaScript. */
+  sections: (
+    | { type: "h2" | "p" | "tip"; text: string }
+    | { type: "list"; items: string[]; ordered?: boolean }
+  )[];
 }
 
 export const BLOG_POSTS: BlogPost[] = [
+  ...SEO_ARTICLES,
   {
     slug: "whatsapp-drain-quote-checklist",
     title: "WhatsApp 通渠報價要影咩？一張清單減少來回追問",

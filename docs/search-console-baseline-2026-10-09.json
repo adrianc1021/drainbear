@@ -1,0 +1,152 @@
+{
+  "source": "User-provided Search Console screenshot and pasted query rows",
+  "receivedOn": "2026-10-09",
+  "selectedPeriod": null,
+  "country": null,
+  "device": null,
+  "searchType": null,
+  "screenshotTotals": {
+    "clicks": 178,
+    "impressionsApproximate": 31500,
+    "ctrPercent": 0.6,
+    "averagePosition": 28.3
+  },
+  "queries": [
+    {
+      "query": "北角通渠",
+      "clicks": 0,
+      "impressions": 897,
+      "averagePosition": null,
+      "landingPage": null
+    },
+    {
+      "query": "觀塘通渠",
+      "clicks": 0,
+      "impressions": 829,
+      "averagePosition": null,
+      "landingPage": null
+    },
+    {
+      "query": "沙田通渠",
+      "clicks": 0,
+      "impressions": 824,
+      "averagePosition": null,
+      "landingPage": null
+    },
+    {
+      "query": "通渠價錢",
+      "clicks": 0,
+      "impressions": 804,
+      "averagePosition": null,
+      "landingPage": null
+    },
+    {
+      "query": "旺角通渠",
+      "clicks": 0,
+      "impressions": 795,
+      "averagePosition": null,
+      "landingPage": null
+    },
+    {
+      "query": "荃灣通渠",
+      "clicks": 0,
+      "impressions": 760,
+      "averagePosition": null,
+      "landingPage": null
+    },
+    {
+      "query": "通渠費用",
+      "clicks": 0,
+      "impressions": 698,
+      "averagePosition": null,
+      "landingPage": null
+    },
+    {
+      "query": "通渠價格",
+      "clicks": 0,
+      "impressions": 678,
+      "averagePosition": null,
+      "landingPage": null
+    },
+    {
+      "query": "深水埗通渠",
+      "clicks": 0,
+      "impressions": 676,
+      "averagePosition": null,
+      "landingPage": null
+    },
+    {
+      "query": "將軍澳通渠",
+      "clicks": 1,
+      "impressions": 642,
+      "averagePosition": null,
+      "landingPage": null
+    },
+    {
+      "query": "屯門通渠",
+      "clicks": 0,
+      "impressions": 638,
+      "averagePosition": null,
+      "landingPage": null
+    },
+    {
+      "query": "銅鑼灣通渠",
+      "clicks": 0,
+      "impressions": 608,
+      "averagePosition": null,
+      "landingPage": null
+    },
+    {
+      "query": "坑口通渠",
+      "clicks": 0,
+      "impressions": 599,
+      "averagePosition": null,
+      "landingPage": null
+    },
+    {
+      "query": "火炭通渠",
+      "clicks": 0,
+      "impressions": 582,
+      "averagePosition": null,
+      "landingPage": null
+    },
+    {
+      "query": "牛頭角通渠",
+      "clicks": 0,
+      "impressions": 530,
+      "averagePosition": null,
+      "landingPage": null
+    },
+    {
+      "query": "通渠收費",
+      "clicks": 0,
+      "impressions": 496,
+      "averagePosition": null,
+      "landingPage": null
+    },
+    {
+      "query": "中環通渠",
+      "clicks": 0,
+      "impressions": 476,
+      "averagePosition": null,
+      "landingPage": null
+    },
+    {
+      "query": "元朗通渠",
+      "clicks": 0,
+      "impressions": 452,
+      "averagePosition": null,
+      "landingPage": null
+    },
+    {
+      "query": "何文田通渠",
+      "clicks": null,
+      "impressions": null,
+      "averagePosition": null,
+      "landingPage": null
+    }
+  ],
+  "completeQueryRows": 18,
+  "listedImpressions": 11984,
+  "listedClicks": 1
+}

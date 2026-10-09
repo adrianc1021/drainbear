@@ -38,6 +38,9 @@ export interface BlogPostView {
   seo?: SeoData;
   body?: SanityBlogBodyBlock[];
   sections?: StaticBlogPost["sections"];
+  resourceLinks?: StaticBlogPost["resourceLinks"];
+  faqs?: StaticBlogPost["faqs"];
+  relatedSlugs?: StaticBlogPost["relatedSlugs"];
 }
 
 export function getCategoryLabel(category: string): string {
@@ -79,8 +82,12 @@ export function mapStaticBlogPost(post: StaticBlogPost): BlogPostView {
     readMins: post.readMins,
     excerpt: post.excerpt,
     keywords: post.keywords,
-    featured: false,
+    featured: Boolean(post.featured),
+    coverImage: post.coverImage,
     sections: post.sections,
+    resourceLinks: post.resourceLinks,
+    faqs: post.faqs,
+    relatedSlugs: post.relatedSlugs,
   };
 }
 

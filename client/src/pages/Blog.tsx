@@ -185,9 +185,23 @@ export default function Blog() {
                     })
                   }
                 >
-                  <ServiceIllustration
-                    slug={articleArt(post.title, post.category)}
-                  />
+                  {post.coverImage?.url?.startsWith("/images/blog/") ? (
+                    <img
+                      className="blog-reading-card__image"
+                      src={post.coverImage.url}
+                      srcSet={post.coverImage.srcSet}
+                      sizes="(max-width: 639px) 96px, (max-width: 1023px) 45vw, 360px"
+                      alt={post.coverImage.alt || post.title}
+                      width={post.coverImage.width}
+                      height={post.coverImage.height}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : (
+                    <ServiceIllustration
+                      slug={articleArt(post.title, post.category)}
+                    />
+                  )}
                   <div>
                     <p className="brand-eyebrow">{post.category}</p>
                     <h3>{post.title}</h3>
