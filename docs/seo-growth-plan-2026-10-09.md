@@ -4,7 +4,7 @@
 
 ## 先做甚麼
 
-**優先改善已有曝光的地區頁與報價入口，再用十篇文章支援服務頁。** 現有數據顯示搜尋需求已存在；繼續大量增加意思相同的文章，未必能解決零點擊。
+**最新網頁資料顯示，優先改善高曝光、少點擊的服務頁，再檢查報價入口與地區頁。** 浴室、鋅盤、主渠及坐廁四頁合共 14,816 次曝光、3 次點擊；十篇新文章支援相關服務。原查詢資料及方案保留如下，最新工作次序見文末「補充：網頁曝光資料」。
 
 本次已新增十篇互補文章、十張藍白紙藝 AI 插圖、手機及桌面圖片版本、三十條同源問答，以及服務頁返回文章的連結。新文章的圖片是說明素材；只有案例頁的真實紀錄作施工證據。文章並未宣稱獲師傅真人審閱。
 
@@ -141,3 +141,56 @@
 - 原有服務、指南、文章目錄、流程及客群頁的 40 次版型檢查與互動流程通過。
 
 重跑方式：完成 `pnpm build`，啟動新建置的 production server，再執行 `pnpm verify:articles http://localhost:4581`。可設定 `AXE_SOURCE_PATH` 載入 axe-core；未設定則只執行功能、資料及版型檢查。新增路由後需重新啟動本機伺服器，讓它讀取新路由 manifest。
+
+## 補充：網頁曝光資料改變了優化次序
+
+使用者在 2026 年 10 月 9 日另提供 17 個網頁的點擊與曝光。**下一輪優先改善四個服務頁，接着處理報價入口與高曝光地區頁。** 原來北角／觀塘／沙田的查詢優先表保留作查詢層面的線索；以下補充為目前整體工作次序。
+
+點擊率 = 點擊 ÷ 曝光 × 100%，表內顯示至小數三位。網頁平均排名、期間及裝置／國家篩選未提供；這批網頁數據沒有逐條連接之前的查詢清單。
+
+| 網頁                                                                                                              | 點擊 |  曝光 | 點擊率 |
+| ----------------------------------------------------------------------------------------------------------------- | ---: | ----: | -----: |
+| [/services/bathroom-drain-unblocking](https://drainbearhk.com/services/bathroom-drain-unblocking)                 |    1 | 5,383 | 0.019% |
+| [/guide](https://drainbearhk.com/guide)                                                                           |    5 | 5,337 | 0.094% |
+| [/services/kitchen-sink-unblocking](https://drainbearhk.com/services/kitchen-sink-unblocking)                     |    2 | 4,612 | 0.043% |
+| [/areas/tseung-kwan-o](https://drainbearhk.com/areas/tseung-kwan-o)                                               |    1 | 3,623 | 0.028% |
+| [/areas/causeway-bay](https://drainbearhk.com/areas/causeway-bay)                                                 |    1 | 3,473 | 0.029% |
+| [/blog/hong-kong-drain-cleaning-price-guide](https://drainbearhk.com/blog/hong-kong-drain-cleaning-price-guide)   |    1 | 3,427 | 0.029% |
+| [/areas/sha-tin](https://drainbearhk.com/areas/sha-tin)                                                           |    2 | 2,652 | 0.075% |
+| [/blog/bathroom-drain-smell-causes-solutions](https://drainbearhk.com/blog/bathroom-drain-smell-causes-solutions) |   11 | 2,591 | 0.425% |
+| [/services/main-drain-manhole](https://drainbearhk.com/services/main-drain-manhole)                               |    0 | 2,559 | 0.000% |
+| [/areas/north-point](https://drainbearhk.com/areas/north-point)                                                   |    1 | 2,558 | 0.039% |
+| [/areas/kwun-tong](https://drainbearhk.com/areas/kwun-tong)                                                       |    0 | 2,486 | 0.000% |
+| [/](https://drainbearhk.com/)                                                                                     |   50 | 2,474 | 2.021% |
+| [/blog/toilet-clog-emergency-guide](https://drainbearhk.com/blog/toilet-clog-emergency-guide)                     |    9 | 2,373 | 0.379% |
+| [/areas/yuen-long](https://drainbearhk.com/areas/yuen-long)                                                       |    3 | 2,305 | 0.130% |
+| [/blog/bathroom-hair-clog-prevention](https://drainbearhk.com/blog/bathroom-hair-clog-prevention)                 |   15 | 2,292 | 0.654% |
+| [/services/toilet-unblocking](https://drainbearhk.com/services/toilet-unblocking)                                 |    0 | 2,262 | 0.000% |
+| [/blog/prevent-kitchen-sink-clog](https://drainbearhk.com/blog/prevent-kitchen-sink-clog)                         |   17 | 2,237 | 0.760% |
+
+### 服務頁已有曝光，點擊仍然很少
+
+四個服務頁合計 **14,816 次曝光、3 次點擊，CTR 0.020%**。浴室與鋅盤合共 9,995 次曝光、3 次點擊；主渠和坐廁仍為零點擊。這代表服務頁值得優先檢查，尚不能判定是標題、內容或排名造成。
+
+1. **浴室通渠、廚房鋅盤**：先取得每頁主要查詢及平均排名。若已在前十而 CTR 很低，可測試更直接的服務標題、摘要；若排名較後，優先補客戶問題的具體答案、相關案例和內鏈。浴室頁可測試「浴室通渠｜企缸、地台去水慢處理｜通渠熊」，但需先核對查詢意圖。鋅盤頁已有明確服務標題，不能只憑數據認定要重寫。
+2. **坐廁、主渠／沙井**：確認 Google 選取的 canonical、索引狀態及實際查詢，補上最相關的異物、共用渠倒灌、物業保養文章入口。新十篇已有服務內鏈，可按實際問題繼續完善既有文章；不新增同意思的服務頁。
+
+### 報價頁需要分工，不能單靠兩個網址判定互相競爭
+
+指南與價格文章合計 **8,764 次曝光、6 次點擊，CTR 0.068%**。指南用來整理現場資料及開始查詢；價格文章用來說明影響處理範圍的因素。先查看四組價錢查詢實際由哪頁獲曝光，再決定需否合併或調整連結。指南搜尋顯示已於本次部署更新，但這批數據的期間不明，不能當作更新後成效。維持不列固定價錢、不加長篇收費條款。
+
+### 地區頁把將軍澳及銅鑼灣加入首批
+
+將軍澳有 3,623 次曝光、1 次點擊，銅鑼灣有 3,473 次曝光、1 次點擊；兩者按這批頁面曝光高於北角、觀塘及沙田，值得加入首批地區頁檢查。北角／觀塘／沙田仍有先前查詢需求證據。不能把地區頁的所有曝光當成同名「地區＋通渠」一個查詢；只有核實當區工程才增加案例證據。
+
+### 知識文章已有點擊，可接到合適服務
+
+鋅盤防塞文章有 17 次點擊、CTR 0.760%；浴室頭髮文章有 15 次點擊、CTR 0.654%；浴室渠味文章有 11 次點擊、CTR 0.425%。將鋅盤文章連到鋅盤通渠，浴室文章連到浴室服務，坐廁應急文章連到坐廁服務；入口放在相關段落旁，不增加一整段推銷文字。是否帶來查詢，要另看服務點擊和真正收到的 WhatsApp 訊息。
+
+首頁有 50 次點擊、CTR 2.021%，但可能包含品牌查詢或不同排名；不能將它當作所有服務頁應達到的標準，亦不能由 CTR 判定客戶偏好或成交。
+
+### 數據口徑與下一個核對點
+
+這 17 頁合計 **52,644 次曝光、119 次點擊，按所列網頁加權 CTR 0.226%**。這是所列網頁的彙總，不能當作整站 CTR，也不是訪客或查詢數。曝光高於先前截圖約 31,500，可能涉及不同期間、篩選或網頁／資源彙總方式，現時不能直接比較或視作成長。
+
+沒有重複 URL、負數或點擊大於曝光的項目；17 頁均缺平均排名。沒有日期序列，不作趨勢、更新後效果或因果判斷。最小下一步是匯出同一期間、同一篩選的查詢對應頁面及排名，再把排名 4–20 的相關服務頁選為首批。

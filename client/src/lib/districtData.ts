@@ -1,3 +1,4 @@
+import { DISTRICT_SEARCH_CONTENT } from "./districtSearchContent";
 /**
  * 通渠熊 DrainBear — 地區著陸頁資料
  * 每區獨立長內容：當區特色、常見問題場景、鄰近地點、FAQ（SEO 長尾關鍵字覆蓋）
@@ -150,7 +151,7 @@ export const DISTRICTS: DistrictInfo[] = [
   ...DISTRICTS_BATCH1,
   ...DISTRICTS_BATCH2,
   ...DISTRICTS_BATCH3,
-];
+].map(district => ({ ...district, ...DISTRICT_SEARCH_CONTENT[district.slug] }));
 
 /** 地區名 → slug 對照（供 pill 連結使用） */
 export const DISTRICT_SLUGS: Record<string, string> = Object.fromEntries(

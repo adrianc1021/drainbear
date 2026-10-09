@@ -66,6 +66,7 @@ const STATIC_ROUTES = [
 
 const STATIC_BLOG_SLUGS = [
   ...SEO_ARTICLES.map(article => article.slug),
+  "hong-kong-drain-cleaning-price-guide",
   "whatsapp-drain-quote-checklist",
   "drain-tool-selection-guide",
   "read-cctv-drain-inspection-report",
