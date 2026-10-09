@@ -1,3 +1,4 @@
+import AnimatedDisclosure from "@/components/AnimatedDisclosure";
 import ContactActions from "@/components/ContactActions";
 /**
  * 通渠熊 DrainBear — Blog文章內頁
@@ -270,14 +271,24 @@ export default function BlogPost() {
 
   const related = posts
     .filter(candidate => candidate.slug !== post.slug)
+    .sort((a, b) => {
+      const preferred = post.relatedSlugs || [];
+      const rank = (slug: string) => {
+        const index = preferred.indexOf(slug);
+        return index < 0 ? preferred.length : index;
+      };
+      return rank(a.slug) - rank(b.slug);
+    })
     .slice(0, 3);
 
-  const seoTitle =
-    post.seo?.metaTitle || `${post.title}｜通渠小知識｜通渠熊 DrainBear`;
+  const seoTitle = post.seo?.metaTitle || `${post.title}｜通渠熊`;
 
   const seoDescription = post.seo?.metaDescription || post.excerpt;
 
-  const seoImage = post.seo?.ogImage?.url || post.coverImage?.url;
+  const imageSource = post.seo?.ogImage?.url || post.coverImage?.url;
+  const seoImage = imageSource
+    ? new URL(imageSource, settings.siteUrl).href
+    : undefined;
 
   const seoImageAlt =
     post.seo?.ogImage?.alt || post.coverImage?.alt || post.title;
@@ -338,7 +349,24 @@ export default function BlogPost() {
         type="article"
         metadataReady={!isLoading}
         keywords={post.keywords.join(", ")}
-        jsonLd={jsonLd}
+        jsonLd={
+          post.faqs?.length
+            ? [
+                jsonLd,
+                {
+                  "@context": "https://schema.org",
+                  "@type": "FAQPage",
+                  "@id": `${settings.siteUrl.replace(/\/+$/, "")}/blog/${post.slug}#faq`,
+                  mainEntity: post.faqs.map((faq, index) => ({
+                    "@type": "Question",
+                    url: `${settings.siteUrl.replace(/\/+$/, "")}/blog/${post.slug}#blog-answer-${index + 1}`,
+                    name: faq.question,
+                    acceptedAnswer: { "@type": "Answer", text: faq.answer },
+                  })),
+                },
+              ]
+            : jsonLd
+        }
         noindex={Boolean(post.seo?.noIndex)}
         breadcrumbs={[
           { name: "首頁", path: "/" },
@@ -390,49 +418,19 @@ export default function BlogPost() {
             </span>
           </div>
 
-          <aside
-            className="mt-7 border-y border-white/20 py-5"
-            aria-labelledby="article-content-details"
-          >
-            <h2 id="article-content-details" className="sr-only">
-              文章內容資料
-            </h2>
-            <dl className="grid gap-5 text-sm sm:grid-cols-3">
-              <div>
-                <dt className="font-bold text-white">資料整理與撰寫</dt>
-                <dd className="mt-1 text-white/70">{post.authorName}</dd>
-              </div>
-              <div>
-                <dt className="font-bold text-white">服務流程及安全資訊審閱</dt>
-                <dd className="mt-1 text-white/70">
-                  {post.reviewerName || "通渠熊渠務團隊"}
-                </dd>
-              </div>
-              <div>
-                <dt className="font-bold text-white">最後更新</dt>
-                <dd className="mt-1 text-white/70">
-                  {formatDate(post.updatedAt || post.date)}
-                </dd>
-              </div>
-            </dl>
-            <p className="mt-5 text-xs leading-relaxed text-white/60">
-              內容根據服務流程、設備用途及一般渠務安全原則整理。網上資料不能取代現場檢查；實際管道狀況、工具、到場時間及收費須按現場與服務安排確認。
-            </p>
-          </aside>
-
           {post.coverImage?.url && (
             <figure className="mt-8 overflow-hidden rounded-lg border border-border bg-white">
               <img
                 src={optimizedImageUrl(post.coverImage.url, 1200)}
-                srcSet={createImageSrcSet(
-                  post.coverImage.url,
-                  [480, 768, 960, 1200]
-                )}
+                srcSet={
+                  post.coverImage.srcSet ||
+                  createImageSrcSet(post.coverImage.url, [480, 768, 960, 1200])
+                }
                 sizes="(min-width: 768px) 768px, 100vw"
                 alt={post.coverImage.alt || post.title}
                 width={post.coverImage.width}
                 height={post.coverImage.height}
-                className="aspect-[1.91/1] h-auto w-full object-cover"
+                className="h-auto w-full"
                 loading="eager"
                 fetchPriority="high"
                 decoding="async"
@@ -459,6 +457,19 @@ export default function BlogPost() {
 
           {post.source === "static" &&
             post.sections?.map((section, index) => {
+              if (section.type === "list") {
+                const List = section.ordered ? "ol" : "ul";
+                return (
+                  <List
+                    key={index}
+                    className={`mt-5 space-y-3 pl-6 leading-[1.8] text-navy/75 ${section.ordered ? "list-decimal" : "list-disc"}`}
+                  >
+                    {section.items.map(item => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </List>
+                );
+              }
               if (section.type === "h2") {
                 return (
                   <h2
@@ -492,6 +503,70 @@ export default function BlogPost() {
               );
             })}
 
+          <AnimatedDisclosure
+            id="article-content-details"
+            title="文章資料與適用範圍"
+            className="mt-10"
+          >
+            <dl className="grid gap-4 text-sm sm:grid-cols-3">
+              <div>
+                <dt className="font-bold">資料整理與撰寫</dt>
+                <dd>{post.authorName}</dd>
+              </div>
+              {post.reviewerName ? (
+                <div>
+                  <dt className="font-bold">服務流程及安全資訊審閱</dt>
+                  <dd>{post.reviewerName}</dd>
+                </div>
+              ) : null}
+              <div>
+                <dt className="font-bold">最後更新</dt>
+                <dd>{formatDate(post.updatedAt || post.date)}</dd>
+              </div>
+            </dl>
+            <p className="mt-4 text-sm leading-relaxed">
+              內容根據服務流程、設備用途及一般渠務安全原則整理。網上資料不能取代現場檢查；管道狀況、處理方法及上門安排須按現場資料確認。
+            </p>
+          </AnimatedDisclosure>
+
+          {post.resourceLinks?.length ? (
+            <section
+              className="article-resources"
+              aria-labelledby="article-resources-heading"
+            >
+              <h2 id="article-resources-heading">相關服務與公開紀錄</h2>
+              <ul>
+                {post.resourceLinks.map(resource => (
+                  <li key={resource.href}>
+                    <Link href={resource.href}>
+                      {resource.label}
+                      <ArrowRight aria-hidden="true" />
+                    </Link>
+                    {resource.note ? <p>{resource.note}</p> : null}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
+          {post.faqs?.length ? (
+            <section
+              className="article-faq"
+              aria-labelledby="article-faq-heading"
+            >
+              <h2 id="article-faq-heading">常見問題</h2>
+              <div className="reading-faq">
+                {post.faqs.map((faq, index) => (
+                  <AnimatedDisclosure
+                    key={faq.question}
+                    id={`blog-answer-${index + 1}`}
+                    title={faq.question}
+                  >
+                    <p>{faq.answer}</p>
+                  </AnimatedDisclosure>
+                ))}
+              </div>
+            </section>
+          ) : null}
           <div className="mt-14 rounded-lg bg-navy p-8 text-center md:p-10">
             <h2 className="font-display text-xl font-black text-white md:text-2xl">
               渠務問題仍未解決？

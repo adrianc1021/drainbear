@@ -1,3 +1,4 @@
+import { SEO_ARTICLES } from "../client/src/lib/seoArticles";
 import { spawn } from "node:child_process";
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -64,6 +65,7 @@ const STATIC_ROUTES = [
 ];
 
 const STATIC_BLOG_SLUGS = [
+  ...SEO_ARTICLES.map(article => article.slug),
   "whatsapp-drain-quote-checklist",
   "drain-tool-selection-guide",
   "read-cctv-drain-inspection-report",

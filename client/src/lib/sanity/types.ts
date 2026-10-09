@@ -1,6 +1,8 @@
 import type { PortableTextBlock } from "@portabletext/types";
 
 export interface SanityImageData {
+  /** Optional local image variants; Sanity images use generated CDN srcsets. */
+  srcSet?: string;
   url?: string;
   alt?: string;
   caption?: string;

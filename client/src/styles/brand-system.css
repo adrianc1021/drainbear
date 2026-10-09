@@ -1898,6 +1898,62 @@
   text-decoration: underline;
   text-underline-offset: 4px;
 }
+/* Article resources use the same native reading and visual card patterns. */
+.blog-reading-card__image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: contain;
+  background: #e7f4fd;
+}
+.article-resources,
+.article-faq {
+  margin-top: 2.5rem;
+}
+.article-resources h2,
+.article-faq h2 {
+  font-size: 1.5rem;
+}
+.article-resources ul {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+.article-resources li {
+  padding: 1rem;
+  border: 1px solid var(--brand-line);
+  border-radius: 12px;
+  background: var(--brand-paper);
+}
+.article-resources a,
+.article-resource-links a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 44px;
+  color: var(--brand-accent);
+  font-weight: 700;
+}
+.article-resources a svg,
+.article-resource-links a svg {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+}
+.article-resources p {
+  margin-top: 0.5rem;
+  color: var(--brand-copy);
+  font-size: 0.85rem;
+}
+.article-resource-links {
+  display: grid;
+  gap: 0.75rem;
+}
+.article-resource-links a {
+  border-bottom: 1px solid var(--brand-line);
+  padding-block: 0.5rem;
+}
 /* Searchable reading and illustrated process pages. */
 .blog-search {
   max-width: 760px;
@@ -1996,7 +2052,8 @@
   border-color: var(--brand-accent);
   box-shadow: 0 8px 24px #07528612;
 }
-.blog-reading-card > .service-illustration {
+.blog-reading-card > .service-illustration,
+.blog-reading-card__image {
   border-radius: 20px 20px 0 0;
 }
 .blog-reading-card > div {
@@ -2178,7 +2235,8 @@
     grid-template-columns: 96px minmax(0, 1fr);
     align-items: center;
   }
-  .blog-reading-card > .service-illustration {
+  .blog-reading-card > .service-illustration,
+  .blog-reading-card__image {
     aspect-ratio: 1;
     border-radius: 12px;
     margin-left: 0.65rem;

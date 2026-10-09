@@ -1,3 +1,4 @@
+import RelatedDrainArticles from "@/components/RelatedDrainArticles";
 import AnimatedDisclosure from "@/components/AnimatedDisclosure";
 import { getServiceVisual } from "@/lib/serviceVisuals";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -280,6 +281,7 @@ export default function ServiceDetail() {
               ) : null;
             })}
           </nav>
+          <RelatedDrainArticles serviceSlug={service.slug} />
         </div>
       </section>
     </div>
