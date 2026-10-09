@@ -13,6 +13,7 @@ description: 使用語意化React元件與Flexbox/Grid統一通渠熊介面，�
 - 公開查詢區必須可用；未驗證接收的表格不顯示為可提交，也不長期展示維護提示。WhatsApp跳轉只能引導傳送，不能聲稱已開啟應用程式、已發訊息或已收到查詢。
 - 用main、section、nav、article、figure、ol、table、details等合適語意。互動用button或有有效href的a。
 - 圖片優先的服務入口使用ServicePhoto與serviceVisuals，一張圖片、一個短標題及一句症狀摘要。首頁服務選擇區使用ServiceIllustration的乾淨AI紙藝插圖，住宅、食肆及物業所有選項都不能混入施工照片或污水近鏡；核對三個分類切換及八款服務對應場景。首頁按「首屏→服務選擇→真實案例→上門安排」引導；上門安排使用AI紙藝白熊流程插圖，圖片描述清楚說明示意用途；縮略圖可按版型裁切，案例完整影片和證據說明仍可開啟。不可用圖片或固定高度裁掉重要文字。
+- /services 的八款服務圖片入口，以及 /services、/guide 的客戶類型入口，一律使用 ServiceIllustration；CustomerPaths 使用 illustrated 模式。這兩頁所有項目圖片只可用乾淨 AI 素材，不得回退到真實施工圖。核對八款服務、兩組客戶連結及五種尺寸下的圖片來源與解碼。
 - 詳細症狀、成因、流程、資料清單及FAQ可使用AnimatedDisclosure預設收合；答案及連結保留在HTML，FAQ與JSON-LD一致。直接答案錨點需自動展開相應內容，亦核對hash變更、原生鍵盤及無JavaScript操作。CMS照片必須來自已發布紀錄，等待data-cms-loading完成並確認圖片成功解碼，不能用空色塊當成已展示照片。
 - Grid欄位使用minmax(0,1fr)，Flex子項需min-width:0。中文標題自然換行，不能以overflow:hidden掩蓋文字溢出。
 - 320px至1440px驗證，包括手機首屏兩個聯絡按鈕、表格可捲動、固定CTA不遮擋內容、平板導覽不擠壓。
