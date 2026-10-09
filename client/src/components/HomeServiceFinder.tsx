@@ -1,3 +1,5 @@
+import ServicePhoto from "@/components/ServicePhoto";
+import { getServiceVisual } from "@/lib/serviceVisuals";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import {
@@ -75,7 +77,7 @@ export default function HomeServiceFinder() {
               hidden={i !== group}
             >
               <div className="home-finder-content__intro">
-                <p>{customer.description}</p>
+                <p>{customer.shortName}，按位置選擇。</p>
                 <Link href={`/customers/${customer.slug}`}>
                   查看查詢資料 <ArrowRight aria-hidden="true" />
                 </Link>
@@ -99,11 +101,12 @@ export default function HomeServiceFinder() {
                         })
                       }
                     >
-                      <span>
+                      <ServicePhoto slug={slug} />
+                      <span className="home-finder-services__copy">
                         <strong>{service.shortName}</strong>
-                        <span>{service.answerSummary.handles}</span>
+                        <span>{getServiceVisual(slug).summary}</span>
+                        <ArrowUpRight aria-hidden="true" />
                       </span>
-                      <ArrowUpRight aria-hidden="true" />
                     </Link>
                   );
                 })}

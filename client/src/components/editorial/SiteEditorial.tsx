@@ -37,9 +37,7 @@ export function EditorialPageHero({
             message={message}
             topic={topic}
           />
-          <p className="contact-note">
-            24 小時接受查詢；上門時間按地區、人手及設備確認。
-          </p>
+          <p className="contact-note">24 小時查詢 · 上門時間另行確認。</p>
         </div>
         {media ? (
           <figure className="site-page-hero__media">

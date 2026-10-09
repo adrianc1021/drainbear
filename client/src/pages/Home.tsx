@@ -38,22 +38,18 @@ const PROCESS = [
   {
     icon: MessageSquareText,
     title: "提供現場資料",
-    description: "傳地區、堵塞位置同相片；有倒灌或用過通渠水，也請說明。",
   },
   {
     icon: CalendarClock,
     title: "確認上門安排",
-    description: "按現場情況確認人手、工具及可安排時間。",
   },
   {
     icon: ClipboardCheck,
     title: "現場檢查及確認",
-    description: "師傅檢查管道及施工條件，說明方案，確認後開始處理。",
   },
   {
     icon: Droplets,
     title: "疏通及測試去水",
-    description: "完成已確認工序，測試去水，再整理施工位置。",
   },
 ] as const;
 
@@ -80,15 +76,9 @@ export default function Home() {
                 <span className="home-hero__headline-line">香港通渠，</span>
                 <span className="home-hero__headline-line">先搵通渠熊。</span>
               </h1>
-              <p className="home-hero__intro">
-                塞廁所、鋅盤去水慢，定係污水倒灌？
-                <br />
-                傳相片同地區，先了解處理方法及報價。
-              </p>
+              <p className="home-hero__intro">傳相片、講地區，先了解點處理。</p>
               <ContactActions location="home_hero" prominent />
-              <p className="contact-note">
-                24 小時接受查詢；上門時間按地區、人手及設備確認。
-              </p>
+              <p className="contact-note">24 小時查詢 · 上門時間另行確認。</p>
             </div>
           </div>
           <figure className="home-hero__media">
@@ -105,8 +95,8 @@ export default function Home() {
           </figure>
         </div>
       </section>
-      <HomeServiceFinder />
       <RecordedCaseGallery />
+      <HomeServiceFinder />
       <section
         className="brand-section brand-section--soft home-arrangement"
         aria-labelledby="home-process-heading"
@@ -120,9 +110,6 @@ export default function Home() {
                 <br />
                 再安排處理。
               </h2>
-              <p className="home-arrangement__description">
-                說明問題位置與去水情況，方便團隊了解所需工具、進場條件及可安排時間。
-              </p>
             </div>
             <Link href="/service-process">
               了解服務流程
@@ -141,15 +128,10 @@ export default function Home() {
                 </span>
                 <div>
                   <h3>{step.title}</h3>
-                  <p>{step.description}</p>
                 </div>
               </li>
             ))}
           </ol>
-          <p className="section-footnote home-arrangement__footnote">
-            相片有助了解情況；實際處理方法由師傅檢查後確認。
-            <Link href="/service-process">了解完整流程</Link>
-          </p>
         </div>
       </section>
       <DrainHomeFaq />

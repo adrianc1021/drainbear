@@ -1,6 +1,13 @@
+import AnimatedDisclosure from "@/components/AnimatedDisclosure";
 import ContactActions from "@/components/ContactActions";
 import { CUSTOMER_JOURNEYS, type CustomerSlug } from "@shared/customerJourneys";
-import { Check, MessageSquareText } from "lucide-react";
+import {
+  Camera,
+  Check,
+  MapPin,
+  MessageSquareText,
+  Droplets,
+} from "lucide-react";
 
 export type InquiryServiceType =
   | "residential"
@@ -31,7 +38,7 @@ export function InquiryChecklist({
 export default function InquiryContactPanel({
   location,
   title = "傳送現場資料，先了解點處理",
-  description = "說明地區和受影響位置，配合相片或短片，方便團隊了解情況。",
+  description = "傳相片同地區，先了解點處理。",
   defaultServiceType = "residential",
   defaultMessage,
   customer,
@@ -64,8 +71,28 @@ export default function InquiryContactPanel({
           現場查詢
         </p>
         <h2>{title}</h2>
-        <p>{description}</p>
-        <InquiryChecklist customer={selected} />
+        <ul className="inquiry-prompts" aria-label="查詢所需資料">
+          <li>
+            <MapPin aria-hidden="true" />
+            <span>所在地區</span>
+          </li>
+          <li>
+            <Droplets aria-hidden="true" />
+            <span>堵塞位置</span>
+          </li>
+          <li>
+            <Camera aria-hidden="true" />
+            <span>相片／短片</span>
+          </li>
+        </ul>
+        <AnimatedDisclosure
+          id={`${location}-preparation`}
+          title="查看資料清單"
+          className="reading-disclosure"
+        >
+          <p>{description}</p>
+          <InquiryChecklist customer={selected} />
+        </AnimatedDisclosure>
       </div>
       <div>
         <ContactActions
@@ -77,9 +104,7 @@ export default function InquiryContactPanel({
           }
           topic={selected}
         />
-        <p className="contact-note">
-          24 小時接受查詢；上門安排由團隊按現場情況確認。
-        </p>
+        <p className="contact-note">24 小時查詢 · 上門時間另行確認。</p>
       </div>
     </div>
   );

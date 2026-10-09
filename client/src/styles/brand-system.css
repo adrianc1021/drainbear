@@ -635,17 +635,36 @@
   gap: 0.75rem;
 }
 .home-finder-services a {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  align-items: stretch;
   border: 1px solid var(--brand-line);
   border-radius: 12px;
-  padding: 1rem;
+  padding: 0;
   background: #f4f9ff;
   transition:
     background 160ms ease,
     border-color 160ms ease;
+}
+.service-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 12px;
+  background: var(--brand-paper);
+}
+.home-finder-services .service-photo {
+  height: 100%;
+  border-radius: 12px 0 0 12px;
+}
+.home-finder-services__copy {
+  min-width: 0;
+  padding: 1rem;
+}
+.home-finder-services__copy > svg {
+  margin-top: 0.5rem;
 }
 .home-finder-services a:hover {
   background: #e7f3ff;
@@ -1015,7 +1034,7 @@
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   border-radius: inherit;
 }
 .recorded-case-card__play {
@@ -1367,7 +1386,8 @@
   background: white;
 }
 .related-case-records article > a {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
   align-items: center;
   height: 100%;
   gap: 1.25rem;
@@ -1378,9 +1398,9 @@
   background: #f7fbff;
 }
 .related-case-records img {
-  width: 90px;
-  height: 160px;
-  object-fit: contain;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
   background: #eaf4fc;
   border-radius: 10px;
   flex-shrink: 0;
@@ -1543,7 +1563,7 @@
   width: 28px;
   height: 28px;
   color: var(--brand-accent);
-  margin-bottom: 1.5rem;
+  margin-block: 1rem;
 }
 .customer-path h3 {
   margin-bottom: 0.75rem;
@@ -1726,6 +1746,272 @@
   text-decoration: underline;
   text-underline-offset: 4px;
 }
+/* Picture-led browsing and optional long-form reading share the brand system. */
+.service-directory--visual {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.service-directory--visual .service-directory__item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-content: start;
+  padding: 0 0 1rem;
+  border: 1px solid var(--brand-line);
+  border-radius: var(--brand-radius);
+  background: white;
+}
+.service-directory--visual .service-photo {
+  grid-column: 1 / -1;
+  border-radius: var(--brand-radius) var(--brand-radius) 0 0;
+  margin-bottom: 1rem;
+}
+.service-directory--visual .service-directory__copy {
+  padding-left: 1rem;
+}
+.service-directory--visual .service-directory__item > svg {
+  margin-right: 1rem;
+}
+.customer-services-grid .service-photo {
+  margin-bottom: 1rem;
+}
+.reading-disclosure {
+  margin-top: 1.25rem;
+}
+.reading-disclosure p + p {
+  margin-top: 0.9rem;
+}
+.reading-disclosure p,
+.reading-faq p,
+.district-editorial .brand-disclosure p {
+  color: var(--brand-copy);
+  line-height: 1.85;
+}
+.reading-faq {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+.service-situation-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.service-situation-chips li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.9rem;
+  border-radius: 12px;
+  background: white;
+  border: 1px solid var(--brand-line);
+  font-weight: 600;
+}
+.service-situation-chips svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--brand-accent);
+}
+.service-reading__columns,
+.service-reading__facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+.service-reading__facts {
+  margin-top: 1.5rem;
+}
+.service-reading__facts dt {
+  font-weight: 800;
+}
+.service-reading__facts dd {
+  color: var(--brand-copy);
+  margin-top: 0.5rem;
+}
+.service-reading ul:not(.service-situation-chips),
+.service-reading__process {
+  padding-left: 1.25rem;
+  list-style: disc;
+  color: var(--brand-copy);
+}
+.service-reading__process {
+  list-style: decimal;
+}
+.service-reading .brand-disclosure li + li {
+  margin-top: 0.5rem;
+}
+.service-reading .brand-disclosure h3 {
+  margin-block: 1rem 0.5rem;
+}
+.service-reading .brand-disclosure a {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 0.75rem;
+  color: var(--brand-accent);
+  font-weight: 700;
+}
+.service-reading .brand-disclosure a svg {
+  width: 18px;
+  height: 18px;
+}
+.service-step-overview {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+.service-step-overview li {
+  padding: 1.25rem;
+  border-radius: var(--brand-radius);
+  background: var(--brand-paper);
+}
+.service-step-overview span {
+  display: block;
+  font-weight: 800;
+  color: var(--brand-accent);
+  margin-bottom: 0.65rem;
+}
+.service-step-overview h3 {
+  font-size: 1.1rem;
+}
+.service-related-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin-top: 1.5rem;
+}
+.service-related-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  font-weight: 700;
+  color: var(--brand-accent);
+}
+.service-related-links svg {
+  width: 18px;
+  height: 18px;
+}
+.inquiry-prompts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+.inquiry-prompts li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 0.2rem;
+  border-radius: 12px;
+  background: white;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.inquiry-prompts svg {
+  width: 24px;
+  height: 24px;
+  color: var(--brand-accent);
+}
+.inquiry-contact-panel .brand-disclosure > summary {
+  min-height: 52px;
+  padding: 0.75rem;
+}
+.inquiry-contact-panel .brand-disclosure__title {
+  font-size: 0.9rem;
+}
+.district-reading-aside {
+  min-width: 0;
+}
+.district-reading-aside__photo {
+  display: block;
+  margin-bottom: 1.25rem;
+}
+.district-reading-aside__photo .service-photo {
+  max-height: 260px;
+}
+.district-reading-aside__photo span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  color: var(--brand-accent);
+  font-weight: 700;
+}
+.district-reading-aside__photo svg {
+  width: 18px;
+  height: 18px;
+}
+.district-reading-aside > p {
+  color: var(--brand-copy);
+  margin-block: 0.75rem 1rem;
+}
+@media (max-width: 1023px) {
+  .service-directory--visual {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .home-finder-services a {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .home-finder-services .service-photo {
+    height: auto;
+    border-radius: 12px 12px 0 0;
+  }
+}
+@media (max-width: 639px) {
+  .customer-services-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+  .customer-services-grid > a {
+    padding: 0.85rem;
+  }
+  .customer-services-grid h3 {
+    font-size: 1rem;
+  }
+  .customer-services-grid p,
+  .customer-services-grid span {
+    font-size: 0.85rem;
+  }
+  .service-step-overview {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .service-reading__columns,
+  .service-reading__facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .home-recorded-cases .recorded-case-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+  .home-recorded-cases .recorded-case-card:first-child {
+    grid-column: 1 / -1;
+  }
+  .home-recorded-cases .recorded-case-card__copy {
+    padding: 0.9rem;
+    gap: 0.5rem;
+  }
+  .home-recorded-cases .recorded-case-card h3 {
+    font-size: 1.05rem;
+  }
+  .home-recorded-cases .recorded-case-card__action {
+    font-size: 0.85rem;
+    gap: 0.25rem;
+  }
+  .home-recorded-cases .recorded-case-card__play {
+    right: 0.5rem;
+    bottom: 0.5rem;
+    padding: 0.35rem 0.5rem;
+  }
+  .service-directory--visual .service-directory__item strong {
+    font-size: 1rem;
+  }
+  .service-directory--visual .service-directory__item span span {
+    font-size: 0.8rem;
+  }
+}
+
 /* Native, crawlable disclosures progressively gain open and close animation. */
 .brand-disclosure {
   min-width: 0;
@@ -2290,7 +2576,7 @@
     display: block;
   }
   .home-finder-services {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .inquiry-contact-panel,
   .handoff-card {

@@ -1,3 +1,5 @@
+import AnimatedDisclosure from "@/components/AnimatedDisclosure";
+import ServicePhoto from "@/components/ServicePhoto";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 /**
  * 通渠熊 DrainBear — 地區專屬著陸頁（觀塘/沙田等）
@@ -17,15 +19,7 @@ import { goThanksAfterWhatsApp, trackCTA } from "@/lib/analytics";
 import DistrictCaseRecords from "@/components/DistrictCaseRecords";
 import { getDistrict } from "@/lib/districtData";
 import NotFound from "@/pages/NotFound";
-import {
-  ArrowRight,
-  BadgeCheck,
-  Clock,
-  MapPin,
-  Phone,
-  ShieldCheck,
-  Wrench,
-} from "lucide-react";
+import { ArrowRight, MapPin, Phone } from "lucide-react";
 import { Link, useParams } from "wouter";
 
 export default function District() {
@@ -126,14 +120,15 @@ export default function District() {
             <h2 className="font-display text-2xl font-black text-navy md:text-3xl">
               {d.name}區渠務特點
             </h2>
-            {d.intro.map(p => (
-              <p
-                key={p.slice(0, 12)}
-                className="mt-4 leading-relaxed text-muted-foreground"
-              >
-                {p}
-              </p>
-            ))}
+            <AnimatedDisclosure
+              id="district-background"
+              title="了解當區渠務特點"
+              className="reading-disclosure"
+            >
+              {d.intro.map(p => (
+                <p key={p.slice(0, 12)}>{p}</p>
+              ))}
+            </AnimatedDisclosure>
             <div className="mt-6 flex flex-wrap gap-2">
               {d.landmarks.map(l => (
                 <span
@@ -147,47 +142,23 @@ export default function District() {
             </div>
           </article>
 
-          {/* 側欄：服務安排及收費 */}
-          <aside className="reveal">
-            <div className="card-float card-accent rounded-lg border border-border bg-white p-7">
-              <h3 className="font-display text-lg font-black text-navy">
-                {d.name}區服務安排
-              </h3>
-              <ul className="mt-5 space-y-4">
-                {[
-                  { icon: Clock, text: "按位置、交通及設備供應確認到場時間" },
-                  {
-                    icon: BadgeCheck,
-                    text: "先提供現場相片，了解所需工具與安排",
-                  },
-                  {
-                    icon: ShieldCheck,
-                    text: "說明現場聯絡人、進場方式及受影響範圍",
-                  },
-                  {
-                    icon: Wrench,
-                    text: "按渠況選用通渠工具、高壓水槍或 CCTV 照喉",
-                  },
-                ].map(i => (
-                  <li
-                    key={i.text}
-                    className="flex items-start gap-3 text-sm text-navy/80"
-                  >
-                    <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-navy text-wagreen">
-                      <i.icon className="h-4 w-4" strokeWidth={2.2} />
-                    </span>
-                    {i.text}
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-6">
-                <WhatsAppButton
-                  className="w-full justify-center"
-                  label="查詢初步估價"
-                  trackLocation="district_sidebar"
-                />
-              </div>
-            </div>
+          <aside className="district-reading-aside">
+            <Link
+              href="/cases/outdoor-drain-chamber-operation"
+              className="district-reading-aside__photo"
+            >
+              <ServicePhoto slug="main-drain-manhole" />
+              <span>
+                睇主渠施工點做 <ArrowRight aria-hidden="true" />
+              </span>
+            </Link>
+            <h3>{d.name}區上門查詢</h3>
+            <p>提供位置同相片，先確認可安排時間。</p>
+            <WhatsAppButton
+              className="w-full justify-center"
+              label="WhatsApp 查詢"
+              trackLocation="district_sidebar"
+            />
           </aside>
         </div>
       </section>
@@ -206,18 +177,13 @@ export default function District() {
           </div>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {d.painPoints.map((p, i) => (
-              <div
+              <AnimatedDisclosure
                 key={p.title}
-                className="card-float card-accent reveal rounded-lg border border-border bg-white p-6"
-                data-reveal-delay={i * 70}
+                id={`district-situation-${i + 1}`}
+                title={p.title}
               >
-                <div className="mb-3 font-display text-base font-black text-navy">
-                  {p.title}
-                </div>
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  {p.desc}
-                </p>
-              </div>
+                <p>{p.desc}</p>
+              </AnimatedDisclosure>
             ))}
           </div>
         </div>
@@ -231,21 +197,13 @@ export default function District() {
           </h2>
           <div className="mt-8 space-y-5">
             {d.faqs.map((f, i) => (
-              <div
+              <AnimatedDisclosure
                 key={f.q}
-                className="card-float reveal rounded-lg border border-border bg-white p-6"
-                data-reveal-delay={i * 70}
+                id={`district-answer-${i + 1}`}
+                title={f.q}
               >
-                <h3 className="district-faq-question flex items-start gap-2.5 font-bold text-navy">
-                  <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-wagreen/10 text-xs font-black text-wagreen-dark">
-                    Q
-                  </span>
-                  <span>{f.q}</span>
-                </h3>
-                <p className="mt-3 pl-[34px] text-sm leading-relaxed text-muted-foreground">
-                  {f.a}
-                </p>
-              </div>
+                <p>{f.a}</p>
+              </AnimatedDisclosure>
             ))}
           </div>
           <div className="reveal mt-8 flex flex-wrap items-center gap-3 text-sm">

@@ -20,8 +20,12 @@ export default function RecordedCaseGallery() {
           </Link>
         </div>
         <div className="recorded-case-grid">
-          {recordedCaseStudies.slice(0, 3).map(study => (
-            <CaseStudyCard key={study._id} study={study} />
+          {[
+            recordedCaseStudies[2],
+            recordedCaseStudies[0],
+            recordedCaseStudies[4],
+          ].map(study => (
+            <CaseStudyCard key={study._id} study={study} concise />
           ))}
         </div>
       </div>

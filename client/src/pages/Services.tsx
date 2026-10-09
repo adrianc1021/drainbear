@@ -43,7 +43,7 @@ export default function Services() {
         <EditorialPageHero
           kicker="住宅 · 食肆 · 物業渠務"
           title="通渠服務，按問題選擇"
-          description="塞廁所同主渠倒灌，處理方法並不一樣。先看受影響位置，再了解合適工具、報價因素及施工安排。"
+          description="塞邊度？按位置搵啱處理方法。"
           contactLocation="services_hero"
         />
       </div>
