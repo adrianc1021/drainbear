@@ -77,7 +77,7 @@ export default function Guide() {
               <h2>查詢要提供甚麼？</h2>
             </div>
           </div>
-          <CustomerPaths />
+          <CustomerPaths illustrated />
         </div>
       </section>
       <section className="brand-section brand-section--soft">

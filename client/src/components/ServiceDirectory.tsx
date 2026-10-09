@@ -1,4 +1,4 @@
-import ServicePhoto from "@/components/ServicePhoto";
+import ServiceIllustration from "@/components/ServiceIllustration";
 import { getServiceVisual } from "@/lib/serviceVisuals";
 import { trackNavClick } from "@/lib/analytics";
 import { SERVICE_PAGES } from "@/lib/serviceData";
@@ -62,7 +62,7 @@ export default function ServiceDirectory({
                 <Icon />
               </span>
             )}
-            {!compact ? <ServicePhoto slug={service.slug} /> : null}
+            {!compact ? <ServiceIllustration slug={service.slug} /> : null}
             <span className="service-directory__copy">
               <strong>{service.shortName}</strong>
               <span>

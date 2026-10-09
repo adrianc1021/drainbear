@@ -1,4 +1,5 @@
 import ServicePhoto from "@/components/ServicePhoto";
+import ServiceIllustration from "@/components/ServiceIllustration";
 import { ArrowRight, Building2, Home, UtensilsCrossed } from "lucide-react";
 import { Link } from "wouter";
 
@@ -31,8 +32,10 @@ const CUSTOMERS = [
 
 export default function CustomerPaths({
   compact = false,
+  illustrated = false,
 }: {
   compact?: boolean;
+  illustrated?: boolean;
 }) {
   return (
     <div
@@ -40,7 +43,11 @@ export default function CustomerPaths({
     >
       {CUSTOMERS.map(item => (
         <article className="customer-path" key={item.title}>
-          <ServicePhoto slug={item.slug} />
+          {illustrated ? (
+            <ServiceIllustration slug={item.slug} />
+          ) : (
+            <ServicePhoto slug={item.slug} />
+          )}
           <item.icon aria-hidden="true" />
           <h3>{item.title}</h3>
           <p>{item.description}</p>

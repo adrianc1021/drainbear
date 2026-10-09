@@ -733,6 +733,17 @@
   height: auto;
   top: 50%;
 }
+.service-illustration .service-illustration__scene {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  aspect-ratio: 1;
+  margin: 0;
+  overflow: clip;
+  transform: translateX(-50%);
+}
 .home-finder-services :is(.service-photo, .service-illustration) {
   height: 100%;
   border-radius: 12px 0 0 12px;
@@ -1681,6 +1692,9 @@
   color: var(--brand-accent);
   margin-block: 1rem;
 }
+.customer-path > .service-illustration {
+  border-radius: 12px;
+}
 .customer-path h3 {
   margin-bottom: 0.75rem;
 }
@@ -1875,7 +1889,7 @@
   border-radius: var(--brand-radius);
   background: white;
 }
-.service-directory--visual .service-photo {
+.service-directory--visual :is(.service-photo, .service-illustration) {
   grid-column: 1 / -1;
   border-radius: var(--brand-radius) var(--brand-radius) 0 0;
   margin-bottom: 1rem;

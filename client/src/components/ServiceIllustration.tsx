@@ -9,7 +9,7 @@ const SCENES: Record<string, { column: number; row: number; label: string }> = {
   "main-drain-manhole": { column: 3, row: 1, label: "主渠及沙井檢視" },
 };
 
-/** Homepage choice illustrations are distinct from the real case evidence. */
+/** Clean service illustrations for browsing, separate from case evidence. */
 export default function ServiceIllustration({ slug }: { slug: string }) {
   const scene = SCENES[slug];
   if (!scene) throw new Error(`Missing service illustration: ${slug}`);
@@ -20,19 +20,21 @@ export default function ServiceIllustration({ slug }: { slug: string }) {
       aria-label={`AI 紙藝白熊服務插圖：${scene.label}`}
       data-service-illustration={slug}
     >
-      <img
-        src="/images/drainbear-services-ai.webp"
-        alt=""
-        aria-hidden="true"
-        width="1536"
-        height="768"
-        loading="lazy"
-        decoding="async"
-        style={{
-          left: `${-100 * scene.column}%`,
-          transform: `translateY(-${scene.row ? 75 : 25}%)`,
-        }}
-      />
+      <span className="service-illustration__scene">
+        <img
+          src="/images/drainbear-services-ai.webp"
+          alt=""
+          aria-hidden="true"
+          width="1536"
+          height="768"
+          loading="lazy"
+          decoding="async"
+          style={{
+            left: `${-100 * scene.column}%`,
+            transform: `translateY(-${scene.row ? 75 : 25}%)`,
+          }}
+        />
+      </span>
     </span>
   );
 }

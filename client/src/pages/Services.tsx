@@ -73,7 +73,7 @@ export default function Services() {
               <h2 id="services-customers">你的場所，需要甚麼安排？</h2>
             </div>
           </div>
-          <CustomerPaths />
+          <CustomerPaths illustrated />
         </div>
       </section>
       <section className="brand-section" aria-labelledby="services-tools">

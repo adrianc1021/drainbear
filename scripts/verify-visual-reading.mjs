@@ -109,6 +109,86 @@ try {
       assert(!state.overflow, path + " " + width);
       assert.deepEqual(state.brokenImages, [], path + " real images decode");
       assert.deepEqual(state.missingIcons, [], path + " WhatsApp icons");
+      if (path === "/services" || path === "/guide") {
+        const expectedImages = path === "/services" ? 11 : 3;
+        assert.equal(await page.locator("main img").count(), expectedImages);
+        assert.deepEqual(
+          await page
+            .locator("main img")
+            .evaluateAll(images => [
+              ...new Set(images.map(image => image.getAttribute("src"))),
+            ]),
+          ["/images/drainbear-services-ai.webp"],
+          "all guide and service browsing images use AI art"
+        );
+        const frames = await page
+          .locator("main .service-illustration")
+          .evaluateAll(elements =>
+            elements.map(element => {
+              const outer = element.getBoundingClientRect();
+              const scene = element
+                .querySelector(".service-illustration__scene")
+                .getBoundingClientRect();
+              return {
+                fits:
+                  scene.width <= outer.width + 1 &&
+                  scene.height <= outer.height + 1,
+                square: Math.abs(scene.width - scene.height) < 1,
+              };
+            })
+          );
+        assert(
+          frames.every(frame => frame.fits && frame.square),
+          "AI scene stays complete within its card"
+        );
+        const customers = page.locator(".customer-path");
+        for (const [index, customer] of CUSTOMER_JOURNEYS.entries()) {
+          assert.equal(
+            await customers
+              .nth(index)
+              .locator(`a[href="/customers/${customer.slug}"]`)
+              .count(),
+            1
+          );
+          assert.equal(
+            await customers
+              .nth(index)
+              .locator("[data-service-illustration]")
+              .count(),
+            1
+          );
+        }
+        if (path === "/services") {
+          const slugs = [
+            ...new Set(
+              CUSTOMER_JOURNEYS.flatMap(customer => customer.serviceSlugs)
+            ),
+          ];
+          assert.equal(slugs.length, 8);
+          for (const slug of slugs) {
+            assert.equal(
+              await page
+                .locator(
+                  `.service-directory a[href="/services/${slug}"] [data-service-illustration="${slug}"]`
+                )
+                .count(),
+              1
+            );
+          }
+          await page
+            .locator(".service-directory")
+            .screenshot({ path: output + "/service-grid-" + width + ".png" });
+        }
+        await page
+          .locator(".customer-paths")
+          .screenshot({
+            path: output + "/customers-" + path.slice(1) + "-" + width + ".png",
+          });
+        await page.screenshot({
+          path: output + "/illustrated-" + path.slice(1) + "-" + width + ".png",
+          fullPage: true,
+        });
+      }
       if (path === "/") {
         assert.equal(
           await page
