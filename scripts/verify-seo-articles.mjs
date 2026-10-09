@@ -147,6 +147,12 @@ try {
         ).filter(a => /^tel:|https:\/\/wa.me\//.test(a.href));
         return {
           title: document.querySelector("main h1").textContent.trim(),
+          searchTitle: document.title,
+          description: document.querySelector('meta[name="description"]')
+            .content,
+          robots: document.querySelector('meta[name="robots"]').content,
+          socialImage: document.querySelector('meta[property="og:image"]')
+            .content,
           h1s: document.querySelectorAll("main h1").length,
           overflow: document.documentElement.scrollWidth > innerWidth + 1,
           canonical: document.querySelector('link[rel="canonical"]').href,
@@ -197,6 +203,13 @@ try {
         state.cover.srcSet.includes("640w") &&
           state.cover.srcSet.includes("1200w")
       );
+      assert(state.searchTitle.startsWith(state.title));
+      assert(
+        state.searchTitle.endsWith("｜通渠熊") && state.searchTitle.length < 65
+      );
+      assert.equal(state.description, state.article.description);
+      assert(!state.robots.includes("noindex"));
+      assert.equal(state.socialImage, state.article.image[0]);
       assert.equal(state.article.headline, state.title);
       assert.equal(state.article.datePublished, "2026-10-09");
       assert(!state.article.reviewedBy, "no unverified human review claim");

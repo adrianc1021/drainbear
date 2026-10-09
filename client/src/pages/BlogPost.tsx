@@ -281,8 +281,7 @@ export default function BlogPost() {
     })
     .slice(0, 3);
 
-  const seoTitle =
-    post.seo?.metaTitle || `${post.title}｜通渠小知識｜通渠熊 DrainBear`;
+  const seoTitle = post.seo?.metaTitle || `${post.title}｜通渠熊`;
 
   const seoDescription = post.seo?.metaDescription || post.excerpt;
 
