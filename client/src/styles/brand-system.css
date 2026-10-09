@@ -675,6 +675,11 @@
   height: 100%;
   border-radius: 12px 0 0 12px;
 }
+.home-finder-services .service-illustration {
+  height: auto;
+  aspect-ratio: 1;
+  align-self: center;
+}
 .home-finder-services__copy {
   min-width: 0;
   padding: 1rem;
