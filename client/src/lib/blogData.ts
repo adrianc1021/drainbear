@@ -1,3 +1,4 @@
+import { PRICE_GUIDE_REVISION } from "./priceGuideRevision";
 import { SEO_ARTICLES } from "./seoArticles";
 import type { SanityImageData } from "./sanity/types";
 /**
@@ -30,6 +31,7 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   ...SEO_ARTICLES,
+  PRICE_GUIDE_REVISION,
   {
     slug: "whatsapp-drain-quote-checklist",
     title: "WhatsApp 通渠報價要影咩？一張清單減少來回追問",

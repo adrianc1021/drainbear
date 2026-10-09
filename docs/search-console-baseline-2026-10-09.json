@@ -148,5 +148,174 @@
   ],
   "completeQueryRows": 18,
   "listedImpressions": 11984,
-  "listedClicks": 1
+  "listedClicks": 1,
+  "pageSnapshot": {
+    "source": "User-provided Search Console page rows, interpreted as clicks then impressions",
+    "receivedOn": "2026-10-09",
+    "selectedPeriod": null,
+    "country": null,
+    "device": null,
+    "searchType": null,
+    "aggregation": "by page; exact GSC aggregation and filters unconfirmed",
+    "pages": [
+      {
+        "url": "https://drainbearhk.com/services/bathroom-drain-unblocking",
+        "clicks": 1,
+        "impressions": 5383,
+        "ctrPercent": 0.01857700167193015,
+        "averagePosition": null
+      },
+      {
+        "url": "https://drainbearhk.com/guide",
+        "clicks": 5,
+        "impressions": 5337,
+        "ctrPercent": 0.09368559115608019,
+        "averagePosition": null
+      },
+      {
+        "url": "https://drainbearhk.com/services/kitchen-sink-unblocking",
+        "clicks": 2,
+        "impressions": 4612,
+        "ctrPercent": 0.04336513443191674,
+        "averagePosition": null
+      },
+      {
+        "url": "https://drainbearhk.com/areas/tseung-kwan-o",
+        "clicks": 1,
+        "impressions": 3623,
+        "ctrPercent": 0.02760143527463428,
+        "averagePosition": null
+      },
+      {
+        "url": "https://drainbearhk.com/areas/causeway-bay",
+        "clicks": 1,
+        "impressions": 3473,
+        "ctrPercent": 0.028793550244745177,
+        "averagePosition": null
+      },
+      {
+        "url": "https://drainbearhk.com/blog/hong-kong-drain-cleaning-price-guide",
+        "clicks": 1,
+        "impressions": 3427,
+        "ctrPercent": 0.029180040852057193,
+        "averagePosition": null
+      },
+      {
+        "url": "https://drainbearhk.com/areas/sha-tin",
+        "clicks": 2,
+        "impressions": 2652,
+        "ctrPercent": 0.07541478129713423,
+        "averagePosition": null
+      },
+      {
+        "url": "https://drainbearhk.com/blog/bathroom-drain-smell-causes-solutions",
+        "clicks": 11,
+        "impressions": 2591,
+        "ctrPercent": 0.42454650714010034,
+        "averagePosition": null
+      },
+      {
+        "url": "https://drainbearhk.com/services/main-drain-manhole",
+        "clicks": 0,
+        "impressions": 2559,
+        "ctrPercent": 0,
+        "averagePosition": null
+      },
+      {
+        "url": "https://drainbearhk.com/areas/north-point",
+        "clicks": 1,
+        "impressions": 2558,
+        "ctrPercent": 0.039093041438623924,
+        "averagePosition": null
+      },
+      {
+        "url": "https://drainbearhk.com/areas/kwun-tong",
+        "clicks": 0,
+        "impressions": 2486,
+        "ctrPercent": 0,
+        "averagePosition": null
+      },
+      {
+        "url": "https://drainbearhk.com/",
+        "clicks": 50,
+        "impressions": 2474,
+        "ctrPercent": 2.021018593371059,
+        "averagePosition": null
+      },
+      {
+        "url": "https://drainbearhk.com/blog/toilet-clog-emergency-guide",
+        "clicks": 9,
+        "impressions": 2373,
+        "ctrPercent": 0.37926675094816686,
+        "averagePosition": null
+      },
+      {
+        "url": "https://drainbearhk.com/areas/yuen-long",
+        "clicks": 3,
+        "impressions": 2305,
+        "ctrPercent": 0.1301518438177874,
+        "averagePosition": null
+      },
+      {
+        "url": "https://drainbearhk.com/blog/bathroom-hair-clog-prevention",
+        "clicks": 15,
+        "impressions": 2292,
+        "ctrPercent": 0.6544502617801047,
+        "averagePosition": null
+      },
+      {
+        "url": "https://drainbearhk.com/services/toilet-unblocking",
+        "clicks": 0,
+        "impressions": 2262,
+        "ctrPercent": 0,
+        "averagePosition": null
+      },
+      {
+        "url": "https://drainbearhk.com/blog/prevent-kitchen-sink-clog",
+        "clicks": 17,
+        "impressions": 2237,
+        "ctrPercent": 0.7599463567277603,
+        "averagePosition": null
+      }
+    ],
+    "groups": {
+      "listedPages": {
+        "rows": 17,
+        "clicks": 119,
+        "impressions": 52644,
+        "ctrPercent": 0.22604665298989438
+      },
+      "servicePages": {
+        "rows": 4,
+        "clicks": 3,
+        "impressions": 14816,
+        "ctrPercent": 0.020248380129589634
+      },
+      "quoteEntrances": {
+        "rows": 2,
+        "clicks": 6,
+        "impressions": 8764,
+        "ctrPercent": 0.06846188954815152
+      },
+      "districtPages": {
+        "rows": 6,
+        "clicks": 8,
+        "impressions": 17097,
+        "ctrPercent": 0.04679183482482307
+      },
+      "informationalArticles": {
+        "rows": 4,
+        "clicks": 52,
+        "impressions": 9493,
+        "ctrPercent": 0.5477720425576741
+      }
+    },
+    "qualityChecks": {
+      "uniqueUrls": true,
+      "validCounts": true,
+      "missingAveragePositionRows": 17,
+      "temporalComparability": "unconfirmed; do not compare with screenshot totals or infer deployment impact",
+      "queryPageAttribution": "unavailable; query and page lists are separate aggregations"
+    }
+  }
 }

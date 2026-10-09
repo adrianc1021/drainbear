@@ -1,3 +1,5 @@
+import { PRICE_GUIDE_REVISION } from "./priceGuideRevision";
+import { ARTICLE_SERVICE_LINKS } from "./contentConnections";
 import {
   BLOG_POSTS,
   getPostBySlug,
@@ -48,6 +50,13 @@ export function getCategoryLabel(category: string): string {
 }
 
 export function mapSanityBlogPost(post: SanityBlogPost): BlogPostView {
+  if (post.slug === PRICE_GUIDE_REVISION.slug) {
+    return {
+      ...mapStaticBlogPost(PRICE_GUIDE_REVISION),
+      id: post._id,
+      date: post.publishedAt,
+    };
+  }
   return {
     source: "sanity",
     id: post._id,
@@ -65,6 +74,7 @@ export function mapSanityBlogPost(post: SanityBlogPost): BlogPostView {
     coverImage: post.coverImage,
     seo: post.seo,
     body: post.body ?? [],
+    resourceLinks: ARTICLE_SERVICE_LINKS[post.slug],
   };
 }
 
@@ -85,7 +95,7 @@ export function mapStaticBlogPost(post: StaticBlogPost): BlogPostView {
     featured: Boolean(post.featured),
     coverImage: post.coverImage,
     sections: post.sections,
-    resourceLinks: post.resourceLinks,
+    resourceLinks: post.resourceLinks ?? ARTICLE_SERVICE_LINKS[post.slug],
     faqs: post.faqs,
     relatedSlugs: post.relatedSlugs,
   };

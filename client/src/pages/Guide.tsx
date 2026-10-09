@@ -38,8 +38,8 @@ export default function Guide() {
       <SEO
         image={BRAND_SOCIAL_IMAGE}
         imageAlt={BRAND_SOCIAL_ALT}
-        title="通渠價錢點估？現場資料與報價指南｜通渠熊"
-        description="通渠費用要按堵塞位置、管道及施工條件評估，沒有適用所有情況的統一價格。先整理地區與相片，了解住宅、食肆及物業的處理方向和報價安排。"
+        title="通渠報價查詢｜住宅、食肆及物業資料清單｜通渠熊"
+        description="準備通渠查詢所需的地區、堵塞位置及相片。按住宅、食肆或物業管理查看資料清單，再了解處理方向與上門安排；報價按個別現場評估。"
         path="/guide"
         breadcrumbs={CRUMBS}
         jsonLd={[
@@ -96,6 +96,9 @@ export default function Guide() {
           </div>
           <nav className="related-inline" aria-label="相關處理與服務">
             <Link href="/services">按問題找服務</Link>
+            <Link href="/blog/hong-kong-drain-cleaning-price-guide">
+              了解報價影響因素
+            </Link>
             <Link href="/service-process">上門與施工流程</Link>
             <Link href="/cases">查看真實施工紀錄</Link>
           </nav>

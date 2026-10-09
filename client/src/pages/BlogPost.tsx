@@ -534,7 +534,7 @@ export default function BlogPost() {
               className="article-resources"
               aria-labelledby="article-resources-heading"
             >
-              <h2 id="article-resources-heading">相關服務與公開紀錄</h2>
+              <h2 id="article-resources-heading">相關服務與延伸資料</h2>
               <ul>
                 {post.resourceLinks.map(resource => (
                   <li key={resource.href}>

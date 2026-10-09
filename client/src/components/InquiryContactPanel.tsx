@@ -120,7 +120,7 @@ export default function InquiryContactPanel({
           location={location}
           message={
             defaultMessage
-              ? `${defaultMessage}\n請提供：${journey.checklist.join("；")}`
+              ? `${defaultMessage}\n場所：${journey.name}\n請提供：${journey.checklist.join("；")}`
               : journey.message
           }
           topic={selected}

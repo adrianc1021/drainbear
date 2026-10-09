@@ -1,6 +1,6 @@
 import AnimatedDisclosure from "@/components/AnimatedDisclosure";
-import ServicePhoto from "@/components/ServicePhoto";
-import WhatsAppIcon from "@/components/WhatsAppIcon";
+import DistrictServiceLinks from "@/components/DistrictServiceLinks";
+import InquiryContactPanel from "@/components/InquiryContactPanel";
 /**
  * 通渠熊 DrainBear — 地區專屬著陸頁（觀塘/沙田等）
  * 風格：Premium SaaS Minimalism，大量留白、8px 圓角、懸浮陰影卡片、無 Emoji
@@ -8,23 +8,17 @@ import WhatsAppIcon from "@/components/WhatsAppIcon";
  */
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
-import { WhatsAppButton } from "@/components/Layout";
 import SEO from "@/components/SEO";
 import { BUSINESS_ID, SITE_URL, WEBSITE_ID } from "@/config/site";
-import {
-  useContactSettings,
-  useSiteSettings,
-} from "@/contexts/SiteSettingsContext";
-import { goThanksAfterWhatsApp, trackCTA } from "@/lib/analytics";
+import { useSiteSettings } from "@/contexts/SiteSettingsContext";
 import DistrictCaseRecords from "@/components/DistrictCaseRecords";
 import { getDistrict } from "@/lib/districtData";
 import NotFound from "@/pages/NotFound";
-import { ArrowRight, MapPin, Phone } from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
 import { Link, useParams } from "wouter";
 
 export default function District() {
   const { slug } = useParams<{ slug: string }>();
-  const { phoneDisplay, phoneHref, whatsappHref } = useContactSettings();
   const { settings } = useSiteSettings();
   const d = getDistrict(slug || "");
   if (!d) return <NotFound />;
@@ -75,7 +69,8 @@ export default function District() {
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      mainEntity: d.faqs.map(f => ({
+      mainEntity: d.faqs.map((f, index) => ({
+        url: `${SITE_URL}/areas/${d.slug}#district-answer-${index + 1}`,
         "@type": "Question",
         name: f.q,
         acceptedAnswer: { "@type": "Answer", text: f.a },
@@ -83,14 +78,10 @@ export default function District() {
     },
   ];
 
-  const waDistrict = whatsappHref(
-    `您好，我位於${d.name}，想查詢通渠服務報價。`
-  );
-
   return (
     <div className="district-editorial">
       <SEO
-        title={`${d.name}通渠｜24 小時查詢・先報價後動工｜通渠熊 DrainBear`}
+        title={`${d.name}通渠｜住宅及商戶處理・24小時查詢｜通渠熊`}
         description={d.metaDescription}
         path={`/areas/${d.slug}`}
         keywords={d.keywords}
@@ -103,13 +94,10 @@ export default function District() {
         <EditorialPageHero
           kicker={`${d.region} · ${d.name}通渠`}
           title={`${d.name}通渠服務`}
-          description={`處理${d.painPoints
-            .slice(0, 2)
-            .map(item => item.title)
-            .join("、")}。提供地區及現場相片，先確認上門時間與報價。`}
+          description="住宅、食肆或共用渠問題，先提供位置與相片，確認合適處理及上門時間。"
           contactLocation="district_hero"
           topic={d.name}
-          message={`您好，我位於${d.name}，想查詢通渠服務報價。`}
+          message={`您好，我位於${d.name}，想查詢通渠處理安排。`}
         />
       </div>
 
@@ -142,24 +130,7 @@ export default function District() {
             </div>
           </article>
 
-          <aside className="district-reading-aside">
-            <Link
-              href="/cases/outdoor-drain-chamber-operation"
-              className="district-reading-aside__photo"
-            >
-              <ServicePhoto slug="main-drain-manhole" />
-              <span>
-                睇主渠施工點做 <ArrowRight aria-hidden="true" />
-              </span>
-            </Link>
-            <h3>{d.name}區上門查詢</h3>
-            <p>提供位置同相片，先確認可安排時間。</p>
-            <WhatsAppButton
-              className="w-full justify-center"
-              label="WhatsApp 查詢"
-              trackLocation="district_sidebar"
-            />
-          </aside>
+          <DistrictServiceLinks district={d.name} slug={d.slug} />
         </div>
       </section>
 
@@ -233,41 +204,12 @@ export default function District() {
       {/* 鄰近地區 + CTA */}
       <section className="bg-white pb-16 md:pb-20">
         <div className="container">
-          <div className="brand-contact-panel px-8 py-12 text-center md:px-16">
-            <h2 className="text-balance font-display text-2xl font-black text-white md:text-3xl">
-              {d.name}塞渠？先提供位置及渠況。
-            </h2>
-            <p className="mx-auto mt-4 max-w-xl text-white/60">
-              {d.nearby.join("、")}
-              等鄰近地區亦可查詢。提供位置及渠況後，先確認可達範圍、設備與上門安排。
-            </p>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-              <a
-                href={waDistrict}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={event => {
-                  trackCTA("whatsapp", "district_footer_cta", d.name);
-                  goThanksAfterWhatsApp(
-                    "district_footer_cta",
-                    event.currentTarget.href
-                  );
-                }}
-                className="btn-smooth inline-flex items-center gap-2 rounded-lg bg-wagreen px-8 py-4 text-base font-bold text-white shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark"
-              >
-                <WhatsAppIcon className="h-5 w-5" />
-                WhatsApp 查詢初步估價
-              </a>
-              <a
-                href={phoneHref}
-                onClick={() => trackCTA("phone", "district_footer_cta", d.name)}
-                className="btn-smooth inline-flex items-center gap-2 rounded-lg border border-white/25 bg-white/5 px-7 py-4 text-base font-bold text-white hover:bg-white hover:text-navy"
-              >
-                <Phone className="h-[18px] w-[18px]" strokeWidth={2.2} />
-                {phoneDisplay}
-              </a>
-            </div>
-          </div>
+          <InquiryContactPanel
+            location={`district_${d.slug}`}
+            title={`${d.name}通渠，先交代現場情況`}
+            defaultMessage={`您好，我位於${d.name}，想查詢通渠處理安排。`}
+            chooseCustomer
+          />
         </div>
       </section>
     </div>

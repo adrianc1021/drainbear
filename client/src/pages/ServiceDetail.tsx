@@ -1,3 +1,4 @@
+import ServiceIllustration from "@/components/ServiceIllustration";
 import RelatedDrainArticles from "@/components/RelatedDrainArticles";
 import AnimatedDisclosure from "@/components/AnimatedDisclosure";
 import { getServiceVisual } from "@/lib/serviceVisuals";
@@ -113,17 +114,12 @@ export default function ServiceDetail() {
         />
       </div>
       <nav className="container page-section-nav" aria-label="本頁內容">
-        <a href="#service-cases">施工紀錄</a>
         <a href="#service-answer-summary">適用情況</a>
+        <a href="#service-cases">施工紀錄</a>
         <a href="#service-method">處理流程</a>
         <a href="#service-questions">常見問題</a>
         <a href="#service-contact">現場查詢</a>
       </nav>
-      <RelatedCaseRecords
-        serviceSlugs={[service.slug]}
-        location={`service_${service.slug}_cases`}
-        id="service-cases"
-      />
       <section
         className="brand-section brand-section--soft"
         aria-labelledby="service-answer-summary"
@@ -138,14 +134,17 @@ export default function ServiceDetail() {
               幫我判斷 <ArrowRight aria-hidden="true" />
             </Link>
           </div>
-          <ul className="service-situation-chips">
-            {service.suitableFor.map(item => (
-              <li key={item}>
-                <CheckCircle2 aria-hidden="true" />
-                {item}
-              </li>
-            ))}
-          </ul>
+          <div className="service-intent-overview">
+            <ServiceIllustration slug={service.slug} />
+            <ul className="service-situation-chips">
+              {service.suitableFor.map(item => (
+                <li key={item}>
+                  <CheckCircle2 aria-hidden="true" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
           <AnimatedDisclosure
             id="service-symptoms"
             title="症狀、成因與適用範圍"
@@ -185,6 +184,11 @@ export default function ServiceDetail() {
           </AnimatedDisclosure>
         </div>
       </section>
+      <RelatedCaseRecords
+        serviceSlugs={[service.slug]}
+        location={`service_${service.slug}_cases`}
+        id="service-cases"
+      />
       <section id="service-method" className="brand-section">
         <div className="container service-reading">
           <div className="section-heading">
