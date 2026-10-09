@@ -261,9 +261,12 @@ export default function DrainHeroScenes({ imageSrc }: { imageSrc?: string }) {
                   href={whatsappDefaultHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => {
+                  onClick={event => {
                     trackCTA("whatsapp", "home_hero");
-                    goThanksAfterWhatsApp("home_hero");
+                    goThanksAfterWhatsApp(
+                      "home_hero",
+                      event.currentTarget.href
+                    );
                   }}
                   className="db-primary-action"
                 >

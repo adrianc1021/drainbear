@@ -413,13 +413,16 @@ export default function DrainDiagnosis() {
                       href={whatsappHref(handoffMessage)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      onClick={() => {
+                      onClick={event => {
                         trackCTA(
                           "whatsapp",
                           "drain_diagnosis_result",
                           result.trackingTopic
                         );
-                        goThanksAfterWhatsApp("drain_diagnosis_result");
+                        goThanksAfterWhatsApp(
+                          "drain_diagnosis_result",
+                          event.currentTarget.href
+                        );
                       }}
                       className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-navy bg-wagreen px-6 py-3 font-black text-navy hover:bg-wagreen-dark hover:text-white"
                     >

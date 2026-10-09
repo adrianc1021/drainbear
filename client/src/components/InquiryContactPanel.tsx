@@ -1,6 +1,7 @@
 import AnimatedDisclosure from "@/components/AnimatedDisclosure";
 import ContactActions from "@/components/ContactActions";
 import { CUSTOMER_JOURNEYS, type CustomerSlug } from "@shared/customerJourneys";
+import { useState } from "react";
 import {
   Camera,
   Check,
@@ -42,6 +43,7 @@ export default function InquiryContactPanel({
   defaultServiceType = "residential",
   defaultMessage,
   customer,
+  chooseCustomer = false,
   className = "",
 }: {
   location: string;
@@ -50,9 +52,12 @@ export default function InquiryContactPanel({
   defaultServiceType?: InquiryServiceType | "";
   defaultMessage?: string;
   customer?: CustomerSlug;
+  chooseCustomer?: boolean;
   className?: string;
 }) {
+  const [choice, setChoice] = useState<CustomerSlug | null>(null);
   const selected =
+    (chooseCustomer ? choice : null) ??
     customer ??
     (defaultServiceType === "commercial"
       ? "restaurants"
@@ -71,6 +76,22 @@ export default function InquiryContactPanel({
           現場查詢
         </p>
         <h2>{title}</h2>
+        {chooseCustomer ? (
+          <div className="inquiry-customer-choice">
+            <label htmlFor={`${location}-customer`}>你的場所</label>
+            <select
+              id={`${location}-customer`}
+              value={selected}
+              onChange={event => setChoice(event.target.value as CustomerSlug)}
+            >
+              {CUSTOMER_JOURNEYS.map(item => (
+                <option key={item.slug} value={item.slug}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        ) : null}
         <ul className="inquiry-prompts" aria-label="查詢所需資料">
           <li>
             <MapPin aria-hidden="true" />

@@ -1,3 +1,4 @@
+import { BRAND_SOCIAL_IMAGE, BRAND_SOCIAL_ALT } from "@/lib/brandVisuals";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CustomerPaths from "@/components/CustomerPaths";
 import SEO from "@/components/SEO";
@@ -32,6 +33,8 @@ export default function Services() {
   return (
     <div className="services-page">
       <SEO
+        image={BRAND_SOCIAL_IMAGE}
+        imageAlt={BRAND_SOCIAL_ALT}
         title="通渠服務｜住宅通渠・食肆隔油池・高壓水槍洗渠・CCTV 照喉｜通渠熊 DrainBear"
         description="坐廁、鋅盤、浴室去水慢，或食肆隔油池、大廈主渠淤塞？按問題查看通渠方法、收費因素及注意事項。通渠熊24小時接受查詢，現場確認報價後才動工。"
         path="/services"
@@ -73,7 +76,7 @@ export default function Services() {
               <h2 id="services-customers">你的場所，需要甚麼安排？</h2>
             </div>
           </div>
-          <CustomerPaths illustrated />
+          <CustomerPaths illustrated compact />
         </div>
       </section>
       <section className="brand-section" aria-labelledby="services-tools">

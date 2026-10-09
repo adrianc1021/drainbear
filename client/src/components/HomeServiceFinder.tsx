@@ -131,9 +131,12 @@ export default function HomeServiceFinder() {
               href={whatsappHref(message)}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => {
+              onClick={event => {
                 trackCTA("whatsapp", "home_service_finder", serviceSlug);
-                goThanksAfterWhatsApp("home_service_finder");
+                goThanksAfterWhatsApp(
+                  "home_service_finder",
+                  event.currentTarget.href
+                );
               }}
             >
               <WhatsAppIcon aria-hidden="true" />

@@ -108,9 +108,12 @@ export default function WhatsAppWidget() {
               href={whatsappHref(t.msg)}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => {
+              onClick={event => {
                 trackCTA("whatsapp", "floating_widget", t.label);
-                goThanksAfterWhatsApp("floating_widget");
+                goThanksAfterWhatsApp(
+                  "floating_widget",
+                  event.currentTarget.href
+                );
               }}
               className="btn-smooth group flex items-center justify-between rounded-lg border border-border bg-white px-4 py-2.5 text-sm font-medium text-navy hover:border-wagreen/50 hover:bg-wagreen/5"
             >
@@ -128,9 +131,12 @@ export default function WhatsAppWidget() {
             href={whatsappHref("您好，我想查詢通渠服務報價。")}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => {
+            onClick={event => {
               trackCTA("whatsapp", "floating_widget", "開始對話");
-              goThanksAfterWhatsApp("floating_widget");
+              goThanksAfterWhatsApp(
+                "floating_widget",
+                event.currentTarget.href
+              );
             }}
             className="btn-smooth mt-1 flex items-center justify-center gap-2 border border-navy bg-wagreen px-4 py-3 text-sm font-black text-navy hover:bg-navy hover:text-white"
           >

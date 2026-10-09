@@ -179,11 +179,9 @@ try {
             .locator(".service-directory")
             .screenshot({ path: output + "/service-grid-" + width + ".png" });
         }
-        await page
-          .locator(".customer-paths")
-          .screenshot({
-            path: output + "/customers-" + path.slice(1) + "-" + width + ".png",
-          });
+        await page.locator(".customer-paths").screenshot({
+          path: output + "/customers-" + path.slice(1) + "-" + width + ".png",
+        });
         await page.screenshot({
           path: output + "/illustrated-" + path.slice(1) + "-" + width + ".png",
           fullPage: true,
@@ -398,6 +396,39 @@ try {
   );
   await page.waitForURL("**/thanks?from=home_service_finder*");
   await page.locator(".handoff-card").waitFor();
+  const retry = page.getByRole("link", { name: "再次開啟 WhatsApp" });
+  assert.equal(
+    new URL(await retry.getAttribute("href")).searchParams.get("text"),
+    inquiryText
+  );
+  const handoffs = () =>
+    page.evaluate(
+      () =>
+        (window.dataLayer || []).filter(
+          entry =>
+            entry?.event === "whatsapp_handoff" ||
+            (entry?.[0] === "event" && entry?.[1] === "whatsapp_handoff")
+        ).length
+    );
+  const firstHandoffs = await handoffs();
+  assert.equal(firstHandoffs, 1, "initial click produces one handoff");
+  const retryPopupPromise = page.waitForEvent("popup");
+  await retry.click();
+  const retryPopup = await retryPopupPromise;
+  await retryPopup.waitForLoadState();
+  assert.equal(new URL(retryPopup.url()).searchParams.get("text"), inquiryText);
+  assert.equal(
+    await handoffs(),
+    firstHandoffs,
+    "retry does not repeat the handoff"
+  );
+  await page.reload();
+  await page.locator(".handoff-card").waitFor();
+  assert.equal(
+    new URL(await retry.getAttribute("href")).searchParams.get("text"),
+    inquiryText
+  );
+  assert.equal(await handoffs(), 0, "refresh consumes no new handoff");
   await page.goto(origin + "/services/toilet-unblocking#service-answer-1");
   await ready(page);
   await page.waitForFunction(
@@ -424,6 +455,24 @@ try {
   await page.waitForURL("**/thanks?from=**");
   await page.locator(".handoff-card").waitFor();
   await context.close();
+  const fresh = await browser.newContext({
+    viewport: { width: 390, height: 900 },
+    reducedMotion: "reduce",
+  });
+  await relay(fresh);
+  const freshPage = await fresh.newPage();
+  await freshPage.goto(origin + "/thanks");
+  await ready(freshPage);
+  const fallbackText = new URL(
+    await freshPage
+      .getByRole("link", { name: "再次開啟 WhatsApp" })
+      .getAttribute("href")
+  ).searchParams.get("text");
+  assert(
+    !fallbackText.includes("觀塘") && !fallbackText.includes("隔油池"),
+    "unrelated tabs use the ordinary contact"
+  );
+  await fresh.close();
   const native = await browser.newContext({
     javaScriptEnabled: false,
     viewport: { width: 390, height: 900 },

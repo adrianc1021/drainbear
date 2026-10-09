@@ -246,9 +246,12 @@ export default function District() {
                 href={waDistrict}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => {
+                onClick={event => {
                   trackCTA("whatsapp", "district_footer_cta", d.name);
-                  goThanksAfterWhatsApp("district_footer_cta");
+                  goThanksAfterWhatsApp(
+                    "district_footer_cta",
+                    event.currentTarget.href
+                  );
                 }}
                 className="btn-smooth inline-flex items-center gap-2 rounded-lg bg-wagreen px-8 py-4 text-base font-bold text-white shadow-[0_4px_16px_rgba(37,211,102,0.35)] hover:bg-wagreen-dark"
               >

@@ -27,3 +27,7 @@ description: 使用語意化React元件與Flexbox/Grid統一通渠熊介面，�
 - 只對已修改檔案格式化。執行pnpm check、相關測試、pnpm build:app及實際瀏覽器操作；不要把單純HTTP200或空白頁當成通過。
 
 資料庫：先確認DB存取及查詢用途；使用EXPLAIN與代表性資料辨認瓶頸。users.openId已有unique索引、inquiries.id為主鍵；避免重複索引。listInquiries目前無界限，若擴充管理後台，設計穩定游標分頁、(createdAt,id)排序及經驗證的索引；沒有實測不能宣稱SQL效能已改善。正式DB遷移需遵守任務授權及備份要求。
+
+- WhatsApp 再次開啟入口必須保留剛才選取的場所、服務及地區。重試資料只在該分頁 sessionStorage 短暫保留，不送到分析工具；檢查重新整理、到期、封鎖儲存及聯絡電話更新的後備路徑。重試和重新整理不能重複送出 handoff 轉換。
+- 長文章目錄用搜尋、分類及可連結分頁；全量文章入口仍保留於原生收合 HTML。核對搜尋空結果、直接頁碼、上一頁及瀏覽器返回。手機服務目錄以兩欄短卡保留完整標題，不能只縮細文字。
+- About 及客群服務介紹使用 ServiceIllustration，服務流程使用 ProcessIllustration；RelatedCaseRecords 的工程證據仍使用原片及真實封面。

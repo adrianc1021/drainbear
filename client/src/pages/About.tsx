@@ -1,3 +1,4 @@
+import { BRAND_SOCIAL_IMAGE, BRAND_SOCIAL_ALT } from "@/lib/brandVisuals";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
 import SEO from "@/components/SEO";
@@ -16,6 +17,8 @@ export default function About() {
   return (
     <div className="about-page">
       <SEO
+        image={BRAND_SOCIAL_IMAGE}
+        imageAlt={BRAND_SOCIAL_ALT}
         title="關於通渠熊 DrainBear｜香港住宅、食肆及物業渠務"
         description="了解通渠熊的服務範圍、聯絡方式與施工紀錄。香港住宅、食肆及物業渠務，24 小時接受查詢，上門時間按實際安排確認。"
         path="/about"
@@ -78,7 +81,7 @@ export default function About() {
               <h2>住宅、食肆與物業</h2>
             </div>
           </div>
-          <CustomerPaths />
+          <CustomerPaths illustrated compact />
         </div>
       </section>
       <section className="brand-section">

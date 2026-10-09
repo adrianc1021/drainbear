@@ -40,9 +40,9 @@ export default function ContactActions({
         href={message ? whatsappHref(message) : whatsappDefaultHref}
         target="_blank"
         rel="noopener noreferrer"
-        onClick={() => {
+        onClick={event => {
           trackCTA("whatsapp", location, topic);
-          goThanksAfterWhatsApp(location);
+          goThanksAfterWhatsApp(location, event.currentTarget.href);
         }}
       >
         <span className="contact-action__icon" aria-hidden="true">
