@@ -3,7 +3,8 @@ import ContactActions from "@/components/ContactActions";
 import DrainHomeFaq, { FAQ_ITEMS } from "@/components/DrainHomeFaq";
 import HomeServiceFinder from "@/components/HomeServiceFinder";
 import RecordedCaseGallery from "@/components/RecordedCaseGallery";
-import { BUSINESS_ID, SITE_URL, WEBSITE_ID } from "@/config/site";
+import { SITE_URL } from "@/config/site";
+import { BRAND_SOCIAL_ALT } from "@/lib/brandVisuals";
 import {
   ArrowRight,
   CalendarClock,
@@ -17,17 +18,6 @@ const HOME_TITLE = "香港專業通渠｜24小時通渠查詢｜通渠熊 DrainB
 const HOME_DESCRIPTION =
   "通渠熊提供香港住宅、食肆及物業通渠服務，處理坐廁塞住、鋅盤去水慢、浴室淤塞及主渠倒灌。電話及 WhatsApp 24 小時接受通渠查詢；上門時間按地區、人手及設備確認。";
 
-const HOME_JSONLD = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "@id": `${SITE_URL}/#webpage`,
-  url: `${SITE_URL}/`,
-  name: HOME_TITLE,
-  description: HOME_DESCRIPTION,
-  inLanguage: "zh-Hant-HK",
-  isPartOf: { "@id": WEBSITE_ID },
-  about: { "@id": BUSINESS_ID },
-};
 const HOME_FAQ_JSONLD = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -69,7 +59,9 @@ export default function Home() {
         title={HOME_TITLE}
         description={HOME_DESCRIPTION}
         path="/"
-        jsonLd={[HOME_JSONLD, HOME_FAQ_JSONLD]}
+        image="/images/drainbear-home-social.jpg"
+        imageAlt={BRAND_SOCIAL_ALT}
+        jsonLd={HOME_FAQ_JSONLD}
       />
       <section
         className="home-hero"

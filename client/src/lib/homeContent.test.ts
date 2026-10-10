@@ -22,7 +22,7 @@ describe("homepage contact and discovery", () => {
     expect(html.match(/<h1\b/g)).toHaveLength(1);
     expect(html).toContain('href="tel:+85295588260"');
     expect(html).toContain('href="https://wa.me/85295588260?');
-    expect(html.indexOf("24小時特快通渠熱線")).toBeLessThan(
+    expect(html.indexOf("24小時通渠查詢")).toBeLessThan(
       html.indexOf('id="home-services-heading"')
     );
     expect(html).toContain("實際上門時間會按地區、交通、人手及設備供應確認");

@@ -291,7 +291,7 @@ try {
             );
             assert.equal(
               await link.locator("img").getAttribute("src"),
-              "/images/drainbear-services-ai.webp"
+              `/images/services/${slug}-224.webp`
             );
             assert(
               await link

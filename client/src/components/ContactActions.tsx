@@ -30,7 +30,7 @@ export default function ContactActions({
           <Phone />
         </span>
         <span className="contact-action__copy">
-          <span className="contact-action__label">24小時特快通渠熱線</span>
+          <span className="contact-action__label">24小時通渠查詢</span>
           <strong>{phoneDisplay}</strong>
         </span>
         <ArrowUpRight className="contact-action__arrow" aria-hidden="true" />

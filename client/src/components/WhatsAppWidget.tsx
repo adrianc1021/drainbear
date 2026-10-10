@@ -9,7 +9,7 @@ import { goThanksAfterWhatsApp, trackCTA } from "@/lib/analytics";
 import { ArrowRight, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-const LOGO = "/favicon-192x192.png";
+const LOGO = "/images/drainbear-logo-192.webp";
 
 const QUICK_TOPICS = [
   { label: "坐廁／馬桶淤塞", msg: "您好，我想查詢坐廁／馬桶淤塞的通渠報價。" },

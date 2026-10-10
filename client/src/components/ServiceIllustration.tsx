@@ -10,7 +10,15 @@ const SCENES: Record<string, { column: number; row: number; label: string }> = {
 };
 
 /** Clean service illustrations for browsing, separate from case evidence. */
-export default function ServiceIllustration({ slug }: { slug: string }) {
+export default function ServiceIllustration({
+  slug,
+  compact = false,
+  sizes = "112px",
+}: {
+  slug: string;
+  compact?: boolean;
+  sizes?: string;
+}) {
   const scene = SCENES[slug];
   if (!scene) throw new Error(`Missing service illustration: ${slug}`);
   return (
@@ -22,17 +30,31 @@ export default function ServiceIllustration({ slug }: { slug: string }) {
     >
       <span className="service-illustration__scene">
         <img
-          src="/images/drainbear-services-ai.webp"
+          src={
+            compact
+              ? `/images/services/${slug}-224.webp`
+              : "/images/drainbear-services-ai.webp"
+          }
+          srcSet={
+            compact
+              ? `/images/services/${slug}-224.webp 224w, /images/services/${slug}-384.webp 384w`
+              : undefined
+          }
+          sizes={compact ? sizes : undefined}
           alt=""
           aria-hidden="true"
-          width="1536"
-          height="768"
+          width={compact ? 224 : 1536}
+          height={compact ? 224 : 768}
           loading="lazy"
           decoding="async"
-          style={{
-            left: `${-100 * scene.column}%`,
-            transform: `translateY(-${scene.row ? 75 : 25}%)`,
-          }}
+          style={
+            compact
+              ? { width: "100%", height: "100%", top: 0, left: 0 }
+              : {
+                  left: `${-100 * scene.column}%`,
+                  transform: `translateY(-${scene.row ? 75 : 25}%)`,
+                }
+          }
         />
       </span>
     </span>

@@ -24,6 +24,13 @@ import { useState } from "react";
 import { Link } from "wouter";
 
 const ICONS = [Home, UtensilsCrossed, Building2];
+const COMMON_SERVICES = [
+  { slug: "toilet-unblocking", label: "坐廁通渠" },
+  { slug: "kitchen-sink-unblocking", label: "鋅盤通渠" },
+  { slug: "bathroom-drain-unblocking", label: "浴室通渠" },
+  { slug: "grease-trap-cleaning", label: "隔油池清理" },
+  { slug: "main-drain-manhole", label: "主渠及沙井通渠" },
+];
 
 /** A single problem entrance for three customer groups, with optional district context. */
 export default function HomeServiceFinder() {
@@ -52,12 +59,16 @@ export default function HomeServiceFinder() {
         <div className="section-heading">
           <div>
             <p className="brand-eyebrow">由眼前嘅問題開始</p>
-            <h2 id="home-services-heading">塞邊度？搵啱通渠方法。</h2>
+            <h2 id="home-services-heading">香港通渠服務</h2>
           </div>
           <Link href="/drain-diagnosis">
             未確定？先做問題判斷 <ArrowRight aria-hidden="true" />
           </Link>
         </div>
+        <p className="section-heading-description">
+          為住宅、食肆及物業處理坐廁、鋅盤、浴室淤塞及主渠倒灌；亦可查詢隔油池清理、高壓洗渠及
+          CCTV 照喉。
+        </p>
         <div className="home-service-finder__panel">
           <div
             className="home-service-finder__types"
@@ -121,7 +132,7 @@ export default function HomeServiceFinder() {
             </div>
             <div className="home-finder-query__preview" aria-hidden="true">
               {service ? (
-                <ServiceIllustration slug={serviceSlug} />
+                <ServiceIllustration slug={serviceSlug} compact />
               ) : (
                 <CircleHelp />
               )}
@@ -183,7 +194,11 @@ export default function HomeServiceFinder() {
                           })
                         }
                       >
-                        <ServiceIllustration slug={slug} />
+                        <ServiceIllustration
+                          slug={slug}
+                          compact
+                          sizes="(max-width: 1023px) 40vw, 96px"
+                        />
                         <span className="home-finder-services__copy">
                           <strong>{service.shortName}</strong>
                           <span>{getServiceVisual(slug).summary}</span>
@@ -197,6 +212,25 @@ export default function HomeServiceFinder() {
             </div>
           ))}
         </div>
+        <nav className="home-service-finder__links" aria-label="常用通渠服務">
+          {COMMON_SERVICES.map(item => (
+            <Link
+              key={item.slug}
+              href={`/services/${item.slug}`}
+              onClick={() =>
+                trackNavClick("service", {
+                  cta_location: "home_common_services",
+                  service_name: item.slug,
+                  cta_label: item.label,
+                  destination_url: `/services/${item.slug}`,
+                })
+              }
+            >
+              {item.label}
+              <ArrowRight aria-hidden="true" />
+            </Link>
+          ))}
+        </nav>
         <aside
           className="home-safety-note"
           aria-labelledby="home-safety-heading"

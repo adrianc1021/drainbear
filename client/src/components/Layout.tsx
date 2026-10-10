@@ -22,7 +22,7 @@ import { ArrowUp, Menu, Phone, X } from "lucide-react";
 import { ReactNode, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "wouter";
 
-const LOGO = "/favicon-192x192.png";
+const LOGO = "/images/drainbear-logo-192.webp";
 
 const NAV_ITEMS = [
   { label: "通渠服務", href: "/services" },

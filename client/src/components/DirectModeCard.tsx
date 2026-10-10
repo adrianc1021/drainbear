@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef } from "react";
+import { Wrench } from "lucide-react";
 
 const LIGHT_PHOTO_SRC =
   "https://res.cloudinary.com/dgupuutfn/image/upload/v1780913983/room2_pihyox.png";
@@ -184,9 +185,7 @@ export default function DirectModeCard() {
                 boxShadow: "0 10px 24px -10px rgba(63,174,107,.6)",
               }}
             >
-              <span className="material-icons" aria-hidden="true">
-                construction
-              </span>
+              <Wrench aria-hidden="true" size={24} />
             </span>
             <strong className="direct-footer__title">
               Build the room in real time
