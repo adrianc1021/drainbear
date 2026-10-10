@@ -1,33 +1,57 @@
 import type { BlogPost } from "./blogData";
+import { DRAIN_COMPANY_REVIEWS_GUIDE } from "./drainCompanyReviewsGuide";
 
 /** Distinct customer questions; publication dates never stand in for project dates. */
 export const SEO_ARTICLES: BlogPost[] = [
+  DRAIN_COMPANY_REVIEWS_GUIDE,
   {
     slug: "choosing-professional-drain-company",
-    title: "專業通渠公司點樣揀？由檢查、施工到完工交代",
+    title: "通渠邊間好？通渠公司推介與師傅比較清單",
     category: "實用指南",
     date: "2026-10-09",
+    updatedAt: "2026-10-11",
     readMins: 4,
     authorName: "通渠熊編輯團隊",
     reviewerName: "",
     featured: true,
     excerpt:
-      "搵專業通渠服務，先睇對方能否解釋問題、施工方法和驗收方式。這份比較清單幫住宅、食肆及物業客戶問清楚需要的安排。",
-    keywords: ["專業通渠", "通渠公司", "香港通渠", "通渠服務比較"],
+      "搵香港通渠公司或師傅，先比較處理範圍、報價、上門安排和完工測試。了解如何核對朋友介紹及網上推介，再按現場需要作選擇。",
+    keywords: [
+      "通渠邊間好",
+      "通渠公司推介",
+      "通渠師傅介紹",
+      "通渠師傅推介",
+      "香港通渠公司",
+    ],
     serviceSlugs: [
       "toilet-unblocking",
       "kitchen-sink-unblocking",
       "cctv-drain-inspection",
     ],
     relatedSlugs: [
+      "drain-company-reviews-red-flags",
+      "hong-kong-drain-cleaning-price-guide",
       "drain-service-completion-checklist",
-      "drain-tool-selection-guide",
-      "24-hour-drain-help-night",
     ],
     sections: [
       {
         type: "p",
         text: "專業通渠要看的，是對方能否把現場問題、採用的方法和完成後的檢查說清楚。單看機器相片或『即刻搞掂』的宣傳，未必知道服務是否合適。先提供地區、受影響位置及相片，再比較對方如何回應，比只問一句『通渠幾錢』更有用。",
+      },
+      { type: "h2", text: "通渠邊間好？先按現場需要比較" },
+      {
+        type: "p",
+        text: "香港通渠公司提供的設備與安排未必一樣。住宅單一去水位、食肆積油與物業共用渠，應先找能處理相應範圍的服務，再比較報價內容及可確認的上門時間。沒有一家公司能單憑搜尋排名或一句推介，就被判定適合所有工程。",
+      },
+      { type: "h2", text: "通渠公司推介：朋友介紹哪些資料最有用？" },
+      {
+        type: "p",
+        text: "請介紹人說明工程時間、場所類型、塞渠位置、處理方法及完工後的去水情況。再向公司確認能否處理你的現場，以及報價包括哪些工序。同一位朋友的好經驗是參考；不同管道或進場條件，仍要重新評估。",
+      },
+      { type: "h2", text: "通渠師傅介紹與推介，要核對身份和安排" },
+      {
+        type: "p",
+        text: "搜尋個別師傅姓名或收到聯絡電話時，先確認是否同一位師傅、所屬公司或獨立接工身份，以及由誰到場、交代施工和收款。名字相同不代表同一服務提供者；網上介紹也不等於該師傅與通渠熊有合作。把聯絡身份與工程範圍問清楚，再決定是否預約。",
       },
       { type: "h2", text: "先分清：你需要疏通、清洗，還是檢查？" },
       {
@@ -68,17 +92,22 @@ export const SEO_ARTICLES: BlogPost[] = [
         href: "/cases/toilet-drain-tool-operation",
         note: "此短片未包含完整沖水測試。",
       },
+      {
+        label: "核對口碑與報價的注意事項",
+        href: "/blog/drain-company-reviews-red-flags",
+      },
+      { label: "返回通渠熊首頁，了解香港通渠服務", href: "/" },
     ],
     faqs: [
       {
-        question: "專業通渠一定要用高壓水槍嗎？",
+        question: "收到通渠師傅介紹，預約前要確認甚麼？",
         answer:
-          "不一定。處理方法要按堵塞物、管道狀況、入口及施工目的選擇；局部堵塞未必需要高壓清洗。應先了解為何選用該工具。",
+          "確認師傅及公司身份、到場與收款的聯絡人、可處理範圍、報價內容和上門安排。姓名或電話相似不足以確認是同一位師傅，也不能據此推定與其他公司有合作。",
       },
       {
-        question: "比較專業通渠服務，最值得問哪一項？",
+        question: "通渠邊間好？如何比較通渠公司推介？",
         answer:
-          "問清楚『完成後如何核對去水』，並同時確認處理位置及仍未確定的問題。這能把施工工序與實際觀察結果連起來。",
+          "先比較是否能處理你的場所及堵塞範圍，再問清報價包括甚麼、上門時間和完成後如何試水。朋友介紹或網上推介需配合工程背景，不能直接當成所有現場的服務保證。",
       },
       {
         question: "網站寫 24小時通渠，是否代表已預約成功？",
@@ -828,6 +857,7 @@ export const SEO_ARTICLES: BlogPost[] = [
 ];
 
 for (const article of SEO_ARTICLES) {
+  if (article.coverImage) continue;
   article.coverImage = {
     url: `/images/blog/${article.slug}.webp`,
     alt: `AI 紙藝通渠熊插圖：${article.title}`,

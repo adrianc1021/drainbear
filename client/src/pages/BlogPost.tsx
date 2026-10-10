@@ -577,7 +577,23 @@ export default function BlogPost() {
               再確認可安排的服務及收費。
             </p>
 
-            <div className="mt-6 flex justify-center">
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
+              {post.resourceLinks?.some(resource => resource.href === "/") ? (
+                <Link
+                  href="/"
+                  onClick={() =>
+                    trackNavClick("navigation", {
+                      article_slug: post.slug,
+                      cta_location: "blogpost_home",
+                      destination_url: "/",
+                    })
+                  }
+                  className="inline-flex min-h-11 items-center gap-2 rounded-md border border-white/60 px-5 py-3 text-sm font-bold text-white hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                >
+                  返回首頁，了解通渠服務
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              ) : null}
               <WhatsAppButton
                 label="WhatsApp 查詢"
                 trackLocation="blogpost_cta"

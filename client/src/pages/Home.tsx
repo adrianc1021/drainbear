@@ -2,6 +2,7 @@ import CmsPageSEO from "@/components/CmsPageSEO";
 import ContactActions from "@/components/ContactActions";
 import DrainHomeFaq, { FAQ_ITEMS } from "@/components/DrainHomeFaq";
 import HomeServiceFinder from "@/components/HomeServiceFinder";
+import HomeCompanyGuides from "@/components/HomeCompanyGuides";
 import RecordedCaseGallery from "@/components/RecordedCaseGallery";
 import { SITE_URL } from "@/config/site";
 import { BRAND_SOCIAL_ALT } from "@/lib/brandVisuals";
@@ -14,9 +15,9 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 
-const HOME_TITLE = "香港專業通渠｜24小時通渠查詢｜通渠熊 DrainBear";
+const HOME_TITLE = "香港通渠公司｜24小時通渠查詢｜通渠熊 DrainBear";
 const HOME_DESCRIPTION =
-  "通渠熊提供香港住宅、食肆及物業通渠服務，處理坐廁塞住、鋅盤去水慢、浴室淤塞及主渠倒灌。電話及 WhatsApp 24 小時接受通渠查詢；上門時間按地區、人手及設備確認。";
+  "搵香港通渠公司？通渠熊為住宅、食肆及物業處理坐廁塞住、鋅盤去水慢、浴室淤塞及主渠倒灌。電話及 WhatsApp 24 小時接受通渠查詢；上門時間按地區、人手及設備確認。";
 
 const HOME_FAQ_JSONLD = {
   "@context": "https://schema.org",
@@ -154,6 +155,7 @@ export default function Home() {
         </div>
       </section>
       <DrainHomeFaq />
+      <HomeCompanyGuides />
       <nav className="container home-resource-links" aria-label="延伸渠務資料">
         <Link href="/areas">
           查看服務地區 <ArrowRight aria-hidden="true" />

@@ -1,4 +1,5 @@
 import { SEO_ARTICLES } from "../client/src/lib/seoArticles";
+import { PRICE_GUIDE_REVISION } from "../client/src/lib/priceGuideRevision";
 import { spawn } from "node:child_process";
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -240,14 +241,24 @@ function mergeBlogEntries(
   const entries = new Map<string, PublishedBlogEntry>();
 
   for (const slug of STATIC_BLOG_SLUGS) {
+    const article =
+      slug === PRICE_GUIDE_REVISION.slug
+        ? PRICE_GUIDE_REVISION
+        : SEO_ARTICLES.find(article => article.slug === slug);
     entries.set(slug, {
       slug,
+      lastmod: normalizeDate(article?.updatedAt ?? article?.date),
       source: "static",
     });
   }
 
   for (const entry of sanityEntries) {
-    entries.set(entry.slug, entry);
+    entries.set(
+      entry.slug,
+      entry.slug === PRICE_GUIDE_REVISION.slug
+        ? { ...entry, lastmod: normalizeDate(PRICE_GUIDE_REVISION.updatedAt) }
+        : entry
+    );
   }
 
   return Array.from(entries.values()).sort((a, b) =>

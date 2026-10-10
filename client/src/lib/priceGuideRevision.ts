@@ -3,16 +3,16 @@ import type { BlogPost } from "./blogData";
 /** Website editorial revision: replaces the old market-price/fee-policy draft. */
 export const PRICE_GUIDE_REVISION: BlogPost = {
   slug: "hong-kong-drain-cleaning-price-guide",
-  title: "通渠價錢點計？先了解堵塞位置、工具及施工範圍",
+  title: "通渠收費點計？比較價錢先了解工具及施工範圍",
   category: "通渠迷思",
   date: "2026-08-10",
-  updatedAt: "2026-10-09",
+  updatedAt: "2026-10-11",
   readMins: 4,
   authorName: "通渠熊編輯團隊",
   reviewerName: "",
   excerpt:
     "通渠費用要按堵塞位置、管道入口、工具及處理範圍評估。了解坐廁、鋅盤與主渠的差別，再提供現場資料查詢個別報價。",
-  keywords: ["通渠價錢", "通渠費用", "通渠價格", "通渠報價"],
+  keywords: ["通渠價錢", "通渠收費", "通渠收費lihkg", "通渠費用", "通渠報價"],
   coverImage: {
     url: "/images/blog/choosing-professional-drain-company.webp",
     srcSet:
@@ -25,6 +25,20 @@ export const PRICE_GUIDE_REVISION: BlogPost = {
     {
       type: "p",
       text: "通渠沒有適用所有現場的統一價錢。同樣是去水慢，堵塞在鋅盤隔氣、坐廁彎位，還是共用主渠，需要的入口、工具和處理範圍都可能不同。先了解問題在哪裡，再查詢個別報價，會比單看一個起步數字清楚。",
+    },
+    { type: "h2", text: "搜尋「通渠收費 LIHKG」，討論價錢可以點比較？" },
+    {
+      type: "p",
+      text: "LIHKG 或其他討論區的通渠收費分享，要連同發文日期、場所、堵塞位置、使用工具與實際施工範圍一起看。多年前的住宅鋅盤疏通，未必能套用到今天的公共主渠清洗；只有總額、沒有工序資料的留言，也難以直接比較。這篇指南沒有引用或驗證個別討論串，亦不代表任何平台推介通渠熊。",
+    },
+    {
+      type: "list",
+      items: [
+        "先看日期：報價是否近期，還是多年以前的經驗。",
+        "核對同類工程：去水位、管道入口、是否拆裝及使用工具是否相近。",
+        "看清包括甚麼：有沒有檢查、疏通、清理、試水或其他工序的說明。",
+        "向服務提供者確認：把自己的地區與現場資料交代清楚，取得適用於這次工程的報價。",
+      ],
     },
     { type: "h2", text: "哪些現場資料會影響報價？" },
     {
@@ -70,10 +84,11 @@ export const PRICE_GUIDE_REVISION: BlogPost = {
     { label: "準備相片與查詢資料", href: "/guide" },
     { label: "按堵塞位置找服務", href: "/services" },
     { label: "上門與處理流程", href: "/service-process" },
+    { label: "返回通渠熊首頁，了解香港通渠服務", href: "/" },
   ],
   relatedSlugs: [
-    "whatsapp-drain-quote-checklist",
-    "drain-tool-selection-guide",
+    "choosing-professional-drain-company",
+    "drain-company-reviews-red-flags",
     "drain-service-completion-checklist",
   ],
   faqs: [
@@ -83,9 +98,9 @@ export const PRICE_GUIDE_REVISION: BlogPost = {
         "相片可以幫助初步了解，但隱藏管段、堵塞原因及入口條件未必能確認。報價須配合實際處理範圍與現場評估，沒有適用所有工程的統一價格。",
     },
     {
-      question: "同樣坐廁塞住，通渠費用為甚麼可能不同？",
+      question: "通渠收費 LIHKG 的討論，可以直接當報價參考嗎？",
       answer:
-        "硬物位置、坐廁結構、可用入口及是否需要拆裝都會影響工序。先交代物件、水位和其他去水位情況，再由團隊評估。",
+        "只可作了解其他人的經驗，先核對日期、堵塞位置、工具、是否拆裝及費用包括的工序。不同現場不能只比較總額，個別報價仍需由服務提供者按你的資料確認。",
     },
     {
       question: "查詢通渠報價，最先要提供甚麼？",
