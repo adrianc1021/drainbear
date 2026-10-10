@@ -52,7 +52,7 @@ export default function HomeServiceFinder() {
         <div className="section-heading">
           <div>
             <p className="brand-eyebrow">由眼前嘅問題開始</p>
-            <h2 id="home-services-heading">塞邊度？搵啱處理方法。</h2>
+            <h2 id="home-services-heading">塞邊度？搵啱通渠方法。</h2>
           </div>
           <Link href="/drain-diagnosis">
             未確定？先做問題判斷 <ArrowRight aria-hidden="true" />

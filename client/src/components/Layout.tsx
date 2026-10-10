@@ -28,6 +28,7 @@ const NAV_ITEMS = [
   { label: "通渠服務", href: "/services" },
   { label: "施工案例", href: "/cases" },
   { label: "查詢指南", href: "/guide" },
+  { label: "通渠小知識", href: "/blog" },
   { label: "服務地區", href: "/areas" },
   { label: "關於通渠熊", href: "/about" },
 ];
@@ -48,7 +49,6 @@ const FOOTER_NAV_ITEMS = [
   { label: "問題判斷", href: "/drain-diagnosis" },
   { label: "服務流程", href: "/service-process" },
   { label: "常見問題", href: "/faq" },
-  { label: "通渠小知識", href: "/blog" },
   { label: "住宅通渠", href: "/customers/residential" },
   { label: "食肆及商舖", href: "/customers/restaurants" },
   { label: "物業渠務", href: "/customers/property-management" },

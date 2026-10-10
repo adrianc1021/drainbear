@@ -23,9 +23,9 @@ const FAQ_ITEMS = [
       "如果短時間內再次淤塞，應保留現場資料並說明上次處理位置。團隊會按情況評估是否需要檢查較長管段、隔油設施或安排 CCTV 照喉。",
   },
   {
-    question: "夜間或假日可以查詢嗎？",
+    question: "24小時通渠，可以夜間或假日查詢嗎？",
     answer:
-      "可以先透過 WhatsApp 或電話提供資料。實際上門時間會按地區、交通、人手及設備供應確認，緊急情況請先說明受影響範圍。",
+      "可以。通渠熊的電話及 WhatsApp 24 小時接受通渠查詢，包括夜間及假日。實際上門時間會按地區、交通、人手及設備供應確認，緊急情況請先說明受影響範圍。",
   },
 ] as const;
 
@@ -41,9 +41,9 @@ export default function DrainHomeFaq() {
           <div className="db-home-faq__intro">
             <p className="db-kicker">
               <span className="db-kicker__rule" aria-hidden="true" />
-              常見問題
+              查詢前先了解
             </p>
-            <h2 id="home-faq-heading">報價前，你可能想問</h2>
+            <h2 id="home-faq-heading">通渠常見問題</h2>
             <p>現場資料、上門安排及反覆塞渠，這裏直接解答。</p>
             <Link href="/faq" className="db-home-faq__all-link">
               查看全部常見問題

@@ -13,13 +13,17 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 
+const HOME_TITLE = "香港專業通渠｜24小時通渠查詢｜通渠熊 DrainBear";
+const HOME_DESCRIPTION =
+  "通渠熊提供香港住宅、食肆及物業通渠服務，處理坐廁塞住、鋅盤去水慢、浴室淤塞及主渠倒灌。電話及 WhatsApp 24 小時接受通渠查詢；上門時間按地區、人手及設備確認。";
+
 const HOME_JSONLD = {
   "@context": "https://schema.org",
   "@type": "WebPage",
   "@id": `${SITE_URL}/#webpage`,
   url: `${SITE_URL}/`,
-  name: "香港 24 小時通渠服務｜通渠熊 DrainBear",
-  description: "香港住宅、食肆及物業通渠查詢，按現場情況安排合適處理。",
+  name: HOME_TITLE,
+  description: HOME_DESCRIPTION,
   inLanguage: "zh-Hant-HK",
   isPartOf: { "@id": WEBSITE_ID },
   about: { "@id": BUSINESS_ID },
@@ -62,8 +66,8 @@ export default function Home() {
     <div className="home-page">
       <CmsPageSEO
         cmsEnabled={false}
-        title="香港通渠服務｜24 小時查詢・真實施工紀錄｜通渠熊 DrainBear"
-        description="塞廁所、鋅盤去水慢或污水倒灌？通渠熊提供香港住宅、食肆及物業通渠查詢。24 小時熱線及 WhatsApp 傳相查詢，按現場情況了解處理及安排。"
+        title={HOME_TITLE}
+        description={HOME_DESCRIPTION}
         path="/"
         jsonLd={[HOME_JSONLD, HOME_FAQ_JSONLD]}
       />
@@ -75,12 +79,14 @@ export default function Home() {
         <div className="home-hero__stage">
           <div className="container home-hero__grid">
             <div className="home-hero__copy">
-              <p className="brand-eyebrow">香港通渠服務 · 24 小時接受查詢</p>
+              <p className="brand-eyebrow">香港專業通渠 · 住宅／食肆／物業</p>
               <h1 id="home-heading">
                 <span className="home-hero__headline-line">香港通渠，</span>
                 <span className="home-hero__headline-line">先搵通渠熊。</span>
               </h1>
-              <p className="home-hero__intro">傳相片、講地區，先了解點處理。</p>
+              <p className="home-hero__intro">
+                坐廁、鋅盤、浴室塞渠？傳相片同地區，先了解點處理。
+              </p>
               <ContactActions location="home_hero" prominent />
               <p className="contact-note">24 小時查詢 · 上門時間另行確認。</p>
             </div>
@@ -110,13 +116,13 @@ export default function Home() {
             <div>
               <p className="brand-eyebrow">上門與處理安排</p>
               <h2 id="home-process-heading">
-                先了解現場，
+                專業通渠，
                 <br />
-                再安排處理。
+                先檢查再處理。
               </h2>
             </div>
             <Link href="/service-process">
-              了解服務流程
+              了解通渠流程
               <ArrowRight aria-hidden="true" />
             </Link>
           </div>
@@ -164,11 +170,11 @@ export default function Home() {
           關於通渠熊 <ArrowRight aria-hidden="true" />
         </Link>
         <Link href="/guide">
-          如何了解報價
+          通渠查詢資料
           <ArrowRight aria-hidden="true" />
         </Link>
         <Link href="/blog">
-          閱讀渠務保養文章
+          通渠小知識
           <ArrowRight aria-hidden="true" />
         </Link>
       </nav>
