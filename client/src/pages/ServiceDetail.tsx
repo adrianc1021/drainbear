@@ -107,7 +107,13 @@ export default function ServiceDetail() {
         <EditorialPageHero
           kicker={service.shortName}
           title={service.name}
-          description={getServiceVisual(service.slug).summary}
+          description={
+            ["cctv-drain-inspection", "kitchen-sink-unblocking"].includes(
+              service.slug
+            )
+              ? service.heroDescription
+              : getServiceVisual(service.slug).summary
+          }
           contactLocation="service_detail_hero"
           topic={service.slug}
           message={service.whatsappMessage}

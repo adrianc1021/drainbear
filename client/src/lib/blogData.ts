@@ -1,4 +1,5 @@
 import { PRICE_GUIDE_REVISION } from "./priceGuideRevision";
+import { KITCHEN_PREVENTION_REVISION } from "./kitchenPreventionRevision";
 import { SEO_ARTICLES } from "./seoArticles";
 import type { SanityImageData } from "./sanity/types";
 /**
@@ -20,11 +21,16 @@ export interface BlogPost {
   coverImage?: SanityImageData;
   serviceSlugs?: string[];
   relatedSlugs?: string[];
+  whatsappMessage?: string;
   resourceLinks?: { label: string; href: string; note?: string }[];
   faqs?: { question: string; answer: string }[];
   /** Short paragraphs and practical lists remain readable without JavaScript. */
   sections: (
-    | { type: "h2" | "p" | "tip"; text: string }
+    | {
+        type: "h2" | "p" | "tip";
+        text: string;
+        link?: { label: string; href: string };
+      }
     | { type: "list"; items: string[]; ordered?: boolean }
   )[];
 }
@@ -176,51 +182,7 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
   },
-  {
-    slug: "prevent-kitchen-sink-clog",
-    title: "廚房鋅盤去水慢？5 個日常習慣杜絕豬油膏淤塞",
-    category: "家居防塞",
-    date: "2026-07-20",
-    readMins: 4,
-    excerpt:
-      "九成廚房塞渠都係「豬油膏」造成。油脂遇冷水凝固積聚喉管內壁，日積月累愈收愈窄。學識呢 5 個習慣，慳返一筆通渠費。",
-    keywords: ["廚房塞渠", "鋅盤去水慢", "豬油膏", "防塞喉管"],
-    sections: [
-      {
-        type: "p",
-        text: "廚房鋅盤去水愈嚟愈慢，通常唔係一朝一夕嘅事。煮食產生嘅油脂混合洗潔精同食物殘渣，流入喉管後遇冷凝固，形成俗稱「豬油膏」嘅白色蠟狀物，黐實管壁愈積愈厚，最終令去水口完全淤塞。",
-      },
-      { type: "h2", text: "習慣一：切勿將煮食油倒入鋅盤" },
-      {
-        type: "p",
-        text: "煎炸完嘅油應該等佢冷卻後，用廚房紙索乾或倒入廢油樽再棄置。就算係少量鑊底油，日日沖落去水口，一個月已經足以喺 U 型隔氣位形成油塞。",
-      },
-      { type: "h2", text: "習慣二：安裝隔渣網，每日清理" },
-      {
-        type: "p",
-        text: "飯粒、菜渣同咖啡渣係豬油膏嘅「鋼筋」，令油塞更加堅固。一個十蚊八蚊嘅不鏽鋼隔渣網，可以擋住九成固體殘渣，記得每日清倒。",
-      },
-      { type: "h2", text: "習慣三：洗完大油膩碗碟後沖熱水" },
-      {
-        type: "p",
-        text: "洗完打邊爐、燒肉等重油餐具後，開最熱嘅水喉沖 30 秒至 1 分鐘，可以將啱啱流入喉管、未凝固嘅油脂沖走，減少積聚機會。",
-      },
-      { type: "h2", text: "習慣四：每月一次梳打粉加白醋保養" },
-      {
-        type: "p",
-        text: "將半杯梳打粉倒入去水口，再倒入半杯白醋，起泡反應可以鬆化管壁輕微油垢，焗 15 分鐘後用熱水沖走。呢個方法溫和唔傷喉管，適合定期保養。",
-      },
-      { type: "h2", text: "習慣五：去水開始慢就要處理，唔好等到完全塞死" },
-      {
-        type: "p",
-        text: "去水明顯變慢係喉管收窄嘅先兆。及早檢查有助找出原因，避免淤塞持續惡化或出現污水倒灌。",
-      },
-      {
-        type: "tip",
-        text: "白熊師傅貼士：如果屋企喉管超過十年未洗過，就算未塞，都建議做一次高壓水槍清洗，將陳年油垢連根拔起，回復出廠般暢通。",
-      },
-    ],
-  },
+  KITCHEN_PREVENTION_REVISION,
   {
     slug: "why-not-drain-cleaner",
     title: "點解千祈唔好亂倒「通渠水」？化學劑毀喉管真相",

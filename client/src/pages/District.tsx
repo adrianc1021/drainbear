@@ -22,6 +22,9 @@ export default function District() {
   const { settings } = useSiteSettings();
   const d = getDistrict(slug || "");
   if (!d) return <NotFound />;
+  const seoTitle =
+    d.metaTitle ?? `${d.name}通渠｜住宅及商戶處理・24小時查詢｜通渠熊`;
+  const pageHeading = d.pageHeading ?? `${d.name}通渠服務`;
 
   const crumbs = [
     { name: "首頁", path: "/" },
@@ -35,7 +38,7 @@ export default function District() {
       "@type": "WebPage",
       "@id": `${SITE_URL}/areas/${d.slug}#webpage`,
       url: `${SITE_URL}/areas/${d.slug}`,
-      name: `${d.name}通渠服務`,
+      name: seoTitle,
       description: d.metaDescription,
       inLanguage: "zh-Hant-HK",
       isPartOf: { "@id": WEBSITE_ID },
@@ -81,7 +84,7 @@ export default function District() {
   return (
     <div className="district-editorial">
       <SEO
-        title={`${d.name}通渠｜住宅及商戶處理・24小時查詢｜通渠熊`}
+        title={seoTitle}
         description={d.metaDescription}
         path={`/areas/${d.slug}`}
         keywords={d.keywords}
@@ -93,8 +96,11 @@ export default function District() {
         <Breadcrumbs items={crumbs} tone="dark" />
         <EditorialPageHero
           kicker={`${d.region} · ${d.name}通渠`}
-          title={`${d.name}通渠服務`}
-          description="住宅、食肆或共用渠問題，先提供位置與相片，確認合適處理及上門時間。"
+          title={pageHeading}
+          description={
+            d.leadDescription ??
+            "住宅、食肆或共用渠問題，先提供位置與相片，確認合適處理及上門時間。"
+          }
           contactLocation="district_hero"
           topic={d.name}
           message={`您好，我位於${d.name}，想查詢通渠處理安排。`}
@@ -117,6 +123,29 @@ export default function District() {
                 <p key={p.slice(0, 12)}>{p}</p>
               ))}
             </AnimatedDisclosure>
+            {d.localSections?.map(section => (
+              <section
+                key={section.id}
+                id={section.id}
+                className="mt-8"
+                aria-labelledby={`${section.id}-heading`}
+              >
+                <h3
+                  id={`${section.id}-heading`}
+                  className="font-display text-lg font-black text-navy"
+                >
+                  {section.title}
+                </h3>
+                {section.paragraphs.map(paragraph => (
+                  <p
+                    key={paragraph}
+                    className="mt-3 leading-relaxed text-navy/75"
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </section>
+            ))}
             <div className="mt-6 flex flex-wrap gap-2">
               {d.landmarks.map(l => (
                 <span

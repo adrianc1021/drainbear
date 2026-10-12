@@ -18,6 +18,10 @@ export interface DistrictInfo {
   faqs: { q: string; a: string }[];
   keywords: string;
   metaDescription: string;
+  metaTitle?: string;
+  pageHeading?: string;
+  leadDescription?: string;
+  localSections?: { id: string; title: string; paragraphs: string[] }[];
 }
 
 const DISTRICTS_BATCH1: DistrictInfo[] = [

@@ -1,5 +1,12 @@
 import { SEO_ARTICLES } from "../client/src/lib/seoArticles";
 import { PRICE_GUIDE_REVISION } from "../client/src/lib/priceGuideRevision";
+import { getPostBySlug } from "../client/src/lib/blogData";
+import { KITCHEN_PREVENTION_REVISION } from "../client/src/lib/kitchenPreventionRevision";
+import {
+  BLOG_BODY_REVISION_DATE,
+  BODY_REVISION_SLUGS,
+  latestEditorialDate,
+} from "../client/src/lib/blogBodyRevisions";
 import { spawn } from "node:child_process";
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -241,10 +248,7 @@ function mergeBlogEntries(
   const entries = new Map<string, PublishedBlogEntry>();
 
   for (const slug of STATIC_BLOG_SLUGS) {
-    const article =
-      slug === PRICE_GUIDE_REVISION.slug
-        ? PRICE_GUIDE_REVISION
-        : SEO_ARTICLES.find(article => article.slug === slug);
+    const article = getPostBySlug(slug);
     entries.set(slug, {
       slug,
       lastmod: normalizeDate(article?.updatedAt ?? article?.date),
@@ -253,10 +257,25 @@ function mergeBlogEntries(
   }
 
   for (const entry of sanityEntries) {
+    const revisionDate =
+      entry.slug === PRICE_GUIDE_REVISION.slug
+        ? PRICE_GUIDE_REVISION.updatedAt
+        : entry.slug === KITCHEN_PREVENTION_REVISION.slug
+          ? KITCHEN_PREVENTION_REVISION.updatedAt
+          : BODY_REVISION_SLUGS.includes(entry.slug)
+            ? BLOG_BODY_REVISION_DATE
+            : undefined;
     entries.set(
       entry.slug,
-      entry.slug === PRICE_GUIDE_REVISION.slug
-        ? { ...entry, lastmod: normalizeDate(PRICE_GUIDE_REVISION.updatedAt) }
+      revisionDate
+        ? {
+            ...entry,
+            lastmod: normalizeDate(
+              entry.slug === PRICE_GUIDE_REVISION.slug
+                ? revisionDate
+                : latestEditorialDate(entry.lastmod, revisionDate)
+            ),
+          }
         : entry
     );
   }
@@ -670,6 +689,16 @@ async function prerender() {
       );
 
       let html = await page.content();
+      // Readiness belongs to the live observer, not the saved HTML. Without JS,
+      // a captured reveal-ready class would keep off-screen headings hidden.
+      html = html.replace(
+        /(<html\b[^>]*\bclass=")([^"]*)(")/i,
+        (_, start, classes, end) =>
+          `${start}${classes
+            .split(/\s+/)
+            .filter((name: string) => name !== "reveal-ready")
+            .join(" ")}${end}`
+      );
       const outputPath = getOutputPath(route);
 
       // 護欄：產品建置的 HTML 只會有 hashed bundle，絕不會出現 dev server 痕跡。

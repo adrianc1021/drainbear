@@ -1,4 +1,12 @@
 import { PRICE_GUIDE_REVISION } from "./priceGuideRevision";
+import { KITCHEN_PREVENTION_REVISION } from "./kitchenPreventionRevision";
+import {
+  BODY_REVISION_SLUGS,
+  BLOG_BODY_REVISION_DATE,
+  WASHING_MACHINE_MESSAGE,
+  latestEditorialDate,
+  reviseBlogBody,
+} from "./blogBodyRevisions";
 import { ARTICLE_SERVICE_LINKS } from "./contentConnections";
 import {
   BLOG_POSTS,
@@ -43,6 +51,7 @@ export interface BlogPostView {
   resourceLinks?: StaticBlogPost["resourceLinks"];
   faqs?: StaticBlogPost["faqs"];
   relatedSlugs?: StaticBlogPost["relatedSlugs"];
+  whatsappMessage?: string;
 }
 
 export function getCategoryLabel(category: string): string {
@@ -57,6 +66,18 @@ export function mapSanityBlogPost(post: SanityBlogPost): BlogPostView {
       date: post.publishedAt,
     };
   }
+  if (post.slug === KITCHEN_PREVENTION_REVISION.slug) {
+    return {
+      ...mapStaticBlogPost(KITCHEN_PREVENTION_REVISION),
+      id: post._id,
+      date: post.publishedAt,
+      updatedAt: latestEditorialDate(
+        post.updatedAt,
+        KITCHEN_PREVENTION_REVISION.updatedAt!
+      ),
+      coverImage: post.coverImage ?? KITCHEN_PREVENTION_REVISION.coverImage,
+    };
+  }
   return {
     source: "sanity",
     id: post._id,
@@ -64,17 +85,25 @@ export function mapSanityBlogPost(post: SanityBlogPost): BlogPostView {
     title: post.title,
     category: getCategoryLabel(post.category),
     date: post.publishedAt,
-    updatedAt: post.updatedAt,
+    updatedAt: BODY_REVISION_SLUGS.includes(post.slug)
+      ? latestEditorialDate(post.updatedAt, BLOG_BODY_REVISION_DATE)
+      : post.updatedAt,
     authorName: post.authorName?.trim() || "通渠熊編輯團隊",
-    reviewerName: post.reviewerName?.trim() || "通渠熊渠務團隊",
+    reviewerName: BODY_REVISION_SLUGS.includes(post.slug)
+      ? ""
+      : post.reviewerName?.trim() || "通渠熊渠務團隊",
     readMins: post.readMins,
     excerpt: post.excerpt,
     keywords: post.seo?.focusKeywords ?? [],
     featured: Boolean(post.featured),
     coverImage: post.coverImage,
     seo: post.seo,
-    body: post.body ?? [],
+    body: reviseBlogBody(post.slug, post.body ?? []),
     resourceLinks: ARTICLE_SERVICE_LINKS[post.slug],
+    whatsappMessage:
+      post.slug === "washing-machine-drain-backflow-causes-fixes"
+        ? WASHING_MACHINE_MESSAGE
+        : undefined,
   };
 }
 
@@ -98,6 +127,7 @@ export function mapStaticBlogPost(post: StaticBlogPost): BlogPostView {
     resourceLinks: post.resourceLinks ?? ARTICLE_SERVICE_LINKS[post.slug],
     faqs: post.faqs,
     relatedSlugs: post.relatedSlugs,
+    whatsappMessage: post.whatsappMessage,
   };
 }
 

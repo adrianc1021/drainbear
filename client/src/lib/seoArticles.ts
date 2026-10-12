@@ -121,6 +121,7 @@ export const SEO_ARTICLES: BlogPost[] = [
     title: "24小時通渠：夜晚塞渠先做甚麼？安全處理與上門準備",
     category: "緊急應對",
     date: "2026-10-09",
+    updatedAt: "2026-10-12",
     readMins: 4,
     authorName: "通渠熊編輯團隊",
     reviewerName: "",
@@ -166,6 +167,22 @@ export const SEO_ARTICLES: BlogPost[] = [
       {
         type: "p",
         text: "住戶應確認能開門及交代問題的聯絡人；食肆應確認可進入的廚房區域；物業則要有人協調公用入口。專業通渠可能需要看另一個去水位或較下游的喉口，若只取得單一單位的出入權限，處理範圍可能受限制。",
+      },
+      {
+        type: "p",
+        text: "旺角樓上單位夜間查詢時，交代樓層、樓梯或升降機及能開門的人員；多戶倒灌另需協調共用入口。",
+        link: {
+          label: "查看旺角、太子及大角咀通渠安排。",
+          href: "/areas/mong-kok",
+        },
+      },
+      {
+        type: "p",
+        text: "銅鑼灣食肆先說明能停用的設備與大廈准許施工的時段；大坑住宅則交代相連去水位及工具入口。",
+        link: {
+          label: "了解銅鑼灣及大坑通渠查詢資料。",
+          href: "/areas/causeway-bay",
+        },
       },
       {
         type: "tip",

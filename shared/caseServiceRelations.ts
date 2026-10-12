@@ -16,6 +16,11 @@ export const CASE_SERVICE_RELATIONS = [
     note: "狹窄櫃內喉口的近鏡施工過程。",
   },
   {
+    serviceSlug: "kitchen-sink-unblocking",
+    caseSlug: "home-basin-grease-buildup-cleaning",
+    note: "相關隔氣拆洗及放水測試紀錄；此案例是家居洗手盆，並非廚房鋅盤工程。",
+  },
+  {
     serviceSlug: "bathroom-drain-unblocking",
     caseSlug: "under-sink-drain-line-operation",
     note: "相關去水工具操作；此片段並非浴室工程，浴室處理方法仍需按現場評估。",

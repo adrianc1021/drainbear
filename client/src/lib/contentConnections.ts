@@ -62,6 +62,18 @@ export const SERVICE_READING_LINKS: Record<
   "kitchen-sink-unblocking": [
     { slug: "prevent-kitchen-sink-clog", title: "鋅盤防塞與日常清理" },
   ],
+  "cctv-drain-inspection": [
+    {
+      slug: "cctv-drain-inspection-hong-kong-guide",
+      title: "CCTV 照渠：適用情況、流程及影像資料",
+    },
+  ],
+  "sewage-backflow": [
+    {
+      slug: "washing-machine-drain-backflow-causes-fixes",
+      title: "洗衣機排水倒灌：支渠與共用渠的分別",
+    },
+  ],
   "toilet-unblocking": [
     { slug: "toilet-clog-emergency-guide", title: "塞廁所時先做甚麼？" },
   ],

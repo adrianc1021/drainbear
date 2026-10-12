@@ -58,16 +58,18 @@ export function WhatsAppButton({
   className = "",
   label = "WhatsApp 查詢",
   trackLocation = "shared_button",
+  message,
 }: {
   className?: string;
   label?: string;
   trackLocation?: string;
+  message?: string;
 }) {
-  const { whatsappDefaultHref } = useContactSettings();
+  const { whatsappDefaultHref, whatsappHref } = useContactSettings();
 
   return (
     <a
-      href={whatsappDefaultHref}
+      href={message ? whatsappHref(message) : whatsappDefaultHref}
       target="_blank"
       rel="noopener noreferrer"
       onClick={event => {

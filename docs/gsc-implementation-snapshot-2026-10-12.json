@@ -1,0 +1,140 @@
+{
+  "source": "User-provided historical GSC Wizard analysis; not re-queried in this implementation task",
+  "receivedOn": "2026-10-12",
+  "period": { "start": "2026-09-13", "end": "2026-10-10" },
+  "comparisonPeriod": { "start": "2026-08-16", "end": "2026-09-12" },
+  "searchType": "web",
+  "countryFilter": null,
+  "deviceFilter": null,
+  "totals": {
+    "clicks": 184,
+    "impressions": 30363,
+    "ctrPercent": 0.606,
+    "averagePosition": 26.4
+  },
+  "comparisonTotals": {
+    "clicks": 102,
+    "impressions": 37002,
+    "ctrPercent": 0.276,
+    "averagePosition": 40.3
+  },
+  "priorities": [
+    {
+      "priority": 1,
+      "action": "Match North Point and Southern metadata to service queries",
+      "queryPageRows": [
+        {
+          "query": "北角通渠",
+          "page": "https://drainbearhk.com/areas/north-point",
+          "impressions": 343,
+          "clicks": 0,
+          "averagePosition": 8.7
+        },
+        {
+          "query": "香港仔通渠",
+          "page": "https://drainbearhk.com/areas/southern",
+          "impressions": 104,
+          "clicks": 0,
+          "averagePosition": 1.8
+        }
+      ]
+    },
+    {
+      "priority": 2,
+      "action": "Add practical local access and coordination content for Mong Kok and Causeway Bay/Tai Hang",
+      "queryPageRows": [
+        {
+          "query": "旺角通渠",
+          "page": "https://drainbearhk.com/areas/mong-kok",
+          "impressions": 356,
+          "clicks": 0,
+          "averagePosition": 12.2
+        },
+        {
+          "query": "銅鑼灣通渠",
+          "page": "https://drainbearhk.com/areas/causeway-bay",
+          "impressions": 237,
+          "clicks": 0,
+          "averagePosition": 12.0
+        },
+        {
+          "query": "大坑通渠",
+          "page": "https://drainbearhk.com/areas/causeway-bay",
+          "impressions": 187,
+          "clicks": 0,
+          "averagePosition": 10.3
+        }
+      ]
+    },
+    {
+      "priority": 3,
+      "action": "Connect CCTV guide and service and clarify inspection/delivery limits",
+      "queryPageRows": [
+        {
+          "query": "照渠",
+          "page": "https://drainbearhk.com/blog/cctv-drain-inspection-hong-kong-guide",
+          "impressions": 111,
+          "clicks": 0,
+          "averagePosition": 8.4
+        },
+        {
+          "query": "照渠cctv",
+          "page": "https://drainbearhk.com/blog/cctv-drain-inspection-hong-kong-guide",
+          "impressions": 102,
+          "clicks": 1,
+          "averagePosition": 9.2
+        }
+      ],
+      "pageRows": [
+        {
+          "page": "https://drainbearhk.com/services/cctv-drain-inspection",
+          "impressions": 492,
+          "clicks": 1,
+          "averagePosition": 55.6
+        }
+      ]
+    },
+    {
+      "priority": 4,
+      "action": "Add contextual service links and washing-machine-specific WhatsApp message",
+      "pageRows": [
+        {
+          "page": "https://drainbearhk.com/blog/washing-machine-drain-backflow-causes-fixes",
+          "clicks": 35,
+          "impressions": 1228,
+          "averagePosition": 6.5
+        }
+      ],
+      "queryRows": [
+        { "query": "洗衣機去水倒灌原因", "averagePosition": 5.3 },
+        { "query": "洗衣機去水倒灌", "averagePosition": 5.6 }
+      ]
+    },
+    {
+      "priority": 5,
+      "action": "Clarify kitchen service positioning and revise unsupported prevention advice",
+      "pageRows": [
+        {
+          "page": "https://drainbearhk.com/services/kitchen-sink-unblocking",
+          "impressions": 693,
+          "previousImpressions": 3841,
+          "clicks": 0,
+          "averagePosition": 52.0
+        },
+        {
+          "page": "https://drainbearhk.com/blog/prevent-kitchen-sink-clog",
+          "clicks": 10
+        }
+      ],
+      "queryRows": [
+        { "query": "廚房鋅盤塞", "averagePositionApproximate": 18.5 }
+      ]
+    }
+  ],
+  "limitations": [
+    "Period average positions are not fixed live ranks",
+    "Query, page and property metrics have different aggregation; do not add them together",
+    "Phone and WhatsApp conversion data unavailable; clicks do not establish inquiries",
+    "Historical snapshot does not establish current performance or effects of this release"
+  ]
+}

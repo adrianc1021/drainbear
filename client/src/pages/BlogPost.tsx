@@ -41,6 +41,20 @@ function formatDate(iso: string) {
   } 月 ${date.getDate()} 日`;
 }
 
+function trackArticleLink(href: string) {
+  if (href.startsWith("/services/"))
+    trackNavClick("service", {
+      cta_location: "blogpost_body",
+      service_name: href.split("/").pop(),
+      destination_url: href,
+    });
+  if (href.startsWith("/areas/"))
+    trackNavClick("area", {
+      cta_location: "blogpost_body",
+      destination_url: href,
+    });
+}
+
 const portableTextComponents: PortableTextComponents = {
   block: {
     normal: ({ children }) => (
@@ -95,6 +109,17 @@ const portableTextComponents: PortableTextComponents = {
       const href = typeof value?.href === "string" ? value.href : "#";
       const openInNewTab = Boolean(value?.openInNewTab);
       const isExternal = /^https?:\/\//i.test(href);
+
+      if (href.startsWith("/") && !href.startsWith("//"))
+        return (
+          <Link
+            href={href}
+            onClick={() => trackArticleLink(href)}
+            className="inline-block min-h-11 content-center font-semibold text-wagreen-dark underline decoration-wagreen/50 underline-offset-2 hover:text-navy"
+          >
+            {children}
+          </Link>
+        );
 
       return (
         <a
@@ -395,7 +420,10 @@ export default function BlogPost() {
           <h1 className="mt-4 text-balance font-display text-3xl font-black leading-tight text-white md:text-4xl">
             {post.title}
           </h1>
-          <ContactActions location="blog_post_hero" />
+          <ContactActions
+            location="blog_post_hero"
+            message={post.whatsappMessage}
+          />
 
           <div className="mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-white/70">
             <span className="inline-flex items-center gap-1.5">
@@ -499,6 +527,15 @@ export default function BlogPost() {
               return (
                 <p key={index} className="mt-5 leading-[1.9] text-navy/75">
                   {section.text}
+                  {section.link ? (
+                    <Link
+                      href={section.link.href}
+                      onClick={() => trackArticleLink(section.link!.href)}
+                      className="inline-block min-h-11 content-center font-semibold text-wagreen-dark underline decoration-wagreen/50 underline-offset-2 hover:text-navy"
+                    >
+                      {section.link.label}
+                    </Link>
+                  ) : null}
                 </p>
               );
             })}
@@ -597,6 +634,7 @@ export default function BlogPost() {
               <WhatsAppButton
                 label="WhatsApp 查詢"
                 trackLocation="blogpost_cta"
+                message={post.whatsappMessage}
               />
             </div>
           </div>
