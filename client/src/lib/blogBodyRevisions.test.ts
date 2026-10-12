@@ -67,6 +67,7 @@ describe("published article service entrances", () => {
       "/services/bathroom-drain-unblocking"
     );
     expect(JSON.stringify(revised)).toContain("/services/sewage-backflow");
+    expect(JSON.stringify(revised)).toContain('"href":"/"');
     expect(
       reviseBlogBody("washing-machine-drain-backflow-causes-fixes", revised)
     ).toEqual(revised);

@@ -551,6 +551,97 @@
   color: var(--brand-ink);
   box-shadow: 0 16px 42px #09376629;
 }
+.home-drain-methods__grid,
+.home-case-evidence__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+.home-drain-methods__grid article,
+.home-case-evidence__grid article {
+  min-width: 0;
+  padding: 1.5rem;
+  border: 1px solid var(--brand-line);
+  border-radius: var(--brand-radius);
+  background: white;
+}
+.home-drain-methods__grid h3,
+.home-case-evidence h3,
+.home-case-evidence h4 {
+  font-weight: 800;
+  font-size: 1.15rem;
+  line-height: 1.5;
+}
+.home-drain-methods__grid p {
+  margin-block: 0.75rem;
+  color: var(--brand-copy);
+  line-height: 1.8;
+}
+.home-drain-methods__grid a,
+.home-case-evidence h4 a,
+.home-faq-links a,
+.company-facts a {
+  color: var(--brand-accent);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.home-drain-methods__grid a,
+.home-case-evidence h4 a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 44px;
+}
+.home-drain-methods__grid svg,
+.home-case-evidence svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+.home-case-evidence {
+  margin-top: 2rem;
+}
+.home-case-evidence__grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 1rem;
+}
+.home-case-evidence__grid img {
+  width: 100%;
+  height: 220px;
+  margin-bottom: 1rem;
+  object-fit: contain;
+  background: #eaf4fc;
+}
+.home-case-evidence dl > div {
+  display: grid;
+  grid-template-columns: 2.5em minmax(0, 1fr);
+  gap: 0.75rem;
+  margin-top: 0.65rem;
+  line-height: 1.7;
+}
+.home-case-evidence dt {
+  font-weight: 700;
+}
+.home-case-evidence dd {
+  color: var(--brand-copy);
+}
+.home-faq-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  padding-bottom: 1rem;
+}
+.home-faq-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+@media (max-width: 767px) {
+  .home-drain-methods__grid,
+  .home-case-evidence__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
 .home-service-finder__types {
   display: flex;
   gap: 0.3rem;

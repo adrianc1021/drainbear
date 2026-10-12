@@ -2,7 +2,7 @@ import type { PortableTextBlock } from "@portabletext/types";
 import type { SanityBlogBodyBlock } from "./sanity/types";
 
 /** Website-only additions preserve the original CMS paragraphs, images and dates. */
-export const BLOG_BODY_REVISION_DATE = "2026-10-12";
+export const BLOG_BODY_REVISION_DATE = "2026-10-13";
 export const WASHING_MACHINE_MESSAGE =
   "您好，我想查詢洗衣機去水倒灌。地區：＿＿；倒灌位置（洗衣機接口／地台去水／洗手盆／其他）：＿＿；其他去水位是否異常：＿＿。我會提供安全拍攝的相片或現有短片；請先了解處理方向及可安排時間。";
 export const BODY_REVISION_SLUGS = [
@@ -42,7 +42,7 @@ function appendServiceLink(
             .join("")
             .includes(match)))
   );
-  const anchor = `service-link-${href.split("/").pop()}`;
+  const anchor = `service-link-${href.split("/").pop() || "home"}`;
   const children = [
     { _type: "span", _key: `${anchor}-lead`, text: lead, marks: [] },
     { _type: "span", _key: `${anchor}-text`, text: label, marks: [anchor] },
@@ -73,13 +73,21 @@ export function reviseBlogBody(
   original: SanityBlogBodyBlock[]
 ): SanityBlogBodyBlock[] {
   if (slug === "cctv-drain-inspection-hong-kong-guide") {
-    return appendServiceLink(
+    const inspection = appendServiceLink(
       original,
       "9d598fec7fca",
       "如渠道反覆淤塞而原因未明",
       "預約前可先",
       "了解 CCTV 照渠服務",
       "/services/cctv-drain-inspection"
+    );
+    return appendServiceLink(
+      inspection,
+      "5cb45acacfc1",
+      "它是一項檢查工具，不等於通渠本身",
+      "如未確定需要疏通還是檢查，可先了解通渠熊的",
+      "香港通渠服務與處理安排",
+      "/"
     );
   }
   if (slug === "washing-machine-drain-backflow-causes-fixes") {
@@ -91,13 +99,21 @@ export function reviseBlogBody(
       "了解浴室通渠的處理範圍",
       "/services/bathroom-drain-unblocking"
     );
-    return appendServiceLink(
+    const backflow = appendServiceLink(
       bathroom,
       "2d7b58d33605",
       "若多個去水位同時咕嚕作響",
       "多處或多戶同時倒灌，可先查看",
       "污水倒灌處理與共用渠安排",
       "/services/sewage-backflow"
+    );
+    return appendServiceLink(
+      backflow,
+      "68a8f7e7cd0a",
+      "如洗衣機排水反覆令地台去水冒水",
+      "如受影響範圍未明，可先查看",
+      "通渠服務及查詢流程",
+      "/"
     );
   }
   return original;

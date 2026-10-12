@@ -3,7 +3,7 @@
  * 每頁獨立 title / description / canonical / Open Graph / JSON-LD
  */
 import { useSiteSettings } from "@/contexts/SiteSettingsContext";
-import { SERVICE_PAGES } from "@/lib/serviceData";
+import { SERVICE_DIRECTORY as SERVICE_PAGES } from "@/lib/navigationDirectory";
 import { useEffect } from "react";
 
 function setMeta(attr: "name" | "property", key: string, content: string) {

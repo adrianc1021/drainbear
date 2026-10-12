@@ -3,6 +3,7 @@ import ContactActions from "@/components/ContactActions";
 import DrainHomeFaq, { FAQ_ITEMS } from "@/components/DrainHomeFaq";
 import HomeServiceFinder from "@/components/HomeServiceFinder";
 import HomeCompanyGuides from "@/components/HomeCompanyGuides";
+import HomeDrainMethods from "@/components/HomeDrainMethods";
 import RecordedCaseGallery from "@/components/RecordedCaseGallery";
 import { SITE_URL } from "@/config/site";
 import { BRAND_SOCIAL_ALT } from "@/lib/brandVisuals";
@@ -23,8 +24,9 @@ const HOME_FAQ_JSONLD = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "@id": `${SITE_URL}/#home-faq`,
-  mainEntity: FAQ_ITEMS.map(item => ({
+  mainEntity: FAQ_ITEMS.map((item, index) => ({
     "@type": "Question",
+    url: `${SITE_URL}/#home-answer-${index + 1}`,
     name: item.question,
     acceptedAnswer: { "@type": "Answer", text: item.answer },
   })),
@@ -100,6 +102,7 @@ export default function Home() {
       </section>
       <HomeServiceFinder />
       <RecordedCaseGallery />
+      <HomeDrainMethods />
       <section
         className="brand-section brand-section--soft home-arrangement"
         aria-labelledby="home-process-heading"

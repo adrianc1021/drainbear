@@ -1,11 +1,12 @@
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { Link } from "wouter";
+import { useEffect, useRef } from "react";
 
 const FAQ_ITEMS = [
   {
     question: "可以先知道大概收費嗎？",
     answer:
-      "可以透過 WhatsApp 提供地區、堵塞位置及現場相片，先了解處理方向。每宗工程的管道及施工條件不同，團隊會按實際情況說明報價。",
+      "通渠收費要按堵塞範圍、可用入口、是否需要拆裝、所需工具及進場條件確認。查詢時先提供地區、受影響位置及相片，有助初步了解；隱藏管段及實際堵塞原因，仍可能需要現場檢查。",
   },
   {
     question: "要提供甚麼資料，才可以初步判斷？",
@@ -30,8 +31,27 @@ const FAQ_ITEMS = [
 ] as const;
 
 export default function DrainHomeFaq() {
+  const section = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const openAnswer = () => {
+      const target = document.getElementById(window.location.hash.slice(1));
+      if (
+        !(target instanceof HTMLDetailsElement) ||
+        !section.current?.contains(target)
+      )
+        return;
+      target.open = true;
+      requestAnimationFrame(() =>
+        target.scrollIntoView({ behavior: "instant", block: "start" })
+      );
+    };
+    openAnswer();
+    window.addEventListener("hashchange", openAnswer);
+    return () => window.removeEventListener("hashchange", openAnswer);
+  }, []);
   return (
     <section
+      ref={section}
       className="db-home-faq"
       aria-labelledby="home-faq-heading"
       data-pr20-section="faq"
@@ -44,7 +64,7 @@ export default function DrainHomeFaq() {
               查詢前先了解
             </p>
             <h2 id="home-faq-heading">通渠常見問題</h2>
-            <p>現場資料、上門安排及反覆塞渠，這裏直接解答。</p>
+            <p>通渠收費、現場資料、上門安排及反覆塞渠，這裏直接解答。</p>
             <Link href="/faq" className="db-home-faq__all-link">
               查看全部常見問題
               <ArrowRight aria-hidden="true" />
@@ -52,13 +72,24 @@ export default function DrainHomeFaq() {
           </div>
 
           <div className="db-home-faq__list">
-            {FAQ_ITEMS.map(item => (
-              <details key={item.question}>
+            {FAQ_ITEMS.map((item, index) => (
+              <details key={item.question} id={`home-answer-${index + 1}`}>
                 <summary>
                   <span>{item.question}</span>
                   <ChevronDown aria-hidden="true" />
                 </summary>
                 <p>{item.answer}</p>
+                {item === FAQ_ITEMS[0] ? (
+                  <nav
+                    className="home-faq-links"
+                    aria-label="通渠收費及安排資料"
+                  >
+                    <Link href="/blog/hong-kong-drain-cleaning-price-guide">
+                      了解通渠收費因素
+                    </Link>
+                    <Link href="/service-process">查看上門處理流程</Link>
+                  </nav>
+                ) : null}
               </details>
             ))}
           </div>

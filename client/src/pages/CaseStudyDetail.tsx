@@ -318,6 +318,11 @@ export default function CaseStudyDetail() {
           <section className="brand-section brand-section--soft">
             <div className="container">
               <h2>相關服務與常見問題</h2>
+              <p className="mt-4">
+                紀錄只反映該次現場情況。遇到相似問題，可先查看
+                <Link href="/">通渠熊的通渠服務、方法及收費安排</Link>
+                ，再按受影響位置選擇相關服務。
+              </p>
               <div className="case-related-services">
                 {CASE_SERVICE_RELATIONS.filter(
                   item => item.caseSlug === study.slug

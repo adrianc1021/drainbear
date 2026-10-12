@@ -44,7 +44,9 @@ describe("homepage contact and discovery", () => {
       expect(html).toContain(`href="${path}"`);
     for (const customer of ["住宅住戶", "食肆及商舖", "業主及物業管理"])
       expect(html).toContain(customer);
-    expect(html).not.toContain('data-cms-loading="true"');
+    // The two completed records now await published CMS evidence; the service
+    // and article entrances remain in HTML independently of that request.
+    expect(html).toContain('class="home-case-evidence"');
     expect(html).not.toContain('data-pr20-section="photo-quote"');
   });
 
@@ -55,7 +57,7 @@ describe("homepage contact and discovery", () => {
     expect(html).toContain('width="1536" height="1024"');
     expect(html).toContain("drainbear-paper-hero-640.webp 640w");
     expect(html).toContain("可以先知道大概收費嗎？");
-    expect(html).toContain("團隊會按實際情況說明報價");
+    expect(html).toContain("隱藏管段及實際堵塞原因，仍可能需要現場檢查");
     expect(html).not.toContain("線上表格暫時維護中");
     expect(html).not.toContain("HK$");
     expect(html.indexOf('id="home-recorded-cases-heading"')).toBeGreaterThan(0);

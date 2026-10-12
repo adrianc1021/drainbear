@@ -1,4 +1,4 @@
-import { getServicePage } from "@/lib/serviceData";
+import { getServiceDirectoryEntry as getServicePage } from "@/lib/navigationDirectory";
 import { cloudinaryImageUrl } from "@/lib/cloudinary";
 
 /** Short labels for browsing. Photos only claim the work shown by their source. */

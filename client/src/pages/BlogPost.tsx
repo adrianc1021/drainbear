@@ -42,6 +42,11 @@ function formatDate(iso: string) {
 }
 
 function trackArticleLink(href: string) {
+  if (href === "/")
+    trackNavClick("cta", {
+      cta_location: "blogpost_body_home",
+      destination_url: href,
+    });
   if (href.startsWith("/services/"))
     trackNavClick("service", {
       cta_location: "blogpost_body",

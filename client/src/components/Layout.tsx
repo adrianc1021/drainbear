@@ -15,9 +15,9 @@ import {
   trackCTA,
   trackNavClick,
 } from "@/lib/analytics";
-import { DISTRICTS } from "@/lib/districtData";
+import { DISTRICT_DIRECTORY as DISTRICTS } from "@/lib/navigationDirectory";
 import { prefetchRoute } from "@/lib/routePrefetch";
-import { SERVICE_PAGES } from "@/lib/serviceData";
+import { SERVICE_DIRECTORY as SERVICE_PAGES } from "@/lib/navigationDirectory";
 import { ArrowUp, Menu, Phone, X } from "lucide-react";
 import { ReactNode, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "wouter";

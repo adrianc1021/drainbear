@@ -1,9 +1,36 @@
 import CaseStudyCard from "@/components/CaseStudyCard";
 import { recordedCaseStudies } from "@/lib/caseRepository";
+import { useCaseStudies } from "@/lib/useCases";
+import { createImageSrcSet, optimizedImageUrl } from "@/lib/imageOptimization";
 import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 
+/** Summaries checked against the published CMS records on 2026-10-13 (Hong Kong). */
+const COMPLETED_CASES = [
+  {
+    slug: "home-basin-grease-buildup-cleaning",
+    title: "洗手盆拆喉清理及放水測試",
+    facts: [
+      ["問題", "家居洗手盆長期去水緩慢。"],
+      ["發現", "去水喉及隔氣位置積聚油污、皂垢和黏稠污物。"],
+      ["處理", "拆喉清理阻塞物，排走污水後重新接駁。"],
+      ["測試", "連續放水後去水恢復正常，接駁位置沒有明顯滲漏。"],
+    ],
+  },
+  {
+    slug: "school-rainwater-drain-high-pressure-cleaning",
+    title: "雨水渠高壓清洗及排水測試",
+    facts: [
+      ["問題", "學校戶外雨水渠排水緩慢並出現積水。"],
+      ["發現", "落水管及相連渠段有泥沙和積聚物淤積。"],
+      ["處理", "從可操作管口放入高壓水喉，清理管段積聚物。"],
+      ["測試", "清洗後進行排水測試，紀錄顯示排水恢復暢順。"],
+    ],
+  },
+];
+
 export default function RecordedCaseGallery() {
+  const { studies, isLoading, error } = useCaseStudies();
   return (
     <section
       className="brand-section home-recorded-cases"
@@ -31,14 +58,57 @@ export default function RecordedCaseGallery() {
             <CaseStudyCard key={study._id} study={study} concise />
           ))}
         </div>
-        <nav className="home-case-links" aria-label="附完工測試的工程紀錄">
-          <Link href="/cases/home-basin-grease-buildup-cleaning">
-            洗手盆拆喉清理及放水測試 <ArrowRight aria-hidden="true" />
-          </Link>
-          <Link href="/cases/school-rainwater-drain-high-pressure-cleaning">
-            雨水渠高壓清洗及排水測試 <ArrowRight aria-hidden="true" />
-          </Link>
-        </nav>
+        <div
+          className="home-case-evidence"
+          data-cms-loading={isLoading}
+          data-cms-error={Boolean(error)}
+        >
+          <h3>附完工測試的通渠紀錄</h3>
+          <p className="section-footnote">
+            以下兩宗工程記錄了處理及去水測試；上方短片展示施工過程，並非每段都包含完工結果。每宗工程的條件及結果不同。
+          </p>
+          <div className="home-case-evidence__grid">
+            {COMPLETED_CASES.map(record => {
+              const study = studies.find(item => item.slug === record.slug);
+              return (
+                <article key={record.slug}>
+                  {study?.coverImage?.url ? (
+                    <img
+                      src={optimizedImageUrl(study.coverImage.url, 640)}
+                      srcSet={createImageSrcSet(
+                        study.coverImage.url,
+                        [320, 480, 640, 960]
+                      )}
+                      sizes="(min-width: 768px) 280px, 100vw"
+                      alt={study.coverImage.alt || study.title}
+                      width={study.coverImage.width}
+                      height={study.coverImage.height}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : null}
+                  <div>
+                    <h4>
+                      <Link href={`/cases/${record.slug}`}>
+                        {record.title} <ArrowRight aria-hidden="true" />
+                      </Link>
+                    </h4>
+                    {study ? (
+                      <dl>
+                        {record.facts.map(([label, text]) => (
+                          <div key={label}>
+                            <dt>{label}</dt>
+                            <dd>{text}</dd>
+                          </div>
+                        ))}
+                      </dl>
+                    ) : null}
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </section>
   );

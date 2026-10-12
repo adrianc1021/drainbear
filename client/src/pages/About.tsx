@@ -51,8 +51,47 @@ export default function About() {
             </div>
             <div>
               <dt>查詢電話</dt>
-              <dd>{settings.phoneDisplay}</dd>
+              <dd>
+                <a href={`tel:${settings.phoneE164}`}>
+                  {settings.phoneDisplay}
+                </a>
+              </dd>
             </div>
+            <div>
+              <dt>官方網站</dt>
+              <dd>
+                <Link href="/">drainbearhk.com</Link>
+              </dd>
+            </div>
+            {settings.googleBusinessUrl ? (
+              <div>
+                <dt>Google 商家資料</dt>
+                <dd>
+                  <a
+                    href={settings.googleBusinessUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    查看通渠熊商家資料
+                    <span className="sr-only">（另開視窗）</span>
+                  </a>
+                </dd>
+              </div>
+            ) : null}
+            {settings.instagramUrl ? (
+              <div>
+                <dt>Instagram</dt>
+                <dd>
+                  <a
+                    href={settings.instagramUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    @drainbearhk<span className="sr-only">（另開視窗）</span>
+                  </a>
+                </dd>
+              </div>
+            ) : null}
             <div>
               <dt>服務對象</dt>
               <dd>住宅住戶、食肆及商舖、業主及物業管理</dd>
@@ -89,6 +128,18 @@ export default function About() {
           <h2>服務與施工紀錄</h2>
           <p className="mt-4">
             提供現場資料，有助了解堵塞位置與合適工具。公開施工影片記錄現場操作，工程結果以個別紀錄及現場確認為準。
+          </p>
+          <p className="mt-4">
+            <Link href="/cases/home-basin-grease-buildup-cleaning">
+              家居洗手盆拆喉清理紀錄
+            </Link>
+            及
+            <Link href="/cases/school-rainwater-drain-high-pressure-cleaning">
+              學校雨水渠高壓清洗紀錄
+            </Link>
+            包含處理後的去水測試。可先了解
+            <Link href="/">通渠熊的香港通渠服務</Link>
+            ，再按自己的問題查詢；個別工程結果不代表其他現場的處理保證。
           </p>
           <nav className="related-inline" aria-label="公司服務及證據">
             {SERVICE_PAGES.map(service => (

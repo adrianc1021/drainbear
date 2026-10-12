@@ -8,8 +8,10 @@ import {
   trackCTA,
   trackNavClick,
 } from "@/lib/analytics";
-import { DISTRICTS } from "@/lib/districtData";
-import { getServicePage } from "@/lib/serviceData";
+import {
+  DISTRICT_DIRECTORY as DISTRICTS,
+  getServiceDirectoryEntry as getServicePage,
+} from "@/lib/navigationDirectory";
 import { CUSTOMER_JOURNEYS } from "@shared/customerJourneys";
 import {
   ArrowRight,
@@ -66,8 +68,7 @@ export default function HomeServiceFinder() {
           </Link>
         </div>
         <p className="section-heading-description">
-          為住宅、食肆及物業處理坐廁、鋅盤、浴室淤塞及主渠倒灌；亦可查詢隔油池清理、高壓洗渠及
-          CCTV 照喉。
+          通渠熊為香港住宅、食肆及物業提供通渠服務，處理坐廁淤塞、鋅盤去水慢、浴室積水及主渠倒灌。先了解受影響位置、現場入口及堵塞情況，再安排合適檢查與處理；現場說明方法及收費，確認後才動工。
         </p>
         <div className="home-service-finder__panel">
           <div
