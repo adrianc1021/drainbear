@@ -944,6 +944,572 @@
           "noMessageSent": true
         }
       ]
+    },
+    "productionLayout": {
+      "origin": "https://drainbearhk.com",
+      "live": true,
+      "results": [
+        {
+          "width": 390,
+          "status": 200,
+          "overflow": false,
+          "headerOverlap": false,
+          "visibleCommonServices": 5,
+          "webpageNodes": 1,
+          "axeViolations": [],
+          "runtimeErrors": [],
+          "realCms": true
+        },
+        {
+          "width": 1440,
+          "status": 200,
+          "overflow": false,
+          "headerOverlap": false,
+          "visibleCommonServices": 5,
+          "webpageNodes": 1,
+          "axeViolations": [],
+          "runtimeErrors": [],
+          "realCms": true
+        }
+      ]
+    },
+    "productionContent": {
+      "origin": "https://drainbearhk.com",
+      "live": true,
+      "results": [
+        {
+          "path": "/",
+          "width": 390,
+          "metadata": {
+            "title": "香港通渠公司｜24小時通渠查詢｜通渠熊 DrainBear",
+            "description": "搵香港通渠公司？通渠熊為住宅、食肆及物業處理坐廁塞住、鋅盤去水慢、浴室淤塞及主渠倒灌。電話及 WhatsApp 24 小時接受通渠查詢；上門時間按地區、人手及設備確認。",
+            "canonical": "https://drainbearhk.com/",
+            "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+            "h1": ["香港通渠，先搵通渠熊。"],
+            "ogTitle": "香港通渠公司｜24小時通渠查詢｜通渠熊 DrainBear",
+            "ogDescription": "搵香港通渠公司？通渠熊為住宅、食肆及物業處理坐廁塞住、鋅盤去水慢、浴室淤塞及主渠倒灌。電話及 WhatsApp 24 小時接受通渠查詢；上門時間按地區、人手及設備確認。"
+          },
+          "rawCrawlable": true,
+          "runtimeErrors": [],
+          "axeViolations": []
+        },
+        {
+          "path": "/about",
+          "width": 390,
+          "metadata": {
+            "title": "關於通渠熊 DrainBear｜香港住宅、食肆及物業渠務",
+            "description": "了解通渠熊的服務範圍、聯絡方式與施工紀錄。香港住宅、食肆及物業渠務，24 小時接受查詢，上門時間按實際安排確認。",
+            "canonical": "https://drainbearhk.com/about",
+            "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+            "h1": ["香港通渠，先搵通渠熊。"],
+            "ogTitle": "關於通渠熊 DrainBear｜香港住宅、食肆及物業渠務",
+            "ogDescription": "了解通渠熊的服務範圍、聯絡方式與施工紀錄。香港住宅、食肆及物業渠務，24 小時接受查詢，上門時間按實際安排確認。"
+          },
+          "rawCrawlable": true,
+          "runtimeErrors": [],
+          "axeViolations": []
+        },
+        {
+          "path": "/blog/why-not-drain-cleaner",
+          "width": 390,
+          "metadata": {
+            "title": "點解唔好亂用通渠水？化學劑風險與處理限制｜通渠熊",
+            "description": "通渠水是否適用，要看產品標示、喉管物料及堵塞情況。了解化學劑接觸風險、使用限制，以及已倒入產品後應向師傅交代的資料。",
+            "canonical": "https://drainbearhk.com/blog/why-not-drain-cleaner",
+            "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+            "h1": ["點解唔好亂用通渠水？化學劑風險與處理限制"],
+            "ogTitle": "點解唔好亂用通渠水？化學劑風險與處理限制｜通渠熊",
+            "ogDescription": "通渠水是否適用，要看產品標示、喉管物料及堵塞情況。了解化學劑接觸風險、使用限制，以及已倒入產品後應向師傅交代的資料。"
+          },
+          "rawCrawlable": true,
+          "runtimeErrors": [],
+          "axeViolations": []
+        },
+        {
+          "path": "/blog/washing-machine-drain-backflow-causes-fixes",
+          "width": 390,
+          "metadata": {
+            "title": "洗衣機去水倒灌點算？成因、處理及防塞方法",
+            "description": "洗衣機排水時渠口冒水或地台去水倒灌？了解排水喉安裝、支渠淤塞及共用去水等常見成因，以及可先做的安全處理和防塞步驟。",
+            "canonical": "https://drainbearhk.com/blog/washing-machine-drain-backflow-causes-fixes",
+            "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+            "h1": ["洗衣機去水倒灌點算？成因、即時處理及防塞方法"],
+            "ogTitle": "洗衣機去水倒灌點算？成因、處理及防塞方法",
+            "ogDescription": "洗衣機排水時渠口冒水或地台去水倒灌？了解排水喉安裝、支渠淤塞及共用去水等常見成因，以及可先做的安全處理和防塞步驟。"
+          },
+          "rawCrawlable": true,
+          "runtimeErrors": [],
+          "axeViolations": []
+        },
+        {
+          "path": "/blog/cctv-drain-inspection-hong-kong-guide",
+          "width": 390,
+          "metadata": {
+            "title": "CCTV 照渠指南｜適用情況、流程及報告內容",
+            "description": "渠道反覆淤塞或懷疑爆裂？了解 CCTV 照渠適用情況、檢查流程、可發現的問題、報告內容及香港預約前注意事項。",
+            "canonical": "https://drainbearhk.com/blog/cctv-drain-inspection-hong-kong-guide",
+            "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+            "h1": ["CCTV照渠有冇需要？適用情況、檢查流程及報告指南"],
+            "ogTitle": "CCTV 照渠指南｜適用情況、流程及報告內容",
+            "ogDescription": "渠道反覆淤塞或懷疑爆裂？了解 CCTV 照渠適用情況、檢查流程、可發現的問題、報告內容及香港預約前注意事項。"
+          },
+          "rawCrawlable": true,
+          "runtimeErrors": [],
+          "axeViolations": []
+        },
+        {
+          "path": "/blog/hong-kong-drain-cleaning-price-guide",
+          "width": 390,
+          "metadata": {
+            "title": "通渠收費點計？比較價錢先了解工具及施工範圍｜通渠熊",
+            "description": "通渠費用要按堵塞位置、管道入口、工具及處理範圍評估。了解坐廁、鋅盤與主渠的差別，再提供現場資料查詢個別報價。",
+            "canonical": "https://drainbearhk.com/blog/hong-kong-drain-cleaning-price-guide",
+            "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+            "h1": ["通渠收費點計？比較價錢先了解工具及施工範圍"],
+            "ogTitle": "通渠收費點計？比較價錢先了解工具及施工範圍｜通渠熊",
+            "ogDescription": "通渠費用要按堵塞位置、管道入口、工具及處理範圍評估。了解坐廁、鋅盤與主渠的差別，再提供現場資料查詢個別報價。"
+          },
+          "rawCrawlable": true,
+          "runtimeErrors": [],
+          "axeViolations": []
+        },
+        {
+          "path": "/cases/home-basin-grease-buildup-cleaning",
+          "width": 390,
+          "metadata": {
+            "title": "家居洗手盆陳年油污積聚｜拆喉清理案例｜通渠熊",
+            "description": "家居洗手盆長期去水慢，拆開去水喉及隔氣位置後發現大量陳年油污、皂垢及黏稠污物。了解今次拆喉清理、重新接駁及放水測試的處理過程。\n",
+            "canonical": "https://drainbearhk.com/cases/home-basin-grease-buildup-cleaning",
+            "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+            "h1": ["家居洗手盆陳年油污積聚｜拆喉清理恢復去水"],
+            "ogTitle": "家居洗手盆陳年油污積聚｜拆喉清理案例｜通渠熊",
+            "ogDescription": "家居洗手盆長期去水慢，拆開去水喉及隔氣位置後發現大量陳年油污、皂垢及黏稠污物。了解今次拆喉清理、重新接駁及放水測試的處理過程。\n"
+          },
+          "rawCrawlable": true,
+          "runtimeErrors": [],
+          "axeViolations": []
+        },
+        {
+          "path": "/cases/school-rainwater-drain-high-pressure-cleaning",
+          "width": 390,
+          "metadata": {
+            "title": "學校雨水渠淤塞｜高壓通渠清理案例｜通渠熊",
+            "description": "學校戶外雨水渠排水緩慢及積水，師傅從落水管入口進行高壓通渠，沖散並帶走管內泥沙及積聚物，完成後進行排水測試。\n",
+            "canonical": "https://drainbearhk.com/cases/school-rainwater-drain-high-pressure-cleaning",
+            "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+            "h1": ["學校雨水渠淤塞｜高壓通渠清理恢復排水"],
+            "ogTitle": "學校雨水渠淤塞｜高壓通渠清理案例｜通渠熊",
+            "ogDescription": "學校戶外雨水渠排水緩慢及積水，師傅從落水管入口進行高壓通渠，沖散並帶走管內泥沙及積聚物，完成後進行排水測試。\n"
+          },
+          "rawCrawlable": true,
+          "runtimeErrors": [],
+          "axeViolations": []
+        },
+        {
+          "path": "/cases/toilet-drain-tool-operation",
+          "width": 390,
+          "metadata": {
+            "title": "坐廁積水，現場疏通操作｜真實施工影片｜通渠熊",
+            "description": "坐廁內可見積水，師傅將疏通工具送入去水位置。這段現場短片記錄了工具操作，讓你先了解坐廁通渠的施工過程。",
+            "canonical": "https://drainbearhk.com/cases/toilet-drain-tool-operation",
+            "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+            "h1": ["坐廁積水，現場疏通操作"],
+            "ogTitle": "坐廁積水，現場疏通操作｜真實施工影片｜通渠熊",
+            "ogDescription": "坐廁內可見積水，師傅將疏通工具送入去水位置。這段現場短片記錄了工具操作，讓你先了解坐廁通渠的施工過程。"
+          },
+          "rawCrawlable": true,
+          "runtimeErrors": [],
+          "axeViolations": []
+        },
+        {
+          "path": "/cases/under-sink-drain-line-operation",
+          "width": 390,
+          "metadata": {
+            "title": "櫃底去水位，工具處理紀錄｜真實施工影片｜通渠熊",
+            "description": "師傅在櫃底去水位置操作線材，並以容器承接污水。短片保留近鏡，讓你看清楚狹窄位置的現場處理。",
+            "canonical": "https://drainbearhk.com/cases/under-sink-drain-line-operation",
+            "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+            "h1": ["櫃底去水位，工具處理紀錄"],
+            "ogTitle": "櫃底去水位，工具處理紀錄｜真實施工影片｜通渠熊",
+            "ogDescription": "師傅在櫃底去水位置操作線材，並以容器承接污水。短片保留近鏡，讓你看清楚狹窄位置的現場處理。"
+          },
+          "rawCrawlable": true,
+          "runtimeErrors": [],
+          "axeViolations": []
+        },
+        {
+          "path": "/cases/drain-inspection-line-feed",
+          "width": 390,
+          "metadata": {
+            "title": "喉口檢查，送入線材的過程｜真實施工影片｜通渠熊",
+            "description": "現場放置檢查設備和黃色線盤，師傅將線材送入低位喉口。這段影片記錄檢查時的操作，方便了解照喉前端的工作。",
+            "canonical": "https://drainbearhk.com/cases/drain-inspection-line-feed",
+            "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+            "h1": ["喉口檢查，送入線材的過程"],
+            "ogTitle": "喉口檢查，送入線材的過程｜真實施工影片｜通渠熊",
+            "ogDescription": "現場放置檢查設備和黃色線盤，師傅將線材送入低位喉口。這段影片記錄檢查時的操作，方便了解照喉前端的工作。"
+          },
+          "rawCrawlable": true,
+          "runtimeErrors": [],
+          "axeViolations": []
+        },
+        {
+          "path": "/cases/cabinet-drain-access-operation",
+          "width": 390,
+          "metadata": {
+            "title": "櫃內喉口，近鏡施工紀錄｜真實施工影片｜通渠熊",
+            "description": "打開櫃門後，師傅在喉口位置操作工具；旁邊可見接水容器與拆開的喉件。影片呈現櫃內施工空間和處理方式。",
+            "canonical": "https://drainbearhk.com/cases/cabinet-drain-access-operation",
+            "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+            "h1": ["櫃內喉口，近鏡施工紀錄"],
+            "ogTitle": "櫃內喉口，近鏡施工紀錄｜真實施工影片｜通渠熊",
+            "ogDescription": "打開櫃門後，師傅在喉口位置操作工具；旁邊可見接水容器與拆開的喉件。影片呈現櫃內施工空間和處理方式。"
+          },
+          "rawCrawlable": true,
+          "runtimeErrors": [],
+          "axeViolations": []
+        },
+        {
+          "path": "/cases/outdoor-drain-chamber-operation",
+          "width": 390,
+          "metadata": {
+            "title": "戶外渠口，開蓋施工紀錄｜真實施工影片｜通渠熊",
+            "description": "戶外渠蓋打開後，可見渠口、水流和放入渠內的工具線材。短片保留渠口近鏡，呈現戶外渠務施工的位置。",
+            "canonical": "https://drainbearhk.com/cases/outdoor-drain-chamber-operation",
+            "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+            "h1": ["戶外渠口，開蓋施工紀錄"],
+            "ogTitle": "戶外渠口，開蓋施工紀錄｜真實施工影片｜通渠熊",
+            "ogDescription": "戶外渠蓋打開後，可見渠口、水流和放入渠內的工具線材。短片保留渠口近鏡，呈現戶外渠務施工的位置。"
+          },
+          "rawCrawlable": true,
+          "runtimeErrors": [],
+          "axeViolations": []
+        },
+        {
+          "path": "/",
+          "width": 1440,
+          "metadata": {
+            "title": "香港通渠公司｜24小時通渠查詢｜通渠熊 DrainBear",
+            "description": "搵香港通渠公司？通渠熊為住宅、食肆及物業處理坐廁塞住、鋅盤去水慢、浴室淤塞及主渠倒灌。電話及 WhatsApp 24 小時接受通渠查詢；上門時間按地區、人手及設備確認。",
+            "canonical": "https://drainbearhk.com/",
+            "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+            "h1": ["香港通渠，先搵通渠熊。"],
+            "ogTitle": "香港通渠公司｜24小時通渠查詢｜通渠熊 DrainBear",
+            "ogDescription": "搵香港通渠公司？通渠熊為住宅、食肆及物業處理坐廁塞住、鋅盤去水慢、浴室淤塞及主渠倒灌。電話及 WhatsApp 24 小時接受通渠查詢；上門時間按地區、人手及設備確認。"
+          },
+          "rawCrawlable": true,
+          "runtimeErrors": [],
+          "axeViolations": []
+        },
+        {
+          "path": "/about",
+          "width": 1440,
+          "metadata": {
+            "title": "關於通渠熊 DrainBear｜香港住宅、食肆及物業渠務",
+            "description": "了解通渠熊的服務範圍、聯絡方式與施工紀錄。香港住宅、食肆及物業渠務，24 小時接受查詢，上門時間按實際安排確認。",
+            "canonical": "https://drainbearhk.com/about",
+            "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+            "h1": ["香港通渠，先搵通渠熊。"],
+            "ogTitle": "關於通渠熊 DrainBear｜香港住宅、食肆及物業渠務",
+            "ogDescription": "了解通渠熊的服務範圍、聯絡方式與施工紀錄。香港住宅、食肆及物業渠務，24 小時接受查詢，上門時間按實際安排確認。"
+          },
+          "rawCrawlable": true,
+          "runtimeErrors": [],
+          "axeViolations": []
+        },
+        {
+          "path": "/blog/why-not-drain-cleaner",
+          "width": 1440,
+          "metadata": {
+            "title": "點解唔好亂用通渠水？化學劑風險與處理限制｜通渠熊",
+            "description": "通渠水是否適用，要看產品標示、喉管物料及堵塞情況。了解化學劑接觸風險、使用限制，以及已倒入產品後應向師傅交代的資料。",
+            "canonical": "https://drainbearhk.com/blog/why-not-drain-cleaner",
+            "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+            "h1": ["點解唔好亂用通渠水？化學劑風險與處理限制"],
+            "ogTitle": "點解唔好亂用通渠水？化學劑風險與處理限制｜通渠熊",
+            "ogDescription": "通渠水是否適用，要看產品標示、喉管物料及堵塞情況。了解化學劑接觸風險、使用限制，以及已倒入產品後應向師傅交代的資料。"
+          },
+          "rawCrawlable": true,
+          "runtimeErrors": [],
+          "axeViolations": []
+        },
+        {
+          "path": "/blog/washing-machine-drain-backflow-causes-fixes",
+          "width": 1440,
+          "metadata": {
+            "title": "洗衣機去水倒灌點算？成因、處理及防塞方法",
+            "description": "洗衣機排水時渠口冒水或地台去水倒灌？了解排水喉安裝、支渠淤塞及共用去水等常見成因，以及可先做的安全處理和防塞步驟。",
+            "canonical": "https://drainbearhk.com/blog/washing-machine-drain-backflow-causes-fixes",
+            "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+            "h1": ["洗衣機去水倒灌點算？成因、即時處理及防塞方法"],
+            "ogTitle": "洗衣機去水倒灌點算？成因、處理及防塞方法",
+            "ogDescription": "洗衣機排水時渠口冒水或地台去水倒灌？了解排水喉安裝、支渠淤塞及共用去水等常見成因，以及可先做的安全處理和防塞步驟。"
+          },
+          "rawCrawlable": true,
+          "runtimeErrors": [],
+          "axeViolations": []
+        },
+        {
+          "path": "/blog/cctv-drain-inspection-hong-kong-guide",
+          "width": 1440,
+          "metadata": {
+            "title": "CCTV 照渠指南｜適用情況、流程及報告內容",
+            "description": "渠道反覆淤塞或懷疑爆裂？了解 CCTV 照渠適用情況、檢查流程、可發現的問題、報告內容及香港預約前注意事項。",
+            "canonical": "https://drainbearhk.com/blog/cctv-drain-inspection-hong-kong-guide",
+            "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+            "h1": ["CCTV照渠有冇需要？適用情況、檢查流程及報告指南"],
+            "ogTitle": "CCTV 照渠指南｜適用情況、流程及報告內容",
+            "ogDescription": "渠道反覆淤塞或懷疑爆裂？了解 CCTV 照渠適用情況、檢查流程、可發現的問題、報告內容及香港預約前注意事項。"
+          },
+          "rawCrawlable": true,
+          "runtimeErrors": [],
+          "axeViolations": []
+        },
+        {
+          "path": "/blog/hong-kong-drain-cleaning-price-guide",
+          "width": 1440,
+          "metadata": {
+            "title": "通渠收費點計？比較價錢先了解工具及施工範圍｜通渠熊",
+            "description": "通渠費用要按堵塞位置、管道入口、工具及處理範圍評估。了解坐廁、鋅盤與主渠的差別，再提供現場資料查詢個別報價。",
+            "canonical": "https://drainbearhk.com/blog/hong-kong-drain-cleaning-price-guide",
+            "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+            "h1": ["通渠收費點計？比較價錢先了解工具及施工範圍"],
+            "ogTitle": "通渠收費點計？比較價錢先了解工具及施工範圍｜通渠熊",
+            "ogDescription": "通渠費用要按堵塞位置、管道入口、工具及處理範圍評估。了解坐廁、鋅盤與主渠的差別，再提供現場資料查詢個別報價。"
+          },
+          "rawCrawlable": true,
+          "runtimeErrors": [],
+          "axeViolations": []
+        },
+        {
+          "path": "/cases/home-basin-grease-buildup-cleaning",
+          "width": 1440,
+          "metadata": {
+            "title": "家居洗手盆陳年油污積聚｜拆喉清理案例｜通渠熊",
+            "description": "家居洗手盆長期去水慢，拆開去水喉及隔氣位置後發現大量陳年油污、皂垢及黏稠污物。了解今次拆喉清理、重新接駁及放水測試的處理過程。\n",
+            "canonical": "https://drainbearhk.com/cases/home-basin-grease-buildup-cleaning",
+            "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+            "h1": ["家居洗手盆陳年油污積聚｜拆喉清理恢復去水"],
+            "ogTitle": "家居洗手盆陳年油污積聚｜拆喉清理案例｜通渠熊",
+            "ogDescription": "家居洗手盆長期去水慢，拆開去水喉及隔氣位置後發現大量陳年油污、皂垢及黏稠污物。了解今次拆喉清理、重新接駁及放水測試的處理過程。\n"
+          },
+          "rawCrawlable": true,
+          "runtimeErrors": [],
+          "axeViolations": []
+        },
+        {
+          "path": "/cases/school-rainwater-drain-high-pressure-cleaning",
+          "width": 1440,
+          "metadata": {
+            "title": "學校雨水渠淤塞｜高壓通渠清理案例｜通渠熊",
+            "description": "學校戶外雨水渠排水緩慢及積水，師傅從落水管入口進行高壓通渠，沖散並帶走管內泥沙及積聚物，完成後進行排水測試。\n",
+            "canonical": "https://drainbearhk.com/cases/school-rainwater-drain-high-pressure-cleaning",
+            "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+            "h1": ["學校雨水渠淤塞｜高壓通渠清理恢復排水"],
+            "ogTitle": "學校雨水渠淤塞｜高壓通渠清理案例｜通渠熊",
+            "ogDescription": "學校戶外雨水渠排水緩慢及積水，師傅從落水管入口進行高壓通渠，沖散並帶走管內泥沙及積聚物，完成後進行排水測試。\n"
+          },
+          "rawCrawlable": true,
+          "runtimeErrors": [],
+          "axeViolations": []
+        },
+        {
+          "path": "/cases/toilet-drain-tool-operation",
+          "width": 1440,
+          "metadata": {
+            "title": "坐廁積水，現場疏通操作｜真實施工影片｜通渠熊",
+            "description": "坐廁內可見積水，師傅將疏通工具送入去水位置。這段現場短片記錄了工具操作，讓你先了解坐廁通渠的施工過程。",
+            "canonical": "https://drainbearhk.com/cases/toilet-drain-tool-operation",
+            "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+            "h1": ["坐廁積水，現場疏通操作"],
+            "ogTitle": "坐廁積水，現場疏通操作｜真實施工影片｜通渠熊",
+            "ogDescription": "坐廁內可見積水，師傅將疏通工具送入去水位置。這段現場短片記錄了工具操作，讓你先了解坐廁通渠的施工過程。"
+          },
+          "rawCrawlable": true,
+          "runtimeErrors": [],
+          "axeViolations": []
+        },
+        {
+          "path": "/cases/under-sink-drain-line-operation",
+          "width": 1440,
+          "metadata": {
+            "title": "櫃底去水位，工具處理紀錄｜真實施工影片｜通渠熊",
+            "description": "師傅在櫃底去水位置操作線材，並以容器承接污水。短片保留近鏡，讓你看清楚狹窄位置的現場處理。",
+            "canonical": "https://drainbearhk.com/cases/under-sink-drain-line-operation",
+            "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+            "h1": ["櫃底去水位，工具處理紀錄"],
+            "ogTitle": "櫃底去水位，工具處理紀錄｜真實施工影片｜通渠熊",
+            "ogDescription": "師傅在櫃底去水位置操作線材，並以容器承接污水。短片保留近鏡，讓你看清楚狹窄位置的現場處理。"
+          },
+          "rawCrawlable": true,
+          "runtimeErrors": [],
+          "axeViolations": []
+        },
+        {
+          "path": "/cases/drain-inspection-line-feed",
+          "width": 1440,
+          "metadata": {
+            "title": "喉口檢查，送入線材的過程｜真實施工影片｜通渠熊",
+            "description": "現場放置檢查設備和黃色線盤，師傅將線材送入低位喉口。這段影片記錄檢查時的操作，方便了解照喉前端的工作。",
+            "canonical": "https://drainbearhk.com/cases/drain-inspection-line-feed",
+            "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+            "h1": ["喉口檢查，送入線材的過程"],
+            "ogTitle": "喉口檢查，送入線材的過程｜真實施工影片｜通渠熊",
+            "ogDescription": "現場放置檢查設備和黃色線盤，師傅將線材送入低位喉口。這段影片記錄檢查時的操作，方便了解照喉前端的工作。"
+          },
+          "rawCrawlable": true,
+          "runtimeErrors": [],
+          "axeViolations": []
+        },
+        {
+          "path": "/cases/cabinet-drain-access-operation",
+          "width": 1440,
+          "metadata": {
+            "title": "櫃內喉口，近鏡施工紀錄｜真實施工影片｜通渠熊",
+            "description": "打開櫃門後，師傅在喉口位置操作工具；旁邊可見接水容器與拆開的喉件。影片呈現櫃內施工空間和處理方式。",
+            "canonical": "https://drainbearhk.com/cases/cabinet-drain-access-operation",
+            "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+            "h1": ["櫃內喉口，近鏡施工紀錄"],
+            "ogTitle": "櫃內喉口，近鏡施工紀錄｜真實施工影片｜通渠熊",
+            "ogDescription": "打開櫃門後，師傅在喉口位置操作工具；旁邊可見接水容器與拆開的喉件。影片呈現櫃內施工空間和處理方式。"
+          },
+          "rawCrawlable": true,
+          "runtimeErrors": [],
+          "axeViolations": []
+        },
+        {
+          "path": "/cases/outdoor-drain-chamber-operation",
+          "width": 1440,
+          "metadata": {
+            "title": "戶外渠口，開蓋施工紀錄｜真實施工影片｜通渠熊",
+            "description": "戶外渠蓋打開後，可見渠口、水流和放入渠內的工具線材。短片保留渠口近鏡，呈現戶外渠務施工的位置。",
+            "canonical": "https://drainbearhk.com/cases/outdoor-drain-chamber-operation",
+            "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+            "h1": ["戶外渠口，開蓋施工紀錄"],
+            "ogTitle": "戶外渠口，開蓋施工紀錄｜真實施工影片｜通渠熊",
+            "ogDescription": "戶外渠蓋打開後，可見渠口、水流和放入渠內的工具線材。短片保留渠口近鏡，呈現戶外渠務施工的位置。"
+          },
+          "rawCrawlable": true,
+          "runtimeErrors": [],
+          "axeViolations": []
+        }
+      ],
+      "journeys": [
+        {
+          "width": 390,
+          "type": "home FAQ hash",
+          "id": "home-answer-1"
+        },
+        {
+          "width": 390,
+          "type": "home FAQ hash",
+          "id": "home-answer-3"
+        },
+        {
+          "width": 390,
+          "type": "home FAQ hash",
+          "id": "home-answer-5"
+        },
+        {
+          "width": 390,
+          "type": "homepage method to service"
+        },
+        {
+          "width": 390,
+          "type": "homepage to completed case"
+        },
+        {
+          "width": 390,
+          "type": "native video play/pause/seek/captions"
+        },
+        {
+          "width": 1440,
+          "type": "home FAQ hash",
+          "id": "home-answer-1"
+        },
+        {
+          "width": 1440,
+          "type": "home FAQ hash",
+          "id": "home-answer-3"
+        },
+        {
+          "width": 1440,
+          "type": "home FAQ hash",
+          "id": "home-answer-5"
+        },
+        {
+          "width": 1440,
+          "type": "homepage method to service"
+        },
+        {
+          "width": 1440,
+          "type": "homepage to completed case"
+        },
+        {
+          "width": 1440,
+          "type": "native video play/pause/seek/captions"
+        }
+      ],
+      "destinations": [
+        "/drain-diagnosis",
+        "/customers/residential",
+        "/services/toilet-unblocking",
+        "/services/kitchen-sink-unblocking",
+        "/services/bathroom-drain-unblocking",
+        "/services/sewage-backflow",
+        "/customers/restaurants",
+        "/services/grease-trap-cleaning",
+        "/services/high-pressure-jetting",
+        "/customers/property-management",
+        "/services/main-drain-manhole",
+        "/services/cctv-drain-inspection",
+        "/cases",
+        "/cases/drain-inspection-line-feed",
+        "/cases/toilet-drain-tool-operation",
+        "/cases/outdoor-drain-chamber-operation",
+        "/cases/home-basin-grease-buildup-cleaning",
+        "/cases/school-rainwater-drain-high-pressure-cleaning",
+        "/blog/drain-tool-selection-guide",
+        "/service-process",
+        "/faq",
+        "/blog/hong-kong-drain-cleaning-price-guide",
+        "/blog/choosing-professional-drain-company",
+        "/blog/drain-company-reviews-red-flags",
+        "/areas",
+        "/about",
+        "/guide",
+        "/blog",
+        "/",
+        "/blog/24-hour-drain-help-night",
+        "/blog/drain-service-completion-checklist",
+        "/services",
+        "/videos/cases/toilet-drain-tool-operation-v1.mp4",
+        "/videos/cases/under-sink-drain-line-operation-v1.mp4",
+        "/videos/cases/drain-inspection-line-feed-v1.mp4",
+        "/videos/cases/cabinet-drain-access-operation-v1.mp4",
+        "/videos/cases/outdoor-drain-chamber-operation-v1.mp4"
+      ]
+    },
+    "productionHandoff": {
+      "origin": "https://drainbearhk.com",
+      "results": [
+        {
+          "width": 390,
+          "whatsappSelection": true,
+          "popupIntercepted": true,
+          "retryPreserved": true,
+          "reloadPreserved": true,
+          "noMessageSent": true
+        },
+        {
+          "width": 1440,
+          "whatsappSelection": true,
+          "popupIntercepted": true,
+          "retryPreserved": true,
+          "reloadPreserved": true,
+          "noMessageSent": true
+        }
+      ]
     }
   },
   "performance": {
@@ -998,12 +1564,96 @@
         "errors": []
       }
     ],
-    "after": null,
+    "after": [
+      {
+        "run": 1,
+        "status": 200,
+        "lcpMs": 1800,
+        "cls": 0,
+        "domContentLoadedMs": 2313,
+        "scriptTransferBytes": 195035,
+        "totalTransferBytes": 474315,
+        "mediaRequestCount": 0,
+        "hero": "https://drainbearhk.com/images/drainbear-paper-hero-960.webp",
+        "errors": []
+      },
+      {
+        "run": 2,
+        "status": 200,
+        "lcpMs": 1716,
+        "cls": 0,
+        "domContentLoadedMs": 2623.0999999996275,
+        "scriptTransferBytes": 195001,
+        "totalTransferBytes": 474087,
+        "mediaRequestCount": 0,
+        "hero": "https://drainbearhk.com/images/drainbear-paper-hero-960.webp",
+        "errors": []
+      },
+      {
+        "run": 3,
+        "status": 200,
+        "lcpMs": 1704,
+        "cls": 0,
+        "domContentLoadedMs": 2612.699999999255,
+        "scriptTransferBytes": 194959,
+        "totalTransferBytes": 474045,
+        "mediaRequestCount": 0,
+        "hero": "https://drainbearhk.com/images/drainbear-paper-hero-960.webp",
+        "errors": []
+      }
+    ],
     "limitations": [
       "Self-designed three-run laboratory measurement, not Lighthouse or field Core Web Vitals",
       "Network/hosting/CPU conditions can vary",
       "No attribution of rankings or enquiries to speed changes"
     ],
-    "mainRawAfterBytes": 501653
+    "mainRawAfterBytes": 501653,
+    "productionMainRawAfterBytes": 501715,
+    "comparison": {
+      "lcpMs": {
+        "beforeMedian": 2048,
+        "afterMedian": 1716,
+        "changePercent": -16.21
+      },
+      "scriptTransferBytes": {
+        "beforeMedian": 220868,
+        "afterMedian": 195001,
+        "changePercent": -11.71
+      },
+      "totalTransferBytes": {
+        "beforeMedian": 494149,
+        "afterMedian": 474087,
+        "changePercent": -4.06
+      },
+      "cls": {
+        "beforeMedian": 0,
+        "afterMedian": 0,
+        "changePercent": null
+      }
+    }
+  },
+  "deployment": {
+    "checkedAt": "2026-10-12T16:34:42.034Z",
+    "commit": "3d8628e",
+    "origin": "https://drainbearhk.com",
+    "published": true,
+    "homeScript": "/assets/index-CZoHUk3L.js",
+    "pages": [
+      {
+        "path": "/",
+        "status": 200,
+        "server": "Render"
+      },
+      {
+        "path": "/blog/why-not-drain-cleaner",
+        "status": 200,
+        "server": "Render"
+      },
+      {
+        "path": "/about",
+        "status": 200,
+        "server": "Render"
+      }
+    ]
   }
 }
