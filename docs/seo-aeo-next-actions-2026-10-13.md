@@ -1,6 +1,6 @@
 # 「通渠」SEO／AEO 下一輪改善方案
 
-**建議先修正可核實的內容風險，再補三篇文章的首頁正文入口及公司／施工證據。首頁剛完成的 title、方法、收費、案例及技術基礎應保留，先累積完整修改後數據。**
+**第一批建議一起做：修正可核實的內容風險，以及補三篇文章的首頁正文入口。Jev 的實際評估亦將這兩項穩定列在前兩位。公司／施工證據可同步收集；首頁剛完成的 title、方法、收費、案例及技術基礎應保留，先累積完整修改後數據。**
 
 本輪是審查與方案，沒有改寫或部署公開網站。使用 SEO Audit、Vercel React Best Practices、OpenAI Playwright 的實際指引；另按業主要求安裝 TypeSafe skill。審查開始於 2026-10-13 香港時間，部分核對延續至次日。
 
@@ -9,7 +9,7 @@
 - **最先做內容可信度修正。** 正式坐廁指南仍有「一次過斷症根治」；此外，文章程式會在缺少審閱人資料時預填「通渠熊渠務團隊」。應逐篇確認審閱紀錄，不能由預設值證明實際審閱。
 - **補強三篇有服務需求的文章到首頁。** 坐廁自救、洗手盆去水慢及主渠／支渠責任文章，在主要正文未見直接首頁連結。保留各自資訊用途及個別服務頁入口，只在安排檢查的位置加入自然連結。
 - **SEO 與 AEO 共用可信、可抓取內容。** 首頁目前 canonical、robots、H1、FAQ 同源資料、兩宗完工測試案例正常。Google 已停止 FAQ 富摘要；新增 schema 或 llms 檔案數量不是引用／排名保證。
-- **模型與搜尋數據接入仍有明確缺項。** GSC Wizard 尚未在本對話出現工具；Jev API 回傳 403「Must supply an API key」。已保存安全憑證需求及可執行評估腳本，沒有編造最新排名或模型評分。
+- **Jev 已完成真實評估，最新 GSC 數據仍缺接入。** 2026-10-14 香港時間成功呼叫 TypeSafe，實際模型 jev-1.13.0，評估五個方案、十個問題。結果支持先做正文連結與內容修正；GSC Wizard 尚未在本對話出現工具，沒有編造最新搜尋排名。
 
 ## 已核對的基礎，今次不重複新增
 
@@ -131,9 +131,27 @@ Vercel 指引中的 Next.js 專用 API 不直接套進 React／Vite。驗收要�
 
 TypeSafe 已用 **一種方法**安裝：`npx skills add typesafe-ai/skills --skill typesafe-ai --agent codex --yes`。專案檔案是 `.agents/skills/typesafe-ai/SKILL.md`、LICENSE 及 `skills-lock.json`；沒有改 dependencies 或把憑證放進前端。
 
-Jev 評估工具在 `/workspace/drainbear-seo-aeo-audit-2026-10-13/jev-evaluate.mjs`；`--prepare` 已成功輸出五個候選方案、十個獨立問題。它把權重及結果組合留在程式，檢查 typed response 與概率分布，沒有發布動作。實際推論尚未完成：API 回覆 403 缺少 API key；不能呈現假模型排名。
+Jev 評估工具在 `/workspace/drainbear-seo-aeo-audit-2026-10-13/jev-evaluate.mjs`。已於 **2026-10-14 香港時間 00:15** 完成真實呼叫，實際模型 **jev-1.13.0**；五個候選方案、十個獨立 Score 問題，同一份證據一併評估。請求約 463ms，使用 2,120 input tokens／154 output tokens；沒有取得帳單價格，因此不推算費用。金鑰只用於本次執行程序，沒有寫入專案、報告或結果檔。
 
-已在雲端設定草稿加入 `TYPESAFE_API_KEY` 憑證需求，目的地限 `api.typesafe.ai`，保留既有設定。請在環境設定安全提供值、儲存並發布環境；設定草稿保存不代表已套用。不要把 key 貼到對話。生效後可執行：
+### Jev 評分與程式組合結果
+
+每個維度都是 **0–3** 的描述性評分。以下綜合優先度由程式以「證據支持 65%＋現在可做程度 35%」計算；權重由本次審查指定，不是模型推算的排名勝率。
+
+| 綜合次序 | 方案                         | 證據支持 | 現在可做程度 | 綜合優先度 |
+| -------- | ---------------------------- | -------: | -----------: | ---------: |
+| 1        | 三篇文章正文連回首頁         |     2.47 |         2.75 |      2.568 |
+| 2        | 修正過度聲稱及審閱人預設值   |     2.80 |         1.85 |      2.468 |
+| 3        | 自包含、有來源的 AEO 答案    |     1.74 |         2.06 |      1.852 |
+| 4        | 可核實公司資料及施工證據     |     2.22 |         0.95 |      1.776 |
+| 5        | React provider／CMS 效能原型 |     1.33 |         1.89 |      1.526 |
+
+**採用結論：正文連結與內容修正列作同一批工作。** 證據權重由 50% 調到 80% 時，前兩項仍是同一組，但先後會互換；不把小差距當成精確勝負。內容聲稱有直接可見的問題，因此專業覆核與保守修正文案不能因總分稍低而延期。公司資料收集可以同步開始，發布仍依賴真實佐證。
+
+**AEO 可做程度的模型 confidence 為 0.06，判斷較不集中。** 不把第三、第四的細微順序當成穩定答案，也不由低 confidence 推論內容無價值。Score／confidence 只代表這次模型在描述性選項間的判斷，沒有在此 SEO 領域以標註成果校準，不能預測 Google 排名、AI 引用或查詢量。
+
+已獨立核對 response 型別、範圍、四級概率總和、概率加權 Score 及綜合分數運算；全部通過。這只驗證介面及數學，不證明模型判斷為真。完整 response、confidence、權重敏感度及來源限制見 [Jev 評估紀錄](jev-seo-aeo-evaluation-2026-10-14.json)。
+
+雲端設定草稿仍保留 `TYPESAFE_API_KEY` 的憑證需求，目的地限 `api.typesafe.ai`。本次直接提供的憑證已證實 API 可用，不代表先前環境綁定已保存或發布。未來從環境安全提供值後，可執行：
 
 ```bash
 source /workspace/drainbear-environment.sh
@@ -162,4 +180,4 @@ AEO 另用固定問題清單，記錄平台、模型、日期、是否啟用搜�
 - [OpenAI Playwright skill](https://github.com/openai/skills/blob/main/skills/.curated/playwright/SKILL.md)。
 - [本專案已安裝 TypeSafe skill](../.agents/skills/typesafe-ai/SKILL.md) 及 [TypeSafe 最新 API 指引](https://docs.typesafe.ai/api)。
 
-方案可供審閱，但最新 GSC 分析與 Jev 模型比較仍待接入。沒有做當下香港 SERP 全面競品比較，沒有實體手機、Safari 或真實用戶 CWV 新測量；不承諾指定時間排名第一頁或必被 AI 推薦。Data Analytics 的 HTML 報告套件／核心資源在本環境不可用，沒有宣稱已生成該 renderer 的 HTML；本文件是 SEO Audit 的 Markdown 方案與來源紀錄。
+方案及 Jev 真實模型評估已可供審閱；最新 GSC 分析仍待接入。沒有做當下香港 SERP 全面競品比較，沒有實體手機、Safari 或真實用戶 CWV 新測量；不承諾指定時間排名第一頁或必被 AI 推薦。Data Analytics 的 HTML 報告套件／核心資源在本環境不可用，沒有宣稱已生成該 renderer 的 HTML；本文件是 SEO Audit 的 Markdown 方案與來源紀錄。

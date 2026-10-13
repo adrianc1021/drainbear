@@ -1,0 +1,474 @@
+{
+  "capturedAt": "2026-10-13T16:15:39.703Z",
+  "elapsedMs": 463,
+  "result": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "claims_evidence": {
+        "type": "score",
+        "score": 2.8,
+        "confidence": 0.81,
+        "legend": {
+          "0": "No supplied evidence supports this action",
+          "1": "Mostly an untested hypothesis",
+          "2": "Specific observed evidence supports a bounded improvement",
+          "3": "Direct verified evidence identifies an issue that this action specifically resolves"
+        },
+        "probabilities": {
+          "0": 0,
+          "1": 0.01,
+          "2": 0.17,
+          "3": 0.82
+        }
+      },
+      "claims_ready": {
+        "type": "score",
+        "score": 1.85,
+        "confidence": 0.82,
+        "legend": {
+          "0": "Cannot implement safely with present information",
+          "1": "Requires substantial new owner/source evidence",
+          "2": "Can be prepared now, with a limited stated review or measurement dependency",
+          "3": "Can be completed and verified now using existing authoritative evidence"
+        },
+        "probabilities": {
+          "0": 0.04,
+          "1": 0.08,
+          "2": 0.86,
+          "3": 0.02
+        }
+      },
+      "links_evidence": {
+        "type": "score",
+        "score": 2.47,
+        "confidence": 0.46,
+        "legend": {
+          "0": "No supplied evidence supports this action",
+          "1": "Mostly an untested hypothesis",
+          "2": "Specific observed evidence supports a bounded improvement",
+          "3": "Direct verified evidence identifies an issue that this action specifically resolves"
+        },
+        "probabilities": {
+          "0": 0.01,
+          "1": 0.03,
+          "2": 0.45,
+          "3": 0.51
+        }
+      },
+      "links_ready": {
+        "type": "score",
+        "score": 2.75,
+        "confidence": 0.75,
+        "legend": {
+          "0": "Cannot implement safely with present information",
+          "1": "Requires substantial new owner/source evidence",
+          "2": "Can be prepared now, with a limited stated review or measurement dependency",
+          "3": "Can be completed and verified now using existing authoritative evidence"
+        },
+        "probabilities": {
+          "0": 0.01,
+          "1": 0,
+          "2": 0.22,
+          "3": 0.77
+        }
+      },
+      "identity_evidence": {
+        "type": "score",
+        "score": 2.22,
+        "confidence": 0.6,
+        "legend": {
+          "0": "No supplied evidence supports this action",
+          "1": "Mostly an untested hypothesis",
+          "2": "Specific observed evidence supports a bounded improvement",
+          "3": "Direct verified evidence identifies an issue that this action specifically resolves"
+        },
+        "probabilities": {
+          "0": 0.02,
+          "1": 0.05,
+          "2": 0.62,
+          "3": 0.31
+        }
+      },
+      "identity_ready": {
+        "type": "score",
+        "score": 0.95,
+        "confidence": 0.91,
+        "legend": {
+          "0": "Cannot implement safely with present information",
+          "1": "Requires substantial new owner/source evidence",
+          "2": "Can be prepared now, with a limited stated review or measurement dependency",
+          "3": "Can be completed and verified now using existing authoritative evidence"
+        },
+        "probabilities": {
+          "0": 0.07,
+          "1": 0.91,
+          "2": 0.02,
+          "3": 0
+        }
+      },
+      "answers_evidence": {
+        "type": "score",
+        "score": 1.74,
+        "confidence": 0.61,
+        "legend": {
+          "0": "No supplied evidence supports this action",
+          "1": "Mostly an untested hypothesis",
+          "2": "Specific observed evidence supports a bounded improvement",
+          "3": "Direct verified evidence identifies an issue that this action specifically resolves"
+        },
+        "probabilities": {
+          "0": 0.05,
+          "1": 0.23,
+          "2": 0.66,
+          "3": 0.06
+        }
+      },
+      "answers_ready": {
+        "type": "score",
+        "score": 2.06,
+        "confidence": 0.06,
+        "legend": {
+          "0": "Cannot implement safely with present information",
+          "1": "Requires substantial new owner/source evidence",
+          "2": "Can be prepared now, with a limited stated review or measurement dependency",
+          "3": "Can be completed and verified now using existing authoritative evidence"
+        },
+        "probabilities": {
+          "0": 0.06,
+          "1": 0.2,
+          "2": 0.36,
+          "3": 0.38
+        }
+      },
+      "performance_evidence": {
+        "type": "score",
+        "score": 1.33,
+        "confidence": 0.62,
+        "legend": {
+          "0": "No supplied evidence supports this action",
+          "1": "Mostly an untested hypothesis",
+          "2": "Specific observed evidence supports a bounded improvement",
+          "3": "Direct verified evidence identifies an issue that this action specifically resolves"
+        },
+        "probabilities": {
+          "0": 0.03,
+          "1": 0.62,
+          "2": 0.35,
+          "3": 0
+        }
+      },
+      "performance_ready": {
+        "type": "score",
+        "score": 1.89,
+        "confidence": 0.86,
+        "legend": {
+          "0": "Cannot implement safely with present information",
+          "1": "Requires substantial new owner/source evidence",
+          "2": "Can be prepared now, with a limited stated review or measurement dependency",
+          "3": "Can be completed and verified now using existing authoritative evidence"
+        },
+        "probabilities": {
+          "0": 0.04,
+          "1": 0.04,
+          "2": 0.9,
+          "3": 0.02
+        }
+      }
+    },
+    "usage": {
+      "input_tokens": 2120,
+      "output_tokens": 154
+    }
+  },
+  "ranked": [
+    {
+      "id": "links",
+      "evidence": {
+        "type": "score",
+        "score": 2.47,
+        "confidence": 0.46,
+        "legend": {
+          "0": "No supplied evidence supports this action",
+          "1": "Mostly an untested hypothesis",
+          "2": "Specific observed evidence supports a bounded improvement",
+          "3": "Direct verified evidence identifies an issue that this action specifically resolves"
+        },
+        "probabilities": {
+          "0": 0.01,
+          "1": 0.03,
+          "2": 0.45,
+          "3": 0.51
+        }
+      },
+      "readiness": {
+        "type": "score",
+        "score": 2.75,
+        "confidence": 0.75,
+        "legend": {
+          "0": "Cannot implement safely with present information",
+          "1": "Requires substantial new owner/source evidence",
+          "2": "Can be prepared now, with a limited stated review or measurement dependency",
+          "3": "Can be completed and verified now using existing authoritative evidence"
+        },
+        "probabilities": {
+          "0": 0.01,
+          "1": 0,
+          "2": 0.22,
+          "3": 0.77
+        }
+      },
+      "reviewPriority": 2.568,
+      "dependency": "Preserve each article's informational purpose and relevant individual service links."
+    },
+    {
+      "id": "claims",
+      "evidence": {
+        "type": "score",
+        "score": 2.8,
+        "confidence": 0.81,
+        "legend": {
+          "0": "No supplied evidence supports this action",
+          "1": "Mostly an untested hypothesis",
+          "2": "Specific observed evidence supports a bounded improvement",
+          "3": "Direct verified evidence identifies an issue that this action specifically resolves"
+        },
+        "probabilities": {
+          "0": 0,
+          "1": 0.01,
+          "2": 0.17,
+          "3": 0.82
+        }
+      },
+      "readiness": {
+        "type": "score",
+        "score": 1.85,
+        "confidence": 0.82,
+        "legend": {
+          "0": "Cannot implement safely with present information",
+          "1": "Requires substantial new owner/source evidence",
+          "2": "Can be prepared now, with a limited stated review or measurement dependency",
+          "3": "Can be completed and verified now using existing authoritative evidence"
+        },
+        "probabilities": {
+          "0": 0.04,
+          "1": 0.08,
+          "2": 0.86,
+          "3": 0.02
+        }
+      },
+      "reviewPriority": 2.4675,
+      "dependency": "Technical wording should be checked by the drainage team; no invented qualifications."
+    },
+    {
+      "id": "answers",
+      "evidence": {
+        "type": "score",
+        "score": 1.74,
+        "confidence": 0.61,
+        "legend": {
+          "0": "No supplied evidence supports this action",
+          "1": "Mostly an untested hypothesis",
+          "2": "Specific observed evidence supports a bounded improvement",
+          "3": "Direct verified evidence identifies an issue that this action specifically resolves"
+        },
+        "probabilities": {
+          "0": 0.05,
+          "1": 0.23,
+          "2": 0.66,
+          "3": 0.06
+        }
+      },
+      "readiness": {
+        "type": "score",
+        "score": 2.06,
+        "confidence": 0.06,
+        "legend": {
+          "0": "Cannot implement safely with present information",
+          "1": "Requires substantial new owner/source evidence",
+          "2": "Can be prepared now, with a limited stated review or measurement dependency",
+          "3": "Can be completed and verified now using existing authoritative evidence"
+        },
+        "probabilities": {
+          "0": 0.06,
+          "1": 0.2,
+          "2": 0.36,
+          "3": 0.38
+        }
+      },
+      "reviewPriority": 1.8519999999999999,
+      "dependency": "No promise of AI citations; llms files supplement rather than replace public content."
+    },
+    {
+      "id": "identity",
+      "evidence": {
+        "type": "score",
+        "score": 2.22,
+        "confidence": 0.6,
+        "legend": {
+          "0": "No supplied evidence supports this action",
+          "1": "Mostly an untested hypothesis",
+          "2": "Specific observed evidence supports a bounded improvement",
+          "3": "Direct verified evidence identifies an issue that this action specifically resolves"
+        },
+        "probabilities": {
+          "0": 0.02,
+          "1": 0.05,
+          "2": 0.62,
+          "3": 0.31
+        }
+      },
+      "readiness": {
+        "type": "score",
+        "score": 0.95,
+        "confidence": 0.91,
+        "legend": {
+          "0": "Cannot implement safely with present information",
+          "1": "Requires substantial new owner/source evidence",
+          "2": "Can be prepared now, with a limited stated review or measurement dependency",
+          "3": "Can be completed and verified now using existing authoritative evidence"
+        },
+        "probabilities": {
+          "0": 0.07,
+          "1": 0.91,
+          "2": 0.02,
+          "3": 0
+        }
+      },
+      "reviewPriority": 1.7755000000000003,
+      "dependency": "Owner evidence is required. No invented address or reviews; no third-party contact is authorized."
+    },
+    {
+      "id": "performance",
+      "evidence": {
+        "type": "score",
+        "score": 1.33,
+        "confidence": 0.62,
+        "legend": {
+          "0": "No supplied evidence supports this action",
+          "1": "Mostly an untested hypothesis",
+          "2": "Specific observed evidence supports a bounded improvement",
+          "3": "Direct verified evidence identifies an issue that this action specifically resolves"
+        },
+        "probabilities": {
+          "0": 0.03,
+          "1": 0.62,
+          "2": 0.35,
+          "3": 0
+        }
+      },
+      "readiness": {
+        "type": "score",
+        "score": 1.89,
+        "confidence": 0.86,
+        "legend": {
+          "0": "Cannot implement safely with present information",
+          "1": "Requires substantial new owner/source evidence",
+          "2": "Can be prepared now, with a limited stated review or measurement dependency",
+          "3": "Can be completed and verified now using existing authoritative evidence"
+        },
+        "probabilities": {
+          "0": 0.04,
+          "1": 0.04,
+          "2": 0.9,
+          "3": 0.02
+        }
+      },
+      "reviewPriority": 1.526,
+      "dependency": "Measure against the existing version; these code observations do not prove ranking causation or bad field Core Web Vitals."
+    }
+  ],
+  "caveat": "Review-priority judgments only. Not a forecast of search rankings, AI citations, or enquiries. Human checks and stated dependencies remain required.",
+  "requestFile": "jev-request.json",
+  "evaluationDateHongKong": "2026-10-14",
+  "sources": {
+    "request": "Saved five-candidate request based on the published website and prior historical GSC snapshot",
+    "searchData": "Historical 2026-09-13 to 2026-10-10 snapshot; no fresh GSC query in this evaluation"
+  },
+  "validation": {
+    "responseTypesAndRanges": "passed",
+    "probabilityDistributions": "passed",
+    "scoreFromProbabilities": "passed",
+    "compositionArithmetic": "passed",
+    "domainAccuracy": "not calibrated against labelled SEO outcomes"
+  },
+  "sensitivity": [
+    {
+      "evidenceWeight": 0.5,
+      "readinessWeight": 0.5,
+      "order": [
+        {
+          "id": "links",
+          "score": 2.6100000000000003
+        },
+        {
+          "id": "claims",
+          "score": 2.325
+        },
+        {
+          "id": "answers",
+          "score": 1.9
+        },
+        {
+          "id": "performance",
+          "score": 1.6099999999999999
+        },
+        {
+          "id": "identity",
+          "score": 1.585
+        }
+      ]
+    },
+    {
+      "evidenceWeight": 0.65,
+      "readinessWeight": 0.35,
+      "order": [
+        {
+          "id": "links",
+          "score": 2.568
+        },
+        {
+          "id": "claims",
+          "score": 2.4675
+        },
+        {
+          "id": "answers",
+          "score": 1.8519999999999999
+        },
+        {
+          "id": "identity",
+          "score": 1.7755000000000003
+        },
+        {
+          "id": "performance",
+          "score": 1.526
+        }
+      ]
+    },
+    {
+      "evidenceWeight": 0.8,
+      "readinessWeight": 0.19999999999999996,
+      "order": [
+        {
+          "id": "claims",
+          "score": 2.61
+        },
+        {
+          "id": "links",
+          "score": 2.526
+        },
+        {
+          "id": "identity",
+          "score": 1.9660000000000002
+        },
+        {
+          "id": "answers",
+          "score": 1.804
+        },
+        {
+          "id": "performance",
+          "score": 1.442
+        }
+      ]
+    }
+  ]
+}
