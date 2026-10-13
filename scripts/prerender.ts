@@ -3,6 +3,10 @@ import { PRICE_GUIDE_REVISION } from "../client/src/lib/priceGuideRevision";
 import { getPostBySlug } from "../client/src/lib/blogData";
 import { KITCHEN_PREVENTION_REVISION } from "../client/src/lib/kitchenPreventionRevision";
 import {
+  ARTICLE_INQUIRY_REVISION_DATE,
+  getArticleInquiryScenario,
+} from "../client/src/lib/articleInquiryScenarios";
+import {
   BLOG_BODY_REVISION_DATE,
   BODY_REVISION_SLUGS,
   latestEditorialDate,
@@ -262,9 +266,11 @@ function mergeBlogEntries(
         ? PRICE_GUIDE_REVISION.updatedAt
         : entry.slug === KITCHEN_PREVENTION_REVISION.slug
           ? KITCHEN_PREVENTION_REVISION.updatedAt
-          : BODY_REVISION_SLUGS.includes(entry.slug)
-            ? BLOG_BODY_REVISION_DATE
-            : undefined;
+          : getArticleInquiryScenario(entry.slug)
+            ? ARTICLE_INQUIRY_REVISION_DATE
+            : BODY_REVISION_SLUGS.includes(entry.slug)
+              ? BLOG_BODY_REVISION_DATE
+              : undefined;
     entries.set(
       entry.slug,
       revisionDate

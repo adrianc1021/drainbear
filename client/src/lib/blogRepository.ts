@@ -9,6 +9,11 @@ import {
 } from "./blogBodyRevisions";
 import { ARTICLE_SERVICE_LINKS } from "./contentConnections";
 import {
+  ARTICLE_INQUIRY_REVISION_DATE,
+  getArticleInquiryScenario,
+  type ArticleInquiryScenario,
+} from "./articleInquiryScenarios";
+import {
   BLOG_POSTS,
   getPostBySlug,
   type BlogPost as StaticBlogPost,
@@ -52,6 +57,7 @@ export interface BlogPostView {
   faqs?: StaticBlogPost["faqs"];
   relatedSlugs?: StaticBlogPost["relatedSlugs"];
   whatsappMessage?: string;
+  inquiryScenario?: ArticleInquiryScenario;
 }
 
 export function getCategoryLabel(category: string): string {
@@ -78,6 +84,7 @@ export function mapSanityBlogPost(post: SanityBlogPost): BlogPostView {
       coverImage: post.coverImage ?? KITCHEN_PREVENTION_REVISION.coverImage,
     };
   }
+  const scenario = getArticleInquiryScenario(post.slug);
   return {
     source: "sanity",
     id: post._id,
@@ -85,13 +92,16 @@ export function mapSanityBlogPost(post: SanityBlogPost): BlogPostView {
     title: post.title,
     category: getCategoryLabel(post.category),
     date: post.publishedAt,
-    updatedAt: BODY_REVISION_SLUGS.includes(post.slug)
-      ? latestEditorialDate(post.updatedAt, BLOG_BODY_REVISION_DATE)
-      : post.updatedAt,
+    updatedAt: scenario
+      ? latestEditorialDate(post.updatedAt, ARTICLE_INQUIRY_REVISION_DATE)
+      : BODY_REVISION_SLUGS.includes(post.slug)
+        ? latestEditorialDate(post.updatedAt, BLOG_BODY_REVISION_DATE)
+        : post.updatedAt,
     authorName: post.authorName?.trim() || "通渠熊編輯團隊",
-    reviewerName: BODY_REVISION_SLUGS.includes(post.slug)
-      ? ""
-      : post.reviewerName?.trim() || "通渠熊渠務團隊",
+    reviewerName:
+      scenario || BODY_REVISION_SLUGS.includes(post.slug)
+        ? ""
+        : post.reviewerName?.trim() || "",
     readMins: post.readMins,
     excerpt: post.excerpt,
     keywords: post.seo?.focusKeywords ?? [],
@@ -101,13 +111,16 @@ export function mapSanityBlogPost(post: SanityBlogPost): BlogPostView {
     body: reviseBlogBody(post.slug, post.body ?? []),
     resourceLinks: ARTICLE_SERVICE_LINKS[post.slug],
     whatsappMessage:
-      post.slug === "washing-machine-drain-backflow-causes-fixes"
+      scenario?.whatsappMessage ??
+      (post.slug === "washing-machine-drain-backflow-causes-fixes"
         ? WASHING_MACHINE_MESSAGE
-        : undefined,
+        : undefined),
+    inquiryScenario: scenario,
   };
 }
 
 export function mapStaticBlogPost(post: StaticBlogPost): BlogPostView {
+  const scenario = getArticleInquiryScenario(post.slug);
   return {
     source: "static",
     id: `static-${post.slug}`,
@@ -115,9 +128,11 @@ export function mapStaticBlogPost(post: StaticBlogPost): BlogPostView {
     title: post.title,
     category: post.category,
     date: post.date,
-    updatedAt: post.updatedAt,
+    updatedAt: scenario
+      ? latestEditorialDate(post.updatedAt, ARTICLE_INQUIRY_REVISION_DATE)
+      : post.updatedAt,
     authorName: post.authorName ?? "通渠熊編輯團隊",
-    reviewerName: post.reviewerName ?? "通渠熊渠務團隊",
+    reviewerName: scenario ? "" : post.reviewerName?.trim() || "",
     readMins: post.readMins,
     excerpt: post.excerpt,
     keywords: post.keywords,
@@ -127,7 +142,8 @@ export function mapStaticBlogPost(post: StaticBlogPost): BlogPostView {
     resourceLinks: post.resourceLinks ?? ARTICLE_SERVICE_LINKS[post.slug],
     faqs: post.faqs,
     relatedSlugs: post.relatedSlugs,
-    whatsappMessage: post.whatsappMessage,
+    whatsappMessage: scenario?.whatsappMessage ?? post.whatsappMessage,
+    inquiryScenario: scenario,
   };
 }
 

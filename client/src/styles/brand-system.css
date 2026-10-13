@@ -2031,6 +2031,30 @@
 .article-faq {
   margin-top: 2.5rem;
 }
+.article-inquiry {
+  margin-block: 1.75rem;
+  padding: 1.25rem;
+  border: 1px solid var(--brand-line);
+  border-radius: var(--brand-radius);
+  background: var(--db-paper);
+}
+.article-inquiry h2 {
+  margin-top: 0.5rem;
+  font-weight: 800;
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+.article-inquiry > p:not(.brand-eyebrow) {
+  margin-block: 0.75rem;
+  color: var(--brand-copy);
+  line-height: 1.8;
+}
+.article-inquiry p a {
+  color: var(--brand-accent);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
 .article-resources h2,
 .article-faq h2 {
   font-size: 1.5rem;

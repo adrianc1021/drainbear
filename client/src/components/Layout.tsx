@@ -80,6 +80,7 @@ export function WhatsAppButton({
     >
       <WhatsAppIcon className="h-4 w-4" />
       <span>{label}</span>
+      <span className="sr-only">（另開視窗）</span>
     </a>
   );
 }

@@ -3,6 +3,7 @@ import {
   mapSanityBlogPost,
   mergeBlogPosts,
   getStaticBlogPostBySlug,
+  mapStaticBlogPost,
 } from "./blogRepository";
 import type { SanityBlogPost } from "./sanity/types";
 
@@ -53,5 +54,54 @@ describe("published editorial revision", () => {
     expect(mapped.body).toEqual(unrelated.body);
     expect(mapped.seo).toEqual(unrelated.seo);
     expect(mapped.updatedAt).toBe(unrelated.updatedAt);
+  });
+  it("requires explicit reviewer data instead of inventing a team review", () => {
+    const unrelated = { ...original, slug: "another-article" };
+    expect(mapSanityBlogPost(unrelated).reviewerName).toBe("");
+    expect(
+      mapSanityBlogPost({ ...unrelated, reviewerName: "  已確認審閱單位  " })
+        .reviewerName
+    ).toBe("已確認審閱單位");
+    const staticPost = {
+      slug: "unrelated-guide",
+      title: "示例文章",
+      category: "家居防塞",
+      date: "2026-07-05",
+      readMins: 3,
+      excerpt: "摘要",
+      keywords: [],
+      sections: [],
+    };
+    expect(mapStaticBlogPost(staticPost).reviewerName).toBe("");
+    expect(
+      mapStaticBlogPost({ ...staticPost, reviewerName: "已確認審閱單位" })
+        .reviewerName
+    ).toBe("已確認審閱單位");
+  });
+  it("adds labelled enquiry examples without rewriting CMS paragraphs or publication dates", () => {
+    const cms = {
+      ...original,
+      slug: "slow-basin-drain-causes-solutions",
+      reviewerName: "舊稿審閱單位",
+    };
+    const saved = structuredClone(cms);
+    const mapped = mapSanityBlogPost(cms);
+    expect(cms).toEqual(saved);
+    expect(mapped.body).toEqual(cms.body);
+    expect(mapped.date).toBe(cms.publishedAt);
+    expect(mapped.updatedAt).toBe("2026-10-14");
+    expect(mapped.inquiryScenario?.example).toMatch(/^假設/);
+    expect(mapped.whatsappMessage).toContain("洗手盆去水慢");
+    expect(mapped.reviewerName).toBe("");
+    expect(
+      mapSanityBlogPost({ ...cms, updatedAt: "2026-10-20" }).updatedAt
+    ).toBe("2026-10-20");
+    expect(
+      mapSanityBlogPost({ ...cms, slug: "unrelated-guide" }).inquiryScenario
+    ).toBeUndefined();
+    const toilet = getStaticBlogPostBySlug("toilet-clog-emergency-guide")!;
+    expect(toilet.date).toBe("2026-07-05");
+    expect(toilet.inquiryScenario).toBeDefined();
+    expect(JSON.stringify(toilet)).not.toContain("一次過斷症根治");
   });
 });

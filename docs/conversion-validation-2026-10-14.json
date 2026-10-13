@@ -1,0 +1,517 @@
+{
+  "revisionDateHongKong": "2026-10-14",
+  "scenarios": [
+    {
+      "slug": "toilet-clog-emergency-guide",
+      "heading": "坐廁塞住，想安排師傅檢查？",
+      "example": "假設沖水後水位升高，等候後仍未回落，而其他去水位暫時正常。先停用坐廁，查詢時交代有沒有異物跌入或用過通渠水。",
+      "nextStep": "可先了解通渠熊的",
+      "homeLinkLabel": "香港通渠服務及上門安排",
+      "whatsappMessage": "您好，我想查詢坐廁通渠。地區：＿＿；問題（水位升高／去水慢／其他）：＿＿；其他去水位是否異常：＿＿；是否有異物跌入或使用過化學通渠劑：＿＿。我會提供安全拍攝的相片，請先了解處理方向及可安排時間。"
+    },
+    {
+      "slug": "slow-basin-drain-causes-solutions",
+      "heading": "洗手盆去水慢，未確定塞喺邊？",
+      "example": "假設洗手盆去水慢，櫃底未見明顯漏水，但你未能確認堵塞位置。查詢時提供盆內水位、可安全拍攝的去水喉位置，以及其他去水位是否正常。",
+      "nextStep": "未能分辨隔氣或後段喉管問題，可先查看",
+      "homeLinkLabel": "通渠服務與檢查流程",
+      "whatsappMessage": "您好，我想查詢洗手盆去水慢。地區：＿＿；情況（積水／去水慢／異味／其他）：＿＿；櫃底是否滲漏：＿＿；其他去水位是否正常：＿＿；已做過的處理：＿＿。我會提供安全拍攝的相片，請先了解檢查方向及安排。"
+    },
+    {
+      "slug": "building-main-drain-vs-unit-branch-pipe",
+      "heading": "多個單位去水異常，點樣開始查詢？",
+      "example": "假設同層幾個單位同時去水慢或冒水。先向管理處說明受影響範圍、樓層及位置，再查詢共用渠段的檢查與進場安排；這個情況不能單憑描述確認是主渠淤塞。",
+      "nextStep": "需要安排檢查時，可先了解",
+      "homeLinkLabel": "住宅與物業通渠服務",
+      "whatsappMessage": "您好，我想查詢單位支渠／大廈主渠問題。地區及樓宇：＿＿；受影響位置、樓層及單位數：＿＿；是否倒灌：＿＿；管理處聯絡及進場安排：＿＿。我會提供現場資料，請先了解檢查範圍及可安排時間。"
+    }
+  ],
+  "toiletSections": [
+    {
+      "type": "p",
+      "text": "坐廁沖水後水位不退反升，先停止沖水，避免污水溢出。觀察其他去水位有沒有異常，並記低有沒有異物跌入或使用過化學通渠劑；這些資料有助了解檢查方向，不能單憑水位確認堵塞位置。"
+    },
+    {
+      "type": "h2",
+      "text": "第一步：即刻閂水掣，唔好再沖"
+    },
+    {
+      "type": "p",
+      "text": "停止沖水及使用受影響坐廁；若可安全操作熟悉的入水閥，可關閉它以免繼續入水。不要強行扭動生鏽或不熟悉的閥件。水位自行回落也不代表淤塞已處理，避免為了測試再次沖水。"
+    },
+    {
+      "type": "h2",
+      "text": "第二步：判斷淤塞原因"
+    },
+    {
+      "type": "p",
+      "text": "先交代是否有大量紙張或異物跌入，以及是否曾倒化學通渠劑。懷疑有硬物、已有化學劑或污水接近溢出時，不要自行加力泵壓、拆卸或混合清潔用品。是否需要拆裝，要按異物位置、坐廁結構及可用入口檢查後確認。"
+    },
+    {
+      "type": "h2",
+      "text": "第三步：呢啲情況請直接搵師傅"
+    },
+    {
+      "type": "p",
+      "text": "持續或反覆淤塞、懷疑異物、地台去水口冒水，或多個去水位同時異常，都適合先安排檢查。多處異常可能涉及共用支渠或主渠，但不是單憑症狀就能確認；涉及多個單位或公共位置時，請一併聯絡管理處了解進場及責任範圍。"
+    },
+    {
+      "type": "h2",
+      "text": "預防勝於治療"
+    },
+    {
+      "type": "p",
+      "text": "廁所只應沖走廁紙同排泄物。濕紙巾（就算標明「可沖式」）、棉花棒、頭髮、貓砂全部都係馬桶殺手。家有小朋友嘅，建議加裝廁所板鎖，防止玩具「意外潛水」。"
+    },
+    {
+      "type": "tip",
+      "text": "坐廁反覆淤塞而原因未明時，可按入口、積水及鏡頭可達範圍評估 CCTV 照渠檢測。影像只反映可檢查位置的管內情況；是否需要疏通、拆裝或進一步工程，仍須按現場資料確認。"
+    }
+  ],
+  "model": {
+    "capturedAt": "2026-10-13T16:39:45.539Z",
+    "result": {
+      "model": "jev-1.13.0",
+      "answers": {
+        "toilet-clog-emergency-guide_intent": {
+          "type": "score",
+          "score": 3,
+          "confidence": 1,
+          "legend": {
+            "0": "Unrelated to the reader problem",
+            "1": "Describes a problem but no useful enquiry direction",
+            "2": "Relevant situation with a usable service or enquiry next step",
+            "3": "Relevant situation with specific intake details and a clear service/enquiry next step"
+          },
+          "probabilities": {
+            "0": 0,
+            "1": 0,
+            "2": 0,
+            "3": 1
+          }
+        },
+        "toilet-clog-emergency-guide_fiction_label": {
+          "type": "noul",
+          "noul": 0.97
+        },
+        "slow-basin-drain-causes-solutions_intent": {
+          "type": "score",
+          "score": 3,
+          "confidence": 1,
+          "legend": {
+            "0": "Unrelated to the reader problem",
+            "1": "Describes a problem but no useful enquiry direction",
+            "2": "Relevant situation with a usable service or enquiry next step",
+            "3": "Relevant situation with specific intake details and a clear service/enquiry next step"
+          },
+          "probabilities": {
+            "0": 0,
+            "1": 0,
+            "2": 0,
+            "3": 1
+          }
+        },
+        "slow-basin-drain-causes-solutions_fiction_label": {
+          "type": "noul",
+          "noul": 0.97
+        },
+        "building-main-drain-vs-unit-branch-pipe_intent": {
+          "type": "score",
+          "score": 3,
+          "confidence": 1,
+          "legend": {
+            "0": "Unrelated to the reader problem",
+            "1": "Describes a problem but no useful enquiry direction",
+            "2": "Relevant situation with a usable service or enquiry next step",
+            "3": "Relevant situation with specific intake details and a clear service/enquiry next step"
+          },
+          "probabilities": {
+            "0": 0,
+            "1": 0,
+            "2": 0,
+            "3": 1
+          }
+        },
+        "building-main-drain-vs-unit-branch-pipe_fiction_label": {
+          "type": "noul",
+          "noul": 0.97
+        }
+      },
+      "usage": {
+        "input_tokens": 1829,
+        "output_tokens": 159
+      }
+    },
+    "caveat": "Model judgments are review aids, not proof of visitor behaviour, ranking uplift or actual customer enquiries."
+  },
+  "local": {
+    "origin": "http://localhost:4420",
+    "live": false,
+    "results": [
+      {
+        "slug": "toilet-clog-emergency-guide",
+        "width": 320,
+        "metadata": {
+          "title": "坐廁塞咗點算好？沖水前必讀嘅 3 分鐘自救指南｜通渠熊",
+          "description": "馬桶塞咗最忌係心急再撳沖水掣——污水倒灌濕晒全屋就大件事。跟住呢個自救流程做，判斷幾時可以 DIY、幾時要即刻搵師傅。",
+          "canonical": "https://drainbearhk.com/blog/toilet-clog-emergency-guide",
+          "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+          "h1": ["坐廁塞咗點算好？沖水前必讀嘅3分鐘自救指南"],
+          "ogTitle": "坐廁塞咗點算好？沖水前必讀嘅 3 分鐘自救指南｜通渠熊",
+          "ogDescription": "馬桶塞咗最忌係心急再撳沖水掣——污水倒灌濕晒全屋就大件事。跟住呢個自救流程做，判斷幾時可以 DIY、幾時要即刻搵師傅。"
+        },
+        "datePublished": "2026-07-05",
+        "dateModified": "2026-10-14",
+        "reviewedByAbsent": true,
+        "scenarioLabelVisible": true,
+        "cmsParagraphsPreserved": false,
+        "axeViolations": [],
+        "runtimeErrors": []
+      },
+      {
+        "slug": "slow-basin-drain-causes-solutions",
+        "width": 320,
+        "metadata": {
+          "title": "洗手盆去水慢點算？常見原因及通渠方法｜通渠熊",
+          "description": "浴室洗手盆去水慢或積水？了解去水塞、隔氣、頭髮及皂垢等常見原因、自行檢查方法，以及何時需要拆喉或安排家居通渠。",
+          "canonical": "https://drainbearhk.com/blog/slow-basin-drain-causes-solutions",
+          "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+          "h1": ["洗手盆去水慢點算？常見原因、自行檢查及通渠方法"],
+          "ogTitle": "洗手盆去水慢點算？常見原因及通渠方法｜通渠熊",
+          "ogDescription": "浴室洗手盆去水慢或積水？了解去水塞、隔氣、頭髮及皂垢等常見原因、自行檢查方法，以及何時需要拆喉或安排家居通渠。"
+        },
+        "datePublished": "2026-09-22T05:31:25.876Z",
+        "dateModified": "2026-10-14",
+        "reviewedByAbsent": true,
+        "scenarioLabelVisible": true,
+        "cmsParagraphsPreserved": true,
+        "axeViolations": [],
+        "runtimeErrors": []
+      },
+      {
+        "slug": "building-main-drain-vs-unit-branch-pipe",
+        "width": 320,
+        "metadata": {
+          "title": "大廈主渠塞定支渠塞？判斷、責任及處理流程",
+          "description": "坐廁倒灌是大廈主渠還是單位支渠？了解五個判斷線索、通知管理處的流程、常見責任界線及安排通渠前要保存的紀錄。",
+          "canonical": "https://drainbearhk.com/blog/building-main-drain-vs-unit-branch-pipe",
+          "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+          "h1": ["大廈主渠塞定單位支渠塞？判斷方法、責任及處理流程"],
+          "ogTitle": "大廈主渠塞定支渠塞？判斷、責任及處理流程",
+          "ogDescription": "坐廁倒灌是大廈主渠還是單位支渠？了解五個判斷線索、通知管理處的流程、常見責任界線及安排通渠前要保存的紀錄。"
+        },
+        "datePublished": "2026-08-17T17:02:00.000Z",
+        "dateModified": "2026-10-14",
+        "reviewedByAbsent": true,
+        "scenarioLabelVisible": true,
+        "cmsParagraphsPreserved": true,
+        "axeViolations": [],
+        "runtimeErrors": []
+      },
+      {
+        "slug": "toilet-clog-emergency-guide",
+        "width": 390,
+        "metadata": {
+          "title": "坐廁塞咗點算好？沖水前必讀嘅 3 分鐘自救指南｜通渠熊",
+          "description": "馬桶塞咗最忌係心急再撳沖水掣——污水倒灌濕晒全屋就大件事。跟住呢個自救流程做，判斷幾時可以 DIY、幾時要即刻搵師傅。",
+          "canonical": "https://drainbearhk.com/blog/toilet-clog-emergency-guide",
+          "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+          "h1": ["坐廁塞咗點算好？沖水前必讀嘅3分鐘自救指南"],
+          "ogTitle": "坐廁塞咗點算好？沖水前必讀嘅 3 分鐘自救指南｜通渠熊",
+          "ogDescription": "馬桶塞咗最忌係心急再撳沖水掣——污水倒灌濕晒全屋就大件事。跟住呢個自救流程做，判斷幾時可以 DIY、幾時要即刻搵師傅。"
+        },
+        "datePublished": "2026-07-05",
+        "dateModified": "2026-10-14",
+        "reviewedByAbsent": true,
+        "scenarioLabelVisible": true,
+        "cmsParagraphsPreserved": false,
+        "axeViolations": [],
+        "runtimeErrors": []
+      },
+      {
+        "slug": "slow-basin-drain-causes-solutions",
+        "width": 390,
+        "metadata": {
+          "title": "洗手盆去水慢點算？常見原因及通渠方法｜通渠熊",
+          "description": "浴室洗手盆去水慢或積水？了解去水塞、隔氣、頭髮及皂垢等常見原因、自行檢查方法，以及何時需要拆喉或安排家居通渠。",
+          "canonical": "https://drainbearhk.com/blog/slow-basin-drain-causes-solutions",
+          "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+          "h1": ["洗手盆去水慢點算？常見原因、自行檢查及通渠方法"],
+          "ogTitle": "洗手盆去水慢點算？常見原因及通渠方法｜通渠熊",
+          "ogDescription": "浴室洗手盆去水慢或積水？了解去水塞、隔氣、頭髮及皂垢等常見原因、自行檢查方法，以及何時需要拆喉或安排家居通渠。"
+        },
+        "datePublished": "2026-09-22T05:31:25.876Z",
+        "dateModified": "2026-10-14",
+        "reviewedByAbsent": true,
+        "scenarioLabelVisible": true,
+        "cmsParagraphsPreserved": true,
+        "axeViolations": [],
+        "runtimeErrors": []
+      },
+      {
+        "slug": "building-main-drain-vs-unit-branch-pipe",
+        "width": 390,
+        "metadata": {
+          "title": "大廈主渠塞定支渠塞？判斷、責任及處理流程",
+          "description": "坐廁倒灌是大廈主渠還是單位支渠？了解五個判斷線索、通知管理處的流程、常見責任界線及安排通渠前要保存的紀錄。",
+          "canonical": "https://drainbearhk.com/blog/building-main-drain-vs-unit-branch-pipe",
+          "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+          "h1": ["大廈主渠塞定單位支渠塞？判斷方法、責任及處理流程"],
+          "ogTitle": "大廈主渠塞定支渠塞？判斷、責任及處理流程",
+          "ogDescription": "坐廁倒灌是大廈主渠還是單位支渠？了解五個判斷線索、通知管理處的流程、常見責任界線及安排通渠前要保存的紀錄。"
+        },
+        "datePublished": "2026-08-17T17:02:00.000Z",
+        "dateModified": "2026-10-14",
+        "reviewedByAbsent": true,
+        "scenarioLabelVisible": true,
+        "cmsParagraphsPreserved": true,
+        "axeViolations": [],
+        "runtimeErrors": []
+      },
+      {
+        "slug": "toilet-clog-emergency-guide",
+        "width": 768,
+        "metadata": {
+          "title": "坐廁塞咗點算好？沖水前必讀嘅 3 分鐘自救指南｜通渠熊",
+          "description": "馬桶塞咗最忌係心急再撳沖水掣——污水倒灌濕晒全屋就大件事。跟住呢個自救流程做，判斷幾時可以 DIY、幾時要即刻搵師傅。",
+          "canonical": "https://drainbearhk.com/blog/toilet-clog-emergency-guide",
+          "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+          "h1": ["坐廁塞咗點算好？沖水前必讀嘅3分鐘自救指南"],
+          "ogTitle": "坐廁塞咗點算好？沖水前必讀嘅 3 分鐘自救指南｜通渠熊",
+          "ogDescription": "馬桶塞咗最忌係心急再撳沖水掣——污水倒灌濕晒全屋就大件事。跟住呢個自救流程做，判斷幾時可以 DIY、幾時要即刻搵師傅。"
+        },
+        "datePublished": "2026-07-05",
+        "dateModified": "2026-10-14",
+        "reviewedByAbsent": true,
+        "scenarioLabelVisible": true,
+        "cmsParagraphsPreserved": false,
+        "axeViolations": [],
+        "runtimeErrors": []
+      },
+      {
+        "slug": "slow-basin-drain-causes-solutions",
+        "width": 768,
+        "metadata": {
+          "title": "洗手盆去水慢點算？常見原因及通渠方法｜通渠熊",
+          "description": "浴室洗手盆去水慢或積水？了解去水塞、隔氣、頭髮及皂垢等常見原因、自行檢查方法，以及何時需要拆喉或安排家居通渠。",
+          "canonical": "https://drainbearhk.com/blog/slow-basin-drain-causes-solutions",
+          "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+          "h1": ["洗手盆去水慢點算？常見原因、自行檢查及通渠方法"],
+          "ogTitle": "洗手盆去水慢點算？常見原因及通渠方法｜通渠熊",
+          "ogDescription": "浴室洗手盆去水慢或積水？了解去水塞、隔氣、頭髮及皂垢等常見原因、自行檢查方法，以及何時需要拆喉或安排家居通渠。"
+        },
+        "datePublished": "2026-09-22T05:31:25.876Z",
+        "dateModified": "2026-10-14",
+        "reviewedByAbsent": true,
+        "scenarioLabelVisible": true,
+        "cmsParagraphsPreserved": true,
+        "axeViolations": [],
+        "runtimeErrors": []
+      },
+      {
+        "slug": "building-main-drain-vs-unit-branch-pipe",
+        "width": 768,
+        "metadata": {
+          "title": "大廈主渠塞定支渠塞？判斷、責任及處理流程",
+          "description": "坐廁倒灌是大廈主渠還是單位支渠？了解五個判斷線索、通知管理處的流程、常見責任界線及安排通渠前要保存的紀錄。",
+          "canonical": "https://drainbearhk.com/blog/building-main-drain-vs-unit-branch-pipe",
+          "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+          "h1": ["大廈主渠塞定單位支渠塞？判斷方法、責任及處理流程"],
+          "ogTitle": "大廈主渠塞定支渠塞？判斷、責任及處理流程",
+          "ogDescription": "坐廁倒灌是大廈主渠還是單位支渠？了解五個判斷線索、通知管理處的流程、常見責任界線及安排通渠前要保存的紀錄。"
+        },
+        "datePublished": "2026-08-17T17:02:00.000Z",
+        "dateModified": "2026-10-14",
+        "reviewedByAbsent": true,
+        "scenarioLabelVisible": true,
+        "cmsParagraphsPreserved": true,
+        "axeViolations": [],
+        "runtimeErrors": []
+      },
+      {
+        "slug": "toilet-clog-emergency-guide",
+        "width": 1024,
+        "metadata": {
+          "title": "坐廁塞咗點算好？沖水前必讀嘅 3 分鐘自救指南｜通渠熊",
+          "description": "馬桶塞咗最忌係心急再撳沖水掣——污水倒灌濕晒全屋就大件事。跟住呢個自救流程做，判斷幾時可以 DIY、幾時要即刻搵師傅。",
+          "canonical": "https://drainbearhk.com/blog/toilet-clog-emergency-guide",
+          "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+          "h1": ["坐廁塞咗點算好？沖水前必讀嘅3分鐘自救指南"],
+          "ogTitle": "坐廁塞咗點算好？沖水前必讀嘅 3 分鐘自救指南｜通渠熊",
+          "ogDescription": "馬桶塞咗最忌係心急再撳沖水掣——污水倒灌濕晒全屋就大件事。跟住呢個自救流程做，判斷幾時可以 DIY、幾時要即刻搵師傅。"
+        },
+        "datePublished": "2026-07-05",
+        "dateModified": "2026-10-14",
+        "reviewedByAbsent": true,
+        "scenarioLabelVisible": true,
+        "cmsParagraphsPreserved": false,
+        "axeViolations": [],
+        "runtimeErrors": []
+      },
+      {
+        "slug": "slow-basin-drain-causes-solutions",
+        "width": 1024,
+        "metadata": {
+          "title": "洗手盆去水慢點算？常見原因及通渠方法｜通渠熊",
+          "description": "浴室洗手盆去水慢或積水？了解去水塞、隔氣、頭髮及皂垢等常見原因、自行檢查方法，以及何時需要拆喉或安排家居通渠。",
+          "canonical": "https://drainbearhk.com/blog/slow-basin-drain-causes-solutions",
+          "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+          "h1": ["洗手盆去水慢點算？常見原因、自行檢查及通渠方法"],
+          "ogTitle": "洗手盆去水慢點算？常見原因及通渠方法｜通渠熊",
+          "ogDescription": "浴室洗手盆去水慢或積水？了解去水塞、隔氣、頭髮及皂垢等常見原因、自行檢查方法，以及何時需要拆喉或安排家居通渠。"
+        },
+        "datePublished": "2026-09-22T05:31:25.876Z",
+        "dateModified": "2026-10-14",
+        "reviewedByAbsent": true,
+        "scenarioLabelVisible": true,
+        "cmsParagraphsPreserved": true,
+        "axeViolations": [],
+        "runtimeErrors": []
+      },
+      {
+        "slug": "building-main-drain-vs-unit-branch-pipe",
+        "width": 1024,
+        "metadata": {
+          "title": "大廈主渠塞定支渠塞？判斷、責任及處理流程",
+          "description": "坐廁倒灌是大廈主渠還是單位支渠？了解五個判斷線索、通知管理處的流程、常見責任界線及安排通渠前要保存的紀錄。",
+          "canonical": "https://drainbearhk.com/blog/building-main-drain-vs-unit-branch-pipe",
+          "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+          "h1": ["大廈主渠塞定單位支渠塞？判斷方法、責任及處理流程"],
+          "ogTitle": "大廈主渠塞定支渠塞？判斷、責任及處理流程",
+          "ogDescription": "坐廁倒灌是大廈主渠還是單位支渠？了解五個判斷線索、通知管理處的流程、常見責任界線及安排通渠前要保存的紀錄。"
+        },
+        "datePublished": "2026-08-17T17:02:00.000Z",
+        "dateModified": "2026-10-14",
+        "reviewedByAbsent": true,
+        "scenarioLabelVisible": true,
+        "cmsParagraphsPreserved": true,
+        "axeViolations": [],
+        "runtimeErrors": []
+      },
+      {
+        "slug": "toilet-clog-emergency-guide",
+        "width": 1440,
+        "metadata": {
+          "title": "坐廁塞咗點算好？沖水前必讀嘅 3 分鐘自救指南｜通渠熊",
+          "description": "馬桶塞咗最忌係心急再撳沖水掣——污水倒灌濕晒全屋就大件事。跟住呢個自救流程做，判斷幾時可以 DIY、幾時要即刻搵師傅。",
+          "canonical": "https://drainbearhk.com/blog/toilet-clog-emergency-guide",
+          "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+          "h1": ["坐廁塞咗點算好？沖水前必讀嘅3分鐘自救指南"],
+          "ogTitle": "坐廁塞咗點算好？沖水前必讀嘅 3 分鐘自救指南｜通渠熊",
+          "ogDescription": "馬桶塞咗最忌係心急再撳沖水掣——污水倒灌濕晒全屋就大件事。跟住呢個自救流程做，判斷幾時可以 DIY、幾時要即刻搵師傅。"
+        },
+        "datePublished": "2026-07-05",
+        "dateModified": "2026-10-14",
+        "reviewedByAbsent": true,
+        "scenarioLabelVisible": true,
+        "cmsParagraphsPreserved": false,
+        "axeViolations": [],
+        "runtimeErrors": []
+      },
+      {
+        "slug": "slow-basin-drain-causes-solutions",
+        "width": 1440,
+        "metadata": {
+          "title": "洗手盆去水慢點算？常見原因及通渠方法｜通渠熊",
+          "description": "浴室洗手盆去水慢或積水？了解去水塞、隔氣、頭髮及皂垢等常見原因、自行檢查方法，以及何時需要拆喉或安排家居通渠。",
+          "canonical": "https://drainbearhk.com/blog/slow-basin-drain-causes-solutions",
+          "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+          "h1": ["洗手盆去水慢點算？常見原因、自行檢查及通渠方法"],
+          "ogTitle": "洗手盆去水慢點算？常見原因及通渠方法｜通渠熊",
+          "ogDescription": "浴室洗手盆去水慢或積水？了解去水塞、隔氣、頭髮及皂垢等常見原因、自行檢查方法，以及何時需要拆喉或安排家居通渠。"
+        },
+        "datePublished": "2026-09-22T05:31:25.876Z",
+        "dateModified": "2026-10-14",
+        "reviewedByAbsent": true,
+        "scenarioLabelVisible": true,
+        "cmsParagraphsPreserved": true,
+        "axeViolations": [],
+        "runtimeErrors": []
+      },
+      {
+        "slug": "building-main-drain-vs-unit-branch-pipe",
+        "width": 1440,
+        "metadata": {
+          "title": "大廈主渠塞定支渠塞？判斷、責任及處理流程",
+          "description": "坐廁倒灌是大廈主渠還是單位支渠？了解五個判斷線索、通知管理處的流程、常見責任界線及安排通渠前要保存的紀錄。",
+          "canonical": "https://drainbearhk.com/blog/building-main-drain-vs-unit-branch-pipe",
+          "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+          "h1": ["大廈主渠塞定單位支渠塞？判斷方法、責任及處理流程"],
+          "ogTitle": "大廈主渠塞定支渠塞？判斷、責任及處理流程",
+          "ogDescription": "坐廁倒灌是大廈主渠還是單位支渠？了解五個判斷線索、通知管理處的流程、常見責任界線及安排通渠前要保存的紀錄。"
+        },
+        "datePublished": "2026-08-17T17:02:00.000Z",
+        "dateModified": "2026-10-14",
+        "reviewedByAbsent": true,
+        "scenarioLabelVisible": true,
+        "cmsParagraphsPreserved": true,
+        "axeViolations": [],
+        "runtimeErrors": []
+      }
+    ],
+    "journeys": [
+      {
+        "slug": "toilet-clog-emergency-guide",
+        "width": 390,
+        "selectionMessagePreserved": true,
+        "reloadRetryPreserved": true,
+        "singleClickEvent": true,
+        "noMessageSent": true
+      },
+      {
+        "slug": "slow-basin-drain-causes-solutions",
+        "width": 390,
+        "selectionMessagePreserved": true,
+        "reloadRetryPreserved": true,
+        "singleClickEvent": true,
+        "noMessageSent": true
+      },
+      {
+        "slug": "building-main-drain-vs-unit-branch-pipe",
+        "width": 390,
+        "selectionMessagePreserved": true,
+        "reloadRetryPreserved": true,
+        "singleClickEvent": true,
+        "noMessageSent": true
+      },
+      {
+        "slug": "toilet-clog-emergency-guide",
+        "width": 1440,
+        "selectionMessagePreserved": true,
+        "reloadRetryPreserved": true,
+        "singleClickEvent": true,
+        "noMessageSent": true
+      },
+      {
+        "slug": "slow-basin-drain-causes-solutions",
+        "width": 1440,
+        "selectionMessagePreserved": true,
+        "reloadRetryPreserved": true,
+        "singleClickEvent": true,
+        "noMessageSent": true
+      },
+      {
+        "slug": "building-main-drain-vs-unit-branch-pipe",
+        "width": 1440,
+        "selectionMessagePreserved": true,
+        "reloadRetryPreserved": true,
+        "singleClickEvent": true,
+        "noMessageSent": true
+      }
+    ]
+  },
+  "tests": {
+    "files": 24,
+    "passed": 136
+  },
+  "build": {
+    "prerendered": 84,
+    "indexable": 82,
+    "visibleAnswers": 154
+  },
+  "limitations": [
+    "Hypothetical examples are labelled and are not case records",
+    "Jev judgments do not measure enquiries, rankings or conversion uplift",
+    "No fresh Search Console or verified lead conversion data"
+  ]
+}

@@ -481,6 +481,30 @@ export default function BlogPost() {
 
       <section className="bg-white pb-20 md:pb-24">
         <article className="mx-auto max-w-3xl px-4">
+          {post.inquiryScenario ? (
+            <aside
+              className="article-inquiry"
+              aria-labelledby="article-inquiry-heading"
+            >
+              <p className="brand-eyebrow">情境示例 · 非施工紀錄</p>
+              <h2 id="article-inquiry-heading">
+                {post.inquiryScenario.heading}
+              </h2>
+              <p>{post.inquiryScenario.example}</p>
+              <p>
+                {post.inquiryScenario.nextStep}
+                <Link href="/" onClick={() => trackArticleLink("/")}>
+                  {post.inquiryScenario.homeLinkLabel}
+                </Link>
+                。提供地區及現場相片，先了解處理方向；上門時間另行確認。
+              </p>
+              <WhatsAppButton
+                label="傳相片，查詢處理安排"
+                message={post.inquiryScenario.whatsappMessage}
+                trackLocation="blogpost_scenario"
+              />
+            </aside>
+          ) : null}
           {post.source === "sanity" && post.body && (
             <PortableText
               value={post.body}
