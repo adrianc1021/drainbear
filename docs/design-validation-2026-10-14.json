@@ -23,13 +23,24 @@
     "allPassed": true
   },
   "production": {
-    "status": "pending"
+    "status": "passed",
+    "verifiedAt": "2026-10-14T09:25:31.520Z",
+    "sourceCommit": "b2ab04b",
+    "origin": "https://drainbearhk.com",
+    "layouts": 18,
+    "serviceSelections": 28,
+    "whatsappRetryJourneys": 2,
+    "caseVideoPlayback": 2,
+    "axe": "passed",
+    "noJavaScript": "passed",
+    "allPassed": true
   },
   "twentyFirstMcp": {
     "skillInstalled": true,
     "configInstalled": true,
     "keyPresent": false,
     "lastUnauthenticatedHttpStatus": 401,
-    "authenticatedToolsUsed": false
+    "authenticatedToolsUsed": false,
+    "deferredByUser": true
   }
 }
