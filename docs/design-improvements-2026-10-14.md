@@ -55,6 +55,6 @@
 
 到 [21st MCP](https://21st.dev/mcp) 取得新的 key，在雲端環境設定填入 `API_KEY_21ST`，儲存並發布環境。key 要求已保存於環境設定草稿，允許目的地為 `21st.dev`；此草稿不會自行加入憑證或重新啟動目前環境。
 
-專案 MCP 設定透過 `env_http_headers` 讀取 key，沒有把 key 寫入程式碼。Codex 重載此設定後才會嘗試連線；目前對話沒有已認證的 21st MCP 工具。本次外觀成果已可獨立驗證與發布，不把讀過 skill 當成已使用遠端元件。
+專案 MCP 設定透過 `env_http_headers` 讀取 key，沒有把 key 寫入程式碼。依用戶決定，設定保留 `enabled = false`；之後加入 key、改為 `enabled = true` 並重載 Codex，才會嘗試連線。目前對話沒有已認證的 21st MCP 工具。本次外觀成果已可獨立驗證與發布，不把讀過 skill 當成已使用遠端元件。
 
 正式發布核對完成：來源提交 `b2ab04b`，2026-10-14 正式網址共 18 次版型／axe、28 個服務選擇組合、2 次 WhatsApp 交接與重載、2 次真實影片播放及無 JavaScript 閱讀均通過。正式網站直接讀取 Sanity，沒有套用本機 CORS 中繼。用戶已回覆先完成 UI UX Pro Max／Impeccable，21st 之後接入；本次不再等待 key，沒有進行 21st 遠端搜尋或生成。
