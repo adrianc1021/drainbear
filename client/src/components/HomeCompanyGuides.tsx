@@ -23,11 +23,10 @@ const GUIDES = [
 export default function HomeCompanyGuides() {
   return (
     <section
-      className="brand-section"
+      className="brand-section home-company-guides"
       aria-labelledby="home-company-guides-heading"
     >
       <div className="container">
-        <p className="brand-eyebrow">選公司與師傅</p>
         <h2
           id="home-company-guides-heading"
           className="font-display text-2xl font-black text-navy md:text-3xl"
@@ -36,7 +35,7 @@ export default function HomeCompanyGuides() {
         </h2>
         <nav
           aria-label="通渠公司與收費指南"
-          className="mt-6 grid gap-4 md:grid-cols-3"
+          className="home-company-guides__links"
         >
           {GUIDES.map(guide => (
             <Link
@@ -49,13 +48,11 @@ export default function HomeCompanyGuides() {
                   destination_url: `/blog/${guide.slug}`,
                 })
               }
-              className="card-float flex min-h-44 flex-col rounded-xl border border-border bg-white p-6 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-navy"
+              className="home-company-guides__link"
             >
               <h3 className="text-lg font-bold text-navy">{guide.title}</h3>
-              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
-                {guide.description}
-              </p>
-              <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-wagreen-dark">
+              <p>{guide.description}</p>
+              <span>
                 閱讀指南 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </span>
             </Link>

@@ -39,7 +39,6 @@ export default function RecordedCaseGallery() {
       <div className="container">
         <div className="section-heading">
           <div>
-            <p className="brand-eyebrow">真實現場 · 施工短片</p>
             <h2 id="home-recorded-cases-heading">點樣通渠？睇現場。</h2>
           </div>
           <Link href="/cases">
@@ -47,7 +46,7 @@ export default function RecordedCaseGallery() {
           </Link>
         </div>
         <p className="section-heading-description">
-          現場短片展示坐廁疏通、喉口檢查及戶外渠口操作；完整紀錄可在各案例內頁查看。
+          真實施工短片展示坐廁疏通、喉口檢查及戶外渠口操作；完整紀錄可在各案例內頁查看。
         </p>
         <div className="recorded-case-grid">
           {[

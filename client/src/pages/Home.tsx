@@ -74,11 +74,11 @@ export default function Home() {
         <div className="home-hero__stage">
           <div className="container home-hero__grid">
             <div className="home-hero__copy">
-              <p className="brand-eyebrow">香港專業通渠 · 住宅／食肆／物業</p>
               <h1 id="home-heading">
                 <span className="home-hero__headline-line">香港通渠，</span>
                 <span className="home-hero__headline-line">先搵通渠熊。</span>
               </h1>
+              <p className="home-hero__coverage">住宅 · 食肆 · 物業渠務</p>
               <p className="home-hero__intro">
                 坐廁、鋅盤、浴室塞渠？傳相片同地區，先了解點處理。
               </p>
@@ -110,7 +110,6 @@ export default function Home() {
         <div className="container home-arrangement__grid">
           <div className="home-arrangement__intro">
             <div>
-              <p className="brand-eyebrow">上門與處理安排</p>
               <h2 id="home-process-heading">
                 專業通渠，
                 <br />

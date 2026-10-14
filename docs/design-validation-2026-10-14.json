@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-14",
+  "checks": {
+    "typecheck": "passed",
+    "testFiles": 24,
+    "tests": 136,
+    "fullBuild": "passed",
+    "prerenderedRoutes": 87,
+    "indexableUrls": 85,
+    "aeoAnswers": 163,
+    "impeccableDetectorFindings": 0,
+    "conversionConfiguration": "passed"
+  },
+  "local": {
+    "layouts": 47,
+    "viewports": [320, 390, 768, 1024, 1199, 1200, 1440],
+    "axe": "passed",
+    "customerServiceSelections": 28,
+    "whatsappHandoffAndReload": 2,
+    "videoPlayback": 2,
+    "noJavaScript": "passed",
+    "settledScrollAndHeader": "passed",
+    "allPassed": true
+  },
+  "production": {
+    "status": "pending"
+  },
+  "twentyFirstMcp": {
+    "skillInstalled": true,
+    "configInstalled": true,
+    "keyPresent": false,
+    "lastUnauthenticatedHttpStatus": 401,
+    "authenticatedToolsUsed": false
+  }
+}

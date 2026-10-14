@@ -60,7 +60,6 @@ export default function HomeServiceFinder() {
       <div className="container">
         <div className="section-heading">
           <div>
-            <p className="brand-eyebrow">由眼前嘅問題開始</p>
             <h2 id="home-services-heading">香港通渠服務</h2>
           </div>
           <Link href="/drain-diagnosis">

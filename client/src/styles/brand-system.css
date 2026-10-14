@@ -8,6 +8,7 @@
   --brand-sky: linear-gradient(135deg, #075286, #0878ba);
   --brand-green: #25d366;
   --brand-radius: 12px;
+  --brand-elevation: 0 14px 36px #06375812;
   --db-paper: var(--brand-paper);
   --db-paper-deep: #e9edf2;
   --db-ink: var(--brand-ink);
@@ -27,6 +28,16 @@
   color: var(--brand-ink);
   font-size: 1rem;
   line-height: 1.7;
+}
+.site-shell ::selection {
+  background: #b8ddf4;
+  color: var(--brand-ink);
+}
+.site-shell :where(input, select, textarea) {
+  caret-color: var(--brand-accent);
+}
+.site-shell :where(a, button, input, select, textarea, summary) {
+  scroll-margin-block: 6rem;
 }
 .site-shell .container,
 .db-container {
@@ -233,10 +244,10 @@
   min-height: 88px;
   padding: 1rem 1.15rem;
   border: 1px solid transparent;
-  border-radius: 20px;
+  border-radius: var(--brand-radius);
   text-decoration: none;
   text-align: left;
-  box-shadow: 0 8px 24px #06375814;
+  box-shadow: none;
   transition:
     transform 180ms ease,
     box-shadow 180ms ease,
@@ -248,8 +259,8 @@
   width: 44px;
   height: 44px;
   flex: 0 0 auto;
-  border-radius: 14px;
-  background: #e3f2fe;
+  border-radius: 50%;
+  background: transparent;
   color: #075286;
 }
 .contact-action__icon svg {
@@ -303,8 +314,8 @@
   color: #126535;
 }
 .contact-action:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 28px #06375829;
+  transform: translateY(-2px);
+  box-shadow: none;
 }
 .contact-action:hover .contact-action__arrow {
   transform: translate(2px, -2px);
@@ -401,14 +412,7 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  padding-bottom: 2.5rem;
-  background: linear-gradient(
-    145deg,
-    #075286 0%,
-    #0878ba 45%,
-    #1592d3 68%,
-    #edf7ff 95%
-  );
+  background: var(--brand-accent);
   color: white;
 }
 .home-hero__stage {
@@ -416,16 +420,18 @@
 }
 .home-hero__grid {
   position: relative;
-  display: block;
-  padding-top: 115px;
-  padding-bottom: 40px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  min-height: 680px;
+  padding-block: 140px 88px;
 }
 .home-hero__copy {
   position: relative;
   z-index: 2;
-  max-width: 1000px;
-  margin-inline: auto;
-  text-align: center;
+  min-width: 0;
+  max-width: 560px;
+  text-align: left;
 }
 .home-hero .brand-eyebrow {
   color: #e0f4ff;
@@ -437,11 +443,17 @@
   color: #b8ddf4;
 }
 .site-shell .home-hero h1 {
-  font-size: clamp(3rem, 8vw, 7rem);
-  margin-top: 1rem;
-  line-height: 1.12;
-  letter-spacing: -0.045em;
-  text-shadow: 0 3px 24px #05395940;
+  font-size: clamp(3rem, 5.6vw, 5rem);
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+.home-hero__coverage {
+  margin-top: 1.25rem;
+  color: #e0f4ff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
 }
 .home-hero__headline-line {
   display: block;
@@ -452,30 +464,23 @@
 }
 @keyframes brand-title-enter {
   from {
-    opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(10px);
   }
   to {
-    opacity: 1;
     transform: translateY(0);
   }
 }
-@keyframes brand-paper-enter {
-  from {
-    opacity: 0;
-    transform: translateY(12px) scale(1.02);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
 .home-hero__copy .contact-actions {
-  max-width: 760px;
-  margin-inline: auto;
+  max-width: 520px;
+  gap: 0.75rem;
+  grid-template-columns: minmax(0, 1fr);
+}
+.home-hero__copy .contact-action,
+.home-hero__copy .contact-actions--prominent .contact-action {
+  min-height: 80px;
 }
 .home-hero__intro {
-  margin-top: 1.25rem;
+  margin-top: 0.65rem;
   color: #e0f4ff;
   font-size: 1.05rem;
   line-height: 1.85;
@@ -490,19 +495,27 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  animation: brand-paper-enter 1000ms ease-out both;
 }
 .home-hero__media::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, #075286c9, #075286cc 55%, #07528685);
+  background:
+    linear-gradient(180deg, #075286eb 0 72px, #07528600 190px),
+    linear-gradient(
+      90deg,
+      #075286 0%,
+      #075286f5 28%,
+      #075286c4 43%,
+      #07528626 67%,
+      #07528600 100%
+    );
 }
 .home-hero__media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: 70% center;
 }
 .site-page-hero__media figcaption {
   margin-top: 0.65rem;
@@ -547,9 +560,9 @@
   overflow: hidden;
   background: white;
   border: 1px solid #dceaf4;
-  border-radius: 20px;
+  border-radius: var(--brand-radius);
   color: var(--brand-ink);
-  box-shadow: 0 16px 42px #09376629;
+  box-shadow: none;
 }
 .home-drain-methods__grid,
 .home-case-evidence__grid {
@@ -557,13 +570,60 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.5rem;
 }
-.home-drain-methods__grid article,
 .home-case-evidence__grid article {
   min-width: 0;
   padding: 1.5rem;
   border: 1px solid var(--brand-line);
   border-radius: var(--brand-radius);
   background: white;
+}
+.home-drain-methods {
+  background: var(--brand-paper);
+}
+.home-drain-methods__grid article {
+  min-width: 0;
+  padding-block: 1.25rem 0;
+  border-top: 1px solid #aacbe1;
+}
+.home-drain-methods__grid a {
+  font-weight: 700;
+}
+.home-company-guides__links {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+.home-company-guides__link {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 0.75rem;
+  min-width: 0;
+  padding-block: 1.25rem;
+  border-top: 1px solid var(--brand-line);
+}
+.home-company-guides__link p {
+  flex: 1;
+  color: var(--brand-copy);
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+.home-company-guides__link > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  color: var(--brand-accent);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.home-company-guides__link:hover {
+  border-color: var(--brand-accent);
+}
+.home-company-guides__link svg {
+  width: 18px;
+  height: 18px;
 }
 .home-drain-methods__grid h3,
 .home-case-evidence h3,
@@ -638,15 +698,17 @@
 }
 @media (max-width: 767px) {
   .home-drain-methods__grid,
+  .home-company-guides__links,
   .home-case-evidence__grid {
     grid-template-columns: minmax(0, 1fr);
   }
 }
 .home-service-finder__types {
   display: flex;
-  gap: 0.3rem;
-  padding: 0.5rem 0.75rem 0;
-  background: #eaf4fc;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--brand-line);
+  background: white;
 }
 .home-service-finder__types button {
   display: flex;
@@ -655,7 +717,7 @@
   min-height: 52px;
   padding: 0.75rem 1.25rem;
   color: #42516a;
-  border-radius: 12px 12px 0 0;
+  border-radius: 8px;
   font-size: 0.9rem;
   font-weight: 700;
 }
@@ -663,8 +725,8 @@
   background: #dcecf8;
 }
 .home-service-finder__types button[aria-pressed="true"] {
-  background: white;
-  color: #075286;
+  background: var(--brand-accent);
+  color: white;
 }
 .home-service-finder__types svg {
   width: 19px;
@@ -680,10 +742,10 @@
 }
 .home-finder-query {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 112px;
+  grid-template-columns: minmax(0, 1fr) 144px;
   align-items: center;
   gap: 1rem 1.5rem;
-  padding: 1.5rem;
+  padding: 2rem;
 }
 .home-finder-query__preview {
   display: grid;
@@ -691,8 +753,7 @@
   aspect-ratio: 1;
   overflow: clip;
   background: #e7f4fd;
-  border: 1px solid var(--brand-line);
-  border-radius: 16px;
+  border-radius: var(--brand-radius);
 }
 .home-finder-query__preview .service-illustration {
   aspect-ratio: 1;
@@ -714,8 +775,8 @@
   line-height: 1.6;
 }
 .home-finder-options.brand-disclosure {
-  border-radius: 12px;
-  background: #f4f9ff;
+  border-radius: 8px;
+  background: var(--brand-paper);
 }
 .home-finder-options.brand-disclosure > summary {
   min-height: 48px;
@@ -747,12 +808,13 @@
   display: block;
   margin-bottom: 0.35rem;
   color: var(--brand-copy);
-  font-size: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 700;
 }
 .home-service-finder select {
   min-width: 0;
   width: 100%;
-  min-height: 48px;
+  min-height: 52px;
   border: 1px solid var(--brand-line);
   border-radius: 8px;
   background: white;
@@ -1014,7 +1076,7 @@
   margin-top: 2rem;
   padding: 1.5rem;
   border: 1px solid #bfddf2;
-  border-radius: 20px;
+  border-radius: var(--brand-radius);
   background: #e3f2fe;
 }
 .home-safety-note > svg {
@@ -1092,10 +1154,8 @@
   gap: 1.5rem;
   justify-content: space-between;
   padding: clamp(1.5rem, 3vw, 2rem);
-  border-radius: 24px;
-  background:
-    linear-gradient(135deg, #075286f2, #0878bae6),
-    url("/images/drainbear-paper-hero-640.webp") center / cover;
+  border-radius: var(--brand-radius);
+  background: var(--brand-accent);
   color: white;
 }
 .home-arrangement__intro .brand-eyebrow {
@@ -2187,19 +2247,19 @@
   grid-template-columns: minmax(0, 1fr);
   align-content: start;
   border: 1px solid var(--brand-line);
-  border-radius: 20px;
+  border-radius: var(--brand-radius);
   background: white;
   transition:
     border-color 180ms ease,
     box-shadow 180ms ease;
 }
 .blog-reading-card:hover {
-  border-color: var(--brand-accent);
-  box-shadow: 0 8px 24px #07528612;
+  border-color: transparent;
+  box-shadow: var(--brand-elevation);
 }
 .blog-reading-card > .service-illustration,
 .blog-reading-card__image {
-  border-radius: 20px 20px 0 0;
+  border-radius: var(--brand-radius) var(--brand-radius) 0 0;
 }
 .blog-reading-card > div {
   min-width: 0;
@@ -3203,11 +3263,16 @@
   }
   .home-hero__grid {
     display: block;
+    min-height: auto;
     padding-top: 108px;
     padding-bottom: 1.5rem;
   }
-  .home-hero__grid {
-    padding-bottom: 2rem;
+  .home-hero__copy {
+    margin-inline: auto;
+    text-align: center;
+  }
+  .home-hero__media::after {
+    background: linear-gradient(180deg, #075286e6, #075286d9 55%, #075286a3);
   }
   .home-service-finder__fields {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -3274,7 +3339,7 @@
     font-size: clamp(2rem, 8.7vw, 2.7rem);
   }
   .site-shell .home-hero h1 {
-    font-size: clamp(2.4rem, 10.2vw, 4rem);
+    font-size: clamp(2.2rem, 10.2vw, 3rem);
   }
   .home-hero__grid {
     padding-top: 100px;
@@ -3283,6 +3348,13 @@
   .home-hero__intro {
     font-size: 0.95rem;
     margin-top: 1rem;
+  }
+  .home-hero__coverage {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+  }
+  .home-hero__copy .contact-actions {
+    margin-inline: auto;
   }
   .contact-actions {
     grid-template-columns: minmax(0, 1fr);

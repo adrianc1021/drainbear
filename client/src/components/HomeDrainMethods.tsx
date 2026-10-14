@@ -34,7 +34,6 @@ export default function HomeDrainMethods() {
       <div className="container">
         <div className="section-heading">
           <div>
-            <p className="brand-eyebrow">按現場條件選擇工具</p>
             <h2 id="home-methods-heading">通渠方法點樣揀？</h2>
           </div>
           <Link href="/blog/drain-tool-selection-guide">
