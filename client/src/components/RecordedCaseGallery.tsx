@@ -1,4 +1,3 @@
-import CaseStudyCard from "@/components/CaseStudyCard";
 import { recordedCaseStudies } from "@/lib/caseRepository";
 import { useCaseStudies } from "@/lib/useCases";
 import { createImageSrcSet, optimizedImageUrl } from "@/lib/imageOptimization";
@@ -39,7 +38,7 @@ export default function RecordedCaseGallery() {
       <div className="container">
         <div className="section-heading">
           <div>
-            <h2 id="home-recorded-cases-heading">點樣通渠？睇現場。</h2>
+            <h2 id="home-recorded-cases-heading">施工過程紀錄</h2>
           </div>
           <Link href="/cases">
             查看全部施工紀錄 <ArrowRight aria-hidden="true" />
@@ -48,13 +47,37 @@ export default function RecordedCaseGallery() {
         <p className="section-heading-description">
           真實施工短片展示坐廁疏通、喉口檢查及戶外渠口操作；完整紀錄可在各案例內頁查看。
         </p>
-        <div className="recorded-case-grid">
-          {[
-            recordedCaseStudies[2],
-            recordedCaseStudies[0],
-            recordedCaseStudies[4],
-          ].map(study => (
-            <CaseStudyCard key={study._id} study={study} concise />
+        <div className="home-work-films">
+          {[recordedCaseStudies[1], recordedCaseStudies[4]].map(study => (
+            <figure key={study._id}>
+              <video
+                controls
+                playsInline
+                preload="none"
+                poster={study.video!.poster}
+                width={study.video!.width}
+                height={study.video!.height}
+                aria-label={study.title}
+              >
+                <source src={study.video!.src} type="video/mp4" />
+                <track
+                  kind="captions"
+                  src={study.video!.captions}
+                  srcLang="zh-HK"
+                  label="繁體中文"
+                  default
+                />
+                <a href={study.video!.src}>下載施工短片</a>
+              </video>
+              <figcaption>
+                <h3>
+                  <Link href={`/cases/${study.slug}`}>
+                    {study.title} <ArrowRight aria-hidden="true" />
+                  </Link>
+                </h3>
+                <p>{study.result}</p>
+              </figcaption>
+            </figure>
           ))}
         </div>
         <div

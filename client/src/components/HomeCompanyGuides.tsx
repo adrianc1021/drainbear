@@ -37,7 +37,7 @@ export default function HomeCompanyGuides() {
           aria-label="通渠公司與收費指南"
           className="home-company-guides__links"
         >
-          {GUIDES.map(guide => (
+          {GUIDES.map((guide, index) => (
             <Link
               key={guide.slug}
               href={`/blog/${guide.slug}`}
@@ -50,6 +50,14 @@ export default function HomeCompanyGuides() {
               }
               className="home-company-guides__link"
             >
+              <img
+                src={`/images/home/knowledge-${index}.webp`}
+                width="788"
+                height="292"
+                alt="通渠服務示意插圖"
+                loading="lazy"
+                decoding="async"
+              />
               <h3 className="text-lg font-bold text-navy">{guide.title}</h3>
               <p>{guide.description}</p>
               <span>

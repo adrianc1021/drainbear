@@ -1,0 +1,1292 @@
+{
+  "schemaVersion": 3,
+  "stage": "components",
+  "id": "components",
+  "title": "Plan and asset review · client/src/pages/Home.tsx",
+  "comp": {
+    "path": ".impeccable/mocks/B-light-water.png",
+    "width": 736,
+    "height": 2135
+  },
+  "specSha256": "d2365afbe60965908fd634720d941805cbf13f3884f220926b0c4ca7b2bc4683",
+  "components": [
+    {
+      "id": "brand-mark",
+      "name": "Brand mark",
+      "kind": "image",
+      "role": "asset",
+      "box": {
+        "x": 0.034,
+        "y": 0.0047,
+        "w": 0.0611,
+        "h": 0.0178
+      },
+      "note": "White existing DrainBear bear-head brand logo",
+      "medium": "raster",
+      "preview": {
+        "kind": "image",
+        "path": "assets/plates/brand-mark.png"
+      },
+      "dependencies": []
+    },
+    {
+      "id": "hero-scene",
+      "name": "Hero scene",
+      "kind": "plate",
+      "role": "asset",
+      "box": {
+        "x": 0,
+        "y": 0.0267,
+        "w": 1,
+        "h": 0.1911
+      },
+      "note": "Full bleed night Hong Kong harbour with large white faceted bear hard hat wrench pipework and flowing water; one coherent brand illustration, never a real job photograph",
+      "medium": "raster",
+      "preview": {
+        "kind": "image",
+        "path": "assets/plates/hero-scene.png"
+      },
+      "dependencies": []
+    },
+    {
+      "id": "service-toilet-photo",
+      "name": "Service toilet photo",
+      "kind": "plate",
+      "role": "asset",
+      "box": {
+        "x": 0.6128,
+        "y": 0.3583,
+        "w": 0.3872,
+        "h": 0.0384
+      },
+      "note": "Illustrative close-up toilet fixture with flowing flushing water; no claim of a recorded customer job",
+      "medium": "raster",
+      "preview": {
+        "kind": "image",
+        "path": "assets/plates/service-toilet-photo.png"
+      },
+      "dependencies": []
+    },
+    {
+      "id": "service-sink-photo",
+      "name": "Service sink photo",
+      "kind": "plate",
+      "role": "asset",
+      "box": {
+        "x": 0.6128,
+        "y": 0.3967,
+        "w": 0.3872,
+        "h": 0.0403
+      },
+      "note": "Illustrative close-up kitchen stainless sink and drain water; no claim of a recorded customer job",
+      "medium": "raster",
+      "preview": {
+        "kind": "image",
+        "path": "assets/plates/service-sink-photo.png"
+      },
+      "dependencies": []
+    },
+    {
+      "id": "service-bathroom-photo",
+      "name": "Service bathroom photo",
+      "kind": "plate",
+      "role": "asset",
+      "box": {
+        "x": 0.6128,
+        "y": 0.437,
+        "w": 0.3872,
+        "h": 0.0403
+      },
+      "note": "Illustrative close-up tiled floor drain and water; no claim of a recorded customer job",
+      "medium": "raster",
+      "preview": {
+        "kind": "image",
+        "path": "assets/plates/service-bathroom-photo.png"
+      },
+      "dependencies": []
+    },
+    {
+      "id": "service-main-photo",
+      "name": "Service main photo",
+      "kind": "image",
+      "role": "asset",
+      "box": {
+        "x": 0.6128,
+        "y": 0.4773,
+        "w": 0.3872,
+        "h": 0.0454
+      },
+      "note": "Existing genuine outdoor drain opening video preview, retained as original source media",
+      "medium": "raster",
+      "preview": {
+        "kind": "image",
+        "path": "assets/plates/service-main-photo.png"
+      },
+      "dependencies": []
+    },
+    {
+      "id": "work-under-sink",
+      "name": "Work under sink",
+      "kind": "image",
+      "role": "asset",
+      "box": {
+        "x": 0.3356,
+        "y": 0.5293,
+        "w": 0.2948,
+        "h": 0.0815
+      },
+      "note": "Original under sink work video still with its existing caption; not regenerated as evidence",
+      "medium": "raster",
+      "preview": {
+        "kind": "image",
+        "path": "assets/plates/work-under-sink.png"
+      },
+      "dependencies": []
+    },
+    {
+      "id": "work-outdoor",
+      "name": "Work outdoor",
+      "kind": "image",
+      "role": "asset",
+      "box": {
+        "x": 0.6549,
+        "y": 0.5293,
+        "w": 0.2948,
+        "h": 0.0815
+      },
+      "note": "Original outdoor drain work video still with its existing caption; not regenerated as evidence",
+      "medium": "raster",
+      "preview": {
+        "kind": "image",
+        "path": "assets/plates/work-outdoor.png"
+      },
+      "dependencies": []
+    },
+    {
+      "id": "method-art-0",
+      "name": "Method art 0",
+      "kind": "plate",
+      "role": "asset",
+      "box": {
+        "x": 0.2772,
+        "y": 0.6375,
+        "w": 0.2092,
+        "h": 0.0407
+      },
+      "note": "White line drawing of a mechanical drain machine and cable on continuous blue band; the blue ground is intentionally cropped at rectangular bounds while the equipment line drawing stays fully visible",
+      "medium": "raster",
+      "preview": {
+        "kind": "image",
+        "path": "assets/plates/method-art-0.png"
+      },
+      "dependencies": []
+    },
+    {
+      "id": "method-art-1",
+      "name": "Method art 1",
+      "kind": "plate",
+      "role": "asset",
+      "box": {
+        "x": 0.4959,
+        "y": 0.6375,
+        "w": 0.212,
+        "h": 0.0407
+      },
+      "note": "White line drawing of water jet nozzle and spray on continuous blue band; the blue ground is intentionally cropped at rectangular bounds while the equipment line drawing stays fully visible",
+      "medium": "raster",
+      "preview": {
+        "kind": "image",
+        "path": "assets/plates/method-art-1.png"
+      },
+      "dependencies": []
+    },
+    {
+      "id": "method-art-2",
+      "name": "Method art 2",
+      "kind": "plate",
+      "role": "asset",
+      "box": {
+        "x": 0.7405,
+        "y": 0.6351,
+        "w": 0.1834,
+        "h": 0.0436
+      },
+      "note": "White line drawing of drain inspection camera reel and screen on continuous blue band; the blue ground is intentionally cropped at rectangular bounds while the equipment line drawing stays fully visible",
+      "medium": "raster",
+      "preview": {
+        "kind": "image",
+        "path": "assets/plates/method-art-2.png"
+      },
+      "dependencies": []
+    },
+    {
+      "id": "knowledge-photo-0",
+      "name": "Knowledge photo 0",
+      "kind": "image",
+      "role": "asset",
+      "box": {
+        "x": 0.0571,
+        "y": 0.8206,
+        "w": 0.2677,
+        "h": 0.0342
+      },
+      "note": "Article thumbnail illustrating kitchen sink drain",
+      "medium": "raster",
+      "preview": {
+        "kind": "image",
+        "path": "assets/plates/knowledge-photo-0.png"
+      },
+      "dependencies": []
+    },
+    {
+      "id": "knowledge-photo-1",
+      "name": "Knowledge photo 1",
+      "kind": "image",
+      "role": "asset",
+      "box": {
+        "x": 0.3682,
+        "y": 0.8206,
+        "w": 0.2677,
+        "h": 0.0342
+      },
+      "note": "Article thumbnail illustrating toilet drain",
+      "medium": "raster",
+      "preview": {
+        "kind": "image",
+        "path": "assets/plates/knowledge-photo-1.png"
+      },
+      "dependencies": []
+    },
+    {
+      "id": "knowledge-photo-2",
+      "name": "Knowledge photo 2",
+      "kind": "image",
+      "role": "asset",
+      "box": {
+        "x": 0.6793,
+        "y": 0.8206,
+        "w": 0.2677,
+        "h": 0.0342
+      },
+      "note": "Article thumbnail illustrating bathroom floor drain",
+      "medium": "raster",
+      "preview": {
+        "kind": "image",
+        "path": "assets/plates/knowledge-photo-2.png"
+      },
+      "dependencies": []
+    },
+    {
+      "id": "footer-brand",
+      "name": "Footer brand",
+      "kind": "image",
+      "role": "asset",
+      "box": {
+        "x": 0.038,
+        "y": 0.9485,
+        "w": 0.288,
+        "h": 0.0361
+      },
+      "note": "Existing white DrainBear brand logo and name",
+      "medium": "raster",
+      "preview": {
+        "kind": "image",
+        "path": "assets/plates/footer-brand.png"
+      },
+      "dependencies": []
+    },
+    {
+      "id": "services-background",
+      "name": "Services background",
+      "kind": "plate",
+      "role": "asset",
+      "box": {
+        "x": 0,
+        "y": 0.3143,
+        "w": 1,
+        "h": 0.044
+      },
+      "note": "Dark harbour water strip continuing the hero material behind service introduction",
+      "medium": "raster",
+      "preview": {
+        "kind": "image",
+        "path": "assets/plates/services-background.png"
+      },
+      "dependencies": []
+    }
+  ],
+  "codeRegions": [
+    {
+      "id": "header",
+      "name": "Header",
+      "kind": "chrome",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 0.0267
+      },
+      "note": "Solid midnight navy navigation strip"
+    },
+    {
+      "id": "brand-name",
+      "name": "Brand name",
+      "kind": "text",
+      "box": {
+        "x": 0.1019,
+        "y": 0.0052,
+        "w": 0.125,
+        "h": 0.0159
+      },
+      "note": "Two lines of white Chinese brand name and DrainBear"
+    },
+    {
+      "id": "nav-0",
+      "name": "Nav 0",
+      "kind": "text",
+      "box": {
+        "x": 0.25,
+        "y": 0.0103,
+        "w": 0.0516,
+        "h": 0.0075
+      },
+      "note": "White navigation label 服務"
+    },
+    {
+      "id": "nav-1",
+      "name": "Nav 1",
+      "kind": "text",
+      "box": {
+        "x": 0.3288,
+        "y": 0.0103,
+        "w": 0.0761,
+        "h": 0.0075
+      },
+      "note": "White navigation label 工程紀錄"
+    },
+    {
+      "id": "nav-2",
+      "name": "Nav 2",
+      "kind": "text",
+      "box": {
+        "x": 0.4348,
+        "y": 0.0103,
+        "w": 0.087,
+        "h": 0.0075
+      },
+      "note": "White navigation label 通渠小知識"
+    },
+    {
+      "id": "nav-3",
+      "name": "Nav 3",
+      "kind": "text",
+      "box": {
+        "x": 0.5435,
+        "y": 0.0103,
+        "w": 0.0761,
+        "h": 0.0075
+      },
+      "note": "White navigation label 關於我們"
+    },
+    {
+      "id": "header-phone",
+      "name": "Header phone",
+      "kind": "control",
+      "box": {
+        "x": 0.6576,
+        "y": 0.0066,
+        "w": 0.1264,
+        "h": 0.0145
+      },
+      "note": "Phone icon and 9558 8260 contact link"
+    },
+    {
+      "id": "header-whatsapp",
+      "name": "Header whatsapp",
+      "kind": "control",
+      "box": {
+        "x": 0.8003,
+        "y": 0.0042,
+        "w": 0.1603,
+        "h": 0.0173
+      },
+      "note": "Green WhatsApp enquiry button"
+    },
+    {
+      "id": "hero-headline",
+      "name": "Hero headline",
+      "kind": "text",
+      "box": {
+        "x": 0.0503,
+        "y": 0.0436,
+        "w": 0.4144,
+        "h": 0.0567
+      },
+      "note": "Two lines bold white 香港通渠，先搵通渠熊。"
+    },
+    {
+      "id": "hero-note",
+      "name": "Hero note",
+      "kind": "text",
+      "box": {
+        "x": 0.053,
+        "y": 0.1087,
+        "w": 0.4226,
+        "h": 0.0089
+      },
+      "note": "White 24 小時接受查詢，上門時間另行確認 clarification"
+    },
+    {
+      "id": "hero-whatsapp",
+      "name": "Hero whatsapp",
+      "kind": "control",
+      "box": {
+        "x": 0.053,
+        "y": 0.1246,
+        "w": 0.3234,
+        "h": 0.023
+      },
+      "note": "Green WhatsApp 傳相查詢 button with icon and arrow"
+    },
+    {
+      "id": "hero-phone",
+      "name": "Hero phone",
+      "kind": "control",
+      "box": {
+        "x": 0.053,
+        "y": 0.1499,
+        "w": 0.3234,
+        "h": 0.023
+      },
+      "note": "Blue 致電 9558 8260 phone button"
+    },
+    {
+      "id": "intake-title",
+      "name": "Intake title",
+      "kind": "text",
+      "box": {
+        "x": 0.0462,
+        "y": 0.2403,
+        "w": 0.25,
+        "h": 0.0351
+      },
+      "note": "Two line bold navy enquiry heading, generated response promise replaced with verified site wording"
+    },
+    {
+      "id": "intake-note",
+      "name": "Intake note",
+      "kind": "text",
+      "box": {
+        "x": 0.0543,
+        "y": 0.2806,
+        "w": 0.2337,
+        "h": 0.0173
+      },
+      "note": "Navy clarification of enquiry and attendance arrangements"
+    },
+    {
+      "id": "intake-tabs",
+      "name": "Intake tabs",
+      "kind": "control",
+      "box": {
+        "x": 0.3315,
+        "y": 0.2295,
+        "w": 0.6141,
+        "h": 0.0187
+      },
+      "note": "Three audience choices 住宅 食肆 物業"
+    },
+    {
+      "id": "service-label",
+      "name": "Service label",
+      "kind": "text",
+      "box": {
+        "x": 0.3315,
+        "y": 0.2553,
+        "w": 0.1114,
+        "h": 0.007
+      },
+      "note": "受影響位置 label"
+    },
+    {
+      "id": "district-label",
+      "name": "District label",
+      "kind": "text",
+      "box": {
+        "x": 0.6427,
+        "y": 0.2553,
+        "w": 0.1019,
+        "h": 0.007
+      },
+      "note": "所在地區 label"
+    },
+    {
+      "id": "service-select",
+      "name": "Service select",
+      "kind": "control",
+      "box": {
+        "x": 0.3315,
+        "y": 0.2637,
+        "w": 0.3003,
+        "h": 0.0159
+      },
+      "note": "Labelled service select input"
+    },
+    {
+      "id": "district-select",
+      "name": "District select",
+      "kind": "control",
+      "box": {
+        "x": 0.6427,
+        "y": 0.2637,
+        "w": 0.303,
+        "h": 0.0159
+      },
+      "note": "Labelled district select input"
+    },
+    {
+      "id": "intake-send",
+      "name": "Intake send",
+      "kind": "control",
+      "box": {
+        "x": 0.3315,
+        "y": 0.2857,
+        "w": 0.6141,
+        "h": 0.0173
+      },
+      "note": "Blue enquiry send action"
+    },
+    {
+      "id": "services-heading",
+      "name": "Services heading",
+      "kind": "text",
+      "box": {
+        "x": 0.0543,
+        "y": 0.3391,
+        "w": 0.8492,
+        "h": 0.0155
+      },
+      "note": "White heading explaining the drain problem range"
+    },
+    {
+      "id": "service-icon-0",
+      "name": "Service icon 0",
+      "kind": "control",
+      "box": {
+        "x": 0.0462,
+        "y": 0.3616,
+        "w": 0.0856,
+        "h": 0.0304
+      },
+      "note": "Small white line icon for 坐廁通渠"
+    },
+    {
+      "id": "service-name-0",
+      "name": "Service name 0",
+      "kind": "text",
+      "box": {
+        "x": 0.1508,
+        "y": 0.363,
+        "w": 0.2976,
+        "h": 0.0155
+      },
+      "note": "White bold service name 坐廁通渠"
+    },
+    {
+      "id": "service-copy-0",
+      "name": "Service copy 0",
+      "kind": "text",
+      "box": {
+        "x": 0.1508,
+        "y": 0.3817,
+        "w": 0.4144,
+        "h": 0.008
+      },
+      "note": "White service summary for 坐廁通渠"
+    },
+    {
+      "id": "service-arrow-0",
+      "name": "Service arrow 0",
+      "kind": "control",
+      "box": {
+        "x": 0.5598,
+        "y": 0.3705,
+        "w": 0.0299,
+        "h": 0.0126
+      },
+      "note": "Arrow link to 坐廁通渠 detail"
+    },
+    {
+      "id": "service-icon-1",
+      "name": "Service icon 1",
+      "kind": "control",
+      "box": {
+        "x": 0.0462,
+        "y": 0.3995,
+        "w": 0.0856,
+        "h": 0.0304
+      },
+      "note": "Small white line icon for 鋅盤通渠"
+    },
+    {
+      "id": "service-name-1",
+      "name": "Service name 1",
+      "kind": "text",
+      "box": {
+        "x": 0.1508,
+        "y": 0.4028,
+        "w": 0.2976,
+        "h": 0.0155
+      },
+      "note": "White bold service name 鋅盤通渠"
+    },
+    {
+      "id": "service-copy-1",
+      "name": "Service copy 1",
+      "kind": "text",
+      "box": {
+        "x": 0.1508,
+        "y": 0.4215,
+        "w": 0.4144,
+        "h": 0.008
+      },
+      "note": "White service summary for 鋅盤通渠"
+    },
+    {
+      "id": "service-arrow-1",
+      "name": "Service arrow 1",
+      "kind": "control",
+      "box": {
+        "x": 0.5598,
+        "y": 0.4103,
+        "w": 0.0299,
+        "h": 0.0126
+      },
+      "note": "Arrow link to 鋅盤通渠 detail"
+    },
+    {
+      "id": "service-icon-2",
+      "name": "Service icon 2",
+      "kind": "control",
+      "box": {
+        "x": 0.0462,
+        "y": 0.4412,
+        "w": 0.0856,
+        "h": 0.0304
+      },
+      "note": "Small white line icon for 浴室淤塞"
+    },
+    {
+      "id": "service-name-2",
+      "name": "Service name 2",
+      "kind": "text",
+      "box": {
+        "x": 0.1508,
+        "y": 0.4436,
+        "w": 0.2976,
+        "h": 0.0155
+      },
+      "note": "White bold service name 浴室淤塞"
+    },
+    {
+      "id": "service-copy-2",
+      "name": "Service copy 2",
+      "kind": "text",
+      "box": {
+        "x": 0.1508,
+        "y": 0.4618,
+        "w": 0.4144,
+        "h": 0.008
+      },
+      "note": "White service summary for 浴室淤塞"
+    },
+    {
+      "id": "service-arrow-2",
+      "name": "Service arrow 2",
+      "kind": "control",
+      "box": {
+        "x": 0.5598,
+        "y": 0.4506,
+        "w": 0.0299,
+        "h": 0.0126
+      },
+      "note": "Arrow link to 浴室淤塞 detail"
+    },
+    {
+      "id": "service-icon-3",
+      "name": "Service icon 3",
+      "kind": "control",
+      "box": {
+        "x": 0.0462,
+        "y": 0.481,
+        "w": 0.0856,
+        "h": 0.0304
+      },
+      "note": "Small white line icon for 主渠倒灌"
+    },
+    {
+      "id": "service-name-3",
+      "name": "Service name 3",
+      "kind": "text",
+      "box": {
+        "x": 0.1508,
+        "y": 0.4838,
+        "w": 0.2976,
+        "h": 0.0155
+      },
+      "note": "White bold service name 主渠倒灌"
+    },
+    {
+      "id": "service-copy-3",
+      "name": "Service copy 3",
+      "kind": "text",
+      "box": {
+        "x": 0.1508,
+        "y": 0.5021,
+        "w": 0.4144,
+        "h": 0.008
+      },
+      "note": "White service summary for 主渠倒灌"
+    },
+    {
+      "id": "service-arrow-3",
+      "name": "Service arrow 3",
+      "kind": "control",
+      "box": {
+        "x": 0.5598,
+        "y": 0.4909,
+        "w": 0.0299,
+        "h": 0.0126
+      },
+      "note": "Arrow link to 主渠倒灌 detail"
+    },
+    {
+      "id": "work-title",
+      "name": "Work title",
+      "kind": "text",
+      "box": {
+        "x": 0.0571,
+        "y": 0.5372,
+        "w": 0.2459,
+        "h": 0.0286
+      },
+      "note": "施工過程紀錄 heading and factual introductory copy"
+    },
+    {
+      "id": "work-play-1",
+      "name": "Work play 1",
+      "kind": "control",
+      "box": {
+        "x": 0.462,
+        "y": 0.5546,
+        "w": 0.0503,
+        "h": 0.0173
+      },
+      "note": "White circular video play control"
+    },
+    {
+      "id": "work-play-2",
+      "name": "Work play 2",
+      "kind": "control",
+      "box": {
+        "x": 0.7758,
+        "y": 0.5546,
+        "w": 0.0503,
+        "h": 0.0173
+      },
+      "note": "White circular video play control"
+    },
+    {
+      "id": "methods-title",
+      "name": "Methods title",
+      "kind": "text",
+      "box": {
+        "x": 0.0571,
+        "y": 0.623,
+        "w": 0.2908,
+        "h": 0.0197
+      },
+      "note": "White methods heading only, bounded separately from introduction"
+    },
+    {
+      "id": "method-name-0",
+      "name": "Method name 0",
+      "kind": "text",
+      "box": {
+        "x": 0.2867,
+        "y": 0.6782,
+        "w": 0.1793,
+        "h": 0.0084
+      },
+      "note": "White method title 機械疏通"
+    },
+    {
+      "id": "method-copy-0",
+      "name": "Method copy 0",
+      "kind": "text",
+      "box": {
+        "x": 0.2867,
+        "y": 0.6895,
+        "w": 0.1793,
+        "h": 0.0173
+      },
+      "note": "White method purpose and limitations for 機械疏通"
+    },
+    {
+      "id": "method-name-1",
+      "name": "Method name 1",
+      "kind": "text",
+      "box": {
+        "x": 0.5245,
+        "y": 0.6782,
+        "w": 0.1793,
+        "h": 0.0084
+      },
+      "note": "White method title 高壓洗渠"
+    },
+    {
+      "id": "method-copy-1",
+      "name": "Method copy 1",
+      "kind": "text",
+      "box": {
+        "x": 0.5245,
+        "y": 0.6895,
+        "w": 0.1793,
+        "h": 0.0173
+      },
+      "note": "White method purpose and limitations for 高壓洗渠"
+    },
+    {
+      "id": "method-name-2",
+      "name": "Method name 2",
+      "kind": "text",
+      "box": {
+        "x": 0.7432,
+        "y": 0.6782,
+        "w": 0.1793,
+        "h": 0.0084
+      },
+      "note": "White method title CCTV 照渠"
+    },
+    {
+      "id": "method-copy-2",
+      "name": "Method copy 2",
+      "kind": "text",
+      "box": {
+        "x": 0.7432,
+        "y": 0.6895,
+        "w": 0.1793,
+        "h": 0.0173
+      },
+      "note": "White method purpose and limitations for CCTV 照渠"
+    },
+    {
+      "id": "process-title",
+      "name": "Process title",
+      "kind": "text",
+      "box": {
+        "x": 0.0571,
+        "y": 0.718,
+        "w": 0.3668,
+        "h": 0.0206
+      },
+      "note": "Navy service process heading and four-step explanation"
+    },
+    {
+      "id": "process-symbol-0",
+      "name": "Process symbol 0",
+      "kind": "control",
+      "box": {
+        "x": 0.0571,
+        "y": 0.7433,
+        "w": 0.1834,
+        "h": 0.0244
+      },
+      "note": "Step number and small line icon for 提供資料"
+    },
+    {
+      "id": "process-name-0",
+      "name": "Process name 0",
+      "kind": "text",
+      "box": {
+        "x": 0.0571,
+        "y": 0.7691,
+        "w": 0.1834,
+        "h": 0.0103
+      },
+      "note": "Navy process step title 提供資料"
+    },
+    {
+      "id": "process-copy-0",
+      "name": "Process copy 0",
+      "kind": "text",
+      "box": {
+        "x": 0.0571,
+        "y": 0.7827,
+        "w": 0.1834,
+        "h": 0.0159
+      },
+      "note": "Navy process step explanation 提供資料"
+    },
+    {
+      "id": "process-symbol-1",
+      "name": "Process symbol 1",
+      "kind": "control",
+      "box": {
+        "x": 0.2935,
+        "y": 0.7433,
+        "w": 0.1834,
+        "h": 0.0244
+      },
+      "note": "Step number and small line icon for 安排上門"
+    },
+    {
+      "id": "process-name-1",
+      "name": "Process name 1",
+      "kind": "text",
+      "box": {
+        "x": 0.2935,
+        "y": 0.7691,
+        "w": 0.1834,
+        "h": 0.0103
+      },
+      "note": "Navy process step title 安排上門"
+    },
+    {
+      "id": "process-copy-1",
+      "name": "Process copy 1",
+      "kind": "text",
+      "box": {
+        "x": 0.2935,
+        "y": 0.7827,
+        "w": 0.1834,
+        "h": 0.0159
+      },
+      "note": "Navy process step explanation 安排上門"
+    },
+    {
+      "id": "process-symbol-2",
+      "name": "Process symbol 2",
+      "kind": "control",
+      "box": {
+        "x": 0.5258,
+        "y": 0.7433,
+        "w": 0.1834,
+        "h": 0.0244
+      },
+      "note": "Step number and small line icon for 現場檢查"
+    },
+    {
+      "id": "process-name-2",
+      "name": "Process name 2",
+      "kind": "text",
+      "box": {
+        "x": 0.5258,
+        "y": 0.7691,
+        "w": 0.1834,
+        "h": 0.0103
+      },
+      "note": "Navy process step title 現場檢查"
+    },
+    {
+      "id": "process-copy-2",
+      "name": "Process copy 2",
+      "kind": "text",
+      "box": {
+        "x": 0.5258,
+        "y": 0.7827,
+        "w": 0.1834,
+        "h": 0.0159
+      },
+      "note": "Navy process step explanation 現場檢查"
+    },
+    {
+      "id": "process-symbol-3",
+      "name": "Process symbol 3",
+      "kind": "control",
+      "box": {
+        "x": 0.7595,
+        "y": 0.7433,
+        "w": 0.1834,
+        "h": 0.0244
+      },
+      "note": "Step number and small line icon for 完成測試"
+    },
+    {
+      "id": "process-name-3",
+      "name": "Process name 3",
+      "kind": "text",
+      "box": {
+        "x": 0.7595,
+        "y": 0.7691,
+        "w": 0.1834,
+        "h": 0.0103
+      },
+      "note": "Navy process step title 完成測試"
+    },
+    {
+      "id": "process-copy-3",
+      "name": "Process copy 3",
+      "kind": "text",
+      "box": {
+        "x": 0.7595,
+        "y": 0.7827,
+        "w": 0.1834,
+        "h": 0.0159
+      },
+      "note": "Navy process step explanation 完成測試"
+    },
+    {
+      "id": "knowledge-title",
+      "name": "Knowledge title",
+      "kind": "text",
+      "box": {
+        "x": 0.0571,
+        "y": 0.8042,
+        "w": 0.7269,
+        "h": 0.0122
+      },
+      "note": "Navy 通渠小知識 heading with introductory copy"
+    },
+    {
+      "id": "knowledge-copy-0",
+      "name": "Knowledge copy 0",
+      "kind": "text",
+      "box": {
+        "x": 0.0571,
+        "y": 0.8571,
+        "w": 0.2677,
+        "h": 0.0164
+      },
+      "note": "Navy article title and short summary; production uses existing confirmed guides"
+    },
+    {
+      "id": "knowledge-copy-1",
+      "name": "Knowledge copy 1",
+      "kind": "text",
+      "box": {
+        "x": 0.3682,
+        "y": 0.8571,
+        "w": 0.2677,
+        "h": 0.0164
+      },
+      "note": "Navy article title and short summary; production uses existing confirmed guides"
+    },
+    {
+      "id": "knowledge-copy-2",
+      "name": "Knowledge copy 2",
+      "kind": "text",
+      "box": {
+        "x": 0.6793,
+        "y": 0.8571,
+        "w": 0.2677,
+        "h": 0.0164
+      },
+      "note": "Navy article title and short summary; production uses existing confirmed guides"
+    },
+    {
+      "id": "faq-heading",
+      "name": "Faq heading",
+      "kind": "text",
+      "box": {
+        "x": 0.0571,
+        "y": 0.8899,
+        "w": 0.2364,
+        "h": 0.0201
+      },
+      "note": "Navy FAQ heading and introduction"
+    },
+    {
+      "id": "faq-row-0",
+      "name": "Faq row 0",
+      "kind": "control",
+      "box": {
+        "x": 0.3179,
+        "y": 0.8895,
+        "w": 0.6277,
+        "h": 0.0112
+      },
+      "note": "Navy FAQ summary text and disclosure arrow"
+    },
+    {
+      "id": "faq-row-1",
+      "name": "Faq row 1",
+      "kind": "control",
+      "box": {
+        "x": 0.3179,
+        "y": 0.9021,
+        "w": 0.6277,
+        "h": 0.0112
+      },
+      "note": "Navy FAQ summary text and disclosure arrow"
+    },
+    {
+      "id": "faq-row-2",
+      "name": "Faq row 2",
+      "kind": "control",
+      "box": {
+        "x": 0.3179,
+        "y": 0.9148,
+        "w": 0.6277,
+        "h": 0.0112
+      },
+      "note": "Navy FAQ summary text and disclosure arrow"
+    },
+    {
+      "id": "faq-row-3",
+      "name": "Faq row 3",
+      "kind": "control",
+      "box": {
+        "x": 0.3179,
+        "y": 0.9274,
+        "w": 0.6277,
+        "h": 0.0112
+      },
+      "note": "Navy FAQ summary text and disclosure arrow"
+    },
+    {
+      "id": "footer-note",
+      "name": "Footer note",
+      "kind": "text",
+      "box": {
+        "x": 0.0543,
+        "y": 0.9859,
+        "w": 0.2976,
+        "h": 0.0136
+      },
+      "note": "White factual service note"
+    },
+    {
+      "id": "footer-phone",
+      "name": "Footer phone",
+      "kind": "control",
+      "box": {
+        "x": 0.3886,
+        "y": 0.9621,
+        "w": 0.2242,
+        "h": 0.0178
+      },
+      "note": "White phone enquiry link 9558 8260"
+    },
+    {
+      "id": "footer-whatsapp",
+      "name": "Footer whatsapp",
+      "kind": "control",
+      "box": {
+        "x": 0.6875,
+        "y": 0.9593,
+        "w": 0.2554,
+        "h": 0.0201
+      },
+      "note": "Green WhatsApp enquiry button"
+    },
+    {
+      "id": "footer-arrangements",
+      "name": "Footer arrangements",
+      "kind": "text",
+      "box": {
+        "x": 0.428,
+        "y": 0.9813,
+        "w": 0.2092,
+        "h": 0.0136
+      },
+      "note": "White 24 hour enquiry and attendance confirmation note"
+    },
+    {
+      "id": "footer-nav",
+      "name": "Footer nav",
+      "kind": "text",
+      "box": {
+        "x": 0.6861,
+        "y": 0.993,
+        "w": 0.2568,
+        "h": 0.007
+      },
+      "note": "White footer navigation links"
+    },
+    {
+      "id": "intake-small-label",
+      "name": "Intake small label",
+      "kind": "text",
+      "box": {
+        "x": 0.0543,
+        "y": 0.23,
+        "w": 0.1535,
+        "h": 0.0108
+      },
+      "note": "Small enquiry wording visible in generated mockup; final wording must avoid unsupported speed promises"
+    },
+    {
+      "id": "services-small-label",
+      "name": "Services small label",
+      "kind": "text",
+      "box": {
+        "x": 0.0543,
+        "y": 0.3246,
+        "w": 0.2052,
+        "h": 0.0112
+      },
+      "note": "Small blue services wording visible in the generated mockup"
+    },
+    {
+      "id": "faq-intro-copy",
+      "name": "Faq intro copy",
+      "kind": "text",
+      "box": {
+        "x": 0.0571,
+        "y": 0.9101,
+        "w": 0.2432,
+        "h": 0.0117
+      },
+      "note": "Short navy explanatory sentence below FAQ heading"
+    },
+    {
+      "id": "service-rule-0",
+      "name": "Service rule 0",
+      "kind": "chrome",
+      "box": {
+        "x": 0.0557,
+        "y": 0.3953,
+        "w": 0.8913,
+        "h": 0.0019
+      },
+      "note": "Thin horizontal service row separator"
+    },
+    {
+      "id": "service-rule-1",
+      "name": "Service rule 1",
+      "kind": "chrome",
+      "box": {
+        "x": 0.0557,
+        "y": 0.4356,
+        "w": 0.8913,
+        "h": 0.0019
+      },
+      "note": "Thin horizontal service row separator"
+    },
+    {
+      "id": "service-rule-2",
+      "name": "Service rule 2",
+      "kind": "chrome",
+      "box": {
+        "x": 0.0557,
+        "y": 0.4759,
+        "w": 0.8913,
+        "h": 0.0019
+      },
+      "note": "Thin horizontal service row separator"
+    },
+    {
+      "id": "methods-intro",
+      "name": "Methods intro",
+      "kind": "text",
+      "box": {
+        "x": 0.0571,
+        "y": 0.6422,
+        "w": 0.2595,
+        "h": 0.0183
+      },
+      "note": "Two short lines of white explanatory text below the methods heading"
+    }
+  ]
+}

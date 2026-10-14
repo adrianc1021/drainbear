@@ -1,0 +1,15 @@
+{
+  "prompt": "Create a COMPLETE desktop website homepage design mockup for 通渠熊 DrainBear, Hong Kong drain-unblocking enquiries. Show the ENTIRE long page from navigation to contact footer as a tall high-resolution web design image, edge-to-edge without a browser/device frame. Offer and genuine controls must remain readable; do not make merely a cinematic poster.\n\nDirection B: light and water. Deep midnight navy, clean white type and a restrained water-blue accent. One large friendly white bear emerges from sculptural pipework and a calm flowing-water scene; photographic lighting and crafted materials, without neon glows, tech-dashboard decoration or purple gradients. Quiet open sections alternate with the dark opening. Reference one defines ONLY the faceted white bear identity, hard hat and wrench, not its old composition. References two and three are genuine work-video stills to reproduce only in the documentary region.\n\nReading order: complete navigation 「通渠熊 DrainBear」「服務」「工程紀錄」「通渠小知識」「關於我們」. Spacious hero with integrated oversized headline 「香港通渠，先搵通渠熊。」 and controls 「WhatsApp 傳相查詢」「致電 9558 8260」. Visible clarification 「24 小時接受查詢，上門時間另行確認」. Full-width open enquiry area with tabs 「住宅」「食肆」「物業」, select inputs 「受影響位置」「所在地區」, and send button. Services appear as large typographic rows, not tiles: 「坐廁通渠」「鋅盤通渠」「浴室淤塞」「主渠倒灌」. Documentary band 「施工過程紀錄」 with actual supplied stills and video play controls. Methods 「機械疏通」「高壓洗渠」「CCTV 照渠」 with restrained line diagrams. Process explains data, arrangements, inspection, and drain testing. FAQ rows and knowledge links complete the body. End with brand, phone and WhatsApp.\n\nNo repeating cards, glass panels, fake testimonials, counts, guarantees, prices or invented project photography. The white bear is the protagonist; depth and water supply a coherent visual narrative, while content stays practical.",
+  "approved": true,
+  "generated_at": "2026-10-14",
+  "tool": "image_gen.imagegen",
+  "source_image": "/workspace/generated_images/exec-9348f58e-fc58-4531-bb52-85411692f961.png",
+  "references": [
+    "client/public/images/drainbear-paper-hero.webp",
+    "client/public/videos/cases/under-sink-drain-line-operation-v1.webp",
+    "client/public/videos/cases/outdoor-drain-chamber-operation-v1.webp"
+  ],
+  "scope": "complete-homepage-design-mockup",
+  "not_implemented": true,
+  "approval_source": "User latest message: B｜光影水流：深藍光影與明暗段落，配景深及水流動效。"
+}

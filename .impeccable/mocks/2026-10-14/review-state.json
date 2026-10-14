@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-14",
+  "stage": "approved-direction-preparing-assets",
+  "application_code_changed": false,
+  "production_deployed": false,
+  "options": [
+    "A-editorial",
+    "B-light-water",
+    "C-paper-city"
+  ],
+  "review_notes": {
+    "A-editorial": "Complete header-to-footer design; open typographic services, process and FAQ.",
+    "B-light-water": "Complete header-to-footer design; dark-water narrative with open service rows.",
+    "C-paper-city": "Revised complete header-to-footer design accepted for presentation: continuous canvas, open service labels, unboxed methods and ruled FAQ; no floating card scaffold."
+  },
+  "verified_21st_catalog_components": [
+    18675,
+    20023
+  ],
+  "approval": "B-light-water",
+  "implementation_checks": "Build, browser interactions, responsive and SEO checks will run after implementation; static imagery cannot validate them.",
+  "renders": {
+    "A-editorial": {
+      "width": 836,
+      "height": 1881,
+      "bytes": 2610925,
+      "prompt_verified": true,
+      "approval": false
+    },
+    "B-light-water": {
+      "width": 736,
+      "height": 2135,
+      "bytes": 2183845,
+      "prompt_verified": true,
+      "approval": false
+    },
+    "C-paper-city": {
+      "width": 797,
+      "height": 1974,
+      "bytes": 2471252,
+      "prompt_verified": true,
+      "approval": false
+    }
+  },
+  "known_mockup_details_to_replace": [
+    "Generated video durations with actual original video metadata",
+    "Footer year with current site year",
+    "Generated microcopy with verified business copy",
+    "Generated documentary thumbnails with untouched original video stills",
+    "Semantic audience/service/district controls from existing intake implementation"
+  ]
+}

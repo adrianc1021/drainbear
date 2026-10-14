@@ -1,0 +1,15 @@
+{
+  "prompt": "Create a COMPLETE desktop homepage mockup for 通渠熊 DrainBear, Hong Kong drain-unblocking enquiries. Show the entire website from navigation to footer in a single tall high-resolution image, edge-to-edge with no browser/device frame. This is a functioning service-page design, not an illustration poster.\n\nDirection C: Hong Kong paper-city long scroll. The entire page is ONE uninterrupted pale ivory canvas. Sculpted paper buildings and a slim harbour-blue water ribbon run along the outer edges and connect the page; the centre remains open and readable. A huge white faceted bear in hard hat holding a wrench leads a fresh full-width hero composition, with headline integrated across the sky. Reference one supplies character identity only. References two and three supply genuine work-video stills, used only for existing documentary media.\n\nHeader: 「通渠熊 DrainBear」「服務」「工程紀錄」「通渠小知識」「關於我們」. Hero: 「香港通渠，先搵通渠熊。」, 「住宅・食肆・物業」, 「WhatsApp 傳相查詢」「致電 9558 8260」, 「24 小時接受查詢，上門時間另行確認」. Below, place audience tabs and underline-only selects 「受影響位置」「所在地區」 DIRECTLY on the continuous canvas. Services are a vertical list of bold text and small drawn symbols: 「坐廁通渠」「鋅盤通渠」「浴室淤塞」「主渠倒灌」. Documentary images with play controls sit freely alongside 「施工過程紀錄」. Methods 「機械疏通」「高壓洗渠」「CCTV 照渠」 become a flowing illustrated diagram with open labels. Process steps follow the ribbon. FAQ uses simple ruled rows; knowledge links use text. Complete brand/phone/WhatsApp footer.\n\nCRITICAL visual law: all text, forms and illustrations share the SAME unbroken background. NO cards, panels, floating white slabs, rounded containers, boxed service tiles, shadows, framed sections or bento grids. No fake reviews, prices, guarantees or statistics. Paper-city depth comes from outer scenery, never containers around content.",
+  "approved": false,
+  "generated_at": "2026-10-14",
+  "tool": "image_gen.imagegen",
+  "source_image": "/workspace/generated_images/exec-e69f4e71-c87f-44f2-bb4b-7912c34b8eee.png",
+  "references": [
+    "client/public/images/drainbear-paper-hero.webp",
+    "client/public/videos/cases/under-sink-drain-line-operation-v1.webp",
+    "client/public/videos/cases/outdoor-drain-chamber-operation-v1.webp"
+  ],
+  "scope": "complete-homepage-design-mockup",
+  "not_implemented": true,
+  "supersedes_rejected_render": "/workspace/generated_images/exec-e2487ca8-6ebf-48a4-bef4-d5773ea7bbb3.png"
+}

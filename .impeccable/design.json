@@ -1,0 +1,461 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-14T11:53:20.023266+00:00",
+  "title": "Design System: 通渠熊 DrainBear",
+  "extensions": {
+    "colorMeta": {
+      "home-night": {
+        "role": "primary",
+        "displayName": "夜港深藍",
+        "tonalRamp": [
+          "oklch(15% 0.07422 253.71)",
+          "oklch(26% 0.07422 253.71)",
+          "oklch(38% 0.07422 253.71)",
+          "oklch(50% 0.07422 253.71)",
+          "oklch(62% 0.07422 253.71)",
+          "oklch(74% 0.07422 253.71)",
+          "oklch(86% 0.07422 253.71)",
+          "oklch(95% 0.07422 253.71)"
+        ]
+      },
+      "home-blue": {
+        "role": "primary",
+        "displayName": "服務水藍",
+        "tonalRamp": [
+          "oklch(15% 0.16869 255.17)",
+          "oklch(26% 0.16869 255.17)",
+          "oklch(38% 0.16869 255.17)",
+          "oklch(50% 0.16869 255.17)",
+          "oklch(62% 0.16869 255.17)",
+          "oklch(74% 0.16869 255.17)",
+          "oklch(86% 0.16869 255.17)",
+          "oklch(95% 0.16869 255.17)"
+        ]
+      },
+      "home-blue-hover": {
+        "role": "primary",
+        "displayName": "深水藍",
+        "tonalRamp": [
+          "oklch(15% 0.12985 253.88)",
+          "oklch(26% 0.12985 253.88)",
+          "oklch(38% 0.12985 253.88)",
+          "oklch(50% 0.12985 253.88)",
+          "oklch(62% 0.12985 253.88)",
+          "oklch(74% 0.12985 253.88)",
+          "oklch(86% 0.12985 253.88)",
+          "oklch(95% 0.12985 253.88)"
+        ]
+      },
+      "home-paper": {
+        "role": "neutral",
+        "displayName": "冷白閱讀底",
+        "tonalRamp": [
+          "oklch(15% 0.00513 247.88)",
+          "oklch(26% 0.00513 247.88)",
+          "oklch(38% 0.00513 247.88)",
+          "oklch(50% 0.00513 247.88)",
+          "oklch(62% 0.00513 247.88)",
+          "oklch(74% 0.00513 247.88)",
+          "oklch(86% 0.00513 247.88)",
+          "oklch(95% 0.00513 247.88)"
+        ]
+      },
+      "home-copy": {
+        "role": "neutral",
+        "displayName": "灰藍正文",
+        "tonalRamp": [
+          "oklch(15% 0.06387 248.72)",
+          "oklch(26% 0.06387 248.72)",
+          "oklch(38% 0.06387 248.72)",
+          "oklch(50% 0.06387 248.72)",
+          "oklch(62% 0.06387 248.72)",
+          "oklch(74% 0.06387 248.72)",
+          "oklch(86% 0.06387 248.72)",
+          "oklch(95% 0.06387 248.72)"
+        ]
+      },
+      "home-line": {
+        "role": "neutral",
+        "displayName": "淺藍細線",
+        "tonalRamp": [
+          "oklch(15% 0.02792 244.73)",
+          "oklch(26% 0.02792 244.73)",
+          "oklch(38% 0.02792 244.73)",
+          "oklch(50% 0.02792 244.73)",
+          "oklch(62% 0.02792 244.73)",
+          "oklch(74% 0.02792 244.73)",
+          "oklch(86% 0.02792 244.73)",
+          "oklch(95% 0.02792 244.73)"
+        ]
+      },
+      "home-dark-copy": {
+        "role": "neutral",
+        "displayName": "淡藍正文",
+        "tonalRamp": [
+          "oklch(15% 0.02396 244.15)",
+          "oklch(26% 0.02396 244.15)",
+          "oklch(38% 0.02396 244.15)",
+          "oklch(50% 0.02396 244.15)",
+          "oklch(62% 0.02396 244.15)",
+          "oklch(74% 0.02396 244.15)",
+          "oklch(86% 0.02396 244.15)",
+          "oklch(95% 0.02396 244.15)"
+        ]
+      },
+      "home-dark-rule": {
+        "role": "neutral",
+        "displayName": "深區細線",
+        "tonalRamp": [
+          "oklch(15% 0.05532 247.98)",
+          "oklch(26% 0.05532 247.98)",
+          "oklch(38% 0.05532 247.98)",
+          "oklch(50% 0.05532 247.98)",
+          "oklch(62% 0.05532 247.98)",
+          "oklch(74% 0.05532 247.98)",
+          "oklch(86% 0.05532 247.98)",
+          "oklch(95% 0.05532 247.98)"
+        ]
+      },
+      "home-field-line": {
+        "role": "neutral",
+        "displayName": "欄位灰藍線",
+        "tonalRamp": [
+          "oklch(15% 0.04057 243.62)",
+          "oklch(26% 0.04057 243.62)",
+          "oklch(38% 0.04057 243.62)",
+          "oklch(50% 0.04057 243.62)",
+          "oklch(62% 0.04057 243.62)",
+          "oklch(74% 0.04057 243.62)",
+          "oklch(86% 0.04057 243.62)",
+          "oklch(95% 0.04057 243.62)"
+        ]
+      },
+      "home-control-idle": {
+        "role": "neutral",
+        "displayName": "控件淡藍底",
+        "tonalRamp": [
+          "oklch(15% 0.01694 242.43)",
+          "oklch(26% 0.01694 242.43)",
+          "oklch(38% 0.01694 242.43)",
+          "oklch(50% 0.01694 242.43)",
+          "oklch(62% 0.01694 242.43)",
+          "oklch(74% 0.01694 242.43)",
+          "oklch(86% 0.01694 242.43)",
+          "oklch(95% 0.01694 242.43)"
+        ]
+      },
+      "home-control-ink": {
+        "role": "neutral",
+        "displayName": "控件深藍字",
+        "tonalRamp": [
+          "oklch(15% 0.07614 249.79)",
+          "oklch(26% 0.07614 249.79)",
+          "oklch(38% 0.07614 249.79)",
+          "oklch(50% 0.07614 249.79)",
+          "oklch(62% 0.07614 249.79)",
+          "oklch(74% 0.07614 249.79)",
+          "oklch(86% 0.07614 249.79)",
+          "oklch(95% 0.07614 249.79)"
+        ]
+      },
+      "home-control-selected": {
+        "role": "neutral",
+        "displayName": "控件選取深藍",
+        "tonalRamp": [
+          "oklch(15% 0.08400 251.75)",
+          "oklch(26% 0.08400 251.75)",
+          "oklch(38% 0.08400 251.75)",
+          "oklch(50% 0.08400 251.75)",
+          "oklch(62% 0.08400 251.75)",
+          "oklch(74% 0.08400 251.75)",
+          "oklch(86% 0.08400 251.75)",
+          "oklch(95% 0.08400 251.75)"
+        ]
+      },
+      "home-control-indicator": {
+        "role": "neutral",
+        "displayName": "選取水藍線",
+        "tonalRamp": [
+          "oklch(15% 0.13194 238.23)",
+          "oklch(26% 0.13194 238.23)",
+          "oklch(38% 0.13194 238.23)",
+          "oklch(50% 0.13194 238.23)",
+          "oklch(62% 0.13194 238.23)",
+          "oklch(74% 0.13194 238.23)",
+          "oklch(86% 0.13194 238.23)",
+          "oklch(95% 0.13194 238.23)"
+        ]
+      },
+      "home-whatsapp": {
+        "role": "secondary",
+        "displayName": "首頁 WhatsApp 綠",
+        "tonalRamp": [
+          "oklch(15% 0.16893 156.49)",
+          "oklch(26% 0.16893 156.49)",
+          "oklch(38% 0.16893 156.49)",
+          "oklch(50% 0.16893 156.49)",
+          "oklch(62% 0.16893 156.49)",
+          "oklch(74% 0.16893 156.49)",
+          "oklch(86% 0.16893 156.49)",
+          "oklch(95% 0.16893 156.49)"
+        ]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "純白",
+        "tonalRamp": [
+          "oklch(15% 0.00000 89.88)",
+          "oklch(26% 0.00000 89.88)",
+          "oklch(38% 0.00000 89.88)",
+          "oklch(50% 0.00000 89.88)",
+          "oklch(62% 0.00000 89.88)",
+          "oklch(74% 0.00000 89.88)",
+          "oklch(86% 0.00000 89.88)",
+          "oklch(95% 0.00000 89.88)"
+        ]
+      },
+      "brand-ink": {
+        "role": "neutral",
+        "displayName": "共用墨藍",
+        "tonalRamp": [
+          "oklch(15% 0.04983 267.74)",
+          "oklch(26% 0.04983 267.74)",
+          "oklch(38% 0.04983 267.74)",
+          "oklch(50% 0.04983 267.74)",
+          "oklch(62% 0.04983 267.74)",
+          "oklch(74% 0.04983 267.74)",
+          "oklch(86% 0.04983 267.74)",
+          "oklch(95% 0.04983 267.74)"
+        ]
+      },
+      "brand-copy": {
+        "role": "neutral",
+        "displayName": "共用灰藍正文",
+        "tonalRamp": [
+          "oklch(15% 0.04578 260.49)",
+          "oklch(26% 0.04578 260.49)",
+          "oklch(38% 0.04578 260.49)",
+          "oklch(50% 0.04578 260.49)",
+          "oklch(62% 0.04578 260.49)",
+          "oklch(74% 0.04578 260.49)",
+          "oklch(86% 0.04578 260.49)",
+          "oklch(95% 0.04578 260.49)"
+        ]
+      },
+      "brand-paper": {
+        "role": "neutral",
+        "displayName": "共用淡藍紙面",
+        "tonalRamp": [
+          "oklch(15% 0.00926 242.84)",
+          "oklch(26% 0.00926 242.84)",
+          "oklch(38% 0.00926 242.84)",
+          "oklch(50% 0.00926 242.84)",
+          "oklch(62% 0.00926 242.84)",
+          "oklch(74% 0.00926 242.84)",
+          "oklch(86% 0.00926 242.84)",
+          "oklch(95% 0.00926 242.84)"
+        ]
+      },
+      "brand-line": {
+        "role": "neutral",
+        "displayName": "共用淺藍線",
+        "tonalRamp": [
+          "oklch(15% 0.01873 242.98)",
+          "oklch(26% 0.01873 242.98)",
+          "oklch(38% 0.01873 242.98)",
+          "oklch(50% 0.01873 242.98)",
+          "oklch(62% 0.01873 242.98)",
+          "oklch(74% 0.01873 242.98)",
+          "oklch(86% 0.01873 242.98)",
+          "oklch(95% 0.01873 242.98)"
+        ]
+      },
+      "brand-accent": {
+        "role": "neutral",
+        "displayName": "共用服務藍",
+        "tonalRamp": [
+          "oklch(15% 0.10810 246.89)",
+          "oklch(26% 0.10810 246.89)",
+          "oklch(38% 0.10810 246.89)",
+          "oklch(50% 0.10810 246.89)",
+          "oklch(62% 0.10810 246.89)",
+          "oklch(74% 0.10810 246.89)",
+          "oklch(86% 0.10810 246.89)",
+          "oklch(95% 0.10810 246.89)"
+        ]
+      },
+      "brand-green": {
+        "role": "secondary",
+        "displayName": "共用 WhatsApp 綠",
+        "tonalRamp": [
+          "oklch(15% 0.20146 149.74)",
+          "oklch(26% 0.20146 149.74)",
+          "oklch(38% 0.20146 149.74)",
+          "oklch(50% 0.20146 149.74)",
+          "oklch(62% 0.20146 149.74)",
+          "oklch(74% 0.20146 149.74)",
+          "oklch(86% 0.20146 149.74)",
+          "oklch(95% 0.20146 149.74)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "首頁繁體重標題",
+        "purpose": "首頁 h1，自託管 Noto Sans HK900 的 DrainBear Display 名稱；353 字子集。"
+      },
+      "headline": {
+        "displayName": "首頁分段標題",
+        "purpose": "首頁 h2；內頁保留既有共用字體。"
+      },
+      "body": {
+        "displayName": "共用正文",
+        "purpose": "平台字體堆疊與繁體 fallback。"
+      }
+    },
+    "shadows": [
+      {
+        "name": "shared-brand-elevation",
+        "value": "0 14px 36px #06375812",
+        "purpose": "既有共用樣式；不是首頁開放列的陰影。"
+      }
+    ],
+    "motion": [
+      {
+        "name": "title-enter",
+        "value": "850ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "18px 垂直進場及2px blur；第二行延遲100ms。"
+      },
+      {
+        "name": "water-drift",
+        "value": "22s linear infinite",
+        "purpose": "低透明水流；只在可見、頁面活躍及未暫停時播放。"
+      },
+      {
+        "name": "shared-reveal",
+        "value": "420ms cubic-bezier(0.23, 1, 0.32, 1)",
+        "purpose": "14px fail-open、一次進場；尊重減少動態。"
+      },
+      {
+        "name": "scene-parallax",
+        "value": "26px desktop / 8px mobile maximum",
+        "purpose": "原生 rAF 隨捲動；暫停、頁面隱藏或減少動態時歸零。"
+      },
+      {
+        "name": "control-transition",
+        "value": "180ms ease",
+        "purpose": "按鈕及 FAQ 狀態轉換。"
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "home-phone",
+        "value": "767px"
+      },
+      {
+        "name": "home-narrow",
+        "value": "359px"
+      },
+      {
+        "name": "home-tablet",
+        "value": "1023px"
+      },
+      {
+        "name": "shared-mobile-navigation",
+        "value": "1199px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "首頁 WhatsApp",
+      "kind": "button",
+      "refersTo": "contact-whatsapp",
+      "description": "首屏主要傳相查詢入口；真實聯絡 URL 由網站配置提供。",
+      "html": "<button class=\"ds-btn ds-wa\">WhatsApp 傳相查詢報價</button>",
+      "css": ".ds-btn{font-family:-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang HK\", \"Noto Sans HK\", \"Microsoft JhengHei\", sans-serif;font-size:16px;min-height:66px;padding:.8rem 1.2rem;border:0;border-radius:6px;cursor:pointer;transition:transform 180ms ease,filter 180ms ease}.ds-wa{background:#21c77b;color:#09294c}.ds-btn:hover{transform:translateY(-2px);filter:brightness(1.08)}.ds-btn:focus-visible,.ds-select:focus-visible,.ds-audience:focus-visible,.ds-service:focus-visible,.ds-faq summary:focus-visible{outline:3px solid #0867c7;outline-offset:5px}@media(prefers-reduced-motion:reduce){.ds-btn{transition:none}}"
+    },
+    {
+      "name": "首頁電話",
+      "kind": "button",
+      "refersTo": "contact-phone",
+      "description": "與 WhatsApp 成組的電話入口。",
+      "html": "<button class=\"ds-btn ds-phone\">致電查詢</button>",
+      "css": ".ds-btn{font-family:-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang HK\", \"Noto Sans HK\", \"Microsoft JhengHei\", sans-serif;font-size:16px;min-height:66px;padding:.8rem 1.2rem;border:0;border-radius:6px;cursor:pointer;transition:transform 180ms ease,filter 180ms ease}.ds-phone{background:#0867c7;color:white}.ds-btn:hover{transform:translateY(-2px);filter:brightness(1.08)}.ds-btn:focus-visible,.ds-select:focus-visible,.ds-audience:focus-visible,.ds-service:focus-visible,.ds-faq summary:focus-visible{outline:3px solid #0867c7;outline-offset:5px}@media(prefers-reduced-motion:reduce){.ds-btn{transition:none}}"
+    },
+    {
+      "name": "送出查詢",
+      "kind": "button",
+      "refersTo": "finder-send",
+      "description": "開放查詢區的主要操作。",
+      "html": "<button class=\"ds-btn ds-send\">傳送現場資料</button>",
+      "css": ".ds-send{font-family:-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang HK\", \"Noto Sans HK\", \"Microsoft JhengHei\", sans-serif;font-size:16px;font-weight:800;min-height:54px;padding:.8rem;border:0;border-radius:3px;background:#0867c7;color:white;cursor:pointer;transition:background 180ms ease}.ds-send:hover{background:#094f94}.ds-btn:focus-visible,.ds-select:focus-visible,.ds-audience:focus-visible,.ds-service:focus-visible,.ds-faq summary:focus-visible{outline:3px solid #0867c7;outline-offset:5px}@media(prefers-reduced-motion:reduce){.ds-send{transition:none}}"
+    },
+    {
+      "name": "服務選擇",
+      "kind": "input",
+      "refersTo": "finder-select",
+      "description": "具可見標籤的原生 select。",
+      "html": "<label class=\"ds-label\" for=\"ds-service-select\">需要的服務</label><select class=\"ds-select\" id=\"ds-service-select\"><option>鋅盤通渠</option><option>坐廁通渠</option></select>",
+      "css": ".ds-label{display:block;font-family:-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang HK\", \"Noto Sans HK\", \"Microsoft JhengHei\", sans-serif;font-size:.85rem;font-weight:700;color:#355574;margin-bottom:.5rem}.ds-select{font-family:-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang HK\", \"Noto Sans HK\", \"Microsoft JhengHei\", sans-serif;font-size:.9rem;width:100%;min-height:52px;padding:.75rem;border:1px solid #a4bdd2;border-radius:3px;color:#09294c;background:white}.ds-btn:focus-visible,.ds-select:focus-visible,.ds-audience:focus-visible,.ds-service:focus-visible,.ds-faq summary:focus-visible{outline:3px solid #0867c7;outline-offset:5px}"
+    },
+    {
+      "name": "受眾選擇",
+      "kind": "button",
+      "refersTo": "audience-control",
+      "description": "底線只標示原生按鈕選取狀態。",
+      "html": "<button class=\"ds-audience\" aria-pressed=\"true\">住宅</button><button class=\"ds-audience\" aria-pressed=\"false\">商舖及食肆</button>",
+      "css": ".ds-audience{font-family:-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang HK\", \"Noto Sans HK\", \"Microsoft JhengHei\", sans-serif;font-size:16px;min-height:52px;padding:.75rem;background:#e2edf6;color:#183e62;border:0;border-bottom:3px solid transparent;border-radius:3px;font-weight:700;cursor:pointer;transition:background 180ms ease,border-color 180ms ease}.ds-audience[aria-pressed=true]{background:#173f68;color:white;border-bottom-color:#2f9edb}.ds-audience:hover{border-bottom-color:#0867c7}.ds-btn:focus-visible,.ds-select:focus-visible,.ds-audience:focus-visible,.ds-service:focus-visible,.ds-faq summary:focus-visible{outline:3px solid #0867c7;outline-offset:5px}@media(prefers-reduced-motion:reduce){.ds-audience{transition:none}}"
+    },
+    {
+      "name": "開放服務列",
+      "kind": "custom",
+      "description": "深色連續背景與細線，沒有內容卡片框。",
+      "html": "<div class=\"ds-services\"><a class=\"ds-service\" href=\"#service-example\"><span><strong>鋅盤通渠</strong><small>了解去水慢及淤塞處理</small></span><svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M7 17 17 7M7 7h10v10\"/></svg></a></div>",
+      "css": ".ds-services{background:#09294c;padding:0 1.5rem}.ds-service{display:flex;justify-content:space-between;align-items:center;gap:1.5rem;min-height:156px;border-top:1px solid #587591;border-bottom:1px solid #587591;color:white;text-decoration:none;font-family:-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang HK\", \"Noto Sans HK\", \"Microsoft JhengHei\", sans-serif}.ds-service strong{font-family:\"DrainBear Display\",\"Noto Sans HK\",\"PingFang HK\",sans-serif;font-size:clamp(1.4rem,2.8vw,2.4rem);font-weight:900}.ds-service small{display:block;margin-top:.5rem;font-size:.95rem;line-height:1.8;color:#d6e5f2}.ds-service svg{transition:transform 240ms ease}.ds-service:hover svg{transform:translate(3px,-3px)}.ds-service:focus-visible{outline:3px solid #c4e9ff;outline-offset:5px}@media(prefers-reduced-motion:reduce){.ds-service svg{transition:none}}"
+    },
+    {
+      "name": "原生 FAQ",
+      "kind": "custom",
+      "description": "同一閱讀面上的 details，箭頭表示開啟。",
+      "html": "<details class=\"ds-faq\"><summary>上門安排點樣確認？<svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"m6 9 6 6 6-6\"/></svg></summary><p>先提供地區及現場資料，再確認安排。</p></details>",
+      "css": ".ds-faq{font-family:-apple-system, BlinkMacSystemFont, \"Segoe UI\", \"PingFang HK\", \"Noto Sans HK\", \"Microsoft JhengHei\", sans-serif;background:#f5f8fb;color:#09294c;border-top:1px solid #bfd0df;border-bottom:1px solid #bfd0df}.ds-faq summary{display:flex;justify-content:space-between;align-items:center;gap:1rem;min-height:65px;padding:1rem 0;font-size:1rem;font-weight:700;cursor:pointer}.ds-faq summary svg{transition:transform 180ms ease}.ds-faq[open] summary svg{transform:rotate(180deg)}.ds-faq p{margin:0;padding:0 0 1.25rem;color:#355574;line-height:1.85}.ds-btn:focus-visible,.ds-select:focus-visible,.ds-audience:focus-visible,.ds-service:focus-visible,.ds-faq summary:focus-visible{outline:3px solid #0867c7;outline-offset:5px}@media(prefers-reduced-motion:reduce){.ds-faq svg{transition:none}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "光影水流",
+    "overview": "首頁以白熊、香港夜景與水流建立主視覺，深藍段落與冷白閱讀區交替。繁體中文重標題、細分隔線和開放式服務列令內容有層次；查詢控件保留直接、清楚的操作語言。\n\n本文件記錄 2026-10-14 已實作及本地驗證的首頁 B 視覺系統，適用範圍是 `.home-page` 及 `.site-shell--home`。共用 Header、Footer、正文字體和內頁既有品牌規則仍然保留。用戶確認「可以：B 作方向，保留原素材，細節授權你完成（推薦）」；本文件不表示歷史 strict-comp 機器關卡已通過，也不將首頁規則自動套用至內頁。",
+    "keyCharacteristics": [
+      "白熊為主角，品牌示意與真實施工證據分開。",
+      "冷白閱讀區、深藍服務區及完整寬度的開放列。",
+      "自託管香港繁體字重標題，細線分隔與可見焦點。",
+      "可暫停水流與景深動效，支援減少動態偏好。"
+    ],
+    "rules": [
+      {
+        "name": "The Open Surface Rule",
+        "body": "首頁服務、查詢、指南及 FAQ 以開放佈局和細線分隔；不再用重複圓角卡片包裹每段內容。功能控件本身可保留小圓角。",
+        "section": "elevation"
+      },
+      {
+        "name": "The Evidence Rule",
+        "body": "品牌插圖、設備示意及真實施工照片／影片須以文案及 alt 說清楚各自用途，原始工程資料優先。",
+        "section": "colors"
+      }
+    ],
+    "dos": [
+      "Do 保留首頁白熊主視覺和原始 Logo、施工影片及文章素材。",
+      "Do 在冷白區用深藍正文，在深藍區用白色或已實作的淡藍文字。",
+      "Do 新增標題時更新 Noto Sans HK 900 字體子集，或驗證缺字的既有 fallback；現有 353 字子集不是完整 CJK 字庫。",
+      "Do 保留至少 44px 操作區、鍵盤焦點、動效暫停、減少動態支援及無 JavaScript 可讀內容。",
+      "Do 沿用首頁 CSS 範圍，修改共用樣式時另外核對內頁。"
+    ],
+    "donts": [
+      "Don't 在首頁新增重複浮起圓角卡片、硬偏移陰影、裝飾性小標或梯度文字。",
+      "Don't 將設備插圖或施工片段當作已驗證完工結果。",
+      "Don't 把深藍色遮罩壓到手機服務圖片難以辨認；手機圖片保留獨立完整圖像列。",
+      "Don't 讓文字進場效果成為內容顯示的必要條件，或在減少動態偏好下持續播放水流。",
+      "Don't 因首頁改版而將內頁既有 12px 容器半徑或共用字體規則全部替換。"
+    ]
+  }
+}

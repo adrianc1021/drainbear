@@ -1,0 +1,167 @@
+[
+  {
+    "id": "method-art-0",
+    "native_output": "/workspace/generated_images/exec-482c6946-cec8-43e1-9ef1-34ca1cd09205.png",
+    "prompt": "Edit the attached existing DrainBear method diagram into a clean production transparent PNG cutout. Preserve the same recognizable mechanical drain spring machine: round front face and central opening, upper handle and box, short wheeled feet, with a long curved cable and narrow tip extending left, its silhouette, arrangement, perspective, stroke thickness, scale and generous surrounding margins. This is the same white fine-line diagram, not a redesign. REMOVE THE ENTIRE DARK BLUE GROUND and replace it with native transparent alpha, including every empty space inside the rings, reel, screen, hose outline, machine outlines and between the spray lines. Preserve solid opaque WHITE and very pale icy-white strokes, small white equipment details and fine antialiasing. White paint must stay visible as white; never make white strokes transparent. All large interiors that currently show the blue background must become completely transparent, with only their white outlines remaining. No blue tint, no colored matte, no glow, no drop shadows, no gray fill, no background texture, no checkerboard pixels, no text, no captions, no UI. Output only the preserved white equipment line drawing on a genuinely transparent canvas. Keep the reference aspect ratio with every line and cable fully inside the canvas; output at least 1000 pixels wide.",
+    "transparent_background": true,
+    "png": "/workspace/drainbear/assets/plates/method-art-0.png",
+    "webp": "/workspace/drainbear/client/public/images/home/method-0.webp",
+    "sidecar": "/workspace/drainbear/assets/production-provenance/method-0.webp.json",
+    "prompt_file": "/workspace/drainbear-home-redesign-2026-10-14/assets-work/fix-transparent-methods/method-0-prompt.txt",
+    "png_qa": {
+      "dimensions": [
+        1669,
+        942
+      ],
+      "bytes": 757463,
+      "sha256": "eadd4dcc94281874701bd4b7a64d4a6b1d13b071d810c9bae7d59254f0cf2064",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 1211946,
+      "fully_opaque_pixels": 5266,
+      "transparent_fraction": 0.7708609220975984,
+      "opaque_stroke_median_rgb": [
+        253,
+        253,
+        253
+      ],
+      "minimum_spec_resolution_pass": true
+    },
+    "webp_qa": {
+      "dimensions": [
+        420,
+        237
+      ],
+      "bytes": 32368,
+      "sha256": "b8cfecd419f9918b288dcc5dc62217925935ecdffddd32aa56650f4d5869a841",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 78836,
+      "fully_opaque_pixels": 1226,
+      "transparent_fraction": 0.7920032147880249,
+      "opaque_stroke_median_rgb": [
+        253,
+        253,
+        253
+      ],
+      "minimum_spec_resolution_pass": true,
+      "exact_prompt_xmp_verified": true
+    },
+    "verification": "Native transparent alpha inspected on light/dark grounds; no chroma key or programmatic matting; only WebP format conversion/downsampling.",
+    "webp_provenance": "Exact prompt embedded in standard RIFF XMP dc:description without modifying compressed pixels; impeccable embed-prompt also generated matching relocated fallback sidecar."
+  },
+  {
+    "id": "method-art-1",
+    "native_output": "/workspace/generated_images/exec-f0fc8b31-acc1-42f3-9aca-34c888def708.png",
+    "prompt": "Edit the attached existing DrainBear method diagram into a clean production transparent PNG cutout. Preserve the same recognizable water jet nozzle: curved hose entering from lower left, horizontal cylindrical nozzle at centre, narrow spray lines and small droplets extending to the right, its silhouette, arrangement, perspective, stroke thickness, scale and generous surrounding margins. This is the same white fine-line diagram, not a redesign. REMOVE THE ENTIRE DARK BLUE GROUND and replace it with native transparent alpha, including every empty space inside the rings, reel, screen, hose outline, machine outlines and between the spray lines. Preserve solid opaque WHITE and very pale icy-white strokes, small white equipment details and fine antialiasing. White paint must stay visible as white; never make white strokes transparent. All large interiors that currently show the blue background must become completely transparent, with only their white outlines remaining. No blue tint, no colored matte, no glow, no drop shadows, no gray fill, no background texture, no checkerboard pixels, no text, no captions, no UI. Output only the preserved white equipment line drawing on a genuinely transparent canvas. Keep the reference aspect ratio with every line and cable fully inside the canvas; output at least 1000 pixels wide.",
+    "transparent_background": true,
+    "png": "/workspace/drainbear/assets/plates/method-art-1.png",
+    "webp": "/workspace/drainbear/client/public/images/home/method-1.webp",
+    "sidecar": "/workspace/drainbear/assets/production-provenance/method-1.webp.json",
+    "prompt_file": "/workspace/drainbear-home-redesign-2026-10-14/assets-work/fix-transparent-methods/method-1-prompt.txt",
+    "png_qa": {
+      "dimensions": [
+        1679,
+        937
+      ],
+      "bytes": 293772,
+      "sha256": "40743dfa8de333a2f4b221b84696203044da61000f5d2ef37e6f41edd4e93e2c",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 1414147,
+      "fully_opaque_pixels": 4961,
+      "transparent_fraction": 0.8988852819975299,
+      "opaque_stroke_median_rgb": [
+        252,
+        252,
+        253
+      ],
+      "minimum_spec_resolution_pass": true
+    },
+    "webp_qa": {
+      "dimensions": [
+        420,
+        234
+      ],
+      "bytes": 11496,
+      "sha256": "296a46ad8ec36199955447746b5a36d68d4e805737d9667247d7d6c60c438194",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 88565,
+      "fully_opaque_pixels": 851,
+      "transparent_fraction": 0.9011497761497762,
+      "opaque_stroke_median_rgb": [
+        250,
+        250,
+        250
+      ],
+      "minimum_spec_resolution_pass": true,
+      "exact_prompt_xmp_verified": true
+    },
+    "verification": "Native transparent alpha inspected on light/dark grounds; no chroma key or programmatic matting; only WebP format conversion/downsampling.",
+    "webp_provenance": "Exact prompt embedded in standard RIFF XMP dc:description without modifying compressed pixels; impeccable embed-prompt also generated matching relocated fallback sidecar."
+  },
+  {
+    "id": "method-art-2",
+    "native_output": "/workspace/generated_images/exec-85c838f6-4912-41a3-a1ac-a07a3b3c9654.png",
+    "prompt": "Edit the attached existing DrainBear method diagram into a clean production transparent PNG cutout. Preserve the same recognizable drain inspection camera equipment: separate round cable reel on the left, fine cable crossing the lower middle, large round wheeled equipment reel on the right with a rectangular display screen above, its silhouette, arrangement, perspective, stroke thickness, scale and generous surrounding margins. This is the same white fine-line diagram, not a redesign. REMOVE THE ENTIRE DARK BLUE GROUND and replace it with native transparent alpha, including every empty space inside the rings, reel, screen, hose outline, machine outlines and between the spray lines. Preserve solid opaque WHITE and very pale icy-white strokes, small white equipment details and fine antialiasing. White paint must stay visible as white; never make white strokes transparent. All large interiors that currently show the blue background must become completely transparent, with only their white outlines remaining. No blue tint, no colored matte, no glow, no drop shadows, no gray fill, no background texture, no checkerboard pixels, no text, no captions, no UI. Output only the preserved white equipment line drawing on a genuinely transparent canvas. Keep the reference aspect ratio with every line and cable fully inside the canvas; output at least 1000 pixels wide.",
+    "transparent_background": true,
+    "png": "/workspace/drainbear/assets/plates/method-art-2.png",
+    "webp": "/workspace/drainbear/client/public/images/home/method-2.webp",
+    "sidecar": "/workspace/drainbear/assets/production-provenance/method-2.webp.json",
+    "prompt_file": "/workspace/drainbear-home-redesign-2026-10-14/assets-work/fix-transparent-methods/method-2-prompt.txt",
+    "png_qa": {
+      "dimensions": [
+        1513,
+        1040
+      ],
+      "bytes": 716194,
+      "sha256": "9980c70701a94ad8127343472eb769aab7bb6e8a2620c95cd181b4ae3b4f2399",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 1035076,
+      "fully_opaque_pixels": 7579,
+      "transparent_fraction": 0.6578092429711729,
+      "opaque_stroke_median_rgb": [
+        253,
+        253,
+        253
+      ],
+      "minimum_spec_resolution_pass": true
+    },
+    "webp_qa": {
+      "dimensions": [
+        420,
+        289
+      ],
+      "bytes": 32104,
+      "sha256": "b8bcd10317762c8aa1bddeddd62b1a6fefcce54fc7f6f396c4ea3802ab4fcc41",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "fully_transparent_pixels": 81766,
+      "fully_opaque_pixels": 26,
+      "transparent_fraction": 0.673636513428901,
+      "opaque_stroke_median_rgb": [
+        253,
+        253,
+        253
+      ],
+      "minimum_spec_resolution_pass": true,
+      "exact_prompt_xmp_verified": true
+    },
+    "verification": "Native transparent alpha inspected on light/dark grounds; no chroma key or programmatic matting; only WebP format conversion/downsampling.",
+    "webp_provenance": "Exact prompt embedded in standard RIFF XMP dc:description without modifying compressed pixels; impeccable embed-prompt also generated matching relocated fallback sidecar."
+  }
+]

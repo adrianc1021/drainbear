@@ -53,9 +53,11 @@ describe("homepage contact and discovery", () => {
   it("keeps accurate image alt text and FAQ answers without visible illustration badges", () => {
     const html = renderHome();
     expect(html).not.toContain("服務示意圖，非客戶工程紀錄。");
-    expect(html).toContain("白色紙藝通渠熊、香港天際線及渠務工具的品牌示意");
-    expect(html).toContain('width="1536" height="1024"');
-    expect(html).toContain("drainbear-paper-hero-640.webp 640w");
+    expect(html).toContain(
+      "品牌示意：白熊戴安全帽、手持工具，站在香港夜景與流動渠水前"
+    );
+    expect(html).toContain('width="1685" height="933"');
+    expect(html).toContain("light-water-mobile-640.webp 640w");
     expect(html).toContain("可以先知道大概收費嗎？");
     expect(html).toContain("隱藏管段及實際堵塞原因，仍可能需要現場檢查");
     expect(html).not.toContain("線上表格暫時維護中");

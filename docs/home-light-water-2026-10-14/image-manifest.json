@@ -1,0 +1,138 @@
+[
+  {
+    "file": "client/public/images/home/light-water.webp",
+    "source": "assets/plates/hero-scene.png",
+    "bytes": 224176,
+    "width": 1685,
+    "conversion_options": [],
+    "provenance_embedded": true
+  },
+  {
+    "file": "client/public/images/home/light-water-960.webp",
+    "source": "assets/plates/hero-scene.png",
+    "bytes": 102152,
+    "width": 960,
+    "conversion_options": [],
+    "provenance_embedded": true
+  },
+  {
+    "file": "client/public/images/home/light-water-640.webp",
+    "source": "assets/plates/hero-scene.png",
+    "bytes": 52560,
+    "width": 640,
+    "conversion_options": [],
+    "provenance_embedded": true
+  },
+  {
+    "file": "client/public/images/home/light-water-mobile-640.webp",
+    "source": "assets/plates/hero-scene.png",
+    "bytes": 80104,
+    "width": 640,
+    "conversion_options": [
+      "-crop",
+      "955x933+730+0",
+      "+repage"
+    ],
+    "provenance_embedded": true
+  },
+  {
+    "file": "client/public/images/home/light-water-mobile-960.webp",
+    "source": "assets/plates/hero-scene.png",
+    "bytes": 124706,
+    "width": 960,
+    "conversion_options": [
+      "-crop",
+      "955x933+730+0",
+      "+repage"
+    ],
+    "provenance_embedded": true
+  },
+  {
+    "file": "client/public/images/home/water.webp",
+    "source": "assets/plates/services-background.png",
+    "bytes": 24632,
+    "width": 1472,
+    "conversion_options": [],
+    "provenance_embedded": true
+  },
+  {
+    "file": "client/public/images/home/service-toilet.webp",
+    "source": "assets/plates/service-toilet-photo.png",
+    "bytes": 13652,
+    "width": 570,
+    "conversion_options": [],
+    "provenance_embedded": true
+  },
+  {
+    "file": "client/public/images/home/service-sink.webp",
+    "source": "assets/plates/service-sink-photo.png",
+    "bytes": 21584,
+    "width": 570,
+    "conversion_options": [],
+    "provenance_embedded": true
+  },
+  {
+    "file": "client/public/images/home/service-bathroom.webp",
+    "source": "assets/plates/service-bathroom-photo.png",
+    "bytes": 26362,
+    "width": 570,
+    "conversion_options": [],
+    "provenance_embedded": true
+  },
+  {
+    "file": "client/public/images/home/service-main.webp",
+    "source": "assets/plates/service-main-photo.png",
+    "bytes": 10192,
+    "width": 570,
+    "conversion_options": [],
+    "provenance_embedded": true
+  },
+  {
+    "file": "client/public/images/home/method-0.webp",
+    "source": "assets/plates/method-art-0.png",
+    "bytes": 11272,
+    "width": 420,
+    "conversion_options": [],
+    "provenance_embedded": true
+  },
+  {
+    "file": "client/public/images/home/method-1.webp",
+    "source": "assets/plates/method-art-1.png",
+    "bytes": 5696,
+    "width": 420,
+    "conversion_options": [],
+    "provenance_embedded": true
+  },
+  {
+    "file": "client/public/images/home/method-2.webp",
+    "source": "assets/plates/method-art-2.png",
+    "bytes": 13968,
+    "width": 420,
+    "conversion_options": [],
+    "provenance_embedded": true
+  },
+  {
+    "file": "client/public/images/home/knowledge-0.webp",
+    "source": "assets/plates/knowledge-photo-0.png",
+    "bytes": 20718,
+    "width": 788,
+    "conversion_options": [],
+    "provenance_embedded": true
+  },
+  {
+    "file": "client/public/images/home/knowledge-1.webp",
+    "source": "assets/plates/knowledge-photo-1.png",
+    "bytes": 21564,
+    "width": 788,
+    "conversion_options": [],
+    "provenance_embedded": true
+  },
+  {
+    "file": "client/public/images/home/knowledge-2.webp",
+    "source": "assets/plates/knowledge-photo-2.png",
+    "bytes": 21596,
+    "width": 788,
+    "conversion_options": [],
+    "provenance_embedded": true
+  }
+]

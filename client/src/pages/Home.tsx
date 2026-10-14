@@ -5,6 +5,8 @@ import HomeServiceFinder from "@/components/HomeServiceFinder";
 import HomeCompanyGuides from "@/components/HomeCompanyGuides";
 import HomeDrainMethods from "@/components/HomeDrainMethods";
 import RecordedCaseGallery from "@/components/RecordedCaseGallery";
+import HomeHeroScene from "@/components/HomeHeroScene";
+import HomeServiceRows from "@/components/HomeServiceRows";
 import { SITE_URL } from "@/config/site";
 import { BRAND_SOCIAL_ALT } from "@/lib/brandVisuals";
 import {
@@ -35,22 +37,22 @@ const PROCESS = [
   {
     icon: MessageSquareText,
     title: "提供現場資料",
-    imageAlt: "AI 流程插圖：白熊透過手機提供位置及現場相片",
+    description: "提供地區、受影響位置及相片或短片。",
   },
   {
     icon: CalendarClock,
     title: "確認上門安排",
-    imageAlt: "AI 流程插圖：白熊師傅攜帶工具箱上門",
+    description: "按地區、人手、設備及進場條件確認時間。",
   },
   {
     icon: ClipboardCheck,
     title: "現場檢查及確認",
-    imageAlt: "AI 流程插圖：白熊戴手套檢查喉口並記錄情況",
+    description: "了解問題，說明處理方法和收費，確認後才動工。",
   },
   {
     icon: Droplets,
     title: "疏通及測試去水",
-    imageAlt: "AI 流程插圖：白熊操作通渠工具並測試去水",
+    description: "按現場條件疏通，完成後測試相關去水位置。",
   },
 ] as const;
 
@@ -79,28 +81,17 @@ export default function Home() {
                 <span className="home-hero__headline-line">先搵通渠熊。</span>
               </h1>
               <p className="home-hero__coverage">住宅 · 食肆 · 物業渠務</p>
-              <p className="home-hero__intro">
-                坐廁、鋅盤、浴室塞渠？傳相片同地區，先了解點處理。
+              <p className="contact-note">
+                24 小時接受查詢，上門時間另行確認。
               </p>
-              <ContactActions location="home_hero" prominent />
-              <p className="contact-note">24 小時查詢 · 上門時間另行確認。</p>
+              <ContactActions location="home_hero" prominent whatsappFirst />
             </div>
           </div>
-          <figure className="home-hero__media">
-            <img
-              src="/images/drainbear-paper-hero.webp"
-              srcSet="/images/drainbear-paper-hero-640.webp 640w, /images/drainbear-paper-hero-960.webp 960w, /images/drainbear-paper-hero.webp 1536w"
-              sizes="100vw"
-              alt="白色紙藝通渠熊、香港天際線及渠務工具的品牌示意"
-              width="1536"
-              height="1024"
-              fetchPriority="high"
-              decoding="async"
-            />
-          </figure>
+          <HomeHeroScene />
         </div>
       </section>
       <HomeServiceFinder />
+      <HomeServiceRows />
       <RecordedCaseGallery />
       <HomeDrainMethods />
       <section
@@ -124,21 +115,6 @@ export default function Home() {
           <ol className="home-arrangement__steps">
             {PROCESS.map((step, index) => (
               <li key={step.title}>
-                <span
-                  className={`home-arrangement__illustration home-arrangement__illustration--${index}`}
-                  role="img"
-                  aria-label={step.imageAlt}
-                >
-                  <img
-                    src="/images/drainbear-process-ai.webp"
-                    alt=""
-                    aria-hidden="true"
-                    width="1024"
-                    height="1024"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </span>
                 <div className="home-arrangement__step-copy">
                   <span
                     className="home-arrangement__step-marker"
@@ -149,6 +125,7 @@ export default function Home() {
                   </span>
                   <div>
                     <h3>{step.title}</h3>
+                    <p>{step.description}</p>
                   </div>
                 </div>
               </li>
@@ -156,8 +133,8 @@ export default function Home() {
           </ol>
         </div>
       </section>
-      <DrainHomeFaq />
       <HomeCompanyGuides />
+      <DrainHomeFaq />
       <nav className="container home-resource-links" aria-label="延伸渠務資料">
         <Link href="/areas">
           查看服務地區 <ArrowRight aria-hidden="true" />

@@ -45,8 +45,16 @@ export default function HomeDrainMethods() {
           CCTV 照渠各有用途，不是每宗工程都需要全部設備。
         </p>
         <div className="home-drain-methods__grid">
-          {METHODS.map(method => (
-            <article key={method.name}>
+          {METHODS.map((method, index) => (
+            <article key={method.name} className="reveal">
+              <img
+                src={`/images/home/method-${index}.webp`}
+                width="420"
+                height="260"
+                loading="lazy"
+                decoding="async"
+                alt={`${method.name}設備示意插圖`}
+              />
               <h3>{method.name}</h3>
               <p>{method.description}</p>
               <Link href={method.href}>
