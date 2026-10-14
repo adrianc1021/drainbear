@@ -1,0 +1,34 @@
+{
+  "verifiedAt": "2026-10-14T11:57:02.015Z",
+  "origin": "https://drainbearhk.com",
+  "status": 200,
+  "title": "香港通渠公司｜24小時通渠查詢｜通渠熊 DrainBear",
+  "canonical": "https://drainbearhk.com/",
+  "redesigned": true,
+  "entry": "/assets/index-irSjI_gs.js",
+  "css": "/assets/index-BwVz9K87.css",
+  "files": [
+    {
+      "path": "/images/home/light-water.webp",
+      "status": 200,
+      "bytes": 224176,
+      "sha256": "20309eda2dd3ffff31574b2b9f81813ef445a1cfc8bebb11ef2a832ad034b03f",
+      "sameAsSource": true
+    },
+    {
+      "path": "/images/home/method-0.webp",
+      "status": 200,
+      "bytes": 32368,
+      "sha256": "b8cfecd419f9918b288dcc5dc62217925935ecdffddd32aa56650f4d5869a841",
+      "sameAsSource": true
+    },
+    {
+      "path": "/fonts/drainbear-hk-display.woff2",
+      "status": 200,
+      "bytes": 57028,
+      "sha256": "db1448e727b3c4165c7159a678129cf550d278031bf718405455a4a2a106033d",
+      "sameAsSource": true
+    }
+  ],
+  "sitemapStatus": 200
+}

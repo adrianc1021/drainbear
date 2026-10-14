@@ -47,7 +47,7 @@ FAQ 答案、穩定錨點及結構化資料保留。主要內容和服務連結�
 
 瀏覽器驗證使用 320、390、768、1024、1199、1200、1440px；涵蓋服務組合、WhatsApp 預填及重試、手機選單、FAQ、影片、暫停動效、無 JavaScript 閱讀及 axe。結果及截圖見 [驗證資料](home-light-water-2026-10-14/validation.json)。WhatsApp 外跳由測試攔截，沒有傳訊或打電話。
 
-獨立審閱提出三項修正；同一位審閱者檢查修正後截圖，判定三項全部 resolved，disposition: ship。此判決只涵蓋其列出的三項修正，不能擴大成全站審查。詳見 [審閱](home-light-water-2026-10-14/finish-review.md) 及 [修正判決](home-light-water-2026-10-14/finish-verdict.md)。正式部署待推送後另驗證域名。
+獨立審閱提出三項修正；同一位審閱者檢查修正後截圖，判定三項全部 resolved，disposition: ship。此判決只涵蓋其列出的三項修正，不能擴大成全站審查。詳見 [審閱](home-light-water-2026-10-14/finish-review.md) 及 [修正判決](home-light-water-2026-10-14/finish-verdict.md)。正式版本 `f34885c` 已推送 main。2026-10-14 19:58（香港）直接驗證 https://drainbearhk.com/：390/1440px、28 組服務組合、WhatsApp 重試、手機選單、影片、動效與 axe 全部通過（issues: []）；主視覺、透明插圖及字型 HTTP 200，位元組及 SHA-256 與來源一致，Sitemap HTTP 200。正式站證據：[操作驗證](home-light-water-2026-10-14/production-validation.json)、[檔案校驗](home-light-water-2026-10-14/production-assets.json)。此驗證直接讀取正式域名，不以另一平台的部署狀態取代。
 
 Impeccable 歷史嚴格樣稿流程仍停於素材關卡：真實 Logo 和施工影像與生成樣稿縮圖不同，CLI 未能登記用戶的細節授權。本次按該授權完成實際網站，沒有偽造素材批准、逐像素比對或工具關卡通過。
 
