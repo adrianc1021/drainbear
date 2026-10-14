@@ -30,13 +30,17 @@
       "source": "https://github.com/21st-dev/magic-mcp",
       "sourceCommit": "6b5299e8a83ceffa73d4fc4e148905bb3eeeeb55",
       "endpoint": "https://21st.dev/api/mcp",
-      "status": "official skill and Codex MCP config installed; authenticated connection deferred by user",
+      "status": "enabled; authenticated HTTP and configured stdio launcher, get_usage and two catalog searches passed",
       "path": ".agents/skills/21st-ui/SKILL.md",
-      "skillSha256": "851d43ba67c18ce6552e5a0462b892d3a2196cce5d1569059fc6f72fe0e78831"
+      "skillSha256": "851d43ba67c18ce6552e5a0462b892d3a2196cce5d1569059fc6f72fe0e78831",
+      "proxyPackage": "@21st-dev/magic@0.2.3",
+      "verifiedToolCount": 51
     }
   ],
   "requiredSecret": "API_KEY_21ST",
   "secretDraftSaved": true,
   "environmentPublishRequired": true,
-  "twentyFirstDeferredByUser": true
+  "twentyFirstDeferredByUser": false,
+  "cloudSecretValueBound": false,
+  "localCredentialConfigured": true
 }

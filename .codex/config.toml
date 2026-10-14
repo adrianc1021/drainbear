@@ -1,6 +1,7 @@
 [mcp_servers."21st"]
-enabled = false
-url = "https://21st.dev/api/mcp"
-env_http_headers = { "x-api-key" = "API_KEY_21ST" }
-startup_timeout_sec = 20
+enabled = true
+command = "node"
+args = [".agents/skills/21st-ui/scripts/launch.mjs"]
+cwd = "/workspace/drainbear"
+startup_timeout_sec = 60
 tool_timeout_sec = 60

@@ -1,0 +1,82 @@
+{
+  "verifiedAt": "2026-10-14T09:32:31.260Z",
+  "authenticated": true,
+  "server": {
+    "name": "21st",
+    "version": "0.1.1"
+  },
+  "protocolVersion": "2025-03-26",
+  "toolCount": 51,
+  "searches": ["service hero", "service selector"],
+  "usage": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Tier: free\nFree component-code retrievals: 2/2 remaining today.\nUpgrade for unlimited: https://21st.dev/pricing\n21st AI is off on this plan. The user can enable it at https://21st.dev/ai/enable?from=mcp. Do not retry generate. Use search and get_component, then build it with your coding agent.\nAI credits: 0 left; resets 2026-11-01T00:00:00.000Z."
+      }
+    ],
+    "structuredContent": {
+      "tier": "free",
+      "aiGenerationEnabled": false,
+      "credits": {
+        "balance": 0,
+        "resetsAt": "2026-11-01T00:00:00.000Z",
+        "scope": "personal"
+      },
+      "freeSearchesPerDay": null,
+      "freeSearchesRemaining": null,
+      "freeRetrievalsPerDay": 2,
+      "freeRetrievalsRemaining": 2,
+      "upgradeUrl": "https://21st.dev/pricing"
+    }
+  },
+  "officialProxy": "@21st-dev/magic@0.2.3",
+  "configurationEnabled": true,
+  "allPassed": true,
+  "credentialStorage": "ignored local .env.local (0600); environment binding preferred when available",
+  "cloudSecretValueBound": false,
+  "componentCodeRetrieved": false,
+  "aiGenerationCalled": false,
+  "catalogMatches": [
+    {
+      "query": "service hero",
+      "matches": [
+        {
+          "id": 1831,
+          "name": "Hero Section 6",
+          "url": "https://21st.dev/@meschacirung/components/hero-section-6"
+        },
+        {
+          "id": 7218,
+          "name": "Hero Section",
+          "url": "https://21st.dev/@prebuiltui/components/hero-section"
+        },
+        {
+          "id": 5260,
+          "name": "Hero Section",
+          "url": "https://21st.dev/@ravikatiyar162/components/hero-section-2"
+        }
+      ]
+    },
+    {
+      "query": "service selector",
+      "matches": [
+        {
+          "id": 12356,
+          "name": "Mode Selector",
+          "url": "https://21st.dev/@serafimcloud/components/mode-selector"
+        },
+        {
+          "id": 7808,
+          "name": "Guest Selector",
+          "url": "https://21st.dev/@ravikatiyar162/components/guest-selector"
+        },
+        {
+          "id": 25137,
+          "name": "Social Selector",
+          "url": "https://21st.dev/@educalvolpz/components/social-selector"
+        }
+      ]
+    }
+  ]
+}

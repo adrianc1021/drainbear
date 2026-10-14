@@ -4,11 +4,11 @@
 
 ## 安裝與實際使用
 
-| 工具                                                                     | 安裝                                                  | 本次實際用途                                                                                                          |
-| ------------------------------------------------------------------------ | ----------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| [UI UX Pro Max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | 官方 CLI 2.15.0，專案 `.agents/skills/ui-ux-pro-max/` | 執行設計系統查詢、React 及焦點可見性查詢，核對網站觸控、對比及響應式要求                                              |
-| [Impeccable](https://github.com/pbakaus/impeccable)                      | 官方 4.5.2，engine 0.1.14；專案 skill，手動檢測模式   | 讀取 context、polish 及 craft-floor 指引，整理版面並執行一次機械檢測，回傳 0 項                                       |
-| [21st MCP／21st UI](https://github.com/21st-dev/magic-mcp)               | 官方 21st UI skill 及 `.codex/config.toml` 已加入     | 依照 skill 保留 React／Tailwind 慣例。MCP 初始化實測回傳 401；缺 `API_KEY_21ST`，沒有已認證的元件搜尋、安裝或 AI 生成 |
+| 工具                                                                     | 安裝                                                   | 本次實際用途                                                                    |
+| ------------------------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------------------------------- |
+| [UI UX Pro Max](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | 官方 CLI 2.15.0，專案 `.agents/skills/ui-ux-pro-max/`  | 執行設計系統查詢、React 及焦點可見性查詢，核對網站觸控、對比及響應式要求        |
+| [Impeccable](https://github.com/pbakaus/impeccable)                      | 官方 4.5.2，engine 0.1.14；專案 skill，手動檢測模式    | 讀取 context、polish 及 craft-floor 指引，整理版面並執行一次機械檢測，回傳 0 項 |
+| [21st MCP／21st UI](https://github.com/21st-dev/magic-mcp)               | 官方 21st UI skill、MCP 設定及官方代理 launcher 已啟用 | 已認證，通過初始化、51 個工具發現、帳戶功能查詢及兩次元件搜尋；AI 生成未開啟    |
 
 三份 SKILL.md、來源與 SHA-256 記錄於 [安裝清單](design-tools-installation-2026-10-14.json)。TypeSafe 既有安裝保留。UI UX Pro Max CLI 附送的其他設計技能留於工作區備份，專案只加入本次要求的主 skill。Impeccable 的系統二進位保留在環境、排除於 Git；launcher 與資料／指引均保留。沒有安裝自動 edit hooks，使用官方支援的手動掃描。
 
@@ -51,10 +51,12 @@
 
 首頁 title、description、H1 文案、FAQ 答案、canonical、聯絡電話、服務網址及文章內容保留，沒有新增施工／客戶／到場保證。正式發布驗證另記錄於上述 JSON。
 
-## 21st 尚需的設定
+## 21st 連線與憑證設定
 
-到 [21st MCP](https://21st.dev/mcp) 取得新的 key，在雲端環境設定填入 `API_KEY_21ST`，儲存並發布環境。key 要求已保存於環境設定草稿，允許目的地為 `21st.dev`；此草稿不會自行加入憑證或重新啟動目前環境。
+用戶提供 key 後已完成認證及搜尋驗證。key 保存在本環境排除 Git 的 `.env.local`，權限為 0600，沒有加入程式碼、文件、公開網站或提交。平台憑證欄位仍未綁定值；本機設定可用，不等於已保存平台 vault 綁定。既有環境草稿已登記 `API_KEY_21ST`，允許目的地為 `21st.dev`。
 
-專案 MCP 設定透過 `env_http_headers` 讀取 key，沒有把 key 寫入程式碼。依用戶決定，設定保留 `enabled = false`；之後加入 key、改為 `enabled = true` 並重載 Codex，才會嘗試連線。目前對話沒有已認證的 21st MCP 工具。本次外觀成果已可獨立驗證與發布，不把讀過 skill 當成已使用遠端元件。
+專案 MCP 現已設為 `enabled = true`。`.agents/skills/21st-ui/scripts/launch.mjs` 先讀取環境的 `API_KEY_21ST`，缺少時讀取本機 `.env.local`，再啟動固定版本的官方 `@21st-dev/magic@0.2.3`。這是官方的 stdio 到 HTTPS 代理，實際端點仍為 `https://21st.dev/api/mcp`。launcher 的標準輸入／輸出完整通過 MCP 初始化、工具發現、`get_usage` 及 `search` 檢查，不需要把 key 放在命令列。Codex 載入專案 MCP 設定後可使用此啟動方式；本對話的驗證透過 workspace MCP client 執行，不冒稱工具已自動加入宿主工具列。
 
-正式發布核對完成：來源提交 `b2ab04b`，2026-10-14 正式網址共 18 次版型／axe、28 個服務選擇組合、2 次 WhatsApp 交接與重載、2 次真實影片播放及無 JavaScript 閱讀均通過。正式網站直接讀取 Sanity，沒有套用本機 CORS 中繼。用戶已回覆先完成 UI UX Pro Max／Impeccable，21st 之後接入；本次不再等待 key，沒有進行 21st 遠端搜尋或生成。
+搜尋 `service hero` 及 `service selector` 均返回 3 個元件 metadata。這是連線與搜尋驗證，並非已把六個元件加入網站。帳戶回報免費方案、今日 2 次程式碼讀取額度、AI 生成關閉；沒有呼叫付費生成、升級帳戶或扣除程式碼讀取額度。完整結果見 [21st 驗證紀錄](21st-mcp-validation-2026-10-14.json)。
+
+正式發布核對完成：來源提交 `b2ab04b`，2026-10-14 正式網址共 18 次版型／axe、28 個服務選擇組合、2 次 WhatsApp 交接與重載、2 次真實影片播放及無 JavaScript 閱讀均通過。正式網站直接讀取 Sanity，沒有套用本機 CORS 中繼。其後的 21st 接入只修改 MCP 啟動設定及紀錄，網站外觀與功能保留。

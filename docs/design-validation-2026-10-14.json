@@ -38,9 +38,15 @@
   "twentyFirstMcp": {
     "skillInstalled": true,
     "configInstalled": true,
-    "keyPresent": false,
-    "lastUnauthenticatedHttpStatus": 401,
-    "authenticatedToolsUsed": false,
-    "deferredByUser": true
+    "enabled": true,
+    "authenticated": true,
+    "stdioLauncherPassed": true,
+    "toolCount": 51,
+    "catalogSearches": ["service hero", "service selector"],
+    "aiGenerationEnabled": false,
+    "componentCodeRetrieved": false,
+    "aiGenerationCalled": false,
+    "credentialStorage": "ignored local configuration; cloud vault binding not set",
+    "deferredByUser": false
   }
 }
