@@ -38,6 +38,69 @@
     "allPassed": true
   },
   "production": {
-    "status": "pending verification"
+    "status": "passed",
+    "verifiedAt": "2026-10-14T07:53:42.787Z",
+    "deployedSourceCommit": "5bc0185dcdcbf215ca75dc64a9ff24ec3575437e",
+    "origin": "https://drainbearhk.com",
+    "layouts": 6,
+    "whatsappJourneys": 6,
+    "checkedLinks": [
+      "/blog",
+      "/blog/toilet-clog-emergency-guide",
+      "/services/cctv-drain-inspection",
+      "/",
+      "/services/toilet-unblocking",
+      "/services/sewage-backflow",
+      "/blog/building-main-drain-vs-unit-branch-pipe",
+      "/blog/cctv-drain-inspection-hong-kong-guide",
+      "/blog/hong-kong-drain-cleaning-price-guide",
+      "/blog/home-drain-service-preparation-protection",
+      "/services",
+      "/service-process",
+      "/blog/drain-service-completion-checklist",
+      "/blog/whatsapp-drain-quote-checklist",
+      "/blog/sink-drain-access-disassembly",
+      "/services/kitchen-sink-unblocking",
+      "/blog/tenant-blocked-drain-landlord-arrangements"
+    ],
+    "verifiedImageFiles": 21,
+    "noJavaScript": true,
+    "axe": true,
+    "allPassed": true,
+    "metadata": [
+      {
+        "url": "https://drainbearhk.com/blog/toilet-gurgling-sounds-drain-check",
+        "title": "坐廁咕嚕聲點算？去水慢、冒泡與倒灌的檢查方向｜通渠熊",
+        "description": "坐廁有咕嚕聲，不一定代表主渠塞了。先看水位、去水速度及其他去水位，了解何時應停止沖水、通知管理處，或安排師傅檢查。",
+        "h1": "坐廁咕嚕聲點算？去水慢、冒泡與倒灌的檢查方向",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+        "ogImage": "https://drainbearhk.com/images/blog/toilet-gurgling-sounds-drain-check-preview.jpg",
+        "datePublished": "2026-10-14",
+        "dateModified": "2026-10-14",
+        "reviewedByAbsent": true
+      },
+      {
+        "url": "https://drainbearhk.com/blog/tenant-blocked-drain-landlord-arrangements",
+        "title": "租客遇到塞渠點安排？通知業主、進場及報價確認清單｜通渠熊",
+        "description": "租屋塞渠，先處理倒灌風險，再通知業主及協調進場。整理相片、報價確認人與工程紀錄，避免師傅到場後仍未能確認處理範圍。",
+        "h1": "租客遇到塞渠點安排？通知業主、進場及報價確認清單",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+        "ogImage": "https://drainbearhk.com/images/blog/tenant-blocked-drain-landlord-arrangements-preview.jpg",
+        "datePublished": "2026-10-14",
+        "dateModified": "2026-10-14",
+        "reviewedByAbsent": true
+      },
+      {
+        "url": "https://drainbearhk.com/blog/home-drain-service-preparation-protection",
+        "title": "上門通渠前要準備咩？櫃底清空、現場保護及試水清單｜通渠熊",
+        "description": "預約通渠後，先清出櫃底與通道、說明漏水及化學劑紀錄，再與師傅確認保護、拆裝和試水安排。了解你可以準備甚麼，以及哪些工作應留待現場評估。",
+        "h1": "上門通渠前要準備咩？櫃底清空、現場保護及試水清單",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+        "ogImage": "https://drainbearhk.com/images/blog/home-drain-service-preparation-protection-preview.jpg",
+        "datePublished": "2026-10-14",
+        "dateModified": "2026-10-14",
+        "reviewedByAbsent": true
+      }
+    ]
   }
 }
