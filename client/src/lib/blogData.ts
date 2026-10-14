@@ -1,7 +1,8 @@
 import { PRICE_GUIDE_REVISION } from "./priceGuideRevision";
 import { KITCHEN_PREVENTION_REVISION } from "./kitchenPreventionRevision";
 import { SEO_ARTICLES } from "./seoArticles";
-import type { SanityImageData } from "./sanity/types";
+import { NEW_SERVICE_ARTICLES } from "./newServiceArticles";
+import type { SanityImageData, SeoData } from "./sanity/types";
 /**
  * 通渠熊 DrainBear — 通渠小知識網誌資料
  * SEO 導向：每篇文章覆蓋不同長尾關鍵字（防塞、通渠水、隔氣、隔油池、村屋沙井、雨季防浸）
@@ -19,6 +20,7 @@ export interface BlogPost {
   keywords: string[];
   featured?: boolean;
   coverImage?: SanityImageData;
+  seo?: SeoData;
   serviceSlugs?: string[];
   relatedSlugs?: string[];
   whatsappMessage?: string;
@@ -32,10 +34,12 @@ export interface BlogPost {
         link?: { label: string; href: string };
       }
     | { type: "list"; items: string[]; ordered?: boolean }
+    | { type: "image"; image: SanityImageData }
   )[];
 }
 
 export const BLOG_POSTS: BlogPost[] = [
+  ...NEW_SERVICE_ARTICLES,
   ...SEO_ARTICLES,
   PRICE_GUIDE_REVISION,
   {

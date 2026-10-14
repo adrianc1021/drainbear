@@ -514,6 +514,32 @@ export default function BlogPost() {
 
           {post.source === "static" &&
             post.sections?.map((section, index) => {
+              if (section.type === "image") {
+                const image = section.image;
+                return (
+                  <figure
+                    key={index}
+                    className="mt-8 overflow-hidden rounded-lg border border-border"
+                  >
+                    <img
+                      src={image.url}
+                      srcSet={image.srcSet}
+                      sizes="(min-width: 768px) 768px, 100vw"
+                      alt={image.alt || ""}
+                      width={image.width}
+                      height={image.height}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-auto w-full"
+                    />
+                    {image.caption ? (
+                      <figcaption className="px-5 py-3 text-sm leading-relaxed text-muted-foreground">
+                        {image.caption}
+                      </figcaption>
+                    ) : null}
+                  </figure>
+                );
+              }
               if (section.type === "list") {
                 const List = section.ordered ? "ol" : "ul";
                 return (

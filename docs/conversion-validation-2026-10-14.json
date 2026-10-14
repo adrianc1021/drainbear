@@ -513,5 +513,13 @@
     "Hypothetical examples are labelled and are not case records",
     "Jev judgments do not measure enquiries, rankings or conversion uplift",
     "No fresh Search Console or verified lead conversion data"
-  ]
+  ],
+  "production": {
+    "verifiedAt": "2026-10-14T07:47:43.805Z",
+    "origin": "https://drainbearhk.com",
+    "layouts": 6,
+    "whatsappJourneys": 6,
+    "allPassed": true,
+    "noMessagesSent": true
+  }
 }

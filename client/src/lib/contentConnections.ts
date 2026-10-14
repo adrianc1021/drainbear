@@ -60,6 +60,10 @@ export const SERVICE_READING_LINKS: Record<
     },
   ],
   "kitchen-sink-unblocking": [
+    {
+      slug: "home-drain-service-preparation-protection",
+      title: "上門前清出櫃底與施工入口",
+    },
     { slug: "prevent-kitchen-sink-clog", title: "鋅盤防塞與日常清理" },
   ],
   "cctv-drain-inspection": [
@@ -75,6 +79,10 @@ export const SERVICE_READING_LINKS: Record<
     },
   ],
   "toilet-unblocking": [
+    {
+      slug: "toilet-gurgling-sounds-drain-check",
+      title: "坐廁咕嚕聲：記錄水位與受影響位置",
+    },
     { slug: "toilet-clog-emergency-guide", title: "塞廁所時先做甚麼？" },
   ],
 };

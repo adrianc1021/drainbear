@@ -139,6 +139,7 @@ export function mapStaticBlogPost(post: StaticBlogPost): BlogPostView {
     featured: Boolean(post.featured),
     coverImage: post.coverImage,
     sections: post.sections,
+    seo: post.seo,
     resourceLinks: post.resourceLinks ?? ARTICLE_SERVICE_LINKS[post.slug],
     faqs: post.faqs,
     relatedSlugs: post.relatedSlugs,

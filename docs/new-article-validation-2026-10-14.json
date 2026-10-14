@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-14",
+  "checks": {
+    "typecheck": "passed",
+    "testFiles": 24,
+    "tests": 136,
+    "build": "passed",
+    "prerenderedRoutes": 87,
+    "indexableUrls": 85,
+    "blogRoutes": 39,
+    "aeoAnswers": 163
+  },
+  "local": {
+    "layouts": 15,
+    "whatsappJourneys": 6,
+    "internalLinks": [
+      "/blog",
+      "/blog/toilet-clog-emergency-guide",
+      "/services/cctv-drain-inspection",
+      "/",
+      "/services/toilet-unblocking",
+      "/services/sewage-backflow",
+      "/blog/building-main-drain-vs-unit-branch-pipe",
+      "/blog/cctv-drain-inspection-hong-kong-guide",
+      "/blog/hong-kong-drain-cleaning-price-guide",
+      "/blog/home-drain-service-preparation-protection",
+      "/services",
+      "/service-process",
+      "/blog/drain-service-completion-checklist",
+      "/blog/whatsapp-drain-quote-checklist",
+      "/blog/sink-drain-access-disassembly",
+      "/services/kitchen-sink-unblocking",
+      "/blog/tenant-blocked-drain-landlord-arrangements"
+    ],
+    "images": 21,
+    "axe": true,
+    "noJavaScript": true,
+    "allPassed": true
+  },
+  "production": {
+    "status": "pending verification"
+  }
+}

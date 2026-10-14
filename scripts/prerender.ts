@@ -1,4 +1,5 @@
 import { SEO_ARTICLES } from "../client/src/lib/seoArticles";
+import { NEW_SERVICE_ARTICLES } from "../client/src/lib/newServiceArticles";
 import { PRICE_GUIDE_REVISION } from "../client/src/lib/priceGuideRevision";
 import { getPostBySlug } from "../client/src/lib/blogData";
 import { KITCHEN_PREVENTION_REVISION } from "../client/src/lib/kitchenPreventionRevision";
@@ -77,6 +78,7 @@ const STATIC_ROUTES = [
 ];
 
 const STATIC_BLOG_SLUGS = [
+  ...NEW_SERVICE_ARTICLES.map(article => article.slug),
   ...SEO_ARTICLES.map(article => article.slug),
   "hong-kong-drain-cleaning-price-guide",
   "whatsapp-drain-quote-checklist",
