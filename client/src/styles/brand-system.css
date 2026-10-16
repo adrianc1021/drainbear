@@ -2928,6 +2928,7 @@
 .consumer-database .brand-disclosure__body dd { margin-top: .35rem; color: var(--brand-copy); }
 .consumer-database .brand-disclosure__body h4 { margin-top: 1.5rem; font-size: 1.05rem; }
 .consumer-database__sources li { margin-top: .65rem; }
+.consumer-database ol.consumer-database__sources { list-style: decimal; padding-left: 1.5rem; }
 .consumer-database__sources a { display: inline-flex; align-items: center; min-height: 44px; gap: .4rem; text-decoration: underline; }
 .consumer-database__sources svg, .consumer-database__official svg { flex-shrink: 0; }
 .consumer-database__sources p { font-size: .95rem; color: var(--brand-copy); }

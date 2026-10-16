@@ -2,6 +2,8 @@ import { describe, it, expect } from "vitest";
 import {
   ALERT_SOURCES,
   CONSUMER_ALERTS,
+  ALERT_REPORT_COUNT,
+  ALERT_OFFICIAL_COUNT,
   filterConsumerAlerts,
 } from "./consumerAlerts";
 describe("curated public consumer records", () => {
@@ -25,7 +27,41 @@ describe("curated public consumer records", () => {
     for (const source of ALERT_SOURCES) {
       expect(new URL(source.url).protocol).toBe("https:");
       expect(source.published).toMatch(/^\d{4}-\d{2}(-\d{2})?$/);
+      expect(
+        CONSUMER_ALERTS.some(record => record.sourceIds.includes(source.id))
+      ).toBe(true);
     }
+  });
+  it("counts at least thirty reports separately from official documents and event groups", () => {
+    expect(ALERT_REPORT_COUNT).toBeGreaterThanOrEqual(30);
+    expect(ALERT_OFFICIAL_COUNT).toBe(2);
+    expect(ALERT_REPORT_COUNT + ALERT_OFFICIAL_COUNT).toBe(
+      ALERT_SOURCES.length
+    );
+    expect(
+      ALERT_SOURCES.filter(source => source.sourceType === "轉載").every(
+        source => source.note
+      )
+    ).toBe(true);
+    const group = CONSUMER_ALERTS.find(
+      record => record.id === "kitchen-fee-dispute-2025"
+    )!;
+    expect(group.sourceIds).toHaveLength(4);
+    expect(new Set(group.sourceIds).size).toBe(4);
+  });
+  it("finds newly added publishers, report titles and original publication dates", () => {
+    expect(
+      filterConsumerAlerts({ q: "am730 7500" }).map(record => record.id)
+    ).toEqual(["quotation-columns-2025"]);
+    expect(
+      filterConsumerAlerts({ q: "柳俊江 晴報" }).map(record => record.id)
+    ).toEqual(["anchor-quote-dispute-2023"]);
+    expect(
+      filterConsumerAlerts({ q: "2025-02-21 經絡" }).map(record => record.id)
+    ).toEqual(["quotation-columns-2025"]);
+    expect(
+      filterConsumerAlerts({ q: "墊支 55000" }).map(record => record.id)
+    ).toEqual(["toilet-fee-dispute-2025"]);
   });
   it("searches source and amount together without treating citations as new incidents", () => {
     expect(filterConsumerAlerts({ q: "東張 18000" }).map(r => r.id)).toEqual([

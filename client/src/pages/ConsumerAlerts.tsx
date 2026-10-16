@@ -10,6 +10,8 @@ import {
   ALERT_KINDS,
   ALERT_TOPICS,
   ALERT_SOURCES,
+  ALERT_REPORT_COUNT,
+  ALERT_OFFICIAL_COUNT,
   CONSUMER_ALERTS,
   CONSUMER_ALERTS_UPDATED,
   CONSUMER_ALERTS_PATH as PATH,
@@ -23,6 +25,9 @@ const crumbs = [
   { name: "首頁", path: "/" },
   { name: "通渠公開資料庫", path: PATH },
 ];
+const chronologicalSources = [...ALERT_SOURCES].sort(
+  (a, b) => b.published.localeCompare(a.published) || a.id.localeCompare(b.id)
+);
 function filterHref(values: {
   q: string;
   kind: string;
@@ -146,11 +151,49 @@ export default function ConsumerAlerts() {
         aria-labelledby="records-heading"
       >
         <p className="consumer-database__provenance">
-          {CONSUMER_ALERTS.length} 組紀錄 · {ALERT_SOURCES.length} 篇來源 · 核對{" "}
+          {ALERT_REPORT_COUNT} 篇相關報道 · {ALERT_OFFICIAL_COUNT} 篇官方資料 ·{" "}
+          {CONSUMER_ALERTS.length} 組紀錄 · 核對{" "}
           <time dateTime={CONSUMER_ALERTS_UPDATED}>
             {CONSUMER_ALERTS_UPDATED}
           </time>
         </p>
+        <AnimatedDisclosure
+          id="report-sources"
+          title={`逐篇查閱報道及官方資料（${ALERT_SOURCES.length} 篇）`}
+          description="報道、專欄與轉載分別標示；每篇可閱讀原文及查看相關紀錄。"
+        >
+          <ol className="consumer-database__sources">
+            {chronologicalSources.map(source => (
+              <li
+                key={source.id}
+                id={`source-${source.id}`}
+                data-consumer-source={source.id}
+              >
+                <a href={source.url}>
+                  {source.title}
+                  <ArrowUpRight size={16} aria-hidden="true" />
+                </a>
+                <p>
+                  {source.publisher} · {source.sourceType} ·{" "}
+                  <time dateTime={source.published}>
+                    {source.publishedLabel}
+                  </time>
+                </p>
+                {source.summary ? <p>{source.summary}</p> : null}
+                {source.note ? <p>{source.note}</p> : null}
+                {CONSUMER_ALERTS.filter(record =>
+                  record.sourceIds.includes(source.id)
+                ).map(record => (
+                  <p key={record.id}>
+                    <a href={PATH + "#record-" + record.id}>
+                      相關紀錄：{record.title}
+                    </a>
+                  </p>
+                ))}
+              </li>
+            ))}
+          </ol>
+        </AnimatedDisclosure>
         <form
           className="consumer-database__filters"
           onSubmit={submit}
@@ -309,11 +352,13 @@ export default function ConsumerAlerts() {
                           <ArrowUpRight size={16} aria-hidden="true" />
                         </a>
                         <p>
-                          {source.publisher} ·{" "}
+                          {source.publisher} · {source.sourceType} ·{" "}
                           <time dateTime={source.published}>
                             {source.publishedLabel}
                           </time>
                         </p>
+                        {source.summary ? <p>{source.summary}</p> : null}
+                        {source.note ? <p>{source.note}</p> : null}
                       </li>
                     ))}
                   </ul>
@@ -335,7 +380,7 @@ export default function ConsumerAlerts() {
               先閱讀可開啟的原文，再寫摘要；區分官方紀錄、消委會投訴與傳媒轉述。
             </li>
             <li>
-              同一事件的轉載或跟進報道合併列來源；紀錄數不等於商戶、受害人或罪成個案數。
+              報道篇數包含不同平台的專欄及轉載，並非全部獨立採訪。同一事件歸組，相關專欄另標資料性質；紀錄數不等於商戶、受害人或罪成個案數。
             </li>
             <li>
               保留原發布日期及當事人回應。匿名、暱稱或部分遮蔽名稱不補全，不因同姓就合併身份。
