@@ -83,11 +83,7 @@ export default function Home() {
             <div className="home-hero__copy">
               <h1 id="home-heading">
                 <span className="home-hero__headline-line">香港通渠，</span>
-                <span className="home-hero__headline-line">
-                  先搵
-                  <wbr className="home-hero__mobile-break" />
-                  通渠熊。
-                </span>
+                <span className="home-hero__headline-line">先搵通渠熊。</span>
               </h1>
               <p className="home-hero__coverage">住宅 · 食肆 · 物業渠務</p>
               <p className="home-hero__price">

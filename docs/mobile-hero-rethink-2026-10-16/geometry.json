@@ -1,0 +1,222 @@
+[
+  {
+    "width": 320,
+    "overflow": false,
+    "height": 614.03125,
+    "headingLines": [
+      {
+        "height": 37.3125,
+        "lineHeight": 37.312
+      },
+      {
+        "height": 37.3125,
+        "lineHeight": 37.312
+      }
+    ],
+    "image": {
+      "x": 0,
+      "y": 301.375,
+      "width": 320,
+      "height": 312.65625,
+      "top": 301.375,
+      "right": 320,
+      "bottom": 614.03125,
+      "left": 0
+    },
+    "heading": "香港通渠，先搵通渠熊。",
+    "price": "全線通渠服務 HK$300 起",
+    "actions": [
+      {
+        "text": "WhatsApp\n（另開視窗）",
+        "x": 20,
+        "y": 239.40625,
+        "width": 152.59375,
+        "height": 49.96875
+      },
+      {
+        "text": "致電查詢",
+        "x": 182.59375,
+        "y": 239.40625,
+        "width": 117.390625,
+        "height": 49.96875
+      }
+    ],
+    "sticky": "hidden"
+  },
+  {
+    "width": 390,
+    "overflow": false,
+    "height": 698.75,
+    "headingLines": [
+      {
+        "height": 45.46875,
+        "lineHeight": 45.474
+      },
+      {
+        "height": 45.46875,
+        "lineHeight": 45.474
+      }
+    ],
+    "image": {
+      "x": 0,
+      "y": 317.6875,
+      "width": 390,
+      "height": 381.0625,
+      "top": 317.6875,
+      "right": 390,
+      "bottom": 698.75,
+      "left": 0
+    },
+    "heading": "香港通渠，先搵通渠熊。",
+    "price": "全線通渠服務 HK$300 起",
+    "actions": [
+      {
+        "text": "WhatsApp\n（另開視窗）",
+        "x": 20,
+        "y": 255.71875,
+        "width": 192.171875,
+        "height": 49.96875
+      },
+      {
+        "text": "致電查詢",
+        "x": 222.171875,
+        "y": 255.71875,
+        "width": 147.828125,
+        "height": 49.96875
+      }
+    ],
+    "sticky": "hidden"
+  },
+  {
+    "width": 430,
+    "overflow": false,
+    "height": 747.140625,
+    "headingLines": [
+      {
+        "height": 50.125,
+        "lineHeight": 50.138
+      },
+      {
+        "height": 50.125,
+        "lineHeight": 50.138
+      }
+    ],
+    "image": {
+      "x": 0,
+      "y": 327,
+      "width": 430,
+      "height": 420.140625,
+      "top": 327,
+      "right": 430,
+      "bottom": 747.140625,
+      "left": 0
+    },
+    "heading": "香港通渠，先搵通渠熊。",
+    "price": "全線通渠服務 HK$300 起",
+    "actions": [
+      {
+        "text": "WhatsApp\n（另開視窗）",
+        "x": 20,
+        "y": 265.03125,
+        "width": 209.125,
+        "height": 49.96875
+      },
+      {
+        "text": "致電查詢",
+        "x": 239.125,
+        "y": 265.03125,
+        "width": 160.875,
+        "height": 49.96875
+      }
+    ],
+    "sticky": "hidden"
+  },
+  {
+    "width": 767,
+    "overflow": false,
+    "height": 757.03125,
+    "headingLines": [
+      {
+        "height": 52.796875,
+        "lineHeight": 52.8
+      },
+      {
+        "height": 52.796875,
+        "lineHeight": 52.8
+      }
+    ],
+    "image": {
+      "x": 0,
+      "y": 332.34375,
+      "width": 767,
+      "height": 424.6875,
+      "top": 332.34375,
+      "right": 767,
+      "bottom": 757.03125,
+      "left": 0
+    },
+    "heading": "香港通渠，先搵通渠熊。",
+    "price": "全線通渠服務 HK$300 起",
+    "actions": [
+      {
+        "text": "WhatsApp\n（另開視窗）",
+        "x": 86.5,
+        "y": 270.375,
+        "width": 209.125,
+        "height": 49.96875
+      },
+      {
+        "text": "致電查詢",
+        "x": 305.625,
+        "y": 270.375,
+        "width": 160.875,
+        "height": 49.96875
+      }
+    ],
+    "sticky": "hidden"
+  },
+  {
+    "width": 1440,
+    "overflow": false,
+    "height": 806.390625,
+    "headingLines": [
+      {
+        "height": 102.671875,
+        "lineHeight": 102.672
+      },
+      {
+        "height": 102.671875,
+        "lineHeight": 102.672
+      }
+    ],
+    "image": {
+      "x": 0,
+      "y": 72,
+      "width": 1440,
+      "height": 782.390625,
+      "top": 72,
+      "right": 1440,
+      "bottom": 854.390625,
+      "left": 0
+    },
+    "heading": "香港通渠，先搵通渠熊。",
+    "price": "全線通渠服務 HK$300 起",
+    "actions": [
+      {
+        "text": "傳相片，問報價\n（另開視窗）",
+        "x": 152,
+        "y": 522.015625,
+        "width": 340,
+        "height": 69.59375
+      },
+      {
+        "text": "+852 9558 8260",
+        "x": 152,
+        "y": 603.609375,
+        "width": 340,
+        "height": 69.59375
+      }
+    ],
+    "sticky": "visible"
+  }
+]

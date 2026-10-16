@@ -63,9 +63,9 @@ export default function HomeHeroScene() {
     <figure ref={scene} className="home-hero__media">
       <picture>
         <source
-          media="(max-width: 767px)"
+          media="(max-width: 479px)"
           srcSet="/images/home/light-water-mobile-640.webp 640w, /images/home/light-water-mobile-960.webp 960w"
-          sizes="(max-width: 440px) calc(65vw + 70px), 356px"
+          sizes="100vw"
         />
         <img
           src="/images/home/light-water.webp"

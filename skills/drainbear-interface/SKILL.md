@@ -37,3 +37,5 @@ description: 使用語意化React元件與Flexbox/Grid統一通渠熊介面，�
 - 手機首頁服務與短片使用 HomeMobileRail 的原生 CSS scroll-snap，保留所有 HTML 連結、可見前後按鍵、位置及鍵盤操作；不能攔截直向捲動或加入自動輪播。切走影片須暫停，下一段不自動播放。預渲染須重設暫時的 data-enhanced，無 JavaScript 不展示失效按鍵，仍能原生捲動及展開案例。修改後執行 `node scripts/verify-home-mobile.mjs`，以真正觸控事件序列核對橫掃及直掃，不能把 viewport 截圖當成手勢證據。
 
 - 手機首屏精簡聯絡列只透過 ContactActions 的 compactOnMobile 在首頁啟用，保留桌面完整電話、aria 名稱及共用 handoff。核對一般／減少動態下標籤、中文斷行與標點；320／767px 圖框和漸變須貼合圖像而不切走白熊頭盔。固定列只在增強後隨首屏聯絡入口離開而顯示，無 JavaScript 保留原生入口。
+
+- 主視覺在手機以自然文流展示完整圖像時，使用素材原始 aspect-ratio，讓內容隨字級自然增高；srcset 的 media 與 CSS 圖框比例要用同一斷點。較闊手機可改用現有橫幅素材，避免把正方形圖片裁成橫幅而切走主體，或只留中央窄圖造成硬邊。實際檢查兩個標題行的行高，而不只計算 h1 數量。

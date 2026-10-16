@@ -66,12 +66,33 @@ try {
     Math.abs(actions[0].y - actions[1].y) < 1,
     "hero contacts sit on the same row"
   );
+  const heroComposition = await page.evaluate(() => {
+    const rect = element => element.getBoundingClientRect();
+    const image = document.querySelector(".home-hero__media");
+    const contacts = document.querySelector(".home-hero .contact-actions");
+    return {
+      lines: [...document.querySelectorAll(".home-hero__headline-line")].map(
+        element => rect(element).height / parseFloat(getComputedStyle(element).lineHeight)
+      ),
+      imageWidth: rect(image).width,
+      imageTop: rect(image).top,
+      contactsBottom: rect(contacts).bottom,
+    };
+  });
+  assert(
+    heroComposition.lines.length === 2 && heroComposition.lines.every(count => count < 1.05),
+    "full-width mobile headline stays on two complete lines"
+  );
+  assert(
+    heroComposition.imageWidth === 390 && heroComposition.imageTop >= heroComposition.contactsBottom,
+    "complete bear scene follows the contacts at full viewport width"
+  );
   await page.locator(".home-service-rows").scrollIntoViewIfNeeded();
   await sticky.waitFor({ state: "visible" });
   await page.evaluate(() => scrollTo(0, 0));
   await sticky.waitFor({ state: "hidden" });
   checks.mobileHero =
-    "compact labelled contacts share a row; sticky contacts appear after hero actions and disappear on return";
+    "full-width two-line heading and bear; compact contacts share a row; sticky contacts appear after hero actions and disappear on return";
   const methods = page.locator("#home-method-details");
   assert(
     !(await methods.evaluate(el => el.open)),

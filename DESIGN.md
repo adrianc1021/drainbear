@@ -32,9 +32,9 @@ typography:
     letterSpacing: "-0.025em"
   display-mobile:
     fontFamily: '"DrainBear Display", "Noto Sans HK", "PingFang HK", sans-serif'
-    fontSize: "clamp(2rem, 9.7vw, 3.4rem)"
+    fontSize: "clamp(2rem, 10.6vw, 3rem)"
     fontWeight: 900
-    lineHeight: 1.13
+    lineHeight: 1.1
     letterSpacing: "-0.025em"
   headline:
     fontFamily: '"DrainBear Display", "Noto Sans HK", "PingFang HK", sans-serif'
@@ -86,12 +86,12 @@ components:
   contact-whatsapp-mobile:
     backgroundColor: "{colors.home-whatsapp}"
     textColor: "{colors.home-night}"
-    rounded: "{rounded.pill}"
+    rounded: "{rounded.home-contact}"
     padding: "0.65rem 0.8rem"
   contact-phone-mobile:
-    backgroundColor: "{colors.home-night}"
+    backgroundColor: "transparent"
     textColor: "{colors.white}"
-    rounded: "{rounded.pill}"
+    rounded: "{rounded.home-contact}"
     padding: "0.65rem 0.8rem"
   finder-send:
     backgroundColor: "{colors.home-blue}"
@@ -165,10 +165,10 @@ components:
 
 ### Hierarchy
 
-- **Display:** 桌面 `clamp(3rem, 6.2vw, 6rem)`、1.15 行高；手機 `clamp(2rem, 9.7vw, 3.4rem)`、1.13 行高；手機 h1 最大寬度 62%，以可選斷行保持標點及全文。
+- **Display:** 桌面 `clamp(3rem, 6.2vw, 6rem)`、1.15 行高；手機 `clamp(2rem, 10.6vw, 3rem)`、1.1 行高；手機 h1 使用可用全寬，兩個完整行塊保留「香港通渠，先搵通渠熊。」及標點，不插入可選斷行。
 - **Headline:** h2 使用 `clamp(1.7rem, 3.2vw, 3rem)`、1.35 行高。
 - **Title:** 服務列標題使用 `clamp(1.4rem, 2.8vw, 2.4rem)`；手機固定 1.5rem。
-- **Body:** 首頁基礎、可見服務／方法／流程及方法限制正文為 1rem，行高按段落為 1.7–1.85；案例收合內的紀錄可用 0.9rem、1.8 行高。段落介紹上限 74ch。手機首屏價格背景文字 1rem，起步價為 1.6rem／800。
+- **Body:** 首頁基礎、可見服務／方法／流程及方法限制正文為 1rem，行高按段落為 1.7–1.85；案例收合內的紀錄可用 0.9rem、1.8 行高。段落介紹上限 74ch。手機首屏價格背景文字 1rem／500，起步價為 1.5rem／800；兩者以 baseline 對齊，必要時可換行。
 - **Label:** 表單標籤 0.95rem、700 字重；手機精簡聯絡標籤同為 0.95rem／700。受眾按鈕等控件仍有各自字級，不用英文字母全大寫作中文標題替代。
 
 **The Reading Priority Rule.** 先顯示標題、簡短用途、價錢與操作；設備限制及技術詳述放入明確命名的原生收合。刪除重複介紹、提示與摘要，不以縮小正文換取密度；表單標籤、工程證據及服務連結仍須清楚。
@@ -179,7 +179,7 @@ components:
 
 容器寬 `min(100%, 1200px)`，水平內距 `clamp(1.25rem, 3vw, 2rem)`。首頁分段垂直距 `clamp(3rem, 6vw, 6rem)`；767px 以下為 2.25rem。常見間距為 0.5、0.75、1、1.5、2rem；它們是抽取的實際用值，不代表所有元件受單一數學 scale 約束。
 
-桌面首屏文案寬 48%、上限 580px；全寬夜景在底層，白熊靠右。首屏高至少 `clamp(660px, 56vw, 860px)`。手機小於 768px 時改為大字在左、白熊在右的同一首屏：內容格最小 560px，上下內距 104px／28px，文案 flex 欄最小 428px。白熊圖層距頂 148px、右側 -70px、底部 64px，寬度為 `min(356px, calc(65% + 70px))`；以受限寬度、cover 及頂／左／底淡出接合夜景，避免 contain 留白形成矩形拼貼邊。這組尺寸只屬首頁手機構圖，不是通用版面 token。手機隱藏受眾短句，完整起步價保留；桌面首屏幾何及其受眾／價錢排列沿用既有實作。
+桌面首屏文案寬 48%、上限 580px；全寬夜景在底層，白熊靠右。首屏高至少 `clamp(660px, 56vw, 860px)`。2026-10-16 最新手機修正取代同日較早的左右窄欄構圖：小於 768px 時，完整兩行標題、同行價錢及精簡並排聯絡先行，全幅白熊／夜港場景接在下方。內容格沒有固定最小高度，上下內距 100px／0，文案使用可用全寬；場景以自然文流、100% 寬、0.75rem 頂距及 contain 保留原圖比例，頂部僅以 3% 深藍淡出接合。479px 以下沿用 960／938 素材比例；480–767px 沿用 1685／933 橫幅比例，兩者 sizes 均為 100vw。手機隱藏受眾短句，完整起步價保留；文字放大或長標籤可推開下方場景。這些是首頁響應式實作值，不是固定首屏高度 token。桌面首屏幾何及其受眾／價錢排列沿用既有實作。
 
 查詢區桌面以 0.85fr / 1.3fr 分欄，1023px 以下用 1fr / 1.2fr，767px 以下單欄。表單桌面兩欄、768–1023px 單欄、360–767px 兩欄、359px 以下單欄。
 
@@ -195,7 +195,7 @@ Header 保留 72px 高度；1199px 以下隱藏桌面導航並顯示手機選單
 
 ## Shapes
 
-首頁內容列、FAQ、查詢面板不設圓角外框。選單、送出按鈕及受眾控件使用 3px 小圓角；桌面首屏聯絡按鈕 6px；手機首屏精簡聯絡、暫停動效及 Header WhatsApp 是 999px 膠囊控件。既有共用容器半徑 12px 繼續適用其原有元件。
+首頁內容列、FAQ、查詢面板不設圓角外框。選單、送出按鈕及受眾控件使用 3px 小圓角；桌面及手機首屏聯絡按鈕均為 6px；暫停動效及 Header WhatsApp 保留 999px 膠囊控件。既有共用容器半徑 12px 繼續適用其原有元件。
 
 ## Components
 
@@ -203,7 +203,7 @@ Header 保留 72px 高度；1199px 以下隱藏桌面導航並顯示手機選單
 
 桌面首屏 WhatsApp 綠／深藍文字與電話水藍／白字維持單欄，最大寬度 340px、間距 0.75rem、最小高度 66px、內距 0.8rem 1.2rem。hover 上移 2px、亮度 1.08；focus 為白色 3px 輪廓，偏移 5px。
 
-手機首頁透過 `compactOnMobile` 明確啟用同列雙控件：WhatsApp 綠底及深藍字，電話深藍底／白字配 1px 淺藍描邊；兩者為膠囊、最小高度 48px、內距 0.65rem 0.8rem、20px 圖示。整組最大寬度 352px、1.3fr／1fr 分欄、間距 0.625rem，位於文案 flex 欄底部；可見名稱為「WhatsApp」及「致電查詢」，完整聯絡語意保留於 accessible name。原有電話、WhatsApp 目的地及追蹤沿用。這是首頁 opt-in，不更改其他入口。
+手機首頁透過 `compactOnMobile` 明確啟用同列雙控件：WhatsApp 綠底及深藍字，電話透明底／白字配 1px 淺藍描邊；兩者為 6px 圓角、最小高度 48px、內距 0.65rem 0.8rem、20px 圖示。整組最大寬度 380px、1.3fr／1fr 分欄、間距 0.625rem，接在價錢下方 1.1rem、全幅場景之前；可見名稱為「WhatsApp」及「致電查詢」，完整聯絡語意保留於 accessible name。原有電話、WhatsApp 目的地及追蹤沿用。這是首頁 opt-in，不更改其他入口。
 
 手機固定聯絡列在 JavaScript 增強後，首屏操作仍可見時隱藏；首屏聯絡組底部到達視窗 80px 或以上時顯示，回到首屏則再次隱藏。無 JavaScript 維持固定列後備；預渲染重設 `data-enhanced`，避免將暫態隱藏帶入靜態頁。固定列只在有判斷結果交接時顯示額外細字。
 
@@ -255,7 +255,7 @@ FAQ 是原生 details／summary，以細線分隔、最低 65px 摘要列、箭�
 - **Do** 保留至少 44px 操作區、鍵盤焦點、動效暫停、減少動態支援及無 JavaScript 可讀內容。
 - **Do** 沿用首頁 CSS 範圍，修改共用樣式時另外核對內頁。
 - **Do** 以短用途及清楚操作維持閱讀層次，將完整設備限制放入可開啟、可連結及無 JavaScript 可讀的原生收合。
-- **Do** 手機首屏保留同列兩個有名稱的聯絡操作、完整白熊安全帽及與夜景接合的影像邊緣。
+- **Do** 手機首屏保留完整兩行主標、同列兩個有名稱的聯絡操作及下方全幅白熊夜景，完整展示安全帽。
 
 ### Don't:
 
