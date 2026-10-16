@@ -79,3 +79,11 @@ UI UX Pro Max 的手勢衝突及拖曳替代控件指引用於保留直向捲動
 本次沒有新增 SEO 頁面，也沒有改寫 128 篇解答或其網址。首頁所有掃動項目及收合案例資料仍在預渲染 HTML。後續手機元件變更可執行 `node scripts/verify-home-mobile.mjs`；使用 QA_ORIGIN 指向待驗網址，MOBILE_REVIEW_OUTPUT 設定證據輸出位置。
 
 Impeccable 提示既有 config.json 的 telemetry 欄位不被目前版本讀取；本次沒有擴大範圍修復該設定。歷史 strict-comp 機器關卡沒有新增通過聲稱；本次為已授權的響應式精簡，審閱結果只適用於此範圍。
+
+## 正式網站驗證
+
+已部署至 https://drainbearhk.com/ ，應用程式提交為 `b15e954`。2026-10-16 香港時間 13:10，直接確認正式域名出現新版 HTML、精簡文案、原生後備狀態及可用的 JavaScript 資產；未以 Vercel 狀態取代正式域名驗證。
+
+正式域名 390px／1440px 排版、axe、28 個服務組合、WhatsApp 跳轉／重試、影片及動效檢查通過，問題清單為空。實際 Chromium 合成觸控、直向捲動、影片切走暫停、鍵盤、收合焦點及無 JavaScript 案例資料重跑通過。正式手機頁高 6,833px，桌面 6,324px，與本地相同條件的最終建置一致。Sitemap 維持 214 個網址；四個服務和兩個完成案例的 HTTP 200 及 canonical 已核對。
+
+[線上瀏覽器結果](home-mobile-2026-10-16/production-browser.json) · [線上觸控結果](home-mobile-2026-10-16/production-touch.json) · [線上高度](home-mobile-2026-10-16/production-height.json) · [正式版本](home-mobile-2026-10-16/production-version.json) · [Sitemap／連結](home-mobile-2026-10-16/production-routes.json)

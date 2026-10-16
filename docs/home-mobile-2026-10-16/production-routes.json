@@ -1,0 +1,32 @@
+{
+  "verifiedAt": "2026-10-16T05:10:40.439Z",
+  "origin": "https://drainbearhk.com",
+  "sitemapCount": 214,
+  "childPages": 213,
+  "routes": [
+    {
+      "path": "/services/toilet-unblocking",
+      "status": 200
+    },
+    {
+      "path": "/services/kitchen-sink-unblocking",
+      "status": 200
+    },
+    {
+      "path": "/services/bathroom-drain-unblocking",
+      "status": 200
+    },
+    {
+      "path": "/services/sewage-backflow",
+      "status": 200
+    },
+    {
+      "path": "/cases/home-basin-grease-buildup-cleaning",
+      "status": 200
+    },
+    {
+      "path": "/cases/school-rainwater-drain-high-pressure-cleaning",
+      "status": 200
+    }
+  ]
+}
