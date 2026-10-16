@@ -4,7 +4,7 @@
 
 ## 實際內容
 
-由原先9篇來源擴充至34篇：32篇相關報道、節目整理、供稿專欄及轉載，另有2篇官方資料。25篇新增原文均成功讀取 HTTP 200，與原先同日核對的9篇組成完整來源清單。並非30宗獨立投訴或30間商戶；同稿及跨平台轉載保留資料性質與說明，沒有以篇數暗示獨立採訪數。
+由原先9篇來源擴充至34篇：32篇相關報道、節目整理、供稿專欄及轉載，另有2篇官方資料。25篇新增原文均成功讀取 HTTP 200，與原先同日核對的9篇組成完整來源清單。來源類型實際分布：21篇報道、2篇節目整理、5篇專欄整理、4篇標示轉載，以及2篇官方資料。並非30宗獨立投訴或30間商戶；同稿及跨平台轉載保留資料性質與說明，沒有以篇數暗示獨立採訪數。
 
 12組紀錄包含原有8組，以及2024年網民加價經歷、2025年港漂鋅盤 $700 至 $18,000、2025年廁所倒灌 $55,000 及同一裝修佬專欄的跨平台資料組。後者只作相關專欄資料，不額外認定受害人或事件數。新紀錄保留當事人說法、師傅未接電話、未有正式回應及未附裁決等實際狀態。
 
@@ -42,4 +42,6 @@ Chromium 320／390／768／1024／1440px 操作通過：title、description、�
 
 證據：[本機瀏覽器結果](public-database-expansion-2026-10-16/local-browser-results.json)、[手機](public-database-expansion-2026-10-16/database-390.png)、[桌面](public-database-expansion-2026-10-16/database-1440.png)、[逐篇來源目錄](public-database-expansion-2026-10-16/source-directory-390.png)。
 
-正式部署後驗證另記。
+程式提交 `f342b47` 已推送 `main` 並正式部署。2026-10-16 19:12 香港時間，正式網址 HTTP 200，已驗證32篇報道／專欄及轉載、2篇官方資料、12組紀錄及215個Sitemap URL。正式 Chromium 390／1440px 的目錄、來源與事件跳轉、搜尋、新發布機構／金額、篩選、排序、分享連結、返回、清除、空結果及無JavaScript操作均通過。沒有收集到JS錯誤、axe違例或水平溢出；人工開啟正式手機目錄及桌面首屏截圖確認發布版本。未驗證Google收錄或排名。
+
+正式證據：[版本](public-database-expansion-2026-10-16/production-version.json)、[瀏覽器驗證](public-database-expansion-2026-10-16/production-browser-results.json)、[手機目錄](public-database-expansion-2026-10-16/production-source-directory-390.png)、[桌面](public-database-expansion-2026-10-16/production-database-1440.png)。

@@ -1,0 +1,998 @@
+{
+  "origin": "https://drainbearhk.com",
+  "at": "2026-10-16T11:12:21.106Z",
+  "layouts": 2,
+  "records": 12,
+  "sources": 34,
+  "sourceClicks": 3,
+  "noJavaScript": true,
+  "sitemap": 215,
+  "results": [
+    {
+      "width": 390,
+      "metadata": {
+        "title": "通渠黑店相關公開資料庫｜通渠熊",
+        "h1": [
+          "通渠黑店相關公開資料庫"
+        ],
+        "description": "查閱通渠消費爭議的警方紀錄、消委會個案及傳媒報道。按關鍵字、資料來源及爭議類型搜尋，每筆附原文、報道日期、當事人回應及核對範圍。",
+        "canonical": "https://drainbearhk.com/consumer-alerts",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+        "overflow": false,
+        "schemas": [
+          {
+            "@type": "Plumber",
+            "@id": "https://drainbearhk.com/#organization",
+            "name": "通渠熊 DrainBear",
+            "alternateName": [
+              "通渠熊",
+              "DrainBear"
+            ],
+            "url": "https://drainbearhk.com/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://drainbearhk.com/favicon-512x512.png",
+              "width": 512,
+              "height": 512
+            },
+            "image": "https://cdn.sanity.io/images/oyph9zy1/production/9ed19fcf88b5621bb8705caae45d2741a172a311-5000x2625.png",
+            "description": "通渠熊 DrainBear 提供香港住宅、商舖及辦公室通渠服務，處理廚房、浴室、座廁及渠管淤塞問題，提供清晰報價、快速聯絡及實用渠務保養資訊。",
+            "priceRange": "HK$300 起",
+            "telephone": "+85295588260",
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "@id": "https://drainbearhk.com/#contact",
+              "telephone": "+85295588260",
+              "url": "https://wa.me/85295588260",
+              "contactType": "customer service",
+              "areaServed": "HK",
+              "availableLanguage": [
+                "zh-Hant",
+                "zh-HK",
+                "en"
+              ]
+            },
+            "sameAs": [
+              "https://www.instagram.com/drainbearhk/",
+              "https://maps.app.goo.gl/hWwww7Tx3ZztEfLD8"
+            ],
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "@id": "https://drainbearhk.com/services#catalog",
+              "name": "通渠熊通渠服務",
+              "url": "https://drainbearhk.com/services",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "priceSpecification": {
+                    "@type": "PriceSpecification",
+                    "minPrice": 300,
+                    "priceCurrency": "HKD"
+                  },
+                  "itemOffered": {
+                    "@type": "Service",
+                    "@id": "https://drainbearhk.com/services/toilet-unblocking#service",
+                    "name": "坐廁及馬桶通渠",
+                    "url": "https://drainbearhk.com/services/toilet-unblocking",
+                    "provider": {
+                      "@id": "https://drainbearhk.com/#organization"
+                    }
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "priceSpecification": {
+                    "@type": "PriceSpecification",
+                    "minPrice": 300,
+                    "priceCurrency": "HKD"
+                  },
+                  "itemOffered": {
+                    "@type": "Service",
+                    "@id": "https://drainbearhk.com/services/kitchen-sink-unblocking#service",
+                    "name": "廚房鋅盤通渠",
+                    "url": "https://drainbearhk.com/services/kitchen-sink-unblocking",
+                    "provider": {
+                      "@id": "https://drainbearhk.com/#organization"
+                    }
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "priceSpecification": {
+                    "@type": "PriceSpecification",
+                    "minPrice": 300,
+                    "priceCurrency": "HKD"
+                  },
+                  "itemOffered": {
+                    "@type": "Service",
+                    "@id": "https://drainbearhk.com/services/grease-trap-cleaning#service",
+                    "name": "食肆隔油池清理",
+                    "url": "https://drainbearhk.com/services/grease-trap-cleaning",
+                    "provider": {
+                      "@id": "https://drainbearhk.com/#organization"
+                    }
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "priceSpecification": {
+                    "@type": "PriceSpecification",
+                    "minPrice": 300,
+                    "priceCurrency": "HKD"
+                  },
+                  "itemOffered": {
+                    "@type": "Service",
+                    "@id": "https://drainbearhk.com/services/bathroom-drain-unblocking#service",
+                    "name": "浴室通渠：企缸、浴缸及地台去水",
+                    "url": "https://drainbearhk.com/services/bathroom-drain-unblocking",
+                    "provider": {
+                      "@id": "https://drainbearhk.com/#organization"
+                    }
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "priceSpecification": {
+                    "@type": "PriceSpecification",
+                    "minPrice": 300,
+                    "priceCurrency": "HKD"
+                  },
+                  "itemOffered": {
+                    "@type": "Service",
+                    "@id": "https://drainbearhk.com/services/sewage-backflow#service",
+                    "name": "污水渠倒灌處理",
+                    "url": "https://drainbearhk.com/services/sewage-backflow",
+                    "provider": {
+                      "@id": "https://drainbearhk.com/#organization"
+                    }
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "priceSpecification": {
+                    "@type": "PriceSpecification",
+                    "minPrice": 300,
+                    "priceCurrency": "HKD"
+                  },
+                  "itemOffered": {
+                    "@type": "Service",
+                    "@id": "https://drainbearhk.com/services/high-pressure-jetting#service",
+                    "name": "高壓水槍洗渠",
+                    "url": "https://drainbearhk.com/services/high-pressure-jetting",
+                    "provider": {
+                      "@id": "https://drainbearhk.com/#organization"
+                    }
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "priceSpecification": {
+                    "@type": "PriceSpecification",
+                    "minPrice": 300,
+                    "priceCurrency": "HKD"
+                  },
+                  "itemOffered": {
+                    "@type": "Service",
+                    "@id": "https://drainbearhk.com/services/cctv-drain-inspection#service",
+                    "name": "CCTV 照渠／照喉檢測",
+                    "url": "https://drainbearhk.com/services/cctv-drain-inspection",
+                    "provider": {
+                      "@id": "https://drainbearhk.com/#organization"
+                    }
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "priceSpecification": {
+                    "@type": "PriceSpecification",
+                    "minPrice": 300,
+                    "priceCurrency": "HKD"
+                  },
+                  "itemOffered": {
+                    "@type": "Service",
+                    "@id": "https://drainbearhk.com/services/main-drain-manhole#service",
+                    "name": "大廈主渠及沙井通渠",
+                    "url": "https://drainbearhk.com/services/main-drain-manhole",
+                    "provider": {
+                      "@id": "https://drainbearhk.com/#organization"
+                    }
+                  }
+                }
+              ]
+            },
+            "areaServed": {
+              "@type": "Country",
+              "name": "Hong Kong"
+            },
+            "knowsAbout": [
+              "住宅通渠",
+              "商業通渠",
+              "高壓水槍洗渠",
+              "CCTV 照喉檢測",
+              "喉管淤塞預防"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://drainbearhk.com/#website",
+            "url": "https://drainbearhk.com/",
+            "name": "通渠熊 DrainBear",
+            "alternateName": "DrainBear",
+            "inLanguage": "zh-Hant-HK",
+            "publisher": {
+              "@id": "https://drainbearhk.com/#organization"
+            },
+            "hasPart": [
+              {
+                "@id": "https://drainbearhk.com/services#webpage"
+              },
+              {
+                "@id": "https://drainbearhk.com/areas#webpage"
+              },
+              {
+                "@id": "https://drainbearhk.com/guide#webpage"
+              },
+              {
+                "@id": "https://drainbearhk.com/service-process#webpage"
+              },
+              {
+                "@id": "https://drainbearhk.com/faq#webpage"
+              },
+              {
+                "@id": "https://drainbearhk.com/cases#webpage"
+              },
+              {
+                "@id": "https://drainbearhk.com/blog#webpage"
+              }
+            ]
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "@id": "https://drainbearhk.com/consumer-alerts#webpage",
+            "url": "https://drainbearhk.com/consumer-alerts",
+            "name": "通渠黑店相關公開資料庫｜通渠熊",
+            "description": "查閱通渠消費爭議的警方紀錄、消委會個案及傳媒報道。按關鍵字、資料來源及爭議類型搜尋，每筆附原文、報道日期、當事人回應及核對範圍。",
+            "inLanguage": "zh-Hant-HK",
+            "isPartOf": {
+              "@id": "https://drainbearhk.com/#website"
+            },
+            "about": {
+              "@id": "https://drainbearhk.com/#organization"
+            },
+            "mainEntity": [
+              {
+                "@id": "https://drainbearhk.com/consumer-alerts#collection"
+              }
+            ]
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            "@id": "https://drainbearhk.com/consumer-alerts#collection",
+            "url": "https://drainbearhk.com/consumer-alerts",
+            "name": "通渠黑店相關公開資料庫",
+            "description": "查閱通渠消費爭議的警方紀錄、消委會個案及傳媒報道。按關鍵字、資料來源及爭議類型搜尋，每筆附原文、報道日期、當事人回應及核對範圍。",
+            "inLanguage": "zh-Hant-HK",
+            "dateModified": "2026-10-16",
+            "publisher": {
+              "@id": "https://drainbearhk.com/#organization"
+            },
+            "mainEntity": {
+              "@type": "ItemList",
+              "numberOfItems": 12,
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "item": {
+                    "@type": "CreativeWork",
+                    "name": "夜間通渠報價 $1,500，當事人指最後收費 $18,000",
+                    "url": "https://drainbearhk.com/consumer-alerts#record-tvb-night-service-2026",
+                    "description": "《東張西望》訪問多名當事人，講述上門後大幅加價及被要求錄音確認服務的經歷；其中一人稱報價由 $1,500 升至 $18,000。",
+                    "citation": [
+                      "https://www.mytvsuper.com/tc/scoopplus/scoop/catch-up/17909420430657/東張西望-東張西望-呂姓通渠師傅坐地起價10倍劏客-眾苦主怒爆被逼錄音滿意服務--報東張曝光黑店手法",
+                      "https://hk.ulifestyle.com.hk/topic/detail/20112395",
+                      "https://hkdecoman.com/article/57912",
+                      "https://www.weekendhk.com/entertainment/tvb-東張西望-通渠黑店-坐地起價-3516726/",
+                      "https://www.orientalsunday.hk/最新娛聞/tvb-東張西望-通渠黑店-坐地起價-1718089/",
+                      "https://www.hothk.com/article/11490",
+                      "https://www.nmplus.hk/entertainment/tvb-%E6%9D%B1%E5%BC%B5%E8%A5%BF%E6%9C%9B-%E9%80%9A%E6%B8%A0%E9%BB%91%E5%BA%97-%E5%9D%90%E5%9C%B0%E8%B5%B7%E5%83%B9-1657565/"
+                    ]
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "item": {
+                    "@type": "CreativeWork",
+                    "name": "廁所倒灌通渠收費 $55,000，住戶反映墊支及報價爭議",
+                    "url": "https://drainbearhk.com/consumer-alerts#record-toilet-fee-dispute-2025",
+                    "description": "《東張西望》訪問李小姐，指廁所污水倒灌後找師傅處理，被收取 $55,000；她稱自己先墊支費用，事後與業主對款項承擔未有解決。",
+                    "citation": [
+                      "https://www.mytvsuper.com/tc/scoopplus/scoop/catch-up/15954004837582/%E6%9D%B1%E5%BC%B5%E8%A5%BF%E6%9C%9B-%E6%9D%B1%E5%BC%B5%E8%A5%BF%E6%9C%9B-%E7%96%8F%E9%80%9A%E5%BB%81%E6%89%80%E5%A0%B5%E5%A1%9E%E8%A2%AB%E9%96%8B%E5%A4%A9%E6%AE%BA%E5%83%B9%E6%94%B65-5%E8%90%AC%E5%85%83--%E8%8B%A6%E4%B8%BB%E5%A0%B1%E6%9D%B1%E5%BC%B5%E6%96%A5%E7%84%A1%E8%89%AF%E9%80%9A%E6%B8%A0%E5%B8%AB%E7%88%B6%E6%AC%BA%E8%A9%90"
+                    ]
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "item": {
+                    "@type": "CreativeWork",
+                    "name": "港漂講述鋅盤通渠 $700 變 $18,000，多家傳媒轉述同一帖文",
+                    "url": "https://drainbearhk.com/consumer-alerts#record-kitchen-fee-dispute-2025",
+                    "description": "住戶稱鋅盤去水慢及倒流，聯絡師傅後獲報價 $700；到場後先升至 $4,800，再以管內碎石及高壓處理為由報價 $18,000。",
+                    "citation": [
+                      "https://www.stheadline.com/lifetips/3457198/%E5%A4%A9%E5%83%B9%E9%80%9A%E6%B8%A0%E6%B8%AF%E6%BC%82%E5%91%BB%E4%B8%AD%E4%BC%8F%E5%A0%B1%E5%83%B9700%E4%B8%8A%E9%96%80%E6%AA%A2%E6%9F%A5%E9%80%90%E7%B4%9A%E8%B7%B3-%E6%9C%80%E7%B5%82%E5%9F%8B%E5%96%AE%E8%AE%8A18000%E9%99%84%E5%B0%88%E5%AE%B6%E6%95%994%E6%8B%9B%E8%87%AA%E8%A1%8C%E9%80%9A%E6%B8%A0",
+                      "https://www.dotdotnews.com/s/202505/21/AP682d93dee4b0a242bf01b40f.html",
+                      "https://www.hk01.com/%E9%96%8B%E7%BD%90/60240757/%E6%B8%AF%E6%BC%82%E5%91%BB%E8%A2%AB%E5%9D%91%E5%A4%A9%E5%83%B9%E9%80%9A%E6%B8%A0-%E5%A0%B1%E5%83%B9-700%E5%9F%8B%E5%96%AE%E8%AE%8A-18-000-%E5%B0%88%E5%AE%B6%E6%95%991%E6%8B%9Bdiy%E9%80%9A%E6%B8%A0",
+                      "https://hk.ulifestyle.com.hk/topic/detail/20065275/%E6%B8%AF%E6%BC%82%E9%80%9A%E6%B8%A0%E8%A2%AB%E5%8A%8F%E5%91%BB%E4%B8%AD%E4%BC%8F-%E9%80%9A%E6%B8%A0%E8%B2%BB%E7%AB%9F%E8%AE%8A-%E6%B6%88%E5%A7%94%E6%9C%83%E6%95%99-%E6%8B%9B%E8%87%AA%E4%BF%9D"
+                    ]
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 4,
+                  "item": {
+                    "@type": "CreativeWork",
+                    "name": "專欄整理：網上格價、多名師傅接單與 $700 至 $7,500 加價爭議",
+                    "url": "https://drainbearhk.com/consumer-alerts#record-quotation-columns-2025",
+                    "description": "am730、SundayKiss、美聯物業及經絡刊載裝修佬提供的專欄，整理多名師傅曾與同一住戶通話，以及上門後逐項加價的說法。",
+                    "citation": [
+                      "https://www.am730.com.hk/article/523278",
+                      "https://www.midland.com.hk/zh-hk/property-news/%E6%A5%AD%E4%B8%BB%E8%B2%BC%E5%A3%AB/%E5%AE%B6%E5%B1%85%E7%94%9F%E6%B4%BB/%E3%80%90%E9%80%9A%E6%B8%A0%E9%A8%99%E6%A1%88%E3%80%91%E4%B8%8A%E7%B6%B2%E6%90%B5%E9%80%9A%E6%B8%A0%E4%BD%AC%E4%B8%AD%E4%BC%8F-700%E8%9A%8A%E8%AE%8A7500%E8%9A%8A-%E6%8F%AD%E6%85%A3%E5%B8%B8%E6%89%8B/",
+                      "https://www.sundaykiss.com/%E5%AE%B6%E4%BA%8B%E9%81%94%E4%BA%BA/%E5%AE%B6%E5%B1%85%E6%B8%85%E6%BD%94-%E5%BB%9A%E6%88%BF%E6%B8%85%E6%BD%94-%E9%80%9A%E6%B8%A0%E4%BD%AC-%E4%B8%AD%E4%BC%8F-%E8%A3%9D%E4%BF%AE%E4%BD%AC-sk25-2039250/",
+                      "https://www.mreferral.com/blog/%E8%A3%9D%E4%BF%AE%E4%BD%AC%E5%B0%88%E6%AC%84-%E9%80%9A%E6%B8%A0%E9%A8%99%E6%A1%88-%E4%B8%8A%E7%B6%B2%E6%90%B5%E9%80%9A%E6%B8%A0%E4%BD%AC%E4%B8%AD%E4%BC%8F-700%E8%9A%8A%E8%AE%8A7500%E8%9A%8A-%E6%8F%AD%E6%85%A3%E5%B8%B8%E6%89%8B%E6%B3%952%E5%A4%A7%E7%89%B9%E5%BE%B5/"
+                    ]
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 5,
+                  "item": {
+                    "@type": "CreativeWork",
+                    "name": "網民講述上門通渠加價：$1,500 至 $3,500，另有人稱 $800 至 $8,000",
+                    "url": "https://drainbearhk.com/consumer-alerts#record-price-accounts-2024",
+                    "description": "星島頭條引述網民發文稱通渠由 $1,500 加至 $3,500；評論區另有人稱最初報價 $800，最後收費 $8,000。",
+                    "citation": [
+                      "https://www.stheadline.com/renovation/3384572/%E4%B8%8A%E9%96%80%E9%80%9A%E6%B8%A0%E9%81%AD%E5%9D%90%E5%9C%B0%E8%B5%B7%E5%83%B9%E8%B2%B410%E5%80%8D-%E5%9F%8B%E5%96%AE%E7%95%808000-%E5%B0%88%E5%AE%B6%E6%95%993%E5%A4%A7%E8%87%AA%E6%95%91%E6%96%B9%E6%B3%95"
+                    ]
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 6,
+                  "item": {
+                    "@type": "CreativeWork",
+                    "name": "廚房通渠 $700 至 $7,500：網民質疑照片及報價改動",
+                    "url": "https://drainbearhk.com/consumer-alerts#record-kitchen-quote-dispute-2023",
+                    "description": "香港01引述網民帖文，指通話報價 $700，上門後再提出外牆及機器工序，最終收費 $7,500；事主亦質疑收到的渠管照片與現場看過的不同。",
+                    "citation": [
+                      "https://www.hk01.com/教煮/894828"
+                    ]
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 7,
+                  "item": {
+                    "@type": "CreativeWork",
+                    "name": "柳俊江講述通渠報價由 $750 升至 $7,500",
+                    "url": "https://drainbearhk.com/consumer-alerts#record-anchor-quote-dispute-2023",
+                    "description": "香港01引述柳俊江帖文，指廚房去水倒流後找人上門，報價隨所稱工具升級而上調；他最終沒有接受 $7,500 報價，支付 $1,500 結束當次安排。",
+                    "citation": [
+                      "https://www.hk01.com/食玩買/854079",
+                      "https://hkdecoman.com/article/56527",
+                      "https://www.bastillepost.com/hongkong/article/12027071",
+                      "https://www.stheadline.com/world-topics/3185378/Juicy叮分享疑中伏渠王初體驗-柳俊江報價似炒緊必理痛",
+                      "https://deco-academy.com/blog/369"
+                    ]
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 8,
+                  "item": {
+                    "@type": "CreativeWork",
+                    "name": "警方通渠拘捕行動：商罪科跟進消委會轉介",
+                    "url": "https://drainbearhk.com/consumer-alerts#record-police-referral-arrests-2021",
+                    "description": "警方《警聲》確認，商罪科跟進消委會轉介的通渠個案，搜證後於2021年8月拘捕兩名涉案師傅。香港01同期報道涉嫌欺詐及刑事恐嚇。",
+                    "citation": [
+                      "https://www.police.gov.hk/offbeat/1194/chi/9010.html",
+                      "https://www.hk01.com/突發/659813",
+                      "https://hk.on.cc/hk/bkn/cnt/news/20210805/bkn-20210805125032310-0805_00822_001.html",
+                      "https://www.hk01.com/%E7%AA%81%E7%99%BC/659803/%E9%80%9A%E6%B8%A0%E6%BF%AB%E6%94%B6%E8%B2%BB%E5%8F%88%E5%A8%81%E5%9A%87-%E5%A0%B1%E5%83%B9%E6%95%B8%E7%99%BE%E5%9F%8B%E5%96%AE%E9%81%8E%E8%90%AC-%E6%8B%982%E7%94%B7%E5%AD%90%E6%B6%89%E6%AC%BA%E8%A9%90%E5%8F%8A%E5%88%91%E4%BA%8B%E6%81%90%E5%9A%87",
+                      "https://orientaldaily.on.cc/content/%E8%A6%81%E8%81%9E%E6%B8%AF%E8%81%9E/odn-20210806-0806_00176_241/%E9%80%BC%E5%AE%A2%E4%BB%98%E5%A4%A9%E5%83%B9%E7%B6%AD%E4%BF%AE%E8%B2%BB--%E5%85%A9%E8%A0%B1%E6%83%91%E9%80%9A%E6%B8%A0%E4%BD%AC%E5%B0%B1%E9%80%AE"
+                    ]
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 9,
+                  "item": {
+                    "@type": "CreativeWork",
+                    "name": "消委會 A 公司個案：$1,500 報價，最終收費 $58,000",
+                    "url": "https://drainbearhk.com/consumer-alerts#record-consumer-a-price-2019",
+                    "description": "消委會記錄住戶接受 $1,500 檢查連通渠報價，上門後被建議拆坐廁及額外清洗，最終支付 $58,000，事後要求協助退回部分款項。",
+                    "citation": [
+                      "https://www.consumer.org.hk/tc/article/513-plumbing-service",
+                      "https://www.hk01.com/社會新聞/351926",
+                      "https://deco-academy.com/blog/85",
+                      "https://hk.on.cc/hk/bkn/cnt/news/20190715/bkn-20190715100109949-0715_00822_001.html",
+                      "https://www.stheadline.com/article/1950811/%E6%B6%88%E5%A7%94%E6%9C%83%E5%BA%A7%E5%BB%81%E8%A2%AB%E6%8B%86%E5%BE%8C%E5%9D%90%E5%9C%B0%E8%B5%B7%E5%83%B9-1500%E5%85%83%E8%AE%8A58000%E5%85%83"
+                    ]
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 10,
+                  "item": {
+                    "@type": "CreativeWork",
+                    "name": "消委會 B 公司個案：通渠後漏水，售後跟進未果",
+                    "url": "https://drainbearhk.com/consumer-alerts#record-consumer-b-leak-2019",
+                    "description": "住戶投訴接受 $900 高壓氣槍服務後浴缸邊漏水，另付 $3,000 找人維修，並質疑原公司沒有履行跟進承諾。",
+                    "citation": [
+                      "https://www.consumer.org.hk/tc/article/513-plumbing-service",
+                      "https://www.hk01.com/社會新聞/351926",
+                      "https://deco-academy.com/blog/85",
+                      "https://hk.on.cc/hk/bkn/cnt/news/20190715/bkn-20190715100109949-0715_00822_001.html"
+                    ]
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 11,
+                  "item": {
+                    "@type": "CreativeWork",
+                    "name": "消委會 C 公司個案：付 $8,300，一個月後再塞渠",
+                    "url": "https://drainbearhk.com/consumer-alerts#record-consumer-c-followup-2019",
+                    "description": "住戶投訴支付 $8,300 清洗後，一個月再度淤塞，聯絡單據電話無人接聽；網站接線員表示單據不是其公司發出，不提供協助。",
+                    "citation": [
+                      "https://www.consumer.org.hk/tc/article/513-plumbing-service",
+                      "https://www.hk01.com/社會新聞/351926",
+                      "https://deco-academy.com/blog/85",
+                      "https://hk.on.cc/hk/bkn/cnt/news/20190715/bkn-20190715100109949-0715_00822_001.html",
+                      "https://www.stheadline.com/article/1950811/%E6%B6%88%E5%A7%94%E6%9C%83%E5%BA%A7%E5%BB%81%E8%A2%AB%E6%8B%86%E5%BE%8C%E5%9D%90%E5%9C%B0%E8%B5%B7%E5%83%B9-1500%E5%85%83%E8%AE%8A58000%E5%85%83"
+                    ]
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 12,
+                  "item": {
+                    "@type": "CreativeWork",
+                    "name": "不同通渠名稱，網民稱疑似同一人接聽電話",
+                    "url": "https://drainbearhk.com/consumer-alerts#record-phone-network-claims-2018",
+                    "description": "香港01引述討論區帖文，指市民致電不同通渠名稱時，懷疑由同一人接聽；另有網民分享報價及上門收費出現差異的經歷。",
+                    "citation": [
+                      "https://www.hk01.com/熱爆話題/256527"
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "首頁",
+                "item": "https://drainbearhk.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "通渠公開資料庫",
+                "item": "https://drainbearhk.com/consumer-alerts"
+              }
+            ]
+          }
+        ]
+      },
+      "search": true,
+      "combinedFilters": true,
+      "sortDomOrder": true,
+      "history": true,
+      "emptyReset": true,
+      "hash": true,
+      "axe": []
+    },
+    {
+      "width": 1440,
+      "metadata": {
+        "title": "通渠黑店相關公開資料庫｜通渠熊",
+        "h1": [
+          "通渠黑店相關公開資料庫"
+        ],
+        "description": "查閱通渠消費爭議的警方紀錄、消委會個案及傳媒報道。按關鍵字、資料來源及爭議類型搜尋，每筆附原文、報道日期、當事人回應及核對範圍。",
+        "canonical": "https://drainbearhk.com/consumer-alerts",
+        "robots": "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+        "overflow": false,
+        "schemas": [
+          {
+            "@type": "Plumber",
+            "@id": "https://drainbearhk.com/#organization",
+            "name": "通渠熊 DrainBear",
+            "alternateName": [
+              "通渠熊",
+              "DrainBear"
+            ],
+            "url": "https://drainbearhk.com/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://drainbearhk.com/favicon-512x512.png",
+              "width": 512,
+              "height": 512
+            },
+            "image": "https://cdn.sanity.io/images/oyph9zy1/production/9ed19fcf88b5621bb8705caae45d2741a172a311-5000x2625.png",
+            "description": "通渠熊 DrainBear 提供香港住宅、商舖及辦公室通渠服務，處理廚房、浴室、座廁及渠管淤塞問題，提供清晰報價、快速聯絡及實用渠務保養資訊。",
+            "priceRange": "HK$300 起",
+            "telephone": "+85295588260",
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "@id": "https://drainbearhk.com/#contact",
+              "telephone": "+85295588260",
+              "url": "https://wa.me/85295588260",
+              "contactType": "customer service",
+              "areaServed": "HK",
+              "availableLanguage": [
+                "zh-Hant",
+                "zh-HK",
+                "en"
+              ]
+            },
+            "sameAs": [
+              "https://www.instagram.com/drainbearhk/",
+              "https://maps.app.goo.gl/hWwww7Tx3ZztEfLD8"
+            ],
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "@id": "https://drainbearhk.com/services#catalog",
+              "name": "通渠熊通渠服務",
+              "url": "https://drainbearhk.com/services",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "priceSpecification": {
+                    "@type": "PriceSpecification",
+                    "minPrice": 300,
+                    "priceCurrency": "HKD"
+                  },
+                  "itemOffered": {
+                    "@type": "Service",
+                    "@id": "https://drainbearhk.com/services/toilet-unblocking#service",
+                    "name": "坐廁及馬桶通渠",
+                    "url": "https://drainbearhk.com/services/toilet-unblocking",
+                    "provider": {
+                      "@id": "https://drainbearhk.com/#organization"
+                    }
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "priceSpecification": {
+                    "@type": "PriceSpecification",
+                    "minPrice": 300,
+                    "priceCurrency": "HKD"
+                  },
+                  "itemOffered": {
+                    "@type": "Service",
+                    "@id": "https://drainbearhk.com/services/kitchen-sink-unblocking#service",
+                    "name": "廚房鋅盤通渠",
+                    "url": "https://drainbearhk.com/services/kitchen-sink-unblocking",
+                    "provider": {
+                      "@id": "https://drainbearhk.com/#organization"
+                    }
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "priceSpecification": {
+                    "@type": "PriceSpecification",
+                    "minPrice": 300,
+                    "priceCurrency": "HKD"
+                  },
+                  "itemOffered": {
+                    "@type": "Service",
+                    "@id": "https://drainbearhk.com/services/grease-trap-cleaning#service",
+                    "name": "食肆隔油池清理",
+                    "url": "https://drainbearhk.com/services/grease-trap-cleaning",
+                    "provider": {
+                      "@id": "https://drainbearhk.com/#organization"
+                    }
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "priceSpecification": {
+                    "@type": "PriceSpecification",
+                    "minPrice": 300,
+                    "priceCurrency": "HKD"
+                  },
+                  "itemOffered": {
+                    "@type": "Service",
+                    "@id": "https://drainbearhk.com/services/bathroom-drain-unblocking#service",
+                    "name": "浴室通渠：企缸、浴缸及地台去水",
+                    "url": "https://drainbearhk.com/services/bathroom-drain-unblocking",
+                    "provider": {
+                      "@id": "https://drainbearhk.com/#organization"
+                    }
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "priceSpecification": {
+                    "@type": "PriceSpecification",
+                    "minPrice": 300,
+                    "priceCurrency": "HKD"
+                  },
+                  "itemOffered": {
+                    "@type": "Service",
+                    "@id": "https://drainbearhk.com/services/sewage-backflow#service",
+                    "name": "污水渠倒灌處理",
+                    "url": "https://drainbearhk.com/services/sewage-backflow",
+                    "provider": {
+                      "@id": "https://drainbearhk.com/#organization"
+                    }
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "priceSpecification": {
+                    "@type": "PriceSpecification",
+                    "minPrice": 300,
+                    "priceCurrency": "HKD"
+                  },
+                  "itemOffered": {
+                    "@type": "Service",
+                    "@id": "https://drainbearhk.com/services/high-pressure-jetting#service",
+                    "name": "高壓水槍洗渠",
+                    "url": "https://drainbearhk.com/services/high-pressure-jetting",
+                    "provider": {
+                      "@id": "https://drainbearhk.com/#organization"
+                    }
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "priceSpecification": {
+                    "@type": "PriceSpecification",
+                    "minPrice": 300,
+                    "priceCurrency": "HKD"
+                  },
+                  "itemOffered": {
+                    "@type": "Service",
+                    "@id": "https://drainbearhk.com/services/cctv-drain-inspection#service",
+                    "name": "CCTV 照渠／照喉檢測",
+                    "url": "https://drainbearhk.com/services/cctv-drain-inspection",
+                    "provider": {
+                      "@id": "https://drainbearhk.com/#organization"
+                    }
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "priceSpecification": {
+                    "@type": "PriceSpecification",
+                    "minPrice": 300,
+                    "priceCurrency": "HKD"
+                  },
+                  "itemOffered": {
+                    "@type": "Service",
+                    "@id": "https://drainbearhk.com/services/main-drain-manhole#service",
+                    "name": "大廈主渠及沙井通渠",
+                    "url": "https://drainbearhk.com/services/main-drain-manhole",
+                    "provider": {
+                      "@id": "https://drainbearhk.com/#organization"
+                    }
+                  }
+                }
+              ]
+            },
+            "areaServed": {
+              "@type": "Country",
+              "name": "Hong Kong"
+            },
+            "knowsAbout": [
+              "住宅通渠",
+              "商業通渠",
+              "高壓水槍洗渠",
+              "CCTV 照喉檢測",
+              "喉管淤塞預防"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://drainbearhk.com/#website",
+            "url": "https://drainbearhk.com/",
+            "name": "通渠熊 DrainBear",
+            "alternateName": "DrainBear",
+            "inLanguage": "zh-Hant-HK",
+            "publisher": {
+              "@id": "https://drainbearhk.com/#organization"
+            },
+            "hasPart": [
+              {
+                "@id": "https://drainbearhk.com/services#webpage"
+              },
+              {
+                "@id": "https://drainbearhk.com/areas#webpage"
+              },
+              {
+                "@id": "https://drainbearhk.com/guide#webpage"
+              },
+              {
+                "@id": "https://drainbearhk.com/service-process#webpage"
+              },
+              {
+                "@id": "https://drainbearhk.com/faq#webpage"
+              },
+              {
+                "@id": "https://drainbearhk.com/cases#webpage"
+              },
+              {
+                "@id": "https://drainbearhk.com/blog#webpage"
+              }
+            ]
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "@id": "https://drainbearhk.com/consumer-alerts#webpage",
+            "url": "https://drainbearhk.com/consumer-alerts",
+            "name": "通渠黑店相關公開資料庫｜通渠熊",
+            "description": "查閱通渠消費爭議的警方紀錄、消委會個案及傳媒報道。按關鍵字、資料來源及爭議類型搜尋，每筆附原文、報道日期、當事人回應及核對範圍。",
+            "inLanguage": "zh-Hant-HK",
+            "isPartOf": {
+              "@id": "https://drainbearhk.com/#website"
+            },
+            "about": {
+              "@id": "https://drainbearhk.com/#organization"
+            },
+            "mainEntity": [
+              {
+                "@id": "https://drainbearhk.com/consumer-alerts#collection"
+              }
+            ]
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            "@id": "https://drainbearhk.com/consumer-alerts#collection",
+            "url": "https://drainbearhk.com/consumer-alerts",
+            "name": "通渠黑店相關公開資料庫",
+            "description": "查閱通渠消費爭議的警方紀錄、消委會個案及傳媒報道。按關鍵字、資料來源及爭議類型搜尋，每筆附原文、報道日期、當事人回應及核對範圍。",
+            "inLanguage": "zh-Hant-HK",
+            "dateModified": "2026-10-16",
+            "publisher": {
+              "@id": "https://drainbearhk.com/#organization"
+            },
+            "mainEntity": {
+              "@type": "ItemList",
+              "numberOfItems": 12,
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "item": {
+                    "@type": "CreativeWork",
+                    "name": "夜間通渠報價 $1,500，當事人指最後收費 $18,000",
+                    "url": "https://drainbearhk.com/consumer-alerts#record-tvb-night-service-2026",
+                    "description": "《東張西望》訪問多名當事人，講述上門後大幅加價及被要求錄音確認服務的經歷；其中一人稱報價由 $1,500 升至 $18,000。",
+                    "citation": [
+                      "https://www.mytvsuper.com/tc/scoopplus/scoop/catch-up/17909420430657/東張西望-東張西望-呂姓通渠師傅坐地起價10倍劏客-眾苦主怒爆被逼錄音滿意服務--報東張曝光黑店手法",
+                      "https://hk.ulifestyle.com.hk/topic/detail/20112395",
+                      "https://hkdecoman.com/article/57912",
+                      "https://www.weekendhk.com/entertainment/tvb-東張西望-通渠黑店-坐地起價-3516726/",
+                      "https://www.orientalsunday.hk/最新娛聞/tvb-東張西望-通渠黑店-坐地起價-1718089/",
+                      "https://www.hothk.com/article/11490",
+                      "https://www.nmplus.hk/entertainment/tvb-%E6%9D%B1%E5%BC%B5%E8%A5%BF%E6%9C%9B-%E9%80%9A%E6%B8%A0%E9%BB%91%E5%BA%97-%E5%9D%90%E5%9C%B0%E8%B5%B7%E5%83%B9-1657565/"
+                    ]
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "item": {
+                    "@type": "CreativeWork",
+                    "name": "廁所倒灌通渠收費 $55,000，住戶反映墊支及報價爭議",
+                    "url": "https://drainbearhk.com/consumer-alerts#record-toilet-fee-dispute-2025",
+                    "description": "《東張西望》訪問李小姐，指廁所污水倒灌後找師傅處理，被收取 $55,000；她稱自己先墊支費用，事後與業主對款項承擔未有解決。",
+                    "citation": [
+                      "https://www.mytvsuper.com/tc/scoopplus/scoop/catch-up/15954004837582/%E6%9D%B1%E5%BC%B5%E8%A5%BF%E6%9C%9B-%E6%9D%B1%E5%BC%B5%E8%A5%BF%E6%9C%9B-%E7%96%8F%E9%80%9A%E5%BB%81%E6%89%80%E5%A0%B5%E5%A1%9E%E8%A2%AB%E9%96%8B%E5%A4%A9%E6%AE%BA%E5%83%B9%E6%94%B65-5%E8%90%AC%E5%85%83--%E8%8B%A6%E4%B8%BB%E5%A0%B1%E6%9D%B1%E5%BC%B5%E6%96%A5%E7%84%A1%E8%89%AF%E9%80%9A%E6%B8%A0%E5%B8%AB%E7%88%B6%E6%AC%BA%E8%A9%90"
+                    ]
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "item": {
+                    "@type": "CreativeWork",
+                    "name": "港漂講述鋅盤通渠 $700 變 $18,000，多家傳媒轉述同一帖文",
+                    "url": "https://drainbearhk.com/consumer-alerts#record-kitchen-fee-dispute-2025",
+                    "description": "住戶稱鋅盤去水慢及倒流，聯絡師傅後獲報價 $700；到場後先升至 $4,800，再以管內碎石及高壓處理為由報價 $18,000。",
+                    "citation": [
+                      "https://www.stheadline.com/lifetips/3457198/%E5%A4%A9%E5%83%B9%E9%80%9A%E6%B8%A0%E6%B8%AF%E6%BC%82%E5%91%BB%E4%B8%AD%E4%BC%8F%E5%A0%B1%E5%83%B9700%E4%B8%8A%E9%96%80%E6%AA%A2%E6%9F%A5%E9%80%90%E7%B4%9A%E8%B7%B3-%E6%9C%80%E7%B5%82%E5%9F%8B%E5%96%AE%E8%AE%8A18000%E9%99%84%E5%B0%88%E5%AE%B6%E6%95%994%E6%8B%9B%E8%87%AA%E8%A1%8C%E9%80%9A%E6%B8%A0",
+                      "https://www.dotdotnews.com/s/202505/21/AP682d93dee4b0a242bf01b40f.html",
+                      "https://www.hk01.com/%E9%96%8B%E7%BD%90/60240757/%E6%B8%AF%E6%BC%82%E5%91%BB%E8%A2%AB%E5%9D%91%E5%A4%A9%E5%83%B9%E9%80%9A%E6%B8%A0-%E5%A0%B1%E5%83%B9-700%E5%9F%8B%E5%96%AE%E8%AE%8A-18-000-%E5%B0%88%E5%AE%B6%E6%95%991%E6%8B%9Bdiy%E9%80%9A%E6%B8%A0",
+                      "https://hk.ulifestyle.com.hk/topic/detail/20065275/%E6%B8%AF%E6%BC%82%E9%80%9A%E6%B8%A0%E8%A2%AB%E5%8A%8F%E5%91%BB%E4%B8%AD%E4%BC%8F-%E9%80%9A%E6%B8%A0%E8%B2%BB%E7%AB%9F%E8%AE%8A-%E6%B6%88%E5%A7%94%E6%9C%83%E6%95%99-%E6%8B%9B%E8%87%AA%E4%BF%9D"
+                    ]
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 4,
+                  "item": {
+                    "@type": "CreativeWork",
+                    "name": "專欄整理：網上格價、多名師傅接單與 $700 至 $7,500 加價爭議",
+                    "url": "https://drainbearhk.com/consumer-alerts#record-quotation-columns-2025",
+                    "description": "am730、SundayKiss、美聯物業及經絡刊載裝修佬提供的專欄，整理多名師傅曾與同一住戶通話，以及上門後逐項加價的說法。",
+                    "citation": [
+                      "https://www.am730.com.hk/article/523278",
+                      "https://www.midland.com.hk/zh-hk/property-news/%E6%A5%AD%E4%B8%BB%E8%B2%BC%E5%A3%AB/%E5%AE%B6%E5%B1%85%E7%94%9F%E6%B4%BB/%E3%80%90%E9%80%9A%E6%B8%A0%E9%A8%99%E6%A1%88%E3%80%91%E4%B8%8A%E7%B6%B2%E6%90%B5%E9%80%9A%E6%B8%A0%E4%BD%AC%E4%B8%AD%E4%BC%8F-700%E8%9A%8A%E8%AE%8A7500%E8%9A%8A-%E6%8F%AD%E6%85%A3%E5%B8%B8%E6%89%8B/",
+                      "https://www.sundaykiss.com/%E5%AE%B6%E4%BA%8B%E9%81%94%E4%BA%BA/%E5%AE%B6%E5%B1%85%E6%B8%85%E6%BD%94-%E5%BB%9A%E6%88%BF%E6%B8%85%E6%BD%94-%E9%80%9A%E6%B8%A0%E4%BD%AC-%E4%B8%AD%E4%BC%8F-%E8%A3%9D%E4%BF%AE%E4%BD%AC-sk25-2039250/",
+                      "https://www.mreferral.com/blog/%E8%A3%9D%E4%BF%AE%E4%BD%AC%E5%B0%88%E6%AC%84-%E9%80%9A%E6%B8%A0%E9%A8%99%E6%A1%88-%E4%B8%8A%E7%B6%B2%E6%90%B5%E9%80%9A%E6%B8%A0%E4%BD%AC%E4%B8%AD%E4%BC%8F-700%E8%9A%8A%E8%AE%8A7500%E8%9A%8A-%E6%8F%AD%E6%85%A3%E5%B8%B8%E6%89%8B%E6%B3%952%E5%A4%A7%E7%89%B9%E5%BE%B5/"
+                    ]
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 5,
+                  "item": {
+                    "@type": "CreativeWork",
+                    "name": "網民講述上門通渠加價：$1,500 至 $3,500，另有人稱 $800 至 $8,000",
+                    "url": "https://drainbearhk.com/consumer-alerts#record-price-accounts-2024",
+                    "description": "星島頭條引述網民發文稱通渠由 $1,500 加至 $3,500；評論區另有人稱最初報價 $800，最後收費 $8,000。",
+                    "citation": [
+                      "https://www.stheadline.com/renovation/3384572/%E4%B8%8A%E9%96%80%E9%80%9A%E6%B8%A0%E9%81%AD%E5%9D%90%E5%9C%B0%E8%B5%B7%E5%83%B9%E8%B2%B410%E5%80%8D-%E5%9F%8B%E5%96%AE%E7%95%808000-%E5%B0%88%E5%AE%B6%E6%95%993%E5%A4%A7%E8%87%AA%E6%95%91%E6%96%B9%E6%B3%95"
+                    ]
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 6,
+                  "item": {
+                    "@type": "CreativeWork",
+                    "name": "廚房通渠 $700 至 $7,500：網民質疑照片及報價改動",
+                    "url": "https://drainbearhk.com/consumer-alerts#record-kitchen-quote-dispute-2023",
+                    "description": "香港01引述網民帖文，指通話報價 $700，上門後再提出外牆及機器工序，最終收費 $7,500；事主亦質疑收到的渠管照片與現場看過的不同。",
+                    "citation": [
+                      "https://www.hk01.com/教煮/894828"
+                    ]
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 7,
+                  "item": {
+                    "@type": "CreativeWork",
+                    "name": "柳俊江講述通渠報價由 $750 升至 $7,500",
+                    "url": "https://drainbearhk.com/consumer-alerts#record-anchor-quote-dispute-2023",
+                    "description": "香港01引述柳俊江帖文，指廚房去水倒流後找人上門，報價隨所稱工具升級而上調；他最終沒有接受 $7,500 報價，支付 $1,500 結束當次安排。",
+                    "citation": [
+                      "https://www.hk01.com/食玩買/854079",
+                      "https://hkdecoman.com/article/56527",
+                      "https://www.bastillepost.com/hongkong/article/12027071",
+                      "https://www.stheadline.com/world-topics/3185378/Juicy叮分享疑中伏渠王初體驗-柳俊江報價似炒緊必理痛",
+                      "https://deco-academy.com/blog/369"
+                    ]
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 8,
+                  "item": {
+                    "@type": "CreativeWork",
+                    "name": "警方通渠拘捕行動：商罪科跟進消委會轉介",
+                    "url": "https://drainbearhk.com/consumer-alerts#record-police-referral-arrests-2021",
+                    "description": "警方《警聲》確認，商罪科跟進消委會轉介的通渠個案，搜證後於2021年8月拘捕兩名涉案師傅。香港01同期報道涉嫌欺詐及刑事恐嚇。",
+                    "citation": [
+                      "https://www.police.gov.hk/offbeat/1194/chi/9010.html",
+                      "https://www.hk01.com/突發/659813",
+                      "https://hk.on.cc/hk/bkn/cnt/news/20210805/bkn-20210805125032310-0805_00822_001.html",
+                      "https://www.hk01.com/%E7%AA%81%E7%99%BC/659803/%E9%80%9A%E6%B8%A0%E6%BF%AB%E6%94%B6%E8%B2%BB%E5%8F%88%E5%A8%81%E5%9A%87-%E5%A0%B1%E5%83%B9%E6%95%B8%E7%99%BE%E5%9F%8B%E5%96%AE%E9%81%8E%E8%90%AC-%E6%8B%982%E7%94%B7%E5%AD%90%E6%B6%89%E6%AC%BA%E8%A9%90%E5%8F%8A%E5%88%91%E4%BA%8B%E6%81%90%E5%9A%87",
+                      "https://orientaldaily.on.cc/content/%E8%A6%81%E8%81%9E%E6%B8%AF%E8%81%9E/odn-20210806-0806_00176_241/%E9%80%BC%E5%AE%A2%E4%BB%98%E5%A4%A9%E5%83%B9%E7%B6%AD%E4%BF%AE%E8%B2%BB--%E5%85%A9%E8%A0%B1%E6%83%91%E9%80%9A%E6%B8%A0%E4%BD%AC%E5%B0%B1%E9%80%AE"
+                    ]
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 9,
+                  "item": {
+                    "@type": "CreativeWork",
+                    "name": "消委會 A 公司個案：$1,500 報價，最終收費 $58,000",
+                    "url": "https://drainbearhk.com/consumer-alerts#record-consumer-a-price-2019",
+                    "description": "消委會記錄住戶接受 $1,500 檢查連通渠報價，上門後被建議拆坐廁及額外清洗，最終支付 $58,000，事後要求協助退回部分款項。",
+                    "citation": [
+                      "https://www.consumer.org.hk/tc/article/513-plumbing-service",
+                      "https://www.hk01.com/社會新聞/351926",
+                      "https://deco-academy.com/blog/85",
+                      "https://hk.on.cc/hk/bkn/cnt/news/20190715/bkn-20190715100109949-0715_00822_001.html",
+                      "https://www.stheadline.com/article/1950811/%E6%B6%88%E5%A7%94%E6%9C%83%E5%BA%A7%E5%BB%81%E8%A2%AB%E6%8B%86%E5%BE%8C%E5%9D%90%E5%9C%B0%E8%B5%B7%E5%83%B9-1500%E5%85%83%E8%AE%8A58000%E5%85%83"
+                    ]
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 10,
+                  "item": {
+                    "@type": "CreativeWork",
+                    "name": "消委會 B 公司個案：通渠後漏水，售後跟進未果",
+                    "url": "https://drainbearhk.com/consumer-alerts#record-consumer-b-leak-2019",
+                    "description": "住戶投訴接受 $900 高壓氣槍服務後浴缸邊漏水，另付 $3,000 找人維修，並質疑原公司沒有履行跟進承諾。",
+                    "citation": [
+                      "https://www.consumer.org.hk/tc/article/513-plumbing-service",
+                      "https://www.hk01.com/社會新聞/351926",
+                      "https://deco-academy.com/blog/85",
+                      "https://hk.on.cc/hk/bkn/cnt/news/20190715/bkn-20190715100109949-0715_00822_001.html"
+                    ]
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 11,
+                  "item": {
+                    "@type": "CreativeWork",
+                    "name": "消委會 C 公司個案：付 $8,300，一個月後再塞渠",
+                    "url": "https://drainbearhk.com/consumer-alerts#record-consumer-c-followup-2019",
+                    "description": "住戶投訴支付 $8,300 清洗後，一個月再度淤塞，聯絡單據電話無人接聽；網站接線員表示單據不是其公司發出，不提供協助。",
+                    "citation": [
+                      "https://www.consumer.org.hk/tc/article/513-plumbing-service",
+                      "https://www.hk01.com/社會新聞/351926",
+                      "https://deco-academy.com/blog/85",
+                      "https://hk.on.cc/hk/bkn/cnt/news/20190715/bkn-20190715100109949-0715_00822_001.html",
+                      "https://www.stheadline.com/article/1950811/%E6%B6%88%E5%A7%94%E6%9C%83%E5%BA%A7%E5%BB%81%E8%A2%AB%E6%8B%86%E5%BE%8C%E5%9D%90%E5%9C%B0%E8%B5%B7%E5%83%B9-1500%E5%85%83%E8%AE%8A58000%E5%85%83"
+                    ]
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 12,
+                  "item": {
+                    "@type": "CreativeWork",
+                    "name": "不同通渠名稱，網民稱疑似同一人接聽電話",
+                    "url": "https://drainbearhk.com/consumer-alerts#record-phone-network-claims-2018",
+                    "description": "香港01引述討論區帖文，指市民致電不同通渠名稱時，懷疑由同一人接聽；另有網民分享報價及上門收費出現差異的經歷。",
+                    "citation": [
+                      "https://www.hk01.com/熱爆話題/256527"
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "首頁",
+                "item": "https://drainbearhk.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "通渠公開資料庫",
+                "item": "https://drainbearhk.com/consumer-alerts"
+              }
+            ]
+          }
+        ]
+      },
+      "search": true,
+      "combinedFilters": true,
+      "sortDomOrder": true,
+      "history": true,
+      "emptyReset": true,
+      "hash": true,
+      "axe": []
+    }
+  ],
+  "errors": [],
+  "physicalDevices": false
+}
