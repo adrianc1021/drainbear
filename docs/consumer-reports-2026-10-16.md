@@ -45,4 +45,6 @@ TypeScript、26 個檔案／142 項現有測試及完整 build 通過。216 個�
 
 ## 正式發布
 
-待正式域名驗證後記錄。
+提交 `3c322c7` 已推送 main，正式網站已發布。於 2026-10-16 17:57:43 HKT 完成 390／1440px Chromium 覆查：標題／描述／H1、canonical、robots、社交標題、首次發布與修訂日期、四項 FAQ、兩張正文圖及四個來源連結均通過；新聞來源逐個實際外跳驗證，WhatsApp 外跳攔截及電話 URI 正常，沒有發送訊息或撥電話。關閉 JavaScript 保留完整內容、來源及 FAQ；214 個 Sitemap URL 保持一致。公司推介文章的相關閱讀、四張正文圖及全量文章目錄標題亦已核對。沒有收集到 JS 錯誤或 axe 違例，正式手機及桌面截圖已人工開啟確認。
+
+[正式頁面](https://drainbearhk.com/blog/drain-company-reviews-red-flags)、[版本紀錄](consumer-reports-2026-10-16/production-version.json)、[正式瀏覽器結果](consumer-reports-2026-10-16/production-browser-results.json)。正式發布不代表已證實 Google 排名變動。
