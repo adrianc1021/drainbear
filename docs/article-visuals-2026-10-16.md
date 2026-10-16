@@ -37,4 +37,6 @@
 
 ## 正式發布
 
-待部署及正式域名核對後記錄。
+程式提交 `39cd184` 已推送 main 並正式發布。正式網址於 2026-10-16 17:40:53 HKT 完成 Chromium 覆查：39 篇文章、43 個版型（全數 390px，四篇代表文章另以 1440px）、80 張正文圖片、九個新增 WebP 檔案的 HTTP／大小／SHA256、三篇無 JavaScript 顯示及 214 個 Sitemap URL 均通過；沒有收集到錯誤。標題、描述、H1、canonical、robots、原文及 FAQ/schema 核對通過。手機及桌面正式配圖截圖已人工開啟確認。
+
+正式頁面：[香港通渠公司推介](https://drainbearhk.com/blog/choosing-professional-drain-company)。證據：[正式版本](article-visuals-2026-10-16/production-version.json)、[正式瀏覽器結果](article-visuals-2026-10-16/production-browser-results.json)、[手機插圖](article-visuals-2026-10-16/production-quote-390.png)、[手機工程原相](article-visuals-2026-10-16/production-real-basin-390.png)。本次發布不代表 Google 已重新收錄或提升排名。
