@@ -33,3 +33,5 @@ description: 使用語意化React元件與Flexbox/Grid統一通渠熊介面，�
 - 調整主要導覽時，核對桌面及手機都能到達既有「通渠小知識」獨立頁 /blog，文章詳情有啟用標記；頁腳從共用清單取得入口，避免重複。新增導覽項目後，額外量度 1199／1200px 切換點的品牌、選單與聯絡按鈕，不能以縮細字體或裁字掩蓋重疊。
 - About 及客群服務介紹使用 ServiceIllustration，服務流程使用 ProcessIllustration；RelatedCaseRecords 的工程證據仍使用原片及真實封面。
 - 預渲染 HTML 不保留 `reveal-ready` 等 observer 初始化標記；這些標記只能由目前分頁的 JavaScript 設定。關閉 JavaScript 後核對地區標題與正文仍可見，原生收合亦須在一般動態設定下可操作；自動化檢查先完成真實捲動及等候前一個收合動畫，不能把定位逾時直接判定為產品失效。
+
+- 手機首頁服務與短片使用 HomeMobileRail 的原生 CSS scroll-snap，保留所有 HTML 連結、可見前後按鍵、位置及鍵盤操作；不能攔截直向捲動或加入自動輪播。切走影片須暫停，下一段不自動播放。預渲染須重設暫時的 data-enhanced，無 JavaScript 不展示失效按鍵，仍能原生捲動及展開案例。修改後執行 `node scripts/verify-home-mobile.mjs`，以真正觸控事件序列核對橫掃及直掃，不能把 viewport 截圖當成手勢證據。

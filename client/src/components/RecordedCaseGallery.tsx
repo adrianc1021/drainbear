@@ -1,3 +1,5 @@
+import HomeMobileRail from "./HomeMobileRail";
+import AnimatedDisclosure from "./AnimatedDisclosure";
 import { recordedCaseStudies } from "@/lib/caseRepository";
 import { useCaseStudies } from "@/lib/useCases";
 import { createImageSrcSet, optimizedImageUrl } from "@/lib/imageOptimization";
@@ -45,9 +47,9 @@ export default function RecordedCaseGallery() {
           </Link>
         </div>
         <p className="section-heading-description">
-          真實施工短片展示坐廁疏通、喉口檢查及戶外渠口操作；完整紀錄可在各案例內頁查看。
+          原片展示施工過程，下方另附兩宗完成去水測試的案例。完整紀錄可在案例內頁查看。
         </p>
-        <div className="home-work-films">
+        <HomeMobileRail label="施工短片" className="home-work-films">
           {[recordedCaseStudies[1], recordedCaseStudies[4]].map(study => (
             <figure key={study._id}>
               <video
@@ -79,16 +81,13 @@ export default function RecordedCaseGallery() {
               </figcaption>
             </figure>
           ))}
-        </div>
+        </HomeMobileRail>
         <div
           className="home-case-evidence"
           data-cms-loading={isLoading}
           data-cms-error={Boolean(error)}
         >
           <h3>附完工測試的通渠紀錄</h3>
-          <p className="section-footnote">
-            以下兩宗工程記錄了處理及去水測試；上方短片展示施工過程，並非每段都包含完工結果。每宗工程的條件及結果不同。
-          </p>
           <div className="home-case-evidence__grid">
             {COMPLETED_CASES.map(record => {
               const study = studies.find(item => item.slug === record.slug);
@@ -101,7 +100,7 @@ export default function RecordedCaseGallery() {
                         study.coverImage.url,
                         [320, 480, 640, 960]
                       )}
-                      sizes="(min-width: 768px) 280px, 100vw"
+                      sizes="(min-width: 768px) 50vw, 80px"
                       alt={study.coverImage.alt || study.title}
                       width={study.coverImage.width}
                       height={study.coverImage.height}
@@ -116,14 +115,20 @@ export default function RecordedCaseGallery() {
                       </Link>
                     </h4>
                     {study ? (
-                      <dl>
-                        {record.facts.map(([label, text]) => (
-                          <div key={label}>
-                            <dt>{label}</dt>
-                            <dd>{text}</dd>
-                          </div>
-                        ))}
-                      </dl>
+                      <AnimatedDisclosure
+                        id={`home-evidence-${record.slug}`}
+                        title="查看處理及測試紀錄"
+                        className="home-evidence-details"
+                      >
+                        <dl>
+                          {record.facts.map(([label, text]) => (
+                            <div key={label}>
+                              <dt>{label}</dt>
+                              <dd>{text}</dd>
+                            </div>
+                          ))}
+                        </dl>
+                      </AnimatedDisclosure>
                     ) : null}
                   </div>
                 </article>

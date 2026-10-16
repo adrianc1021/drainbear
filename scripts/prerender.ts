@@ -715,6 +715,10 @@ async function prerender() {
             .filter((name: string) => name !== "reveal-ready")
             .join(" ")}${end}`
       );
+      // Carousel controls become active only after this visitor's JS attaches.
+      // Capturing the prerender browser's enhanced state would leave dead buttons
+      // in the no-JavaScript version; native scrolling remains available there.
+      html = html.replace(/data-enhanced="true"/g, 'data-enhanced="false"');
       const outputPath = getOutputPath(route);
 
       // 護欄：產品建置的 HTML 只會有 hashed bundle，絕不會出現 dev server 痕跡。

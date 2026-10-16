@@ -25,14 +25,6 @@ import { useState } from "react";
 import { Link } from "wouter";
 
 const ICONS = [Home, UtensilsCrossed, Building2];
-const COMMON_SERVICES = [
-  { slug: "toilet-unblocking", label: "坐廁通渠" },
-  { slug: "kitchen-sink-unblocking", label: "鋅盤通渠" },
-  { slug: "bathroom-drain-unblocking", label: "浴室通渠" },
-  { slug: "grease-trap-cleaning", label: "隔油池清理" },
-  { slug: "main-drain-manhole", label: "主渠及沙井通渠" },
-];
-
 /** A single problem entrance for three customer groups, with optional district context. */
 export default function HomeServiceFinder() {
   const [group, setGroup] = useState(0);
@@ -68,7 +60,7 @@ export default function HomeServiceFinder() {
               </Link>
             </div>
             <p className="section-heading-description">
-              通渠熊為香港住宅、食肆及物業提供通渠服務，處理坐廁淤塞、鋅盤去水慢、浴室積水及主渠倒灌。先了解受影響位置、現場入口及堵塞情況，再安排合適檢查與處理；現場說明方法及收費，確認後才動工。
+              通渠熊為香港住宅、食肆及物業處理坐廁淤塞、鋅盤去水慢、浴室積水及主渠倒灌。選擇場所、問題及地區，立即傳相查詢。
             </p>
           </div>
           <div className="home-service-finder__panel">
@@ -208,25 +200,6 @@ export default function HomeServiceFinder() {
             ))}
           </div>
         </div>
-        <nav className="home-service-finder__links" aria-label="常用通渠服務">
-          {COMMON_SERVICES.map(item => (
-            <Link
-              key={item.slug}
-              href={`/services/${item.slug}`}
-              onClick={() =>
-                trackNavClick("service", {
-                  cta_location: "home_common_services",
-                  service_name: item.slug,
-                  cta_label: item.label,
-                  destination_url: `/services/${item.slug}`,
-                })
-              }
-            >
-              {item.label}
-              <ArrowRight aria-hidden="true" />
-            </Link>
-          ))}
-        </nav>
         <aside
           className="home-safety-note"
           aria-labelledby="home-safety-heading"

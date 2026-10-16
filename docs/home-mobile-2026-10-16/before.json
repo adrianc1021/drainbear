@@ -1,0 +1,217 @@
+[
+  {
+    "width": 320,
+    "height": 11057,
+    "overflow": false,
+    "sections": [
+      {
+        "name": "home-hero",
+        "height": 888
+      },
+      {
+        "name": "brand-section home-problems home-service-finder",
+        "height": 1345
+      },
+      {
+        "name": "home-service-rows",
+        "height": 1341
+      },
+      {
+        "name": "brand-section home-recorded-cases",
+        "height": 2732
+      },
+      {
+        "name": "brand-section home-drain-methods",
+        "height": 1288
+      },
+      {
+        "name": "brand-section brand-section--soft home-arrangement",
+        "height": 934
+      },
+      {
+        "name": "brand-section home-company-guides",
+        "height": 962
+      },
+      {
+        "name": "db-home-faq",
+        "height": 656
+      },
+      {
+        "name": "container home-resource-links",
+        "height": 221
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "height": 9906,
+    "overflow": false,
+    "sections": [
+      {
+        "name": "home-hero",
+        "height": 893
+      },
+      {
+        "name": "brand-section home-problems home-service-finder",
+        "height": 1026
+      },
+      {
+        "name": "home-service-rows",
+        "height": 1304
+      },
+      {
+        "name": "brand-section home-recorded-cases",
+        "height": 2546
+      },
+      {
+        "name": "brand-section home-drain-methods",
+        "height": 1202
+      },
+      {
+        "name": "brand-section brand-section--soft home-arrangement",
+        "height": 618
+      },
+      {
+        "name": "brand-section home-company-guides",
+        "height": 849
+      },
+      {
+        "name": "db-home-faq",
+        "height": 613
+      },
+      {
+        "name": "container home-resource-links",
+        "height": 221
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "height": 6172,
+    "overflow": false,
+    "sections": [
+      {
+        "name": "home-hero",
+        "height": 660
+      },
+      {
+        "name": "brand-section home-problems home-service-finder",
+        "height": 749
+      },
+      {
+        "name": "home-service-rows",
+        "height": 806
+      },
+      {
+        "name": "brand-section home-recorded-cases",
+        "height": 1416
+      },
+      {
+        "name": "brand-section home-drain-methods",
+        "height": 674
+      },
+      {
+        "name": "brand-section brand-section--soft home-arrangement",
+        "height": 512
+      },
+      {
+        "name": "brand-section home-company-guides",
+        "height": 414
+      },
+      {
+        "name": "db-home-faq",
+        "height": 427
+      },
+      {
+        "name": "container home-resource-links",
+        "height": 117
+      }
+    ]
+  },
+  {
+    "width": 1024,
+    "height": 6009,
+    "overflow": false,
+    "sections": [
+      {
+        "name": "home-hero",
+        "height": 693
+      },
+      {
+        "name": "brand-section home-problems home-service-finder",
+        "height": 650
+      },
+      {
+        "name": "home-service-rows",
+        "height": 840
+      },
+      {
+        "name": "brand-section home-recorded-cases",
+        "height": 1374
+      },
+      {
+        "name": "brand-section home-drain-methods",
+        "height": 680
+      },
+      {
+        "name": "brand-section brand-section--soft home-arrangement",
+        "height": 414
+      },
+      {
+        "name": "brand-section home-company-guides",
+        "height": 479
+      },
+      {
+        "name": "db-home-faq",
+        "height": 454
+      },
+      {
+        "name": "container home-resource-links",
+        "height": 117
+      }
+    ]
+  },
+  {
+    "width": 1440,
+    "height": 6547,
+    "overflow": false,
+    "sections": [
+      {
+        "name": "home-hero",
+        "height": 806
+      },
+      {
+        "name": "brand-section home-problems home-service-finder",
+        "height": 700
+      },
+      {
+        "name": "home-service-rows",
+        "height": 908
+      },
+      {
+        "name": "brand-section home-recorded-cases",
+        "height": 1416
+      },
+      {
+        "name": "brand-section home-drain-methods",
+        "height": 748
+      },
+      {
+        "name": "brand-section brand-section--soft home-arrangement",
+        "height": 500
+      },
+      {
+        "name": "brand-section home-company-guides",
+        "height": 540
+      },
+      {
+        "name": "db-home-faq",
+        "height": 504
+      },
+      {
+        "name": "container home-resource-links",
+        "height": 117
+      }
+    ]
+  }
+]

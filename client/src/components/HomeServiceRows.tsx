@@ -1,3 +1,4 @@
+import HomeMobileRail from "./HomeMobileRail";
 import { ArrowUpRight, CookingPot, ShowerHead, Waves } from "lucide-react";
 import { Link } from "wouter";
 import { trackNavClick } from "@/lib/analytics";
@@ -60,7 +61,7 @@ export default function HomeServiceRows() {
             全部通渠服務 <ArrowUpRight aria-hidden="true" />
           </Link>
         </div>
-        <nav aria-label="按問題選擇通渠服務">
+        <HomeMobileRail label="通渠服務" className="home-service-rail">
           {SERVICES.map(service => (
             <Link
               key={service.slug}
@@ -97,7 +98,7 @@ export default function HomeServiceRows() {
               />
             </Link>
           ))}
-        </nav>
+        </HomeMobileRail>
       </div>
     </section>
   );
