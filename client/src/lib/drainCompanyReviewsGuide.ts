@@ -5,6 +5,7 @@ export const DRAIN_COMPANY_REVIEWS_GUIDE: BlogPost = {
   title: "通渠公司黑店點避？報價、口碑與施工紀錄核對清單",
   category: "實用指南",
   date: "2026-10-11",
+  updatedAt: "2026-10-16",
   readMins: 4,
   authorName: "通渠熊編輯團隊",
   reviewerName: "",
@@ -72,7 +73,7 @@ export const DRAIN_COMPANY_REVIEWS_GUIDE: BlogPost = {
   ],
   resourceLinks: [
     {
-      label: "比較通渠公司與師傅",
+      label: "香港通渠公司推介與比較",
       href: "/blog/choosing-professional-drain-company",
     },
     {

@@ -31,3 +31,5 @@ description: 審查通渠熊SEO、AEO與WCAG，連接商家及內容實體並驗
 
 - 通渠問題解答由 shared/drainAnswers/ 的獨立問題內容維護，/answers 是可抓取目錄。修改清單後執行 pnpm exec tsx scripts/sync-answer-routes.ts；build 中的 verify:answers 會核對完整正文、目錄路由及 200+ 子頁面。新增內容不可只替換地區名稱或捏造工程紀錄。
 - HK$300 起為業主 2026-10-16 確認的全線起步報價，Schema 使用 PriceSpecification.minPrice 及 HKD，與可見文案共用 shared/pricing.ts，不用 Offer.price 誤標為固定總額。
+
+- 「香港通渠公司推介／通渠邊間好」集中由現有 /blog/choosing-professional-drain-company 承接，來源為 client/src/lib/drainCompanySelectionGuide.ts。沿用原發布日期、實際修訂日期與自我 canonical，核對列表／內頁／相關閱讀／AEO 一致；首頁保留一般通渠服務用途，避免另開同意圖的重複頁。
