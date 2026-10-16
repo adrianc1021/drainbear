@@ -36,3 +36,9 @@
 完整建置已通過：216 個預渲染路由、214 個 Sitemap 可索引網址、213 個子頁、128 篇完整解答及 291 項可見 AEO 答案；五段真實影片及其校驗、字幕、schema 與影片 Sitemap 一致。沒有使用舊 CMS 快照。
 
 [獨立設計審閱](mobile-hero-rethink-2026-10-16/review.md)：本次手機首頁首屏修正的完整審閱結論為 `ship`，沒有要求再修正的項目。這不是整站重新認證，歷史 strict-comp gate 仍維持未通過，沒有建立新像素樣稿或捏造批准。
+
+## 正式部署
+
+已按既有授權把 `f629464` 發佈至 main。直接核對 https://drainbearhk.com/ 已切換至全幅白熊構圖，正式入口 JS 正常回應 200；驗證完成時間：2026-10-16 14:55（香港）。正式網站 390／1440px、28 個查詢組合再檢查，`issues: []`；手機兩行標題、全幅場景、觸控及影片、聯絡列時機與無 JavaScript 檢查通過。正式手機畫面已開啟比對，與審閱版本一致。
+
+[正式手機畫面](mobile-hero-rethink-2026-10-16/production-mobile.png) · [正式瀏覽器檢查](mobile-hero-rethink-2026-10-16/production-browser.json) · [正式手機互動](mobile-hero-rethink-2026-10-16/production-mobile-checks.json) · [正式版本](mobile-hero-rethink-2026-10-16/production-version.json)
