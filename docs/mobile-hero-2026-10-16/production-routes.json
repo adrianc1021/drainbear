@@ -1,0 +1,27 @@
+[
+  {
+    "path": "/sitemap.xml",
+    "status": 200,
+    "urls": 214
+  },
+  {
+    "path": "/services/cctv-drain-inspection",
+    "status": 200,
+    "canonical": "https://drainbearhk.com/services/cctv-drain-inspection"
+  },
+  {
+    "path": "/services/sewage-backflow",
+    "status": 200,
+    "canonical": "https://drainbearhk.com/services/sewage-backflow"
+  },
+  {
+    "path": "/cases/home-basin-grease-buildup-cleaning",
+    "status": 200,
+    "canonical": "https://drainbearhk.com/cases/home-basin-grease-buildup-cleaning"
+  },
+  {
+    "path": "/cases/school-rainwater-drain-high-pressure-cleaning",
+    "status": 200,
+    "canonical": "https://drainbearhk.com/cases/school-rainwater-drain-high-pressure-cleaning"
+  }
+]

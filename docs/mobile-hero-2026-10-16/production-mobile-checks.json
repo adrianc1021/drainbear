@@ -1,0 +1,16 @@
+{
+  "origin": "https://drainbearhk.com",
+  "verifiedAt": "2026-10-16T06:00:11.517Z",
+  "engine": "Chromium",
+  "physicalDeviceTested": false,
+  "checks": {
+    "mobileHero": "compact labelled contacts share a row; sticky contacts appear after hero actions and disappear on return",
+    "methodDetails": "three method limitations remain available by native keyboard disclosure and anchor",
+    "touchSwipe": "Chromium CDP touch scroll moves the service rail",
+    "verticalScroll": "vertical touch over the rail still scrolls the page",
+    "keyboard": "Home/End and native scrolling update the counter",
+    "video": "real video plays, pauses when swiped away, and the next film does not autoplay",
+    "closingFocus": "closed case content immediately becomes inert",
+    "noJavaScript": "all service links and videos remain; native details reveal all four case facts; inactive controls hidden"
+  }
+}

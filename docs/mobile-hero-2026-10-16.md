@@ -49,3 +49,11 @@
 [完整瀏覽器結果](mobile-hero-2026-10-16/browser.json) · [整頁量度](mobile-hero-2026-10-16/page-metrics.json) · [修正後審閱](mobile-hero-2026-10-16/review-verdict.md)
 
 初次獨立審閱提出兩項修正，均已完成；最終結論為修正清單範圍可交付（ship），並非重新完成全頁嚴格樣稿評分。歷史 strict-comp gate 仍未通過，未將其改寫為已通過。
+
+## 正式部署
+
+已按既有部署授權把 `2af06be` 發佈至 main，並直接驗證 https://drainbearhk.com/ 已切換；核對時間：2026-10-16 14:01（香港）。正式 HTML 含新版精簡聯絡標籤、原生 fallback，入口 JS 正常回應 200。
+
+正式網站再驗證 390／1440px、28 個服務組合，`issues: []`；觸控、影片、固定聯絡列時機、方法收合及無 JavaScript 路徑通過。正式 390px 全頁高 5934px，1440px 6084px。Sitemap 保留 214 個網址，抽查的兩個服務及兩個真實案例均 200、自我 canonical 正確。沒有發出查詢訊息或電話。
+
+[正式手機畫面](mobile-hero-2026-10-16/production-mobile.png) · [正式瀏覽器驗證](mobile-hero-2026-10-16/production-browser.json) · [正式手機互動](mobile-hero-2026-10-16/production-mobile-checks.json) · [正式版本](mobile-hero-2026-10-16/production-version.json) · [Sitemap／連結](mobile-hero-2026-10-16/production-routes.json)
