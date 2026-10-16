@@ -10,12 +10,14 @@ export default function ContactActions({
   topic,
   prominent = false,
   whatsappFirst = false,
+  compactOnMobile = false,
 }: {
   location: string;
   message?: string;
   topic?: string;
   prominent?: boolean;
   whatsappFirst?: boolean;
+  compactOnMobile?: boolean;
 }) {
   const { phoneDisplay, phoneHref, whatsappDefaultHref, whatsappHref } =
     useContactSettings();
@@ -23,7 +25,7 @@ export default function ContactActions({
     <a
       className="contact-action contact-action--phone"
       href={phoneHref}
-      aria-label={`致電 ${phoneDisplay}`}
+      aria-label={`${compactOnMobile ? "致電查詢" : "致電"} ${phoneDisplay}`}
       onClick={() => trackCTA("phone", location, topic)}
     >
       <span className="contact-action__icon" aria-hidden="true">
@@ -31,7 +33,16 @@ export default function ContactActions({
       </span>
       <span className="contact-action__copy">
         <span className="contact-action__label">24小時通渠查詢</span>
-        <strong>{phoneDisplay}</strong>
+        <strong
+          className={
+            compactOnMobile ? "contact-action__desktop-value" : undefined
+          }
+        >
+          {phoneDisplay}
+        </strong>
+        {compactOnMobile ? (
+          <span className="contact-action__mobile-value">致電查詢</span>
+        ) : null}
       </span>
       <ArrowUpRight className="contact-action__arrow" aria-hidden="true" />
     </a>
@@ -53,7 +64,16 @@ export default function ContactActions({
       </span>
       <span className="contact-action__copy">
         <span className="contact-action__label">WhatsApp 查詢報價</span>
-        <strong>傳相片，問報價</strong>
+        <strong
+          className={
+            compactOnMobile ? "contact-action__desktop-value" : undefined
+          }
+        >
+          傳相片，問報價
+        </strong>
+        {compactOnMobile ? (
+          <span className="contact-action__mobile-value">WhatsApp</span>
+        ) : null}
       </span>
       <ArrowUpRight className="contact-action__arrow" aria-hidden="true" />
       <span className="sr-only">（另開視窗）</span>
@@ -62,6 +82,7 @@ export default function ContactActions({
   return (
     <div
       className={`contact-actions ${prominent ? "contact-actions--prominent" : ""}`}
+      data-mobile-compact={compactOnMobile}
     >
       {whatsappFirst ? (
         <>

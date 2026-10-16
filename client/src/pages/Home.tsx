@@ -18,7 +18,10 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 
-import { STARTING_PRICE_LINE } from "../../../shared/pricing";
+import {
+  STARTING_PRICE_LINE,
+  STARTING_PRICE_LABEL,
+} from "../../../shared/pricing";
 
 const HOME_TITLE = "香港通渠公司｜通渠 HK$300 起｜通渠熊 DrainBear";
 const HOME_DESCRIPTION =
@@ -80,14 +83,25 @@ export default function Home() {
             <div className="home-hero__copy">
               <h1 id="home-heading">
                 <span className="home-hero__headline-line">香港通渠，</span>
-                <span className="home-hero__headline-line">先搵通渠熊。</span>
+                <span className="home-hero__headline-line">
+                  先搵
+                  <wbr className="home-hero__mobile-break" />
+                  通渠熊。
+                </span>
               </h1>
               <p className="home-hero__coverage">住宅 · 食肆 · 物業渠務</p>
-              <p className="home-hero__price">{STARTING_PRICE_LINE}</p>
-              <p className="contact-note">
-                24 小時接受查詢，上門時間另行確認。
+              <p className="home-hero__price">
+                <span className="home-hero__price-context">
+                  {STARTING_PRICE_LINE.replace(STARTING_PRICE_LABEL, "")}
+                </span>
+                <strong>{STARTING_PRICE_LABEL}</strong>
               </p>
-              <ContactActions location="home_hero" prominent whatsappFirst />
+              <ContactActions
+                location="home_hero"
+                prominent
+                whatsappFirst
+                compactOnMobile
+              />
             </div>
           </div>
           <HomeHeroScene />

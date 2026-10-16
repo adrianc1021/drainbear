@@ -61,7 +61,6 @@ export default function DrainHomeFaq() {
         <div className="db-home-faq__layout">
           <div className="db-home-faq__intro">
             <h2 id="home-faq-heading">通渠常見問題</h2>
-            <p>通渠收費、現場資料、上門安排及反覆塞渠，這裏直接解答。</p>
             <Link href="/faq" className="db-home-faq__all-link">
               查看全部常見問題
               <ArrowRight aria-hidden="true" />

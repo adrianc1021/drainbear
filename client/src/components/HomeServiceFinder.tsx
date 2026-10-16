@@ -60,7 +60,7 @@ export default function HomeServiceFinder() {
               </Link>
             </div>
             <p className="section-heading-description">
-              通渠熊為香港住宅、食肆及物業處理坐廁淤塞、鋅盤去水慢、浴室積水及主渠倒灌。選擇場所、問題及地區，立即傳相查詢。
+              住宅、食肆及物業通渠，處理坐廁、鋅盤、浴室淤塞及主渠倒灌。
             </p>
           </div>
           <div className="home-service-finder__panel">
@@ -109,7 +109,7 @@ export default function HomeServiceFinder() {
                   </select>
                 </div>
                 <div>
-                  <label htmlFor="home-district">服務地區（可稍後提供）</label>
+                  <label htmlFor="home-district">服務地區（選填）</label>
                   <select
                     id="home-district"
                     value={districtSlug}
@@ -141,9 +141,6 @@ export default function HomeServiceFinder() {
                 WhatsApp 查詢 <ArrowUpRight aria-hidden="true" />
                 <span className="sr-only">（另開視窗）</span>
               </a>
-              <p className="home-finder-query__hint">
-                已選資料會帶入訊息，相片可在 WhatsApp 補充。
-              </p>
             </div>
             {CUSTOMER_JOURNEYS.map((customer, i) => (
               <div
@@ -205,12 +202,8 @@ export default function HomeServiceFinder() {
           aria-labelledby="home-safety-heading"
         >
           <ShieldCheck aria-hidden="true" />
-          <div>
-            <h3 id="home-safety-heading">污水倒灌？先停用相關水源。</h3>
-            <p>停止沖廁，避免接觸污水；不要加入或混合通渠水。</p>
-          </div>
-          <Link href="/services/sewage-backflow">
-            查看處理建議 <ArrowRight aria-hidden="true" />
+          <Link id="home-safety-heading" href="/services/sewage-backflow">
+            污水倒灌？先停用水源 <ArrowRight aria-hidden="true" />
           </Link>
         </aside>
       </div>

@@ -46,9 +46,6 @@ export default function RecordedCaseGallery() {
             查看全部施工紀錄 <ArrowRight aria-hidden="true" />
           </Link>
         </div>
-        <p className="section-heading-description">
-          原片展示施工過程，下方另附兩宗完成去水測試的案例。完整紀錄可在案例內頁查看。
-        </p>
         <HomeMobileRail label="施工短片" className="home-work-films">
           {[recordedCaseStudies[1], recordedCaseStudies[4]].map(study => (
             <figure key={study._id}>
@@ -77,7 +74,6 @@ export default function RecordedCaseGallery() {
                     {study.title} <ArrowRight aria-hidden="true" />
                   </Link>
                 </h3>
-                <p>{study.result}</p>
               </figcaption>
             </figure>
           ))}
@@ -117,7 +113,7 @@ export default function RecordedCaseGallery() {
                     {study ? (
                       <AnimatedDisclosure
                         id={`home-evidence-${record.slug}`}
-                        title="查看處理及測試紀錄"
+                        title="查看工程詳情"
                         className="home-evidence-details"
                       >
                         <dl>

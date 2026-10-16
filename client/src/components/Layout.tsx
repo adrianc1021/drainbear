@@ -94,6 +94,35 @@ export function WhatsAppButton({
  * - 全程固定顯示，讓緊急服務 CTA 在任何閱讀位置都可見
  */
 function MobileCTABar() {
+  const [location] = useLocation();
+  const isHome = location.split(/[?#]/)[0] === "/";
+  const [enhanced, setEnhanced] = useState(false);
+  const [pastHomeHero, setPastHomeHero] = useState(false);
+  useEffect(() => {
+    setEnhanced(true);
+    if (!isHome) {
+      setPastHomeHero(false);
+      return;
+    }
+    let frame = 0;
+    const update = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const hero = document.querySelector(".home-hero .contact-actions");
+        setPastHomeHero(
+          Boolean(hero && hero.getBoundingClientRect().bottom <= 80)
+        );
+      });
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, [isHome]);
   const { diagnosis } = useContactHandoff();
   const { phoneDisplay, phoneHref, whatsappDefaultHref, whatsappHref } =
     useContactSettings();
@@ -113,6 +142,8 @@ function MobileCTABar() {
       />
       <div
         data-mobile-cta="true"
+        data-enhanced={enhanced}
+        data-home-hero-visible={isHome && !pastHomeHero}
         className="fixed inset-x-0 bottom-0 z-50 border-t border-navy/15 bg-white/96 backdrop-blur-xl md:hidden"
         style={{
           transitionTimingFunction: "cubic-bezier(0.23, 1, 0.32, 1)",
@@ -135,9 +166,11 @@ function MobileCTABar() {
             <WhatsAppIcon className="h-5 w-5 shrink-0" />
             <span className="min-w-0 flex flex-col items-start leading-tight">
               <span className="text-[15px] font-bold">{waTitle}</span>
-              <span className="max-w-full truncate text-[10.5px] font-medium text-navy/75">
-                {waSub}
-              </span>
+              {diagnosis ? (
+                <span className="max-w-full truncate text-[10.5px] font-medium text-navy/75">
+                  {waSub}
+                </span>
+              ) : null}
             </span>
           </a>
           <a

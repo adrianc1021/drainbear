@@ -65,7 +65,7 @@ export default function HomeHeroScene() {
         <source
           media="(max-width: 767px)"
           srcSet="/images/home/light-water-mobile-640.webp 640w, /images/home/light-water-mobile-960.webp 960w"
-          sizes="100vw"
+          sizes="(max-width: 440px) calc(65vw + 70px), 356px"
         />
         <img
           src="/images/home/light-water.webp"

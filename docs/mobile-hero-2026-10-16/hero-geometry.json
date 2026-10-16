@@ -1,0 +1,122 @@
+[
+  {
+    "width": 320,
+    "overflow": false,
+    "height": 560,
+    "heading": "香港通渠，先搵通渠熊。",
+    "price": "全線通渠服務 HK$300 起",
+    "actions": [
+      {
+        "text": "WhatsApp\n（另開視窗）",
+        "x": 20,
+        "y": 482.03125,
+        "width": 152.59375,
+        "height": 49.96875
+      },
+      {
+        "text": "致電查詢",
+        "x": 182.59375,
+        "y": 482.03125,
+        "width": 117.390625,
+        "height": 49.96875
+      }
+    ],
+    "sticky": "hidden"
+  },
+  {
+    "width": 390,
+    "overflow": false,
+    "height": 560,
+    "heading": "香港通渠，先搵通渠熊。",
+    "price": "全線通渠服務 HK$300 起",
+    "actions": [
+      {
+        "text": "WhatsApp\n（另開視窗）",
+        "x": 20,
+        "y": 482.03125,
+        "width": 192.171875,
+        "height": 49.96875
+      },
+      {
+        "text": "致電查詢",
+        "x": 222.171875,
+        "y": 482.03125,
+        "width": 147.828125,
+        "height": 49.96875
+      }
+    ],
+    "sticky": "hidden"
+  },
+  {
+    "width": 430,
+    "overflow": false,
+    "height": 560,
+    "heading": "香港通渠，先搵通渠熊。",
+    "price": "全線通渠服務 HK$300 起",
+    "actions": [
+      {
+        "text": "WhatsApp\n（另開視窗）",
+        "x": 20,
+        "y": 482.03125,
+        "width": 193.296875,
+        "height": 49.96875
+      },
+      {
+        "text": "致電查詢",
+        "x": 223.296875,
+        "y": 482.03125,
+        "width": 148.6875,
+        "height": 49.96875
+      }
+    ],
+    "sticky": "hidden"
+  },
+  {
+    "width": 767,
+    "overflow": false,
+    "height": 560,
+    "heading": "香港通渠，先搵通渠熊。",
+    "price": "全線通渠服務 HK$300 起",
+    "actions": [
+      {
+        "text": "WhatsApp\n（另開視窗）",
+        "x": 86.5,
+        "y": 482.03125,
+        "width": 193.296875,
+        "height": 49.96875
+      },
+      {
+        "text": "致電查詢",
+        "x": 289.796875,
+        "y": 482.03125,
+        "width": 148.6875,
+        "height": 49.96875
+      }
+    ],
+    "sticky": "hidden"
+  },
+  {
+    "width": 1440,
+    "overflow": false,
+    "height": 806.390625,
+    "heading": "香港通渠，先搵通渠熊。",
+    "price": "全線通渠服務 HK$300 起",
+    "actions": [
+      {
+        "text": "傳相片，問報價\n（另開視窗）",
+        "x": 152,
+        "y": 522.015625,
+        "width": 340,
+        "height": 69.59375
+      },
+      {
+        "text": "+852 9558 8260",
+        "x": 152,
+        "y": 603.609375,
+        "width": 340,
+        "height": 69.59375
+      }
+    ],
+    "sticky": "visible"
+  }
+]

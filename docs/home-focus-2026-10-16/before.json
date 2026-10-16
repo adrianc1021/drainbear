@@ -1,0 +1,852 @@
+[
+  {
+    "width": 320,
+    "height": 7338,
+    "paragraphs": [
+      {
+        "text": "住宅 · 食肆 · 物業渠務",
+        "size": 15.2,
+        "className": "home-hero__coverage"
+      },
+      {
+        "text": "全線通渠服務 HK$300 起",
+        "size": 18.4,
+        "className": "home-hero__price"
+      },
+      {
+        "text": "24 小時接受查詢，上門時間另行確認。",
+        "size": 12.8,
+        "className": "contact-note"
+      },
+      {
+        "text": "通渠熊為香港住宅、食肆及物業處理坐廁淤塞、鋅盤去水慢、浴室積水及主渠倒灌。選擇場所、問題及地區，立即傳相查詢。",
+        "size": 15.2,
+        "className": "section-heading-description"
+      },
+      {
+        "text": "已選資料會帶入訊息，相片可在 WhatsApp 補充。",
+        "size": 12.8,
+        "className": "home-finder-query__hint"
+      },
+      {
+        "text": "停止沖廁，避免接觸污水；不要加入或混合通渠水。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "坐廁淤塞、沖水不去或水位異常，先了解受影響範圍。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "廚房鋅盤去水慢、隔氣及支渠淤塞，按入口評估處理。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "浴缸、淋浴及地台去水異常，核對共用支渠情況。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "多個位置冒水或污水倒灌，先停用相關水源並傳相查詢。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "原片展示施工過程，下方另附兩宗完成去水測試的案例。完整紀錄可在案例內頁查看。",
+        "size": 16,
+        "className": "section-heading-description"
+      },
+      {
+        "text": "畫面記錄了去水位置的工具操作和承接污水的安排，未顯示完整放水測試。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "短片記錄渠口內的水流和施工位置；未顯示清理前後對照或完整完工檢查。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "堵塞位置、喉管物料及入口，決定適合的通渠方法；不是每宗工程都需要全部設備。",
+        "size": 16,
+        "className": "section-heading-description"
+      },
+      {
+        "text": "按堵塞位置及喉管條件處理局部淤塞；懷疑硬物或喉管損壞，先檢查。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "按喉管物料、入口及現場排水、污水處理條件，評估是否適合清理管段積聚物。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "查看鏡頭可到達位置的管內情況，協助了解反覆淤塞；照渠不等於疏通。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "提供地區、受影響位置及相片或短片。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "按地區、人手、設備及進場條件確認時間。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "了解問題，說明處理方法和收費，確認後才動工。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "按現場條件疏通，完成後測試相關去水位置。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "比較公司與師傅推介，核對處理範圍及上門安排。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "了解收費含糊、臨場加項及網上評價的核對方法。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "按現場與工序比較價錢，了解討論區分享的限制。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "通渠收費、現場資料、上門安排及反覆塞渠，這裏直接解答。",
+        "size": 16,
+        "className": ""
+      }
+    ],
+    "overflow": false,
+    "sections": [
+      {
+        "name": "home-hero",
+        "height": 770
+      },
+      {
+        "name": "brand-section home-problems home-service-finder",
+        "height": 1047
+      },
+      {
+        "name": "home-service-rows",
+        "height": 596
+      },
+      {
+        "name": "brand-section home-recorded-cases",
+        "height": 1177
+      },
+      {
+        "name": "brand-section home-drain-methods",
+        "height": 932
+      },
+      {
+        "name": "brand-section brand-section--soft home-arrangement",
+        "height": 657
+      },
+      {
+        "name": "brand-section home-company-guides",
+        "height": 641
+      },
+      {
+        "name": "db-home-faq",
+        "height": 624
+      },
+      {
+        "name": "container home-resource-links",
+        "height": 205
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "height": 6833,
+    "paragraphs": [
+      {
+        "text": "住宅 · 食肆 · 物業渠務",
+        "size": 15.2,
+        "className": "home-hero__coverage"
+      },
+      {
+        "text": "全線通渠服務 HK$300 起",
+        "size": 18.4,
+        "className": "home-hero__price"
+      },
+      {
+        "text": "24 小時接受查詢，上門時間另行確認。",
+        "size": 12.8,
+        "className": "contact-note"
+      },
+      {
+        "text": "通渠熊為香港住宅、食肆及物業處理坐廁淤塞、鋅盤去水慢、浴室積水及主渠倒灌。選擇場所、問題及地區，立即傳相查詢。",
+        "size": 15.2,
+        "className": "section-heading-description"
+      },
+      {
+        "text": "已選資料會帶入訊息，相片可在 WhatsApp 補充。",
+        "size": 12.8,
+        "className": "home-finder-query__hint"
+      },
+      {
+        "text": "停止沖廁，避免接觸污水；不要加入或混合通渠水。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "坐廁淤塞、沖水不去或水位異常，先了解受影響範圍。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "廚房鋅盤去水慢、隔氣及支渠淤塞，按入口評估處理。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "浴缸、淋浴及地台去水異常，核對共用支渠情況。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "多個位置冒水或污水倒灌，先停用相關水源並傳相查詢。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "原片展示施工過程，下方另附兩宗完成去水測試的案例。完整紀錄可在案例內頁查看。",
+        "size": 16,
+        "className": "section-heading-description"
+      },
+      {
+        "text": "畫面記錄了去水位置的工具操作和承接污水的安排，未顯示完整放水測試。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "短片記錄渠口內的水流和施工位置；未顯示清理前後對照或完整完工檢查。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "堵塞位置、喉管物料及入口，決定適合的通渠方法；不是每宗工程都需要全部設備。",
+        "size": 16,
+        "className": "section-heading-description"
+      },
+      {
+        "text": "按堵塞位置及喉管條件處理局部淤塞；懷疑硬物或喉管損壞，先檢查。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "按喉管物料、入口及現場排水、污水處理條件，評估是否適合清理管段積聚物。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "查看鏡頭可到達位置的管內情況，協助了解反覆淤塞；照渠不等於疏通。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "提供地區、受影響位置及相片或短片。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "按地區、人手、設備及進場條件確認時間。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "了解問題，說明處理方法和收費，確認後才動工。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "按現場條件疏通，完成後測試相關去水位置。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "比較公司與師傅推介，核對處理範圍及上門安排。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "了解收費含糊、臨場加項及網上評價的核對方法。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "按現場與工序比較價錢，了解討論區分享的限制。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "通渠收費、現場資料、上門安排及反覆塞渠，這裏直接解答。",
+        "size": 16,
+        "className": ""
+      }
+    ],
+    "overflow": false,
+    "sections": [
+      {
+        "name": "home-hero",
+        "height": 775
+      },
+      {
+        "name": "brand-section home-problems home-service-finder",
+        "height": 853
+      },
+      {
+        "name": "home-service-rows",
+        "height": 533
+      },
+      {
+        "name": "brand-section home-recorded-cases",
+        "height": 1128
+      },
+      {
+        "name": "brand-section home-drain-methods",
+        "height": 851
+      },
+      {
+        "name": "brand-section brand-section--soft home-arrangement",
+        "height": 632
+      },
+      {
+        "name": "brand-section home-company-guides",
+        "height": 641
+      },
+      {
+        "name": "db-home-faq",
+        "height": 581
+      },
+      {
+        "name": "container home-resource-links",
+        "height": 205
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "height": 5873,
+    "paragraphs": [
+      {
+        "text": "住宅 · 食肆 · 物業渠務",
+        "size": 17.6,
+        "className": "home-hero__coverage"
+      },
+      {
+        "text": "全線通渠服務 HK$300 起",
+        "size": 18.4,
+        "className": "home-hero__price"
+      },
+      {
+        "text": "24 小時接受查詢，上門時間另行確認。",
+        "size": 14.4,
+        "className": "contact-note"
+      },
+      {
+        "text": "通渠熊為香港住宅、食肆及物業處理坐廁淤塞、鋅盤去水慢、浴室積水及主渠倒灌。選擇場所、問題及地區，立即傳相查詢。",
+        "size": 15.2,
+        "className": "section-heading-description"
+      },
+      {
+        "text": "已選資料會帶入訊息，相片可在 WhatsApp 補充。",
+        "size": 12.8,
+        "className": "home-finder-query__hint"
+      },
+      {
+        "text": "停止沖廁，避免接觸污水；不要加入或混合通渠水。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "坐廁淤塞、沖水不去或水位異常，先了解受影響範圍。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "廚房鋅盤去水慢、隔氣及支渠淤塞，按入口評估處理。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "浴缸、淋浴及地台去水異常，核對共用支渠情況。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "多個位置冒水或污水倒灌，先停用相關水源並傳相查詢。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "原片展示施工過程，下方另附兩宗完成去水測試的案例。完整紀錄可在案例內頁查看。",
+        "size": 16,
+        "className": "section-heading-description"
+      },
+      {
+        "text": "畫面記錄了去水位置的工具操作和承接污水的安排，未顯示完整放水測試。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "短片記錄渠口內的水流和施工位置；未顯示清理前後對照或完整完工檢查。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "堵塞位置、喉管物料及入口，決定適合的通渠方法；不是每宗工程都需要全部設備。",
+        "size": 16,
+        "className": "section-heading-description"
+      },
+      {
+        "text": "按堵塞位置及喉管條件處理局部淤塞；懷疑硬物或喉管損壞，先檢查。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "按喉管物料、入口及現場排水、污水處理條件，評估是否適合清理管段積聚物。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "查看鏡頭可到達位置的管內情況，協助了解反覆淤塞；照渠不等於疏通。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "提供地區、受影響位置及相片或短片。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "按地區、人手、設備及進場條件確認時間。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "了解問題，說明處理方法和收費，確認後才動工。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "按現場條件疏通，完成後測試相關去水位置。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "比較公司與師傅推介，核對處理範圍及上門安排。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "了解收費含糊、臨場加項及網上評價的核對方法。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "按現場與工序比較價錢，了解討論區分享的限制。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "通渠收費、現場資料、上門安排及反覆塞渠，這裏直接解答。",
+        "size": 16,
+        "className": ""
+      }
+    ],
+    "overflow": false,
+    "sections": [
+      {
+        "name": "home-hero",
+        "height": 660
+      },
+      {
+        "name": "brand-section home-problems home-service-finder",
+        "height": 673
+      },
+      {
+        "name": "home-service-rows",
+        "height": 806
+      },
+      {
+        "name": "brand-section home-recorded-cases",
+        "height": 1251
+      },
+      {
+        "name": "brand-section home-drain-methods",
+        "height": 616
+      },
+      {
+        "name": "brand-section brand-section--soft home-arrangement",
+        "height": 512
+      },
+      {
+        "name": "brand-section home-company-guides",
+        "height": 414
+      },
+      {
+        "name": "db-home-faq",
+        "height": 427
+      },
+      {
+        "name": "container home-resource-links",
+        "height": 117
+      }
+    ]
+  },
+  {
+    "width": 1024,
+    "height": 5787,
+    "paragraphs": [
+      {
+        "text": "住宅 · 食肆 · 物業渠務",
+        "size": 17.6,
+        "className": "home-hero__coverage"
+      },
+      {
+        "text": "全線通渠服務 HK$300 起",
+        "size": 20.48,
+        "className": "home-hero__price"
+      },
+      {
+        "text": "24 小時接受查詢，上門時間另行確認。",
+        "size": 14.4,
+        "className": "contact-note"
+      },
+      {
+        "text": "通渠熊為香港住宅、食肆及物業處理坐廁淤塞、鋅盤去水慢、浴室積水及主渠倒灌。選擇場所、問題及地區，立即傳相查詢。",
+        "size": 15.2,
+        "className": "section-heading-description"
+      },
+      {
+        "text": "已選資料會帶入訊息，相片可在 WhatsApp 補充。",
+        "size": 12.8,
+        "className": "home-finder-query__hint"
+      },
+      {
+        "text": "停止沖廁，避免接觸污水；不要加入或混合通渠水。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "坐廁淤塞、沖水不去或水位異常，先了解受影響範圍。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "廚房鋅盤去水慢、隔氣及支渠淤塞，按入口評估處理。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "浴缸、淋浴及地台去水異常，核對共用支渠情況。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "多個位置冒水或污水倒灌，先停用相關水源並傳相查詢。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "原片展示施工過程，下方另附兩宗完成去水測試的案例。完整紀錄可在案例內頁查看。",
+        "size": 16,
+        "className": "section-heading-description"
+      },
+      {
+        "text": "畫面記錄了去水位置的工具操作和承接污水的安排，未顯示完整放水測試。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "短片記錄渠口內的水流和施工位置；未顯示清理前後對照或完整完工檢查。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "堵塞位置、喉管物料及入口，決定適合的通渠方法；不是每宗工程都需要全部設備。",
+        "size": 16,
+        "className": "section-heading-description"
+      },
+      {
+        "text": "按堵塞位置及喉管條件處理局部淤塞；懷疑硬物或喉管損壞，先檢查。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "按喉管物料、入口及現場排水、污水處理條件，評估是否適合清理管段積聚物。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "查看鏡頭可到達位置的管內情況，協助了解反覆淤塞；照渠不等於疏通。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "提供地區、受影響位置及相片或短片。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "按地區、人手、設備及進場條件確認時間。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "了解問題，說明處理方法和收費，確認後才動工。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "按現場條件疏通，完成後測試相關去水位置。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "比較公司與師傅推介，核對處理範圍及上門安排。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "了解收費含糊、臨場加項及網上評價的核對方法。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "按現場與工序比較價錢，了解討論區分享的限制。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "通渠收費、現場資料、上門安排及反覆塞渠，這裏直接解答。",
+        "size": 16,
+        "className": ""
+      }
+    ],
+    "overflow": false,
+    "sections": [
+      {
+        "name": "home-hero",
+        "height": 693
+      },
+      {
+        "name": "brand-section home-problems home-service-finder",
+        "height": 574
+      },
+      {
+        "name": "home-service-rows",
+        "height": 840
+      },
+      {
+        "name": "brand-section home-recorded-cases",
+        "height": 1285
+      },
+      {
+        "name": "brand-section home-drain-methods",
+        "height": 623
+      },
+      {
+        "name": "brand-section brand-section--soft home-arrangement",
+        "height": 414
+      },
+      {
+        "name": "brand-section home-company-guides",
+        "height": 479
+      },
+      {
+        "name": "db-home-faq",
+        "height": 454
+      },
+      {
+        "name": "container home-resource-links",
+        "height": 117
+      }
+    ]
+  },
+  {
+    "width": 1440,
+    "height": 6324,
+    "paragraphs": [
+      {
+        "text": "住宅 · 食肆 · 物業渠務",
+        "size": 17.6,
+        "className": "home-hero__coverage"
+      },
+      {
+        "text": "全線通渠服務 HK$300 起",
+        "size": 24,
+        "className": "home-hero__price"
+      },
+      {
+        "text": "24 小時接受查詢，上門時間另行確認。",
+        "size": 14.4,
+        "className": "contact-note"
+      },
+      {
+        "text": "通渠熊為香港住宅、食肆及物業處理坐廁淤塞、鋅盤去水慢、浴室積水及主渠倒灌。選擇場所、問題及地區，立即傳相查詢。",
+        "size": 15.2,
+        "className": "section-heading-description"
+      },
+      {
+        "text": "已選資料會帶入訊息，相片可在 WhatsApp 補充。",
+        "size": 12.8,
+        "className": "home-finder-query__hint"
+      },
+      {
+        "text": "停止沖廁，避免接觸污水；不要加入或混合通渠水。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "坐廁淤塞、沖水不去或水位異常，先了解受影響範圍。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "廚房鋅盤去水慢、隔氣及支渠淤塞，按入口評估處理。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "浴缸、淋浴及地台去水異常，核對共用支渠情況。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "多個位置冒水或污水倒灌，先停用相關水源並傳相查詢。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "原片展示施工過程，下方另附兩宗完成去水測試的案例。完整紀錄可在案例內頁查看。",
+        "size": 16,
+        "className": "section-heading-description"
+      },
+      {
+        "text": "畫面記錄了去水位置的工具操作和承接污水的安排，未顯示完整放水測試。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "短片記錄渠口內的水流和施工位置；未顯示清理前後對照或完整完工檢查。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "堵塞位置、喉管物料及入口，決定適合的通渠方法；不是每宗工程都需要全部設備。",
+        "size": 16,
+        "className": "section-heading-description"
+      },
+      {
+        "text": "按堵塞位置及喉管條件處理局部淤塞；懷疑硬物或喉管損壞，先檢查。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "按喉管物料、入口及現場排水、污水處理條件，評估是否適合清理管段積聚物。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "查看鏡頭可到達位置的管內情況，協助了解反覆淤塞；照渠不等於疏通。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "提供地區、受影響位置及相片或短片。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "按地區、人手、設備及進場條件確認時間。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "了解問題，說明處理方法和收費，確認後才動工。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "按現場條件疏通，完成後測試相關去水位置。",
+        "size": 14.4,
+        "className": ""
+      },
+      {
+        "text": "比較公司與師傅推介，核對處理範圍及上門安排。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "了解收費含糊、臨場加項及網上評價的核對方法。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "按現場與工序比較價錢，了解討論區分享的限制。",
+        "size": 15.2,
+        "className": ""
+      },
+      {
+        "text": "通渠收費、現場資料、上門安排及反覆塞渠，這裏直接解答。",
+        "size": 16,
+        "className": ""
+      }
+    ],
+    "overflow": false,
+    "sections": [
+      {
+        "name": "home-hero",
+        "height": 806
+      },
+      {
+        "name": "brand-section home-problems home-service-finder",
+        "height": 624
+      },
+      {
+        "name": "home-service-rows",
+        "height": 908
+      },
+      {
+        "name": "brand-section home-recorded-cases",
+        "height": 1327
+      },
+      {
+        "name": "brand-section home-drain-methods",
+        "height": 691
+      },
+      {
+        "name": "brand-section brand-section--soft home-arrangement",
+        "height": 500
+      },
+      {
+        "name": "brand-section home-company-guides",
+        "height": 540
+      },
+      {
+        "name": "db-home-faq",
+        "height": 504
+      },
+      {
+        "name": "container home-resource-links",
+        "height": 117
+      }
+    ]
+  }
+]

@@ -35,3 +35,5 @@ description: 使用語意化React元件與Flexbox/Grid統一通渠熊介面，�
 - 預渲染 HTML 不保留 `reveal-ready` 等 observer 初始化標記；這些標記只能由目前分頁的 JavaScript 設定。關閉 JavaScript 後核對地區標題與正文仍可見，原生收合亦須在一般動態設定下可操作；自動化檢查先完成真實捲動及等候前一個收合動畫，不能把定位逾時直接判定為產品失效。
 
 - 手機首頁服務與短片使用 HomeMobileRail 的原生 CSS scroll-snap，保留所有 HTML 連結、可見前後按鍵、位置及鍵盤操作；不能攔截直向捲動或加入自動輪播。切走影片須暫停，下一段不自動播放。預渲染須重設暫時的 data-enhanced，無 JavaScript 不展示失效按鍵，仍能原生捲動及展開案例。修改後執行 `node scripts/verify-home-mobile.mjs`，以真正觸控事件序列核對橫掃及直掃，不能把 viewport 截圖當成手勢證據。
+
+- 手機首屏精簡聯絡列只透過 ContactActions 的 compactOnMobile 在首頁啟用，保留桌面完整電話、aria 名稱及共用 handoff。核對一般／減少動態下標籤、中文斷行與標點；320／767px 圖框和漸變須貼合圖像而不切走白熊頭盔。固定列只在增強後隨首屏聯絡入口離開而顯示，無 JavaScript 保留原生入口。

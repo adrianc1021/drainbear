@@ -87,7 +87,9 @@ export default function HomeMobileRail({
   return (
     <div className={`home-mobile-rail ${className}`} data-enhanced={enhanced}>
       <div className="home-mobile-rail__controls">
-        <span id={`${id}-hint`}>左右掃動查看更多</span>
+        <span id={`${id}-hint`} className="sr-only">
+          左右掃動，或使用前後按鈕查看更多
+        </span>
         <div
           className="home-mobile-rail__buttons"
           role="group"

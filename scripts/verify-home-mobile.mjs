@@ -30,6 +30,71 @@ try {
   const page = await context.newPage();
   await page.goto(origin);
   await ready(page);
+  assert(
+    !(await page
+      .locator('[data-mobile-cta="true"]')
+      .innerText()
+      .then(text => text.includes("加快初步判斷"))),
+    "default sticky CTA must not repeat helper copy"
+  );
+  const sticky = page.locator('[data-mobile-cta="true"]');
+  await sticky.waitFor({ state: "hidden" });
+  assert.equal(
+    await page
+      .locator(".home-hero .contact-action__mobile-value")
+      .allTextContents()
+      .then(items => items.join(" / ")),
+    "WhatsApp / 致電查詢"
+  );
+  for (const label of await page
+    .locator(".home-hero .contact-action__mobile-value")
+    .all())
+    assert(await label.isVisible());
+  const actions = await page
+    .locator(".home-hero .contact-action")
+    .evaluateAll(items =>
+      items.map(item => {
+        const r = item.getBoundingClientRect();
+        return { x: r.x, y: r.y, right: r.right, height: r.height };
+      })
+    );
+  assert(
+    actions.every(a => a.height >= 44 && a.height <= 56 && a.right <= 390),
+    "hero controls remain compact touch targets"
+  );
+  assert(
+    Math.abs(actions[0].y - actions[1].y) < 1,
+    "hero contacts sit on the same row"
+  );
+  await page.locator(".home-service-rows").scrollIntoViewIfNeeded();
+  await sticky.waitFor({ state: "visible" });
+  await page.evaluate(() => scrollTo(0, 0));
+  await sticky.waitFor({ state: "hidden" });
+  checks.mobileHero =
+    "compact labelled contacts share a row; sticky contacts appear after hero actions and disappear on return";
+  const methods = page.locator("#home-method-details");
+  assert(
+    !(await methods.evaluate(el => el.open)),
+    "technical details start collapsed"
+  );
+  await methods.locator("summary").focus();
+  await page.keyboard.press("Enter");
+  await methods.locator("dl").waitFor({ state: "visible" });
+  assert.equal(await methods.locator("dt").count(), 3);
+  await methods.locator("summary").focus();
+  await page.keyboard.press("Space");
+  assert(!(await methods.evaluate(el => el.open)));
+  await page.evaluate(() => {
+    location.hash = "home-method-details-content";
+  });
+  await page.waitForFunction(
+    () => document.querySelector("#home-method-details").open
+  );
+  assert(await methods.evaluate(el => el.open));
+  await methods.locator("summary").click();
+  await page.evaluate(() => history.replaceState(null, "", "/"));
+  checks.methodDetails =
+    "three method limitations remain available by native keyboard disclosure and anchor";
   const rail = page.locator(".home-service-rail");
   const track = rail.locator(".home-mobile-rail__track");
   await track.scrollIntoViewIfNeeded();
@@ -155,6 +220,15 @@ try {
     !(await p
       .locator(".home-service-rail .home-mobile-rail__buttons")
       .isVisible())
+  );
+  const nativeMethods = p.locator("#home-method-details");
+  await nativeMethods.locator("summary").click();
+  await nativeMethods.locator("dl").waitFor({ state: "visible" });
+  assert.equal(await nativeMethods.locator("dt").count(), 3);
+  assert(
+    await nativeMethods
+      .getByRole("link", { name: "查看工具選擇指南" })
+      .isVisible()
   );
   const details = p.locator(".home-evidence-details").first();
   await details.locator("summary").click();

@@ -1,0 +1,15 @@
+{
+  "origin": "http://localhost:4570",
+  "verifiedAt": "2026-10-16T05:22:51.076Z",
+  "engine": "Chromium",
+  "physicalDeviceTested": false,
+  "checks": {
+    "methodDetails": "three method limitations remain available by native keyboard disclosure and anchor",
+    "touchSwipe": "Chromium CDP touch scroll moves the service rail",
+    "verticalScroll": "vertical touch over the rail still scrolls the page",
+    "keyboard": "Home/End and native scrolling update the counter",
+    "video": "real video plays, pauses when swiped away, and the next film does not autoplay",
+    "closingFocus": "closed case content immediately becomes inert",
+    "noJavaScript": "all service links and videos remain; native details reveal all four case facts; inactive controls hidden"
+  }
+}
