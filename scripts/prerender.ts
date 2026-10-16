@@ -1,3 +1,7 @@
+import {
+  ARTICLE_ILLUSTRATION_DATE,
+  hasArticleIllustrations,
+} from "../client/src/lib/articleIllustrationPlan";
 import { SEO_ARTICLES } from "../client/src/lib/seoArticles";
 import { NEW_SERVICE_ARTICLES } from "../client/src/lib/newServiceArticles";
 import { PRICE_GUIDE_REVISION } from "../client/src/lib/priceGuideRevision";
@@ -259,13 +263,20 @@ function mergeBlogEntries(
     const article = getPostBySlug(slug);
     entries.set(slug, {
       slug,
-      lastmod: normalizeDate(article?.updatedAt ?? article?.date),
+      lastmod: normalizeDate(
+        hasArticleIllustrations(slug)
+          ? latestEditorialDate(
+              article?.updatedAt ?? article?.date,
+              ARTICLE_ILLUSTRATION_DATE
+            )
+          : (article?.updatedAt ?? article?.date)
+      ),
       source: "static",
     });
   }
 
   for (const entry of sanityEntries) {
-    const revisionDate =
+    const originalRevisionDate =
       entry.slug === PRICE_GUIDE_REVISION.slug
         ? PRICE_GUIDE_REVISION.updatedAt
         : entry.slug === KITCHEN_PREVENTION_REVISION.slug
@@ -275,6 +286,9 @@ function mergeBlogEntries(
             : BODY_REVISION_SLUGS.includes(entry.slug)
               ? BLOG_BODY_REVISION_DATE
               : undefined;
+    const revisionDate = hasArticleIllustrations(entry.slug)
+      ? latestEditorialDate(originalRevisionDate, ARTICLE_ILLUSTRATION_DATE)
+      : originalRevisionDate;
     entries.set(
       entry.slug,
       revisionDate

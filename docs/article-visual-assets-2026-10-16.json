@@ -1,0 +1,89 @@
+[
+  {
+    "key": "service-scenes",
+    "source": "AI-generated editorial illustration; not a customer project",
+    "original": "/workspace/generated_images/exec-4ed3d36f-9b35-467d-92b1-02e0e402e10e.png",
+    "prompt": "Create a polished landscape editorial illustration for DrainBear, a Hong Kong drain-service brand, to accompany an article comparing service needs. Wide horizontal 3:2 composition, bright white and pale blue architecture, navy and cobalt accents, dimensional folded-paper low-poly craft style, crisp physical lighting and plausible perspective. A friendly faceted WHITE POLAR BEAR technician in cobalt blue bib overalls and blue protective gloves is the consistent protagonist. One continuous editorial panorama with three clear spatial scenes, not UI cards and not a collage with borders: at left a compact clean Hong Kong apartment bathroom with toilet, basin and floor drain; middle a clean restaurant kitchen with stainless sink and a closed grease-trap access cover; at right a property courtyard with an accessible closed surface drain and a compact inspection equipment case. The bear calmly points out these three different work settings to a customer holding a phone. Building silhouettes subtly suggest Hong Kong in the background. No lettering, no numbers, no price, no badges, no watermarks. No dramatic flood, no open manhole, no person entering a drain, no technical cutaway pretending to specify actual plumbing. Editorial brand illustration only, not photographic evidence of a real job. Keep all subjects safely inside the frame with breathing space and simple readable silhouettes at mobile size.",
+    "variants": [
+      {
+        "url": "/images/blog/editorial/service-scenes-640.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 56180,
+        "sha256": "67cdf6013390de59c47f8699e2baea9c4cc78376183cf0fa365ef41ac7af7dc6"
+      },
+      {
+        "url": "/images/blog/editorial/service-scenes-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 102046,
+        "sha256": "27b31e535c738fa6c7654328c020be5a662e003e334922481f81a67d0dc81ad8"
+      },
+      {
+        "url": "/images/blog/editorial/service-scenes.webp",
+        "width": 1200,
+        "height": 800,
+        "bytes": 140730,
+        "sha256": "e1cbbf30678e206e82f833386fa0e9c8a8b9a7a46838f95bab942c09fd336f33"
+      }
+    ]
+  },
+  {
+    "key": "quote-review",
+    "source": "AI-generated editorial illustration; not a customer project",
+    "original": "/workspace/generated_images/exec-fa5774da-7b92-4511-863f-7b9b287f4e12.png",
+    "prompt": "Create a refined wide landscape 3:2 editorial illustration for DrainBear's Hong Kong drain-service articles about comparing quotations and confirming the work scope. Bright dimensional low-poly folded-paper material, a friendly white polar bear technician in COBALT blue bib overalls and protective blue gloves, restrained navy details, warm white daylight, pale blue Hong Kong apartment interior. The bear and a homeowner sit at a clean small table, facing each other and jointly looking at a simple paper checklist with only three large blue checkmarks and blank lines. A phone on the table shows a plain outline camera icon without any text. Beside them, an open cabinet reveals a normal intact basin trap and a tidy closed blue toolbox, clearly identifying drain service rather than general office paperwork. Honest collaborative conversation and comfortable human-scale framing; not a posed advertisement, not a card layout, no decorative infographic circles. Excellent edge detail and coherent perspective, room around hands and heads, composition readable on a 390px mobile article. No written words, no currencies, no numbers, no stars, no award seals, no logo or watermark. This is clearly a crafted paper-art brand illustration, not a real construction photo and not a before/after promise.",
+    "variants": [
+      {
+        "url": "/images/blog/editorial/quote-review-640.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 41292,
+        "sha256": "59cc63bc44a176b6637a0be242555201f13b2b008289b925fe50b7e4cbf67438"
+      },
+      {
+        "url": "/images/blog/editorial/quote-review-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 68170,
+        "sha256": "079293bbfecd8cdec424191a003d20fa6810dfc85dad9933b8a1921201d64b55"
+      },
+      {
+        "url": "/images/blog/editorial/quote-review.webp",
+        "width": 1200,
+        "height": 800,
+        "bytes": 89556,
+        "sha256": "60acba14230f84cbb59580030578ad65d9a0a72b409bf9774016c7908a832d1b"
+      }
+    ]
+  },
+  {
+    "key": "camera-inspection",
+    "source": "AI-generated editorial illustration; not a customer project",
+    "original": "/workspace/generated_images/exec-3568e3c2-286a-4926-96e0-029e59e27790.png",
+    "prompt": "A wide 3:2 landscape editorial brand illustration for a Hong Kong drain inspection article. Carefully crafted dimensional low-poly folded paper, bright soft daylight, white and pale blue apartment utility space, restrained navy and cobalt blue. The friendly WHITE polar bear DrainBear technician wears cobalt blue bib overalls and protective gloves, kneeling beside a dry accessible drain entry at floor level. A compact CCTV inspection camera cable reel and portable monitor sit safely beside the bear; one gloved paw guides the cable gently toward the accessible opening. The monitor shows only an abstract neutral circular pipe interior, with NO diagnostic labels, text, distance readings, damage markers or numbers. There is no water spilling and no promise of a detected problem. Emphasize the actual relationship of reel, cable, entry and screen through clear composition. Intact basin pipes and a closed blue toolbox in the background, a subtle Hong Kong skyline through a window. Natural coherent perspective, strong readable silhouettes, generous breathing room, complete ears and equipment in frame. No badges, no stars, no watermark, no typography. This is an informative paper-art illustration, not a photograph or an authentic inspection report, no technical cross-section pretending to show actual plumbing.",
+    "variants": [
+      {
+        "url": "/images/blog/editorial/camera-inspection-640.webp",
+        "width": 640,
+        "height": 427,
+        "bytes": 35826,
+        "sha256": "20ffbbc4f642fda8616f96f07b2f8b2aee38c6ad358776ac94aff6e8bee3c312"
+      },
+      {
+        "url": "/images/blog/editorial/camera-inspection-960.webp",
+        "width": 960,
+        "height": 640,
+        "bytes": 60206,
+        "sha256": "0c13077769bdfd78be6a5d372e3ac676ec2caa86431c1ed78d0bc71f5a418a6b"
+      },
+      {
+        "url": "/images/blog/editorial/camera-inspection.webp",
+        "width": 1200,
+        "height": 800,
+        "bytes": 79590,
+        "sha256": "e7c00458c737f61b1afdfe449667524d285986a13dc193ffd6df679234438c57"
+      }
+    ]
+  }
+]

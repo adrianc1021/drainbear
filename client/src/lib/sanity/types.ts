@@ -47,6 +47,7 @@ export interface SanityArticleImage {
   _type: "articleImage";
   _key: string;
   url?: string;
+  srcSet?: string;
   alt?: string;
   caption?: string;
   width?: number;

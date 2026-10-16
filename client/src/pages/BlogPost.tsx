@@ -1,3 +1,4 @@
+import ArticleFigure from "@/components/ArticleFigure";
 import AnimatedDisclosure from "@/components/AnimatedDisclosure";
 import ContactActions from "@/components/ContactActions";
 /**
@@ -145,27 +146,7 @@ const portableTextComponents: PortableTextComponents = {
 
       if (!image.url) return null;
 
-      return (
-        <figure className="mt-10">
-          <img
-            src={optimizedImageUrl(image.url, 1200)}
-            srcSet={createImageSrcSet(image.url, [480, 768, 960, 1200])}
-            sizes="(min-width: 768px) 768px, 100vw"
-            alt={image.alt ?? ""}
-            width={image.width}
-            height={image.height}
-            className="h-auto w-full rounded-lg border border-border object-cover"
-            loading="lazy"
-            decoding="async"
-          />
-
-          {image.caption && (
-            <figcaption className="mt-3 text-center text-sm leading-relaxed text-muted-foreground">
-              {image.caption}
-            </figcaption>
-          )}
-        </figure>
-      );
+      return <ArticleFigure image={image} />;
     },
 
     expertTip: ({ value }) => {
@@ -515,30 +496,7 @@ export default function BlogPost() {
           {post.source === "static" &&
             post.sections?.map((section, index) => {
               if (section.type === "image") {
-                const image = section.image;
-                return (
-                  <figure
-                    key={index}
-                    className="mt-8 overflow-hidden rounded-lg border border-border"
-                  >
-                    <img
-                      src={image.url}
-                      srcSet={image.srcSet}
-                      sizes="(min-width: 768px) 768px, 100vw"
-                      alt={image.alt || ""}
-                      width={image.width}
-                      height={image.height}
-                      loading="lazy"
-                      decoding="async"
-                      className="h-auto w-full"
-                    />
-                    {image.caption ? (
-                      <figcaption className="px-5 py-3 text-sm leading-relaxed text-muted-foreground">
-                        {image.caption}
-                      </figcaption>
-                    ) : null}
-                  </figure>
-                );
+                return <ArticleFigure key={index} image={section.image} />;
               }
               if (section.type === "list") {
                 const List = section.ordered ? "ol" : "ul";

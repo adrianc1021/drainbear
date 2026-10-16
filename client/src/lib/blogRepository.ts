@@ -1,3 +1,8 @@
+import {
+  illustrateStaticSections,
+  illustratePortableBody,
+} from "./articleIllustrations";
+import { ARTICLE_ILLUSTRATION_DATE } from "./articleIllustrationPlan";
 import { PRICE_GUIDE_REVISION } from "./priceGuideRevision";
 import { KITCHEN_PREVENTION_REVISION } from "./kitchenPreventionRevision";
 import {
@@ -85,6 +90,17 @@ export function mapSanityBlogPost(post: SanityBlogPost): BlogPostView {
     };
   }
   const scenario = getArticleInquiryScenario(post.slug);
+  const originalBody = reviseBlogBody(post.slug, post.body ?? []);
+  const body = illustratePortableBody(
+    post.slug,
+    originalBody,
+    post.coverImage?.url
+  );
+  const editorialDate = scenario
+    ? latestEditorialDate(post.updatedAt, ARTICLE_INQUIRY_REVISION_DATE)
+    : BODY_REVISION_SLUGS.includes(post.slug)
+      ? latestEditorialDate(post.updatedAt, BLOG_BODY_REVISION_DATE)
+      : post.updatedAt;
   return {
     source: "sanity",
     id: post._id,
@@ -92,11 +108,10 @@ export function mapSanityBlogPost(post: SanityBlogPost): BlogPostView {
     title: post.title,
     category: getCategoryLabel(post.category),
     date: post.publishedAt,
-    updatedAt: scenario
-      ? latestEditorialDate(post.updatedAt, ARTICLE_INQUIRY_REVISION_DATE)
-      : BODY_REVISION_SLUGS.includes(post.slug)
-        ? latestEditorialDate(post.updatedAt, BLOG_BODY_REVISION_DATE)
-        : post.updatedAt,
+    updatedAt:
+      body !== originalBody
+        ? latestEditorialDate(editorialDate, ARTICLE_ILLUSTRATION_DATE)
+        : editorialDate,
     authorName: post.authorName?.trim() || "通渠熊編輯團隊",
     reviewerName:
       scenario || BODY_REVISION_SLUGS.includes(post.slug)
@@ -108,7 +123,7 @@ export function mapSanityBlogPost(post: SanityBlogPost): BlogPostView {
     featured: Boolean(post.featured),
     coverImage: post.coverImage,
     seo: post.seo,
-    body: reviseBlogBody(post.slug, post.body ?? []),
+    body,
     resourceLinks: ARTICLE_SERVICE_LINKS[post.slug],
     whatsappMessage:
       scenario?.whatsappMessage ??
@@ -121,6 +136,14 @@ export function mapSanityBlogPost(post: SanityBlogPost): BlogPostView {
 
 export function mapStaticBlogPost(post: StaticBlogPost): BlogPostView {
   const scenario = getArticleInquiryScenario(post.slug);
+  const sections = illustrateStaticSections(
+    post.slug,
+    post.sections,
+    post.coverImage?.url
+  );
+  const editorialDate = scenario
+    ? latestEditorialDate(post.updatedAt, ARTICLE_INQUIRY_REVISION_DATE)
+    : post.updatedAt;
   return {
     source: "static",
     id: `static-${post.slug}`,
@@ -128,9 +151,10 @@ export function mapStaticBlogPost(post: StaticBlogPost): BlogPostView {
     title: post.title,
     category: post.category,
     date: post.date,
-    updatedAt: scenario
-      ? latestEditorialDate(post.updatedAt, ARTICLE_INQUIRY_REVISION_DATE)
-      : post.updatedAt,
+    updatedAt:
+      sections !== post.sections
+        ? latestEditorialDate(editorialDate, ARTICLE_ILLUSTRATION_DATE)
+        : editorialDate,
     authorName: post.authorName ?? "通渠熊編輯團隊",
     reviewerName: scenario ? "" : post.reviewerName?.trim() || "",
     readMins: post.readMins,
@@ -138,7 +162,7 @@ export function mapStaticBlogPost(post: StaticBlogPost): BlogPostView {
     keywords: post.keywords,
     featured: Boolean(post.featured),
     coverImage: post.coverImage,
-    sections: post.sections,
+    sections,
     seo: post.seo,
     resourceLinks: post.resourceLinks ?? ARTICLE_SERVICE_LINKS[post.slug],
     faqs: post.faqs,

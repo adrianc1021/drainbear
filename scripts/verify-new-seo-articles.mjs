@@ -3,6 +3,7 @@ import fs from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { chromium } from "playwright";
 import { enableCmsRelay } from "./browser-cms-relay.ts";
+import { ARTICLE_ILLUSTRATION_DATE } from "../client/src/lib/articleIllustrationPlan.ts";
 import { NEW_SERVICE_ARTICLES } from "../client/src/lib/newServiceArticles.ts";
 
 const origin = process.env.QA_ORIGIN || "http://localhost:4450";
@@ -150,16 +151,16 @@ try {
       assert.equal(state.twitter, state.og);
       assert.deepEqual(state.article.image, [state.og]);
       assert.equal(state.article.datePublished, post.date);
-      assert.equal(state.article.dateModified, post.date);
+      assert.equal(state.article.dateModified, ARTICLE_ILLUSTRATION_DATE);
       assert.equal(state.article.reviewedBy, undefined);
-      assert.equal(state.images.length, 2);
+      assert.equal(state.images.length, 3);
       assert(
         state.images.every(
           i =>
             i.loaded &&
             i.alt.startsWith("AI ") &&
             i.srcSet.includes("640w") &&
-            i.srcSet.includes("960w")
+            i.srcSet.includes(`${i.width}w`)
         )
       );
       assert.deepEqual(
@@ -167,6 +168,12 @@ try {
         [
           [1600, 1000],
           [1200, 800],
+          [
+            1200,
+            post.slug === "home-drain-service-preparation-protection"
+              ? 676
+              : 800,
+          ],
         ]
       );
       assert.equal(state.overflow, false);
