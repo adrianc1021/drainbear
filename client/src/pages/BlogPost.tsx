@@ -541,13 +541,22 @@ export default function BlogPost() {
                 <p key={index} className="mt-5 leading-[1.9] text-navy/75">
                   {section.text}
                   {section.link ? (
-                    <Link
-                      href={section.link.href}
-                      onClick={() => trackArticleLink(section.link!.href)}
-                      className="inline-block min-h-11 content-center font-semibold text-wagreen-dark underline decoration-wagreen/50 underline-offset-2 hover:text-navy"
-                    >
-                      {section.link.label}
-                    </Link>
+                    /^https?:\/\//.test(section.link.href) ? (
+                      <a
+                        href={section.link.href}
+                        className="inline-block min-h-11 content-center font-semibold text-wagreen-dark underline decoration-wagreen/50 underline-offset-2 hover:text-navy"
+                      >
+                        {section.link.label}
+                      </a>
+                    ) : (
+                      <Link
+                        href={section.link.href}
+                        onClick={() => trackArticleLink(section.link!.href)}
+                        className="inline-block min-h-11 content-center font-semibold text-wagreen-dark underline decoration-wagreen/50 underline-offset-2 hover:text-navy"
+                      >
+                        {section.link.label}
+                      </Link>
+                    )
                   ) : null}
                 </p>
               );

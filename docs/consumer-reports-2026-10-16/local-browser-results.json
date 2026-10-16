@@ -1,0 +1,43 @@
+{
+  "origin": "http://localhost:4571",
+  "at": "2026-10-16T09:51:41.716Z",
+  "layouts": 5,
+  "sourceNavigations": 4,
+  "whatsapp": "handoff intercepted; no message sent",
+  "noJavaScript": true,
+  "sitemapCount": 214,
+  "results": [
+    {
+      "width": 320,
+      "title": "通渠黑店報道整理｜收費爭議、被捕個案與防騙清單｜通渠熊",
+      "figures": 2,
+      "axe": []
+    },
+    {
+      "width": 390,
+      "title": "通渠黑店報道整理｜收費爭議、被捕個案與防騙清單｜通渠熊",
+      "figures": 2,
+      "axe": []
+    },
+    {
+      "width": 768,
+      "title": "通渠黑店報道整理｜收費爭議、被捕個案與防騙清單｜通渠熊",
+      "figures": 2,
+      "axe": []
+    },
+    {
+      "width": 1024,
+      "title": "通渠黑店報道整理｜收費爭議、被捕個案與防騙清單｜通渠熊",
+      "figures": 2,
+      "axe": []
+    },
+    {
+      "width": 1440,
+      "title": "通渠黑店報道整理｜收費爭議、被捕個案與防騙清單｜通渠熊",
+      "figures": 2,
+      "axe": []
+    }
+  ],
+  "errors": [],
+  "physicalDeviceTested": false
+}

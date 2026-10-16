@@ -120,7 +120,7 @@ export const DRAIN_COMPANY_SELECTION_GUIDE: BlogPost = {
     { label: "通渠熊公司及聯絡資料", href: "/about#company-facts" },
     { label: "上門與處理流程", href: "/service-process" },
     {
-      label: "口碑、報價與施工紀錄核對清單",
+      label: "通渠黑店相關報道與防騙清單",
       href: "/blog/drain-company-reviews-red-flags",
     },
   ],
