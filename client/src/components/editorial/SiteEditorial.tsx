@@ -10,6 +10,7 @@ interface EditorialPageHeroProps {
   topic?: string;
   media?: { src: string; alt: string; caption?: ReactNode };
   className?: string;
+  priceLabel?: string;
 }
 
 export function EditorialPageHero({
@@ -21,6 +22,7 @@ export function EditorialPageHero({
   topic,
   media,
   className = "",
+  priceLabel,
 }: EditorialPageHeroProps) {
   return (
     <section
@@ -32,6 +34,9 @@ export function EditorialPageHero({
           <p className="brand-eyebrow">{kicker}</p>
           <h1 className="site-page-hero__title">{title}</h1>
           <p className="site-page-hero__description">{description}</p>
+          {priceLabel ? (
+            <p className="service-starting-price">{priceLabel}</p>
+          ) : null}
           <ContactActions
             location={contactLocation}
             message={message}

@@ -18,9 +18,11 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 
-const HOME_TITLE = "香港通渠公司｜24小時通渠查詢｜通渠熊 DrainBear";
+import { STARTING_PRICE_LINE } from "../../../shared/pricing";
+
+const HOME_TITLE = "香港通渠公司｜通渠 HK$300 起｜通渠熊 DrainBear";
 const HOME_DESCRIPTION =
-  "搵香港通渠公司？通渠熊為住宅、食肆及物業處理坐廁塞住、鋅盤去水慢、浴室淤塞及主渠倒灌。電話及 WhatsApp 24 小時接受通渠查詢；上門時間按地區、人手及設備確認。";
+  "通渠熊全線通渠服務 HK$300 起！坐廁塞、鋅盤去水慢、浴室淤塞及主渠倒灌，住宅、食肆及物業都可查詢。立即 WhatsApp 傳相報價，24 小時接受查詢。";
 
 const HOME_FAQ_JSONLD = {
   "@context": "https://schema.org",
@@ -81,6 +83,7 @@ export default function Home() {
                 <span className="home-hero__headline-line">先搵通渠熊。</span>
               </h1>
               <p className="home-hero__coverage">住宅 · 食肆 · 物業渠務</p>
+              <p className="home-hero__price">{STARTING_PRICE_LINE}</p>
               <p className="contact-note">
                 24 小時接受查詢，上門時間另行確認。
               </p>
@@ -144,6 +147,10 @@ export default function Home() {
         </Link>
         <Link href="/guide">
           通渠查詢資料
+          <ArrowRight aria-hidden="true" />
+        </Link>
+        <Link href="/answers">
+          通渠問題解答
           <ArrowRight aria-hidden="true" />
         </Link>
         <Link href="/blog">

@@ -8,6 +8,7 @@ import {
   DISTRICT_SLUGS as DISTRICT_ROUTE_SLUGS,
   SERVICE_SLUGS,
   COMPANY_ROUTES,
+  ANSWER_ROUTES,
 } from "../../shared/publicRoutes";
 import viteConfig from "../../vite.config";
 import { RECORDED_VIDEO_CASES } from "../../shared/recordedVideoCases";
@@ -25,6 +26,7 @@ const STATIC_PUBLIC_ROUTES = new Set([
   "/thanks",
   "/404",
   ...COMPANY_ROUTES,
+  ...ANSWER_ROUTES,
   ...RECORDED_VIDEO_CASES.map(study => `/cases/${study.slug}`),
 ]);
 

@@ -1,3 +1,7 @@
+import {
+  STARTING_PRICE_LABEL,
+  SERVICE_PRICE_SPECIFICATION,
+} from "../../../shared/pricing";
 /**
  * 通渠熊 DrainBear — SEO 元件
  * 每頁獨立 title / description / canonical / Open Graph / JSON-LD
@@ -223,6 +227,7 @@ export default function SEO({
             settings.defaultOgImage?.url || "/favicon-512x512.png"
           ),
           description: settings.businessDescription,
+          priceRange: STARTING_PRICE_LABEL,
           telephone: settings.phoneE164,
           contactPoint: {
             "@type": "ContactPoint",
@@ -244,6 +249,7 @@ export default function SEO({
             url: `${siteUrl}/services`,
             itemListElement: SERVICE_PAGES.map(service => ({
               "@type": "Offer",
+              priceSpecification: SERVICE_PRICE_SPECIFICATION,
               itemOffered: {
                 "@type": "Service",
                 "@id": `${siteUrl}/services/${service.slug}#service`,

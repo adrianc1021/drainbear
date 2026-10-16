@@ -2,11 +2,12 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 import { Link } from "wouter";
 import { useEffect, useRef } from "react";
 
+import { STARTING_PRICE_ANSWER } from "../../../shared/pricing";
+
 const FAQ_ITEMS = [
   {
     question: "可以先知道大概收費嗎？",
-    answer:
-      "通渠收費要按堵塞範圍、可用入口、是否需要拆裝、所需工具及進場條件確認。查詢時先提供地區、受影響位置及相片，有助初步了解；隱藏管段及實際堵塞原因，仍可能需要現場檢查。",
+    answer: STARTING_PRICE_ANSWER,
   },
   {
     question: "要提供甚麼資料，才可以初步判斷？",

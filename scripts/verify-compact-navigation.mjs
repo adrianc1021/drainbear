@@ -312,6 +312,25 @@ try {
   await native
     .locator('#coverage-1 a[href="/areas/kwun-tong"]')
     .waitFor({ state: "visible" });
+  // The native region expands above the footer. Wait for its real transition,
+  // then scroll explicitly so Playwright does not chase a moving summary.
+  // Poll from Node: the no-JavaScript page cannot reliably schedule a
+  // waitForFunction rAF continuation while its CSS transition is running.
+  for (let attempt = 0; attempt < 30; attempt++) {
+    const running = await native
+      .locator("#coverage-1")
+      .evaluate(el => el.getAnimations({ subtree: true }).length);
+    if (running === 0) break;
+    await native.waitForTimeout(50);
+  }
+  assert.equal(
+    await native
+      .locator("#coverage-1")
+      .evaluate(el => el.getAnimations({ subtree: true }).length),
+    0,
+    "native region transition finished before footer scroll"
+  );
+  await native.locator("#footer-services summary").scrollIntoViewIfNeeded();
   await native.locator("#footer-services summary").click();
   await native
     .locator('#footer-services a[href="/services/toilet-unblocking"]')

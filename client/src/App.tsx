@@ -46,6 +46,7 @@ const CaseStudyDetail = lazy(loadCaseStudyDetail);
 const Guide = lazy(loadGuide);
 const Thanks = lazy(loadThanks);
 const NotFound = lazy(loadNotFound);
+const DrainAnswers = lazy(() => import("./pages/DrainAnswers"));
 
 initAnalytics();
 
@@ -96,6 +97,8 @@ function Router() {
           <Route path="/cases" component={CaseStudies} />
           <Route path="/cases/:slug" component={CaseStudyDetail} />
           <Route path="/faq" component={FAQ} />
+          <Route path="/answers" component={DrainAnswers} />
+          <Route path="/answers/:slug" component={DrainAnswers} />
           <Route path="/thanks" component={Thanks} />
           <Route path="/404" component={NotFound} />
           <Route component={NotFound} />

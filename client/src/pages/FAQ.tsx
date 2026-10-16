@@ -1,3 +1,7 @@
+import {
+  STARTING_PRICE_LINE,
+  STARTING_PRICE_ANSWER,
+} from "../../../shared/pricing";
 /**
  * 通渠熊 DrainBear — 常見問題
  * Native details elements keep every answer present in prerendered HTML.
@@ -29,7 +33,7 @@ const FAQS = [
     id: "pricing",
     source: "/guide",
     sourceLabel: "按現場了解報價",
-    a: "堵塞位置、管道狀況、所需工具與進場條件都會影響報價。先提供地區和現場資料，團隊再按實際情況說明；沒有適用所有工程的統一價格。",
+    a: STARTING_PRICE_ANSWER,
   },
   {
     q: "師傅最快多久可以到達？",
@@ -193,6 +197,7 @@ export default function FAQ() {
       <div className="site-hero-shell">
         <Breadcrumbs items={FAQ_CRUMBS} tone="dark" />
         <EditorialPageHero
+          priceLabel={STARTING_PRICE_LINE}
           contactLocation="faq_hero"
           kicker="香港住宅 · 食肆 · 物業渠務"
           title="通渠常見問題與直接答案"
@@ -237,6 +242,9 @@ export default function FAQ() {
           <div className="faq-answer-guide">
             <p className="brand-eyebrow">搵到你需要嘅答案</p>
             <h2>收費、緊急處理，定係上門安排？</h2>
+            <Link className="answer-library-entry" href="/answers">
+              按具體症狀查看通渠問題解答
+            </Link>
             <nav aria-label="答案快速連結" className="related-inline">
               <a href="#pricing">通渠收費</a>
               <a href="#backflow-safety">污水倒灌</a>

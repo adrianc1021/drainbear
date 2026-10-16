@@ -1,3 +1,7 @@
+import {
+  STARTING_PRICE_LINE,
+  SERVICE_PRICE_SPECIFICATION,
+} from "../../../shared/pricing";
 import { BRAND_SOCIAL_IMAGE, BRAND_SOCIAL_ALT } from "@/lib/brandVisuals";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import CustomerPaths from "@/components/CustomerPaths";
@@ -26,6 +30,10 @@ const SERVICES_JSONLD = {
       name: service.name,
       url: `${SITE_URL}/services/${service.slug}`,
       provider: { "@id": BUSINESS_ID },
+      offers: {
+        "@type": "Offer",
+        priceSpecification: SERVICE_PRICE_SPECIFICATION,
+      },
     },
   })),
 };
@@ -35,8 +43,8 @@ export default function Services() {
       <SEO
         image={BRAND_SOCIAL_IMAGE}
         imageAlt={BRAND_SOCIAL_ALT}
-        title="通渠服務｜住宅通渠・食肆隔油池・高壓水槍洗渠・CCTV 照喉｜通渠熊 DrainBear"
-        description="坐廁、鋅盤、浴室去水慢，或食肆隔油池、大廈主渠淤塞？按問題查看通渠方法、收費因素及注意事項。通渠熊24小時接受查詢，現場確認報價後才動工。"
+        title="通渠服務 HK$300 起｜坐廁、鋅盤、高壓洗渠及 CCTV｜通渠熊"
+        description="通渠熊全線通渠服務 HK$300 起！坐廁、鋅盤、浴室、主渠、隔油池、高壓洗渠及 CCTV 照渠，立即 WhatsApp 傳相查詢報價。"
         path="/services"
         breadcrumbs={CRUMBS}
         jsonLd={SERVICES_JSONLD}
@@ -44,9 +52,10 @@ export default function Services() {
       <div className="site-hero-shell">
         <Breadcrumbs items={CRUMBS} tone="dark" />
         <EditorialPageHero
+          priceLabel={STARTING_PRICE_LINE}
           kicker="住宅 · 食肆 · 物業渠務"
           title="通渠服務，按問題選擇"
-          description="塞邊度？按位置搵啱處理方法。"
+          description="坐廁塞、鋅盤去水慢、浴室積水？即刻搵通渠熊，傳相查詢報價。"
           contactLocation="services_hero"
         />
       </div>

@@ -20,6 +20,7 @@ import {
   DISTRICT_SLUGS,
   SERVICE_SLUGS,
   COMPANY_ROUTES,
+  ANSWER_ROUTES,
 } from "../shared/publicRoutes";
 import { RECORDED_VIDEO_CASES } from "../shared/recordedVideoCases";
 import { writeVideoSitemap } from "./video-artifacts";
@@ -75,6 +76,7 @@ const STATIC_ROUTES = [
   "/thanks",
   "/404",
   ...COMPANY_ROUTES,
+  ...ANSWER_ROUTES,
 ];
 
 const STATIC_BLOG_SLUGS = [
@@ -352,6 +354,12 @@ function getSitemapEntries(
       priority: "0.8",
     })),
     { route: "/faq", changefreq: "monthly", priority: "0.7" },
+    ...ANSWER_ROUTES.map(route => ({
+      route,
+      lastmod: "2026-10-16",
+      changefreq: "monthly" as const,
+      priority: route === "/answers" ? "0.7" : "0.6",
+    })),
     { route: "/blog", changefreq: "weekly", priority: "0.8" },
     ...blogEntries.map(entry => ({
       route: `/blog/${entry.slug}`,

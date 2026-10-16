@@ -1,3 +1,6 @@
+import answerRoutes from "./drainAnswerRoutes.json";
+export const ANSWER_ROUTES: string[] = answerRoutes;
+
 /** Source of truth for static service, customer and district route discovery. */
 export const CUSTOMER_SLUGS = [
   "residential",

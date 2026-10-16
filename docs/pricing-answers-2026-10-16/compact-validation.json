@@ -1,0 +1,80 @@
+{
+  "measurements": [
+    {
+      "width": 320,
+      "pageHeight": 2119,
+      "mainHeight": 1428.875,
+      "footerHeight": 610.078125,
+      "overflow": false,
+      "closedRegions": 3,
+      "closedFooterGroups": 3
+    },
+    {
+      "width": 390,
+      "pageHeight": 1987,
+      "mainHeight": 1353.046875,
+      "footerHeight": 553.953125,
+      "overflow": false,
+      "closedRegions": 3,
+      "closedFooterGroups": 3
+    },
+    {
+      "width": 768,
+      "pageHeight": 1613,
+      "mainHeight": 1215.6875,
+      "footerHeight": 396.828125,
+      "overflow": false,
+      "closedRegions": 3,
+      "closedFooterGroups": 3
+    },
+    {
+      "width": 1024,
+      "pageHeight": 1566,
+      "mainHeight": 1258.25,
+      "footerHeight": 307.984375,
+      "overflow": false,
+      "closedRegions": 3,
+      "closedFooterGroups": 3
+    },
+    {
+      "width": 1440,
+      "pageHeight": 1637,
+      "mainHeight": 1329.375,
+      "footerHeight": 307.984375,
+      "overflow": false,
+      "closedRegions": 3,
+      "closedFooterGroups": 3
+    }
+  ],
+  "interactions": {
+    "expandedAxe320": "passed",
+    "expandedAxe1440": "passed",
+    "animation": {
+      "supports": true,
+      "running": 2,
+      "properties": [
+        "background-color",
+        "transform"
+      ],
+      "duration": "0.28s, 0.2s, 0.28s",
+      "closing": 1,
+      "closingProperties": [
+        "transform"
+      ],
+      "heights": {
+        "closedHeight": 93.1875,
+        "openingHeight": 767.109375,
+        "expandedHeight": 1185.5,
+        "closingHeight": 511.6875
+      }
+    },
+    "immediateFooterFocus": "passed",
+    "whatsapp": {
+      "click": 1,
+      "handoff": 1,
+      "noFalseReceiptEvents": true
+    },
+    "nativeWithoutJavaScript": "passed",
+    "nativeClosingFocusWithoutJavaScript": "passed"
+  }
+}

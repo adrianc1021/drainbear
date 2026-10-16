@@ -28,3 +28,6 @@ description: 審查通渠熊SEO、AEO與WCAG，連接商家及內容實體並驗
 - 改寫已發布 CMS 文章時，列表、內頁、靜態後備及 SEO／AEO 必須呈現同一修訂，保留原發布日期並記錄實際更新日期。目前價格文章的網站版本由 client/src/lib/priceGuideRevision.ts 維護；CMS 原稿保留，後續編輯此篇須同步這個網站修訂或明確移除覆寫，不能只改 CMS。
 
 技能更新：遇到新的真實缺陷，增加可操作的檢查；刪除不適用的臨時限制，保留經驗證的原則。
+
+- 通渠問題解答由 shared/drainAnswers/ 的獨立問題內容維護，/answers 是可抓取目錄。修改清單後執行 pnpm exec tsx scripts/sync-answer-routes.ts；build 中的 verify:answers 會核對完整正文、目錄路由及 200+ 子頁面。新增內容不可只替換地區名稱或捏造工程紀錄。
+- HK$300 起為業主 2026-10-16 確認的全線起步報價，Schema 使用 PriceSpecification.minPrice 及 HKD，與可見文案共用 shared/pricing.ts，不用 Offer.price 誤標為固定總額。

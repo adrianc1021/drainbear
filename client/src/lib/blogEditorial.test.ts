@@ -39,7 +39,8 @@ describe("published editorial revision", () => {
     expect(list[0].sections).toEqual(direct.sections);
     expect(direct.sections).toEqual(fallback.sections);
     expect(direct.date).toBe(original.publishedAt);
-    expect(direct.updatedAt).toBe("2026-10-11");
+    expect(direct.updatedAt).toBe("2026-10-16");
+    expect(JSON.stringify(direct)).toContain("HK$300 起");
     expect(direct.seo?.metaTitle).not.toBe(original.seo.metaTitle);
     expect(JSON.stringify(direct)).not.toContain("數百元起");
     expect(direct.reviewerName).toBe("");

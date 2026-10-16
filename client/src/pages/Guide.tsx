@@ -1,3 +1,7 @@
+import {
+  STARTING_PRICE_LINE,
+  STARTING_PRICE_ANSWER,
+} from "../../../shared/pricing";
 import { BRAND_SOCIAL_IMAGE, BRAND_SOCIAL_ALT } from "@/lib/brandVisuals";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
@@ -14,9 +18,8 @@ const CRUMBS = [
 const ANSWERS = [
   {
     id: "quote-context",
-    question: "通渠價錢點計？可以用統一價格報價嗎？",
-    answer:
-      "每宗工程的堵塞位置、管道狀況、工具及進場條件不同，沒有適用所有情況的統一價格。提供現場資料後，團隊會按實際情況了解處理方向及報價。",
+    question: "通渠幾錢起？如何查詢報價？",
+    answer: STARTING_PRICE_ANSWER,
   },
   {
     id: "quote-photos",
@@ -38,8 +41,8 @@ export default function Guide() {
       <SEO
         image={BRAND_SOCIAL_IMAGE}
         imageAlt={BRAND_SOCIAL_ALT}
-        title="通渠報價查詢｜住宅、食肆及物業資料清單｜通渠熊"
-        description="準備通渠查詢所需的地區、堵塞位置及相片。按住宅、食肆或物業管理查看資料清單，再了解處理方向與上門安排；報價按個別現場評估。"
+        title="通渠報價 HK$300 起｜WhatsApp 傳相查詢｜通渠熊"
+        description="通渠熊全線通渠服務 HK$300 起。住宅、食肆及物業，提供地區、堵塞位置及相片，立即 WhatsApp 查詢通渠報價。"
         path="/guide"
         breadcrumbs={CRUMBS}
         jsonLd={[
@@ -66,8 +69,9 @@ export default function Guide() {
       <div className="site-hero-shell">
         <Breadcrumbs items={CRUMBS} tone="dark" />
         <EditorialPageHero
+          priceLabel={STARTING_PRICE_LINE}
           kicker="查詢與報價"
-          title="講清現場情況，先了解點處理。"
+          title="通渠 HK$300 起，傳相即刻問報價。"
           description="同樣係塞渠，位置、管道同所需工具可以好唔同。傳送地區與現場相片，方便團隊了解處理方向。"
           contactLocation="guide_hero"
         />

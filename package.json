@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "NODE_ENV=development tsx watch server/_core/index.ts",
-    "build": "pnpm build:app && pnpm prerender && pnpm verify:aeo && pnpm verify:sitemap && pnpm verify:seo",
+    "build": "pnpm build:app && pnpm prerender && pnpm verify:aeo && pnpm verify:sitemap && pnpm verify:seo && pnpm verify:answers",
     "build:app": "vite build && esbuild server/_core/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
     "prerender": "tsx scripts/prerender.ts",
     "verify:sitemap": "node scripts/verify-sitemap-consistency.mjs",
@@ -20,7 +20,8 @@
     "format": "prettier --write .",
     "test": "vitest run",
     "db:push": "drizzle-kit generate && drizzle-kit migrate",
-    "verify:articles": "node scripts/verify-seo-articles.mjs"
+    "verify:articles": "node scripts/verify-seo-articles.mjs",
+    "verify:answers": "tsx scripts/verify-answer-library.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.693.0",

@@ -13,6 +13,8 @@ export const ROUTE_LOADERS: Record<string, RouteLoader> = {
   "/cases": () => import("@/pages/CaseStudies"),
   "/cases/:slug": () => import("@/pages/CaseStudyDetail"),
   "/faq": () => import("@/pages/FAQ"),
+  "/answers": () => import("@/pages/DrainAnswers"),
+  "/answers/:slug": () => import("@/pages/DrainAnswers"),
   "/thanks": () => import("@/pages/Thanks"),
 };
 
@@ -21,15 +23,17 @@ const prefetchedRoutes = new Set<string>();
 /** Start downloading a likely next route without blocking the current page. */
 export function prefetchRoute(href: string) {
   const path = href.split(/[?#]/)[0] || "/";
-  const key = path.startsWith("/services/")
-    ? "/services/:slug"
-    : path.startsWith("/areas/")
-      ? "/areas/:slug"
-      : path.startsWith("/blog/")
-        ? "/blog/:slug"
-        : path.startsWith("/cases/")
-          ? "/cases/:slug"
-          : path;
+  const key = path.startsWith("/answers/")
+    ? "/answers/:slug"
+    : path.startsWith("/services/")
+      ? "/services/:slug"
+      : path.startsWith("/areas/")
+        ? "/areas/:slug"
+        : path.startsWith("/blog/")
+          ? "/blog/:slug"
+          : path.startsWith("/cases/")
+            ? "/cases/:slug"
+            : path;
   const loader = ROUTE_LOADERS[key];
 
   if (!loader || prefetchedRoutes.has(key)) return;

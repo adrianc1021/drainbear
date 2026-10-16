@@ -6,8 +6,15 @@ import { enableCmsRelay } from "./browser-cms-relay.ts";
 const PORT = Number(process.env.ROUTE_CONSISTENCY_PORT || 4281);
 const BASE_URL = `http://127.0.0.1:${PORT}`;
 const routes = [
-  ["/", "香港通渠服務", "香港通渠，先搵通渠熊。", null],
-  ["/services", "通渠服務｜住宅通渠", "通渠服務", "通渠服務"],
+  ["/answers", "通渠問題解答", "通渠問題解答", null],
+  [
+    "/answers/toilet-unblocking-water-rises",
+    "沖廁後水位升高",
+    "沖廁後水位升高，應該再沖一次嗎？",
+    null,
+  ],
+  ["/", "香港通渠公司｜通渠 HK$300 起", "香港通渠，先搵通渠熊。", null],
+  ["/services", "通渠服務 HK$300 起", "通渠服務", "通渠服務"],
   ["/services/toilet-unblocking", "坐廁通渠", "坐廁及馬桶通渠", "通渠服務"],
   [
     "/drain-diagnosis",
@@ -15,7 +22,12 @@ const routes = [
     "先看症狀，再決定下一步",
     "通渠服務",
   ],
-  ["/guide", "香港通渠報價", "講清現場情況，先了解點處理。", "查詢指南"],
+  [
+    "/guide",
+    "通渠報價 HK$300 起",
+    "通渠 HK$300 起，傳相即刻問報價。",
+    "查詢指南",
+  ],
   ["/areas", "服務地區覆蓋", "港九新界及離島通渠服務", "服務地區"],
   ["/areas/kwun-tong", "觀塘通渠", "觀塘通渠", "服務地區"],
   ["/areas/tai-po", "大埔通渠", "大埔通渠服務", "服務地區"],

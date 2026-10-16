@@ -1,3 +1,8 @@
+import {
+  STARTING_PRICE_LINE,
+  SERVICE_PRICE_SPECIFICATION,
+} from "../../../shared/pricing";
+import ServiceAnswerLinks from "@/components/ServiceAnswerLinks";
 import ServiceIllustration from "@/components/ServiceIllustration";
 import RelatedDrainArticles from "@/components/RelatedDrainArticles";
 import AnimatedDisclosure from "@/components/AnimatedDisclosure";
@@ -50,7 +55,12 @@ export default function ServiceDetail() {
     "@id": `${SITE_URL}${path}#service`,
     name: service.name,
     serviceType: service.name,
-    description: service.description,
+    description: `${service.description} ${STARTING_PRICE_LINE}。`,
+    offers: {
+      "@type": "Offer",
+      priceSpecification: SERVICE_PRICE_SPECIFICATION,
+      url: `${SITE_URL}${path}`,
+    },
     url: `${SITE_URL}${path}`,
     image: serviceSocialImage,
     provider: {
@@ -80,7 +90,7 @@ export default function ServiceDetail() {
     <div className="phase4-service-detail" data-phase4-page="service-detail">
       <SEO
         title={service.title}
-        description={service.description}
+        description={`${service.description} ${STARTING_PRICE_LINE}，立即查詢。`}
         path={path}
         image={serviceSocialImage}
         imageAlt={BRAND_SOCIAL_ALT}
@@ -105,6 +115,7 @@ export default function ServiceDetail() {
       <div className="site-hero-shell">
         <Breadcrumbs items={crumbs} tone="dark" />
         <EditorialPageHero
+          priceLabel={STARTING_PRICE_LINE}
           kicker={service.shortName}
           title={service.name}
           description={
@@ -291,6 +302,7 @@ export default function ServiceDetail() {
               ) : null;
             })}
           </nav>
+          <ServiceAnswerLinks serviceSlug={service.slug} />
           <RelatedDrainArticles serviceSlug={service.slug} />
         </div>
       </section>

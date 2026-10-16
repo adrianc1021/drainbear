@@ -59,9 +59,9 @@ describe("homepage contact and discovery", () => {
     expect(html).toContain('width="1685" height="933"');
     expect(html).toContain("light-water-mobile-640.webp 640w");
     expect(html).toContain("可以先知道大概收費嗎？");
-    expect(html).toContain("隱藏管段及實際堵塞原因，仍可能需要現場檢查");
+    expect(html).toContain("全線通渠服務 HK$300 起");
     expect(html).not.toContain("線上表格暫時維護中");
-    expect(html).not.toContain("HK$");
+    expect(html).toContain("HK$300 起報價");
     expect(html.indexOf('id="home-recorded-cases-heading"')).toBeGreaterThan(0);
     expect(html.indexOf('id="home-recorded-cases-heading"')).toBeLessThan(
       html.indexOf('id="home-process-heading"')

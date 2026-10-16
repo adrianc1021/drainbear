@@ -1,3 +1,4 @@
+import { STARTING_PRICE_LINE } from "../../../shared/pricing";
 import WhatsAppIcon from "@/components/WhatsAppIcon";
 /**
  * 通渠熊 DrainBear — Hong Kong Industrial Editorial
@@ -429,6 +430,7 @@ function Footer({ compact = false }: { compact?: boolean }) {
             通渠熊 DrainBear
           </Link>
           <p>香港住宅、食肆及物業渠務。</p>
+          <p>{STARTING_PRICE_LINE}</p>
         </div>
         {!compact ? <ContactActions location="footer" /> : null}
       </div>
