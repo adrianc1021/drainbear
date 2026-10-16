@@ -33,3 +33,5 @@ description: 審查通渠熊SEO、AEO與WCAG，連接商家及內容實體並驗
 - HK$300 起為業主 2026-10-16 確認的全線起步報價，Schema 使用 PriceSpecification.minPrice 及 HKD，與可見文案共用 shared/pricing.ts，不用 Offer.price 誤標為固定總額。
 
 - 「香港通渠公司推介／通渠邊間好」集中由現有 /blog/choosing-professional-drain-company 承接，來源為 client/src/lib/drainCompanySelectionGuide.ts。沿用原發布日期、實際修訂日期與自我 canonical，核對列表／內頁／相關閱讀／AEO 一致；首頁保留一般通渠服務用途，避免另開同意圖的重複頁。
+
+- /consumer-alerts 是獨立通渠公開資料集合，來源與紀錄由 client/src/lib/consumerAlerts.ts 維護。保留穩定紀錄錨點、原刊日期、回應、身份及核對範圍；同事件多篇跟進合併 sourceIds，不能把來源數當作商戶／罪成個案數。新增獨立資源須同時接入 RESOURCE_ROUTES、Express、預渲染、Sitemap 及入站連結；CollectionPage／ItemList 不套用商戶評分或 Review。

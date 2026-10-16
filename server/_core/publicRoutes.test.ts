@@ -5,6 +5,7 @@ import {
   DISTRICT_SLUGS,
   SERVICE_SLUGS,
   COMPANY_ROUTES,
+  RESOURCE_ROUTES,
   CUSTOMER_SLUGS,
 } from "../../shared/publicRoutes";
 import { CUSTOMER_JOURNEYS } from "../../shared/customerJourneys";
@@ -35,6 +36,11 @@ describe("public route discovery", () => {
     );
     for (const district of DISTRICTS)
       expect(isStaticPublicRoute(`/areas/${district.slug}/`)).toBe(true);
+  });
+  it("recognizes curated resource routes without accepting arbitrary children", () => {
+    for (const route of RESOURCE_ROUTES)
+      expect(isStaticPublicRoute(route)).toBe(true);
+    expect(isStaticPublicRoute("/consumer-alerts/invented-record")).toBe(false);
   });
   it("keeps unknown services and districts as real 404 routes", () => {
     expect(isStaticPublicRoute("/services/invented-service")).toBe(false);

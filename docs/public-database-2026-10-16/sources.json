@@ -1,0 +1,224 @@
+{
+  "sources": [
+    {
+      "id": "police-1194",
+      "publisher": "香港警務處《警聲》",
+      "title": "商罪科與消委會攜手打擊騙案",
+      "url": "https://www.police.gov.hk/offbeat/1194/chi/9010.html",
+      "published": "2021-10-13",
+      "publishedLabel": "2021年10月13日，第1194期",
+      "sourceId": "police-1194",
+      "status": 200,
+      "sha256": "2405cffdc42b4fe441db5d769541d150f6072d682f10a75bdce02a82f7cc4579",
+      "snapshot": "/workspace/drainbear-public-database-2026-10-16/police.html",
+      "checkedDate": "2026-10-16"
+    },
+    {
+      "id": "consumer-513",
+      "publisher": "消費者委員會",
+      "title": "浴室通水渠服務參差 看清消費貼示以防中伏",
+      "url": "https://www.consumer.org.hk/tc/article/513-plumbing-service",
+      "published": "2019-07",
+      "publishedLabel": "2019年7月，《選擇》513期",
+      "sourceId": "consumer-513",
+      "status": 200,
+      "sha256": "f40445818c06bf8e8d7d637eb9446ddaa171563f6814e8481fdcfc117b6ce94b",
+      "snapshot": "/workspace/drainbear-consumer-reports-2026-10-16/consumer.html",
+      "checkedDate": "2026-10-16"
+    },
+    {
+      "id": "hk01-arrests",
+      "publisher": "香港01",
+      "title": "兩名通渠男子被捕：消委會曾揭收費陷阱",
+      "url": "https://www.hk01.com/突發/659813",
+      "published": "2021-08-05",
+      "publishedLabel": "2021年8月5日",
+      "sourceId": "hk01-arrests",
+      "status": 200,
+      "sha256": "18eebeffecd8be6d3188b58bfa1b0dabbad82554a1f465d1f1f527b474796d53",
+      "snapshot": "/workspace/drainbear-consumer-reports-2026-10-16/hk01-659813.html",
+      "checkedDate": "2026-10-16"
+    },
+    {
+      "id": "hk01-anchor",
+      "publisher": "香港01",
+      "title": "柳俊江通渠報價經歷：$750 變 $7,500",
+      "url": "https://www.hk01.com/食玩買/854079",
+      "published": "2023-01-06",
+      "publishedLabel": "2023年1月6日",
+      "sourceId": "hk01-anchor",
+      "status": 200,
+      "sha256": "eb30bc4deab3f7abafc034db811c8783b25f9082ca01b0d979865e56f2b6d12f",
+      "snapshot": "/workspace/drainbear-consumer-reports-2026-10-16/hk01-854079.html",
+      "checkedDate": "2026-10-16"
+    },
+    {
+      "id": "hk01-phones",
+      "publisher": "香港01",
+      "title": "市民指致電不同通渠公司，疑似同一人接聽",
+      "url": "https://www.hk01.com/熱爆話題/256527",
+      "published": "2018-11-08",
+      "publishedLabel": "2018年11月8日",
+      "sourceId": "hk01-phones",
+      "status": 200,
+      "sha256": "34d83f699742a6ad0eeca7f073d0d013206c1306ef3e6b46a3f86c8d424e93d1",
+      "snapshot": "/workspace/drainbear-consumer-reports-2026-10-16/hk01-256527.html",
+      "checkedDate": "2026-10-16"
+    },
+    {
+      "id": "hk01-kitchen",
+      "publisher": "香港01",
+      "title": "網民講述廚房通渠 $700 變 $7,500",
+      "url": "https://www.hk01.com/教煮/894828",
+      "published": "2023-05-16",
+      "publishedLabel": "2023年5月16日",
+      "sourceId": "hk01-kitchen",
+      "status": 200,
+      "sha256": "5ce6391c2fdd8e2a6dfaa4e8db97056f305b58fb2f6fbfb3f0a29264fd8fe246",
+      "snapshot": "/workspace/drainbear-consumer-reports-2026-10-16/hk01-894828.html",
+      "checkedDate": "2026-10-16"
+    },
+    {
+      "id": "tvb-2026",
+      "publisher": "東張+／東張西望",
+      "title": "通渠加價及被要求錄音的消費爭議報道",
+      "url": "https://www.mytvsuper.com/tc/scoopplus/scoop/catch-up/17909420430657/東張西望-東張西望-呂姓通渠師傅坐地起價10倍劏客-眾苦主怒爆被逼錄音滿意服務--報東張曝光黑店手法",
+      "published": "2026-10-02",
+      "publishedLabel": "2026年10月2日",
+      "sourceId": "tvb-2026",
+      "status": 200,
+      "sha256": "9ee5149df0b905fa040fadc731086c50c457ea95560c16d69f02737ed121b1cb",
+      "snapshot": "/workspace/drainbear-public-database-2026-10-16/tvb.html",
+      "checkedDate": "2026-10-16"
+    },
+    {
+      "id": "uhk-2026",
+      "publisher": "UHK 港生活",
+      "title": "夜半通渠收費及錄音爭議：多名當事人講述經歷",
+      "url": "https://hk.ulifestyle.com.hk/topic/detail/20112395",
+      "published": "2026-10-03",
+      "publishedLabel": "2026年10月3日",
+      "sourceId": "uhk-2026",
+      "status": 200,
+      "sha256": "d48d91292daa04a2c3300efa16e70ff2ba7bf4b95e7d92174d68e00883006e1e",
+      "snapshot": "/workspace/drainbear-public-database-2026-10-16/uhk.html",
+      "checkedDate": "2026-10-16"
+    },
+    {
+      "id": "decoman-2026",
+      "publisher": "裝修佬",
+      "title": "通渠收費由千五至萬八及錄音爭議整理",
+      "url": "https://hkdecoman.com/article/57912",
+      "published": "2026-10-14",
+      "publishedLabel": "2026年10月14日",
+      "sourceId": "decoman-2026",
+      "status": 200,
+      "sha256": "3f6835183fc7294de38e14bcc92147d94287d328b4380cbb4a2b3c9ee4b25948",
+      "snapshot": "/workspace/drainbear-public-database-2026-10-16/decoman.html",
+      "checkedDate": "2026-10-16"
+    }
+  ],
+  "officialResources": [
+    {
+      "label": "消委會：投訴及查詢途徑",
+      "url": "https://www.consumer.org.hk/tc/complaints-and-services/complaint-and-enquiry-channels",
+      "description": "查看官方受理範圍及聯絡方法。"
+    },
+    {
+      "label": "消委會：被點名的商號",
+      "url": "https://www.consumer.org.hk/tc/complaints-and-services/named-firms",
+      "description": "官方點名內容以消委會原頁及日期為準，不表示所有商號涉及通渠。"
+    },
+    {
+      "label": "消委會：不良商戶名單",
+      "url": "https://www.consumer.org.hk/tc/complaints-and-services/sanctioned-traders",
+      "description": "官方名單有其適用範圍；本庫沒有把此處的其他行業商號列作通渠公司。"
+    }
+  ],
+  "records": [
+    {
+      "id": "tvb-night-service-2026",
+      "title": "夜間通渠報價 $1,500，當事人指最後收費 $18,000",
+      "sourceIds": [
+        "tvb-2026",
+        "uhk-2026",
+        "decoman-2026"
+      ],
+      "kind": "傳媒報道",
+      "status": "當事人指控；受訪師傅否認身份",
+      "published": "2026-10-02"
+    },
+    {
+      "id": "kitchen-quote-dispute-2023",
+      "title": "廚房通渠 $700 至 $7,500：網民質疑照片及報價改動",
+      "sourceIds": [
+        "hk01-kitchen"
+      ],
+      "kind": "傳媒報道",
+      "status": "傳媒轉述網民陳述",
+      "published": "2023-05-16"
+    },
+    {
+      "id": "anchor-quote-dispute-2023",
+      "title": "柳俊江講述通渠報價由 $750 升至 $7,500",
+      "sourceIds": [
+        "hk01-anchor"
+      ],
+      "kind": "傳媒報道",
+      "status": "當事人公開經歷",
+      "published": "2023-01-06"
+    },
+    {
+      "id": "police-referral-arrests-2021",
+      "title": "警方通渠拘捕行動：商罪科跟進消委會轉介",
+      "sourceIds": [
+        "police-1194",
+        "hk01-arrests"
+      ],
+      "kind": "官方紀錄",
+      "status": "警方公布拘捕；未附裁決",
+      "published": "2021-08-05"
+    },
+    {
+      "id": "consumer-a-price-2019",
+      "title": "消委會 A 公司個案：$1,500 報價，最終收費 $58,000",
+      "sourceIds": [
+        "consumer-513"
+      ],
+      "kind": "消委會個案",
+      "status": "消費投訴；商戶拒絕退款",
+      "published": "2019-07"
+    },
+    {
+      "id": "consumer-b-leak-2019",
+      "title": "消委會 B 公司個案：通渠後漏水，售後跟進未果",
+      "sourceIds": [
+        "consumer-513"
+      ],
+      "kind": "消委會個案",
+      "status": "消費投訴；消委會記錄跟進",
+      "published": "2019-07"
+    },
+    {
+      "id": "consumer-c-followup-2019",
+      "title": "消委會 C 公司個案：付 $8,300，一個月後再塞渠",
+      "sourceIds": [
+        "consumer-513"
+      ],
+      "kind": "消委會個案",
+      "status": "消費投訴；聯絡及單據爭議",
+      "published": "2019-07"
+    },
+    {
+      "id": "phone-network-claims-2018",
+      "title": "不同通渠名稱，網民稱疑似同一人接聽電話",
+      "sourceIds": [
+        "hk01-phones"
+      ],
+      "kind": "傳媒報道",
+      "status": "傳媒轉述網民陳述",
+      "published": "2018-11-08"
+    }
+  ],
+  "automaticRefresh": false
+}

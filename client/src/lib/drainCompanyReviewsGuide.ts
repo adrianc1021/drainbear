@@ -39,6 +39,11 @@ export const DRAIN_COMPANY_REVIEWS_GUIDE: BlogPost = {
   sections: [
     {
       type: "p",
+      text: "想按事件或來源搜尋更多公開紀錄？獨立資料庫收錄警方紀錄、消委會個案及不同傳媒報道，設分類、搜尋及每筆來源連結。",
+      link: { label: "前往通渠公開資料庫", href: "/consumer-alerts" },
+    },
+    {
+      type: "p",
       text: "想避開通渠收費陷阱，先睇有來源的報道。以下整理三則香港01報道，直接交代發生過甚麼、報道日期及資料性質，再附消委會的投訴個案，方便預約前核對。",
     },
     {
@@ -118,6 +123,7 @@ export const DRAIN_COMPANY_REVIEWS_GUIDE: BlogPost = {
     },
   ],
   resourceLinks: [
+    { label: "搜尋獨立通渠公開資料庫", href: "/consumer-alerts" },
     {
       label: "香港通渠公司推介與比較",
       href: "/blog/choosing-professional-drain-company",

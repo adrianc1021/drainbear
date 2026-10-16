@@ -7,6 +7,7 @@ export const CUSTOMER_SLUGS = [
   "restaurants",
   "property-management",
 ] as const;
+export const RESOURCE_ROUTES = ["/consumer-alerts"] as const;
 export const COMPANY_ROUTES = [
   "/about",
   ...CUSTOMER_SLUGS.map(slug => `/customers/${slug}`),

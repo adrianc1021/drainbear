@@ -117,6 +117,7 @@ export const DRAIN_COMPANY_SELECTION_GUIDE: BlogPost = {
     },
   ],
   resourceLinks: [
+    { label: "搜尋通渠爭議公開資料庫", href: "/consumer-alerts" },
     { label: "通渠熊公司及聯絡資料", href: "/about#company-facts" },
     { label: "上門與處理流程", href: "/service-process" },
     {

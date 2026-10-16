@@ -13,6 +13,7 @@ export const ROUTE_LOADERS: Record<string, RouteLoader> = {
   "/cases": () => import("@/pages/CaseStudies"),
   "/cases/:slug": () => import("@/pages/CaseStudyDetail"),
   "/faq": () => import("@/pages/FAQ"),
+  "/consumer-alerts": () => import("@/pages/ConsumerAlerts"),
   "/answers": () => import("@/pages/DrainAnswers"),
   "/answers/:slug": () => import("@/pages/DrainAnswers"),
   "/thanks": () => import("@/pages/Thanks"),

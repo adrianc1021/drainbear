@@ -47,6 +47,7 @@ function isNavItemActive(location: string, href: string) {
 
 const FOOTER_NAV_ITEMS = [
   ...NAV_ITEMS,
+  { label: "通渠公開資料庫", href: "/consumer-alerts" },
   { label: "問題判斷", href: "/drain-diagnosis" },
   { label: "服務流程", href: "/service-process" },
   { label: "常見問題", href: "/faq" },

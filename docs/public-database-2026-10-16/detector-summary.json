@@ -1,0 +1,57 @@
+{
+  "totalFindings": 128,
+  "blocking": 0,
+  "newSectionStartLine": 2882,
+  "newSectionFindings": [
+    {
+      "antipattern": "design-system-font-size",
+      "name": "Font size outside DESIGN.md",
+      "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+      "severity": "advisory",
+      "category": "quality",
+      "file": "/workspace/drainbear/client/src/styles/brand-system.css",
+      "line": 2886,
+      "snippet": "font-size: clamp(2rem, 4.2vw, 3.5rem) has fluid endpoint 3.5rem off the DESIGN.md type ramp",
+      "advisory": true,
+      "ignoreValue": "3.5rem"
+    },
+    {
+      "antipattern": "design-system-radius",
+      "name": "Radius outside DESIGN.md",
+      "description": "A border-radius value is outside the DESIGN.md rounded scale. Use a documented radius token or update the design system if the new shape is intentional.",
+      "severity": "advisory",
+      "category": "quality",
+      "file": "/workspace/drainbear/client/src/styles/brand-system.css",
+      "line": 2897,
+      "snippet": "border-radius: 4px is outside the DESIGN.md rounded scale",
+      "advisory": true,
+      "ignoreValue": "4px"
+    },
+    {
+      "antipattern": "design-system-font-size",
+      "name": "Font size outside DESIGN.md",
+      "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+      "severity": "advisory",
+      "category": "quality",
+      "file": "/workspace/drainbear/client/src/styles/brand-system.css",
+      "line": 2917,
+      "snippet": "font-size: clamp(1.25rem, 2.4vw, 1.7rem) has fluid endpoint 1.25rem off the DESIGN.md type ramp",
+      "advisory": true,
+      "ignoreValue": "1.25rem"
+    },
+    {
+      "antipattern": "design-system-font-size",
+      "name": "Font size outside DESIGN.md",
+      "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+      "severity": "advisory",
+      "category": "quality",
+      "file": "/workspace/drainbear/client/src/styles/brand-system.css",
+      "line": 2929,
+      "snippet": "font-size: 1.05rem is off the DESIGN.md type ramp",
+      "advisory": true,
+      "ignoreValue": "1.05rem"
+    }
+  ],
+  "pageFindings": [],
+  "scope": "One scan; shared stylesheet advisories include pre-existing drift. No global design repair."
+}

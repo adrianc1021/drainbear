@@ -41,3 +41,5 @@ description: 使用語意化React元件與Flexbox/Grid統一通渠熊介面，�
 - 主視覺在手機以自然文流展示完整圖像時，使用素材原始 aspect-ratio，讓內容隨字級自然增高；srcset 的 media 與 CSS 圖框比例要用同一斷點。較闊手機可改用現有橫幅素材，避免把正方形圖片裁成橫幅而切走主體，或只留中央窄圖造成硬邊。實際檢查兩個標題行的行高，而不只計算 h1 數量。
 
 - 文章正文插圖沿用 ArticleFigure 與明確章節／段落錨點；不要重複文章封面，不得改動原文／marks／既有連結。映射必須可重複執行而不增加重複圖片，找不到錨點時不猜測插入位置。AI 示意與工程原相用短圖說區分；預留真實尺寸、使用響應式來源及正文 lazy loading，直幅證據保持完整。實際圖片修訂日期須同步詳情、列表、schema 及 Sitemap。
+
+- 公開資料集合的 URL 篩選使用明確提交、結果焦點、清除及返回狀態；排序必須改變 DOM 順序。/consumer-alerts 關閉 JavaScript 時以 CSS (scripting: none) 隱藏搜尋及快速篩選，所有紀錄和原生 details 仍留在 HTML；不要依賴 React noscript 子節點在瀏覽器預渲染時輸出。

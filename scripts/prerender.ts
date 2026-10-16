@@ -1,3 +1,4 @@
+import { CONSUMER_ALERTS_UPDATED } from "../client/src/lib/consumerAlerts";
 import {
   ARTICLE_ILLUSTRATION_DATE,
   hasArticleIllustrations,
@@ -24,6 +25,7 @@ import {
   DISTRICT_SLUGS,
   SERVICE_SLUGS,
   COMPANY_ROUTES,
+  RESOURCE_ROUTES,
   ANSWER_ROUTES,
 } from "../shared/publicRoutes";
 import { RECORDED_VIDEO_CASES } from "../shared/recordedVideoCases";
@@ -80,6 +82,7 @@ const STATIC_ROUTES = [
   "/thanks",
   "/404",
   ...COMPANY_ROUTES,
+  ...RESOURCE_ROUTES,
   ...ANSWER_ROUTES,
 ];
 
@@ -346,6 +349,12 @@ function getSitemapEntries(
   caseEntries: PublishedCaseEntry[]
 ): SitemapEntry[] {
   const entries: SitemapEntry[] = [
+    ...RESOURCE_ROUTES.map(route => ({
+      route,
+      lastmod: CONSUMER_ALERTS_UPDATED,
+      changefreq: "monthly" as const,
+      priority: "0.7",
+    })),
     ...COMPANY_ROUTES.map(route => ({
       route,
       changefreq: "monthly" as const,
