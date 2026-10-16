@@ -1,0 +1,20 @@
+[
+  {
+    "path": "/",
+    "status": 200,
+    "robotsHeader": null,
+    "canonical": "https://drainbearhk.com/"
+  },
+  {
+    "path": "/answers/toilet-unblocking-water-rises",
+    "status": 200,
+    "robotsHeader": null,
+    "canonical": "https://drainbearhk.com/answers/toilet-unblocking-water-rises"
+  },
+  {
+    "path": "/robots.txt",
+    "status": 200,
+    "robotsHeader": null,
+    "allowsAnswers": true
+  }
+]

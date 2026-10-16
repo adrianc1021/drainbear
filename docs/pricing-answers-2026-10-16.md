@@ -32,7 +32,7 @@
 
 型別及 25 個測試檔／138 項測試通過。新增解答發布檢查逐頁核對正文、唯一 title、canonical、robots、連結及最低報價 Schema。Sitemap、AEO、五段真實影片校驗及 SEO 檢查通過。
 
-本機瀏覽器驗證 28 組版面（320、390、768、1024、1199、1200、1440px）、128 個實際解答 HTTP 網址、WhatsApp 預填與重試、無 JavaScript 目錄／正文及 axe 全部通過。另有 16 條路由的 metadata／導航一致性，以及五種尺寸的收合、鍵盤、搜尋、分批目錄和原生操作檢查通過。見 [瀏覽器結果](pricing-answers-2026-10-16/local-browser-validation.json) 及 [收合檢查](pricing-answers-2026-10-16/compact-validation.json)。正式域名在推送後另行驗證。第一輪腳本提早讀取延後載入的 React 畫面，已改成等候實際頁面載入；無 JavaScript 的 CSS 收合測試改用 Node 側量度動畫完成，保留一般動態、原生開合、鍵盤及所有斷言。新增中文標題改用正常斷行，避免問號獨立成行。
+本機瀏覽器驗證 28 組版面（320、390、768、1024、1199、1200、1440px）、128 個實際解答 HTTP 網址、WhatsApp 預填與重試、無 JavaScript 目錄／正文及 axe 全部通過。另有 16 條路由的 metadata／導航一致性，以及五種尺寸的收合、鍵盤、搜尋、分批目錄和原生操作檢查通過。見 [瀏覽器結果](pricing-answers-2026-10-16/local-browser-validation.json) 及 [收合檢查](pricing-answers-2026-10-16/compact-validation.json)。網站程式提交 `2f0ebc9` 已部署；正式域名於 2026-10-16 12:44（香港）驗證通過。390/1440px 共八組版面、全部 128 個解答 HTTP／正文、WhatsApp 預填及重試、無 JavaScript 目錄／答案和 axe 均無問題。實際 Sitemap 有 214 個網址、213 個子頁及 128 個解答頁；首頁與新解答的 HTTP robots 標頭沒有 noindex，robots.txt 沒有禁止解答路徑。證據：[正式站瀏覽器驗證](pricing-answers-2026-10-16/production-browser-validation.json)、[價格與 Sitemap](pricing-answers-2026-10-16/production-sitemap-pricing.json)、[HTTP 索引設定](pricing-answers-2026-10-16/production-indexability.json)。第一輪腳本提早讀取延後載入的 React 畫面，已改成等候實際頁面載入；無 JavaScript 的 CSS 收合測試改用 Node 側量度動畫完成，保留一般動態、原生開合、鍵盤及所有斷言。新增中文標題改用正常斷行，避免問號獨立成行。
 
 ## 維護檔案
 
@@ -41,3 +41,5 @@
 路由／內容：`shared/pricing.ts`、`shared/drainAnswers.ts`、`shared/drainAnswers/`、`shared/drainAnswerRoutes.json`、`shared/featuredDrainAnswers.json`、`shared/publicRoutes.ts`、`server/_core/vite.ts`、`scripts/prerender.ts`。其餘是發布檢查、樣式、產品及專案技能文件。沒有新增依賴或改寫鎖定檔。
 
 後續用 Search Console 觀察香港的「通渠」、收費及具體問題詞，分開手機與桌面；以發布後完整 28 日作首次比較。搜尋點擊、WhatsApp 外跳與實際收到客人查詢分開記錄，不預設價格或頁數增加就一定獲 AI 推薦。
+
+正式站批量讀取原先使用 Playwright API 請求，曾遇到無 IPv6 路由；改用 Node 已配置的受信任代理後，128 個實際網址全部通過。瀏覽器互動仍由 Chromium 直接驗證；沒有停用 TLS 或更改網站來迴避檢查。
