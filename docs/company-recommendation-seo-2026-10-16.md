@@ -52,3 +52,11 @@ WhatsApp 沿用共用 handoff／追蹤，預填訊息加入指南背景、地區
 本機瀏覽器實際核對 320／390／1440px 的五個頁面，共 15 個版面，axe 自動檢查沒有違規；9 個正文目的地及錨點均正常，指南專屬 WhatsApp 預填、電話、無 JavaScript FAQ 與預渲染正文通過。手機與桌面畫面已開啟檢視。初次測試在 WhatsApp 後把確認頁誤存為文章圖，已修正測試返回文章並重跑，以下為正確證據；沒有修改產品去遷就測試。沒有實體裝置／Safari 驗證。
 
 [手機文章](company-recommendation-seo-2026-10-16/mobile.png) · [桌面文章](company-recommendation-seo-2026-10-16/desktop.png) · [首頁入口](company-recommendation-seo-2026-10-16/homepage-link.png) · [瀏覽器結果](company-recommendation-seo-2026-10-16/browser.json) · [改前內容](company-recommendation-seo-2026-10-16/before.json) · [搜尋存取狀態](company-recommendation-seo-2026-10-16/search-access.json)
+
+## 正式部署
+
+按既有授權將 `9b9265a` 發佈至 main，正式域名已提供新版；驗證完成時間為 2026-10-16 17:05（香港）。指南與入口 JS 均 HTTP 200，Sitemap 保留 214 個網址，指南 lastmod 為 2026-10-16。
+
+正式網站五頁 × 390／1440px 共 10 個版面、9 個正文目的地、WhatsApp 預填及電話、FAQ／Article metadata、axe、無 JavaScript 與預渲染正文再核對通過，沒有執行錯誤。正式手機指南及首頁入口畫面已開啟比對。這些結果證實網站發布及可抓取內容，沒有驗證 Google 已重新收錄或排名上升；未提交 Search Console 索引請求。
+
+[正式手機指南](company-recommendation-seo-2026-10-16/production-mobile.png) · [正式瀏覽器檢查](company-recommendation-seo-2026-10-16/production-browser.json) · [正式版本及 Sitemap](company-recommendation-seo-2026-10-16/production-version.json)
