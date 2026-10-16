@@ -69,4 +69,8 @@ Chromium 320、390、768、1024、1440px 全部通過：metadata、唯一 H1、�
 
 ## 正式發布
 
-待正式域名驗證後記錄。
+程式提交 `faed006` 已推送 `main` 並正式部署。2026-10-16 18:36 香港時間，獨立頁面 https://drainbearhk.com/consumer-alerts 回傳 HTTP 200，已核對正式版本的入口資產及內容。
+
+正式網站 Chromium 390／1440px 驗證通過：八組紀錄、九篇來源，title、description、H1、canonical、robots、CollectionPage／ItemList；搜尋、組合篩選、DOM 排序、返回、空結果、清除及指定紀錄 hash；三種來源原生外跳及無 JavaScript 閱讀／原生展開均通過。沒有收集到 JavaScript 錯誤或 axe 違例，沒有水平溢出。正式 Sitemap 保持 215 個 URL。沒有撥電話或發送訊息；沒有聲稱已獲 Google 收錄或排名提升。
+
+證據：[正式版本](public-database-2026-10-16/production-version.json)、[正式瀏覽器驗證](public-database-2026-10-16/production-browser-results.json)、[手機](public-database-2026-10-16/production-database-390.png)、[桌面](public-database-2026-10-16/production-database-1440.png)、[搜尋](public-database-2026-10-16/production-search-390.png)。
