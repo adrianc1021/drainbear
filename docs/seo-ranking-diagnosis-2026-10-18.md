@@ -71,4 +71,6 @@ TypeScript及27個測試檔案／149項測試通過。完整build、217個路由
 
 證據：[瀏覽器結果](seo-ranking-diagnosis-2026-10-18/local-browser-results.json)、[215頁機讀資料核對](seo-ranking-diagnosis-2026-10-18/prerender-contact-results.json)、[手機](seo-ranking-diagnosis-2026-10-18/home-390.png)、[桌面](seo-ranking-diagnosis-2026-10-18/home-1440.png)。
 
-正式發布後驗證另記；這些檢查不代表Google已採用新資料或排名已提升。
+程式提交 `ef050e9` 已推送main並正式部署。2026-10-18 01:49香港時間，正式首頁與knowledge.json已核對同一組24小時查詢資料。正式Chromium 390／1440px對四頁共8個頁面／尺寸組合驗證通過；schema、canonical、robots、H1、價格及電話／WhatsApp連結一致，無JavaScript仍可讀取主要內容。四頁390px axe未見違例，沒有水平溢出或收集到JS錯誤。人工開啟正式手機／桌面首屏截圖，確認既有版面。
+
+正式證據：[版本及聯絡資料](seo-ranking-diagnosis-2026-10-18/production-version.json)、[瀏覽器核對](seo-ranking-diagnosis-2026-10-18/production-browser-results.json)。這些檢查不代表Google已採用新資料或排名已提升。
