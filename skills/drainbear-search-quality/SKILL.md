@@ -12,6 +12,7 @@ description: 審查通渠熊SEO、AEO與WCAG，連接商家及內容實體並驗
 - 服務頁用Service、FAQPage及BreadcrumbList；ServiceChannel.servicePhone使用ContactPoint。文章和案例保留正式內容及已有日期／作者資料。
 - 真實影片案例以畫面與客戶提供資料為準；WhatsApp檔名日期不能代替工程日期，施工鏡頭不能代替完工測試。影片發布日期與工程日期分開記錄。VideoObject的媒體連結、封面、長度及文字紀錄須與實際播放器相符；驗證原生播放、字幕、跳轉時間和HTTP Range 206，再納入影片sitemap及AEO索引。
 - FAQ schema與可見答案使用同一資料來源，包含服務範圍、限制、報價及安全處理的具體答案。不以FAQ schema或llms.txt承諾Google富摘要或AI引用。
+- Google 官方文件更新紀錄已確認 FAQ 搜尋富摘要自2026-05-07停止顯示（https://developers.google.com/search/updates#faq-deprecation）；保留有用的可見問答及同源機讀資料，不把FAQ標記當成取得搜尋下拉問答的方法。24小時查詢可記錄在ContactPoint.hoursAvailable，不能據此新增商家全日施工時段或固定到場承諾。
 - 可引用的答案需有實際存在的固定題目連結及可見相關資料。由完成CMS載入的公開預渲染HTML產生llms.txt、llms-full.txt與knowledge.json；排除noindex及非canonical內容。索引生成時間不能冒充文章更新日期。pnpm verify:aeo核對sitemap覆蓋、商家電話、可見答案及來源；不一致須阻止建置。
 - 排除video內非顯示後備文字、hidden客群面板及data-aeo-exclude內容，保留影片外可見文字紀錄。FAQ按相同題目整理來源，條目數、字面獨立題數與語義問題數要分開；不能以數量承諾推薦。
 - 商家sameAs只使用CMS已提供的正式檔案連結；不捏造Google Business Profile或評論。AI檢索爬蟲、訓練爬蟲與使用者觸發抓取用途不同；robots放行只代表存取偏好，不代表推薦。正式域名與部署別名的索引政策應分開驗證。

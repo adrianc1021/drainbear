@@ -105,6 +105,28 @@ beforeEach(() => {
 });
 
 describe("SEO metadata lifecycle", () => {
+  it("describes all-day enquiries without promising all-day on-site work", () => {
+    renderSeo();
+    const { "@graph": nodes } = JSON.parse(
+      document.getElementById("jsonld-business")!.textContent!
+    );
+    const business = nodes.find(
+      (node: Record<string, unknown>) => node["@type"] === "Plumber"
+    );
+    expect(business.contactPoint.name).toBe("24小時通渠查詢");
+    expect(business.contactPoint.description).toContain(
+      "上門時間按地區、人手及設備確認"
+    );
+    expect(business.contactPoint.telephone).toBe(business.telephone);
+    expect(new URL(business.contactPoint.url).pathname).toBe("/85295588260");
+    expect(new Set(business.contactPoint.hoursAvailable.dayOfWeek).size).toBe(
+      7
+    );
+    expect(business.contactPoint.hoursAvailable.opens).toBe("00:00");
+    expect(business.contactPoint.hoursAvailable.closes).toBe("23:59");
+    expect(business.openingHoursSpecification).toBeUndefined();
+  });
+
   it("keeps useful fallback metadata while CMS site settings are pending", () => {
     lifecycle.site.isLoading = true;
     renderSeo();

@@ -1,0 +1,75 @@
+{
+  "checkedAt": "2026-10-17T17:40:37.969556+00:00",
+  "sources": [
+    {
+      "id": "helpful",
+      "requestedUrl": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "finalUrl": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "status": 200,
+      "sha256": "e62316e73b62a0ffb2670ea648062dea76464cfe94b827ca212d25cbcb099df7"
+    },
+    {
+      "id": "faq",
+      "requestedUrl": "https://developers.google.com/search/docs/appearance/structured-data/faqpage",
+      "finalUrl": "https://developers.google.com/search/updates#removing-faq-rich-result",
+      "status": 200,
+      "sha256": "d04d5d8bbd8909b68e250fd76badee4e43a2bbc042c2cd080ff2fcab48d9312e"
+    },
+    {
+      "id": "spam",
+      "requestedUrl": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "finalUrl": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "status": 200,
+      "sha256": "9c2acb84df16d76e99a53157dfd9b0966527e04c13655de3a65594953c7ad17c"
+    },
+    {
+      "id": "cwv",
+      "requestedUrl": "https://developers.google.com/search/docs/appearance/core-web-vitals",
+      "finalUrl": "https://developers.google.com/search/docs/appearance/core-web-vitals",
+      "status": 200,
+      "sha256": "d2ea3b6c2aefc06ef5daf83280393a34303b860eadf0e5511811c75edf551dec"
+    },
+    {
+      "id": "mobile",
+      "requestedUrl": "https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing",
+      "finalUrl": "https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing",
+      "status": 200,
+      "sha256": "6ec176ecb872b915407daa21ca022b7f66fc7846e91cbd9563cda4f45006aeda"
+    },
+    {
+      "id": "schema",
+      "requestedUrl": "https://developers.google.com/search/docs/appearance/structured-data/local-business",
+      "finalUrl": "https://developers.google.com/search/docs/appearance/structured-data/local-business",
+      "status": 200,
+      "sha256": "02e7ef5bad3fa96d19b83837a36f52b1774b10eaeb6f0fb39086c1dbbcc1a931"
+    },
+    {
+      "id": "contact-hours",
+      "requestedUrl": "https://schema.org/hoursAvailable",
+      "finalUrl": "https://schema.org/hoursAvailable",
+      "status": 200,
+      "sha256": "22ffc1db0f3bec7abd0328b1fc510125b2834975e77ed9158606c163ca80cee4"
+    },
+    {
+      "id": "gbp-public",
+      "requestedUrl": "https://maps.app.goo.gl/hWwww7Tx3ZztEfLD8",
+      "finalUrl": "https://www.google.com/maps/place/%E9%80%9A%E6%B8%A0%E7%86%8A+DrainBear/@22.3521649,113.5154655,10z/data=!3m1!4b1!4m6!3m5!1s0xa5e91a33daa06dc1:0x889875a2cd2a4a01!8m2!3d22.3527242!4d114.1394!16s%2Fg%2F11zh6qvtxs?entry=tts&g_ep=EgoyMDI2MDgwMy4wIPu8ASoASAFQAw%3D%3D&skid=2b6f98b8-6fce-412c-9d22-4245dfa1292f",
+      "status": 200,
+      "sha256": "778bc2b9d2fa7dad8a4db34e8fee9a092a08c8d196f92ca686187aaa3d9c4d4d"
+    }
+  ],
+  "unavailable": [
+    {
+      "url": "https://support.google.com/business/answer/3038177",
+      "status": 429
+    },
+    {
+      "url": "https://support.google.com/business/answer/7091",
+      "status": 429
+    }
+  ],
+  "notes": [
+    "Google Maps連結回傳需JavaScript的頁面，沒有據此核實商家擁有權、類別、評價或距離排名。",
+    "FAQ文件網址已重新導向官方文件更新紀錄，明列2026-05-07停止顯示FAQ富摘要。"
+  ]
+}

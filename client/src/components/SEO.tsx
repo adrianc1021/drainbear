@@ -232,11 +232,29 @@ export default function SEO({
           contactPoint: {
             "@type": "ContactPoint",
             "@id": `${siteUrl}/#contact`,
+            name: "24小時通渠查詢",
+            description:
+              "電話及 WhatsApp 24 小時接受查詢；上門時間按地區、人手及設備確認。",
             telephone: settings.phoneE164,
             url: `https://wa.me/${settings.whatsappNumber.replace(/\D/g, "")}`,
             contactType: "customer service",
             areaServed: "HK",
             availableLanguage: ["zh-Hant", "zh-HK", "en"],
+            // These hours describe enquiries, not guaranteed on-site staffing.
+            hoursAvailable: {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+                "Sunday",
+              ].map(day => `https://schema.org/${day}`),
+              opens: "00:00",
+              closes: "23:59",
+            },
           },
           sameAs: [settings.instagramUrl, settings.googleBusinessUrl].filter(
             (url): url is string =>
