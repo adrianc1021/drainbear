@@ -1,0 +1,20 @@
+[
+  {
+    "path": "/",
+    "status": 200,
+    "newCopy": true,
+    "phoneAndWhatsAppCorrect": true
+  },
+  {
+    "path": "/about",
+    "status": 200,
+    "newCopy": true,
+    "phoneAndWhatsAppCorrect": true
+  },
+  {
+    "path": "/blog/choosing-professional-drain-company",
+    "status": 200,
+    "newCopy": true,
+    "phoneAndWhatsAppCorrect": true
+  }
+]
