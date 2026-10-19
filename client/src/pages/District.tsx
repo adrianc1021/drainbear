@@ -1,11 +1,7 @@
 import AnimatedDisclosure from "@/components/AnimatedDisclosure";
 import DistrictServiceLinks from "@/components/DistrictServiceLinks";
 import InquiryContactPanel from "@/components/InquiryContactPanel";
-/**
- * 通渠熊 DrainBear — 地區專屬著陸頁（觀塘/沙田等）
- * 風格：Premium SaaS Minimalism，大量留白、8px 圓角、懸浮陰影卡片、無 Emoji
- * SEO：Service JSON-LD + FAQPage + 麵包屑 + 長內容當區關鍵字
- */
+/** Shared reading layout; each district has its own complete service article. */
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
 import SEO from "@/components/SEO";
@@ -13,6 +9,7 @@ import { BUSINESS_ID, SITE_URL, WEBSITE_ID } from "@/config/site";
 import { useSiteSettings } from "@/contexts/SiteSettingsContext";
 import DistrictCaseRecords from "@/components/DistrictCaseRecords";
 import { getDistrict } from "@/lib/districtData";
+import { DISTRICT_CONTENT_REVISED_AT } from "@/lib/districtSearchContent";
 import NotFound from "@/pages/NotFound";
 import { ArrowRight, MapPin } from "lucide-react";
 import { Link, useParams } from "wouter";
@@ -40,6 +37,7 @@ export default function District() {
       url: `${SITE_URL}/areas/${d.slug}`,
       name: seoTitle,
       description: d.metaDescription,
+      dateModified: DISTRICT_CONTENT_REVISED_AT,
       inLanguage: "zh-Hant-HK",
       isPartOf: { "@id": WEBSITE_ID },
       about: { "@id": `${SITE_URL}/areas/${d.slug}#service` },
@@ -107,22 +105,37 @@ export default function District() {
         />
       </div>
 
-      {/* 當區介紹（SEO 長內容） */}
+      {/* The full local article is readable without opening a disclosure. */}
       <section className="bg-white py-14 md:py-16">
-        <div className="container grid gap-10 lg:grid-cols-[1fr_320px]">
-          <article className="reveal max-w-3xl">
-            <h2 className="font-display text-2xl font-black text-navy md:text-3xl">
-              {d.name}區渠務特點
-            </h2>
-            <AnimatedDisclosure
-              id="district-background"
-              title="了解當區渠務特點"
-              className="reading-disclosure"
+        <div className="container district-reading-layout">
+          <article
+            className="district-article"
+            aria-labelledby="district-article-title"
+          >
+            <h2
+              id="district-article-title"
+              className="font-display text-2xl font-black text-navy md:text-3xl"
             >
+              {d.articleTitle}
+            </h2>
+            <div id="district-background" className="district-article__intro">
               {d.intro.map(p => (
                 <p key={p.slice(0, 12)}>{p}</p>
               ))}
-            </AnimatedDisclosure>
+            </div>
+            <nav
+              className="district-article__contents"
+              aria-label={`${d.name}通渠文章目錄`}
+            >
+              <span>本頁重點</span>
+              <ol>
+                {d.localSections?.map(section => (
+                  <li key={section.id}>
+                    <a href={`#${section.id}`}>{section.title}</a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
             {d.localSections?.map(section => (
               <section
                 key={section.id}
@@ -144,6 +157,15 @@ export default function District() {
                     {paragraph}
                   </p>
                 ))}
+                {section.link ? (
+                  <Link
+                    className="district-article__link"
+                    href={section.link.href}
+                  >
+                    {section.link.label}
+                    <ArrowRight aria-hidden="true" />
+                  </Link>
+                ) : null}
               </section>
             ))}
             <div className="mt-6 flex flex-wrap gap-2">
@@ -159,23 +181,26 @@ export default function District() {
             </div>
           </article>
 
-          <DistrictServiceLinks district={d.name} slug={d.slug} />
+          <DistrictServiceLinks
+            district={d.name}
+            serviceSlugs={d.serviceSlugs}
+          />
         </div>
       </section>
 
       <DistrictCaseRecords district={d.name} />
-      {/* 當區常見問題場景 */}
+      {/* Preparation follows this district's article, rather than repeated symptoms. */}
       <section className="bg-mist py-14 md:py-16">
         <div className="container">
           <div className="reveal mb-10 max-w-xl">
             <div className="mb-3 text-xs font-bold tracking-[0.2em] text-safety">
-              常見情況
+              查詢前準備
             </div>
             <h2 className="font-display text-2xl font-black text-navy md:text-3xl">
-              {d.name}常見渠務情況
+              {d.name}通渠，帶齊這三類資料
             </h2>
           </div>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-5 md:grid-cols-3">
             {d.painPoints.map((p, i) => (
               <AnimatedDisclosure
                 key={p.title}
@@ -227,6 +252,22 @@ export default function District() {
               查看工程案例 <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
+          <nav
+            className="district-article__reading"
+            aria-label={`${d.name}相關閱讀`}
+          >
+            <h3>延伸閱讀</h3>
+            {d.relatedReading?.map(item => (
+              <Link key={item.href} href={item.href}>
+                {item.label}
+                <ArrowRight aria-hidden="true" />
+              </Link>
+            ))}
+            <Link href="/">
+              通渠熊香港通渠服務
+              <ArrowRight aria-hidden="true" />
+            </Link>
+          </nav>
         </div>
       </section>
 

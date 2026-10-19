@@ -6,25 +6,16 @@ import { Link } from "wouter";
 
 export default function DistrictServiceLinks({
   district,
-  slug,
+  serviceSlugs = [
+    "toilet-unblocking",
+    "kitchen-sink-unblocking",
+    "bathroom-drain-unblocking",
+    "main-drain-manhole",
+  ],
 }: {
   district: string;
-  slug: string;
+  serviceSlugs?: string[];
 }) {
-  const slugs =
-    slug === "causeway-bay"
-      ? [
-          "kitchen-sink-unblocking",
-          "grease-trap-cleaning",
-          "toilet-unblocking",
-          "main-drain-manhole",
-        ]
-      : [
-          "toilet-unblocking",
-          "kitchen-sink-unblocking",
-          "bathroom-drain-unblocking",
-          "main-drain-manhole",
-        ];
   return (
     <aside
       className="district-service-links"
@@ -32,7 +23,7 @@ export default function DistrictServiceLinks({
     >
       <h3 id="district-service-heading">按問題找處理</h3>
       <nav aria-label={`${district}查詢相關服務`}>
-        {slugs.map(serviceSlug => {
+        {serviceSlugs.map(serviceSlug => {
           const service = getServicePage(serviceSlug)!;
           return (
             <Link

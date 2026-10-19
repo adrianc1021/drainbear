@@ -1,11 +1,12 @@
 import { DISTRICT_SEARCH_CONTENT } from "./districtSearchContent";
+import type { DISTRICT_SLUGS as PUBLIC_DISTRICT_SLUGS } from "../../../shared/publicRoutes";
 /**
  * 通渠熊 DrainBear — 地區著陸頁資料
  * 每區獨立長內容：當區特色、常見問題場景、鄰近地點、FAQ（SEO 長尾關鍵字覆蓋）
  * 第一批：觀塘、沙田；第二批：八個熱門地區；第三批：補齊八個主要行政區專頁
  */
 export interface DistrictInfo {
-  slug: string;
+  slug: (typeof PUBLIC_DISTRICT_SLUGS)[number];
   name: string;
   en: string;
   region: string;
@@ -21,7 +22,15 @@ export interface DistrictInfo {
   metaTitle?: string;
   pageHeading?: string;
   leadDescription?: string;
-  localSections?: { id: string; title: string; paragraphs: string[] }[];
+  articleTitle?: string;
+  serviceSlugs?: string[];
+  relatedReading?: { href: string; label: string }[];
+  localSections?: {
+    id: string;
+    title: string;
+    paragraphs: string[];
+    link?: { href: string; label: string };
+  }[];
 }
 
 const DISTRICTS_BATCH1: DistrictInfo[] = [

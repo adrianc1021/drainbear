@@ -1,0 +1,75 @@
+{
+  "method": "8-character shingle Jaccard on article paragraphs after removing main district names; diagnostic only, not a Google score",
+  "highestPairs": [
+    {
+      "pages": [
+        "kwai-tsing",
+        "islands"
+      ],
+      "eightCharacterJaccard": 0.01066350710900474
+    },
+    {
+      "pages": [
+        "kwun-tong",
+        "wong-tai-sin"
+      ],
+      "eightCharacterJaccard": 0.0056433408577878106
+    },
+    {
+      "pages": [
+        "yuen-long",
+        "kowloon-city"
+      ],
+      "eightCharacterJaccard": 0.0011750881316098707
+    },
+    {
+      "pages": [
+        "kwun-tong",
+        "sha-tin"
+      ],
+      "eightCharacterJaccard": 0.0
+    },
+    {
+      "pages": [
+        "kwun-tong",
+        "mong-kok"
+      ],
+      "eightCharacterJaccard": 0.0
+    },
+    {
+      "pages": [
+        "kwun-tong",
+        "sham-shui-po"
+      ],
+      "eightCharacterJaccard": 0.0
+    },
+    {
+      "pages": [
+        "kwun-tong",
+        "causeway-bay"
+      ],
+      "eightCharacterJaccard": 0.0
+    },
+    {
+      "pages": [
+        "kwun-tong",
+        "north-point"
+      ],
+      "eightCharacterJaccard": 0.0
+    },
+    {
+      "pages": [
+        "kwun-tong",
+        "tsuen-wan"
+      ],
+      "eightCharacterJaccard": 0.0
+    },
+    {
+      "pages": [
+        "kwun-tong",
+        "yuen-long"
+      ],
+      "eightCharacterJaccard": 0.0
+    }
+  ]
+}
