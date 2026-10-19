@@ -63,3 +63,11 @@
 若要加入各區實績，仍需可公開的工程地點、日期、相片、處理範圍、完工測試與使用同意。此項未阻止獨立文章完成，也沒有以虛構案例填補。專業團隊可逐步補充實際工具、管道及現場紀錄；現時技術文字保持條件說明。
 
 發布後以Search Console觀察地區頁的抓取、已收錄狀態，以及「地區＋通渠」的曝光、點擊和平均排名；首個完整28日再比較，不能將可索引數量當作流量成效。
+
+## 正式部署與覆核
+
+提交 `6a638b3` 已推送 main，2026-10-19 18:33（香港）觀察到正式域名（Render）更新。18頁全部HTTP 200，公開HTML含完整新正文、單一H1、自我canonical、可索引robots及2026-10-19 Sitemap日期。正式Sitemap仍是215個網址／214個子頁。
+
+正式Chromium再完成18頁×5種闊度、18次手機axe、圖片解碼、目錄、鍵盤FAQ、當區WhatsApp及電話URL檢查；18頁無JavaScript正文及原生FAQ均通過，沒有收集到JavaScript錯誤。已人工查看正式觀塘手機與離島桌面截圖。發布及檢查沒有撥電話或向WhatsApp傳送訊息。
+
+證據：[正式索引與正文檢查](district-articles-2026-10-19/production-index-checks.json)、[正式瀏覽器結果](district-articles-2026-10-19/production-browser.json)、[部署觀察](district-articles-2026-10-19/deployment.json)。另核對本次生成knowledge.json的18頁標題、描述及每段主文章與實際文案一致。正式域名成功已直接驗證，不以另一個Vercel部署別名狀態代替。

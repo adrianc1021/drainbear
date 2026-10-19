@@ -1,0 +1,332 @@
+{
+  "origin": "https://drainbearhk.com",
+  "verifiedAt": "2026-10-19T10:34:29.187Z",
+  "pageErrors": [],
+  "noJavaScriptPages": 18,
+  "results": [
+    {
+      "slug": "kwun-tong",
+      "status": 200,
+      "uniqueArticle": true,
+      "metaVerified": true,
+      "faqSchemaMatches": true,
+      "widths": [
+        320,
+        390,
+        768,
+        1024,
+        1440
+      ],
+      "decodedServiceImages": true,
+      "tocAndKeyboard": true,
+      "contactURLs": true,
+      "axeViolations": []
+    },
+    {
+      "slug": "sha-tin",
+      "status": 200,
+      "uniqueArticle": true,
+      "metaVerified": true,
+      "faqSchemaMatches": true,
+      "widths": [
+        320,
+        390,
+        768,
+        1024,
+        1440
+      ],
+      "decodedServiceImages": true,
+      "tocAndKeyboard": true,
+      "contactURLs": true,
+      "axeViolations": []
+    },
+    {
+      "slug": "mong-kok",
+      "status": 200,
+      "uniqueArticle": true,
+      "metaVerified": true,
+      "faqSchemaMatches": true,
+      "widths": [
+        320,
+        390,
+        768,
+        1024,
+        1440
+      ],
+      "decodedServiceImages": true,
+      "tocAndKeyboard": true,
+      "contactURLs": true,
+      "axeViolations": []
+    },
+    {
+      "slug": "sham-shui-po",
+      "status": 200,
+      "uniqueArticle": true,
+      "metaVerified": true,
+      "faqSchemaMatches": true,
+      "widths": [
+        320,
+        390,
+        768,
+        1024,
+        1440
+      ],
+      "decodedServiceImages": true,
+      "tocAndKeyboard": true,
+      "contactURLs": true,
+      "axeViolations": []
+    },
+    {
+      "slug": "causeway-bay",
+      "status": 200,
+      "uniqueArticle": true,
+      "metaVerified": true,
+      "faqSchemaMatches": true,
+      "widths": [
+        320,
+        390,
+        768,
+        1024,
+        1440
+      ],
+      "decodedServiceImages": true,
+      "tocAndKeyboard": true,
+      "contactURLs": true,
+      "axeViolations": []
+    },
+    {
+      "slug": "north-point",
+      "status": 200,
+      "uniqueArticle": true,
+      "metaVerified": true,
+      "faqSchemaMatches": true,
+      "widths": [
+        320,
+        390,
+        768,
+        1024,
+        1440
+      ],
+      "decodedServiceImages": true,
+      "tocAndKeyboard": true,
+      "contactURLs": true,
+      "axeViolations": []
+    },
+    {
+      "slug": "tsuen-wan",
+      "status": 200,
+      "uniqueArticle": true,
+      "metaVerified": true,
+      "faqSchemaMatches": true,
+      "widths": [
+        320,
+        390,
+        768,
+        1024,
+        1440
+      ],
+      "decodedServiceImages": true,
+      "tocAndKeyboard": true,
+      "contactURLs": true,
+      "axeViolations": []
+    },
+    {
+      "slug": "yuen-long",
+      "status": 200,
+      "uniqueArticle": true,
+      "metaVerified": true,
+      "faqSchemaMatches": true,
+      "widths": [
+        320,
+        390,
+        768,
+        1024,
+        1440
+      ],
+      "decodedServiceImages": true,
+      "tocAndKeyboard": true,
+      "contactURLs": true,
+      "axeViolations": []
+    },
+    {
+      "slug": "tuen-mun",
+      "status": 200,
+      "uniqueArticle": true,
+      "metaVerified": true,
+      "faqSchemaMatches": true,
+      "widths": [
+        320,
+        390,
+        768,
+        1024,
+        1440
+      ],
+      "decodedServiceImages": true,
+      "tocAndKeyboard": true,
+      "contactURLs": true,
+      "axeViolations": []
+    },
+    {
+      "slug": "tseung-kwan-o",
+      "status": 200,
+      "uniqueArticle": true,
+      "metaVerified": true,
+      "faqSchemaMatches": true,
+      "widths": [
+        320,
+        390,
+        768,
+        1024,
+        1440
+      ],
+      "decodedServiceImages": true,
+      "tocAndKeyboard": true,
+      "contactURLs": true,
+      "axeViolations": []
+    },
+    {
+      "slug": "central-western",
+      "status": 200,
+      "uniqueArticle": true,
+      "metaVerified": true,
+      "faqSchemaMatches": true,
+      "widths": [
+        320,
+        390,
+        768,
+        1024,
+        1440
+      ],
+      "decodedServiceImages": true,
+      "tocAndKeyboard": true,
+      "contactURLs": true,
+      "axeViolations": []
+    },
+    {
+      "slug": "southern",
+      "status": 200,
+      "uniqueArticle": true,
+      "metaVerified": true,
+      "faqSchemaMatches": true,
+      "widths": [
+        320,
+        390,
+        768,
+        1024,
+        1440
+      ],
+      "decodedServiceImages": true,
+      "tocAndKeyboard": true,
+      "contactURLs": true,
+      "axeViolations": []
+    },
+    {
+      "slug": "kowloon-city",
+      "status": 200,
+      "uniqueArticle": true,
+      "metaVerified": true,
+      "faqSchemaMatches": true,
+      "widths": [
+        320,
+        390,
+        768,
+        1024,
+        1440
+      ],
+      "decodedServiceImages": true,
+      "tocAndKeyboard": true,
+      "contactURLs": true,
+      "axeViolations": []
+    },
+    {
+      "slug": "kwai-tsing",
+      "status": 200,
+      "uniqueArticle": true,
+      "metaVerified": true,
+      "faqSchemaMatches": true,
+      "widths": [
+        320,
+        390,
+        768,
+        1024,
+        1440
+      ],
+      "decodedServiceImages": true,
+      "tocAndKeyboard": true,
+      "contactURLs": true,
+      "axeViolations": []
+    },
+    {
+      "slug": "wong-tai-sin",
+      "status": 200,
+      "uniqueArticle": true,
+      "metaVerified": true,
+      "faqSchemaMatches": true,
+      "widths": [
+        320,
+        390,
+        768,
+        1024,
+        1440
+      ],
+      "decodedServiceImages": true,
+      "tocAndKeyboard": true,
+      "contactURLs": true,
+      "axeViolations": []
+    },
+    {
+      "slug": "islands",
+      "status": 200,
+      "uniqueArticle": true,
+      "metaVerified": true,
+      "faqSchemaMatches": true,
+      "widths": [
+        320,
+        390,
+        768,
+        1024,
+        1440
+      ],
+      "decodedServiceImages": true,
+      "tocAndKeyboard": true,
+      "contactURLs": true,
+      "axeViolations": []
+    },
+    {
+      "slug": "north-district",
+      "status": 200,
+      "uniqueArticle": true,
+      "metaVerified": true,
+      "faqSchemaMatches": true,
+      "widths": [
+        320,
+        390,
+        768,
+        1024,
+        1440
+      ],
+      "decodedServiceImages": true,
+      "tocAndKeyboard": true,
+      "contactURLs": true,
+      "axeViolations": []
+    },
+    {
+      "slug": "tai-po",
+      "status": 200,
+      "uniqueArticle": true,
+      "metaVerified": true,
+      "faqSchemaMatches": true,
+      "widths": [
+        320,
+        390,
+        768,
+        1024,
+        1440
+      ],
+      "decodedServiceImages": true,
+      "tocAndKeyboard": true,
+      "contactURLs": true,
+      "axeViolations": []
+    }
+  ]
+}
