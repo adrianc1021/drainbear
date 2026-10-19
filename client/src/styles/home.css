@@ -57,6 +57,34 @@
   color: var(--home-copy);
   line-height: 1.85;
 }
+.home-company-line {
+  background: #edf3f7;
+  border-bottom: 1px solid var(--home-line);
+}
+.home-company-line > .container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.25rem 1.5rem;
+  padding-block: 0.6rem;
+}
+.home-company-line span {
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+.home-company-line .container > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+}
+.home-company-line a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 1rem;
+  text-decoration: underline;
+}
 .home-page .home-hero {
   position: relative;
   isolation: isolate;

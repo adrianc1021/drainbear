@@ -25,7 +25,7 @@ import {
 
 const HOME_TITLE = "香港通渠公司｜通渠 HK$300 起｜通渠熊 DrainBear";
 const HOME_DESCRIPTION =
-  "通渠熊全線通渠服務 HK$300 起！坐廁塞、鋅盤去水慢、浴室淤塞及主渠倒灌，住宅、食肆及物業都可查詢。立即 WhatsApp 傳相報價，24 小時接受查詢。";
+  "通渠熊承接香港住宅、食肆及物業通渠，HK$300 起。處理坐廁、鋅盤、浴室淤塞及主渠倒灌，先檢查、確認報價再動工。查看施工紀錄，電話及 WhatsApp 24 小時接受查詢。";
 
 const HOME_FAQ_JSONLD = {
   "@context": "https://schema.org",
@@ -103,6 +103,16 @@ export default function Home() {
           <HomeHeroScene />
         </div>
       </section>
+      <nav className="home-company-line" aria-label="通渠熊公司與施工資料">
+        <div className="container">
+          <span>通渠熊 · 香港渠務</span>
+          <div>
+            <Link href="/cases">施工實錄</Link>
+            <Link href="/service-process">做事流程</Link>
+            <Link href="/about#company-facts">公司資料</Link>
+          </div>
+        </div>
+      </nav>
       <HomeServiceFinder />
       <HomeServiceRows />
       <RecordedCaseGallery />
@@ -115,9 +125,9 @@ export default function Home() {
           <div className="home-arrangement__intro">
             <div>
               <h2 id="home-process-heading">
-                專業通渠，
+                通渠有工序，
                 <br />
-                先檢查再處理。
+                做事有交代。
               </h2>
             </div>
             <Link href="/service-process">

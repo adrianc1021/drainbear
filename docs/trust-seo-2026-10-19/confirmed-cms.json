@@ -1,0 +1,34 @@
+{
+  "cases": [
+    {
+      "body": null,
+      "projectDate": "2026-09-07",
+      "slug": {
+        "_type": "slug",
+        "current": "school-rainwater-drain-high-pressure-cleaning"
+      },
+      "summary": "學校戶外雨水渠出現排水緩慢及積水，檢查後發現落水管及相連渠段有淤積情況。師傅從可操作的管口放入高壓水喉，沖散及帶走管內泥沙和積聚物，再進行排水測試，確認雨水渠恢復暢順。\n",
+      "title": "學校雨水渠淤塞｜高壓通渠清理恢復排水",
+      "updatedAt": null
+    },
+    {
+      "body": null,
+      "projectDate": "2026-09-08",
+      "slug": {
+        "_type": "slug",
+        "current": "home-basin-grease-buildup-cleaning"
+      },
+      "summary": "家居洗手盆長期去水緩慢，拆開去水喉及隔氣位置後，發現管內積聚大量陳年油污、皂垢及黏稠污物。師傅以人手拆喉清理阻塞物，排走管內污水並重新接駁，再進行放水測試，確認洗手盆去水恢復正常。\n",
+      "title": "家居洗手盆陳年油污積聚｜拆喉清理恢復去水",
+      "updatedAt": null
+    }
+  ],
+  "settings": {
+    "businessDescription": "通渠熊 DrainBear 提供香港住宅、商舖及辦公室通渠服務，處理廚房、浴室、座廁及渠管淤塞問題，提供清晰報價、快速聯絡及實用渠務保養資訊。",
+    "businessName": "通渠熊 DrainBear",
+    "googleBusinessUrl": "https://maps.app.goo.gl/hWwww7Tx3ZztEfLD8",
+    "instagramUrl": "https://www.instagram.com/drainbearhk/",
+    "phoneDisplay": "+852 9558 8260",
+    "phoneE164": "+85295588260"
+  }
+}

@@ -1063,6 +1063,38 @@
 .related-case-records__icon {
   color: var(--brand-accent);
 }
+.company-profile {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+}
+.company-profile__intro > p:not(.brand-eyebrow) {
+  margin-top: 1.25rem;
+  max-width: 34em;
+  color: var(--brand-copy);
+  font-size: 1.05rem;
+  line-height: 1.85;
+}
+.company-profile__links {
+  display: grid;
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--brand-line);
+}
+.company-profile__links a {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding-block: 0.6rem;
+  border-bottom: 1px solid var(--brand-line);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+@media (max-width: 767px) {
+  .company-profile {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
 .company-facts {
   margin-top: 1.5rem;
 }

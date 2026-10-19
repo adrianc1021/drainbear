@@ -60,7 +60,7 @@ export default function HomeServiceFinder() {
               </Link>
             </div>
             <p className="section-heading-description">
-              住宅、食肆及物業通渠，處理坐廁、鋅盤、浴室淤塞及主渠倒灌。
+              通渠熊承接香港住宅、食肆及物業渠務。坐廁、鋅盤、浴室淤塞及主渠倒灌，按現場情況安排處理。
             </p>
           </div>
           <div className="home-service-finder__panel">

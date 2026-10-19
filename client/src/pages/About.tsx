@@ -3,6 +3,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
 import SEO from "@/components/SEO";
 import CustomerPaths from "@/components/CustomerPaths";
+import CompletedCaseEvidence from "@/components/CompletedCaseEvidence";
 import { BUSINESS_ID, SITE_URL } from "@/config/site";
 import { useSiteSettings } from "@/contexts/SiteSettingsContext";
 import { SERVICE_PAGES } from "@/lib/serviceData";
@@ -19,8 +20,8 @@ export default function About() {
       <SEO
         image={BRAND_SOCIAL_IMAGE}
         imageAlt={BRAND_SOCIAL_ALT}
-        title="關於通渠熊 DrainBear｜香港住宅、食肆及物業渠務"
-        description="了解通渠熊的服務範圍、聯絡方式與施工紀錄。香港住宅、食肆及物業渠務，24 小時接受查詢，上門時間按實際安排確認。"
+        title="關於通渠熊｜香港通渠公司・服務流程與施工紀錄"
+        description="認識通渠熊 DrainBear 的香港住宅、食肆及物業通渠服務。了解檢查、報價及試水流程，查看洗手盆與雨水渠施工紀錄、公司聯絡及官方商家資料。"
         path="/about"
         breadcrumbs={crumbs}
         jsonLd={{
@@ -35,81 +36,103 @@ export default function About() {
         <Breadcrumbs items={crumbs} tone="dark" />
         <EditorialPageHero
           kicker="關於通渠熊"
-          title="香港通渠，先搵通渠熊。"
-          description="由家居去水到食肆及物業渠務，先了解實際情況，再安排合適處理。"
+          title="通渠熊，做事有交代。"
+          description="承接香港住宅、食肆及物業渠務。由檢查、報價到施工試水，把處理工序交代清楚。"
           contactLocation="about_hero"
         />
       </div>
       <section className="brand-section" id="company-facts">
-        <div className="container brand-narrow">
-          <p className="brand-eyebrow">公司及聯絡資料</p>
-          <h2>認識通渠熊</h2>
-          <dl className="company-facts">
-            <div>
-              <dt>品牌名稱</dt>
-              <dd>{settings.businessName}（通渠熊／DrainBear）</dd>
-            </div>
-            <div>
-              <dt>查詢電話</dt>
-              <dd>
-                <a href={`tel:${settings.phoneE164}`}>
-                  {settings.phoneDisplay}
-                </a>
-              </dd>
-            </div>
-            <div>
-              <dt>官方網站</dt>
-              <dd>
-                <Link href="/">drainbearhk.com</Link>
-              </dd>
-            </div>
-            {settings.googleBusinessUrl ? (
+        <div className="container company-profile">
+          <div className="company-profile__intro">
+            <p className="brand-eyebrow">通渠熊 DrainBear</p>
+            <h2>
+              通渠靠手藝，
+              <br />
+              信任靠交代。
+            </h2>
+            <p>
+              每個去水位都有不同情況。我們先了解堵塞範圍與施工入口，說明處理方法及收費，確認後才動工。
+            </p>
+            <nav
+              className="company-profile__links"
+              aria-label="了解通渠熊的服務"
+            >
+              <Link href="/service-process">檢查、施工與試水流程</Link>
+              <Link href="/cases">查看現場施工紀錄</Link>
+              <Link href="/blog/hong-kong-drain-cleaning-price-guide">
+                了解報價包括哪些工序
+              </Link>
+            </nav>
+          </div>
+          <div>
+            <h3>公司及聯絡資料</h3>
+            <dl className="company-facts">
               <div>
-                <dt>Google 商家資料</dt>
+                <dt>品牌名稱</dt>
+                <dd>{settings.businessName}（通渠熊／DrainBear）</dd>
+              </div>
+              <div>
+                <dt>查詢電話</dt>
                 <dd>
-                  <a
-                    href={settings.googleBusinessUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    查看通渠熊商家資料
-                    <span className="sr-only">（另開視窗）</span>
+                  <a href={`tel:${settings.phoneE164}`}>
+                    {settings.phoneDisplay}
                   </a>
                 </dd>
               </div>
-            ) : null}
-            {settings.instagramUrl ? (
               <div>
-                <dt>Instagram</dt>
+                <dt>官方網站</dt>
                 <dd>
-                  <a
-                    href={settings.instagramUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    @drainbearhk<span className="sr-only">（另開視窗）</span>
-                  </a>
+                  <Link href="/">drainbearhk.com</Link>
                 </dd>
               </div>
-            ) : null}
-            <div>
-              <dt>服務對象</dt>
-              <dd>住宅住戶、食肆及商舖、業主及物業管理</dd>
-            </div>
-            <div>
-              <dt>服務地區</dt>
-              <dd>
-                港島、九龍、新界及離島可先查詢；進場、交通及設備安排按位置確認。
-              </dd>
-            </div>
-            <div>
-              <dt>查詢安排</dt>
-              <dd>24 小時接受查詢；上門時間由團隊按地區、人手及設備確認。</dd>
-            </div>
-          </dl>
-          <p className="section-footnote">
-            聯絡資料以本頁及網站的最新顯示為準。
-          </p>
+              {settings.googleBusinessUrl ? (
+                <div>
+                  <dt>Google 商家資料</dt>
+                  <dd>
+                    <a
+                      href={settings.googleBusinessUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      查看通渠熊商家資料
+                      <span className="sr-only">（另開視窗）</span>
+                    </a>
+                  </dd>
+                </div>
+              ) : null}
+              {settings.instagramUrl ? (
+                <div>
+                  <dt>Instagram</dt>
+                  <dd>
+                    <a
+                      href={settings.instagramUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      @drainbearhk<span className="sr-only">（另開視窗）</span>
+                    </a>
+                  </dd>
+                </div>
+              ) : null}
+              <div>
+                <dt>服務對象</dt>
+                <dd>住宅住戶、食肆及商舖、業主及物業管理</dd>
+              </div>
+              <div>
+                <dt>服務地區</dt>
+                <dd>
+                  港島、九龍、新界及離島可先查詢；進場、交通及設備安排按位置確認。
+                </dd>
+              </div>
+              <div>
+                <dt>查詢安排</dt>
+                <dd>24 小時接受查詢；上門時間由團隊按地區、人手及設備確認。</dd>
+              </div>
+            </dl>
+            <p className="section-footnote">
+              聯絡資料以本頁及網站的最新顯示為準。
+            </p>
+          </div>
         </div>
       </section>
       <section className="brand-section brand-section--soft">
@@ -125,21 +148,14 @@ export default function About() {
       </section>
       <section className="brand-section">
         <div className="container brand-narrow">
-          <h2>服務與施工紀錄</h2>
+          <h2>做過甚麼，睇返施工紀錄。</h2>
           <p className="mt-4">
-            提供現場資料，有助了解堵塞位置與合適工具。公開施工影片記錄現場操作，工程結果以個別紀錄及現場確認為準。
+            家居洗手盆的油垢清理、學校雨水渠的高壓清洗，分別記錄現場問題、處理方法及完成後的試水。相片與工程詳情一併保留，方便了解實際工序。
           </p>
+          <CompletedCaseEvidence />
           <p className="mt-4">
-            <Link href="/cases/home-basin-grease-buildup-cleaning">
-              家居洗手盆拆喉清理紀錄
-            </Link>
-            及
-            <Link href="/cases/school-rainwater-drain-high-pressure-cleaning">
-              學校雨水渠高壓清洗紀錄
-            </Link>
-            包含處理後的去水測試。可先了解
-            <Link href="/">通渠熊的香港通渠服務</Link>
-            ，再按自己的問題查詢；個別工程結果不代表其他現場的處理保證。
+            需要安排師傅？可先查看<Link href="/">通渠熊香港通渠服務</Link>
+            ，再按受影響位置提供資料查詢。
           </p>
           <nav className="related-inline" aria-label="公司服務及證據">
             {SERVICE_PAGES.map(service => (

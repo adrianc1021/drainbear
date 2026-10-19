@@ -36,3 +36,5 @@ description: 審查通渠熊SEO、AEO與WCAG，連接商家及內容實體並驗
 - 「香港通渠公司推介／通渠邊間好」集中由現有 /blog/choosing-professional-drain-company 承接，來源為 client/src/lib/drainCompanySelectionGuide.ts。沿用原發布日期、實際修訂日期與自我 canonical，核對列表／內頁／相關閱讀／AEO 一致；首頁保留一般通渠服務用途，避免另開同意圖的重複頁。
 
 - /consumer-alerts 是獨立通渠公開資料集合，來源與紀錄由 client/src/lib/consumerAlerts.ts 維護。保留穩定紀錄錨點、原刊日期、回應、身份及核對範圍；同事件多篇跟進合併 sourceIds，不能把來源數當作商戶／罪成個案數。新增獨立資源須同時接入 RESOURCE_ROUTES、Express、預渲染、Sitemap 及入站連結；CollectionPage／ItemList 不套用商戶評分或 Review。
+
+- 成熟公司形象以可核對的公司資料、工序及施工紀錄建立，不以文案模擬網域年資或倒填發布日期。首頁與 About 共用 CompletedCaseEvidence，案例摘要、相片與完工測試須對應 CMS 原紀錄；sameAs 的後備網址亦須使用已確認商家檔案，不用一般搜尋結果代替。

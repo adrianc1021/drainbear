@@ -1,0 +1,521 @@
+diff --git a/client/src/components/HomeServiceFinder.tsx b/client/src/components/HomeServiceFinder.tsx
+index fbc8a8e..c123b55 100644
+--- a/client/src/components/HomeServiceFinder.tsx
++++ b/client/src/components/HomeServiceFinder.tsx
+@@ -60,7 +60,7 @@ export default function HomeServiceFinder() {
+               </Link>
+             </div>
+             <p className="section-heading-description">
+-              住宅、食肆及物業通渠，處理坐廁、鋅盤、浴室淤塞及主渠倒灌。
++              通渠熊承接香港住宅、食肆及物業渠務。坐廁、鋅盤、浴室淤塞及主渠倒灌，按現場情況安排處理。
+             </p>
+           </div>
+           <div className="home-service-finder__panel">
+diff --git a/client/src/components/RecordedCaseGallery.tsx b/client/src/components/RecordedCaseGallery.tsx
+index ad6ba7a..a4bd18b 100644
+--- a/client/src/components/RecordedCaseGallery.tsx
++++ b/client/src/components/RecordedCaseGallery.tsx
+@@ -1,37 +1,10 @@
+ import HomeMobileRail from "./HomeMobileRail";
+-import AnimatedDisclosure from "./AnimatedDisclosure";
++import CompletedCaseEvidence from "./CompletedCaseEvidence";
+ import { recordedCaseStudies } from "@/lib/caseRepository";
+-import { useCaseStudies } from "@/lib/useCases";
+-import { createImageSrcSet, optimizedImageUrl } from "@/lib/imageOptimization";
+ import { ArrowRight } from "lucide-react";
+ import { Link } from "wouter";
+ 
+-/** Summaries checked against the published CMS records on 2026-10-13 (Hong Kong). */
+-const COMPLETED_CASES = [
+-  {
+-    slug: "home-basin-grease-buildup-cleaning",
+-    title: "洗手盆拆喉清理及放水測試",
+-    facts: [
+-      ["問題", "家居洗手盆長期去水緩慢。"],
+-      ["發現", "去水喉及隔氣位置積聚油污、皂垢和黏稠污物。"],
+-      ["處理", "拆喉清理阻塞物，排走污水後重新接駁。"],
+-      ["測試", "連續放水後去水恢復正常，接駁位置沒有明顯滲漏。"],
+-    ],
+-  },
+-  {
+-    slug: "school-rainwater-drain-high-pressure-cleaning",
+-    title: "雨水渠高壓清洗及排水測試",
+-    facts: [
+-      ["問題", "學校戶外雨水渠排水緩慢並出現積水。"],
+-      ["發現", "落水管及相連渠段有泥沙和積聚物淤積。"],
+-      ["處理", "從可操作管口放入高壓水喉，清理管段積聚物。"],
+-      ["測試", "清洗後進行排水測試，紀錄顯示排水恢復暢順。"],
+-    ],
+-  },
+-];
+-
+ export default function RecordedCaseGallery() {
+-  const { studies, isLoading, error } = useCaseStudies();
+   return (
+     <section
+       className="brand-section home-recorded-cases"
+@@ -78,60 +51,7 @@ export default function RecordedCaseGallery() {
+             </figure>
+           ))}
+         </HomeMobileRail>
+-        <div
+-          className="home-case-evidence"
+-          data-cms-loading={isLoading}
+-          data-cms-error={Boolean(error)}
+-        >
+-          <h3>附完工測試的通渠紀錄</h3>
+-          <div className="home-case-evidence__grid">
+-            {COMPLETED_CASES.map(record => {
+-              const study = studies.find(item => item.slug === record.slug);
+-              return (
+-                <article key={record.slug}>
+-                  {study?.coverImage?.url ? (
+-                    <img
+-                      src={optimizedImageUrl(study.coverImage.url, 640)}
+-                      srcSet={createImageSrcSet(
+-                        study.coverImage.url,
+-                        [320, 480, 640, 960]
+-                      )}
+-                      sizes="(min-width: 768px) 50vw, 80px"
+-                      alt={study.coverImage.alt || study.title}
+-                      width={study.coverImage.width}
+-                      height={study.coverImage.height}
+-                      loading="lazy"
+-                      decoding="async"
+-                    />
+-                  ) : null}
+-                  <div>
+-                    <h4>
+-                      <Link href={`/cases/${record.slug}`}>
+-                        {record.title} <ArrowRight aria-hidden="true" />
+-                      </Link>
+-                    </h4>
+-                    {study ? (
+-                      <AnimatedDisclosure
+-                        id={`home-evidence-${record.slug}`}
+-                        title="查看工程詳情"
+-                        className="home-evidence-details"
+-                      >
+-                        <dl>
+-                          {record.facts.map(([label, text]) => (
+-                            <div key={label}>
+-                              <dt>{label}</dt>
+-                              <dd>{text}</dd>
+-                            </div>
+-                          ))}
+-                        </dl>
+-                      </AnimatedDisclosure>
+-                    ) : null}
+-                  </div>
+-                </article>
+-              );
+-            })}
+-          </div>
+-        </div>
++        <CompletedCaseEvidence />
+       </div>
+     </section>
+   );
+diff --git a/client/src/components/SEO.tsx b/client/src/components/SEO.tsx
+index 507070e..178e138 100644
+--- a/client/src/components/SEO.tsx
++++ b/client/src/components/SEO.tsx
+@@ -227,6 +227,10 @@ export default function SEO({
+             settings.defaultOgImage?.url || "/favicon-512x512.png"
+           ),
+           description: settings.businessDescription,
++          subjectOf: [
++            { "@id": `${siteUrl}/about#webpage` },
++            { "@id": `${siteUrl}/cases#webpage` },
++          ],
+           priceRange: STARTING_PRICE_LABEL,
+           telephone: settings.phoneE164,
+           contactPoint: {
+@@ -300,6 +304,7 @@ export default function SEO({
+             "@id": `${siteUrl}/#organization`,
+           },
+           hasPart: [
++            "/about",
+             "/services",
+             "/areas",
+             "/guide",
+diff --git a/client/src/contexts/SiteSettingsContext.tsx b/client/src/contexts/SiteSettingsContext.tsx
+index 66a3181..81e0dfc 100644
+--- a/client/src/contexts/SiteSettingsContext.tsx
++++ b/client/src/contexts/SiteSettingsContext.tsx
+@@ -19,8 +19,7 @@ const FALLBACK_SITE_SETTINGS: SiteSettings = {
+   phoneE164: "+85295588260",
+   whatsappNumber: WHATSAPP_NUMBER,
+   whatsappDefaultMessage: "您好，我想查詢通渠服務及報價。",
+-  googleBusinessUrl:
+-    "https://www.google.com/maps/search/%E9%80%9A%E6%B8%A0%E7%86%8A+DrainBear",
++  googleBusinessUrl: "https://maps.app.goo.gl/hWwww7Tx3ZztEfLD8",
+   featuredBlogCount: 3,
+   featuredCaseCount: 3,
+   defaultOgImage: {
+diff --git a/client/src/lib/drainCompanySelectionGuide.ts b/client/src/lib/drainCompanySelectionGuide.ts
+index 4a0d9d2..15160f5 100644
+--- a/client/src/lib/drainCompanySelectionGuide.ts
++++ b/client/src/lib/drainCompanySelectionGuide.ts
+@@ -10,7 +10,7 @@ export const DRAIN_COMPANY_SELECTION_GUIDE: BlogPost = {
+   title: "香港通渠公司推介：通渠邊間好？收費與案例比較",
+   category: "實用指南",
+   date: "2026-10-09",
+-  updatedAt: "2026-10-16",
++  updatedAt: "2026-10-19",
+   readMins: 4,
+   authorName: "通渠熊編輯團隊",
+   reviewerName: "",
+@@ -61,6 +61,12 @@ export const DRAIN_COMPANY_SELECTION_GUIDE: BlogPost = {
+         "由誰跟進工程：核對公司、到場師傅、收款及後續聯絡資料，保留確認紀錄。",
+       ],
+     },
++    { type: "h2", text: "揀老字號通渠公司，還要核對甚麼？" },
++    {
++      type: "p",
++      text: "年資可以作參考，亦要看今次由誰接洽、施工和跟進。核對公司名稱、電話及官方商家資料是否一致，再看與自己問題相近的工程紀錄：發現甚麼、用了甚麼方法、完成後如何試水。介紹寫得再長，都應該對應得到具體資料。",
++      link: { label: "核對通渠熊公司及聯絡資料", href: "/about#company-facts" },
++    },
+     { type: "h2", text: "通渠熊適合處理哪些問題？" },
+     {
+       type: "list",
+diff --git a/client/src/pages/About.tsx b/client/src/pages/About.tsx
+index e849199..f97edba 100644
+--- a/client/src/pages/About.tsx
++++ b/client/src/pages/About.tsx
+@@ -3,6 +3,7 @@ import Breadcrumbs from "@/components/Breadcrumbs";
+ import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
+ import SEO from "@/components/SEO";
+ import CustomerPaths from "@/components/CustomerPaths";
++import CompletedCaseEvidence from "@/components/CompletedCaseEvidence";
+ import { BUSINESS_ID, SITE_URL } from "@/config/site";
+ import { useSiteSettings } from "@/contexts/SiteSettingsContext";
+ import { SERVICE_PAGES } from "@/lib/serviceData";
+@@ -19,8 +20,8 @@ export default function About() {
+       <SEO
+         image={BRAND_SOCIAL_IMAGE}
+         imageAlt={BRAND_SOCIAL_ALT}
+-        title="關於通渠熊 DrainBear｜香港住宅、食肆及物業渠務"
+-        description="了解通渠熊的服務範圍、聯絡方式與施工紀錄。香港住宅、食肆及物業渠務，24 小時接受查詢，上門時間按實際安排確認。"
++        title="關於通渠熊｜香港通渠公司・服務流程與施工紀錄"
++        description="認識通渠熊 DrainBear 的香港住宅、食肆及物業通渠服務。了解檢查、報價及試水流程，查看洗手盆與雨水渠施工紀錄、公司聯絡及官方商家資料。"
+         path="/about"
+         breadcrumbs={crumbs}
+         jsonLd={{
+@@ -35,81 +36,103 @@ export default function About() {
+         <Breadcrumbs items={crumbs} tone="dark" />
+         <EditorialPageHero
+           kicker="關於通渠熊"
+-          title="香港通渠，先搵通渠熊。"
+-          description="由家居去水到食肆及物業渠務，先了解實際情況，再安排合適處理。"
++          title="通渠熊，做事有交代。"
++          description="承接香港住宅、食肆及物業渠務。由檢查、報價到施工試水，把處理工序交代清楚。"
+           contactLocation="about_hero"
+         />
+       </div>
+       <section className="brand-section" id="company-facts">
+-        <div className="container brand-narrow">
+-          <p className="brand-eyebrow">公司及聯絡資料</p>
+-          <h2>認識通渠熊</h2>
+-          <dl className="company-facts">
+-            <div>
+-              <dt>品牌名稱</dt>
+-              <dd>{settings.businessName}（通渠熊／DrainBear）</dd>
+-            </div>
+-            <div>
+-              <dt>查詢電話</dt>
+-              <dd>
+-                <a href={`tel:${settings.phoneE164}`}>
+-                  {settings.phoneDisplay}
+-                </a>
+-              </dd>
+-            </div>
+-            <div>
+-              <dt>官方網站</dt>
+-              <dd>
+-                <Link href="/">drainbearhk.com</Link>
+-              </dd>
+-            </div>
+-            {settings.googleBusinessUrl ? (
++        <div className="container company-profile">
++          <div className="company-profile__intro">
++            <p className="brand-eyebrow">通渠熊 DrainBear</p>
++            <h2>
++              通渠靠手藝，
++              <br />
++              信任靠交代。
++            </h2>
++            <p>
++              每個去水位都有不同情況。我們先了解堵塞範圍與施工入口，說明處理方法及收費，確認後才動工。
++            </p>
++            <nav
++              className="company-profile__links"
++              aria-label="了解通渠熊的服務"
++            >
++              <Link href="/service-process">檢查、施工與試水流程</Link>
++              <Link href="/cases">查看現場施工紀錄</Link>
++              <Link href="/blog/hong-kong-drain-cleaning-price-guide">
++                了解報價包括哪些工序
++              </Link>
++            </nav>
++          </div>
++          <div>
++            <h3>公司及聯絡資料</h3>
++            <dl className="company-facts">
++              <div>
++                <dt>品牌名稱</dt>
++                <dd>{settings.businessName}（通渠熊／DrainBear）</dd>
++              </div>
+               <div>
+-                <dt>Google 商家資料</dt>
++                <dt>查詢電話</dt>
+                 <dd>
+-                  <a
+-                    href={settings.googleBusinessUrl}
+-                    target="_blank"
+-                    rel="noopener noreferrer"
+-                  >
+-                    查看通渠熊商家資料
+-                    <span className="sr-only">（另開視窗）</span>
++                  <a href={`tel:${settings.phoneE164}`}>
++                    {settings.phoneDisplay}
+                   </a>
+                 </dd>
+               </div>
+-            ) : null}
+-            {settings.instagramUrl ? (
+               <div>
+-                <dt>Instagram</dt>
++                <dt>官方網站</dt>
+                 <dd>
+-                  <a
+-                    href={settings.instagramUrl}
+-                    target="_blank"
+-                    rel="noopener noreferrer"
+-                  >
+-                    @drainbearhk<span className="sr-only">（另開視窗）</span>
+-                  </a>
++                  <Link href="/">drainbearhk.com</Link>
+                 </dd>
+               </div>
+-            ) : null}
+-            <div>
+-              <dt>服務對象</dt>
+-              <dd>住宅住戶、食肆及商舖、業主及物業管理</dd>
+-            </div>
+-            <div>
+-              <dt>服務地區</dt>
+-              <dd>
+-                港島、九龍、新界及離島可先查詢；進場、交通及設備安排按位置確認。
+-              </dd>
+-            </div>
+-            <div>
+-              <dt>查詢安排</dt>
+-              <dd>24 小時接受查詢；上門時間由團隊按地區、人手及設備確認。</dd>
+-            </div>
+-          </dl>
+-          <p className="section-footnote">
+-            聯絡資料以本頁及網站的最新顯示為準。
+-          </p>
++              {settings.googleBusinessUrl ? (
++                <div>
++                  <dt>Google 商家資料</dt>
++                  <dd>
++                    <a
++                      href={settings.googleBusinessUrl}
++                      target="_blank"
++                      rel="noopener noreferrer"
++                    >
++                      查看通渠熊商家資料
++                      <span className="sr-only">（另開視窗）</span>
++                    </a>
++                  </dd>
++                </div>
++              ) : null}
++              {settings.instagramUrl ? (
++                <div>
++                  <dt>Instagram</dt>
++                  <dd>
++                    <a
++                      href={settings.instagramUrl}
++                      target="_blank"
++                      rel="noopener noreferrer"
++                    >
++                      @drainbearhk<span className="sr-only">（另開視窗）</span>
++                    </a>
++                  </dd>
++                </div>
++              ) : null}
++              <div>
++                <dt>服務對象</dt>
++                <dd>住宅住戶、食肆及商舖、業主及物業管理</dd>
++              </div>
++              <div>
++                <dt>服務地區</dt>
++                <dd>
++                  港島、九龍、新界及離島可先查詢；進場、交通及設備安排按位置確認。
++                </dd>
++              </div>
++              <div>
++                <dt>查詢安排</dt>
++                <dd>24 小時接受查詢；上門時間由團隊按地區、人手及設備確認。</dd>
++              </div>
++            </dl>
++            <p className="section-footnote">
++              聯絡資料以本頁及網站的最新顯示為準。
++            </p>
++          </div>
+         </div>
+       </section>
+       <section className="brand-section brand-section--soft">
+@@ -125,21 +148,14 @@ export default function About() {
+       </section>
+       <section className="brand-section">
+         <div className="container brand-narrow">
+-          <h2>服務與施工紀錄</h2>
++          <h2>做過甚麼，睇返施工紀錄。</h2>
+           <p className="mt-4">
+-            提供現場資料，有助了解堵塞位置與合適工具。公開施工影片記錄現場操作，工程結果以個別紀錄及現場確認為準。
++            家居洗手盆的油垢清理、學校雨水渠的高壓清洗，分別記錄現場問題、處理方法及完成後的試水。相片與工程詳情一併保留，方便了解實際工序。
+           </p>
++          <CompletedCaseEvidence />
+           <p className="mt-4">
+-            <Link href="/cases/home-basin-grease-buildup-cleaning">
+-              家居洗手盆拆喉清理紀錄
+-            </Link>
+-            及
+-            <Link href="/cases/school-rainwater-drain-high-pressure-cleaning">
+-              學校雨水渠高壓清洗紀錄
+-            </Link>
+-            包含處理後的去水測試。可先了解
+-            <Link href="/">通渠熊的香港通渠服務</Link>
+-            ，再按自己的問題查詢；個別工程結果不代表其他現場的處理保證。
++            需要安排師傅？可先查看<Link href="/">通渠熊香港通渠服務</Link>
++            ，再按受影響位置提供資料查詢。
+           </p>
+           <nav className="related-inline" aria-label="公司服務及證據">
+             {SERVICE_PAGES.map(service => (
+diff --git a/client/src/pages/Home.tsx b/client/src/pages/Home.tsx
+index a83ce86..3449c04 100644
+--- a/client/src/pages/Home.tsx
++++ b/client/src/pages/Home.tsx
+@@ -25,7 +25,7 @@ import {
+ 
+ const HOME_TITLE = "香港通渠公司｜通渠 HK$300 起｜通渠熊 DrainBear";
+ const HOME_DESCRIPTION =
+-  "通渠熊全線通渠服務 HK$300 起！坐廁塞、鋅盤去水慢、浴室淤塞及主渠倒灌，住宅、食肆及物業都可查詢。立即 WhatsApp 傳相報價，24 小時接受查詢。";
++  "通渠熊承接香港住宅、食肆及物業通渠，HK$300 起。處理坐廁、鋅盤、浴室淤塞及主渠倒灌，先檢查、確認報價再動工。查看施工紀錄，電話及 WhatsApp 24 小時接受查詢。";
+ 
+ const HOME_FAQ_JSONLD = {
+   "@context": "https://schema.org",
+@@ -103,6 +103,16 @@ export default function Home() {
+           <HomeHeroScene />
+         </div>
+       </section>
++      <nav className="home-company-line" aria-label="通渠熊公司與施工資料">
++        <div className="container">
++          <span>通渠熊 · 香港渠務</span>
++          <div>
++            <Link href="/cases">施工實錄</Link>
++            <Link href="/service-process">做事流程</Link>
++            <Link href="/about#company-facts">公司資料</Link>
++          </div>
++        </div>
++      </nav>
+       <HomeServiceFinder />
+       <HomeServiceRows />
+       <RecordedCaseGallery />
+@@ -115,9 +125,9 @@ export default function Home() {
+           <div className="home-arrangement__intro">
+             <div>
+               <h2 id="home-process-heading">
+-                專業通渠，
++                通渠有工序，
+                 <br />
+-                先檢查再處理。
++                做事有交代。
+               </h2>
+             </div>
+             <Link href="/service-process">
+diff --git a/client/src/styles/brand-system.css b/client/src/styles/brand-system.css
+index 7776780..0b35331 100644
+--- a/client/src/styles/brand-system.css
++++ b/client/src/styles/brand-system.css
+@@ -1063,6 +1063,38 @@
+ .related-case-records__icon {
+   color: var(--brand-accent);
+ }
++.company-profile {
++  display: grid;
++  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
++  gap: clamp(2rem, 5vw, 5rem);
++  align-items: start;
++}
++.company-profile__intro > p:not(.brand-eyebrow) {
++  margin-top: 1.25rem;
++  max-width: 34em;
++  color: var(--brand-copy);
++  font-size: 1.05rem;
++  line-height: 1.85;
++}
++.company-profile__links {
++  display: grid;
++  margin-top: 1.5rem;
++  border-top: 1px solid var(--brand-line);
++}
++.company-profile__links a {
++  display: flex;
++  align-items: center;
++  min-height: 48px;
++  padding-block: 0.6rem;
++  border-bottom: 1px solid var(--brand-line);
++  text-decoration: underline;
++  text-underline-offset: 0.25em;
++}
++@media (max-width: 767px) {
++  .company-profile {
++    grid-template-columns: minmax(0, 1fr);
++  }
++}
+ .company-facts {
+   margin-top: 1.5rem;
+ }
+diff --git a/client/src/styles/home.css b/client/src/styles/home.css
+index 57567b3..3c92276 100644
+--- a/client/src/styles/home.css
++++ b/client/src/styles/home.css
+@@ -57,6 +57,34 @@
+   color: var(--home-copy);
+   line-height: 1.85;
+ }
++.home-company-line {
++  background: #edf3f7;
++  border-bottom: 1px solid var(--home-line);
++}
++.home-company-line > .container {
++  display: flex;
++  flex-wrap: wrap;
++  justify-content: space-between;
++  align-items: center;
++  gap: 0.25rem 1.5rem;
++  padding-block: 0.6rem;
++}
++.home-company-line span {
++  font-weight: 800;
++  letter-spacing: 0.06em;
++}
++.home-company-line .container > div {
++  display: flex;
++  flex-wrap: wrap;
++  gap: 0.25rem 1.25rem;
++}
++.home-company-line a {
++  display: inline-flex;
++  align-items: center;
++  min-height: 44px;
++  font-size: 1rem;
++  text-decoration: underline;
++}
+ .home-page .home-hero {
+   position: relative;
+   isolation: isolate;

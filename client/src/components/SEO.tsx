@@ -227,6 +227,10 @@ export default function SEO({
             settings.defaultOgImage?.url || "/favicon-512x512.png"
           ),
           description: settings.businessDescription,
+          subjectOf: [
+            { "@id": `${siteUrl}/about#webpage` },
+            { "@id": `${siteUrl}/cases#webpage` },
+          ],
           priceRange: STARTING_PRICE_LABEL,
           telephone: settings.phoneE164,
           contactPoint: {
@@ -300,6 +304,7 @@ export default function SEO({
             "@id": `${siteUrl}/#organization`,
           },
           hasPart: [
+            "/about",
             "/services",
             "/areas",
             "/guide",

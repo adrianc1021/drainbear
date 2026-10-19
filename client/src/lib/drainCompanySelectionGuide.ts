@@ -10,7 +10,7 @@ export const DRAIN_COMPANY_SELECTION_GUIDE: BlogPost = {
   title: "香港通渠公司推介：通渠邊間好？收費與案例比較",
   category: "實用指南",
   date: "2026-10-09",
-  updatedAt: "2026-10-16",
+  updatedAt: "2026-10-19",
   readMins: 4,
   authorName: "通渠熊編輯團隊",
   reviewerName: "",
@@ -60,6 +60,12 @@ export const DRAIN_COMPANY_SELECTION_GUIDE: BlogPost = {
         "上門時間能否確認：交代地區與進場條件，取得具體安排；24 小時接受查詢不等於已確認到場。",
         "由誰跟進工程：核對公司、到場師傅、收款及後續聯絡資料，保留確認紀錄。",
       ],
+    },
+    { type: "h2", text: "揀老字號通渠公司，還要核對甚麼？" },
+    {
+      type: "p",
+      text: "年資可以作參考，亦要看今次由誰接洽、施工和跟進。核對公司名稱、電話及官方商家資料是否一致，再看與自己問題相近的工程紀錄：發現甚麼、用了甚麼方法、完成後如何試水。介紹寫得再長，都應該對應得到具體資料。",
+      link: { label: "核對通渠熊公司及聯絡資料", href: "/about#company-facts" },
     },
     { type: "h2", text: "通渠熊適合處理哪些問題？" },
     {
