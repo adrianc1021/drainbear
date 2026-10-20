@@ -361,7 +361,12 @@ function getSitemapEntries(
       changefreq: "monthly" as const,
       priority: "0.8",
     })),
-    { route: "/", changefreq: "weekly", priority: "1.0" },
+    {
+      route: "/",
+      lastmod: "2026-10-20",
+      changefreq: "weekly",
+      priority: "1.0",
+    },
     { route: "/services", changefreq: "monthly", priority: "0.9" },
     { route: "/drain-diagnosis", changefreq: "monthly", priority: "0.9" },
     { route: "/service-process", changefreq: "monthly", priority: "0.8" },

@@ -1,0 +1,126 @@
+{
+  "origin": "http://localhost:4320",
+  "checkedAt": "2026-10-20T03:37:33.183Z",
+  "checks": [
+    {
+      "width": 320,
+      "noOverflow": true,
+      "bodyTextAtLeast16px": true,
+      "image": {
+        "width": 320,
+        "src": "http://localhost:4320/images/home/drain-inspection-guide-640.webp",
+        "renderedWidth": 280
+      }
+    },
+    {
+      "width": 390,
+      "noOverflow": true,
+      "bodyTextAtLeast16px": true,
+      "image": {
+        "width": 390,
+        "src": "http://localhost:4320/images/home/drain-inspection-guide-640.webp",
+        "renderedWidth": 350
+      }
+    },
+    {
+      "width": 768,
+      "noOverflow": true,
+      "bodyTextAtLeast16px": true,
+      "image": {
+        "width": 768,
+        "src": "http://localhost:4320/images/home/drain-inspection-guide-960.webp",
+        "renderedWidth": 491.546875
+      }
+    },
+    {
+      "width": 1024,
+      "noOverflow": true,
+      "bodyTextAtLeast16px": true,
+      "image": {
+        "width": 665,
+        "src": "http://localhost:4320/images/home/drain-inspection-guide-960.webp",
+        "renderedWidth": 719.375
+      }
+    },
+    {
+      "width": 1440,
+      "noOverflow": true,
+      "bodyTextAtLeast16px": true,
+      "image": {
+        "width": 935,
+        "src": "http://localhost:4320/images/home/drain-inspection-guide-960.webp",
+        "renderedWidth": 816
+      }
+    }
+  ],
+  "linkResults": [
+    {
+      "link": "/services/toilet-unblocking",
+      "status": 200
+    },
+    {
+      "link": "/services/kitchen-sink-unblocking",
+      "status": 200
+    },
+    {
+      "link": "/services/bathroom-drain-unblocking",
+      "status": 200
+    },
+    {
+      "link": "/services/sewage-backflow",
+      "status": 200
+    },
+    {
+      "link": "/services/grease-trap-cleaning",
+      "status": 200
+    },
+    {
+      "link": "/services/main-drain-manhole",
+      "status": 200
+    },
+    {
+      "link": "/blog/hong-kong-drain-cleaning-price-guide",
+      "status": 200
+    },
+    {
+      "link": "/service-process",
+      "status": 200
+    },
+    {
+      "link": "/services/cctv-drain-inspection",
+      "status": 200
+    },
+    {
+      "link": "/blog/why-not-drain-cleaner",
+      "status": 200
+    },
+    {
+      "link": "/areas/kwun-tong",
+      "status": 200
+    },
+    {
+      "link": "/areas/sha-tin",
+      "status": 200
+    },
+    {
+      "link": "/areas/causeway-bay",
+      "status": 200
+    },
+    {
+      "link": "/areas",
+      "status": 200
+    },
+    {
+      "link": "/cases",
+      "status": 200
+    },
+    {
+      "link": "/about#company-facts",
+      "status": 200
+    }
+  ],
+  "faqSchemaMatches": true,
+  "noJavaScriptBodyVisible": true,
+  "axeViolations": [],
+  "pageErrors": []
+}

@@ -94,14 +94,18 @@ try {
   checks.mobileHero =
     "full-width two-line heading and bear; compact contacts share a row; sticky contacts appear after hero actions and disappear on return";
   const methods = page.locator("#home-method-details");
+  const methodSummaries = page.locator(".home-drain-methods__grid article p");
+  assert.equal(await methodSummaries.count(), 3);
+  for (const summary of await methodSummaries.all())
+    assert(await summary.isVisible(), "method descriptions remain directly visible");
   assert(
     !(await methods.evaluate(el => el.open)),
-    "technical details start collapsed"
+    "additional entry arrangements start collapsed"
   );
   await methods.locator("summary").focus();
   await page.keyboard.press("Enter");
-  await methods.locator("dl").waitFor({ state: "visible" });
-  assert.equal(await methods.locator("dt").count(), 3);
+  await methods.locator(".brand-disclosure__body p").waitFor({ state: "visible" });
+  assert((await methods.innerText()).includes("工具如何到達施工位置"));
   await methods.locator("summary").focus();
   await page.keyboard.press("Space");
   assert(!(await methods.evaluate(el => el.open)));
@@ -115,7 +119,7 @@ try {
   await methods.locator("summary").click();
   await page.evaluate(() => history.replaceState(null, "", "/"));
   checks.methodDetails =
-    "three method limitations remain available by native keyboard disclosure and anchor";
+    "three method descriptions are visible; entry arrangements remain available by native keyboard disclosure and anchor";
   const rail = page.locator(".home-service-rail");
   const track = rail.locator(".home-mobile-rail__track");
   await track.scrollIntoViewIfNeeded();
@@ -243,9 +247,12 @@ try {
       .isVisible())
   );
   const nativeMethods = p.locator("#home-method-details");
+  assert.equal(await p.locator(".home-drain-methods__grid article p").count(), 3);
+  for (const summary of await p.locator(".home-drain-methods__grid article p").all())
+    assert(await summary.isVisible());
   await nativeMethods.locator("summary").click();
-  await nativeMethods.locator("dl").waitFor({ state: "visible" });
-  assert.equal(await nativeMethods.locator("dt").count(), 3);
+  await nativeMethods.locator(".brand-disclosure__body p").waitFor({ state: "visible" });
+  assert((await nativeMethods.innerText()).includes("工具如何到達施工位置"));
   assert(
     await nativeMethods
       .getByRole("link", { name: "查看工具選擇指南" })

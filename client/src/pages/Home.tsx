@@ -7,6 +7,7 @@ import HomeDrainMethods from "@/components/HomeDrainMethods";
 import RecordedCaseGallery from "@/components/RecordedCaseGallery";
 import HomeHeroScene from "@/components/HomeHeroScene";
 import HomeServiceRows from "@/components/HomeServiceRows";
+import HomeServiceGuide from "@/components/HomeServiceGuide";
 import { SITE_URL } from "@/config/site";
 import { BRAND_SOCIAL_ALT } from "@/lib/brandVisuals";
 import {
@@ -156,6 +157,7 @@ export default function Home() {
           </ol>
         </div>
       </section>
+      <HomeServiceGuide />
       <HomeCompanyGuides />
       <DrainHomeFaq />
       <nav className="container home-resource-links" aria-label="延伸渠務資料">

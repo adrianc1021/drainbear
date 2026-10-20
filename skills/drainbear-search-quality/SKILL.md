@@ -40,3 +40,5 @@ description: 審查通渠熊SEO、AEO與WCAG，連接商家及內容實體並驗
 - 成熟公司形象以可核對的公司資料、工序及施工紀錄建立，不以文案模擬網域年資或倒填發布日期。首頁與 About 共用 CompletedCaseEvidence，案例摘要、相片與完工測試須對應 CMS 原紀錄；sameAs 的後備網址亦須使用已確認商家檔案，不用一般搜尋結果代替。
 
 - 全部地區頁的獨立文章由 districtSearchContent.ts 維護，對應 shared/publicRoutes.ts 的完整地區清單。每區保留自身主題、正文、FAQ、服務及延伸閱讀；舊網址和已有章節錨點繼續有效。主文章預設可見，不把只換地名的段落當作獨立內容；不以區內有某類樓宇推論故障頻率或曾完成當區工程。更新時同步實際 dateModified／Sitemap lastmod，逐頁核對 FAQ 與 HTML。全站子頁數從正式 Sitemap 扣除首頁計算，與 Google 實際已收錄數分開。
+
+- 首頁詳細服務內容由 HomeServiceGuide 維護，以原生錨點目錄連到六個直接可見章節；HomeDrainMethods 的方法摘要亦直接顯示，詳細 FAQ 與 FAQPage 共用 FAQ_ITEMS。保留首屏查詢與真實案例入口，不以增加文字為由加入虛構年資、評價或排名保證。寫實 AI 示意圖要有可見圖說及相應 alt，不當作公司施工證據；更新首頁正文時同步 Sitemap 的實際 lastmod，檢查無 JavaScript 正文、目錄、圖片尺寸和新連結。
