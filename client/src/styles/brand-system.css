@@ -3202,3 +3202,30 @@
 @media (max-width: 767px) {
   .service-scene-gallery__grid { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
 }
+
+/* Mobile reading: short answers first, native details retain full guidance. */
+.home-service-guide__quick-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 1rem; margin-block: 1rem; }
+.home-service-guide__quick-links a { display: flex; align-items: center; justify-content: space-between; gap: .5rem; min-height: 48px; padding-block: .5rem; border-bottom: 1px solid var(--db-rule, #d0d8df); }
+.home-service-guide__quick-links svg { width: 1rem; flex-shrink: 0; }
+.home-service-guide .home-guide-chapter { margin-top: 1.25rem; background: transparent; border-inline: 0; border-radius: 0; }
+.home-service-guide .home-guide-chapter > summary { padding-inline: 0; min-height: 48px; }
+.home-service-guide .home-guide-chapter .brand-disclosure__body { padding-inline: 0; }
+@media (max-width: 767px) {
+  .home-page .home-service-guide { padding-block: 2.5rem; }
+  .home-service-guide__header { margin-bottom: 1.5rem; }
+  .home-service-guide__header h2 { font-size: 1.65rem; line-height: 1.45; margin-bottom: .85rem; }
+  .home-service-guide__layout { gap: 1.5rem; }
+  .home-service-guide__toc { column-gap: 1.25rem; }
+  .home-service-guide__toc a { min-height: 48px; font-size: 1rem; }
+  .home-service-guide__body section { padding-block: 1.75rem; }
+  .home-service-guide__body h2 { font-size: 1.4rem; line-height: 1.5; margin-bottom: 1rem; }
+  .home-service-guide figure { margin: 1.25rem 0; }
+  .home-service-guide :is(p, li) { line-height: 1.8; }
+  .home-service-guide__quick-links { grid-template-columns: minmax(0, 1fr); }
+  .home-service-guide .brand-disclosure__title { font-size: 1rem; }
+  .home-service-guide .brand-disclosure__body { padding-top: .75rem; }
+  .home-page .home-drain-methods__grid article { display: grid; grid-template-columns: 96px minmax(0, 1fr); column-gap: 1rem; align-items: start; }
+  .home-page .home-drain-methods__grid article > img { width: 96px; height: auto; grid-row: span 2; margin: 0; }
+  .home-page .home-drain-methods__grid article > h3 { margin-top: 0; }
+  .home-page .home-drain-methods__grid article > p { grid-column: 2; font-size: 1rem; line-height: 1.8; }
+}

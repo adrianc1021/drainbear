@@ -1,0 +1,25 @@
+{
+  "origin": "http://localhost:4320",
+  "results": [
+    {
+      "width": 320,
+      "guideHeight": 3334.65625
+    },
+    {
+      "width": 390,
+      "guideHeight": 3388.375
+    },
+    {
+      "width": 768,
+      "guideHeight": 3265.765625
+    },
+    {
+      "width": 1440,
+      "guideHeight": 4037.3125
+    }
+  ],
+  "keyboard": true,
+  "hash": true,
+  "noJS": true,
+  "axe": []
+}

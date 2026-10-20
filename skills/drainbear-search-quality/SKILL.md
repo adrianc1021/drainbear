@@ -41,4 +41,4 @@ description: 審查通渠熊SEO、AEO與WCAG，連接商家及內容實體並驗
 
 - 全部地區頁的獨立文章由 districtSearchContent.ts 維護，對應 shared/publicRoutes.ts 的完整地區清單。每區保留自身主題、正文、FAQ、服務及延伸閱讀；舊網址和已有章節錨點繼續有效。主文章預設可見，不把只換地名的段落當作獨立內容；不以區內有某類樓宇推論故障頻率或曾完成當區工程。更新時同步實際 dateModified／Sitemap lastmod，逐頁核對 FAQ 與 HTML。全站子頁數從正式 Sitemap 扣除首頁計算，與 Google 實際已收錄數分開。
 
-- 首頁詳細服務內容由 HomeServiceGuide 維護，以原生錨點目錄連到六個直接可見章節；HomeDrainMethods 的方法摘要亦直接顯示，詳細 FAQ 與 FAQPage 共用 FAQ_ITEMS。保留首屏查詢與真實案例入口，不以增加文字為由加入虛構年資、評價或排名保證。寫實 AI 示意圖要有可見圖說及相應 alt，不當作公司施工證據；更新首頁正文時同步 Sitemap 的實際 lastmod，檢查無 JavaScript 正文、目錄、圖片尺寸和新連結。
+- 首頁詳細服務內容由 HomeServiceGuide 維護，以原生錨點目錄連到六個直接可見的短摘要，完整說明由 AnimatedDisclosure 原生收合保留在 HTML；HomeDrainMethods 的方法摘要亦直接顯示，詳細 FAQ 與 FAQPage 共用 FAQ_ITEMS。保留首屏查詢與真實案例入口，不以增加文字為由加入虛構年資、評價或排名保證。依使用者2026-10-20要求，首頁與服務總覽的編輯配圖不加可見示意圖說，alt描述實際畫面，生成來源記錄在交付文件；不當作公司施工證據；更新首頁正文時同步 Sitemap 的實際 lastmod，檢查無 JavaScript 正文、目錄、圖片尺寸和新連結。
