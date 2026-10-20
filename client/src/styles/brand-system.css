@@ -3191,3 +3191,14 @@
     line-height: 1.9;
   }
 }
+
+/* Editorial service photography complements the existing illustrated directory. */
+.service-scene-photo { margin: 1.75rem 0; }
+.service-scene-photo img { display: block; width: 100%; height: auto; }
+.service-scene-gallery__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; }
+.service-scene-gallery__grid h3 { font-size: 1.35rem; margin: 1rem 0 .75rem; }
+.service-scene-gallery__grid a { display: inline-flex; align-items: center; gap: .5rem; text-decoration: underline; text-underline-offset: .2em; }
+.service-scene-gallery__grid a svg { width: 1rem; }
+@media (max-width: 767px) {
+  .service-scene-gallery__grid { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+}

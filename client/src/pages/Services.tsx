@@ -1,3 +1,4 @@
+import ServiceScenePhoto from "@/components/ServiceScenePhoto";
 import {
   STARTING_PRICE_LINE,
   SERVICE_PRICE_SPECIFICATION,
@@ -86,6 +87,16 @@ export default function Services() {
             </div>
           </div>
           <CustomerPaths illustrated compact />
+        </div>
+      </section>
+      <section className="brand-section service-scene-gallery" aria-labelledby="service-scenes-heading">
+        <div className="container">
+          <div className="section-heading"><h2 id="service-scenes-heading">由現場入口，了解處理安排</h2></div>
+          <div className="service-scene-gallery__grid">
+            <div><ServiceScenePhoto scene="drain-inspection-guide" /><h3>鋅盤與支喉檢查</h3><Link href="/services/kitchen-sink-unblocking">了解鋅盤通渠 <ArrowRight aria-hidden="true" /></Link></div>
+            <div><ServiceScenePhoto scene="restaurant-drains" /><h3>食肆廚房去水</h3><Link href="/services/grease-trap-cleaning">了解隔油池清理 <ArrowRight aria-hidden="true" /></Link></div>
+            <div><ServiceScenePhoto scene="bathroom-preparation" /><h3>浴室與地台去水</h3><Link href="/services/bathroom-drain-unblocking">了解浴室通渠 <ArrowRight aria-hidden="true" /></Link></div>
+          </div>
         </div>
       </section>
       <section className="brand-section" aria-labelledby="services-tools">

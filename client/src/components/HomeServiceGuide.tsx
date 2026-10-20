@@ -1,3 +1,4 @@
+import ServiceScenePhoto from "./ServiceScenePhoto";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { STARTING_PRICE_LINE } from "../../../shared/pricing";
@@ -74,21 +75,7 @@ export default function HomeServiceGuide() {
             ))}
           </nav>
           <div className="home-service-guide__body">
-            <figure>
-              <img
-                src="/images/home/drain-inspection-guide-960.webp"
-                srcSet="/images/home/drain-inspection-guide-640.webp 640w, /images/home/drain-inspection-guide-960.webp 960w, /images/home/drain-inspection-guide-1536.webp 1536w"
-                sizes="(min-width: 1024px) 65vw, 100vw"
-                width={1536}
-                height={1024}
-                loading="lazy"
-                decoding="async"
-                alt="AI 示意：工作人員在鋅盤櫃底用手電筒查看去水喉，地面鋪有保護墊"
-              />
-              <figcaption>
-                櫃底去水喉檢查情境 · AI 生成示意，非實際工程照片
-              </figcaption>
-            </figure>
+            <ServiceScenePhoto scene="drain-inspection-guide" />
             <section
               id="home-blockage-signs"
               aria-labelledby="home-blockage-heading"
@@ -128,6 +115,7 @@ export default function HomeServiceGuide() {
                 及<Link href="/services/kitchen-sink-unblocking">鋅盤服務</Link>
                 ，按實際問題選擇；未確定堵塞位置亦可以先提供相片查詢。
               </p>
+              <ServiceScenePhoto scene="restaurant-drains" />
               <h3>食肆及商舖：連同隔油設施與營業安排考慮</h3>
               <p>
                 廚房去水、地台渠及隔油設施可能互相接駁，單一去水口恢復排水，未必代表整條管線已清理。查詢時說明出水位置、最近清理紀錄、繁忙時段，以及可暫停使用哪部分設備。安排
@@ -189,6 +177,7 @@ export default function HomeServiceGuide() {
               id="home-visit-preparation"
               aria-labelledby="home-preparation-heading"
             >
+              <ServiceScenePhoto scene="bathroom-preparation" />
               <h2 id="home-preparation-heading">
                 等師傅上門前，可以準備甚麼？
               </h2>
