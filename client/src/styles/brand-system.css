@@ -3282,3 +3282,16 @@
 @media (max-width: 359px) {
   .home-company-intro__wordmark { font-size: 2.65rem; }
 }
+
+.home-company-intro__details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem clamp(2rem, 6vw, 5.5rem); margin-top: 3rem; }
+.home-company-intro__details > section { border-top: 1px solid #b7c4cc; padding-top: 1.5rem; }
+.home-company-intro__number { display: block; color: #36536a; font-size: .95rem; font-weight: 700; margin-bottom: .75rem; }
+.home-company-intro__details h3 { font-size: clamp(1.25rem, 2vw, 1.6rem); line-height: 1.5; margin-bottom: 1rem; }
+.home-company-intro__details p { font-size: 1rem; line-height: 1.9; margin-bottom: 1rem; }
+.home-company-intro__details a { text-decoration: underline; text-underline-offset: .25em; }
+.home-company-intro__details > section > a { display: inline-flex; align-items: center; gap: .5rem; min-height: 44px; font-weight: 600; }
+.home-company-intro__details a svg { width: 1rem; height: 1rem; }
+.home-company-intro__details a:focus-visible { outline: 3px solid #087a55; outline-offset: 4px; }
+@media (max-width: 767px) {
+  .home-company-intro__details { grid-template-columns: minmax(0, 1fr); gap: 1.75rem; margin-top: 2rem; }
+}
