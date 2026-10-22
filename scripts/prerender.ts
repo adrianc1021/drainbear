@@ -1,3 +1,4 @@
+import { COMPANY_ANSWERS_UPDATED } from "../client/src/lib/companyAnswers";
 import {
   contentConnectionDate,
   CONTENT_CONNECTIONS_REVISED_AT,
@@ -365,6 +366,7 @@ function getSitemapEntries(
     })),
     ...COMPANY_ROUTES.map(route => ({
       route,
+      ...(route === "/about" ? { lastmod: COMPANY_ANSWERS_UPDATED } : {}),
       changefreq: "monthly" as const,
       priority: "0.8",
     })),

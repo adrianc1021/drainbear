@@ -1,3 +1,8 @@
+import {
+  COMPANY_ANSWERS,
+  companyAnswersJsonLd,
+  COMPANY_ANSWERS_UPDATED,
+} from "@/lib/companyAnswers";
 import { BRAND_SOCIAL_IMAGE, BRAND_SOCIAL_ALT } from "@/lib/brandVisuals";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
@@ -24,13 +29,17 @@ export default function About() {
         description="認識通渠熊 DrainBear 的香港住宅、食肆及物業通渠服務。了解檢查、報價及試水流程，查看洗手盆與雨水渠施工紀錄、公司聯絡及官方商家資料。"
         path="/about"
         breadcrumbs={crumbs}
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "AboutPage",
-          "@id": `${SITE_URL}/about#webpage`,
-          url: `${SITE_URL}/about`,
-          about: { "@id": BUSINESS_ID },
-        }}
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "AboutPage",
+            "@id": `${SITE_URL}/about#webpage`,
+            url: `${SITE_URL}/about`,
+            about: { "@id": BUSINESS_ID },
+            dateModified: COMPANY_ANSWERS_UPDATED,
+          },
+          companyAnswersJsonLd(SITE_URL),
+        ]}
       />
       <div className="site-hero-shell">
         <Breadcrumbs items={crumbs} tone="dark" />
@@ -133,6 +142,35 @@ export default function About() {
               聯絡資料以本頁及網站的最新顯示為準。
             </p>
           </div>
+        </div>
+      </section>
+      <section
+        className="brand-section company-answer-section"
+        id="company-answers"
+        aria-labelledby="company-answers-heading"
+      >
+        <div className="container service-reading">
+          <h2 id="company-answers-heading">查詢通渠熊前，先睇這幾點</h2>
+          {COMPANY_ANSWERS.map(item => (
+            <section
+              key={item.id}
+              id={item.id}
+              aria-labelledby={`${item.id}-heading`}
+            >
+              <h3 id={`${item.id}-heading`}>{item.question}</h3>
+              <p>{item.answer}</p>
+              <nav aria-label={`${item.question}相關資料`}>
+                {item.sources.map(source => (
+                  <Link key={source.path} href={source.path}>
+                    {source.label}
+                  </Link>
+                ))}
+                <a href={`#${item.id}`} aria-label={`連結到：${item.question}`}>
+                  本題連結
+                </a>
+              </nav>
+            </section>
+          ))}
         </div>
       </section>
       <section className="brand-section brand-section--soft">

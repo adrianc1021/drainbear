@@ -3239,3 +3239,10 @@
 .service-search-paths__rows h3 { font-size: 1.2rem; line-height: 1.5; margin-bottom: .75rem; }
 .service-search-paths nav { display: flex; flex-wrap: wrap; gap: .25rem 1.5rem; margin-top: .75rem; }
 .service-search-paths nav a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: .2em; }
+
+.company-answer-section h2 { font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.5; margin-bottom: 1.5rem; }
+.company-answer-section section { border-top: 1px solid var(--db-rule, #d0d8df); padding-block: 1.5rem; scroll-margin-top: 7rem; }
+.company-answer-section h3 { font-size: 1.2rem; line-height: 1.6; margin-bottom: .75rem; }
+.company-answer-section p { font-size: 1rem; line-height: 1.85; }
+.company-answer-section nav { display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; margin-top: .75rem; }
+.company-answer-section nav a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: .2em; }

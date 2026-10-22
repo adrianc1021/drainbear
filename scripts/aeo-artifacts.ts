@@ -92,7 +92,13 @@ export function buildAeoArtifacts(
               `AEO answer has an invalid source anchor: ${source}`
             );
           const citations =
-            typeof answer.citation === "string" ? [answer.citation] : [];
+            typeof answer.citation === "string"
+              ? [answer.citation]
+              : Array.isArray(answer.citation)
+                ? answer.citation
+                : [];
+          if (citations.some(citation => typeof citation !== "string"))
+            throw new Error("AEO citations must be visible URL strings");
           for (const citation of citations)
             if (!snapshot.links.includes(citation))
               throw new Error(

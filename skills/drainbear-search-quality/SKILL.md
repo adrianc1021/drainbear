@@ -44,3 +44,5 @@ description: 審查通渠熊SEO、AEO與WCAG，連接商家及內容實體並驗
 - 首頁詳細服務內容由 HomeServiceGuide 維護，以原生錨點目錄連到六個直接可見的短摘要，完整說明由 AnimatedDisclosure 原生收合保留在 HTML；HomeDrainMethods 的方法摘要亦直接顯示，詳細 FAQ 與 FAQPage 共用 FAQ_ITEMS。保留首屏查詢與真實案例入口，不以增加文字為由加入虛構年資、評價或排名保證。依使用者2026-10-20要求，首頁與服務總覽的編輯配圖不加可見示意圖說，alt描述實際畫面，生成來源記錄在交付文件；不當作公司施工證據；更新首頁正文時同步 Sitemap 的實際 lastmod，檢查無 JavaScript 正文、目錄、圖片尺寸和新連結。
 
 - 文章↔服務主題關聯由 contentConnections.ts 的 SERVICE_TOPIC_ARTICLES 維護，與原有文章資源合併時按 href 去重並保留作者指定連結文案；已有明確資源清單（包括空陣列）不可重新加回舊的後備入口。CMS、靜態後備、文章列表與 Sitemap 共用實際修訂日期，保留原發布日期及較新的 CMS 更新。內部連結審核須分開正文連結與全站頁腳，不能把頁腳八項服務誤當成正文已有對應服務說明。
+
+- 關於通渠熊的六項公司答案由companyAnswers.ts同源產生可見文字、固定題目錨點及FAQPage引用。多來源citation陣列必須逐一存在於可見連結及可索引來源；機讀輸出不得默默丟失陣列引用。公司自述不冒充獨立推薦榜。Google AI功能依官方ai-features文件沿用一般SEO，不宣稱llms.txt或特殊schema能直接取得推薦。

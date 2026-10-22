@@ -137,6 +137,30 @@ describe("public AEO artifacts", () => {
       buildAeoArtifacts([home, { ...faq, links: [] }], origin)
     ).toThrow("absent from visible links");
   });
+  it("preserves multiple visible citations and rejects any missing citation", () => {
+    const multiple = structuredClone(faq);
+    const node = multiple.structuredData[0] as {
+      mainEntity: {
+        acceptedAnswer: { text: string; citation: string | string[] };
+      }[];
+    };
+    node.mainEntity[0].acceptedAnswer.citation = [
+      origin + "/guide",
+      origin + "/cases",
+    ];
+    multiple.links.push(origin + "/cases");
+    const result = buildAeoArtifacts([home, multiple], origin);
+    expect(result.knowledge.pages[1].answers[0].citations).toEqual([
+      origin + "/guide",
+      origin + "/cases",
+    ]);
+    expect(() =>
+      buildAeoArtifacts(
+        [home, { ...multiple, links: [origin + "/guide"] }],
+        origin
+      )
+    ).toThrow("absent from visible links");
+  });
   it("rejects conflicting business contacts and duplicate canonical sources", () => {
     expect(() =>
       buildAeoArtifacts([{ ...home, phoneDisplay: "+852 0000 0000" }], origin)
