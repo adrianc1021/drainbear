@@ -1,4 +1,7 @@
-import { SERVICE_READING_LINKS } from "@/lib/contentConnections";
+import {
+  SERVICE_READING_LINKS,
+  SERVICE_TOPIC_ARTICLES,
+} from "@/lib/contentConnections";
 import AnimatedDisclosure from "@/components/AnimatedDisclosure";
 import { SEO_ARTICLES } from "@/lib/seoArticles";
 import { ArrowRight } from "lucide-react";
@@ -11,10 +14,16 @@ export default function RelatedDrainArticles({
 }) {
   const articles = [
     ...(SERVICE_READING_LINKS[serviceSlug] ?? []),
+    ...SERVICE_TOPIC_ARTICLES.filter(article =>
+      (article.services as readonly string[]).includes(serviceSlug)
+    ),
     ...SEO_ARTICLES.filter(article =>
       article.serviceSlugs?.includes(serviceSlug)
     ),
-  ];
+  ].filter(
+    (article, index, all) =>
+      all.findIndex(item => item.slug === article.slug) === index
+  );
   if (!articles.length) return null;
   return (
     <AnimatedDisclosure

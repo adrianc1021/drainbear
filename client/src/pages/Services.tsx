@@ -76,6 +76,63 @@ export default function Services() {
         </div>
       </section>
       <section
+        className="brand-section service-search-paths"
+        aria-labelledby="service-search-paths-heading"
+      >
+        <div className="container service-reading">
+          <h2 id="service-search-paths-heading">
+            搵通渠服務，先分清問題同方法
+          </h2>
+          <p>
+            通渠唔只係選擇一部機。先了解受影響位置、堵塞範圍及可用入口，再決定適合疏通、清洗，還是先做影像檢查。
+          </p>
+          <div className="service-search-paths__rows">
+            <div>
+              <h3>坐廁、鋅盤或浴室塞咗</h3>
+              <p>
+                先停用持續倒灌的設備，記下哪些去水位受影響。局部淤塞與共用支渠問題的處理範圍不同。
+              </p>
+              <nav aria-label="家居通渠選擇">
+                <Link href="/services/toilet-unblocking">坐廁通渠</Link>
+                <Link href="/services/kitchen-sink-unblocking">鋅盤通渠</Link>
+                <Link href="/services/bathroom-drain-unblocking">浴室通渠</Link>
+              </nav>
+            </div>
+            <div>
+              <h3>通完又塞，或者多處倒灌</h3>
+              <p>
+                先看管段與入口，再評估是否需要 CCTV
+                照渠或高壓洗渠；影像檢查與疏通各有用途。
+              </p>
+              <nav aria-label="反覆淤塞檢查">
+                <Link href="/blog/high-pressure-drain-cleaning-vs-spring-machine">
+                  比較高壓洗渠與彈簧機
+                </Link>
+                <Link href="/blog/cctv-drain-inspection-hong-kong-guide">
+                  了解 CCTV 照渠
+                </Link>
+                <Link href="/services/sewage-backflow">倒灌處理</Link>
+              </nav>
+            </div>
+            <div>
+              <h3>想先了解通渠收費與上門安排</h3>
+              <p>
+                {STARTING_PRICE_LINE}
+                。傳送地區、受影響位置及相片，了解初步安排；到場確認方法與收費後才動工。
+              </p>
+              <nav aria-label="通渠報價準備">
+                <Link href="/blog/hong-kong-drain-cleaning-price-guide">
+                  通渠收費指南
+                </Link>
+                <Link href="/service-process">上門處理流程</Link>
+                <Link href="/areas">查看服務地區</Link>
+                <Link href="/cases">查看施工紀錄</Link>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
         className="brand-section brand-section--soft"
         aria-labelledby="services-customers"
       >
@@ -89,13 +146,36 @@ export default function Services() {
           <CustomerPaths illustrated compact />
         </div>
       </section>
-      <section className="brand-section service-scene-gallery" aria-labelledby="service-scenes-heading">
+      <section
+        className="brand-section service-scene-gallery"
+        aria-labelledby="service-scenes-heading"
+      >
         <div className="container">
-          <div className="section-heading"><h2 id="service-scenes-heading">由現場入口，了解處理安排</h2></div>
+          <div className="section-heading">
+            <h2 id="service-scenes-heading">由現場入口，了解處理安排</h2>
+          </div>
           <div className="service-scene-gallery__grid">
-            <div><ServiceScenePhoto scene="drain-inspection-guide" /><h3>鋅盤與支喉檢查</h3><Link href="/services/kitchen-sink-unblocking">了解鋅盤通渠 <ArrowRight aria-hidden="true" /></Link></div>
-            <div><ServiceScenePhoto scene="restaurant-drains" /><h3>食肆廚房去水</h3><Link href="/services/grease-trap-cleaning">了解隔油池清理 <ArrowRight aria-hidden="true" /></Link></div>
-            <div><ServiceScenePhoto scene="bathroom-preparation" /><h3>浴室與地台去水</h3><Link href="/services/bathroom-drain-unblocking">了解浴室通渠 <ArrowRight aria-hidden="true" /></Link></div>
+            <div>
+              <ServiceScenePhoto scene="drain-inspection-guide" />
+              <h3>鋅盤與支喉檢查</h3>
+              <Link href="/services/kitchen-sink-unblocking">
+                了解鋅盤通渠 <ArrowRight aria-hidden="true" />
+              </Link>
+            </div>
+            <div>
+              <ServiceScenePhoto scene="restaurant-drains" />
+              <h3>食肆廚房去水</h3>
+              <Link href="/services/grease-trap-cleaning">
+                了解隔油池清理 <ArrowRight aria-hidden="true" />
+              </Link>
+            </div>
+            <div>
+              <ServiceScenePhoto scene="bathroom-preparation" />
+              <h3>浴室與地台去水</h3>
+              <Link href="/services/bathroom-drain-unblocking">
+                了解浴室通渠 <ArrowRight aria-hidden="true" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>

@@ -12,7 +12,10 @@ import {
   latestEditorialDate,
   reviseBlogBody,
 } from "./blogBodyRevisions";
-import { ARTICLE_SERVICE_LINKS } from "./contentConnections";
+import {
+  getArticleResourceLinks,
+  contentConnectionDate,
+} from "./contentConnections";
 import {
   ARTICLE_INQUIRY_REVISION_DATE,
   getArticleInquiryScenario,
@@ -108,10 +111,12 @@ export function mapSanityBlogPost(post: SanityBlogPost): BlogPostView {
     title: post.title,
     category: getCategoryLabel(post.category),
     date: post.publishedAt,
-    updatedAt:
+    updatedAt: contentConnectionDate(
+      post.slug,
       body !== originalBody
         ? latestEditorialDate(editorialDate, ARTICLE_ILLUSTRATION_DATE)
-        : editorialDate,
+        : editorialDate
+    ),
     authorName: post.authorName?.trim() || "通渠熊編輯團隊",
     reviewerName:
       scenario || BODY_REVISION_SLUGS.includes(post.slug)
@@ -124,7 +129,7 @@ export function mapSanityBlogPost(post: SanityBlogPost): BlogPostView {
     coverImage: post.coverImage,
     seo: post.seo,
     body,
-    resourceLinks: ARTICLE_SERVICE_LINKS[post.slug],
+    resourceLinks: getArticleResourceLinks(post.slug),
     whatsappMessage:
       scenario?.whatsappMessage ??
       (post.slug === "washing-machine-drain-backflow-causes-fixes"
@@ -151,10 +156,12 @@ export function mapStaticBlogPost(post: StaticBlogPost): BlogPostView {
     title: post.title,
     category: post.category,
     date: post.date,
-    updatedAt:
+    updatedAt: contentConnectionDate(
+      post.slug,
       sections !== post.sections
         ? latestEditorialDate(editorialDate, ARTICLE_ILLUSTRATION_DATE)
-        : editorialDate,
+        : editorialDate
+    ),
     authorName: post.authorName ?? "通渠熊編輯團隊",
     reviewerName: scenario ? "" : post.reviewerName?.trim() || "",
     readMins: post.readMins,
@@ -164,7 +171,7 @@ export function mapStaticBlogPost(post: StaticBlogPost): BlogPostView {
     coverImage: post.coverImage,
     sections,
     seo: post.seo,
-    resourceLinks: post.resourceLinks ?? ARTICLE_SERVICE_LINKS[post.slug],
+    resourceLinks: getArticleResourceLinks(post.slug, post.resourceLinks),
     faqs: post.faqs,
     relatedSlugs: post.relatedSlugs,
     whatsappMessage: scenario?.whatsappMessage ?? post.whatsappMessage,

@@ -3229,3 +3229,13 @@
   .home-page .home-drain-methods__grid article > h3 { margin-top: 0; }
   .home-page .home-drain-methods__grid article > p { grid-column: 2; font-size: 1rem; line-height: 1.8; }
 }
+
+/* Service summaries and contextual reading paths remain visible without scripts. */
+.service-direct-answer { margin-block: 1.5rem; font-size: 1rem; line-height: 1.85; }
+.service-direct-answer p + p { margin-top: .75rem; }
+.service-search-paths h2 { font-size: clamp(1.5rem, 2.5vw, 2rem); line-height: 1.5; margin-bottom: 1rem; }
+.service-search-paths p { font-size: 1rem; line-height: 1.85; }
+.service-search-paths__rows > div { border-top: 1px solid var(--db-rule, #d0d8df); padding-block: 1.5rem; margin-top: 1rem; }
+.service-search-paths__rows h3 { font-size: 1.2rem; line-height: 1.5; margin-bottom: .75rem; }
+.service-search-paths nav { display: flex; flex-wrap: wrap; gap: .25rem 1.5rem; margin-top: .75rem; }
+.service-search-paths nav a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: .2em; }

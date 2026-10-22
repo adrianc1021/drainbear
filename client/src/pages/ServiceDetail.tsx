@@ -162,6 +162,10 @@ export default function ServiceDetail() {
               ))}
             </ul>
           </div>
+          <div className="service-direct-answer">
+            <p>{service.answerSummary.handles}</p>
+            <p>{service.answerSummary.suitableWhen}</p>
+          </div>
           <AnimatedDisclosure
             id="service-symptoms"
             title="症狀、成因與適用範圍"
@@ -187,8 +191,6 @@ export default function ServiceDetail() {
             </div>
             <dl className="service-reading__facts">
               {[
-                ["處理甚麼", service.answerSummary.handles],
-                ["何時適用", service.answerSummary.suitableWhen],
                 ["主要限制", service.answerSummary.limitation],
                 ["動工前確認", service.answerSummary.confirmBeforeWork],
               ].map(([term, description]) => (

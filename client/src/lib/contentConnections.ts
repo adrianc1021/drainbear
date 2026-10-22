@@ -86,3 +86,114 @@ export const SERVICE_READING_LINKS: Record<
     { slug: "toilet-clog-emergency-guide", title: "塞廁所時先做甚麼？" },
   ],
 };
+
+/** Editorially matched reading paths; never infer a service from a keyword alone. */
+export const CONTENT_CONNECTIONS_REVISED_AT = "2026-10-22";
+export const SERVICE_TOPIC_ARTICLES = [
+  {
+    slug: "building-main-drain-vs-unit-branch-pipe",
+    title: "大廈主渠與單位支喉點分？",
+    services: ["main-drain-manhole", "sewage-backflow"],
+    note: "多戶同時倒灌，先與管理處確認共用渠及檢查入口。",
+  },
+  {
+    slug: "drain-blocked-after-renovation",
+    title: "裝修後塞渠，先查甚麼？",
+    services: ["cctv-drain-inspection", "main-drain-manhole"],
+    note: "懷疑喉內有殘留物或管段異常，可先了解影像檢查的入口與視野限制。",
+  },
+  {
+    slug: "drain-blocked-again-after-cleaning-root-causes",
+    title: "通完又塞：反覆淤塞的檢查方向",
+    services: ["cctv-drain-inspection", "high-pressure-jetting"],
+    note: "反覆淤塞需了解原因；是否適合清洗，仍要按管道狀況確認。",
+  },
+  {
+    slug: "drain-tool-selection-guide",
+    title: "機械疏通、高壓洗渠與照渠點揀？",
+    services: ["high-pressure-jetting", "cctv-drain-inspection"],
+    note: "疏通、清洗與影像檢查用途不同，先了解各項服務的適用條件。",
+  },
+  {
+    slug: "high-pressure-drain-cleaning-vs-spring-machine",
+    title: "高壓洗渠與彈簧機的分別",
+    services: ["high-pressure-jetting", "kitchen-sink-unblocking"],
+    note: "局部鋅盤堵塞與較長管段積聚，所需入口及工具未必相同。",
+  },
+  {
+    slug: "old-building-backflow-signs",
+    title: "舊樓倒灌，如何交代受影響範圍？",
+    services: ["sewage-backflow", "main-drain-manhole"],
+    note: "說明是否多個單位或去水位同時受影響，再確認共用渠工作範圍。",
+  },
+  {
+    slug: "rainstorm-typhoon-drain-checklist-hong-kong",
+    title: "雨季前的去水與沙井檢查",
+    services: ["main-drain-manhole", "high-pressure-jetting"],
+    note: "預約檢查前先確認可安全接近的位置，毋須自行落井或在暴雨中檢查。",
+  },
+  {
+    slug: "read-cctv-drain-inspection-report",
+    title: "點睇CCTV照渠影像與報告？",
+    services: ["cctv-drain-inspection"],
+    note: "安排檢查時，先確認可檢查範圍及影像交付方式。",
+  },
+  {
+    slug: "restaurant-grease-trap-guide",
+    title: "食肆隔油池清理與保養",
+    services: ["grease-trap-cleaning", "high-pressure-jetting"],
+    note: "隔油池與下游管段分開確認清理範圍，並配合廚房營業安排。",
+  },
+  {
+    slug: "slow-basin-drain-causes-solutions",
+    title: "洗手盆去水慢：隔氣與支渠檢查",
+    services: ["bathroom-drain-unblocking"],
+    note: "浴室洗手盆去水慢，可先傳隔氣、櫃底及其他受影響位置的相片。",
+  },
+  {
+    slug: "tree-roots-in-underground-drain",
+    title: "懷疑地下渠有樹根，點樣檢查？",
+    services: ["cctv-drain-inspection", "main-drain-manhole"],
+    note: "樹根或喉管損壞需按檢查結果判斷，不能單憑去水慢確定。",
+  },
+  {
+    slug: "village-house-manhole-rainy-season",
+    title: "村屋沙井與雨季去水安排",
+    services: ["main-drain-manhole", "sewage-backflow"],
+    note: "先確認沙井位置、車輛通道及負責人，再安排合適處理。",
+  },
+] as const;
+
+const SERVICE_LABELS: Record<string, string> = {
+  "main-drain-manhole": "主渠及沙井處理",
+  "sewage-backflow": "污水倒灌處理",
+  "cctv-drain-inspection": "CCTV 照渠／照喉檢測",
+  "high-pressure-jetting": "高壓洗渠服務",
+  "kitchen-sink-unblocking": "廚房鋅盤通渠",
+  "grease-trap-cleaning": "食肆隔油池清理",
+  "bathroom-drain-unblocking": "浴室與洗手盆通渠",
+};
+type ResourceLink = { label: string; href: string; note?: string };
+export function getArticleResourceLinks(
+  slug: string,
+  existing?: ResourceLink[]
+) {
+  const topic = SERVICE_TOPIC_ARTICLES.find(item => item.slug === slug);
+  const links: ResourceLink[] = [
+    ...(existing ?? ARTICLE_SERVICE_LINKS[slug] ?? []),
+    ...(topic?.services.map((service, index) => ({
+      label: SERVICE_LABELS[service],
+      href: `/services/${service}`,
+      ...(index === 0 ? { note: topic.note } : {}),
+    })) ?? []),
+  ];
+  return links.filter(
+    (link, index) => links.findIndex(item => item.href === link.href) === index
+  );
+}
+export function contentConnectionDate(slug: string, date?: string) {
+  if (!SERVICE_TOPIC_ARTICLES.some(item => item.slug === slug)) return date;
+  return date && Date.parse(date) > Date.parse(CONTENT_CONNECTIONS_REVISED_AT)
+    ? date
+    : CONTENT_CONNECTIONS_REVISED_AT;
+}

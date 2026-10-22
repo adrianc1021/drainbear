@@ -1,0 +1,29 @@
+{
+  "retrieved_at_utc": "2026-10-22T04:25:45.590691+00:00",
+  "sitemap_status": 200,
+  "sitemap_urls": 215,
+  "child_pages": 214,
+  "unique_urls": 215,
+  "robots_status": 200,
+  "checked": 215,
+  "status_counts": {
+    "200": 215
+  },
+  "issues": [],
+  "duplicate_metadata": {
+    "title": [],
+    "meta_description": []
+  },
+  "no_inbound_links": [],
+  "internal_urls_not_in_sitemap": [
+    "https://drainbearhk.com/videos/cases/cabinet-drain-access-operation-v1.mp4",
+    "https://drainbearhk.com/videos/cases/drain-inspection-line-feed-v1.mp4",
+    "https://drainbearhk.com/videos/cases/outdoor-drain-chamber-operation-v1.mp4",
+    "https://drainbearhk.com/videos/cases/toilet-drain-tool-operation-v1.mp4",
+    "https://drainbearhk.com/videos/cases/under-sink-drain-line-operation-v1.mp4"
+  ],
+  "video_sitemap_status": 200,
+  "video_pages": 5,
+  "video_pages_missing_from_main": [],
+  "google_index_status": "UNVERIFIED: This run checked public URLs, not Google index coverage. No GSC connector available in this conversation."
+}

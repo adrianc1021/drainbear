@@ -1,3 +1,7 @@
+import {
+  contentConnectionDate,
+  CONTENT_CONNECTIONS_REVISED_AT,
+} from "../client/src/lib/contentConnections";
 import { CONSUMER_ALERTS_UPDATED } from "../client/src/lib/consumerAlerts";
 import { DISTRICT_CONTENT_REVISED_AT } from "../client/src/lib/districtSearchContent";
 import {
@@ -308,9 +312,12 @@ function mergeBlogEntries(
     );
   }
 
-  return Array.from(entries.values()).sort((a, b) =>
-    a.slug.localeCompare(b.slug)
-  );
+  return Array.from(entries.values())
+    .map(entry => ({
+      ...entry,
+      lastmod: normalizeDate(contentConnectionDate(entry.slug, entry.lastmod)),
+    }))
+    .sort((a, b) => a.slug.localeCompare(b.slug));
 }
 
 function getOutputPath(route: string) {
@@ -367,11 +374,17 @@ function getSitemapEntries(
       changefreq: "weekly",
       priority: "1.0",
     },
-    { route: "/services", changefreq: "monthly", priority: "0.9" },
+    {
+      route: "/services",
+      lastmod: CONTENT_CONNECTIONS_REVISED_AT,
+      changefreq: "monthly",
+      priority: "0.9",
+    },
     { route: "/drain-diagnosis", changefreq: "monthly", priority: "0.9" },
     { route: "/service-process", changefreq: "monthly", priority: "0.8" },
     ...SERVICE_SLUGS.map(slug => ({
       route: `/services/${slug}`,
+      lastmod: CONTENT_CONNECTIONS_REVISED_AT,
       changefreq: "monthly" as const,
       priority: "0.8",
     })),
