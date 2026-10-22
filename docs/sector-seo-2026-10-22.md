@@ -41,3 +41,7 @@ TypeScript通過；28個測試檔／151項測試通過。新增測試覆蓋既�
 完整build通過：215個canonical/Sitemap網址、214子頁、128個問題答案、SEO與AEO一致性檢查。瀏覽器逐項核對12篇文章的正文服務入口、日期與原發布日期、8項服務可見摘要與反向文章連結；320／390／768／1024／1440px無溢出，手機axe AA零違例，無JavaScript仍可閱讀服務摘要及展開文章連結。已人工檢視手機截圖。本機CMS依專案唯讀中繼讀取真實資料，非模擬內容；不代表實體Safari或完整無障礙認證。
 
 修改檔案：contentConnections.ts、blogRepository.ts、RelatedDrainArticles.tsx、ServiceDetail.tsx、Services.tsx、brand-system.css、prerender.ts、兩個相關測試檔與search-quality維護指引。原創新增摘要、連結文案及說明完整保存在上述版本化檔案。
+
+## 正式發布
+
+應用程式提交f9b6694已部署至drainbearhk.com。2026-10-22直接驗證正式域名：12篇文章正文服務連結與原發布日期、8項服務摘要及對應文章、五種寬度、axe、無JavaScript操作全部通過。正式Sitemap仍為215網址，9個服務相關頁及12篇文章的lastmod為2026-10-22。正式證據見sector-seo-2026-10-22/production.json。沒有聲稱Google已重新抓取或排名已上升。
