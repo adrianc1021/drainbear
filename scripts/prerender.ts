@@ -372,7 +372,7 @@ function getSitemapEntries(
     })),
     {
       route: "/",
-      lastmod: "2026-10-20",
+      lastmod: "2026-10-22",
       changefreq: "weekly",
       priority: "1.0",
     },

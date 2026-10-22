@@ -1,3 +1,4 @@
+import HomeCompanyIntro from "@/components/HomeCompanyIntro";
 import CmsPageSEO from "@/components/CmsPageSEO";
 import ContactActions from "@/components/ContactActions";
 import DrainHomeFaq, { FAQ_ITEMS } from "@/components/DrainHomeFaq";
@@ -104,16 +105,7 @@ export default function Home() {
           <HomeHeroScene />
         </div>
       </section>
-      <nav className="home-company-line" aria-label="通渠熊公司與施工資料">
-        <div className="container">
-          <span>通渠熊 · 香港渠務</span>
-          <div>
-            <Link href="/cases">施工實錄</Link>
-            <Link href="/service-process">做事流程</Link>
-            <Link href="/about#company-facts">公司資料</Link>
-          </div>
-        </div>
-      </nav>
+      <HomeCompanyIntro />
       <HomeServiceFinder />
       <HomeServiceRows />
       <RecordedCaseGallery />
