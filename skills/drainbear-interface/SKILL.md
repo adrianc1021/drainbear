@@ -47,3 +47,5 @@ description: 使用語意化React元件與Flexbox/Grid統一通渠熊介面，�
 - 2026-10-24 段落插圖使用 SectionIllustration（小幅圖文）或 ArticleFigure 的 compact presentation（章節圖片）。新增配圖保留 width/height、lazy、響應式 sizes/srcset；手機不把每幅圖放成全屏大圖。真實案例相片不套用插圖樣式。文章額外位置由 articleSectionIllustrations.json 明確匹配標題；已有照片的章節與同頁已用資產須跳過，找不到標題不可猜位置。插圖數報告區分獨立檔案與頁面展示位置。
 
 - 2026-10-25 使用者指出段落圖片太小：SectionIllustration 及 ArticleFigure 章節插圖改成獨立一行、手機佔滿內容欄、保持原比例；取代此前 132px 小圖與 170px 高度限制。srcset sizes 要跟放大後的實際尺寸一致，不要再回復縮圖環繞文字。
+
+- 2026-10-25 使用者要求標題明顯大於內文：使用 brand-heading-1 至 brand-heading-4 共用字級，手機 H1 至少 40px、H2 32px、H3 24px、較小標題及服務目錄名稱 20px；內文維持原尺寸。不要以局部手機覆蓋把標題縮回正文大小，核對自然換行、水平溢出及聯絡功能。
