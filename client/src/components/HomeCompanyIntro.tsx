@@ -1,3 +1,4 @@
+import SectionIllustration from "@/components/SectionIllustration";
 import { STARTING_PRICE_LINE } from "../../../shared/pricing";
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "wouter";
@@ -72,6 +73,7 @@ export default function HomeCompanyIntro() {
             01 ／ 服務範圍
           </span>
           <h3 id="company-home-services">家居、食肆、物業，各有處理重點。</h3>
+          <SectionIllustration scene="services" />
           <p>
             通渠熊 DrainBear
             是提供香港渠務服務的品牌。家居常見的坐廁淤塞、廚房鋅盤去水慢、浴室地台積水，以至污水倒灌，都可以向我們查詢。食肆及物業方面，服務包括隔油池清理、主渠沙井處理、高壓洗渠及
@@ -90,6 +92,7 @@ export default function HomeCompanyIntro() {
             02 ／ 地區與查詢
           </span>
           <h3 id="company-home-coverage">服務香港，24 小時接受查詢。</h3>
+          <SectionIllustration scene="village" />
           <p>
             我們接受港島、九龍、新界及離島的通渠查詢，服務對象包括住宅住戶、食肆、商舖及物業管理。透過電話或
             WhatsApp
@@ -109,6 +112,7 @@ export default function HomeCompanyIntro() {
           <h3 id="company-home-process">
             {STARTING_PRICE_LINE}，確認後才動工。
           </h3>
+          <SectionIllustration scene="quote" />
           <p>
             收費按堵塞範圍、施工入口、是否需要拆裝及使用的工具確認。到場了解情況後，我們會說明處理方法與報價，雙方確認後才開始施工，讓客人知道今次會處理哪些位置和工序。
           </p>
@@ -124,6 +128,7 @@ export default function HomeCompanyIntro() {
             04 ／ 施工紀錄
           </span>
           <h3 id="company-home-records">由現場問題，到處理與試水。</h3>
+          <SectionIllustration scene="waterTest" />
           <p>
             了解一間通渠公司，可以由實際工序開始。通渠熊網站公開現場施工影片及案例，讓客人查詢前了解不同堵塞情況，以及清理、檢查和測試的做法。
           </p>

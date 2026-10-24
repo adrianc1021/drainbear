@@ -8,16 +8,21 @@ export default function ArticleFigure({ image }: { image: SanityImageData }) {
     image.width && image.height && image.height > image.width
   );
   return (
-    <figure className="mt-8" data-article-figure="true">
+    <figure
+      className={`mt-8 ${image.presentation === "compact" ? "article-figure--compact" : ""}`}
+      data-article-figure="true"
+    >
       <img
         src={optimizedImageUrl(image.url, 1200)}
         srcSet={
           image.srcSet || createImageSrcSet(image.url, [480, 768, 960, 1200])
         }
         sizes={
-          portrait
-            ? "(min-width: 368px) 336px, calc(100vw - 32px)"
-            : "(min-width: 768px) 736px, calc(100vw - 32px)"
+          image.presentation === "compact"
+            ? "(min-width: 768px) 420px, 290px"
+            : portrait
+              ? "(min-width: 368px) 336px, calc(100vw - 32px)"
+              : "(min-width: 768px) 736px, calc(100vw - 32px)"
         }
         alt={image.alt || ""}
         width={image.width}

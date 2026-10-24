@@ -1,3 +1,4 @@
+import SectionIllustration from "@/components/SectionIllustration";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ContactActions from "@/components/ContactActions";
 import SEO from "@/components/SEO";
@@ -45,7 +46,7 @@ export default function DrainAnswers() {
           headline: title,
           description,
           datePublished: ANSWERS_PUBLISHED_AT,
-          dateModified: ANSWERS_PUBLISHED_AT,
+          dateModified: "2026-10-24",
           author: { "@id": BUSINESS_ID },
           publisher: { "@id": BUSINESS_ID },
           inLanguage: "zh-Hant-HK",
@@ -119,14 +120,17 @@ export default function DrainAnswers() {
           <article className="container answer-library__article">
             <section id="direct-answer" aria-labelledby="direct-answer-heading">
               <h2 id="direct-answer-heading">直接解答</h2>
+              <SectionIllustration scene="services" />
               <p>{answer.answer}</p>
             </section>
             <section aria-labelledby="observation-heading">
               <h2 id="observation-heading">現場觀察重點</h2>
+              <SectionIllustration scene="observe" />
               <p>{answer.observation}</p>
             </section>
             <section aria-labelledby="next-step-heading">
               <h2 id="next-step-heading">下一步點做？</h2>
+              <SectionIllustration scene="handoff" />
               <p>{answer.nextStep}</p>
             </section>
             <nav className="answer-library__service" aria-label="相關通渠服務">

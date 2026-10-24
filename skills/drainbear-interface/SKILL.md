@@ -43,3 +43,5 @@ description: 使用語意化React元件與Flexbox/Grid統一通渠熊介面，�
 - 文章正文插圖沿用 ArticleFigure 與明確章節／段落錨點；不要重複文章封面，不得改動原文／marks／既有連結。映射必須可重複執行而不增加重複圖片，找不到錨點時不猜測插入位置。AI 示意與工程原相用短圖說區分；預留真實尺寸、使用響應式來源及正文 lazy loading，直幅證據保持完整。實際圖片修訂日期須同步詳情、列表、schema 及 Sitemap。
 
 - 公開資料集合的 URL 篩選使用明確提交、結果焦點、清除及返回狀態；排序必須改變 DOM 順序。/consumer-alerts 關閉 JavaScript 時以 CSS (scripting: none) 隱藏搜尋及快速篩選，所有紀錄和原生 details 仍留在 HTML；不要依賴 React noscript 子節點在瀏覽器預渲染時輸出。
+
+- 2026-10-24 段落插圖使用 SectionIllustration（小幅圖文）或 ArticleFigure 的 compact presentation（章節圖片）。新增配圖保留 width/height、lazy、響應式 sizes/srcset；手機不把每幅圖放成全屏大圖。真實案例相片不套用插圖樣式。文章額外位置由 articleSectionIllustrations.json 明確匹配標題；已有照片的章節與同頁已用資產須跳過，找不到標題不可猜位置。插圖數報告區分獨立檔案與頁面展示位置。

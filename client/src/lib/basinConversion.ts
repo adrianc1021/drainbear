@@ -23,8 +23,23 @@ export function applyBasinConversion(post: BlogPostView): BlogPostView {
           href: "/services/bathroom-drain-unblocking",
         },
       },
-      { type: "image", image: ARTICLE_IMAGES.sink },
+      {
+        type: "image",
+        image: {
+          ...ARTICLE_IMAGES.sink,
+          caption: undefined,
+          presentation: "compact",
+        },
+      },
       { type: "h2", text: "想格價？先問清楚三件事" },
+      {
+        type: "image",
+        image: {
+          ...ARTICLE_IMAGES.quote,
+          caption: undefined,
+          presentation: "compact",
+        },
+      },
       {
         type: "list",
         items: [
@@ -38,6 +53,14 @@ export function applyBasinConversion(post: BlogPostView): BlogPostView {
         text: "傳盆口、櫃底相片及所在地區，方便先了解堵塞情況與報價範圍。實際費用按入口、工具及拆裝需要確認。",
       },
       { type: "h2", text: "睇洗手盆施工紀錄" },
+      {
+        type: "image",
+        image: {
+          ...ARTICLE_IMAGES.waterTest,
+          caption: undefined,
+          presentation: "compact",
+        },
+      },
       {
         type: "p",
         text: "想了解實際做法，可查看油垢清理及試水過程。",

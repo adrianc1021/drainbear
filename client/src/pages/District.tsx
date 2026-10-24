@@ -1,3 +1,4 @@
+import SectionIllustration from "@/components/SectionIllustration";
 import AnimatedDisclosure from "@/components/AnimatedDisclosure";
 import DistrictServiceLinks from "@/components/DistrictServiceLinks";
 import InquiryContactPanel from "@/components/InquiryContactPanel";
@@ -149,6 +150,20 @@ export default function District() {
                 >
                   {section.title}
                 </h3>
+                <SectionIllustration
+                  scene={
+                    section.link?.href.includes("cctv")
+                      ? "camera"
+                      : section.link?.href.includes("kitchen")
+                        ? "sink"
+                        : section.link?.href.includes("bathroom") ||
+                            section.link?.href.includes("toilet")
+                          ? "observe"
+                          : section.link?.href.includes("main-drain")
+                            ? "property"
+                            : "handoff"
+                  }
+                />
                 {section.paragraphs.map(paragraph => (
                   <p
                     key={paragraph}

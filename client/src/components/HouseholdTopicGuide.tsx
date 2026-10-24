@@ -1,3 +1,4 @@
+import SectionIllustration from "@/components/SectionIllustration";
 import { BASIN_SLUG, BASIN_MESSAGE } from "@/lib/basinConversion";
 import { WhatsAppButton } from "@/components/Layout";
 import { Link } from "wouter";
@@ -16,6 +17,7 @@ export function HouseholdTopicGuide({ slug }: { slug: string }) {
         aria-labelledby="household-topic-heading"
       >
         <h2 id="household-topic-heading">{topic.heading}</h2>
+        <SectionIllustration scene="handoff" />
         <ol>
           {topic.observations.map(t => (
             <li key={t}>{t}</li>
@@ -34,6 +36,7 @@ export function HouseholdTopicGuide({ slug }: { slug: string }) {
       aria-labelledby="household-topic-heading"
     >
       <h2 id="household-topic-heading">{topic.heading}</h2>
+      <SectionIllustration scene="observe" />
       <p>{topic.answer}</p>
       <ul>
         {topic.observations.map(text => (
@@ -48,6 +51,7 @@ export function HouseholdTopicGuide({ slug }: { slug: string }) {
         。
       </p>
       <h3>按你的情況繼續閱讀</h3>
+      <SectionIllustration scene="prepare" />
       <ul>
         {topic.links.map(link => (
           <li key={link.href}>

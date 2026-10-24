@@ -1,3 +1,4 @@
+import SectionIllustration from "@/components/SectionIllustration";
 import AnimatedDisclosure from "./AnimatedDisclosure";
 import ServiceScenePhoto from "./ServiceScenePhoto";
 import { Link } from "wouter";
@@ -82,6 +83,7 @@ export default function HomeServiceGuide() {
               aria-labelledby="home-blockage-heading"
             >
               <h2 id="home-blockage-heading">邊種塞渠情況，應該搵邊類服務？</h2>
+              <SectionIllustration scene="observe" />
 
               <p className="home-service-guide__lead">
                 坐廁、鋅盤、浴室積水，處理位置各有不同。先講清楚邊個位置塞、有冇倒灌，同埋幾多個去水位受影響。
@@ -128,6 +130,7 @@ export default function HomeServiceGuide() {
               <h2 id="home-customers-heading">
                 住宅、食肆同物業，通渠安排有咩分別？
               </h2>
+              <SectionIllustration scene="services" />
 
               <ServiceScenePhoto scene="restaurant-drains" />
               <p className="home-service-guide__lead">
@@ -172,6 +175,7 @@ export default function HomeServiceGuide() {
               <h2 id="home-pricing-heading">
                 通渠收費點計？報價前要睇哪些因素？
               </h2>
+              <SectionIllustration scene="quote" />
 
               <p className="home-service-guide__lead">
                 <strong>{STARTING_PRICE_LINE}。</strong>
@@ -228,6 +232,7 @@ export default function HomeServiceGuide() {
               <h2 id="home-preparation-heading">
                 等師傅上門前，可以準備甚麼？
               </h2>
+              <SectionIllustration scene="prepare" />
 
               <ServiceScenePhoto scene="bathroom-preparation" />
               <p className="home-service-guide__lead">
@@ -254,6 +259,7 @@ export default function HomeServiceGuide() {
             </section>
             <section id="home-drain-care" aria-labelledby="home-care-heading">
               <h2 id="home-care-heading">平日點樣減少塞渠同反覆倒灌？</h2>
+              <SectionIllustration scene="sink" />
 
               <p className="home-service-guide__lead">
                 油脂、食物殘渣、頭髮同濕紙巾，唔好沖入去水口。經常同一位置再塞，就要檢查原因，唔好只靠反覆加清潔劑。
@@ -291,6 +297,7 @@ export default function HomeServiceGuide() {
               aria-labelledby="home-coverage-heading"
             >
               <h2 id="home-coverage-heading">香港通渠服務，先按所在地區安排</h2>
+              <SectionIllustration scene="village" />
 
               <p className="home-service-guide__lead">
                 港島、九龍、新界及離島均可查詢。提供所在地區及現場相片，確認適合嘅工具與上門安排。

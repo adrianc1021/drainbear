@@ -1,6 +1,7 @@
+import sectionPlacements from "./articleSectionIllustrations.json";
 import { ARTICLE_IMAGES } from "./articleImages";
 
-export const ARTICLE_ILLUSTRATION_DATE = "2026-10-16";
+export const ARTICLE_ILLUSTRATION_DATE = "2026-10-24";
 type Placement =
   | { afterHeading: string; image: keyof typeof ARTICLE_IMAGES }
   | { afterText: string; image: keyof typeof ARTICLE_IMAGES };
@@ -159,6 +160,25 @@ export const ARTICLE_ILLUSTRATIONS: Record<string, Placement[]> = {
     { afterHeading: "先兆四：雨天時去水明顯轉差", image: "property" },
   ],
 };
+
+// Existing authored positions win; new entries require an exact reviewed heading.
+for (const [slug, additions] of Object.entries(sectionPlacements)) {
+  const existing = ARTICLE_ILLUSTRATIONS[slug] ?? [];
+  ARTICLE_ILLUSTRATIONS[slug] = [
+    ...existing,
+    ...additions
+      .filter(
+        add =>
+          !existing.some(
+            p => "afterHeading" in p && p.afterHeading === add.afterHeading
+          )
+      )
+      .map(add => ({
+        afterHeading: add.afterHeading,
+        image: add.image as keyof typeof ARTICLE_IMAGES,
+      })),
+  ];
+}
 
 export function hasArticleIllustrations(slug: string) {
   return Boolean(ARTICLE_ILLUSTRATIONS[slug]?.length);

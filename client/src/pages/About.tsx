@@ -1,3 +1,4 @@
+import SectionIllustration from "@/components/SectionIllustration";
 import {
   COMPANY_ANSWERS,
   companyAnswersJsonLd,
@@ -75,6 +76,7 @@ export default function About() {
           </div>
           <div>
             <h3>公司及聯絡資料</h3>
+            <SectionIllustration scene="handoff" />
             <dl className="company-facts">
               <div>
                 <dt>品牌名稱</dt>
@@ -158,6 +160,19 @@ export default function About() {
               aria-labelledby={`${item.id}-heading`}
             >
               <h3 id={`${item.id}-heading`}>{item.question}</h3>
+              <SectionIllustration
+                scene={
+                  item.id.includes("price")
+                    ? "quote"
+                    : item.id.includes("coverage")
+                      ? "village"
+                      : item.id.includes("service")
+                        ? "services"
+                        : item.id.includes("evidence")
+                          ? "waterTest"
+                          : "handoff"
+                }
+              />
               <p>{item.answer}</p>
               <nav aria-label={`${item.question}相關資料`}>
                 {item.sources.map(source => (

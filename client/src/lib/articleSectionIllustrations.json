@@ -1,0 +1,880 @@
+{
+  "24-hour-drain-help-night": [
+    {
+      "afterHeading": "先睇三個訊號，決定怎樣交代情況",
+      "image": "observe"
+    },
+    {
+      "afterHeading": "聯絡時不用寫長篇，先提供這些資料",
+      "image": "handoff"
+    },
+    {
+      "afterHeading": "等候期間，哪些動作應停止？",
+      "image": "services"
+    },
+    {
+      "afterHeading": "確認上門時，要講清楚誰可以開門及配合",
+      "image": "prepare"
+    }
+  ],
+  "24-hour-restaurant-drain-emergency": [
+    {
+      "afterHeading": "先列受影響設備，別只拍一個水面",
+      "image": "services"
+    },
+    {
+      "afterHeading": "營業中可否施工，要看現場分隔條件",
+      "image": "quote"
+    },
+    {
+      "afterHeading": "隔油池清理，與下游管道疏通可能要分開安排",
+      "image": "restaurant"
+    },
+    {
+      "afterHeading": "完成後，哪些設備可以恢復使用？",
+      "image": "waterTest"
+    }
+  ],
+  "24-hour-shared-drain-backflow-coordination": [
+    {
+      "afterHeading": "住戶先做甚麼，管理處協調甚麼？",
+      "image": "shared"
+    },
+    {
+      "afterHeading": "夜間查詢，把範圍資料放在同一份紀錄",
+      "image": "handoff"
+    },
+    {
+      "afterHeading": "公共道路與私人管道，不宜靠相片判責任",
+      "image": "property"
+    },
+    {
+      "afterHeading": "要進入其他位置，先取得現場協調",
+      "image": "prepare"
+    }
+  ],
+  "bathroom-drain-smell-causes-solutions": [
+    {
+      "afterHeading": "有渠味不一定等於塞渠",
+      "image": "observe"
+    },
+    {
+      "afterHeading": "浴室渠味的六個常見來源",
+      "image": "sink"
+    },
+    {
+      "afterHeading": "先做三個簡單判斷",
+      "image": "waterTest"
+    },
+    {
+      "afterHeading": "可以安全嘗試的處理方法",
+      "image": "prepare"
+    },
+    {
+      "afterHeading": "不建議用通渠水處理渠味",
+      "image": "services"
+    },
+    {
+      "afterHeading": "甚麼情況應通知管理處？",
+      "image": "shared"
+    },
+    {
+      "afterHeading": "何時需要專業檢查？",
+      "image": "camera"
+    }
+  ],
+  "bathroom-hair-clog-prevention": [
+    {
+      "afterHeading": "地台積水、企缸去水慢與倒灌，怎樣分辨？",
+      "image": "observe"
+    },
+    {
+      "afterHeading": "第一招：去水口毛髮過濾器",
+      "image": "sink"
+    },
+    {
+      "afterHeading": "第二招：按設備說明保養隔氣",
+      "image": "prepare"
+    },
+    {
+      "afterHeading": "第三招：留意「去水慢+臭味」組合訊號",
+      "image": "camera"
+    }
+  ],
+  "building-main-drain-vs-unit-branch-pipe": [
+    {
+      "afterHeading": "多個單位去水異常，點樣開始查詢？",
+      "image": "shared"
+    },
+    {
+      "afterHeading": "先分清楚問題在哪一段渠管",
+      "image": "observe"
+    },
+    {
+      "afterHeading": "甚麼是單位支渠和大廈主渠？",
+      "image": "property"
+    },
+    {
+      "afterHeading": "五個判斷線索",
+      "image": "services"
+    },
+    {
+      "afterHeading": "出現污水倒灌時先做甚麼？",
+      "image": "prepare"
+    },
+    {
+      "afterHeading": "何時應先聯絡管理處？",
+      "image": "handoff"
+    },
+    {
+      "afterHeading": "誰負責支付通渠費？",
+      "image": "quote"
+    },
+    {
+      "afterHeading": "安排檢查前要保存哪些資料？",
+      "image": "camera"
+    },
+    {
+      "afterHeading": "甚麼時候需要 CCTV 照渠？",
+      "image": "sink"
+    },
+    {
+      "afterHeading": "完工後如何驗收？",
+      "image": "waterTest"
+    },
+    {
+      "afterHeading": "如何向 DrainBear 提供資料？",
+      "image": "village"
+    }
+  ],
+  "cctv-drain-inspection-hong-kong-guide": [
+    {
+      "afterHeading": "CCTV 照渠是甚麼？",
+      "image": "camera"
+    },
+    {
+      "afterHeading": "甚麼情況值得安排 CCTV 照渠？",
+      "image": "observe"
+    },
+    {
+      "afterHeading": "CCTV 照渠一般流程",
+      "image": "prepare"
+    },
+    {
+      "afterHeading": "CCTV 可以發現哪些渠道問題？",
+      "image": "services"
+    },
+    {
+      "afterHeading": "照渠報告應包含甚麼？",
+      "image": "handoff"
+    },
+    {
+      "afterHeading": "哪些因素影響照渠收費？",
+      "image": "quote"
+    },
+    {
+      "afterHeading": "照渠前要做甚麼準備？",
+      "image": "village"
+    },
+    {
+      "afterHeading": "檢查後應如何決定下一步？",
+      "image": "property"
+    }
+  ],
+  "ceiling-water-seepage-drainage-causes": [
+    {
+      "afterHeading": "常見滲水來源",
+      "image": "property"
+    },
+    {
+      "afterHeading": "可以先記錄甚麼？",
+      "image": "handoff"
+    },
+    {
+      "afterHeading": "甚麼是色水測試？",
+      "image": "waterTest"
+    },
+    {
+      "afterHeading": "通渠能否解決天花滲水？",
+      "image": "services"
+    },
+    {
+      "afterHeading": "發現滲水時應怎樣處理？",
+      "image": "quote"
+    },
+    {
+      "afterHeading": "渠管懷疑漏水？",
+      "image": "prepare"
+    }
+  ],
+  "choosing-professional-drain-company": [
+    {
+      "afterHeading": "揀通渠公司，先比較這五項",
+      "image": "quote"
+    },
+    {
+      "afterHeading": "揀老字號通渠公司，還要核對甚麼？",
+      "image": "handoff"
+    },
+    {
+      "afterHeading": "通渠熊適合處理哪些問題？",
+      "image": "services"
+    },
+    {
+      "afterHeading": "通渠收費要比較哪些項目？",
+      "image": "prepare"
+    },
+    {
+      "afterHeading": "朋友介紹或網上推介，點樣核對？",
+      "image": "shared"
+    },
+    {
+      "afterHeading": "傳相查詢，一次過提供這些資料",
+      "image": "observe"
+    }
+  ],
+  "drain-blocked-after-renovation": [
+    {
+      "afterHeading": "裝修期間甚麼物料容易進入去水渠？",
+      "image": "property"
+    },
+    {
+      "afterHeading": "裝修後淤塞的常見徵狀",
+      "image": "observe"
+    },
+    {
+      "afterHeading": "先判斷是淤塞還是安裝問題",
+      "image": "sink"
+    },
+    {
+      "afterHeading": "普通通渠能否處理工程碎料？",
+      "image": "services"
+    },
+    {
+      "afterHeading": "何時值得安排CCTV照渠？",
+      "image": "camera"
+    },
+    {
+      "afterHeading": "裝修驗收時應測試甚麼？",
+      "image": "waterTest"
+    },
+    {
+      "afterHeading": "不要自行倒酸性液體溶解英泥",
+      "image": "prepare"
+    },
+    {
+      "afterHeading": "渠道問題揮之不去？",
+      "image": "handoff"
+    }
+  ],
+  "drain-blocked-again-after-cleaning-root-causes": [
+    {
+      "afterHeading": "先分清「未清乾淨」還是「再次造成」",
+      "image": "waterTest"
+    },
+    {
+      "afterHeading": "反覆塞渠的 6 個常見原因",
+      "image": "observe"
+    },
+    {
+      "afterHeading": "何時值得考慮 CCTV 照渠？",
+      "image": "camera"
+    },
+    {
+      "afterHeading": "再次叫通渠前準備甚麼？",
+      "image": "handoff"
+    },
+    {
+      "afterHeading": "不要反覆自行倒通渠水",
+      "image": "prepare"
+    }
+  ],
+  "drain-cleaning-scam-prevention-hong-kong": [
+    {
+      "afterHeading": "點解通渠服務容易出現收費爭議？",
+      "image": "handoff"
+    },
+    {
+      "afterHeading": "「幾百元起」唔等於最終收費",
+      "image": "quote"
+    },
+    {
+      "afterHeading": "常見臨場加價項目",
+      "image": "services"
+    },
+    {
+      "afterHeading": "「不成功不收費」要問清楚定義",
+      "image": "prepare"
+    },
+    {
+      "afterHeading": "動工前要求文字報價",
+      "image": "property"
+    },
+    {
+      "afterHeading": "師傅到場後改價應該點處理？",
+      "image": "shared"
+    },
+    {
+      "afterHeading": "唔好在未確認價錢前同意拆卸",
+      "image": "sink"
+    },
+    {
+      "afterHeading": "完工後點樣驗收？",
+      "image": "waterTest"
+    },
+    {
+      "afterHeading": "保留報價、相片及付款紀錄",
+      "image": "observe"
+    },
+    {
+      "afterHeading": "搵通渠師傅前應提供甚麼資料？",
+      "image": "village"
+    },
+    {
+      "afterHeading": "通渠報價 Checklist",
+      "image": "quote"
+    },
+    {
+      "afterHeading": "總結：唔好只比較最低價",
+      "image": "handoff"
+    }
+  ],
+  "drain-flies-causes-removal-prevention": [
+    {
+      "afterHeading": "為甚麼渠口會有小飛蟲？",
+      "image": "sink"
+    },
+    {
+      "afterHeading": "簡單確認是否來自去水口",
+      "image": "observe"
+    },
+    {
+      "afterHeading": "正確處理步驟",
+      "image": "prepare"
+    },
+    {
+      "afterHeading": "為甚麼殺蟲噴霧治標不治本？",
+      "image": "property"
+    },
+    {
+      "afterHeading": "何時需要進一步檢查？",
+      "image": "camera"
+    }
+  ],
+  "drain-gurgling-sound-causes": [
+    {
+      "afterHeading": "為甚麼去水時會有咕嚕聲？",
+      "image": "observe"
+    },
+    {
+      "afterHeading": "4種常見情況",
+      "image": "services"
+    },
+    {
+      "afterHeading": "可以先做的簡單測試",
+      "image": "waterTest"
+    },
+    {
+      "afterHeading": "咕嚕聲會否自己消失？",
+      "image": "sink"
+    },
+    {
+      "afterHeading": "不建議立即做甚麼？",
+      "image": "prepare"
+    },
+    {
+      "afterHeading": "何時需要安排檢查？",
+      "image": "camera"
+    },
+    {
+      "afterHeading": "渠道問題揮之不去？",
+      "image": "handoff"
+    }
+  ],
+  "drain-service-completion-checklist": [
+    {
+      "afterHeading": "坐廁、鋅盤與公共渠，要分開測試",
+      "image": "observe"
+    },
+    {
+      "afterHeading": "四項完成交代，值得記錄下來",
+      "image": "quote"
+    },
+    {
+      "afterHeading": "有影片，就一定證明完成測試嗎？",
+      "image": "handoff"
+    },
+    {
+      "afterHeading": "完成後再出現去水慢，怎樣跟進較有用？",
+      "image": "waterTest"
+    }
+  ],
+  "drain-tool-selection-guide": [
+    {
+      "afterHeading": "局部軟性淤塞：先評估手動工具或彈弓機",
+      "image": "sink"
+    },
+    {
+      "afterHeading": "油脂與長距離沉積：評估高壓水槍",
+      "image": "services"
+    },
+    {
+      "afterHeading": "原因不明或反覆復發：用 CCTV 收集證據",
+      "image": "camera"
+    },
+    {
+      "afterHeading": "有時要分兩階段，而不是三選一",
+      "image": "prepare"
+    },
+    {
+      "afterHeading": "報價前應問的四個問題",
+      "image": "quote"
+    }
+  ],
+  "high-pressure-drain-cleaning-vs-spring-machine": [
+    {
+      "afterHeading": "兩種方法有甚麼分別？",
+      "image": "services"
+    },
+    {
+      "afterHeading": "哪些情況較適合高壓水槍？",
+      "image": "property"
+    },
+    {
+      "afterHeading": "哪些情況可先考慮彈弓機？",
+      "image": "sink"
+    },
+    {
+      "afterHeading": "是否一定要二選一？",
+      "image": "camera"
+    },
+    {
+      "afterHeading": "報價前應問的 5 個問題",
+      "image": "quote"
+    },
+    {
+      "afterHeading": "安全與選擇重點",
+      "image": "prepare"
+    }
+  ],
+  "home-drain-service-preparation-protection": [
+    {
+      "afterHeading": "通渠會整污糟屋嗎？先說明可能接觸水的位置",
+      "image": "observe"
+    },
+    {
+      "afterHeading": "清出櫃底與通道，保留完整入口",
+      "image": "prepare"
+    },
+    {
+      "afterHeading": "有漏水或用過通渠水，要在到場前說清楚",
+      "image": "handoff"
+    },
+    {
+      "afterHeading": "不用先買工具，也不要預先拆喉",
+      "image": "sink"
+    },
+    {
+      "afterHeading": "到場後，先確認三件事再動工",
+      "image": "quote"
+    },
+    {
+      "afterHeading": "完工後試水，要按實際處理位置核對",
+      "image": "waterTest"
+    }
+  ],
+  "hong-kong-drain-cleaning-price-guide": [
+    {
+      "afterHeading": "搜尋「通渠收費 LIHKG」，討論價錢可以點比較？",
+      "image": "handoff"
+    },
+    {
+      "afterHeading": "哪些現場資料會影響報價？",
+      "image": "quote"
+    },
+    {
+      "afterHeading": "坐廁、鋅盤及主渠，評估重點不同",
+      "image": "observe"
+    },
+    {
+      "afterHeading": "用機器，是否一定比其他方法合適？",
+      "image": "services"
+    },
+    {
+      "afterHeading": "相片可以先了解甚麼？",
+      "image": "prepare"
+    },
+    {
+      "afterHeading": "確認處理後，保留哪些交代？",
+      "image": "waterTest"
+    }
+  ],
+  "moving-home-drain-inspection": [
+    {
+      "afterHeading": "先取得同意，逐個位置觀察",
+      "image": "observe"
+    },
+    {
+      "afterHeading": "發現異常時，停止加水並記錄",
+      "image": "handoff"
+    },
+    {
+      "afterHeading": "基本試水與管內檢查，回答不同問題",
+      "image": "camera"
+    },
+    {
+      "afterHeading": "需要安排處理，先確認授權及範圍",
+      "image": "quote"
+    }
+  ],
+  "old-building-backflow-signs": [
+    {
+      "afterHeading": "先兆一：去水口傳出「咕嚕咕嚕」怪聲",
+      "image": "sink"
+    },
+    {
+      "afterHeading": "先兆二：多個去水位同時變慢",
+      "image": "observe"
+    },
+    {
+      "afterHeading": "先兆三：地台去水口隱隱發臭",
+      "image": "prepare"
+    },
+    {
+      "afterHeading": "先兆四：雨天時去水明顯轉差",
+      "image": "property"
+    },
+    {
+      "afterHeading": "先兆五：低層單位牆身滲水發霉",
+      "image": "shared"
+    }
+  ],
+  "prevent-kitchen-sink-clog": [
+    {
+      "afterHeading": "習慣一：洗碗前抹走煮食油",
+      "image": "restaurant"
+    },
+    {
+      "afterHeading": "習慣二：用隔渣網，清走食物碎屑",
+      "image": "sink"
+    },
+    {
+      "afterHeading": "習慣三：不要把熱水當成油垢疏通方法",
+      "image": "services"
+    },
+    {
+      "afterHeading": "習慣四：清潔前先看產品與配件說明",
+      "image": "prepare"
+    },
+    {
+      "afterHeading": "習慣五：去水變慢，記錄範圍再查詢",
+      "image": "handoff"
+    }
+  ],
+  "property-drain-maintenance-plan": [
+    {
+      "afterHeading": "先把排水位置與聯絡安排整理好",
+      "image": "property"
+    },
+    {
+      "afterHeading": "巡查、清洗與照喉，目的不同",
+      "image": "camera"
+    },
+    {
+      "afterHeading": "每次處理後，留下可交接的紀錄",
+      "image": "handoff"
+    },
+    {
+      "afterHeading": "保養頻率，應怎樣調整？",
+      "image": "quote"
+    }
+  ],
+  "rainstorm-typhoon-drain-checklist-hong-kong": [
+    {
+      "afterHeading": "雨前 24 至 48 小時檢查",
+      "image": "village"
+    },
+    {
+      "afterHeading": "哪些警號表示不只是表面雜物？",
+      "image": "observe"
+    },
+    {
+      "afterHeading": "黑雨或颱風期間怎樣做？",
+      "image": "property"
+    },
+    {
+      "afterHeading": "雨後復查清單",
+      "image": "waterTest"
+    },
+    {
+      "afterHeading": "應否安裝止回閥？",
+      "image": "services"
+    }
+  ],
+  "read-cctv-drain-inspection-report": [
+    {
+      "afterHeading": "先確認檢測起點、方向和距離基準",
+      "image": "camera"
+    },
+    {
+      "afterHeading": "把畫面異常描述成可核對的現象",
+      "image": "observe"
+    },
+    {
+      "afterHeading": "留意沒有拍到的部分",
+      "image": "property"
+    },
+    {
+      "afterHeading": "比較處理前後，而不是只看片段",
+      "image": "waterTest"
+    },
+    {
+      "afterHeading": "何時需要進一步定位或其他專業意見",
+      "image": "handoff"
+    }
+  ],
+  "restaurant-grease-trap-guide": [
+    {
+      "afterHeading": "幾耐要清一次先夠？",
+      "image": "restaurant"
+    },
+    {
+      "afterHeading": "唔清嘅代價比你想像中大",
+      "image": "property"
+    },
+    {
+      "afterHeading": "慳錢秘訣：定期保養合約",
+      "image": "quote"
+    }
+  ],
+  "sink-drain-access-disassembly": [
+    {
+      "afterHeading": "為甚麼師傅會查看櫃底？",
+      "image": "sink"
+    },
+    {
+      "afterHeading": "上門前，先拍三個角度",
+      "image": "handoff"
+    },
+    {
+      "afterHeading": "清出空間，但不要自行鬆開喉件",
+      "image": "prepare"
+    },
+    {
+      "afterHeading": "真實短片能幫你看清狹窄位置的操作",
+      "image": "services"
+    }
+  ],
+  "tenant-blocked-drain-landlord-arrangements": [
+    {
+      "afterHeading": "第一步：記錄現象，先通知適合的負責人",
+      "image": "handoff"
+    },
+    {
+      "afterHeading": "第二步：把可處理範圍和報價確認人問清楚",
+      "image": "quote"
+    },
+    {
+      "afterHeading": "租客還是業主付通渠費？先分開安排與責任",
+      "image": "shared"
+    },
+    {
+      "afterHeading": "第三步：進場前，確認管理處與現場條件",
+      "image": "prepare"
+    },
+    {
+      "afterHeading": "第四步：完工後，把資料交回業主",
+      "image": "waterTest"
+    }
+  ],
+  "toilet-clog-emergency-guide": [
+    {
+      "afterHeading": "坐廁塞住，想安排師傅檢查？",
+      "image": "handoff"
+    },
+    {
+      "afterHeading": "馬桶塞的四種反應，查詢時要怎樣說明？",
+      "image": "observe"
+    },
+    {
+      "afterHeading": "第一步：即刻閂水掣，唔好再沖",
+      "image": "prepare"
+    },
+    {
+      "afterHeading": "第二步：判斷淤塞原因",
+      "image": "sink"
+    },
+    {
+      "afterHeading": "第三步：呢啲情況請直接搵師傅",
+      "image": "services"
+    },
+    {
+      "afterHeading": "預防勝於治療",
+      "image": "waterTest"
+    }
+  ],
+  "toilet-foreign-object-drain-service": [
+    {
+      "afterHeading": "記低甚麼物件，不要再加力推進",
+      "image": "observe"
+    },
+    {
+      "afterHeading": "不同位置，處理入口可能不同",
+      "image": "sink"
+    },
+    {
+      "afterHeading": "有異物，就一定要拆坐廁嗎？",
+      "image": "prepare"
+    },
+    {
+      "afterHeading": "取出物件與恢復去水，是不同的觀察",
+      "image": "waterTest"
+    }
+  ],
+  "toilet-gurgling-sounds-drain-check": [
+    {
+      "afterHeading": "先看水位和其他去水位，不要只聽聲音",
+      "image": "observe"
+    },
+    {
+      "afterHeading": "哪些情況應先停止沖水？",
+      "image": "prepare"
+    },
+    {
+      "afterHeading": "有咕嚕聲就要通渠，或者一定要照渠嗎？",
+      "image": "camera"
+    },
+    {
+      "afterHeading": "傳相查詢時，提供這四項資料",
+      "image": "handoff"
+    }
+  ],
+  "tree-roots-in-underground-drain": [
+    {
+      "afterHeading": "樹根為甚麼會進入地下渠？",
+      "image": "village"
+    },
+    {
+      "afterHeading": "樹根入渠有甚麼徵狀？",
+      "image": "observe"
+    },
+    {
+      "afterHeading": "如何確認是否真的有樹根？",
+      "image": "camera"
+    },
+    {
+      "afterHeading": "高壓洗渠可以清除樹根嗎？",
+      "image": "services"
+    },
+    {
+      "afterHeading": "清除樹根後是否代表已經修好？",
+      "image": "waterTest"
+    },
+    {
+      "afterHeading": "不建議自行倒化學劑「殺根」",
+      "image": "prepare"
+    },
+    {
+      "afterHeading": "何時應安排進一步檢查？",
+      "image": "property"
+    },
+    {
+      "afterHeading": "渠道問題揮之不去？",
+      "image": "handoff"
+    }
+  ],
+  "village-house-drain-access-planning": [
+    {
+      "afterHeading": "從落車位置開始，交代工具搬運路線",
+      "image": "village"
+    },
+    {
+      "afterHeading": "單位去水與戶外渠口，未必屬同一處問題",
+      "image": "observe"
+    },
+    {
+      "afterHeading": "沙井安全：住戶不用入井確認",
+      "image": "property"
+    },
+    {
+      "afterHeading": "偏遠位置查詢，先確認現場條件再安排",
+      "image": "handoff"
+    }
+  ],
+  "village-house-manhole-rainy-season": [
+    {
+      "afterHeading": "檢查一：打開沙井蓋目測水位",
+      "image": "property"
+    },
+    {
+      "afterHeading": "檢查二：留意樹根入侵跡象",
+      "image": "camera"
+    },
+    {
+      "afterHeading": "檢查三：化糞池幾時抽過？",
+      "image": "services"
+    },
+    {
+      "afterHeading": "檢查四：清理天台同明渠落葉",
+      "image": "village"
+    }
+  ],
+  "washing-machine-drain-backflow-causes-fixes": [
+    {
+      "afterHeading": "倒灌時先做甚麼？",
+      "image": "prepare"
+    },
+    {
+      "afterHeading": "常見成因",
+      "image": "sink"
+    },
+    {
+      "afterHeading": "可以自行檢查的地方",
+      "image": "observe"
+    },
+    {
+      "afterHeading": "如何減少再次倒灌？",
+      "image": "waterTest"
+    }
+  ],
+  "whatsapp-drain-quote-checklist": [
+    {
+      "afterHeading": "第一項：完整地址和進場限制",
+      "image": "village"
+    },
+    {
+      "afterHeading": "第二項：拍一段連續去水影片",
+      "image": "handoff"
+    },
+    {
+      "afterHeading": "第三項：列出所有受影響去水位",
+      "image": "observe"
+    },
+    {
+      "afterHeading": "第四項：交代已做過的處理",
+      "image": "prepare"
+    },
+    {
+      "afterHeading": "第五項：確認現場聯絡人和可處理時段",
+      "image": "quote"
+    }
+  ],
+  "why-not-drain-cleaner": [
+    {
+      "afterHeading": "限制一：產品未必適合現有喉管",
+      "image": "sink"
+    },
+    {
+      "afterHeading": "限制二：硬物及結構問題未必能靠化學劑處理",
+      "image": "services"
+    },
+    {
+      "afterHeading": "風險三：對人體嘅灼傷危險",
+      "image": "prepare"
+    },
+    {
+      "afterHeading": "需要師傅時，先檢查再選擇通渠方法",
+      "image": "camera"
+    }
+  ]
+}

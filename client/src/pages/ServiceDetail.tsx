@@ -1,3 +1,4 @@
+import SectionIllustration from "@/components/SectionIllustration";
 import { HouseholdServiceTopics } from "@/components/HouseholdTopicGuide";
 import {
   STARTING_PRICE_LINE,
@@ -175,6 +176,7 @@ export default function ServiceDetail() {
             <div className="service-reading__columns">
               <div>
                 <h3>常見症狀</h3>
+                <SectionIllustration scene="observe" />
                 <ul>
                   {service.symptoms.map(item => (
                     <li key={item}>{item}</li>
@@ -183,6 +185,7 @@ export default function ServiceDetail() {
               </div>
               <div>
                 <h3>常見成因</h3>
+                <SectionIllustration scene="camera" />
                 <ul>
                   {service.causes.map(item => (
                     <li key={item}>{item}</li>
@@ -217,6 +220,7 @@ export default function ServiceDetail() {
               <h2>點樣處理？</h2>
             </div>
           </div>
+          <SectionIllustration scene="services" />
           <ol className="service-step-overview">
             {service.process.map((step, index) => (
               <li key={step.title}>
@@ -256,6 +260,7 @@ export default function ServiceDetail() {
       >
         <div className="container brand-narrow">
           <h2>{service.shortName}常見問題</h2>
+          <SectionIllustration scene="quote" />
           <div className="reading-faq">
             {service.faqs.map((faq, index) => (
               <AnimatedDisclosure

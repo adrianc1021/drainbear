@@ -26,7 +26,12 @@ function insertImages<T>(
   let result = original;
   for (let index = 0; index < placements.length; index++) {
     const placement = placements[index];
-    const image = ARTICLE_IMAGES[placement.image];
+    const originalImage = ARTICLE_IMAGES[placement.image];
+    const image: SanityImageData = ["basinCase", "schoolCase"].includes(
+      placement.image
+    )
+      ? originalImage
+      : { ...originalImage, caption: undefined, presentation: "compact" };
     const identity = imageIdentity(image.url);
     if (seen.has(identity)) continue;
     const anchor = result.findIndex(block => {
@@ -40,6 +45,11 @@ function insertImages<T>(
     if ("afterHeading" in placement)
       while (insertion < result.length && !read(result[insertion]).heading)
         insertion++;
+    if (
+      "afterHeading" in placement &&
+      result.slice(anchor + 1, insertion).some(block => read(block).image)
+    )
+      continue;
     if (result === original) result = original.slice();
     result.splice(insertion, 0, create(image, `editorial-${slug}-${index}`));
     seen.add(identity);

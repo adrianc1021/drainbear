@@ -382,13 +382,13 @@ function getSitemapEntries(
     })),
     {
       route: "/",
-      lastmod: "2026-10-22",
+      lastmod: "2026-10-24",
       changefreq: "weekly",
       priority: "1.0",
     },
     {
       route: "/services",
-      lastmod: CONTENT_CONNECTIONS_REVISED_AT,
+      lastmod: "2026-10-24",
       changefreq: "monthly",
       priority: "0.9",
     },
@@ -398,7 +398,7 @@ function getSitemapEntries(
       route: `/services/${slug}`,
       lastmod: HOUSEHOLD_SEARCH_TOPICS.some(t => t.service === slug)
         ? HOUSEHOLD_TOPICS_UPDATED
-        : CONTENT_CONNECTIONS_REVISED_AT,
+        : "2026-10-24",
       changefreq: "monthly" as const,
       priority: "0.8",
     })),
@@ -413,7 +413,7 @@ function getSitemapEntries(
     { route: "/faq", changefreq: "monthly", priority: "0.7" },
     ...ANSWER_ROUTES.map(route => ({
       route,
-      lastmod: "2026-10-16",
+      lastmod: route === "/answers" ? "2026-10-16" : "2026-10-24",
       changefreq: "monthly" as const,
       priority: route === "/answers" ? "0.7" : "0.6",
     })),

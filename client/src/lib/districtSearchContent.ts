@@ -19,7 +19,7 @@ type DistrictEditorial = Required<
 > &
   Pick<DistrictInfo, "pageHeading">;
 
-export const DISTRICT_CONTENT_REVISED_AT = "2026-10-19";
+export const DISTRICT_CONTENT_REVISED_AT = "2026-10-24";
 export const DISTRICT_SEARCH_CONTENT = {
   "kwun-tong": {
     metaTitle: "觀塘通渠｜工廈食堂、住宅及商戶排水｜通渠熊",
