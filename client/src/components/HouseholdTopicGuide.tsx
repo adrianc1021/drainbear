@@ -1,3 +1,5 @@
+import { BASIN_SLUG, BASIN_MESSAGE } from "@/lib/basinConversion";
+import { WhatsAppButton } from "@/components/Layout";
 import { Link } from "wouter";
 import {
   householdTopic,
@@ -7,6 +9,25 @@ import {
 export function HouseholdTopicGuide({ slug }: { slug: string }) {
   const topic = householdTopic(slug);
   if (!topic) return null;
+  if (slug === BASIN_SLUG)
+    return (
+      <section
+        className="household-topic-guide basin-action-guide"
+        aria-labelledby="household-topic-heading"
+      >
+        <h2 id="household-topic-heading">{topic.heading}</h2>
+        <ol>
+          {topic.observations.map(t => (
+            <li key={t}>{t}</li>
+          ))}
+        </ol>
+        <WhatsAppButton
+          label="傳相片，查詢洗手盆報價"
+          message={BASIN_MESSAGE}
+          trackLocation="basin_quick_quote"
+        />
+      </section>
+    );
   return (
     <section
       className="household-topic-guide"

@@ -41,7 +41,13 @@ describe("household search series", () => {
       const copy = structuredClone(original),
         mapped = mapSanityBlogPost(original);
       expect(original).toEqual(copy);
-      expect(mapped.body).toEqual(original.body);
+      if (topic.slug === "slow-basin-drain-causes-solutions") {
+        expect(mapped.body).toBeUndefined();
+        expect(
+          mapped.sections?.some(s => s.type === "h2" && s.text.includes("格價"))
+        ).toBe(true);
+        expect(mapped.whatsappMessage).toContain("初步報價");
+      } else expect(mapped.body).toEqual(original.body);
       expect(mapped.date).toBe(original.publishedAt);
       expect(mapped.coverImage).toEqual(original.coverImage);
       expect(mapped.title).toBe(topic.title);

@@ -79,7 +79,7 @@ describe("published editorial revision", () => {
         .reviewerName
     ).toBe("已確認審閱單位");
   });
-  it("adds labelled enquiry examples without rewriting CMS paragraphs or publication dates", () => {
+  it("uses a concise basin website revision without mutating CMS or publication dates", () => {
     const cms = {
       ...original,
       slug: "slow-basin-drain-causes-solutions",
@@ -88,10 +88,11 @@ describe("published editorial revision", () => {
     const saved = structuredClone(cms);
     const mapped = mapSanityBlogPost(cms);
     expect(cms).toEqual(saved);
-    expect(mapped.body).toEqual(cms.body);
+    expect(mapped.body).toBeUndefined();
+    expect(mapped.sections?.length).toBeGreaterThan(0);
     expect(mapped.date).toBe(cms.publishedAt);
     expect(mapped.updatedAt).toBe("2026-10-24");
-    expect(mapped.inquiryScenario?.example).toMatch(/^假設/);
+    expect(mapped.inquiryScenario).toBeUndefined();
     expect(mapped.whatsappMessage).toContain("洗手盆去水慢");
     expect(mapped.reviewerName).toBe("");
     expect(

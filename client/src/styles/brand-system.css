@@ -3307,3 +3307,20 @@
 .household-topic-guide nav a { display: inline-flex; min-height: 44px; align-items: center; }
 .article-faq .reading-faq > section { border-top: 1px solid var(--db-rule, #d0d8df); padding-block: 1.25rem; scroll-margin-top: 7rem; }
 .article-faq .reading-faq > section h3 { font-size: 1.15rem; line-height: 1.6; margin-bottom: .75rem; }
+
+.basin-hero-summary { margin-block: 1rem; font-size: 1rem; line-height: 1.8; }
+.basin-hero-summary p + p { margin-top: .5rem; }
+.basin-action-guide ol { list-style: decimal; padding-left: 1.4rem; margin-block: 1rem 1.5rem; }
+@media (max-width: 767px) {
+  .basin-article-hero figure img { max-height: 220px; object-fit: contain; }
+  .basin-article-hero .article-hero__inner { padding-top: 1rem; }
+}
+.basin-article-hero .contact-action__mobile-value { display: none; }
+@media (max-width: 767px) {
+  .basin-article-hero .contact-actions { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: .75rem; }
+  .basin-article-hero .contact-action { min-height: 50px; padding: .65rem .75rem; display: flex; align-items: center; justify-content: center; gap: .5rem; }
+  .basin-article-hero :is(.contact-action__label, .contact-action__desktop-value, .contact-action__arrow) { display: none; }
+  .basin-article-hero .contact-action__mobile-value { display: block; font-size: 1rem; font-weight: 700; }
+  .basin-article-hero .contact-action__icon { width: 22px; height: 22px; flex: 0 0 22px; padding: 0; background: transparent; }
+  .basin-article-hero .contact-action__icon svg { width: 22px; height: 22px; }
+}

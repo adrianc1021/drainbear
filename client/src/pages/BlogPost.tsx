@@ -1,3 +1,5 @@
+import { BASIN_SLUG } from "@/lib/basinConversion";
+import { STARTING_PRICE_LABEL } from "../../../shared/pricing";
 import { HouseholdTopicGuide } from "@/components/HouseholdTopicGuide";
 import { householdTopic } from "@/lib/householdSearchTopics";
 import ArticleFigure from "@/components/ArticleFigure";
@@ -391,7 +393,9 @@ export default function BlogPost() {
         ]}
       />
 
-      <section className="article-hero text-white">
+      <section
+        className={`article-hero text-white ${post.slug === BASIN_SLUG ? "basin-article-hero" : ""}`}
+      >
         <div className="article-hero__inner relative z-10 mx-auto max-w-3xl px-4">
           <Link
             href="/blog"
@@ -408,7 +412,16 @@ export default function BlogPost() {
           <h1 className="mt-4 text-balance font-display text-3xl font-black leading-tight text-white md:text-4xl">
             {post.title}
           </h1>
+          {post.slug === BASIN_SLUG && (
+            <div className="basin-hero-summary">
+              <p>洗手盆去水慢、完全塞住？</p>
+              <p>通渠熊 {STARTING_PRICE_LABEL}，傳相查詢報價及上門時間。</p>
+              <p>檢查隔氣與支渠 · 確認收費後動工 · 完工試水</p>
+            </div>
+          )}
           <ContactActions
+            compactOnMobile={post.slug === BASIN_SLUG}
+            whatsappFirst={post.slug === BASIN_SLUG}
             location="blog_post_hero"
             message={post.whatsappMessage}
           />

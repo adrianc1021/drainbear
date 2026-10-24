@@ -1,3 +1,4 @@
+import { applyBasinConversion } from "./basinConversion";
 import type { BlogPostView } from "./blogRepository";
 import { STARTING_PRICE_LABEL } from "../../../shared/pricing";
 
@@ -67,59 +68,45 @@ export const HOUSEHOLD_SEARCH_TOPICS = [
     slug: "slow-basin-drain-causes-solutions",
     service: "bathroom-drain-unblocking",
     name: "洗手盆塞",
-    title: "洗手盆塞、洗手盤去水慢點算？彈跳塞、隔氣與支渠檢查",
-    description:
-      "洗手盆塞或洗手盤去水慢，先看彈跳塞、去水口及其他浴室設備的反應。了解隔氣與支渠的分別、通渠水使用限制、報價因素及查詢資料。",
+    title: `洗手盆塞？通渠 ${STARTING_PRICE_LABEL}｜傳相查詢報價`,
+    description: `洗手盆塞、洗手盤去水慢？通渠熊 ${STARTING_PRICE_LABEL}，傳盆口及櫃底相片查詢報價與上門時間。檢查隔氣及支渠，確認收費後動工，完成後試水。`,
     keywords: [
       "洗手盆塞",
       "洗手盤塞",
       "洗手盆去水慢",
-      "面盆去水慢",
-      "洗手盆隔氣塞",
       "洗手盆通渠",
       "洗手盆通渠收費",
+      "洗手盆通渠報價",
+      "洗手盆塞搵師傅",
     ],
     answer:
-      "洗手盆塞（亦有人寫洗手盤塞），先查看彈跳塞是否正常打開，以及去水口表面是否有可安全移走的毛髮或雜物。只有面盆去水慢與浴室多處同時異常，檢查方向不同；隔氣清理後仍慢、櫃底滲水或地台倒灌時，停止使用並安排檢查，不要反覆倒通渠水。",
-    heading: "洗手盆塞，先看盆口、櫃底，再看其他去水位",
+      "洗手盆塞，先停用，避免積水溢出。傳盆口、櫃底相片及地區，通渠熊幫你了解處理方向、報價及上門安排。",
+    heading: "洗手盆塞，而家做呢三步",
     observations: [
-      "彈跳塞沒有打開：留意按壓或拉桿是否正常，不要強行撬起卡住的零件。",
-      "只有洗手盆去水慢：拍盆口與櫃底隔氣全景，交代有否清理、拆裝及滲漏；不能只憑去水慢斷定一定是隔氣塞。",
-      "洗手盆、浴缸或地台一起異常：查詢時一併交代，師傅需要了解相連支渠；浴室面盆與廚房鋅盤的用途及污物不同，不應混為同一問題。",
+      "先停水：積水、漏水時不要繼續開水測試。",
+      "影兩張相：盆口一張、櫃底喉管一張，毋須自行拆喉。",
+      "傳相格價：附上地區；用過通渠水亦請告知，勿再混加清潔劑。",
     ],
-    links: [
-      {
-        href: "/cases/home-basin-grease-buildup-cleaning",
-        label: "洗手盆清理與試水施工紀錄",
-      },
-      {
-        href: "/answers/bathroom-drain-unblocking-several-fixtures",
-        label: "洗手盆和浴缸同時去水慢，應分開通嗎？",
-      },
-      {
-        href: "/blog/why-not-drain-cleaner",
-        label: "通渠水的限制及使用後要交代甚麼",
-      },
-    ],
+    links: [],
     faqs: [
       {
-        question: "洗手盤塞和廚房鋅盤塞，是同一種服務嗎？",
-        answer:
-          "洗手盤通常指浴室洗手盆；廚房鋅盤用於洗碗及處理食物，積聚物和管路安排可能不同。查詢時說明設備所在位置及用途，浴室面盆可由浴室通渠服務了解處理方向。",
+        question: "洗手盆通渠幾錢？",
+        answer: `通渠熊全線通渠服務 ${STARTING_PRICE_LABEL}。傳相先了解報價，實際費用按堵塞、入口及拆裝需要確認，確認後才動工。`,
       },
       {
-        question: "洗手盆隔氣可以自行拆開清洗嗎？",
+        question: "想格價，要傳甚麼資料？",
         answer:
-          "不要只憑外觀便拆卸。先確認零件、接駁及產品維護說明；不熟悉、喉件老化、已滲漏或曾用化學劑時，應交由人員檢查。錯誤拆裝可能造成漏水，清走隔氣污物亦不代表支渠已暢通。",
+          "傳盆口及櫃底相片、所在地區，再說明去水慢、完全塞或漏水。有用過通渠水亦請告知，方便確認工序及報價範圍。",
       },
       {
-        question: "洗手盆塞可以倒滾水、梳打粉和白醋嗎？",
+        question: "可以即日上門嗎？",
         answer:
-          "不建議用滾水或混合清潔用品處理。材料及接駁耐熱情況不同；梳打粉與白醋起泡不能證明堵塞已清除。曾用通渠劑應告知到場人員，避免再加其他產品或泵壓造成濺出。",
+          "24 小時接受電話及 WhatsApp 查詢。提供地區後，團隊按人手、交通及進場條件確認可安排時段。",
       },
       {
-        question: "洗手盆通渠報價前要提供甚麼？",
-        answer: `提供地區、盆口及櫃底相片、何時開始變慢、其他去水位反應，以及有否拆喉或用過化學劑。通渠熊服務 ${STARTING_PRICE_LABEL}，實際費用按入口、工具及拆裝需要確認。`,
+        question: "洗手盤塞，要自己拆隔氣先嗎？",
+        answer:
+          "不用。先停用並傳相，讓師傅了解入口。尤其已有漏水或用過通渠劑，避免自行拆喉、泵壓或混加清潔劑。",
       },
     ],
   },
@@ -198,7 +185,7 @@ export function householdTopicDate(slug: string, date?: string) {
 export function applyHouseholdTopic(post: BlogPostView): BlogPostView {
   const topic = householdTopic(post.slug);
   if (!topic) return post;
-  return {
+  return applyBasinConversion({
     ...post,
     title: topic.title,
     excerpt: topic.description,
@@ -217,7 +204,7 @@ export function applyHouseholdTopic(post: BlogPostView): BlogPostView {
         f => !topic.faqs.some(t => t.question === f.question)
       ),
     ],
-  };
+  });
 }
 
 /** Correct unsupported numerical/diagnostic claims in the existing hair-clog guide. */
