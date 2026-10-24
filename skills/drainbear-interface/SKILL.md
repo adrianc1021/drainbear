@@ -45,3 +45,5 @@ description: 使用語意化React元件與Flexbox/Grid統一通渠熊介面，�
 - 公開資料集合的 URL 篩選使用明確提交、結果焦點、清除及返回狀態；排序必須改變 DOM 順序。/consumer-alerts 關閉 JavaScript 時以 CSS (scripting: none) 隱藏搜尋及快速篩選，所有紀錄和原生 details 仍留在 HTML；不要依賴 React noscript 子節點在瀏覽器預渲染時輸出。
 
 - 2026-10-24 段落插圖使用 SectionIllustration（小幅圖文）或 ArticleFigure 的 compact presentation（章節圖片）。新增配圖保留 width/height、lazy、響應式 sizes/srcset；手機不把每幅圖放成全屏大圖。真實案例相片不套用插圖樣式。文章額外位置由 articleSectionIllustrations.json 明確匹配標題；已有照片的章節與同頁已用資產須跳過，找不到標題不可猜位置。插圖數報告區分獨立檔案與頁面展示位置。
+
+- 2026-10-25 使用者指出段落圖片太小：SectionIllustration 及 ArticleFigure 章節插圖改成獨立一行、手機佔滿內容欄、保持原比例；取代此前 132px 小圖與 170px 高度限制。srcset sizes 要跟放大後的實際尺寸一致，不要再回復縮圖環繞文字。

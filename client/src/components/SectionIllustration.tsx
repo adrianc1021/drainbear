@@ -15,7 +15,7 @@ export default function SectionIllustration({
       <img
         src={image.url?.replace(/\.webp$/, "-640.webp")}
         srcSet={image.srcSet}
-        sizes="(max-width: 767px) 132px, 240px"
+        sizes="(max-width: 767px) calc(100vw - 40px), 720px"
         alt={image.alt}
         width={image.width}
         height={image.height}

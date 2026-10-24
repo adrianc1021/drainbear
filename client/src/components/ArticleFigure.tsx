@@ -19,7 +19,7 @@ export default function ArticleFigure({ image }: { image: SanityImageData }) {
         }
         sizes={
           image.presentation === "compact"
-            ? "(min-width: 768px) 420px, 290px"
+            ? "(min-width: 768px) 736px, calc(100vw - 32px)"
             : portrait
               ? "(min-width: 368px) 336px, calc(100vw - 32px)"
               : "(min-width: 768px) 736px, calc(100vw - 32px)"

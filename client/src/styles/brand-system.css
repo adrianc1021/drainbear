@@ -3312,7 +3312,7 @@
 .basin-hero-summary p + p { margin-top: .5rem; }
 .basin-action-guide ol { list-style: decimal; padding-left: 1.4rem; margin-block: 1rem 1.5rem; }
 @media (max-width: 767px) {
-  .basin-article-hero figure img { max-height: 220px; object-fit: contain; }
+  .basin-article-hero figure img { max-height: none; height: auto; object-fit: contain; }
   .basin-article-hero .article-hero__inner { padding-top: 1rem; }
 }
 .basin-article-hero .contact-action__mobile-value { display: none; }
@@ -3325,16 +3325,16 @@
   .basin-article-hero .contact-action__icon svg { width: 22px; height: 22px; }
 }
 
-/* Section-led illustration system: visible text, compact mobile visuals, no autoplay. */
-.section-illustration { float: right; width: 36%; max-width: 240px; margin: .25rem 0 1rem 1.5rem; }
+/* Readable full-width section illustrations; retain original image proportions. */
+.section-illustration { float: none; width: 100%; max-width: 720px; margin: 1.25rem auto 1.5rem; }
 .section-illustration img { display: block; width: 100%; height: auto; border-radius: 10px; }
 .home-company-intro__details > section, .home-service-guide__body > section, .district-article > section, .answer-library__article > section, .company-answer-section section, .household-topic-guide { display: flow-root; }
-.article-figure--compact { max-width: 420px; margin: 1rem auto; }
-.article-figure--compact img { max-height: 230px; object-fit: contain; }
+.article-figure--compact { width: 100%; max-width: 736px; margin: 1.5rem auto; }
+.article-figure--compact img { max-height: none; height: auto; object-fit: contain; }
 @media (max-width: 767px) {
-  .section-illustration { width: 38%; max-width: 132px; margin: .25rem 0 .75rem 1rem; }
-  .article-figure--compact { max-width: 290px; margin-block: 1rem; }
-  .article-figure--compact img { max-height: 170px; }
+  .section-illustration { width: 100%; max-width: none; margin: 1rem 0 1.25rem; }
+  .article-figure--compact { max-width: none; margin-block: 1.25rem; }
+  .article-figure--compact img { max-height: none; }
   .service-step-overview { clear: both; }
   .basin-action-guide > a { clear: both; }
 }
