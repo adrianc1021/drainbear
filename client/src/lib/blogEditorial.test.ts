@@ -90,7 +90,7 @@ describe("published editorial revision", () => {
     expect(cms).toEqual(saved);
     expect(mapped.body).toEqual(cms.body);
     expect(mapped.date).toBe(cms.publishedAt);
-    expect(mapped.updatedAt).toBe("2026-10-22");
+    expect(mapped.updatedAt).toBe("2026-10-24");
     expect(mapped.inquiryScenario?.example).toMatch(/^假設/);
     expect(mapped.whatsappMessage).toContain("洗手盆去水慢");
     expect(mapped.reviewerName).toBe("");

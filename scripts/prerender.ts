@@ -1,3 +1,8 @@
+import {
+  householdTopicDate,
+  HOUSEHOLD_SEARCH_TOPICS,
+  HOUSEHOLD_TOPICS_UPDATED,
+} from "../client/src/lib/householdSearchTopics";
 import { COMPANY_ANSWERS_UPDATED } from "../client/src/lib/companyAnswers";
 import {
   contentConnectionDate,
@@ -316,7 +321,12 @@ function mergeBlogEntries(
   return Array.from(entries.values())
     .map(entry => ({
       ...entry,
-      lastmod: normalizeDate(contentConnectionDate(entry.slug, entry.lastmod)),
+      lastmod: normalizeDate(
+        householdTopicDate(
+          entry.slug,
+          contentConnectionDate(entry.slug, entry.lastmod)
+        )
+      ),
     }))
     .sort((a, b) => a.slug.localeCompare(b.slug));
 }
@@ -386,7 +396,9 @@ function getSitemapEntries(
     { route: "/service-process", changefreq: "monthly", priority: "0.8" },
     ...SERVICE_SLUGS.map(slug => ({
       route: `/services/${slug}`,
-      lastmod: CONTENT_CONNECTIONS_REVISED_AT,
+      lastmod: HOUSEHOLD_SEARCH_TOPICS.some(t => t.service === slug)
+        ? HOUSEHOLD_TOPICS_UPDATED
+        : CONTENT_CONNECTIONS_REVISED_AT,
       changefreq: "monthly" as const,
       priority: "0.8",
     })),

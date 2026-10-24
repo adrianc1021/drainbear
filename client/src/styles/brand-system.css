@@ -3295,3 +3295,15 @@
 @media (max-width: 767px) {
   .home-company-intro__details { grid-template-columns: minmax(0, 1fr); gap: 1.75rem; margin-top: 2rem; }
 }
+
+.household-topic-guide { margin-block: 2rem; padding-block: 1.5rem; border-block: 1px solid var(--db-rule, #d0d8df); }
+.household-topic-guide h2 { font-size: clamp(1.4rem, 2.4vw, 1.8rem); line-height: 1.5; margin-bottom: 1rem; }
+.household-topic-guide h3 { font-size: 1.15rem; line-height: 1.6; margin-block: 1.5rem .75rem; }
+.household-topic-guide :is(p,li) { font-size: 1rem; line-height: 1.9; }
+.household-topic-guide ul { list-style: disc; padding-left: 1.4rem; margin-block: 1rem; }
+.household-topic-guide li + li { margin-top: .75rem; }
+.household-topic-guide a { text-decoration: underline; text-underline-offset: .2em; }
+.household-topic-guide nav { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; margin-top: 1rem; }
+.household-topic-guide nav a { display: inline-flex; min-height: 44px; align-items: center; }
+.article-faq .reading-faq > section { border-top: 1px solid var(--db-rule, #d0d8df); padding-block: 1.25rem; scroll-margin-top: 7rem; }
+.article-faq .reading-faq > section h3 { font-size: 1.15rem; line-height: 1.6; margin-bottom: .75rem; }

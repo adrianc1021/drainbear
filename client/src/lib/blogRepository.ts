@@ -1,4 +1,8 @@
 import {
+  applyHouseholdTopic,
+  reviseHouseholdText,
+} from "./householdSearchTopics";
+import {
   illustrateStaticSections,
   illustratePortableBody,
 } from "./articleIllustrations";
@@ -93,7 +97,24 @@ export function mapSanityBlogPost(post: SanityBlogPost): BlogPostView {
     };
   }
   const scenario = getArticleInquiryScenario(post.slug);
-  const originalBody = reviseBlogBody(post.slug, post.body ?? []);
+  const originalBody = reviseBlogBody(post.slug, post.body ?? []).map(block => {
+    if (
+      post.slug !== "bathroom-hair-clog-prevention" ||
+      block._type !== "block" ||
+      !("children" in block)
+    )
+      return block;
+    return {
+      ...block,
+      children: block.children.map(span => ({
+        ...span,
+        text:
+          typeof span.text === "string"
+            ? reviseHouseholdText(post.slug, span.text)
+            : span.text,
+      })),
+    };
+  });
   const body = illustratePortableBody(
     post.slug,
     originalBody,
@@ -104,7 +125,7 @@ export function mapSanityBlogPost(post: SanityBlogPost): BlogPostView {
     : BODY_REVISION_SLUGS.includes(post.slug)
       ? latestEditorialDate(post.updatedAt, BLOG_BODY_REVISION_DATE)
       : post.updatedAt;
-  return {
+  return applyHouseholdTopic({
     source: "sanity",
     id: post._id,
     slug: post.slug,
@@ -136,20 +157,26 @@ export function mapSanityBlogPost(post: SanityBlogPost): BlogPostView {
         ? WASHING_MACHINE_MESSAGE
         : undefined),
     inquiryScenario: scenario,
-  };
+  });
 }
 
 export function mapStaticBlogPost(post: StaticBlogPost): BlogPostView {
   const scenario = getArticleInquiryScenario(post.slug);
   const sections = illustrateStaticSections(
     post.slug,
-    post.sections,
+    post.slug === "bathroom-hair-clog-prevention"
+      ? post.sections.map(section =>
+          "text" in section
+            ? { ...section, text: reviseHouseholdText(post.slug, section.text) }
+            : section
+        )
+      : post.sections,
     post.coverImage?.url
   );
   const editorialDate = scenario
     ? latestEditorialDate(post.updatedAt, ARTICLE_INQUIRY_REVISION_DATE)
     : post.updatedAt;
-  return {
+  return applyHouseholdTopic({
     source: "static",
     id: `static-${post.slug}`,
     slug: post.slug,
@@ -176,7 +203,7 @@ export function mapStaticBlogPost(post: StaticBlogPost): BlogPostView {
     relatedSlugs: post.relatedSlugs,
     whatsappMessage: scenario?.whatsappMessage ?? post.whatsappMessage,
     inquiryScenario: scenario,
-  };
+  });
 }
 
 export function getStaticBlogPosts(): BlogPostView[] {

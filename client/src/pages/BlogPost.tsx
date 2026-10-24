@@ -1,3 +1,5 @@
+import { HouseholdTopicGuide } from "@/components/HouseholdTopicGuide";
+import { householdTopic } from "@/lib/householdSearchTopics";
 import ArticleFigure from "@/components/ArticleFigure";
 import AnimatedDisclosure from "@/components/AnimatedDisclosure";
 import ContactActions from "@/components/ContactActions";
@@ -486,6 +488,7 @@ export default function BlogPost() {
               />
             </aside>
           ) : null}
+          <HouseholdTopicGuide slug={post.slug} />
           {post.source === "sanity" && post.body && (
             <PortableText
               value={post.body}
@@ -614,15 +617,22 @@ export default function BlogPost() {
             >
               <h2 id="article-faq-heading">常見問題</h2>
               <div className="reading-faq">
-                {post.faqs.map((faq, index) => (
-                  <AnimatedDisclosure
-                    key={faq.question}
-                    id={`blog-answer-${index + 1}`}
-                    title={faq.question}
-                  >
-                    <p>{faq.answer}</p>
-                  </AnimatedDisclosure>
-                ))}
+                {post.faqs.map((faq, index) =>
+                  householdTopic(post.slug) ? (
+                    <section key={faq.question} id={`blog-answer-${index + 1}`}>
+                      <h3>{faq.question}</h3>
+                      <p>{faq.answer}</p>
+                    </section>
+                  ) : (
+                    <AnimatedDisclosure
+                      key={faq.question}
+                      id={`blog-answer-${index + 1}`}
+                      title={faq.question}
+                    >
+                      <p>{faq.answer}</p>
+                    </AnimatedDisclosure>
+                  )
+                )}
               </div>
             </section>
           ) : null}

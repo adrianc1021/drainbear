@@ -1,3 +1,4 @@
+import { HouseholdServiceTopics } from "@/components/HouseholdTopicGuide";
 import {
   STARTING_PRICE_LINE,
   SERVICE_PRICE_SPECIFICATION,
@@ -304,6 +305,7 @@ export default function ServiceDetail() {
               ) : null;
             })}
           </nav>
+          <HouseholdServiceTopics serviceSlug={service.slug} />
           <ServiceAnswerLinks serviceSlug={service.slug} />
           <RelatedDrainArticles serviceSlug={service.slug} />
         </div>
