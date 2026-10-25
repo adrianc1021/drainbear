@@ -121,7 +121,7 @@ export default function ServiceDetail() {
           kicker={service.shortName}
           title={service.name}
           description={
-            ["cctv-drain-inspection", "kitchen-sink-unblocking"].includes(
+            ["cctv-drain-inspection", "kitchen-sink-unblocking", "bathroom-drain-unblocking"].includes(
               service.slug
             )
               ? service.heroDescription

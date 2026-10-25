@@ -25,7 +25,7 @@ export const SERVICE_DIRECTORY = [
   },
   {
     slug: "bathroom-drain-unblocking",
-    name: "浴室通渠：企缸、浴缸及地台去水",
+    name: "浴室通渠：洗手盆、企缸及浴缸去水",
     shortName: "浴室／企缸通渠",
     image:
       "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A1_vyqcil.png",

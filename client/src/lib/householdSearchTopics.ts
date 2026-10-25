@@ -2,7 +2,7 @@ import { applyBasinConversion } from "./basinConversion";
 import type { BlogPostView } from "./blogRepository";
 import { STARTING_PRICE_LABEL } from "../../../shared/pricing";
 
-export const HOUSEHOLD_TOPICS_UPDATED = "2026-10-24";
+export const HOUSEHOLD_TOPICS_UPDATED = "2026-10-26";
 export const HOUSEHOLD_SEARCH_TOPICS = [
   {
     slug: "bathroom-hair-clog-prevention",
@@ -49,9 +49,9 @@ export const HOUSEHOLD_SEARCH_TOPICS = [
           "不一定。頭髮及皂垢可能積聚，但隔氣、支渠、相連管段或地面排水路徑亦會影響積水。先看水能否流到渠口，以及其他設備是否同時去水慢，再決定檢查方向。",
       },
       {
-        question: "地台去水口清走頭髮後仍塞，怎樣處理？",
+        question: "浴缸去水塞、清走頭髮後仍去水慢，點算？",
         answer:
-          "停止持續放水，保留去水口及浴室全景相片。表面清理不能確認深處暢通；不要強拆隔氣或用硬物深入探喉，可安排浴室支渠檢查。",
+          "停止持續放水，保留浴缸或地台去水口及全景相片。表面清理不能確認深處暢通；不要強拆隔氣或用硬物深入探喉，可安排浴室支渠檢查。",
       },
       {
         question: "沖涼時地台冒污水，應繼續試水嗎？",
@@ -78,6 +78,7 @@ export const HOUSEHOLD_SEARCH_TOPICS = [
       "洗手盆通渠收費",
       "洗手盆通渠報價",
       "洗手盆塞搵師傅",
+      "洗手盆塞彈不起",
     ],
     answer:
       "洗手盆塞，先停用，避免積水溢出。傳盆口、櫃底相片及地區，通渠熊幫你了解處理方向、報價及上門安排。",
@@ -99,9 +100,9 @@ export const HOUSEHOLD_SEARCH_TOPICS = [
           "傳盆口及櫃底相片、所在地區，再說明去水慢、完全塞或漏水。有用過通渠水亦請告知，方便確認工序及報價範圍。",
       },
       {
-        question: "可以即日上門嗎？",
+        question: "洗手盆塞彈不起，是塞渠嗎？",
         answer:
-          "24 小時接受電話及 WhatsApp 查詢。提供地區後，團隊按人手、交通及進場條件確認可安排時段。",
+          "未必。按壓式塞頭卡住屬配件問題，與隔氣或支渠淤塞不同。不要用刀撬或強拆；傳塞頭及櫃底相片，先確認處理方向。",
       },
       {
         question: "洗手盤塞，要自己拆隔氣先嗎？",
@@ -152,9 +153,9 @@ export const HOUSEHOLD_SEARCH_TOPICS = [
     ],
     faqs: [
       {
-        question: "馬桶塞但水會慢慢退，是否已經通了？",
+        question: "馬桶塞了怎麼辦？水慢慢退是否已經通了？",
         answer:
-          "未能據此確認。退水只代表當時仍能排走部分水，堵塞可能未清除。先停用並記錄情況；反覆出現、水位升高或其他去水位異常時安排檢查。",
+          "先停止沖水。退水未能確認已疏通，只代表當時仍能排走部分水，堵塞可能未清除。先停用並記錄情況；反覆出現、水位升高或其他去水位異常時安排檢查。",
       },
       {
         question: "馬桶塞可以用皮碗泵嗎？",

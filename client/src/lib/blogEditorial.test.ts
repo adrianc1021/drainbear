@@ -91,13 +91,13 @@ describe("published editorial revision", () => {
     expect(mapped.body).toBeUndefined();
     expect(mapped.sections?.length).toBeGreaterThan(0);
     expect(mapped.date).toBe(cms.publishedAt);
-    expect(mapped.updatedAt).toBe("2026-10-24");
+    expect(mapped.updatedAt).toBe("2026-10-26");
     expect(mapped.inquiryScenario).toBeUndefined();
     expect(mapped.whatsappMessage).toContain("洗手盆去水慢");
     expect(mapped.reviewerName).toBe("");
     expect(
-      mapSanityBlogPost({ ...cms, updatedAt: "2026-10-24" }).updatedAt
-    ).toBe("2026-10-24");
+      mapSanityBlogPost({ ...cms, updatedAt: "2026-10-26" }).updatedAt
+    ).toBe("2026-10-26");
     expect(
       mapSanityBlogPost({ ...cms, slug: "unrelated-guide" }).inquiryScenario
     ).toBeUndefined();

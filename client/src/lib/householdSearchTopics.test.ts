@@ -52,15 +52,15 @@ describe("household search series", () => {
       expect(mapped.coverImage).toEqual(original.coverImage);
       expect(mapped.title).toBe(topic.title);
       expect(mapped.seo?.metaDescription).toBe(topic.description);
-      expect(mapped.updatedAt).toBe("2026-10-24");
+      expect(mapped.updatedAt).toBe("2026-10-26");
       expect(mapped.faqs).toHaveLength(4);
       expect(mapped.reviewerName).toBe("");
     }
   );
   it("preserves newer revisions and unrelated dates", () => {
     expect(
-      householdTopicDate("slow-basin-drain-causes-solutions", "2026-10-25")
-    ).toBe("2026-10-25");
+      householdTopicDate("slow-basin-drain-causes-solutions", "2026-10-27")
+    ).toBe("2026-10-27");
     expect(householdTopicDate("other", "2026-08-01")).toBe("2026-08-01");
   });
   it("removes unsupported hair-clog claims while retaining heading-anchored illustrations", () => {
