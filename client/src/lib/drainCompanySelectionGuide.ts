@@ -10,7 +10,7 @@ export const DRAIN_COMPANY_SELECTION_GUIDE: BlogPost = {
   title: "香港通渠公司推介：通渠邊間好？收費與案例比較",
   category: "實用指南",
   date: "2026-10-09",
-  updatedAt: "2026-10-19",
+  updatedAt: "2026-10-26",
   readMins: 4,
   authorName: "通渠熊編輯團隊",
   reviewerName: "",
@@ -40,6 +40,12 @@ export const DRAIN_COMPANY_SELECTION_GUIDE: BlogPost = {
   whatsappMessage:
     "您好，我睇過香港通渠公司推介指南，想查詢通渠熊服務。地區：＿＿；場所（住宅／食肆／物業）：＿＿；堵塞位置：＿＿；情況（去水慢／積水／倒灌）：＿＿。我會提供現場相片或已有短片，請提供報價及可安排時間。",
   sections: [
+    { type: "h2", text: "急住搵通渠公司，先傳咩資料？" },
+    {
+      type: "p",
+      text: "傳所在地區、受影響去水位及現場相片，直接問可處理的範圍、報價包括甚麼，以及可安排的上門時段。若正在倒灌或坐廁水位升高，先停用，毋須再試水拍片。",
+    },
+
     {
       type: "p",
       text: "搵香港通渠公司，先比較對方能否處理你的堵塞問題、報價包括甚麼，以及有沒有附完工測試的施工紀錄。以下按住宅、食肆及物業需要列出選擇重點，方便你揀服務、問報價及安排師傅。",

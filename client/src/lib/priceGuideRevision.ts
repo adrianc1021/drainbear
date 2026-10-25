@@ -4,10 +4,10 @@ import type { BlogPost } from "./blogData";
 /** Website editorial revision: replaces the old market-price/fee-policy draft. */
 export const PRICE_GUIDE_REVISION: BlogPost = {
   slug: "hong-kong-drain-cleaning-price-guide",
-  title: "通渠 HK$300 起｜坐廁、鋅盤及主渠報價指南",
+  title: "通渠價錢幾多？HK$300 起｜工序與報價比較｜通渠熊",
   category: "通渠迷思",
   date: "2026-08-10",
-  updatedAt: "2026-10-16",
+  updatedAt: "2026-10-26",
   readMins: 4,
   authorName: "通渠熊編輯團隊",
   reviewerName: "",
@@ -26,6 +26,19 @@ export const PRICE_GUIDE_REVISION: BlogPost = {
     {
       type: "p",
       text: STARTING_PRICE_ANSWER,
+    },
+    { type: "h2", text: "通渠價錢點問？先確認總額包括甚麼" },
+    {
+      type: "p",
+      text: "想快啲格價，直接傳地區、受影響位置及相片，並問清楚檢查、疏通、拆裝與試水是否包括。HK$300 是起步報價，不能單憑相片保證現場總額；確認處理範圍與收費後才動工。",
+    },
+    {
+      type: "list",
+      items: [
+        "只塞一個洗手盆：傳盆口與櫃底相片，先了解隔氣及支渠入口。",
+        "坐廁水位升高：停沖水，交代有沒有異物，問清楚是否涉及拆裝。",
+        "多個位置倒灌：說明受影響設備及共用渠入口，先界定檢查範圍。",
+      ],
     },
     { type: "h2", text: "搜尋「通渠收費 LIHKG」，討論價錢可以點比較？" },
     {
@@ -96,7 +109,7 @@ export const PRICE_GUIDE_REVISION: BlogPost = {
     {
       question: "通渠價錢可以按一張相片確定嗎？",
       answer:
-        "可以先傳相查詢。通渠熊全線通渠服務 HK$300 起，提供地區、堵塞位置及相片，便可開始了解處理方法和報價。",
+        "相片可以幫助初步了解，未必看得到隱藏管段、異物及拆裝需要。通渠熊 HK$300 起，先傳地區與相片問價，總額按現場工序確認，雙方確認後動工。",
     },
     {
       question: "通渠收費 LIHKG 的討論，可以直接當報價參考嗎？",

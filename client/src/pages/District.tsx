@@ -10,7 +10,7 @@ import { BUSINESS_ID, SITE_URL, WEBSITE_ID } from "@/config/site";
 import { useSiteSettings } from "@/contexts/SiteSettingsContext";
 import DistrictCaseRecords from "@/components/DistrictCaseRecords";
 import { getDistrict } from "@/lib/districtData";
-import { DISTRICT_CONTENT_REVISED_AT } from "@/lib/districtSearchContent";
+import { districtContentDate } from "@/lib/districtSearchContent";
 import NotFound from "@/pages/NotFound";
 import { ArrowRight, MapPin } from "lucide-react";
 import { Link, useParams } from "wouter";
@@ -38,7 +38,7 @@ export default function District() {
       url: `${SITE_URL}/areas/${d.slug}`,
       name: seoTitle,
       description: d.metaDescription,
-      dateModified: DISTRICT_CONTENT_REVISED_AT,
+      dateModified: districtContentDate(d.slug),
       inLanguage: "zh-Hant-HK",
       isPartOf: { "@id": WEBSITE_ID },
       about: { "@id": `${SITE_URL}/areas/${d.slug}#service` },

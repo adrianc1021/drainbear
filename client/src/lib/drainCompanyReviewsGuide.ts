@@ -2,10 +2,10 @@ import type { BlogPost } from "./blogData";
 
 export const DRAIN_COMPANY_REVIEWS_GUIDE: BlogPost = {
   slug: "drain-company-reviews-red-flags",
-  title: "通渠黑店報道整理｜收費爭議、被捕個案與防騙清單",
+  title: "通渠公司黑店點查證？收費爭議報道與避伏清單",
   category: "實用指南",
   date: "2026-10-11",
-  updatedAt: "2026-10-16",
+  updatedAt: "2026-10-26",
   readMins: 6,
   authorName: "通渠熊編輯團隊",
   reviewerName: "",
@@ -37,6 +37,11 @@ export const DRAIN_COMPANY_REVIEWS_GUIDE: BlogPost = {
     height: 676,
   },
   sections: [
+    {
+      type: "p",
+      text: "搜尋「通渠公司黑店」時，先核對報道日期、商戶身份、當事人說法及有沒有後續裁決；搜尋結果或匿名留言本身不是黑店認定。預約前保留公司名稱、電話、文字報價及確認工序，臨場加項未講清楚就先不要確認施工。",
+    },
+
     {
       type: "p",
       text: "想按事件或來源搜尋更多公開紀錄？獨立資料庫收錄警方紀錄、消委會個案及不同傳媒報道，設分類、搜尋及每筆來源連結。",

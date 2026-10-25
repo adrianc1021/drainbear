@@ -9,7 +9,7 @@ import {
   CONTENT_CONNECTIONS_REVISED_AT,
 } from "../client/src/lib/contentConnections";
 import { CONSUMER_ALERTS_UPDATED } from "../client/src/lib/consumerAlerts";
-import { DISTRICT_CONTENT_REVISED_AT } from "../client/src/lib/districtSearchContent";
+import { districtContentDate } from "../client/src/lib/districtSearchContent";
 import {
   ARTICLE_ILLUSTRATION_DATE,
   hasArticleIllustrations,
@@ -406,7 +406,7 @@ function getSitemapEntries(
     { route: "/areas", changefreq: "monthly", priority: "0.8" },
     ...DISTRICT_SLUGS.map(slug => ({
       route: `/areas/${slug}`,
-      lastmod: DISTRICT_CONTENT_REVISED_AT,
+      lastmod: districtContentDate(slug),
       changefreq: "monthly" as const,
       priority: "0.8",
     })),
