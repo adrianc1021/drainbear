@@ -41,7 +41,7 @@ export const SERVICE_DIRECTORY = [
   },
   {
     slug: "high-pressure-jetting",
-    name: "高壓水槍洗渠",
+    name: "高壓通渠／高壓水槍洗渠",
     shortName: "高壓洗渠",
     image:
       "https://res.cloudinary.com/pgjztf2p/image/upload/v1785164195/A3_fyozug.png",

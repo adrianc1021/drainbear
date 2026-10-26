@@ -1,4 +1,8 @@
 import {
+  queryIntentDate,
+  QUERY_INTENT_UPDATED,
+} from "../client/src/lib/queryIntentRevision";
+import {
   householdTopicDate,
   HOUSEHOLD_SEARCH_TOPICS,
   HOUSEHOLD_TOPICS_UPDATED,
@@ -324,7 +328,10 @@ function mergeBlogEntries(
       lastmod: normalizeDate(
         householdTopicDate(
           entry.slug,
-          contentConnectionDate(entry.slug, entry.lastmod)
+          queryIntentDate(
+            entry.slug,
+            contentConnectionDate(entry.slug, entry.lastmod)
+          )
         )
       ),
     }))
@@ -382,7 +389,7 @@ function getSitemapEntries(
     })),
     {
       route: "/",
-      lastmod: "2026-10-24",
+      lastmod: QUERY_INTENT_UPDATED,
       changefreq: "weekly",
       priority: "1.0",
     },
@@ -396,9 +403,12 @@ function getSitemapEntries(
     { route: "/service-process", changefreq: "monthly", priority: "0.8" },
     ...SERVICE_SLUGS.map(slug => ({
       route: `/services/${slug}`,
-      lastmod: HOUSEHOLD_SEARCH_TOPICS.some(t => t.service === slug)
-        ? HOUSEHOLD_TOPICS_UPDATED
-        : "2026-10-24",
+      lastmod:
+        slug === "high-pressure-jetting"
+          ? QUERY_INTENT_UPDATED
+          : HOUSEHOLD_SEARCH_TOPICS.some(t => t.service === slug)
+            ? HOUSEHOLD_TOPICS_UPDATED
+            : "2026-10-24",
       changefreq: "monthly" as const,
       priority: "0.8",
     })),

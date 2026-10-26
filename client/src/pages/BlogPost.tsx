@@ -1,3 +1,4 @@
+import QueryIntentIntro from "@/components/QueryIntentIntro";
 import { BASIN_SLUG } from "@/lib/basinConversion";
 import { STARTING_PRICE_LABEL } from "../../../shared/pricing";
 import { HouseholdTopicGuide } from "@/components/HouseholdTopicGuide";
@@ -502,6 +503,7 @@ export default function BlogPost() {
             </aside>
           ) : null}
           <HouseholdTopicGuide slug={post.slug} />
+          <QueryIntentIntro slug={post.slug} />
           {post.source === "sanity" && post.body && (
             <PortableText
               value={post.body}
