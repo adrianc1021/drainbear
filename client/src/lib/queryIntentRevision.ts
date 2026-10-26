@@ -5,6 +5,7 @@ export const QUERY_INTENT_REVISIONS: Record<
   string,
   {
     title: string;
+    replaceScenario?: boolean;
     description: string;
     heading: string;
     answer: string;
@@ -13,6 +14,41 @@ export const QUERY_INTENT_REVISIONS: Record<
     faqs: { question: string; answer: string }[];
   }
 > = {
+  "cctv-drain-inspection-hong-kong-guide": {
+    title: "CCTV 照渠指南｜適用情況、流程及報告內容",
+    description:
+      "照渠 CCTV 點收費、包唔包疏通及報告？了解鏡頭檢查用途、入口限制、影片交付及報價因素，傳現場相片查詢合適檢測安排。",
+    heading: "照渠收費，查詢前要講清楚甚麼？",
+    answer:
+      "先提供地區、受影響去水位、可用檢查口及過往通渠紀錄，再確認檢查管段、是否要先疏通，以及需要影片、截圖還是書面報告。入口、管段長度與交付內容會影響報價；CCTV 照渠是影像檢查，不等於已包括疏通。",
+    href: "/services/cctv-drain-inspection",
+    label: "查看 CCTV 照渠服務，查詢檢查及影像交付",
+    faqs: [
+      {
+        question: "照渠報價是否包括通渠及書面報告？",
+        answer:
+          "不一定。查詢時分別確認影像檢查、前置疏通或拆裝，以及影片、截圖或書面報告的交付安排。所需工序和資料不同，報價範圍也不同。",
+      },
+    ],
+  },
+  "building-main-drain-vs-unit-branch-pipe": {
+    title: "污水渠塞邊個負責？大廈主渠、單位支渠及處理流程｜通渠熊",
+    description:
+      "污水渠塞責任點分？先確認堵塞管段、服務範圍及大廈公契等文件；多戶倒灌先通知管理處。了解報修、檢查與通渠報價要保留哪些紀錄。",
+    replaceScenario: true,
+    heading: "污水渠塞，住戶定管理處負責？",
+    answer:
+      "不能只憑污水從哪個單位湧出判定責任。先確認堵塞管段屬單位專用還是共用部分，再核對大廈公契、租約及維修紀錄。多戶同時倒灌，先通知管理處協調檢查；委託施工前講清楚處理範圍、報價與付款安排，費用責任有爭議時另按文件及專業意見處理。",
+    href: "/services/main-drain-manhole",
+    label: "了解主渠及沙井檢查，準備進場與報價資料",
+    faqs: [
+      {
+        question: "樓下單位倒灌，是否一定由樓下住戶支付通渠費？",
+        answer:
+          "不是。出水位置不等於堵塞位置或責任界線。需要確認管段是否共用、檢查結果及相關物業文件；先與管理處、業主及施工方確認工作與付款安排。",
+      },
+    ],
+  },
   "high-pressure-drain-cleaning-vs-spring-machine": {
     title: "高壓通渠定彈弓機？方法、收費因素與適用範圍｜通渠熊",
     description:
@@ -79,6 +115,9 @@ export function applyQueryIntentRevision(post: BlogPostView): BlogPostView {
     excerpt: revision.description,
     updatedAt: queryIntentDate(post.slug, post.updatedAt),
     reviewerName: "",
+    inquiryScenario: revision.replaceScenario
+      ? undefined
+      : post.inquiryScenario,
     seo: {
       ...post.seo,
       metaTitle: revision.title,

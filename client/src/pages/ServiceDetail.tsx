@@ -1,3 +1,4 @@
+import ServiceDistrictReading from "@/components/ServiceDistrictReading";
 import SectionIllustration from "@/components/SectionIllustration";
 import { HouseholdServiceTopics } from "@/components/HouseholdTopicGuide";
 import {
@@ -121,9 +122,12 @@ export default function ServiceDetail() {
           kicker={service.shortName}
           title={service.name}
           description={
-            ["cctv-drain-inspection", "kitchen-sink-unblocking", "bathroom-drain-unblocking"].includes(
-              service.slug
-            )
+            [
+              "sewage-backflow",
+              "cctv-drain-inspection",
+              "kitchen-sink-unblocking",
+              "bathroom-drain-unblocking",
+            ].includes(service.slug)
               ? service.heroDescription
               : getServiceVisual(service.slug).summary
           }
@@ -311,6 +315,7 @@ export default function ServiceDetail() {
             })}
           </nav>
           <HouseholdServiceTopics serviceSlug={service.slug} />
+          <ServiceDistrictReading serviceSlug={service.slug} />
           <ServiceAnswerLinks serviceSlug={service.slug} />
           <RelatedDrainArticles serviceSlug={service.slug} />
         </div>

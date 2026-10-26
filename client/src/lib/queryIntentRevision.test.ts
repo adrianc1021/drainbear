@@ -9,6 +9,8 @@ import type { SanityBlogPost } from "./sanity/types";
 describe("query-led editorial additions", () => {
   it.each([
     "why-not-drain-cleaner",
+    "cctv-drain-inspection-hong-kong-guide",
+    "building-main-drain-vs-unit-branch-pipe",
     "high-pressure-drain-cleaning-vs-spring-machine",
   ])("preserves original CMS content and publication for %s", slug => {
     const source = {
