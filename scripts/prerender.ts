@@ -403,12 +403,7 @@ function getSitemapEntries(
     { route: "/service-process", changefreq: "monthly", priority: "0.8" },
     ...SERVICE_SLUGS.map(slug => ({
       route: `/services/${slug}`,
-      lastmod:
-        slug === "high-pressure-jetting"
-          ? QUERY_INTENT_UPDATED
-          : HOUSEHOLD_SEARCH_TOPICS.some(t => t.service === slug)
-            ? HOUSEHOLD_TOPICS_UPDATED
-            : "2026-10-24",
+      lastmod: "2026-10-26",
       changefreq: "monthly" as const,
       priority: "0.8",
     })),
@@ -701,7 +696,10 @@ async function prerender() {
         timeout: 30_000,
       });
 
-      if (!response?.ok()) {
+      if (
+        !response?.ok() &&
+        !(route === "/404" && response?.status() === 404)
+      ) {
         throw new Error(
           `Failed to prerender ${route}: HTTP ${response?.status()}`
         );

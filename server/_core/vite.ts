@@ -1,3 +1,4 @@
+import { legacyGuideRedirect, publicDocumentStatus } from "./indexingRoutes";
 import express, { type Express } from "express";
 import fs from "fs";
 import { type Server } from "http";
@@ -121,6 +122,11 @@ function applyRobotsHeaders(
 }
 
 export async function setupVite(app: Express, server: Server) {
+  app.use((req, res, next) => {
+    const destination = legacyGuideRedirect(req.originalUrl);
+    if (destination) return res.redirect(301, destination);
+    return next();
+  });
   const serverOptions = {
     middlewareMode: true,
     hmr: { server },
@@ -176,7 +182,7 @@ export async function setupVite(app: Express, server: Server) {
       applyRobotsHeaders(pathname, isKnownRoute, res);
 
       res
-        .status(isKnownRoute ? 200 : 404)
+        .status(publicDocumentStatus(pathname, isKnownRoute))
         .set({ "Content-Type": "text/html" })
         .end(page);
     } catch (error) {
@@ -197,6 +203,21 @@ export function serveStatic(app: Express) {
   }
 
   const prerenderRoutes = loadPrerenderRoutes(distPath);
+  app.use((req, res, next) => {
+    const destination = legacyGuideRedirect(req.originalUrl);
+    if (destination) return res.redirect(301, destination);
+    // The directly accessible error document is an error too, even with .html.
+    if (/^\/404(?:\.html)?\/?$/.test(req.path)) {
+      const document = path.resolve(distPath, "404.html");
+      if (fs.existsSync(document)) {
+        return res
+          .status(404)
+          .set("X-Robots-Tag", "noindex, follow")
+          .sendFile(document);
+      }
+    }
+    return next();
+  });
 
   app.use(
     express.static(distPath, {
@@ -243,7 +264,9 @@ export function serveStatic(app: Express) {
       const prerenderFile = getPrerenderFilePath(distPath, pathname);
 
       if (fs.existsSync(prerenderFile)) {
-        return res.status(200).sendFile(prerenderFile);
+        return res
+          .status(publicDocumentStatus(pathname, true))
+          .sendFile(prerenderFile);
       }
 
       console.warn(`Prerendered HTML not found for ${pathname}`);
@@ -258,7 +281,7 @@ export function serveStatic(app: Express) {
     }
 
     return res
-      .status(isKnownRoute ? 200 : 404)
+      .status(publicDocumentStatus(pathname, isKnownRoute))
       .sendFile(path.resolve(distPath, "index.html"));
   });
 }
