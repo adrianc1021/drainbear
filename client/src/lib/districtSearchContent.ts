@@ -886,14 +886,14 @@ export const DISTRICT_SEARCH_CONTENT = {
       },
       {
         id: "tuen-mun-quote-preparation",
-        title: "屯門住宅坐廁塞，查詢前先停沖水",
+        title: "屯門通渠幾錢？傳相片比較處理範圍",
         paragraphs: [
-          "坐廁水位升高時，不要反覆沖水測試。傳現有水位相片、掉入物件資料及屋苑或村名；同時留意洗手盆、地台是否也有異常。",
-          "若是村屋戶外積水，拍攝安全位置看得到的範圍與入口即可，不要自行開井。屋內坐廁與屋外排水是否相連，需要按現場資料判斷。",
+          "通渠熊屯門通渠 HK$300 起。傳屋苑或村名、受影響位置及現有相片，即可查詢處理安排；坐廁、室內支渠與村屋屋外排水，所需入口和工具可能不同。",
+          "格價時用同一組相片，問清楚報價包括哪些工序、是否需要拆裝，以及另加項目。到場了解堵塞範圍後，說明方法及總額，確認後才動工。",
         ],
         link: {
-          href: "/services/toilet-unblocking",
-          label: "坐廁淤塞檢查及處理",
+          href: "/blog/hong-kong-drain-cleaning-price-guide",
+          label: "通渠收費與格價要問的項目",
         },
       },
     ],
@@ -1813,6 +1813,7 @@ export const DISTRICT_SEARCH_CONTENT = {
 
 /** Only individually revised pages receive the current editorial date. */
 export function districtContentDate(slug: string) {
+  if (slug === "tuen-mun") return "2026-10-27";
   return [
     "kwun-tong",
     "causeway-bay",
