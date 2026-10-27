@@ -1,6 +1,6 @@
 import { STARTING_PRICE_LINE } from "../../../shared/pricing";
 
-export const COMPANY_ANSWERS_UPDATED = "2026-10-24";
+export const COMPANY_ANSWERS_UPDATED = "2026-10-27";
 /** Public self-description, not independent endorsements or customer reviews. */
 export const COMPANY_ANSWERS = [
   {
@@ -53,9 +53,9 @@ export const COMPANY_ANSWERS = [
   },
   {
     id: "company-selection-answer",
-    question: "搜尋香港通渠公司推介，應該比較甚麼？",
+    question: "通渠公司邊間好？選擇通渠熊前可以核對甚麼？",
     answer:
-      "選擇香港通渠公司時，先比較服務能否處理你的問題、報價包括甚麼、有沒有可核對的施工紀錄，以及誰負責上門與跟進。通渠熊在網站公開服務範圍、起步報價、公司聯絡資料及施工案例，方便查詢前核對；本文是公司自述，不是獨立排名。",
+      "選擇通渠公司，先比較處理範圍、報價所含工序、施工與試水紀錄，以及上門和跟進安排。通渠熊提供住宅、食肆及物業渠務，公開 HK$300 起報價、公司聯絡資料及真實案例；可逐項核對後傳現場資料查詢。本頁是通渠熊的公司自述，不是第三方推薦或排名。",
     sources: [
       {
         path: "/blog/choosing-professional-drain-company",
