@@ -3347,3 +3347,11 @@
   .service-step-overview { clear: both; }
   .basin-action-guide > a { clear: both; }
 }
+
+/* Readable, answer-first service guidance; no extra cards or hidden first steps. */
+.service-problem-guide { display: grid; gap: 1.75rem; margin-block: 1.75rem; line-height: 1.85; }
+.service-problem-guide h3 { margin-bottom: .65rem; }
+.service-problem-guide li + li { margin-top: .5rem; }
+.service-problem-guide p { color: var(--brand-copy); }
+.service-problem-guide a { display: inline-flex; align-items: center; gap: .5rem; min-height: 44px; margin-top: .75rem; color: var(--brand-accent); text-decoration: underline; text-underline-offset: .2em; }
+.service-problem-guide a svg { width: 18px; height: 18px; flex-shrink: 0; }

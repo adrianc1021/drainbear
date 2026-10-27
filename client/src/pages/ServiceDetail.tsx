@@ -9,7 +9,7 @@ import ServiceAnswerLinks from "@/components/ServiceAnswerLinks";
 import ServiceIllustration from "@/components/ServiceIllustration";
 import RelatedDrainArticles from "@/components/RelatedDrainArticles";
 import AnimatedDisclosure from "@/components/AnimatedDisclosure";
-import { getServiceVisual } from "@/lib/serviceVisuals";
+import { SERVICE_PROBLEM_GUIDES } from "@/lib/serviceProblemGuides";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
 import InquiryContactPanel, {
@@ -44,6 +44,7 @@ export default function ServiceDetail() {
 
   if (!service) return <NotFound />;
 
+  const guide = SERVICE_PROBLEM_GUIDES[service.slug];
   const path = `/services/${service.slug}`;
   const serviceSocialImage = `${SITE_URL}${BRAND_SOCIAL_IMAGE}`;
   const crumbs = [
@@ -121,23 +122,14 @@ export default function ServiceDetail() {
           priceLabel={STARTING_PRICE_LINE}
           kicker={service.shortName}
           title={service.name}
-          description={
-            [
-              "sewage-backflow",
-              "cctv-drain-inspection",
-              "kitchen-sink-unblocking",
-              "bathroom-drain-unblocking",
-            ].includes(service.slug)
-              ? service.heroDescription
-              : getServiceVisual(service.slug).summary
-          }
+          description={guide.intro}
           contactLocation="service_detail_hero"
           topic={service.slug}
-          message={service.whatsappMessage}
+          message={guide.message}
         />
       </div>
       <nav className="container page-section-nav" aria-label="本頁內容">
-        <a href="#service-answer-summary">適用情況</a>
+        <a href="#service-answer-summary">問題與處理</a>
         <a href="#service-cases">施工紀錄</a>
         <a href="#service-method">處理流程</a>
         <a href="#service-questions">常見問題</a>
@@ -168,13 +160,42 @@ export default function ServiceDetail() {
               ))}
             </ul>
           </div>
-          <div className="service-direct-answer">
-            <p>{service.answerSummary.handles}</p>
-            <p>{service.answerSummary.suitableWhen}</p>
+          <div className="service-problem-guide">
+            <section aria-labelledby="service-first-steps">
+              <h3 id="service-first-steps">{guide.firstHeading}</h3>
+              <ul>
+                {guide.firstSteps.map(step => (
+                  <li key={step}>{step}</li>
+                ))}
+              </ul>
+            </section>
+            <section aria-labelledby="service-common-causes">
+              <h3 id="service-common-causes">可能由哪些情況引起？</h3>
+              <ul>
+                {service.causes.map(cause => (
+                  <li key={cause}>{cause}</li>
+                ))}
+              </ul>
+            </section>
+            <section aria-labelledby="service-safe-observation">
+              <h3 id="service-safe-observation">{guide.observeHeading}</h3>
+              <ul>
+                {guide.observations.map(item => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </section>
+            <section aria-labelledby="service-when-to-call">
+              <h3 id="service-when-to-call">{guide.helpHeading}</h3>
+              <p>{guide.help}</p>
+              <a href="#service-contact">
+                提供現場資料，查詢處理及報價 <ArrowRight aria-hidden="true" />
+              </a>
+            </section>
           </div>
           <AnimatedDisclosure
             id="service-symptoms"
-            title="症狀、成因與適用範圍"
+            title="其他症狀與檢查限制"
             className="reading-disclosure"
           >
             <div className="service-reading__columns">
@@ -183,15 +204,6 @@ export default function ServiceDetail() {
                 <SectionIllustration scene="observe" />
                 <ul>
                   {service.symptoms.map(item => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h3>常見成因</h3>
-                <SectionIllustration scene="camera" />
-                <ul>
-                  {service.causes.map(item => (
                     <li key={item}>{item}</li>
                   ))}
                 </ul>
@@ -290,7 +302,7 @@ export default function ServiceDetail() {
                 ? "property-management"
                 : undefined
             }
-            defaultMessage={`我想查詢${service.name}，請按我的情況提供初步方向。`}
+            defaultMessage={guide.message}
           />
           <nav className="service-related-links" aria-label="相關通渠服務">
             {service.relatedSlugs.map(slug => {

@@ -403,7 +403,7 @@ function getSitemapEntries(
     { route: "/service-process", changefreq: "monthly", priority: "0.8" },
     ...SERVICE_SLUGS.map(slug => ({
       route: `/services/${slug}`,
-      lastmod: "2026-10-26",
+      lastmod: "2026-10-27",
       changefreq: "monthly" as const,
       priority: "0.8",
     })),
