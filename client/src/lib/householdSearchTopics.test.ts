@@ -52,7 +52,14 @@ describe("household search series", () => {
       expect(mapped.coverImage).toEqual(original.coverImage);
       expect(mapped.title).toBe(topic.title);
       expect(mapped.seo?.metaDescription).toBe(topic.description);
-      expect(mapped.updatedAt).toBe("2026-10-26");
+      expect(mapped.updatedAt).toBe(
+        [
+          "bathroom-hair-clog-prevention",
+          "toilet-clog-emergency-guide",
+        ].includes(topic.slug)
+          ? "2026-10-27"
+          : "2026-10-26"
+      );
       expect(mapped.faqs).toHaveLength(4);
       expect(mapped.reviewerName).toBe("");
     }

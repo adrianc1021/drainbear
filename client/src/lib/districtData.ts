@@ -22,6 +22,7 @@ export interface DistrictInfo {
   metaTitle?: string;
   pageHeading?: string;
   leadDescription?: string;
+  inquiryMessage?: string;
   articleTitle?: string;
   serviceSlugs?: string[];
   relatedReading?: { href: string; label: string }[];

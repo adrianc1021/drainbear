@@ -174,6 +174,38 @@ const SERVICE_LABELS: Record<string, string> = {
   "bathroom-drain-unblocking": "浴室與洗手盆通渠",
 };
 type ResourceLink = { label: string; href: string; note?: string };
+export const DISTRICT_READING_REVISED_AT = "2026-10-27";
+/** Preparation guidance, not evidence of work completed in these districts. */
+export const ARTICLE_DISTRICT_READING: Record<string, ResourceLink[]> = {
+  "toilet-clog-emergency-guide": [
+    {
+      href: "/areas/north-point#north-point-toilet-water",
+      label: "北角、炮台山坐廁塞：上門前要記錄甚麼？",
+      note: "在北角或炮台山查詢時，可按地區頁整理水位、異物及其他去水位的情況，毋須反覆沖水測試。",
+    },
+  ],
+  "bathroom-hair-clog-prevention": [
+    {
+      href: "/areas/causeway-bay#tai-hang-drain-arrangements",
+      label: "大坑浴室去水慢：相連喉管與施工入口",
+      note: "清走表面頭髮後仍積水，大坑住宅可先了解相連去水位及入口安排，再提供現有相片查詢。",
+    },
+  ],
+  "restaurant-grease-trap-guide": [
+    {
+      href: "/areas/kwun-tong#kwun-tong-kitchen-route",
+      label: "觀塘工廈食堂：隔油池清理後仍去水慢",
+      note: "隔油池與下游管道是不同處理範圍；觀塘商戶可先列出受影響設備及可停用時段，方便安排檢查。",
+    },
+  ],
+  "village-house-manhole-rainy-season": [
+    {
+      href: "/areas/tai-po#tai-po-village-rain",
+      label: "大埔村屋戶外積水：雨天情況與進場資料",
+      note: "大埔村屋查詢可先交代日常與雨天的差別、落車位置及負責人，毋須自行開井拍攝。",
+    },
+  ],
+};
 export function getArticleResourceLinks(
   slug: string,
   existing?: ResourceLink[]
@@ -186,14 +218,18 @@ export function getArticleResourceLinks(
       href: `/services/${service}`,
       ...(index === 0 ? { note: topic.note } : {}),
     })) ?? []),
+    ...(ARTICLE_DISTRICT_READING[slug] ?? []),
   ];
   return links.filter(
     (link, index) => links.findIndex(item => item.href === link.href) === index
   );
 }
 export function contentConnectionDate(slug: string, date?: string) {
-  if (!SERVICE_TOPIC_ARTICLES.some(item => item.slug === slug)) return date;
-  return date && Date.parse(date) > Date.parse(CONTENT_CONNECTIONS_REVISED_AT)
-    ? date
-    : CONTENT_CONNECTIONS_REVISED_AT;
+  const revision = ARTICLE_DISTRICT_READING[slug]
+    ? DISTRICT_READING_REVISED_AT
+    : SERVICE_TOPIC_ARTICLES.some(item => item.slug === slug)
+      ? CONTENT_CONNECTIONS_REVISED_AT
+      : undefined;
+  if (!revision) return date;
+  return date && Date.parse(date) > Date.parse(revision) ? date : revision;
 }

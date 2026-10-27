@@ -23,6 +23,8 @@ export default function District() {
   const seoTitle =
     d.metaTitle ?? `${d.name}通渠｜住宅及商戶處理・24小時查詢｜通渠熊`;
   const pageHeading = d.pageHeading ?? `${d.name}通渠服務`;
+  const inquiryMessage =
+    d.inquiryMessage ?? `您好，我位於${d.name}，想查詢通渠處理安排。`;
 
   const crumbs = [
     { name: "首頁", path: "/" },
@@ -102,7 +104,7 @@ export default function District() {
           }
           contactLocation="district_hero"
           topic={d.name}
-          message={`您好，我位於${d.name}，想查詢通渠處理安排。`}
+          message={inquiryMessage}
         />
       </div>
 
@@ -292,7 +294,7 @@ export default function District() {
           <InquiryContactPanel
             location={`district_${d.slug}`}
             title={`${d.name}通渠，先交代現場情況`}
-            defaultMessage={`您好，我位於${d.name}，想查詢通渠處理安排。`}
+            defaultMessage={inquiryMessage}
             chooseCustomer
           />
         </div>

@@ -17,11 +17,13 @@ type DistrictEditorial = Required<
     | "relatedReading"
   >
 > &
-  Pick<DistrictInfo, "pageHeading">;
+  Pick<DistrictInfo, "pageHeading" | "inquiryMessage">;
 
 export const DISTRICT_CONTENT_REVISED_AT = "2026-10-24";
 export const DISTRICT_SEARCH_CONTENT = {
   "kwun-tong": {
+    inquiryMessage:
+      "您好，我想查詢觀塘／牛頭角／藍田通渠。位置及樓層：＿＿；住宅／商戶：＿＿；受影響設備：＿＿；其他去水位情況：＿＿；可停用設備及貨梯時段（如適用）：＿＿。我會傳現場相片，請確認工序、報價及上門安排。",
     metaTitle: "觀塘通渠｜工廈食堂、住宅及商戶排水｜通渠熊",
     leadDescription:
       "觀塘、牛頭角及藍田通渠 HK$300 起。住宅鋅盤塞、坐廁淤塞或工廈食堂排水問題，傳位置及相片查詢；商戶請附可停用時段，確認工序、收費及上門安排。",
@@ -428,6 +430,8 @@ export const DISTRICT_SEARCH_CONTENT = {
     ],
   },
   "causeway-bay": {
+    inquiryMessage:
+      "您好，我想查詢銅鑼灣／大坑通渠。街道或大廈：＿＿；住宅／食肆：＿＿；積水或倒灌位置：＿＿；其他去水位情況：＿＿；可進場時段：＿＿。我會提供現有相片，請確認處理範圍、報價及上門安排。",
     metaTitle: "銅鑼灣及大坑通渠｜食肆停機、住宅排水｜通渠熊",
     leadDescription:
       "銅鑼灣、大坑及天后通渠 HK$300 起。住宅浴室積水、鋅盤塞或餐廳排水不暢，傳相查詢處理方法；食肆可先交代隔油設施及停機時段，確認報價與上門安排。",
@@ -522,6 +526,8 @@ export const DISTRICT_SEARCH_CONTENT = {
     ],
   },
   "north-point": {
+    inquiryMessage:
+      "您好，我想查詢北角／炮台山通渠。街道或大廈：＿＿；坐廁／洗手盆／其他位置：＿＿；水位及去水情況：＿＿；其他位置是否同時冒水：＿＿；曾使用的通渠劑（如有）：＿＿。我會傳現有相片，請確認方法、報價及上門安排。",
     metaTitle: "北角通渠｜坐廁、鋅盤及浴室淤塞處理｜通渠熊",
     leadDescription:
       "北角、炮台山通渠 HK$300 起，處理坐廁塞、鋅盤及洗手盆去水慢。傳受影響位置及櫃底相片，查詢疏通、拆裝收費與上門安排；24 小時接受查詢。",
@@ -1716,6 +1722,8 @@ export const DISTRICT_SEARCH_CONTENT = {
     ],
   },
   "tai-po": {
+    inquiryMessage:
+      "您好，我想查詢大埔通渠。屋苑／村名及位置：＿＿；室內／屋外排水：＿＿；受影響位置：＿＿；是否只在落雨時發生：＿＿；可用入口及現場聯絡安排：＿＿。我會從安全位置拍攝相片，請確認處理範圍、報價及上門安排。",
     metaTitle: "大埔通渠｜屋苑廚房、大埔墟商戶與村屋｜通渠熊",
     leadDescription:
       "大埔、太和及大埔墟通渠 HK$300 起。住宅鋅盤塞、商戶排水或林村、汀角村屋積水，傳位置與相片查詢；按堵塞範圍及入口確認方法、收費與可安排時段。",
@@ -1813,7 +1821,12 @@ export const DISTRICT_SEARCH_CONTENT = {
 
 /** Only individually revised pages receive the current editorial date. */
 export function districtContentDate(slug: string) {
-  if (slug === "tuen-mun") return "2026-10-27";
+  if (
+    ["tuen-mun", "kwun-tong", "causeway-bay", "north-point", "tai-po"].includes(
+      slug
+    )
+  )
+    return "2026-10-27";
   return [
     "kwun-tong",
     "causeway-bay",

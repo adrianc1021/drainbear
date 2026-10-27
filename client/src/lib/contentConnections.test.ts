@@ -49,7 +49,7 @@ describe("contextual article/service connections", () => {
     });
     expect(cms.date).toBe("2026-08-01");
     expect(cms.body).toEqual([]);
-    expect(cms.updatedAt).toBe("2026-10-22");
+    expect(cms.updatedAt).toBe("2026-10-27");
     expect(fallback.updatedAt).toBe(cms.updatedAt);
     expect(fallback.resourceLinks).toEqual(cms.resourceLinks);
     expect(contentConnectionDate(common.slug, "2026-11-01")).toBe("2026-11-01");
