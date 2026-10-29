@@ -2,6 +2,7 @@ import { PRICE_GUIDE_REVISION } from "./priceGuideRevision";
 import { KITCHEN_PREVENTION_REVISION } from "./kitchenPreventionRevision";
 import { SEO_ARTICLES } from "./seoArticles";
 import { NEW_SERVICE_ARTICLES } from "./newServiceArticles";
+import { COMPANY_SEARCH_ARTICLES } from "./companySearchArticles";
 import type { SanityImageData, SeoData } from "./sanity/types";
 /**
  * 通渠熊 DrainBear — 通渠小知識網誌資料
@@ -39,6 +40,7 @@ export interface BlogPost {
 }
 
 export const BLOG_POSTS: BlogPost[] = [
+  ...COMPANY_SEARCH_ARTICLES,
   ...NEW_SERVICE_ARTICLES,
   ...SEO_ARTICLES,
   PRICE_GUIDE_REVISION,

@@ -10,7 +10,7 @@ export const DRAIN_COMPANY_SELECTION_GUIDE: BlogPost = {
   title: "香港通渠公司推介：通渠邊間好？收費與案例比較",
   category: "實用指南",
   date: "2026-10-09",
-  updatedAt: "2026-10-27",
+  updatedAt: "2026-10-29",
   readMins: 4,
   authorName: "通渠熊編輯團隊",
   reviewerName: "",
@@ -153,6 +153,14 @@ export const DRAIN_COMPANY_SELECTION_GUIDE: BlogPost = {
     },
   ],
   resourceLinks: [
+    {
+      label: "通渠公司報價單、收據與保養確認",
+      href: "/blog/drain-company-quotation-receipt-warranty",
+    },
+    {
+      label: "物業管理委託香港通渠公司的工作清單",
+      href: "/blog/hong-kong-drain-company-property-commissioning",
+    },
     { label: "搜尋通渠爭議公開資料庫", href: "/consumer-alerts" },
     { label: "通渠熊公司及聯絡資料", href: "/about#company-facts" },
     { label: "上門與處理流程", href: "/service-process" },
