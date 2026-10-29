@@ -389,7 +389,7 @@ function getSitemapEntries(
     })),
     {
       route: "/",
-      lastmod: QUERY_INTENT_UPDATED,
+      lastmod: "2026-10-29",
       changefreq: "weekly",
       priority: "1.0",
     },

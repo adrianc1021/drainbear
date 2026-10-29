@@ -33,15 +33,16 @@ export default function HomeCompanyIntro() {
         <div className="home-company-intro__copy">
           <p className="home-company-intro__eyebrow">認識通渠熊 DrainBear</p>
           <h2 id="home-company-heading">
-            由家居去水，
+            香港通渠公司，
             <br />
-            到物業渠務。
+            由家居到物業。
           </h2>
           <p className="home-company-intro__lead">
-            通渠熊為香港住宅、食肆及物業提供渠務服務。坐廁、鋅盤、浴室以至主渠沙井，都由現場情況出發，安排合適處理。
+            通渠熊 DrainBear
+            提供香港通渠服務，處理住宅坐廁塞、洗手盆及鋅盤去水慢、浴室積水，以及食肆排水、物業主渠與沙井淤塞。
           </p>
           <p>
-            我們先了解堵塞位置與施工入口，說明方法及收費，確認後才動工。完成後按工作範圍測試去水，將處理過程交代清楚。
+            想搵通渠公司格價，先傳地區、受影響位置及相片。我們會了解堵塞範圍與施工入口，確認方法及收費後才動工，完成後按工作範圍測試去水。
           </p>
           <div
             className="home-company-intro__principles"
