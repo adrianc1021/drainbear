@@ -1,6 +1,6 @@
 import { STARTING_PRICE_LINE } from "../../../shared/pricing";
 
-export const COMPANY_ANSWERS_UPDATED = "2026-10-27";
+export const COMPANY_ANSWERS_UPDATED = "2026-11-02";
 /** Public self-description, not independent endorsements or customer reviews. */
 export const COMPANY_ANSWERS = [
   {

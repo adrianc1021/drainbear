@@ -1,3 +1,4 @@
+import { SERVICE_COMPANY_GUIDES } from "@/lib/contentConnections";
 import ServiceDistrictReading from "@/components/ServiceDistrictReading";
 import SectionIllustration from "@/components/SectionIllustration";
 import { HouseholdServiceTopics } from "@/components/HouseholdTopicGuide";
@@ -40,6 +41,7 @@ const INQUIRY_TYPE_BY_SLUG: Record<string, InquiryServiceType> = {
 export default function ServiceDetail() {
   const { slug } = useParams<{ slug: string }>();
   const service = getServicePage(slug || "");
+  const companyGuide = SERVICE_COMPANY_GUIDES[slug || ""];
   const { settings } = useSiteSettings();
 
   if (!service) return <NotFound />;
@@ -268,6 +270,18 @@ export default function ServiceDetail() {
               查看完整上門流程 <ArrowRight aria-hidden="true" />
             </Link>
           </AnimatedDisclosure>
+          {companyGuide ? (
+            <aside className="mt-6" aria-label="委託與報價準備">
+              <p>{companyGuide.note}</p>
+              <Link
+                href={companyGuide.href}
+                className="inline-flex min-h-11 items-center gap-2 font-bold underline underline-offset-4"
+              >
+                {companyGuide.label}
+                <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+              </Link>
+            </aside>
+          ) : null}
         </div>
       </section>
       <section

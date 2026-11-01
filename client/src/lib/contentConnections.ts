@@ -233,3 +233,48 @@ export function contentConnectionDate(slug: string, date?: string) {
   if (!revision) return date;
   return date && Date.parse(date) > Date.parse(revision) ? date : revision;
 }
+
+/** Service-specific commissioning help, visible beside the work process. */
+export const COMPANY_GUIDE_LINKS_UPDATED = "2026-11-02";
+export const SERVICE_COMPANY_GUIDES: Record<string, ResourceLink> = {
+  "toilet-unblocking": {
+    href: "/blog/drain-company-quotation-receipt-warranty",
+    label: "坐廁通渠報價：拆裝及加項點確認？",
+    note: "比較坐廁通渠公司時，先問清楚是否需要拆裝座廁，以及相關費用有沒有包括。",
+  },
+  "kitchen-sink-unblocking": {
+    href: "/blog/drain-company-quotation-receipt-warranty",
+    label: "鋅盤通渠報價：隔氣與下游管段點列明？",
+    note: "清理隔氣與處理牆內支渠範圍不同，報價單應列明處理位置、拆裝及試水項目。",
+  },
+  "bathroom-drain-unblocking": {
+    href: "/blog/drain-company-quotation-receipt-warranty",
+    label: "浴室通渠報價：多個去水位點計？",
+    note: "洗手盆與地台去水同時有問題，先確認報價涵蓋哪些位置，以及額外工序如何確認。",
+  },
+  "cctv-drain-inspection": {
+    href: "/blog/hong-kong-drain-company-property-commissioning",
+    label: "委託照渠前：確認檢查範圍與影像交付",
+    note: "物業安排 CCTV 檢測，先列明入口、可檢查管段、影像及紀錄交付要求，再比較報價。",
+  },
+  "high-pressure-jetting": {
+    href: "/blog/hong-kong-drain-company-property-commissioning",
+    label: "高壓洗渠工程：進場與交接資料",
+    note: "委託清洗前先交代車輛通道、取水及工作時段，並確認要清洗的管段與測試方式。",
+  },
+  "main-drain-manhole": {
+    href: "/blog/hong-kong-drain-company-property-commissioning",
+    label: "搵香港通渠公司處理公共渠：報價與交接清單",
+    note: "管理處比較主渠工程報價時，先統一沙井及管段範圍、進場安排和完工紀錄要求。",
+  },
+  "sewage-backflow": {
+    href: "/blog/hong-kong-drain-company-property-commissioning",
+    label: "共用渠倒灌：管理處如何委託處理？",
+    note: "多個單位同時倒灌，先確認現場負責人、可停用設施及工程批准安排，減少到場後等候。",
+  },
+  "grease-trap-cleaning": {
+    href: "/blog/drain-company-quotation-receipt-warranty",
+    label: "隔油池清理報價：清理範圍與收據",
+    note: "隔油池本體與下游去水管分開確認清理範圍，並列明停用時段、廢物處理及收費項目。",
+  },
+};

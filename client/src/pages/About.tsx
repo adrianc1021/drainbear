@@ -40,6 +40,14 @@ export default function About() {
             dateModified: COMPANY_ANSWERS_UPDATED,
           },
           companyAnswersJsonLd(SITE_URL),
+          {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "@id": `${SITE_URL}/about#editorial-team`,
+            name: "通渠熊編輯團隊",
+            url: `${SITE_URL}/about#editorial-team`,
+            parentOrganization: { "@id": BUSINESS_ID },
+          },
         ]}
       />
       <div className="site-hero-shell">
@@ -144,6 +152,27 @@ export default function About() {
               聯絡資料以本頁及網站的最新顯示為準。
             </p>
           </div>
+        </div>
+      </section>
+      <section
+        className="brand-section"
+        id="editorial-team"
+        aria-labelledby="editorial-team-heading"
+      >
+        <div className="container service-reading">
+          <h2 id="editorial-team-heading">通渠熊編輯團隊：文章與施工資料</h2>
+          <p>
+            網站以「通渠熊編輯團隊」署名的文章，是通渠熊的品牌內容，整理塞渠症狀、查詢準備及服務流程，方便住宅住戶、商戶和物業管理比較處理方案。
+          </p>
+          <p>
+            想了解實際工程，可查看<Link href="/cases">施工案例與現場影片</Link>
+            ；方法指南則說明一般檢查方向，不能單憑症狀確認管內情況。文章插圖與現場施工紀錄分開呈現。
+          </p>
+          <p>
+            文章保留發布日期，有內容修訂時另列更新日期。需要查證服務資料或反映內容問題，可使用
+            <Link href="/about#company-facts">公司聯絡資料</Link>
+            聯絡我們，並提供文章網址及相關段落。
+          </p>
         </div>
       </section>
       <section

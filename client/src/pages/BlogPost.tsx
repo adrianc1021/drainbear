@@ -311,6 +311,9 @@ export default function BlogPost() {
 
   const canonicalUrl = post.seo?.canonicalUrl || `/blog/${post.slug}`;
 
+  const isEditorialTeam = post.authorName === "通渠熊編輯團隊";
+  const editorialUrl = `${settings.siteUrl.replace(/\/+$/, "")}/about#editorial-team`;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -327,7 +330,8 @@ export default function BlogPost() {
     author: {
       "@type": "Organization",
       name: post.authorName,
-      url: settings.siteUrl,
+      ...(isEditorialTeam ? { "@id": editorialUrl } : {}),
+      url: isEditorialTeam ? editorialUrl : settings.siteUrl,
     },
     reviewedBy: post.reviewerName
       ? {
@@ -444,7 +448,17 @@ export default function BlogPost() {
 
             <span className="inline-flex items-center gap-1.5 sm:border-l sm:border-border sm:pl-5">
               <UserRound className="h-4 w-4" />
-              作者：{post.authorName}
+              作者：
+              {isEditorialTeam ? (
+                <Link
+                  href="/about#editorial-team"
+                  className="underline underline-offset-4"
+                >
+                  {post.authorName}
+                </Link>
+              ) : (
+                post.authorName
+              )}
             </span>
           </div>
 
