@@ -1,3 +1,5 @@
+import { STARTING_PRICE_LABEL } from "../../../shared/pricing";
+
 export interface ServiceFaq {
   question: string;
   answer: string;
@@ -430,7 +432,7 @@ export const SERVICE_PAGES: ServicePageData[] = [
       {
         question: "查詢浴室通渠前，需要提供甚麼？",
         answer:
-          "企缸、浴缸或地台去水全景，說明開始時間及其他去水位是否正常。已倒灌時不要加水測試。",
+          "傳洗手盆、企缸、浴缸或地台去水全景；洗手盆另加櫃底接駁相片，說明地區、開始時間及其他去水位是否正常。用過通渠水，請告知產品及使用時間；已倒灌時不要加水測試。",
       },
       {
         question: "夜間也可以查詢浴室通渠嗎？",
@@ -446,6 +448,15 @@ export const SERVICE_PAGES: ServicePageData[] = [
         question: "浴缸去水塞或去水慢，可以點做？",
         answer:
           "先關水，避免水位繼續升高；只清走容易取出的隔網表面毛髮，不強拆配件。仍不退水時，傳去水口及浴缸全景，查詢檢查入口與疏通報價。",
+      },
+      {
+        question: "洗手盆通渠幾錢？拆隔氣費用包括在內嗎？",
+        answer: `通渠熊洗手盆通渠 ${STARTING_PRICE_LABEL}。報價按堵塞位置、隔氣或支渠處理範圍、是否拆裝及施工入口確認。傳盆口、櫃底相片及地區查詢，動工前確認總收費與包括的工序；起步價不代表所有情況都只收同一金額。`,
+      },
+      {
+        question: "洗手盆一放水，地台就冒水，應該搵邊項服務？",
+        answer:
+          "先停用洗手盆及其他會引起冒水的設備，不要反覆放水測試。洗手盆與地台可能共用下游支渠，可向通渠熊查詢浴室及支渠檢查；若多個單位同時倒灌，亦要通知管理處確認公共渠範圍。提供最先冒水的位置及現有短片，方便判斷處理方向。",
       },
     ],
     relatedSlugs: [

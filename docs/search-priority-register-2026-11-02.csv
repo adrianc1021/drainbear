@@ -1,0 +1,15 @@
+query,cluster,target_page,historical_impressions,historical_clicks,historical_average_position,baseline_period,baseline_scope
+通渠公司,公司選擇,/,211,3,28.67,2026-09-28/2026-10-25,所有國家及裝置
+香港通渠公司,公司選擇,/,35,1,24,2026-09-28/2026-10-25,所有國家及裝置
+通渠公司推介,公司選擇,/blog/choosing-professional-drain-company,26,1,24.15,2026-09-28/2026-10-25,所有國家及裝置
+洗手盆去水慢,洗手盆,/blog/slow-basin-drain-causes-solutions,30,1,7.63,2026-09-28/2026-10-25,所有國家及裝置
+洗手盤去水慢,洗手盆,/blog/slow-basin-drain-causes-solutions,86,1,28.93,2026-09-28/2026-10-25,所有國家及裝置
+洗手盆通渠,洗手盆,/services/bathroom-drain-unblocking,,,,未提供,未提供
+北角通渠,地區,/areas/north-point,299,0,10.89,2026-09-28/2026-10-25,所有國家及裝置
+大坑通渠,地區,/areas/causeway-bay,265,0,9.70,2026-09-28/2026-10-25,所有國家及裝置
+銅鑼灣通渠,地區,/areas/causeway-bay,265,0,12.06,2026-09-28/2026-10-25,所有國家及裝置
+觀塘通渠,地區,/areas/kwun-tong,319,0,17.18,2026-09-28/2026-10-25,所有國家及裝置
+大埔通渠,地區,/areas/tai-po,234,0,15.66,2026-09-28/2026-10-25,所有國家及裝置
+大圍通渠,地區,/areas/sha-tin,279,0,18.09,2026-09-28/2026-10-25,所有國家及裝置
+污水倒灌,倒灌,/services/sewage-backflow,125,0,14.18,2026-09-28/2026-10-25,所有國家及裝置
+照渠,檢測,/services/cctv-drain-inspection,115,1,6.94,2026-09-28/2026-10-25,所有國家及裝置
