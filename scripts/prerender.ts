@@ -1,3 +1,4 @@
+import { QUOTATION_GUIDE_UPDATED } from "../client/src/lib/quotationGuide";
 import { COMPANY_GUIDE_LINKS_UPDATED } from "../client/src/lib/contentConnections";
 import {
   queryIntentDate,
@@ -410,7 +411,12 @@ function getSitemapEntries(
       changefreq: "monthly" as const,
       priority: "0.8",
     })),
-    { route: "/guide", changefreq: "monthly", priority: "0.9" },
+    {
+      route: "/guide",
+      lastmod: QUOTATION_GUIDE_UPDATED,
+      changefreq: "monthly",
+      priority: "0.9",
+    },
     { route: "/areas", changefreq: "monthly", priority: "0.8" },
     ...DISTRICT_SLUGS.map(slug => ({
       route: `/areas/${slug}`,

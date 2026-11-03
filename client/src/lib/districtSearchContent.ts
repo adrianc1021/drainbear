@@ -1100,17 +1100,41 @@ export const DISTRICT_SEARCH_CONTENT = {
     ],
   },
   "central-western": {
-    metaTitle: "中西區通渠｜中環商廈、上環舊樓與半山入口｜通渠熊",
+    pageHeading: "中環、上環及西半山通渠服務",
+    inquiryMessage:
+      "您好，我想查詢中環／上環／西半山通渠。街道或大廈：＿＿；住宅／商戶／商廈：＿＿；受影響設備：＿＿；其他樓層或去水位情況：＿＿；可進場及停用設備時段：＿＿。我會提供相片，請確認處理範圍、總收費及上門時間。",
+    metaTitle: "中環、上環通渠｜住宅及商廈淤塞・先報價後動工｜通渠熊",
     leadDescription:
-      "中環、上環、西營盤及半山通渠查詢。商廈洗手間、舊樓共用渠及斜路樓宇如何準備進場、停水與檢查資料，按現場條件確認處理。",
+      "中環、上環、西營盤及西半山通渠 HK$300 起。處理住宅坐廁、鋅盤及浴室淤塞、商廈排水與共用渠問題；現場確認工序及總收費後動工，24 小時接受查詢。",
     metaDescription:
-      "中環、上環、西營盤及半山通渠查詢。商廈洗手間、舊樓共用渠及斜路樓宇如何準備進場、停水與檢查資料，按現場條件確認處理。",
-    articleTitle: "中西區通渠，從商廈使用時段到半山搬運路線",
+      "中環、上環、西營盤及西半山通渠 HK$300 起。處理住宅坐廁、鋅盤及浴室淤塞、商廈排水與共用渠問題；現場確認工序及總收費後動工，24 小時接受查詢。",
+    articleTitle: "中環與上環通渠：住宅、商廈及共用渠處理",
     intro: [
-      "中環商廈洗手間在辦公時間不能隨意停用，上環、西營盤住宅的入口則可能要配合住戶與管理人員。這兩類情況，即使同樣出現倒灌，協調次序也不同。",
-      "半山或有高低差的樓宇，地址只交代了目的地，未交代工具怎樣送到工作位置。查詢時把落車點、樓層及入口一併說明，有助確認可行安排。",
+      "通渠熊承接中環、上環、西營盤及西半山住宅與商廈的通渠查詢，包括坐廁塞、鋅盤及浴室去水慢、多處倒灌和共用管段淤塞。先了解受影響位置與入口，按現場情況選擇疏通或檢查方法，確認工序及總收費後才動工。",
+      "24 小時接受電話及 WhatsApp 查詢；到場時間按具體地址、交通、人手和設備安排。中環商廈需先確認可停用設備及管理處要求；上環住宅與半山樓宇則要說明樓層、升降機和工具搬運路線。",
     ],
     localSections: [
+      {
+        id: "central-western-quotation",
+        title: "中環及上環通渠收費：先界定範圍，再確認總額",
+        paragraphs: [
+          "通渠服務 HK$300 起，並非每宗工程的固定總價。單一潔具疏通、拆裝隔氣、共用管段處理或 CCTV 檢查，涉及的入口與工序不同；現場檢查後、動工前確認最終總收費。",
+          "預約前先問清上門及檢查是否收費，動工前確認拆裝、設備與試水是否包括。商廈請提供停用設備時段及現場聯絡人；如需額外工序，先確認新增範圍和費用。",
+        ],
+        link: { href: "/guide", label: "查看通渠收費與報價確認清單" },
+      },
+      {
+        id: "central-western-home-drains",
+        title: "上環及西半山住宅：坐廁、鋅盤與浴室分開判斷",
+        paragraphs: [
+          "只有鋅盤去水慢，可先拍盆面與櫃底接駁，了解隔氣及支渠的檢查入口；坐廁水位上升則先停止反覆沖水，說明是否曾有異物掉入。浴室積水時，一併交代洗手盆、企缸和地台去水情況。",
+          "多個位置或鄰戶同時倒灌，應通知管理處協調共用管段檢查。疏通與修復漏水、換喉並非同一工序，需按現場發現分別確認，毋須自行拆喉尋找原因。",
+        ],
+        link: {
+          href: "/services/bathroom-drain-unblocking",
+          label: "了解洗手盆及浴室淤塞處理",
+        },
+      },
       {
         id: "central-western-office-floor",
         title: "商廈洗手間：先分清單層與多層影響",
@@ -1175,14 +1199,26 @@ export const DISTRICT_SEARCH_CONTENT = {
         q: "半山住宅能停車但渠位在另一層，要預先說明嗎？",
         a: "要。提供由停車點到工作位置的完整路線、梯級及入口資料，方便評估工具、人手和搬運安排。",
       },
+      {
+        q: "中環或上環通渠幾多錢？",
+        a: "通渠熊通渠服務 HK$300 起，最終收費按堵塞範圍、施工入口、拆裝及所需工具確認。先提供地區與相片，現場檢查後、動工前確認工序及總額；起步價不代表所有檢查或設備已包括。",
+      },
+      {
+        q: "中環、上環及西半山夜晚塞渠，可以即時上門嗎？",
+        a: "電話及 WhatsApp 24 小時接受查詢，但不能把查詢時間當作到場承諾。請提供具體位置、渠況及樓宇進場要求，團隊按交通、人手和設備確認上門時間。",
+      },
     ],
     serviceSlugs: [
       "main-drain-manhole",
       "cctv-drain-inspection",
       "toilet-unblocking",
+      "kitchen-sink-unblocking",
+      "bathroom-drain-unblocking",
       "sewage-backflow",
     ],
     relatedReading: [
+      { href: "/cases", label: "查看實際施工紀錄（工程地點以個別紀錄為準）" },
+      { href: "/service-process", label: "了解上門、報價與完工試水流程" },
       {
         href: "/blog/property-drain-maintenance-plan",
         label: "管理處如何保存渠務紀錄",
@@ -1858,7 +1894,8 @@ export const DISTRICT_SEARCH_CONTENT = {
 
 /** Only individually revised pages receive the current editorial date. */
 export function districtContentDate(slug: string) {
-  if (["north-point", "causeway-bay"].includes(slug)) return "2026-11-03";
+  if (["north-point", "causeway-bay", "central-western"].includes(slug))
+    return "2026-11-03";
   if (
     ["tuen-mun", "kwun-tong", "causeway-bay", "north-point", "tai-po"].includes(
       slug
