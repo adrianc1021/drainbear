@@ -1,7 +1,11 @@
+import { STARTING_PRICE_LINE } from "../../../shared/pricing";
 import {
-  STARTING_PRICE_LINE,
-  STARTING_PRICE_ANSWER,
-} from "../../../shared/pricing";
+  QUOTATION_GUIDE_UPDATED,
+  QUOTATION_GUIDE_TITLE,
+  QUOTATION_GUIDE_DESCRIPTION,
+  QUOTATION_ANSWERS as ANSWERS,
+  QUOTATION_SCOPES,
+} from "@/lib/quotationGuide";
 import { BRAND_SOCIAL_IMAGE, BRAND_SOCIAL_ALT } from "@/lib/brandVisuals";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { EditorialPageHero } from "@/components/editorial/SiteEditorial";
@@ -15,25 +19,6 @@ const CRUMBS = [
   { name: "首頁", path: "/" },
   { name: "通渠查詢與報價指南", path: "/guide" },
 ];
-const ANSWERS = [
-  {
-    id: "quote-context",
-    question: "通渠幾錢起？如何查詢報價？",
-    answer: STARTING_PRICE_ANSWER,
-  },
-  {
-    id: "quote-photos",
-    question: "傳相片可以先了解報價嗎？",
-    answer:
-      "相片或短片有助了解受影響位置和進場條件；隱藏管段及堵塞原因可能仍需現場檢查。請先提供地區、問題描述及安全情況下拍攝的畫面。",
-  },
-  {
-    id: "quote-tools",
-    question: "為甚麼不同塞渠情況需要不同工具？",
-    answer:
-      "局部異物、管壁油垢和多處倒灌的原因不一樣。師傅會按現場評估機械疏通、高壓清洗或影像檢查是否合適。",
-  },
-];
 
 export default function Guide() {
   return (
@@ -41,8 +26,8 @@ export default function Guide() {
       <SEO
         image={BRAND_SOCIAL_IMAGE}
         imageAlt={BRAND_SOCIAL_ALT}
-        title="通渠報價 HK$300 起｜WhatsApp 傳相查詢｜通渠熊"
-        description="通渠熊全線通渠服務 HK$300 起。住宅、食肆及物業，提供地區、堵塞位置及相片，立即 WhatsApp 查詢通渠報價。"
+        title={QUOTATION_GUIDE_TITLE}
+        description={QUOTATION_GUIDE_DESCRIPTION}
         path="/guide"
         breadcrumbs={CRUMBS}
         jsonLd={[
@@ -51,7 +36,10 @@ export default function Guide() {
             "@type": "WebPage",
             "@id": `${SITE_URL}/guide#webpage`,
             url: `${SITE_URL}/guide`,
-            name: "通渠查詢與報價指南",
+            name: QUOTATION_GUIDE_TITLE,
+            description: QUOTATION_GUIDE_DESCRIPTION,
+            dateModified: QUOTATION_GUIDE_UPDATED,
+            inLanguage: "zh-Hant-HK",
             about: { "@id": BUSINESS_ID },
           },
           {
@@ -71,11 +59,96 @@ export default function Guide() {
         <EditorialPageHero
           priceLabel={STARTING_PRICE_LINE}
           kicker="查詢與報價"
-          title="通渠 HK$300 起，傳相即刻問報價。"
-          description="同樣係塞渠，位置、管道同所需工具可以好唔同。傳送地區與現場相片，方便團隊了解處理方向。"
+          title="通渠收費 HK$300 起，先問清工序與總額。"
+          description="起步價不是每宗工程的固定總價。先傳地區及相片了解處理方向，現場檢查後確認工序與總收費，雙方同意才動工。"
           contactLocation="guide_hero"
         />
       </div>
+      <section className="brand-section" aria-labelledby="quote-scope-heading">
+        <div className="container brand-narrow">
+          <p className="brand-eyebrow">起步價與實際工序</p>
+          <h2 id="quote-scope-heading">通渠報價，要看今次處理甚麼。</h2>
+          <p className="brand-section-description">
+            同樣是去水慢，可能只涉及一個隔氣，也可能要檢查共用管段。 HK$300
+            起並非固定套餐；適用工序及最終總收費須按現場確認。
+          </p>
+          <div className="mt-8 space-y-8">
+            {QUOTATION_SCOPES.map(scope => (
+              <div key={scope.title}>
+                <h3 className="text-lg font-bold text-navy">{scope.title}</h3>
+                <p className="mt-3 leading-relaxed text-navy/75">
+                  {scope.detail}
+                </p>
+                <Link
+                  href={scope.href}
+                  className="mt-2 inline-flex min-h-11 items-center font-bold text-wagreen-dark underline underline-offset-4"
+                >
+                  {scope.label}
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section
+        className="brand-section brand-section--soft"
+        aria-labelledby="quote-confirm-heading"
+      >
+        <div className="container brand-narrow">
+          <h2 id="quote-confirm-heading">確認報價前，逐項問清楚。</h2>
+          <ul className="mt-6 list-disc space-y-3 pl-5 leading-relaxed text-navy/75">
+            <li>預約上門：檢查是否收費、未能疏通時已做工序如何計費。</li>
+            <li>
+              動工之前：處理位置、方法、拆裝、設備與試水是否包含在總額內。
+            </li>
+            <li>需要追加：新增哪段管道或工序、加幾多費用，確認後才繼續。</li>
+            <li>
+              完成之後：今次完成哪些位置、試水結果，以及仍需檢查或跟進的範圍。
+            </li>
+          </ul>
+          <nav className="related-inline" aria-label="報價及施工流程">
+            <Link href="/service-process">查看上門、報價與試水流程</Link>
+          </nav>
+        </div>
+      </section>
+      <section className="brand-section" aria-labelledby="quote-cases-heading">
+        <div className="container brand-narrow">
+          <h2 id="quote-cases-heading">從真實工程，了解工序差別。</h2>
+          <p className="brand-section-description">
+            以下紀錄展示實際處理方法，並非價目表；個別案例不能當成其他工程的報價或結果保證。
+          </p>
+          <div className="mt-6 grid gap-6 md:grid-cols-2">
+            <article>
+              <h3 className="text-lg font-bold text-navy">
+                家居洗手盆油垢清理
+              </h3>
+              <p className="mt-3 leading-relaxed text-navy/75">
+                紀錄包括拆喉、清理隔氣及接駁後放水測試，了解疏通與拆裝需要如何一併確認。
+              </p>
+              <Link
+                className="mt-2 inline-flex min-h-11 items-center font-bold text-wagreen-dark underline underline-offset-4"
+                href="/cases/home-basin-grease-buildup-cleaning"
+              >
+                查看洗手盆工程紀錄
+              </Link>
+            </article>
+            <article>
+              <h3 className="text-lg font-bold text-navy">
+                學校雨水渠高壓清洗
+              </h3>
+              <p className="mt-3 leading-relaxed text-navy/75">
+                紀錄展示戶外雨水渠清理及排水測試，工作入口與處理管段跟室內洗手盆不同。
+              </p>
+              <Link
+                className="mt-2 inline-flex min-h-11 items-center font-bold text-wagreen-dark underline underline-offset-4"
+                href="/cases/school-rainwater-drain-high-pressure-cleaning"
+              >
+                查看高壓清洗工程紀錄
+              </Link>
+            </article>
+          </div>
+        </div>
+      </section>
       <section className="brand-section">
         <div className="container">
           <div className="section-heading">
