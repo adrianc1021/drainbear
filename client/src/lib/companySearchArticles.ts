@@ -9,7 +9,7 @@ const definitions: BlogPost[] = [
     title: "通渠公司報價單：加項、收據及保養",
     category: "實用指南",
     date: "2026-10-29",
-    updatedAt: "2026-10-29",
+    updatedAt: "2026-11-06",
     authorName: "通渠熊編輯團隊",
     reviewerName: "",
     readMins: 4,
@@ -77,6 +77,14 @@ const definitions: BlogPost[] = [
         type: "p",
         text: "先問清楚成功如何判定、檢查或拆裝是否另計，以及保養期限、適用位置、例外情況和跟進方法。不要把別間公司的宣傳當成今次工程條款。通渠熊現有公開資料沒有承諾全線不成功不收費或固定免費保養期，相關安排需要查詢時確認。",
       },
+      {
+        type: "p",
+        text: "如果仍在比較不同通渠公司，除了報價文件，也要核對實際施工者、相近工程紀錄及後續聯絡安排。",
+        link: {
+          label: "香港通渠公司推介：按工序與紀錄比較",
+          href: "/blog/choosing-professional-drain-company",
+        },
+      },
       { type: "h2", text: "向通渠熊查詢，先傳位置與相片" },
       {
         type: "p",
@@ -107,7 +115,7 @@ const definitions: BlogPost[] = [
     title: "香港通渠公司｜物業工程報價與交接",
     category: "大廈渠務",
     date: "2026-10-29",
-    updatedAt: "2026-10-29",
+    updatedAt: "2026-11-06",
     authorName: "通渠熊編輯團隊",
     reviewerName: "",
     readMins: 4,
@@ -186,6 +194,14 @@ const definitions: BlogPost[] = [
         link: {
           label: "物業通渠保養與紀錄交接",
           href: "/blog/property-drain-maintenance-plan",
+        },
+      },
+      {
+        type: "p",
+        text: "揀承辦公司時，要求對方按同一工作範圍回覆，並確認由誰到場、收款及跟進，方便管理處交接。",
+        link: {
+          label: "選擇香港通渠公司前的比較清單",
+          href: "/blog/choosing-professional-drain-company",
         },
       },
       { type: "h2", text: "通渠熊可按哪些資料安排查詢？" },
