@@ -31,7 +31,7 @@ export default function HomeCompanyGuides() {
           id="home-company-guides-heading"
           className="font-display text-2xl font-black text-navy md:text-3xl"
         >
-          搵香港通渠公司，先了解這幾點。
+          香港通渠公司推介：點揀先啱？
         </h2>
         <nav
           aria-label="通渠公司與收費指南"

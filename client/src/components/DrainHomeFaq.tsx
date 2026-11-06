@@ -15,9 +15,9 @@ const FAQ_ITEMS = [
       "提供服務地點、受影響的去水位置、出現多久，以及相片或短片即可。若是倒灌或多個位置同時異常，也請一併說明。",
   },
   {
-    question: "委託通渠公司前，要確認哪些工序及費用？",
+    question: "睇通渠公司推介時，應該比較甚麼？",
     answer:
-      "先確認要處理哪個去水位或管段、使用的方法、是否需要拆裝，以及試水與其他項目是否包括在報價內。通渠熊到場了解情況後會說明工序及收費，雙方確認後才動工；有額外工作需要，先確認範圍及費用。",
+      "先比較服務是否適合你的堵塞問題、報價包含哪些工序、施工及試水紀錄，再確認上門時間與後續聯絡。通渠熊提供公司資料及真實案例供查閱，到場了解情況後說明處理方法與收費，雙方確認後才動工。",
   },
   {
     question: "通渠後很快再塞，應該怎樣處理？",
@@ -100,6 +100,16 @@ export default function DrainHomeFaq() {
                   <ChevronDown aria-hidden="true" />
                 </summary>
                 <p>{item.answer}</p>
+                {item === FAQ_ITEMS[2] ? (
+                  <nav
+                    className="home-faq-links"
+                    aria-label="通渠公司推介比較資料"
+                  >
+                    <Link href="/blog/choosing-professional-drain-company">
+                      香港通渠公司推介與比較指南
+                    </Link>
+                  </nav>
+                ) : null}
                 {item === FAQ_ITEMS[0] ? (
                   <nav
                     className="home-faq-links"

@@ -131,7 +131,7 @@ export default function HomeCompanyIntro() {
           <h3 id="company-home-records">由現場問題，到處理與試水。</h3>
           <SectionIllustration scene="waterTest" />
           <p>
-            了解一間通渠公司，可以由實際工序開始。通渠熊網站公開現場施工影片及案例，讓客人查詢前了解不同堵塞情況，以及清理、檢查和測試的做法。
+            睇通渠公司推介，除了評價，也可以比較實際工序。通渠熊網站公開現場施工影片及案例，讓客人查詢前了解不同堵塞情況，以及清理、檢查和測試的做法。
           </p>
           <p>
             例如
