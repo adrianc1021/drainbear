@@ -1,4 +1,5 @@
 import { SERVICE_COMPANY_GUIDES } from "@/lib/contentConnections";
+import { getServiceIntentFocus } from "@/lib/searchIntentFocus";
 import ServiceDistrictReading from "@/components/ServiceDistrictReading";
 import SectionIllustration from "@/components/SectionIllustration";
 import { HouseholdServiceTopics } from "@/components/HouseholdTopicGuide";
@@ -47,6 +48,7 @@ export default function ServiceDetail() {
   if (!service) return <NotFound />;
 
   const guide = SERVICE_PROBLEM_GUIDES[service.slug];
+  const intentFocus = getServiceIntentFocus(service.slug);
   const path = `/services/${service.slug}`;
   const serviceSocialImage = `${SITE_URL}${BRAND_SOCIAL_IMAGE}`;
   const crumbs = [
@@ -162,6 +164,28 @@ export default function ServiceDetail() {
               ))}
             </ul>
           </div>
+          {intentFocus ? (
+            <aside
+              className="mt-6 rounded-xl border border-navy/10 bg-white p-5 md:p-6"
+              aria-labelledby={`service-intent-focus-${service.slug}`}
+            >
+              <h3
+                id={`service-intent-focus-${service.slug}`}
+                className="text-lg font-bold text-navy"
+              >
+                {intentFocus.heading}
+              </h3>
+              <p className="mt-3 leading-relaxed">{intentFocus.summary}</p>
+              <p className="mt-3 leading-relaxed">{intentFocus.guidance}</p>
+              <Link
+                href={intentFocus.articleHref}
+                className="mt-4 inline-flex min-h-11 items-center gap-2 font-bold underline underline-offset-4"
+              >
+                {intentFocus.articleLabel}
+                <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+              </Link>
+            </aside>
+          ) : null}
           <div className="service-problem-guide">
             <section aria-labelledby="service-first-steps">
               <h3 id="service-first-steps">{guide.firstHeading}</h3>
