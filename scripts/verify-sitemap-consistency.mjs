@@ -116,6 +116,24 @@ for (const route of sitemapRoutes) {
       ? path.join(OUTPUT_ROOT, "index.html")
       : path.join(OUTPUT_ROOT, `${route.slice(1)}.html`);
   const html = await fs.readFile(htmlPath, "utf8");
+  // Mobile hero requests must be discovered in the homepage HTML head only.
+  // Never pay this image cost on service, article or district landings.
+  const heroPreloads = Array.from(
+    html.matchAll(/<link\\b[^>]*data-mobile-hero-preload="true"[^>]*>/g),
+    match => match[0]
+  );
+  if (route === "/") {
+    if (
+      heroPreloads.length !== 2 ||
+      !heroPreloads.every(link => link.includes('fetchpriority="high"')) ||
+      !heroPreloads.some(link => link.includes('media="(max-width: 479px)"')) ||
+      !heroPreloads.some(link => link.includes('(min-width: 480px) and (max-width: 767px)'))
+    ) {
+      throw new Error("Homepage responsive mobile hero preloads are missing or malformed");
+    }
+  } else if (heroPreloads.length) {
+    throw new Error(`${route}: homepage hero must not be preloaded on non-home routes`);
+  }
   const robots = extractMetaContent(html, "robots")?.toLowerCase() ?? "";
   const googlebot = extractMetaContent(html, "googlebot")?.toLowerCase() ?? "";
   const canonical = extractCanonical(html);
