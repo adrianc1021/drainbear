@@ -119,7 +119,7 @@ for (const route of sitemapRoutes) {
   // Mobile hero requests must be discovered in the homepage HTML head only.
   // Never pay this image cost on service, article or district landings.
   const heroPreloads = Array.from(
-    html.matchAll(/<link\\b[^>]*data-mobile-hero-preload="true"[^>]*>/g),
+    html.matchAll(/<link\b[^>]*data-mobile-hero-preload="true"[^>]*>/g),
     match => match[0]
   );
   if (route === "/") {
