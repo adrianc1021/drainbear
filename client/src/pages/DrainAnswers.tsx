@@ -7,6 +7,7 @@ import { SERVICE_DIRECTORY } from "@/lib/navigationDirectory";
 import { BRAND_SOCIAL_IMAGE, BRAND_SOCIAL_ALT } from "@/lib/brandVisuals";
 import {
   ANSWERS_PUBLISHED_AT,
+  ANSWERS_UPDATED_AT,
   DRAIN_ANSWERS,
   getDrainAnswer,
 } from "../../../shared/drainAnswers";
@@ -46,7 +47,7 @@ export default function DrainAnswers() {
           headline: title,
           description,
           datePublished: ANSWERS_PUBLISHED_AT,
-          dateModified: "2026-10-24",
+          dateModified: ANSWERS_UPDATED_AT,
           author: { "@id": BUSINESS_ID },
           publisher: { "@id": BUSINESS_ID },
           inLanguage: "zh-Hant-HK",
@@ -98,7 +99,7 @@ export default function DrainAnswers() {
           <h1>{title}</h1>
           {answer ? (
             <p className="answer-library__byline">
-              通渠熊 · 更新：2026年10月16日
+              通渠熊 · 更新：{ANSWERS_UPDATED_AT.slice(0, 4)}年{ANSWERS_UPDATED_AT.slice(5, 7)}月{ANSWERS_UPDATED_AT.slice(8, 10)}日
             </p>
           ) : (
             <p>{description}</p>

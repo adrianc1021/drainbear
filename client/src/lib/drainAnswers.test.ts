@@ -1,7 +1,7 @@
 import featured from "../../../shared/featuredDrainAnswers.json";
 import { describe, expect, it } from "vitest";
 import { ANSWER_ROUTES, SERVICE_SLUGS } from "../../../shared/publicRoutes";
-import { DRAIN_ANSWERS, getDrainAnswer } from "../../../shared/drainAnswers";
+import { DRAIN_ANSWERS, ANSWERS_PUBLISHED_AT, ANSWERS_UPDATED_AT, getDrainAnswer } from "../../../shared/drainAnswers";
 
 describe("published drain answer inventory", () => {
   it("has independent, complete questions for every actual service", () => {
@@ -30,6 +30,11 @@ describe("published drain answer inventory", () => {
     expect(getDrainAnswer("missing-answer")).toBeUndefined();
     for (const [serviceSlug, slug] of Object.entries(featured))
       expect(getDrainAnswer(slug)?.serviceSlug).toBe(serviceSlug);
+  });
+  it("keeps the editorial update timestamp consistent and chronological", () => {
+    expect(ANSWERS_PUBLISHED_AT).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    expect(ANSWERS_UPDATED_AT).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    expect(ANSWERS_UPDATED_AT >= ANSWERS_PUBLISHED_AT).toBe(true);
   });
   it("discovers every published answer and no nonexistent URL", () => {
     expect(ANSWER_ROUTES).toEqual([

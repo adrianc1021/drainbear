@@ -47,6 +47,7 @@ import {
   ANSWER_ROUTES,
 } from "../shared/publicRoutes";
 import { RECORDED_VIDEO_CASES } from "../shared/recordedVideoCases";
+import { ANSWERS_PUBLISHED_AT, ANSWERS_UPDATED_AT } from "../shared/drainAnswers";
 import { writeVideoSitemap } from "./video-artifacts";
 import { enableCmsRelay, isLocalOrigin } from "./browser-cms-relay";
 import { assessPrerenderSnapshot } from "./prerender-readiness";
@@ -427,7 +428,7 @@ function getSitemapEntries(
     { route: "/faq", changefreq: "monthly", priority: "0.7" },
     ...ANSWER_ROUTES.map(route => ({
       route,
-      lastmod: route === "/answers" ? "2026-10-16" : "2026-10-24",
+      lastmod: route === "/answers" ? ANSWERS_PUBLISHED_AT : ANSWERS_UPDATED_AT,
       changefreq: "monthly" as const,
       priority: route === "/answers" ? "0.7" : "0.6",
     })),
