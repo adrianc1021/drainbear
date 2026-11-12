@@ -41,7 +41,7 @@ export const SERVICE_PAGES: ServicePageData[] = [
     name: "坐廁及馬桶通渠",
     shortName: "坐廁通渠",
     eyebrow: "TOILET UNBLOCKING",
-    title: "坐廁通渠｜馬桶塞住、水位升高及異物處理｜通渠熊",
+    title: "通廁所／坐廁通渠｜馬桶塞住、異物與倒灌處理｜通渠熊",
     description:
       "坐廁塞住、水位升高或有異物掉入？先停用並傳相片，通渠熊按入口和受影響範圍了解處理方向。24 小時接受查詢，上門時間按安排確認。",
     heroTitle: "坐廁淤塞、去水慢或倒灌，先判斷堵塞位置",
@@ -349,9 +349,9 @@ export const SERVICE_PAGES: ServicePageData[] = [
     name: "浴室通渠：洗手盆、企缸及浴缸去水",
     shortName: "浴室／企缸通渠",
     eyebrow: "BATHROOM DRAIN",
-    title: "洗手盆及浴室通渠｜企缸、浴缸去水慢處理｜通渠熊",
+    title: "洗手盆通渠｜浴室地渠、企缸及浴缸去水慢｜通渠熊",
     description:
-      "洗手盆塞、企缸積水或浴缸去水慢？傳去水口、喉管相片及地區，向通渠熊查詢處理方法、報價及上門安排。",
+      "洗手盆通渠、浴室地渠或企缸去水慢？先檢查隔氣、支渠與相連去水位。傳洗手盆口、櫃底喉管及地區相片，查詢處理工序、報價及上門安排。",
     heroTitle: "洗手盆塞、浴缸去水慢？傳相查詢浴室通渠",
     heroDescription:
       "洗手盆、企缸或浴缸積水，先停用。傳去水口相片；洗手盆另加櫃底喉管相片，方便了解隔氣、支渠及可用入口。確認處理方法與收費後動工。",
@@ -562,7 +562,7 @@ export const SERVICE_PAGES: ServicePageData[] = [
     name: "高壓通渠／高壓水槍洗渠",
     shortName: "高壓洗渠",
     eyebrow: "HIGH-PRESSURE JETTING",
-    title: "高壓通渠｜收費查詢、主渠積垢及反覆淤塞｜通渠熊",
+    title: "高壓通渠｜高壓水槍洗渠收費與主渠積垢｜通渠熊",
     description:
       "高壓通渠處理主渠積垢及反覆淤塞，先評估管道、入口與排污條件。傳檢查口及受影響位置相片，查詢高壓通渠收費與可安排時段。",
     heroTitle: "反覆淤塞，不一定適合只做局部打通",

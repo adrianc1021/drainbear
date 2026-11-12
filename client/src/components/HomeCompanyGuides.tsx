@@ -5,8 +5,8 @@ import { Link } from "wouter";
 const GUIDES = [
   {
     slug: "choosing-professional-drain-company",
-    title: "香港通渠公司推介",
-    description: "比較處理範圍、施工紀錄與跟進安排。",
+    title: "通渠推薦：香港通渠公司點揀？",
+    description: "按洗手盆、坐廁或高壓通渠需要，比較工序、收費、評論與案例。",
   },
   {
     slug: "drain-company-reviews-red-flags",
@@ -31,7 +31,7 @@ export default function HomeCompanyGuides() {
           id="home-company-guides-heading"
           className="font-display text-2xl font-black text-navy md:text-3xl"
         >
-          香港通渠公司推介：點揀先啱？
+          通渠推薦與公司推介：點樣比較先啱？
         </h2>
         <nav
           aria-label="通渠公司與收費指南"
