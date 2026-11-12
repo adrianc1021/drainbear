@@ -99,7 +99,7 @@ export default function DrainAnswers() {
           <h1>{title}</h1>
           {answer ? (
             <p className="answer-library__byline">
-              通渠熊 · 更新：{ANSWERS_UPDATED_AT.replace(/-/g, "年").replace(/年(\\d{2})年(\\d{2})$/, "年$1月$2日")}
+              通渠熊 · 更新：{ANSWERS_UPDATED_AT.slice(0, 4)}年{ANSWERS_UPDATED_AT.slice(5, 7)}月{ANSWERS_UPDATED_AT.slice(8, 10)}日
             </p>
           ) : (
             <p>{description}</p>
