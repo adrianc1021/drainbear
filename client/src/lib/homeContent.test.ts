@@ -58,6 +58,7 @@ describe("homepage contact and discovery", () => {
     );
     expect(html).toContain('width="1685" height="933"');
     expect(html).toContain("light-water-mobile-640.webp 640w");
+    expect(html).toContain("light-water-mobile-960.webp 960w");
     expect(html).toContain("香港通渠公司點報價？通渠熊幾錢起？");
     expect(html).toContain("全線通渠服務 HK$300 起");
     expect(html).not.toContain("線上表格暫時維護中");

@@ -1043,7 +1043,28 @@
   }
   .home-hero__water {
     height: 70px;
-    background-size: auto 70px;
+    /* Decorative animation competes with the first-screen hero on mobile. */
+    background-image: none;
+    animation: none;
+  }
+  .home-hero__headline-line {
+    /* Avoid delayed LCP paint from the entrance transform/blur animation. */
+    animation: none;
+  }
+  .home-scene-control {
+    display: none;
+  }
+  /* Preserve semantic content in DOM/SEO prerender but skip off-screen paint. */
+  .home-page :is(
+    .home-service-rows,
+    .home-drain-methods,
+    .home-arrangement,
+    .home-service-guide,
+    .home-company-guides,
+    .db-home-faq
+  ) {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 960px;
   }
   .home-scene-control {
     right: 20px;
