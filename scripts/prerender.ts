@@ -785,7 +785,7 @@ async function prerender() {
       // hydration for the mobile LCP image; other routes must not preload it.
       if (route === "/") {
         const mobileHeroPreloads = [
-          '<link rel="preload" as="image" media="(max-width: 479px)" imagesrcset="/images/home/light-water-mobile-640.webp 640w, /images/home/light-water-mobile-960.webp 960w" imagesizes="100vw" fetchpriority="high" data-mobile-hero-preload="true">',
+          '<link rel="preload" as="image" media="(max-width: 479px)" imagesrcset="/images/home/light-water-mobile-640-perf.webp 640w, /images/home/light-water-mobile-960-perf.webp 960w" imagesizes="100vw" fetchpriority="high" data-mobile-hero-preload="true">',
           '<link rel="preload" as="image" media="(min-width: 480px) and (max-width: 767px)" imagesrcset="/images/home/light-water-960.webp 960w, /images/home/light-water.webp 1685w" imagesizes="100vw" fetchpriority="high" data-mobile-hero-preload="true">',
         ];
         if (!html.includes("<head>")) {
