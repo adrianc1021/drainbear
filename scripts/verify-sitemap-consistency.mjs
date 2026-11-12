@@ -35,25 +35,25 @@ function extractCanonical(html) {
 }
 
 function extractHtmlTitle(html) {
-  return html.match(/<title[^>]*>([^<]+)<\\/title>/i)?.[1]?.trim() ?? "";
+  return html.match(/<title[^>]*>([^<]+)<\/title>/i)?.[1]?.trim() ?? "";
 }
 
 function extractVisibleText(fragment) {
   return fragment
-    .replace(/<(script|style)[^>]*>[\\s\\S]*?<\\/\\1>/gi, " ")
+    .replace(/<(script|style)[^>]*>[\s\S]*?<\/\1>/gi, " ")
     .replace(/<[^>]+>/g, " ")
     .replace(/&(?:nbsp|#160);/gi, " ")
-    .replace(/\\s+/g, " ")
+    .replace(/\s+/g, " ")
     .trim();
 }
 
 function extractMainText(html) {
-  const main = html.match(/<main\\b[^>]*>([\\s\\S]*?)<\\/main>/i);
+  const main = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i);
   return main ? extractVisibleText(main[1]) : "";
 }
 
 function extractH1(html) {
-  const heading = html.match(/<h1\\b[^>]*>([\\s\\S]*?)<\\/h1>/i);
+  const heading = html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i);
   return heading ? extractVisibleText(heading[1]) : "";
 }
 
