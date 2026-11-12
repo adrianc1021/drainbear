@@ -2,6 +2,8 @@ import { HOUSEHOLD_ANSWERS } from "./drainAnswers/household";
 import { PROPERTY_ANSWERS } from "./drainAnswers/property";
 
 export const ANSWERS_PUBLISHED_AT = "2026-10-16";
+/** Last substantive editorial review of the published answers. */
+export const ANSWERS_UPDATED_AT = "2026-10-24";
 export interface DrainAnswer {
   slug: string;
   serviceSlug: string;
