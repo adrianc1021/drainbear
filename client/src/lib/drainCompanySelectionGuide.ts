@@ -7,22 +7,25 @@ import type { BlogPost } from "./blogData";
 /** Existing selection guide: one destination for recommendation/comparison intent. */
 export const DRAIN_COMPANY_SELECTION_GUIDE: BlogPost = {
   slug: "choosing-professional-drain-company",
-  title: "香港通渠公司推介：通渠邊間好？收費與案例比較",
+  title: "通渠推薦｜香港通渠公司點揀？收費、評價與工程案例",
   category: "實用指南",
   date: "2026-10-09",
-  updatedAt: "2026-11-06",
-  readMins: 4,
+  updatedAt: "2026-11-12",
+  readMins: 6,
   authorName: "通渠熊編輯團隊",
   reviewerName: "",
   featured: true,
   excerpt:
-    "香港通渠公司推介點揀？比較直接聯絡公司與配對平台、報價所含工序、真實案例及跟進安排。附格價提問清單；通渠熊 HK$300 起，24 小時接受傳相查詢。",
+    "搜尋通渠推薦、通渠公司推介，應該點比較？先按洗手盆、坐廁或高壓通渠需求，核對報價工序、真實案例、評論來源與跟進安排。本指南由通渠熊編寫，非獨立排行榜。",
   keywords: [
+    "通渠推薦",
+    "通渠公司推薦",
     "香港通渠公司推介",
     "通渠公司推介",
     "通渠邊間好",
     "通渠公司邊間好",
     "香港通渠公司",
+    "通渠公司比較",
     "通渠師傅介紹",
     "通渠師傅推介",
   ],
@@ -50,6 +53,30 @@ export const DRAIN_COMPANY_SELECTION_GUIDE: BlogPost = {
       type: "p",
       text: `通渠熊 DrainBear 為香港住宅、食肆及物業提供通渠、清洗及 CCTV 照渠服務，${STARTING_PRICE_LINE}，電話及 WhatsApp 24 小時接受查詢。可先查看服務範圍、公司聯絡資料及附處理與試水說明的案例，再按你的地區、現場入口及問題查詢上門安排。`,
       link: { label: "核對通渠熊公司及服務資料", href: "/about#company-facts" },
+    },
+    { type: "h2", text: "通渠推薦點比較？先分清三種服務需求" },
+    {
+      type: "list",
+      items: [
+        "洗手盆、浴室塞渠：優先問是否先檢查隔氣、支渠及相連去水位，拆裝與試水有沒有包括；不能只比較一個起步價。",
+        "坐廁塞住或有硬物：優先確認可否處理異物、何時需要拆裝座廁，以及報價有沒有列出額外工序。",
+        "高壓通渠或大廈主渠：優先核對管徑、清洗長度、檢查入口、排污安排及完工測試；高壓機器不一定適合每條喉管。",
+      ],
+    },
+    {
+      type: "p",
+      text: "如果問題係洗手盆塞，先對照浴室服務頁的隔氣、支渠與施工限制；家居局部淤塞未必需要高壓設備。",
+      link: { label: "查看洗手盆與浴室通渠服務", href: "/services/bathroom-drain-unblocking" },
+    },
+    {
+      type: "p",
+      text: "如需處理坐廁或馬桶淤塞，留意是否有硬物、其他去水位是否一同倒灌，以及拆裝與試水安排。",
+      link: { label: "查看坐廁通渠服務", href: "/services/toilet-unblocking" },
+    },
+    {
+      type: "p",
+      text: "反覆淤塞或長管段積垢，可先了解高壓清洗的適用限制與報價因素，不能只以機器大小選公司。",
+      link: { label: "查看高壓通渠服務及收費因素", href: "/services/high-pressure-jetting" },
     },
     { type: "h2", text: "急住搵通渠公司，先傳咩資料？" },
     {
@@ -165,6 +192,16 @@ export const DRAIN_COMPANY_SELECTION_GUIDE: BlogPost = {
         href: "/cases/school-rainwater-drain-high-pressure-cleaning",
       },
     },
+    { type: "h2", text: "Google 評價同網上通渠推薦，點樣驗證？" },
+    {
+      type: "list",
+      items: [
+        "先核對評論平台、發表日期及評價是否描述相近的堵塞位置和工程內容；星級只係其中一個參考。",
+        "區分平台認證、付費廣告、服務商自述與獨立客戶經驗；有付費或商業關係的內容不應當成中立排名。",
+        "優先查看有問題描述、報價安排、完工測試或照片背景的紀錄；不要以無法核實的留言判定公司好壞。",
+        "把評論中提及的承諾同正式報價逐項核對，特別係加項、保養、拆裝及誰負責後續跟進。",
+      ],
+    },
     { type: "h2", text: "朋友介紹或網上推介，點樣核對？" },
     {
       type: "p",
@@ -192,6 +229,9 @@ export const DRAIN_COMPANY_SELECTION_GUIDE: BlogPost = {
     { label: "搜尋通渠爭議公開資料庫", href: "/consumer-alerts" },
     { label: "通渠熊公司及聯絡資料", href: "/about#company-facts" },
     { label: "上門與處理流程", href: "/service-process" },
+    { label: "洗手盆通渠服務", href: "/services/bathroom-drain-unblocking" },
+    { label: "坐廁及馬桶通渠", href: "/services/toilet-unblocking" },
+    { label: "高壓通渠服務", href: "/services/high-pressure-jetting" },
     {
       label: "通渠黑店相關報道與防騙清單",
       href: "/blog/drain-company-reviews-red-flags",
