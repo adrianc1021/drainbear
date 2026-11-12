@@ -780,22 +780,8 @@ async function prerender() {
       );
 
       let html = await page.content();
-      // Only the homepage needs the first-viewport mobile illustration.
-      // Earlier discovery (from the document head) avoids competing with JS
-      // hydration for the mobile LCP image; other routes must not preload it.
-      if (route === "/") {
-        const mobileHeroPreloads = [
-          '<link rel="preload" as="image" media="(max-width: 479px)" imagesrcset="/images/home/light-water-mobile-640.webp 640w, /images/home/light-water-mobile-960.webp 960w" imagesizes="100vw" fetchpriority="high" data-mobile-hero-preload="true">',
-          '<link rel="preload" as="image" media="(min-width: 480px) and (max-width: 767px)" imagesrcset="/images/home/light-water-960.webp 960w, /images/home/light-water.webp 1685w" imagesizes="100vw" fetchpriority="high" data-mobile-hero-preload="true">',
-        ];
-        if (!html.includes("<head>")) {
-          throw new Error("Homepage prerender did not contain a document head");
-        }
-        html = html.replace(
-          "<head>",
-          `<head>\n    ${mobileHeroPreloads.join("\n    ")}`
-        );
-      }
+      // Mobile hero preloads are added after the entire route loop.
+      // Rewriting index.html now would leak home hints into SPA fallback pages.
       // Readiness belongs to the live observer, not the saved HTML. Without JS,
       // a captured reveal-ready class would keep off-screen headings hidden.
       html = html.replace(
@@ -852,6 +838,27 @@ async function prerender() {
       console.log(`Prerendered ${route} → ${outputPath}`);
       console.log(`  Title: ${await page.title()}`);
     }
+
+    // The production fallback server serves dist/public/index.html when
+    // visiting other paths. Add homepage-specific hints only after all
+    // routes are captured, so service and blog HTML never inherit them.
+    const homePath = getOutputPath("/");
+    const homeHtml = await fs.readFile(homePath, "utf8");
+    const mobileHeroPreloads = [
+      '<link rel="preload" as="image" media="(max-width: 479px)" imagesrcset="/images/home/light-water-mobile-640.webp 640w, /images/home/light-water-mobile-960.webp 960w" imagesizes="100vw" fetchpriority="high" data-mobile-hero-preload="true">',
+      '<link rel="preload" as="image" media="(min-width: 480px) and (max-width: 767px)" imagesrcset="/images/home/light-water-960.webp 960w, /images/home/light-water.webp 1685w" imagesizes="100vw" fetchpriority="high" data-mobile-hero-preload="true">',
+    ];
+    if (!homeHtml.includes("<head>")) {
+      throw new Error("Homepage prerender did not contain a document head");
+    }
+    await fs.writeFile(
+      homePath,
+      homeHtml.replace(
+        "<head>",
+        `<head>\n    ${mobileHeroPreloads.join("\n    ")}`
+      ),
+      "utf8"
+    );
 
     await context.close();
     await updateSitemap(blogEntries, caseEntries);
