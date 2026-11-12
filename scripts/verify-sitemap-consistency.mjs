@@ -131,15 +131,15 @@ for (const route of sitemapRoutes) {
     ) {
       throw new Error("Homepage responsive mobile hero preloads are missing or malformed");
     }
-    for (const [asset, maxBytes] of [
-      ["/images/home/light-water-mobile-640-perf.webp", 70000],
-      ["/images/home/light-water-mobile-960-perf.webp", 100000],
+    for (const [asset, minBytes, maxBytes] of [
+      ["/images/home/light-water-mobile-640-perf.webp", 40000, 70000],
+      ["/images/home/light-water-mobile-960-perf.webp", 65000, 100000],
     ]) {
       if (!heroPreloads.some(link => link.includes(asset))) {
         throw new Error(`Missing mobile LCP asset in preload: ${asset}`);
       }
       const image = await fs.stat(path.join(OUTPUT_ROOT, asset.slice(1)));
-      if (!image.isFile() || image.size > maxBytes) {
+      if (!image.isFile() || image.size < minBytes || image.size > maxBytes) {
         throw new Error(`Oversized or missing mobile LCP image: ${asset} (${image.size} bytes)`);
       }
     }
