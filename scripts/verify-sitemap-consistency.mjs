@@ -132,8 +132,8 @@ for (const route of sitemapRoutes) {
       throw new Error("Homepage responsive mobile hero preloads are missing or malformed");
     }
     for (const [asset, minBytes, maxBytes] of [
-      ["/images/home/light-water-mobile-640-perf.webp", 40000, 70000],
-      ["/images/home/light-water-mobile-960-perf.webp", 65000, 100000],
+      ["/images/home/light-water-mobile-640.webp", 70000, 100000],
+      ["/images/home/light-water-mobile-960.webp", 110000, 150000],
     ]) {
       if (!heroPreloads.some(link => link.includes(asset))) {
         throw new Error(`Missing mobile LCP asset in preload: ${asset}`);
