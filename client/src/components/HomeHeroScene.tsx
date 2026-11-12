@@ -12,11 +12,12 @@ export default function HomeHeroScene() {
     const el = scene.current;
     if (!el) return;
     const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const mobile = window.matchMedia("(max-width: 767px)");
     let frame = 0;
     let visible = true;
     const update = () => {
       frame = 0;
-      const active = !query.matches && !paused && visible && !document.hidden;
+      const active = !query.matches && !mobile.matches && !paused && visible && !document.hidden;
       el.dataset.sceneActive = String(active);
       if (!active) {
         el.style.setProperty("--scene-shift", "0px");
@@ -34,7 +35,7 @@ export default function HomeHeroScene() {
       if (!frame) frame = requestAnimationFrame(update);
     };
     const preference = () => {
-      setReduced(query.matches);
+      setReduced(query.matches || mobile.matches);
       schedule();
     };
     const observer =
@@ -46,6 +47,7 @@ export default function HomeHeroScene() {
           });
     observer?.observe(el);
     query.addEventListener("change", preference);
+    mobile.addEventListener("change", preference);
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", schedule);
     document.addEventListener("visibilitychange", schedule);
@@ -54,6 +56,7 @@ export default function HomeHeroScene() {
       cancelAnimationFrame(frame);
       observer?.disconnect();
       query.removeEventListener("change", preference);
+      mobile.removeEventListener("change", preference);
       window.removeEventListener("scroll", schedule);
       window.removeEventListener("resize", schedule);
       document.removeEventListener("visibilitychange", schedule);
