@@ -34,6 +34,29 @@ function extractCanonical(html) {
   )?.[1];
 }
 
+function extractHtmlTitle(html) {
+  return html.match(/<title[^>]*>([^<]+)<\\/title>/i)?.[1]?.trim() ?? "";
+}
+
+function extractVisibleText(fragment) {
+  return fragment
+    .replace(/<(script|style)[^>]*>[\\s\\S]*?<\\/\\1>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&(?:nbsp|#160);/gi, " ")
+    .replace(/\\s+/g, " ")
+    .trim();
+}
+
+function extractMainText(html) {
+  const main = html.match(/<main\\b[^>]*>([\\s\\S]*?)<\\/main>/i);
+  return main ? extractVisibleText(main[1]) : "";
+}
+
+function extractH1(html) {
+  const heading = html.match(/<h1\\b[^>]*>([\\s\\S]*?)<\\/h1>/i);
+  return heading ? extractVisibleText(heading[1]) : "";
+}
+
 function toSet(values) {
   return new Set(values.map(normalizePath));
 }
@@ -78,6 +101,8 @@ if (missingFromSitemap.length || extraInSitemap.length) {
   );
 }
 
+const pageTitles = new Map();
+
 for (const route of sitemapRoutes) {
   const expectedUrl = `${SITE_URL}${route === "/" ? "/" : route}`;
   const matchedUrl = rawUrls.find(url => normalizePath(url) === route);
@@ -94,10 +119,30 @@ for (const route of sitemapRoutes) {
   const robots = extractMetaContent(html, "robots")?.toLowerCase() ?? "";
   const googlebot = extractMetaContent(html, "googlebot")?.toLowerCase() ?? "";
   const canonical = extractCanonical(html);
+  const title = extractHtmlTitle(html);
+  const description = extractMetaContent(html, "description");
+  const h1 = extractH1(html);
+  const mainText = extractMainText(html);
 
   if (robots.includes("noindex") || googlebot.includes("noindex")) {
     throw new Error(`${route} sitemap URL 對應 HTML 設定了 noindex`);
   }
+
+  // Catch soft-404-style or incomplete pre-rendered documents before
+  // publishing them as discoverable URLs in sitemap.xml.
+  if (!title || !h1 || !description || mainText.length < 200) {
+    throw new Error(
+      `${route} 頁面內容不完整：title=${Boolean(title)}, h1=${Boolean(h1)}, description=${Boolean(description)}, mainText=${mainText.length}`
+    );
+  }
+  if (!html.includes('data-seo-ready="true"')) {
+    throw new Error(`${route} 預先渲染 SEO 未準備好`);
+  }
+  const duplicateRoute = pageTitles.get(title);
+  if (duplicateRoute) {
+    throw new Error(`${route} 與 ${duplicateRoute} 使用相同 title：${title}`);
+  }
+  pageTitles.set(title, route);
 
   if (canonical !== expectedUrl) {
     throw new Error(
@@ -107,5 +152,5 @@ for (const route of sitemapRoutes) {
 }
 
 console.log(
-  `PASS：sitemap、prerender manifest、HTML canonical/robots 一致（${sitemapRoutes.size} 個可索引 URL）`
+  `PASS：sitemap、prerender manifest、HTML title/H1/內文/description/canonical/robots 一致（${sitemapRoutes.size} 個可索引 URL）`
 );
