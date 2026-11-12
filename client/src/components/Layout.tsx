@@ -7,7 +7,7 @@ import WhatsAppIcon from "@/components/WhatsAppIcon";
  */
 import AnimatedDisclosure from "@/components/AnimatedDisclosure";
 import ContactActions from "@/components/ContactActions";
-import WhatsAppWidget from "@/components/WhatsAppWidget";
+
 import { useContactHandoff } from "@/contexts/ContactHandoffContext";
 import { useContactSettings } from "@/contexts/SiteSettingsContext";
 import { useReveal } from "@/hooks/useReveal";
@@ -20,10 +20,13 @@ import { DISTRICT_DIRECTORY as DISTRICTS } from "@/lib/navigationDirectory";
 import { prefetchRoute } from "@/lib/routePrefetch";
 import { SERVICE_DIRECTORY as SERVICE_PAGES } from "@/lib/navigationDirectory";
 import { ArrowUp, Menu, Phone, X } from "lucide-react";
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { lazy, ReactNode, Suspense, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "wouter";
 
 const LOGO = "/images/drainbear-logo-192.webp";
+
+// The floating chat panel only appears on desktop; keep its JS out of the mobile entry bundle.
+const DesktopWhatsAppWidget = lazy(() => import("@/components/WhatsAppWidget"));
 
 const NAV_ITEMS = [
   { label: "通渠服務", href: "/services" },
@@ -224,7 +227,22 @@ function BackToTop() {
 }
 
 function DeferredDesktopWhatsAppWidget() {
-  return <WhatsAppWidget />;
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 768px)");
+    const update = () => setIsDesktop(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+
+  if (!isDesktop) return null;
+  return (
+    <Suspense fallback={null}>
+      <DesktopWhatsAppWidget />
+    </Suspense>
+  );
 }
 
 function Header({
