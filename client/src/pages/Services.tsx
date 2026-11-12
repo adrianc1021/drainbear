@@ -44,8 +44,8 @@ export default function Services() {
       <SEO
         image={BRAND_SOCIAL_IMAGE}
         imageAlt={BRAND_SOCIAL_ALT}
-        title="通渠服務 HK$300 起｜坐廁、鋅盤、高壓洗渠及 CCTV｜通渠熊"
-        description="通渠熊全線通渠服務 HK$300 起！坐廁、鋅盤、浴室、主渠、隔油池、高壓洗渠及 CCTV 照渠，立即 WhatsApp 傳相查詢報價。"
+        title="香港通渠服務｜洗手盆通渠、通廁所、高壓通渠｜通渠熊"
+        description="通渠熊提供香港洗手盆通渠、通廁所、廚房鋅盤、高壓通渠及主渠檢查等服務，通渠 HK$300 起。按堵塞位置與工具確認工序、報價及上門安排。"
         path="/services"
         breadcrumbs={CRUMBS}
         jsonLd={SERVICES_JSONLD}
@@ -81,7 +81,7 @@ export default function Services() {
       >
         <div className="container service-reading">
           <h2 id="service-search-paths-heading">
-            搵通渠服務，先分清問題同方法
+            洗手盆通渠、通廁所、高壓通渠點揀？
           </h2>
           <p>
             通渠唔只係選擇一部機。先了解受影響位置、堵塞範圍及可用入口，再決定適合疏通、清洗，還是先做影像檢查。
@@ -93,9 +93,9 @@ export default function Services() {
                 先停用持續倒灌的設備，記下哪些去水位受影響。局部淤塞與共用支渠問題的處理範圍不同。
               </p>
               <nav aria-label="家居通渠選擇">
-                <Link href="/services/toilet-unblocking">坐廁通渠</Link>
+                <Link href="/services/toilet-unblocking">通廁所／坐廁通渠</Link>
                 <Link href="/services/kitchen-sink-unblocking">鋅盤通渠</Link>
-                <Link href="/services/bathroom-drain-unblocking">浴室通渠</Link>
+                <Link href="/services/bathroom-drain-unblocking">洗手盆通渠／浴室通渠</Link>
               </nav>
             </div>
             <div>
@@ -112,6 +112,7 @@ export default function Services() {
                   了解 CCTV 照渠
                 </Link>
                 <Link href="/services/sewage-backflow">倒灌處理</Link>
+                <Link href="/services/high-pressure-jetting">高壓通渠服務</Link>
               </nav>
             </div>
             <div>
@@ -127,6 +128,7 @@ export default function Services() {
                 <Link href="/service-process">上門處理流程</Link>
                 <Link href="/areas">查看服務地區</Link>
                 <Link href="/cases">查看施工紀錄</Link>
+                <Link href="/blog/choosing-professional-drain-company">通渠公司推薦與比較指南</Link>
               </nav>
             </div>
           </div>
