@@ -14,6 +14,14 @@ export default function QueryIntentIntro({ slug }: { slug: string }) {
       <p>
         <Link href={revision.href}>{revision.label}</Link>
       </p>
+      {revision.caseRecord && (
+        <div>
+          <p>{revision.caseRecord.detail}</p>
+          <p>
+            <Link href={revision.caseRecord.href}>{revision.caseRecord.label}</Link>
+          </p>
+        </div>
+      )}
     </section>
   );
 }

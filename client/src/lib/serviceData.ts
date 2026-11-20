@@ -562,10 +562,10 @@ export const SERVICE_PAGES: ServicePageData[] = [
     name: "高壓通渠／高壓水槍洗渠",
     shortName: "高壓洗渠",
     eyebrow: "HIGH-PRESSURE JETTING",
-    title: "高壓通渠｜高壓水槍洗渠收費與主渠積垢｜通渠熊",
+    title: "高壓通渠服務｜主渠積垢、雨水渠清洗及報價｜通渠熊",
     description:
-      "高壓通渠處理主渠積垢及反覆淤塞，先評估管道、入口與排污條件。傳檢查口及受影響位置相片，查詢高壓通渠收費與可安排時段。",
-    heroTitle: "反覆淤塞，不一定適合只做局部打通",
+      "了解高壓通渠適用的主渠油垢及雨水渠泥沙問題，查看學校清洗及排水測試紀錄。管理處可提供管段、入口、供水和進場時段，查詢工序及收費。",
+    heroTitle: "高壓通渠可以清洗邊段主渠或雨水渠？",
     heroDescription:
       "高壓水流可用於清理部分管壁油垢及沉積物，但施工前仍要評估喉管物料、走向、接駁及現場排水條件。",
     answerSummary: {

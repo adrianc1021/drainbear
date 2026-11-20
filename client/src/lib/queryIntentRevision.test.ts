@@ -45,7 +45,8 @@ describe("query-led editorial additions", () => {
     expect(post.date).toBe(source.publishedAt);
     expect(post.coverImage).toEqual(source.coverImage);
     expect(JSON.stringify(post.body)).toContain("原有施工內容與來源。");
-    expect(post.updatedAt).toBe("2026-10-26");
+    const hasNewCase = ["building-main-drain-vs-unit-branch-pipe", "high-pressure-drain-cleaning-vs-spring-machine"].includes(slug);
+    expect(post.updatedAt).toBe(hasNewCase ? "2026-11-20" : "2026-10-26");
     expect(post.seo?.metaTitle).toBe(post.title);
     const oldFaq = { question: "原有問題", answer: "原有答案" };
     expect(

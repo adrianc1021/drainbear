@@ -6,6 +6,8 @@ export const QUERY_INTENT_REVISIONS: Record<
   {
     title: string;
     replaceScenario?: boolean;
+    caseRecord?: { href: string; label: string; detail: string };
+    updatedAt?: string;
     description: string;
     heading: string;
     answer: string;
@@ -32,6 +34,12 @@ export const QUERY_INTENT_REVISIONS: Record<
     ],
   },
   "building-main-drain-vs-unit-branch-pipe": {
+    updatedAt: "2026-11-20",
+    caseRecord: {
+      href: "/cases/outdoor-drain-chamber-operation",
+      label: "觀看戶外渠口開蓋及工具操作片段",
+      detail: "管理處跟進大廈淤塞時，可先記低受影響樓層、通知時間同師傅可用嘅檢查口。呢段現場片記錄開蓋及使用工具；要判斷邊段渠塞，仍要核對現場檢查同試水紀錄。",
+    },
     title: "污水渠塞邊個負責？大廈主渠、單位支渠及處理流程｜通渠熊",
     description:
       "污水渠塞責任點分？先確認堵塞管段、服務範圍及大廈公契等文件；多戶倒灌先通知管理處。了解報修、檢查與通渠報價要保留哪些紀錄。",
@@ -50,6 +58,12 @@ export const QUERY_INTENT_REVISIONS: Record<
     ],
   },
   "high-pressure-drain-cleaning-vs-spring-machine": {
+    updatedAt: "2026-11-20",
+    caseRecord: {
+      href: "/cases/school-rainwater-drain-high-pressure-cleaning",
+      label: "查看學校雨水渠施工相片及排水測試",
+      detail: "呢宗學校工程，師傅確認落水管入口同排水出口後，用高壓水喉清走管內泥沙，再試水觀察渠口積水有冇退。物業格價時，可以用相同方式逐項問清楚清洗邊段、雜物點清走、點樣驗收。",
+    },
     title: "高壓通渠定彈弓機？方法、收費因素與適用範圍｜通渠熊",
     description:
       "高壓通渠與彈弓機點揀？比較管段清洗、局部疏通、入口與喉管限制，了解高壓通渠收費要提供哪些資料，再傳相查詢合適方法。",
@@ -100,10 +114,10 @@ export const QUERY_INTENT_REVISIONS: Record<
   },
 };
 export function queryIntentDate(slug: string, date?: string) {
-  return QUERY_INTENT_REVISIONS[slug] &&
-    (!date || Date.parse(date) < Date.parse(QUERY_INTENT_UPDATED))
-    ? QUERY_INTENT_UPDATED
-    : date;
+  const revision = QUERY_INTENT_REVISIONS[slug];
+  if (!revision) return date;
+  const updatedAt = revision.updatedAt ?? QUERY_INTENT_UPDATED;
+  return !date || Date.parse(date) < Date.parse(updatedAt) ? updatedAt : date;
 }
 export function applyQueryIntentRevision(post: BlogPostView): BlogPostView {
   const revision = QUERY_INTENT_REVISIONS[post.slug];

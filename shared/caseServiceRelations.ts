@@ -43,7 +43,7 @@ export const CASE_SERVICE_RELATIONS = [
   {
     serviceSlug: "high-pressure-jetting",
     caseSlug: "school-rainwater-drain-high-pressure-cleaning",
-    note: "學校雨水渠的高壓清洗紀錄。",
+    note: "學校戶外落水管附近積水。師傅從可用管口清走較深渠段的泥沙，再進行排水測試，記錄渠口積水退去的情況。",
   },
   {
     serviceSlug: "cctv-drain-inspection",

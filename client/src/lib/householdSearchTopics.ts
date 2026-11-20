@@ -6,11 +6,12 @@ export const HOUSEHOLD_TOPICS_UPDATED = "2026-10-26";
 export const HOUSEHOLD_SEARCH_TOPICS = [
   {
     slug: "bathroom-hair-clog-prevention",
+    updatedAt: "2026-11-20",
     service: "bathroom-drain-unblocking",
     name: "浴室地台去水慢",
-    title: "浴室地台去水慢、企缸塞渠點算？成因、清理與倒灌判斷",
+    title: "企缸塞、浴室去水慢？先分清地台積水與渠口倒灌",
     description:
-      "浴室地台去水慢，先分清表面積水還是渠口倒灌。了解頭髮清理、隔氣與支渠檢查方向、何時停止用水，以及浴室通渠查詢要準備的資料。",
+      "沖涼時水浸腳眼，關水後有冇退？水積喺去水口，定留喺地磚低位？按三種現場情況分辨企缸塞渠、地面排水及支渠倒灌，了解應搵師傅定先通知管理處。",
     keywords: [
       "浴室地台去水慢",
       "浴室去水慢",
@@ -24,7 +25,7 @@ export const HOUSEHOLD_SEARCH_TOPICS = [
       "浴室地台去水慢，先停止會令積水增加的用水，分清水是流向去水口卻排不走，還是由渠口反湧。可安全清走隔網表面可見的頭髮；清理後仍積水、多個去水位異常或有污水湧出，就需要檢查隔氣、支渠及相連管段，不能單憑積水確定堵塞位置。",
     heading: "地台積水、企缸去水慢與倒灌，怎樣分辨？",
     observations: [
-      "只在企缸內積水：記錄開始積水的時間、停水後回落情況及可見隔網有沒有雜物。",
+      "只在企缸內積水：若沖涼時水浸住渠口，關水後慢慢退，告知師傅退水需時及隔網情況。查詢時影一張連地磚和渠口都睇到的相片，比單拍隔網更容易分清積水位置。",
       "水在地面流不到渠口：同時留意積水位置和地面排水路徑；通渠未必能處理地面坡度問題。",
       "地台渠口反湧：停止引起冒水的設備；若伴隨沖廁或其他單位用水出現，交代所有受影響位置並聯絡管理處。",
     ],
@@ -113,11 +114,12 @@ export const HOUSEHOLD_SEARCH_TOPICS = [
   },
   {
     slug: "toilet-clog-emergency-guide",
+    updatedAt: "2026-11-20",
     service: "toilet-unblocking",
     name: "馬桶塞",
-    title: "馬桶塞、坐廁去水慢點算？水位升高、異物與通廁所指南",
+    title: "坐廁塞、廁所去水慢點算？按水位判斷下一步",
     description:
-      "馬桶塞先停止沖水。按水位升高、慢慢退水、硬物跌入及地台冒水分辨查詢方向，了解皮碗泵限制、通坐廁收費因素及何時搵師傅。",
+      "沖廁後水位升高再慢慢退，先停用坐廁。睇四種常見情況、實際工具操作短片，以及報價前要確認的拆裝、試水及復原安排。",
     keywords: [
       "馬桶塞",
       "坐廁塞",
@@ -138,6 +140,10 @@ export const HOUSEHOLD_SEARCH_TOPICS = [
       "沖廁令地台冒水或其他單位亦異常：可能涉及相連管段，需連同管理處了解共用入口，不能只當作馬桶內堵塞。",
     ],
     links: [
+      {
+        href: "/cases/toilet-drain-tool-operation",
+        label: "看坐廁積水時的工具操作短片",
+      },
       {
         href: "/blog/toilet-foreign-object-drain-service",
         label: "馬桶跌入異物：工具與拆裝限制",
@@ -178,10 +184,10 @@ export function householdTopic(slug: string) {
   return HOUSEHOLD_SEARCH_TOPICS.find(topic => topic.slug === slug);
 }
 export function householdTopicDate(slug: string, date?: string) {
-  return householdTopic(slug) &&
-    (!date || Date.parse(date) < Date.parse(HOUSEHOLD_TOPICS_UPDATED))
-    ? HOUSEHOLD_TOPICS_UPDATED
-    : date;
+  const topic = householdTopic(slug);
+  if (!topic) return date;
+  const updatedAt = topic.updatedAt ?? HOUSEHOLD_TOPICS_UPDATED;
+  return !date || Date.parse(date) < Date.parse(updatedAt) ? updatedAt : date;
 }
 export function applyHouseholdTopic(post: BlogPostView): BlogPostView {
   const topic = householdTopic(post.slug);
