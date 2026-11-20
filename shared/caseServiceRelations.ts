@@ -22,6 +22,11 @@ export const CASE_SERVICE_RELATIONS = [
   },
   {
     serviceSlug: "bathroom-drain-unblocking",
+    caseSlug: "home-basin-grease-buildup-cleaning",
+    note: "通渠熊在這宗家居洗手盆工程拆開隔氣，清走油污和皂垢，接回去水喉後連續放水，確認排水暢順及接口沒有明顯滲漏。",
+  },
+  {
+    serviceSlug: "bathroom-drain-unblocking",
     caseSlug: "under-sink-drain-line-operation",
     note: "相關去水工具操作；此片段並非浴室工程，浴室處理方法仍需按現場評估。",
   },

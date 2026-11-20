@@ -408,7 +408,9 @@ function getSitemapEntries(
     { route: "/service-process", changefreq: "monthly", priority: "0.8" },
     ...SERVICE_SLUGS.map(slug => ({
       route: `/services/${slug}`,
-      lastmod: COMPANY_GUIDE_LINKS_UPDATED,
+      lastmod: ["bathroom-drain-unblocking", "kitchen-sink-unblocking", "sewage-backflow"].includes(slug)
+        ? latestEditorialDate(COMPANY_GUIDE_LINKS_UPDATED, "2026-11-20")
+        : COMPANY_GUIDE_LINKS_UPDATED,
       changefreq: "monthly" as const,
       priority: "0.8",
     })),
@@ -442,7 +444,9 @@ function getSitemapEntries(
     { route: "/cases", changefreq: "monthly", priority: "0.8" },
     ...caseEntries.map(entry => ({
       route: `/cases/${entry.slug}`,
-      lastmod: entry.lastmod,
+      lastmod: entry.slug === "home-basin-grease-buildup-cleaning"
+        ? latestEditorialDate(entry.lastmod, "2026-11-20")
+        : entry.lastmod,
       changefreq: "monthly" as const,
       priority: "0.7",
     })),

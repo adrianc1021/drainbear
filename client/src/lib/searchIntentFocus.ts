@@ -21,6 +21,24 @@ export const SERVICE_INTENT_FOCUS = {
     articleHref: "/blog/toilet-clog-emergency-guide",
     articleLabel: "塞廁所緊急處理與安全判斷",
   },
+  "kitchen-sink-unblocking": {
+    heading: "廚房鋅盤塞，報價要問清楚邊段喉？",
+    summary:
+      "鋅盤積水，可以先告知通渠熊係單盆定雙盆、兩邊會唔會互相冒水，以及浴室去水有冇同時受影響。呢幾項資料有助安排檢查盆底隔氣、櫃內去水喉，或較深嘅支渠。",
+    guidance:
+      "格價時，請對方列明拆隔氣、清理、重新接駁同放水試漏是否已包括。如果堵塞伸延至牆內，要另外使用工具，可以先確認新增工序同總額，再決定是否繼續。",
+    articleHref: "/blog/sink-drain-access-disassembly",
+    articleLabel: "睇鋅盤櫃底入口同拆裝點樣影響報價",
+  },
+  "sewage-backflow": {
+    heading: "低層單位或洗衣機去水倒灌，應先搵邊個？",
+    summary:
+      "留意邊個去水口冒水、係咪只喺洗衣機排水時出現，以及鄰戶有冇同時受影響。單靠樓層判斷唔到塞喺邊段。多戶同時倒灌，先通知管理處協調共用渠入口，再安排師傅檢查。",
+    guidance:
+      "向通渠熊查詢時，可提供地區、受影響位置及已有相片。先確認今次報價涵蓋單位內支渠，定包括共用管段，並由有權安排進場嘅一方確認。毋須再開機或放水重演倒灌。",
+    articleHref: "/blog/washing-machine-drain-backflow-causes-fixes",
+    articleLabel: "洗衣機排水時地渠冒水：點分單位支渠同共用渠",
+  },
   "high-pressure-jetting": {
     heading: "高壓通渠收費：幾時適合高壓水槍洗渠？",
     summary:
