@@ -214,6 +214,11 @@ export const DRAIN_COMPANY_SELECTION_GUIDE: BlogPost = {
         "把評論中提及的承諾同正式報價逐項核對，特別係加項、保養、拆裝及誰負責後續跟進。",
       ],
     },
+    {
+      type: "p",
+      text: "想核對通渠熊，可以由公司資料頁打開「通渠熊 DrainBear」的 Google 商家檔案，先對清公司名稱和聯絡資料，再看評論描述的是洗手盆、鋅盤還是大廈共用渠。比對自己遇到的問題，會比單看整體星數更有參考價值。",
+      link: { label: "查閱通渠熊公司資料及 Google 商家檔案入口", href: "/about#company-facts" },
+    },
     { type: "h2", text: "朋友介紹或網上推介，點樣核對？" },
     {
       type: "p",

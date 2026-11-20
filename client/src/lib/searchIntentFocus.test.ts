@@ -1,10 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { DRAIN_COMPANY_SELECTION_GUIDE } from "./drainCompanySelectionGuide";
 import { SERVICE_PAGES } from "./serviceData";
-import {
-  SERVICE_INTENT_FOCUS,
-  getServiceIntentFocus,
-} from "./searchIntentFocus";
+import { SERVICE_INTENT_FOCUS, getServiceIntentFocus } from "./searchIntentFocus";
 
 const PRIORITY_INTENTS = [
   ["bathroom-drain-unblocking", "洗手盆通渠"],
@@ -39,8 +36,15 @@ describe("commercial search intent coverage", () => {
     }
   );
 
+  it.each([
+    ["kitchen-sink-unblocking", "/blog/sink-drain-access-disassembly"],
+    ["sewage-backflow", "/blog/washing-machine-drain-backflow-causes-fixes"],
+  ])("points %s to its matching diagnostic guide", (slug, href) => {
+    expect(getServiceIntentFocus(slug)?.articleHref).toBe(href);
+  });
+
   it("never creates a service-intent entry for an unknown route", () => {
     expect(getServiceIntentFocus("nonexistent-service")).toBeNull();
-    expect(Object.keys(SERVICE_INTENT_FOCUS)).toHaveLength(3);
+    expect(Object.keys(SERVICE_INTENT_FOCUS)).toHaveLength(5);
   });
 });
