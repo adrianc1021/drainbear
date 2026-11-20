@@ -10,7 +10,7 @@ export const DRAIN_COMPANY_SELECTION_GUIDE: BlogPost = {
   title: "通渠推薦｜香港通渠公司點揀？收費、評價與工程案例",
   category: "實用指南",
   date: "2026-10-09",
-  updatedAt: "2026-11-12",
+  updatedAt: "2026-11-20",
   readMins: 6,
   authorName: "通渠熊編輯團隊",
   reviewerName: "",
@@ -32,6 +32,7 @@ export const DRAIN_COMPANY_SELECTION_GUIDE: BlogPost = {
   serviceSlugs: [
     "toilet-unblocking",
     "kitchen-sink-unblocking",
+    "sewage-backflow",
     "cctv-drain-inspection",
     "main-drain-manhole",
     "high-pressure-jetting",
@@ -100,6 +101,17 @@ export const DRAIN_COMPANY_SELECTION_GUIDE: BlogPost = {
         "上門時間能否確認：交代地區與進場條件，取得具體安排；24 小時接受查詢不等於已確認到場。",
         "由誰跟進工程：核對公司、到場師傅、收款及後續聯絡資料，保留確認紀錄。",
       ],
+    },
+    { type: "h2", text: "同樣係廚房鋅盤塞，兩份報價點對？" },
+    {
+      type: "p",
+      text: "假設一份報價只列「疏通鋅盤」，另一份寫明「拆隔氣、清理、接駁後試水」。先問第一間是否包括相同工序，再問兩間如果發現堵塞在牆內支渠，是否會停手另報。範圍寫清楚，兩個總額先有得比較。",
+      link: { label: "對照鋅盤通渠的檢查位置與處理方法", href: "/services/kitchen-sink-unblocking" },
+    },
+    {
+      type: "p",
+      text: "如果連浴室地渠都同時湧水，查詢時要一併講明。請對方交代今次只處理單一去水位，還是會檢查相連管段，再決定原本的報價是否適用。",
+      link: { label: "多個去水位同時倒灌時的處理安排", href: "/services/sewage-backflow" },
     },
     { type: "h2", text: "直接搵通渠公司，定經配對平台？" },
     {
