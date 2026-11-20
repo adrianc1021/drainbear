@@ -72,6 +72,15 @@ export default function Guide() {
             同樣是去水慢，可能只涉及一個隔氣，也可能要檢查共用管段。 HK$300
             起並非固定套餐；適用工序及最終總收費須按現場確認。
           </p>
+          <p className="mt-4 leading-relaxed text-navy/75">
+            查詢廚房鋅盤通渠時，可先拍下盆底去水喉及櫃內入口。師傅會按堵塞位置、是否需要拆裝及試水範圍確認總額。
+            <Link
+              href="/blog/hong-kong-drain-cleaning-price-guide"
+              className="font-bold text-wagreen-dark underline underline-offset-4"
+            >
+              查看通渠熊現行起步收費及報價條件
+            </Link>
+          </p>
           <div className="mt-8 space-y-8">
             {QUOTATION_SCOPES.map(scope => (
               <div key={scope.title}>

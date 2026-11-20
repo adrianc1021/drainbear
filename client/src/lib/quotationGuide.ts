@@ -1,6 +1,6 @@
 import { STARTING_PRICE_LABEL } from "../../../shared/pricing";
 
-export const QUOTATION_GUIDE_UPDATED = "2026-11-03";
+export const QUOTATION_GUIDE_UPDATED = "2026-11-20";
 export const QUOTATION_GUIDE_TITLE =
   "通渠收費及報價 HK$300 起｜工序、拆裝與費用確認｜通渠熊";
 export const QUOTATION_GUIDE_DESCRIPTION =
@@ -12,6 +12,11 @@ export const QUOTATION_ANSWERS = [
     id: "quote-context",
     question: "通渠幾錢起？起步價是否就是最終收費？",
     answer: `通渠熊全線通渠服務 ${STARTING_PRICE_LABEL}。起步價不是每宗工程的固定總價，也不代表包括所有檢查、拆裝或設備。先提供地區、受影響位置及相片；師傅現場檢查後說明工序與總收費，雙方確認才動工。`,
+  },
+  {
+    id: "kitchen-sink-quote",
+    question: "廚房鋅盤通渠幾錢？拆隔氣是否另外收費？",
+    answer: `通渠熊全線通渠服務報價 ${STARTING_PRICE_LABEL}，廚房鋅盤亦適用。實際總額按堵塞位置、可用入口及拆裝需要釐定。請師傅在動工前逐項說明拆隔氣、疏通及完工試水的收費，再確認總額。`,
   },
   {
     id: "quote-photos",
