@@ -57,7 +57,7 @@ describe("household search series", () => {
           "bathroom-hair-clog-prevention",
           "toilet-clog-emergency-guide",
         ].includes(topic.slug)
-          ? "2026-10-27"
+          ? "2026-11-20"
           : "2026-10-26"
       );
       expect(mapped.faqs).toHaveLength(4);
