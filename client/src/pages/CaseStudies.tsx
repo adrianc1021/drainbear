@@ -25,7 +25,7 @@ export default function CaseStudies() {
       "@type": "CollectionPage",
       "@id": `${SITE_URL}/cases#webpage`,
       url: `${SITE_URL}/cases`,
-      name: "通渠工程案例｜通渠熊 DrainBear",
+      name: "通渠工程案例與施工紀錄｜通渠熊 DrainBear",
       inLanguage: "zh-Hant-HK",
       isPartOf: { "@id": WEBSITE_ID },
       about: { "@id": BUSINESS_ID },
@@ -35,7 +35,7 @@ export default function CaseStudies() {
           {
             "@context": "https://schema.org",
             "@type": "ItemList",
-            itemListElement: studies.map((study, index) => ({
+            itemListElement: [...otherStudies, ...videoStudies].map((study, index) => ({
               "@type": "ListItem",
               position: index + 1,
               url: `${SITE_URL}/cases/${study.slug}`,
@@ -53,8 +53,8 @@ export default function CaseStudies() {
       data-cms-error={Boolean(error)}
     >
       <SEO
-        title="通渠工程案例｜現場問題、處理方法與完成結果｜通渠熊"
-        description="觀看通渠熊真實施工短片，了解坐廁通渠、櫃內去水位、喉口檢查與戶外渠口處理。每段影片附現場情況、施工說明及文字紀錄。"
+        title="通渠工程案例｜學校雨水渠高壓清洗、家居洗手盆疏通｜通渠熊"
+        description="查看通渠熊的渠務工程實例。學校雨水渠記錄高壓清走泥沙後的排水測試，家居洗手盆記錄拆洗隔氣及接口試漏。另有坐廁、櫃底及戶外渠口的施工短片。"
         path="/cases"
         keywords="通渠案例, 通渠工程, 高壓水槍案例, CCTV照喉案例, 香港渠務工程"
         jsonLd={jsonLd}
@@ -66,7 +66,7 @@ export default function CaseStudies() {
         <EditorialPageHero
           kicker="工程紀錄"
           title="通渠工程案例"
-          description="睇真實現場，了解師傅點樣處理。施工短片附文字說明；相似問題的處理方法和收費，仍按現場情況確認。"
+          description="想知同你情況相似嘅工程點收尾？先睇施工前邊度積水、師傅清咗邊段喉，再睇完工後點試水。下面亦有現場操作短片。"
           contactLocation="cases_hero"
         />
       </div>
@@ -81,26 +81,8 @@ export default function CaseStudies() {
           </p>
         ) : studies.length ? (
           <div>
-            {videoStudies.length ? (
-              <section
-                aria-labelledby="recorded-videos-heading"
-                className="mb-12"
-              >
-                <div className="section-heading">
-                  <div>
-                    <p className="brand-eyebrow">真實現場 · 施工短片</p>
-                    <h2 id="recorded-videos-heading">由畫面了解施工過程</h2>
-                  </div>
-                </div>
-                <div className="recorded-case-grid">
-                  {videoStudies.map(study => (
-                    <CaseStudyCard key={study._id} study={study} />
-                  ))}
-                </div>
-              </section>
-            ) : null}
             {otherStudies.length ? (
-              <h2 className="mb-6 text-3xl font-black">更多工程紀錄</h2>
+              <h2 className="mb-6 text-3xl font-black">渠務工程實例與完工紀錄</h2>
             ) : null}
             {otherStudies.map((study, index) => (
               <article
@@ -132,9 +114,9 @@ export default function CaseStudies() {
                     <p className="mt-4 text-xs font-black uppercase tracking-[0.12em] text-[var(--db-safety)]">
                       {study.serviceLabel}
                     </p>
-                    <h2 className="mt-3 text-2xl font-black leading-tight text-[var(--db-ink)] md:text-3xl">
+                    <h3 className="mt-3 text-2xl font-black leading-tight text-[var(--db-ink)] md:text-3xl">
                       {study.title}
-                    </h2>
+                    </h3>
                   </div>
                   <div>
                     <p className="text-base leading-8 text-[var(--db-copy)]">
@@ -147,6 +129,24 @@ export default function CaseStudies() {
                 </Link>
               </article>
             ))}
+            {videoStudies.length ? (
+              <section
+                aria-labelledby="recorded-videos-heading"
+                className={otherStudies.length ? "mt-12" : undefined}
+              >
+                <div className="section-heading">
+                  <div>
+                    <p className="brand-eyebrow">真實現場 · 施工短片</p>
+                    <h2 id="recorded-videos-heading">由畫面了解施工過程</h2>
+                  </div>
+                </div>
+                <div className="recorded-case-grid">
+                  {videoStudies.map(study => (
+                    <CaseStudyCard key={study._id} study={study} />
+                  ))}
+                </div>
+              </section>
+            ) : null}
           </div>
         ) : (
           <section className="grid gap-8 border-y border-[var(--db-rule)] py-10 md:grid-cols-2 md:items-center">

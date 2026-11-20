@@ -78,7 +78,7 @@ export default function HomeCompanyIntro() {
         </div>
         <div className="home-company-intro__notes">
           <section id="company-home-process">
-            <h3>上門前點樣格價？</h3>
+            <h3>揀通渠公司，上門前點樣格價？</h3>
             <p>
               {STARTING_PRICE_LINE}
               。先問清上門檢查、拆裝同試水包唔包括在內。師傅到場確認入口同堵塞範圍後，會講明工序同收費，等你確認先動工。
@@ -106,6 +106,7 @@ export default function HomeCompanyIntro() {
           <Link href="/cases/school-rainwater-drain-high-pressure-cleaning">
             學校雨水渠高壓清洗紀錄
           </Link>
+          <Link href="/cases">按工程紀錄比較處理方法</Link>
         </nav>
       </div>
     </section>
