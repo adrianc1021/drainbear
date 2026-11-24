@@ -227,7 +227,8 @@ try {
       }
       if (path === "/blog/hong-kong-drain-cleaning-price-guide") {
         assert(!/數百元|一千多元|不成功不收費|超低起步價/.test(state.text));
-        assert.equal(state.article.dateModified, "2026-10-09");
+        assert.equal(state.article.dateModified, "2026-11-25");
+        assert.equal(state.title.split("通渠熊").length - 1, 1);
         assert(!state.article.reviewedBy);
         assert.equal(state.faq.mainEntity.length, 3);
         assert(
