@@ -1,18 +1,18 @@
-import { STARTING_PRICE_ANSWER } from "../../../shared/pricing";
+import { STARTING_PRICE_LINE } from "../../../shared/pricing";
 import type { BlogPost } from "./blogData";
 
 /** Website editorial revision: replaces the old market-price/fee-policy draft. */
 export const PRICE_GUIDE_REVISION: BlogPost = {
   slug: "hong-kong-drain-cleaning-price-guide",
-  title: "通渠價錢幾多？HK$300 起｜工序與報價比較｜通渠熊",
+  title: "通渠價錢幾多？HK$300 起，局部疏通同高壓洗渠點格價？",
   category: "通渠迷思",
   date: "2026-08-10",
-  updatedAt: "2026-10-26",
+  updatedAt: "2026-11-25",
   readMins: 4,
   authorName: "通渠熊編輯團隊",
   reviewerName: "",
   excerpt:
-    "通渠熊全線通渠服務 HK$300 起。坐廁、鋅盤、浴室及主渠，立即 WhatsApp 傳相查詢報價，了解合適的處理方法。",
+    `通渠熊${STARTING_PRICE_LINE}。比較兩份報價，先睇包邊個去水位、需唔需要拆裝；如果要高壓洗渠，就要問清洗邊段喉、點樣試水同幾時確認總額。`,
   keywords: ["通渠價錢", "通渠收費", "通渠收費lihkg", "通渠費用", "通渠報價"],
   coverImage: {
     url: "/images/blog/choosing-professional-drain-company.webp",
@@ -25,12 +25,12 @@ export const PRICE_GUIDE_REVISION: BlogPost = {
   sections: [
     {
       type: "p",
-      text: STARTING_PRICE_ANSWER,
+      text: `通渠熊${STARTING_PRICE_LINE}。單靠起步價，未知道今次埋單幾多。師傅到場睇過堵塞位置同喉管入口，會交代要做嘅工序同總額，你確認後先動工。`,
     },
     { type: "h2", text: "通渠價錢點問？先確認總額包括甚麼" },
     {
       type: "p",
-      text: "想快啲格價，直接傳地區、受影響位置及相片，並問清楚檢查、疏通、拆裝與試水是否包括。HK$300 是起步報價，不能單憑相片保證現場總額；確認處理範圍與收費後才動工。",
+      text: "假設鋅盤去水慢，一份報價只寫「通鋅盤」，另一份寫明「拆洗隔氣、裝回後放水試漏」。先問第一間包唔包拆裝同試水，再比較總額。如果拆開先發現塞喺後面條支喉，就要再問清楚處理嗰段喉要幾錢。",
     },
     {
       type: "list",
@@ -77,7 +77,8 @@ export const PRICE_GUIDE_REVISION: BlogPost = {
     { type: "h2", text: "用機器，是否一定比其他方法合適？" },
     {
       type: "p",
-      text: "不一定。機械疏通、高壓洗渠及 CCTV 照喉各有用途。局部堵塞未必需要高壓清洗，影像檢查也不能代替疏通。選工具要對應現場問題，不能只憑機器名稱決定施工範圍或費用。",
+      text: "要睇塞喺邊度。局部疏通着重打通堵塞位置，高壓洗渠可以清理一段喉內嘅油垢或泥沙。收到高壓洗渠報價，可以直接問：「由邊個檢查口入？洗到邊個位置？清出嚟嘅泥沙邊個處理？完工喺邊度放水驗收？」如果兩份報價所包嘅管段唔同，就要先對清範圍。",
+      link: { label: "高壓洗渠報價及現場要求", href: "/services/high-pressure-jetting" },
     },
     { type: "h2", text: "相片可以先了解甚麼？" },
     {

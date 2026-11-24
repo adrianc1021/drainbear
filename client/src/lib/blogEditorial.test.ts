@@ -39,7 +39,12 @@ describe("published editorial revision", () => {
     expect(list[0].sections).toEqual(direct.sections);
     expect(direct.sections).toEqual(fallback.sections);
     expect(direct.date).toBe(original.publishedAt);
-    expect(direct.updatedAt).toBe("2026-10-26");
+    expect(direct.updatedAt).toBe("2026-11-25");
+    expect(direct.sections).toContainEqual(
+      expect.objectContaining({
+        link: expect.objectContaining({ href: "/services/high-pressure-jetting" }),
+      })
+    );
     expect(JSON.stringify(direct)).toContain("HK$300 起");
     expect(direct.seo?.metaTitle).not.toBe(original.seo.metaTitle);
     expect(JSON.stringify(direct)).not.toContain("數百元起");
