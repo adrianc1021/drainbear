@@ -25,9 +25,9 @@ import {
   STARTING_PRICE_LABEL,
 } from "../../../shared/pricing";
 
-const HOME_TITLE = "香港通渠公司｜通渠 HK$300 起｜通渠熊 DrainBear";
+const HOME_TITLE = "香港通渠公司｜住宅、食肆及物業通渠｜通渠熊";
 const HOME_DESCRIPTION =
-  "香港通渠公司通渠熊提供坐廁、鋅盤、浴室及主渠疏通，HK$300 起，現場確認總額後動工。可先看洗手盆拆喉試水及學校雨水渠高壓清洗紀錄。電話或 WhatsApp 24 小時接受查詢。";
+  "通渠熊為香港住宅、食肆及物業處理坐廁、鋅盤、地渠及主渠淤塞。通渠 HK$300 起，到場說明工序及總額，確認後才動工。可查看施工及試水紀錄，電話及 WhatsApp 24 小時接受查詢。";
 
 const HOME_FAQ_JSONLD = {
   "@context": "https://schema.org",
