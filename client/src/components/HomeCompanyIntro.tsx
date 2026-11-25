@@ -36,7 +36,7 @@ export default function HomeCompanyIntro() {
           <div>
             <h2 id="home-company-heading">邊個位置塞咗？</h2>
             <p className="home-company-intro__lead" id="company-home-services">
-              同師傅講邊度去水慢、其他去水位有冇一齊受影響，就可以先收窄要檢查嘅範圍。
+              通渠熊為香港住宅、食肆同物業處理坐廁、鋅盤、地渠同主渠淤塞。報價前可以先講邊度去水慢、其他去水位有冇一齊受影響，方便師傅收窄要檢查嘅範圍。
             </p>
             <nav
               aria-label="按淤塞位置查看通渠服務"
