@@ -1,10 +1,10 @@
 import { STARTING_PRICE_LABEL } from "../../../shared/pricing";
 
-export const QUOTATION_GUIDE_UPDATED = "2026-11-20";
+export const QUOTATION_GUIDE_UPDATED = "2026-11-27";
 export const QUOTATION_GUIDE_TITLE =
   "通渠收費及報價 HK$300 起｜工序、拆裝與費用確認｜通渠熊";
 export const QUOTATION_GUIDE_DESCRIPTION =
-  "通渠幾多錢？通渠熊 HK$300 起，了解坐廁、鋅盤、浴室、主渠及照渠報價要確認哪些工序。先問清檢查、拆裝、設備及追加費用，現場確認總收費後才動工。";
+  `通渠收費 ${STARTING_PRICE_LABEL}。預約前用清單核對上門檢查、疏通、拆裝及試水。多個去水位同時塞，先確認報價涵蓋哪幾個位置、有冇追加項目，再確認總額。`;
 
 /** Confirmed starting quote only; no unverified package inclusions or price ranges. */
 export const QUOTATION_ANSWERS = [
@@ -41,6 +41,12 @@ export const QUOTATION_ANSWERS = [
     question: "施工期間發現要加做工序，會直接加價嗎？",
     answer:
       "如發現需要額外工序，先說明新增的處理範圍與費用，經確認後才繼續。確認時可要求分清原報價與追加項目，並保留雙方確認的內容。",
+  },
+  {
+    id: "quote-multiple-drains",
+    question: "兩個去水位一齊塞，通渠收費係咪計兩次？",
+    answer:
+      "要先查清兩個去水位係各自堵塞，定係接駁到同一段淤塞嘅喉管，先可以確認係一項定分開報價。例如鋅盤同地渠一齊去水慢，請師傅列明要處理邊段喉、報價包邊個位置，同埋完工會喺邊個去水位試水。如果涉及大廈共用渠，先通知管理處協調入口同進場安排。",
   },
 ];
 
